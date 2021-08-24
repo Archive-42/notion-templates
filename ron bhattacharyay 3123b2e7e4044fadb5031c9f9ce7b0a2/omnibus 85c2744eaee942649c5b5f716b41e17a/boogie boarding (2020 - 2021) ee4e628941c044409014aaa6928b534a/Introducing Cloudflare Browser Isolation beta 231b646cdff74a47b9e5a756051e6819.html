@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introducing Cloudflare Browser Isolation beta</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="231b646c-dff7-4a47-b9e5-a756051e6819" class="page sans"><header><h1 class="page-title">Introducing Cloudflare Browser Isolation beta</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blog.cloudflare.com/browser-beta/" class="url-value">https://blog.cloudflare.com/browser-beta/</a></td></tr></tbody></table></header><div class="page-body"><figure id="90ad4233-180f-4e84-a16f-58716498a293" class="image"><a href="Introducing%20Cloudflare%20Browser%20Isolation%20beta%20231b646cdff74a47b9e5a756051e6819/image1-19.png"><img style="width:505px" src="Introducing%20Cloudflare%20Browser%20Isolation%20beta%20231b646cdff74a47b9e5a756051e6819/image1-19.png"/></a></figure><h3 id="3c34a267-72d2-41b0-801b-23acec852b1d" class="">Reimagining the Browser</h3><p id="ecfabedd-4c79-4150-a2bc-6cd2f6832f89" class="">A web browser, the same application that connects users to the entire Internet, also connects you to all of the potentially harmful parts of the Internet. It’s an open door to nearly every connected system on the planet, which is powerful and terrifying.</p><p id="0040a4e8-96c6-40a2-8e47-550abd3ec8f3" class="">We also rely on browsers more than ever. Most applications that we use live in a browser and that will continue to increase. For more and more organizations, a corporate laptop is just a managed web browser machine.</p><p id="ae1b2bd7-c2d0-44d4-bcd3-0ddc91d1d969" class="">To keep those devices safe, and the data they hold or access, enterprises have started to deploy “browser isolation” services where the browser itself doesn’t run on the machine. Instead, the browser runs on a virtual machine in a cloud provider somewhere. By running away from the device, threats from the browser stay on that virtual machine somewhere in the cloud.</p><p id="69976b4a-ea2b-4aa8-a975-b7fbd47a38e5" class="">However, most isolation solutions take one of two approaches that both ruin the convenience and flexibility of a web browser:</p><ul id="cd96fed6-5213-42e9-949c-95a46a1be60f" class="bulleted-list"><li>Record the isolated browser and send a live stream of it to the user, which is slow and makes it difficult to do basic things like input text to a form.</li></ul><ul id="b7dd3fe2-f97b-4cc4-b159-34dae9833585" class="bulleted-list"><li>Unpack the webpage, inspect it, repack it and send it to the user - sometimes missing threats or more often failing to repack the webpage in a way that it still works.</li></ul><p id="b724aba3-2128-4ac8-83ea-046f6b9418a8" class="">Today, we’re excited to open up a beta of a third approach to keeping web browsing safe with Cloudflare Browser Isolation. Browser sessions run in sandboxed environments in Cloudflare data centers in 200 cities around the world, bringing the remote browser milliseconds away from the user so it feels like local web browsing.</p><p id="773eb4e7-abb9-4b2a-8c64-245499aa9633" class="">Instead of streaming pixels to the user, Cloudflare Browser Isolation sends the final output of a browser’s web page rendering. The approach means that the only thing ever sent to the device is a package of draw commands to render the webpage, which also makes Cloudflare Browser Isolation compatible with any HTML5 compliant browser.</p><p id="93c09da3-f6c9-4e42-912e-52e710008214" class="">The result is a browser that just feels like a browser, while keeping threats far away from the device.</p><p id="0c51d1b0-b2b7-4f78-a999-c9c1221cdc04" class="">We’re inviting users to sign up for the beta today as part of Zero Trust week at Cloudflare. If you’re interested in signing up now, visit the bottom of this post. If you’d like to find out how this works, keep reading.</p><h3 id="3ecd5ed4-e7f4-44b0-a55d-213d8f273464" class="">The unexpected universal productivity application</h3><p id="f2df753b-1543-46b6-88c4-dab3c1eff811" class="">While it never quite became the replacement operating system Marc Andreessen <a href="https://www.wired.com/2012/04/ff-andreessen/">predicted in 1995</a>, the web browser is perhaps the most important application today on end-user devices. In the workplace, many people spend the majority of their at-work computer time entirely within a web browser connected to internal apps and external SaaS applications and services. As this has occurred, browsers have needed to become increasingly complex — to address the expanding richness of the web and the demands of modern web applications such as Office 365 and Google Workspace.</p><p id="f2c12930-c45f-4797-8c06-238659c72463" class="">However, despite the pivotal and ubiquitous role of web browsers, they are the least controlled application in the enterprise. Businesses struggle to control how users interact with web browsers. It’s all too easy for a user to inadvertently download an infected file, install a malicious extension, upload sensitive company data or click a malicious zero-day link in an email or on a webpage.</p><p id="0824bf68-918b-4136-b74f-b0f0a02dcdb6" class="">Making the problem worse is the growing prevalence of BYOD. It makes it difficult to enforce which browsers are used or if they are properly patched. Mobile device management (MDM) is a step in the right direction, but just like the slow patching cycles of on-premise firewalls, MDM can often be too slow to protect against zero day threats. I’ve been the recipient of many mass emails from CISO’s reminding everyone to patch their browser and to do it right now because this time it’s “<em><strong>really important</strong></em>” (CVE-2019-5786).</p><h3 id="7c03fb27-e39c-41c4-9e72-05cf837017bf" class="">Reimagining the browser</h3><p id="9ced6e4f-3988-41e8-88c6-2def56b58d95" class="">Earlier this week we announced Cloudflare One, which is our vision for the future of the corporate network. The fundamental approach we’ve taken is a blank sheet: to zero out all the assumptions of the old model (like castle-and-moat) and usher in a new model based on the complex nature of today’s corporate networking and the shift to Zero Trust, cloud-based networking-as-a-service.</p><p id="bf86589d-f63d-44e0-aeb0-c7ed0c49204a" class="">It would be impossible to do this without thinking about the browser. Remote computing technologies have offered the promise of fixing the problems of the browser for some time — a future where anyone can benefit from the security and scale of cloud computing on their personal device. The reality has been that getting a generally performant solution is much more difficult than it sounds. It requires sending a user’s input over the Internet, computing that input, retrieving resources off the web, and then streaming them back to the user. And it all must occur in milliseconds, to create an illusion of using a local piece of software.</p><p id="e56998cb-1d93-4306-8796-9707371a6c5e" class="">The general experience has been terrible, and many implementations have created nothing but angry emails and help-desk tickets for IT folks.</p><p id="240b59e6-8ff7-46a8-afb5-a37e170d7f12" class="">It is a tough problem, and it’s something we’ve been hard at work at solving. By delivering a vector-based stream that scales across any display size without requiring high bandwidth connections we’re able to reproduce the native browser experience remotely. Users experience the website as it was intended, without all the compatibility issues introduced by scrubbing HTML, CSS and JavaScript. And performance issues are aided tremendously by the fact that the managed browser is hosted only milliseconds away on our network.</p><h3 id="02f19b07-3d75-4cfc-a70f-ecd796166899" class="">How secure remote browsing fits in with Cloudflare for Teams</h3><p id="379a12b2-2c62-42ce-9796-e8adbdec8f20" class="">Before Cloudflare Browser Isolation, Cloudflare for Teams consisted of two core services:</p><p id="858d0396-ab4b-4cf5-b4a3-c23eeccbf4cf" class=""><a href="http://cloudflare.com/teams/access"><strong>Cloudflare Access</strong></a> creates a Zero Trust network perimeter that allows users to access corporate applications without needing to poke holes in their internal network with a legacy VPN appliance.</p><p id="bf8eb9d6-f0e2-4461-9b1d-7b73eb36d9d6" class=""><a href="http://cloudflare.com/teams/gateway"><strong>Cloudflare Gateway</strong></a> creates a Secure Web Gateway that protects users from threats on any website.</p><p id="e0dd8970-8bf9-41fd-993b-7bbe95e93e57" class="">These tools are excellent for protecting private Internet properties from unauthorized access and web browsing activity from known malicious websites. But what about unknown and unforeseeable threats?</p><p id="47916b84-c731-449d-ac55-262531e2ef8b" class=""><a href="http://cloudflare.com/teams/browser-isolation"><strong>Cloudflare Browser Isolation</strong></a> answers this question by sandboxing a web browser in a remote container that is easily disposed of at the end of the user’s browsing session or when compromised.</p><p id="9167f87e-1710-475d-8b3b-cbb5353722b3" class="">Should an unknown threat such as a zero day vulnerability or malicious website exploit any of the hundreds of Web APIs, the attack is limited to a browser running in a supervised cloud environment leaving the end-user’s device unaffected.</p><h3 id="e7a45684-6187-46e1-b60f-d5617322dedf" class="">The Network is the Computer®</h3><p id="3765db40-9015-48e1-bdc0-1a6d033a5a93" class="">Web browsers are the foundation that the shift to the cloud has been built on. It’s just that they’ve always run in the wrong place.</p><p id="3bc42c7d-f9ce-4c1b-a7fe-f7346e546942" class="">In the same way that it made no sense for a developer to run and maintain the hardware that their application runs on, the same exact case can be made for the other side of the cloud’s equation: the browser. Funnily enough, the solution is exactly the same: like the developer’s application, the browser needed to move to the cloud. However, as with all disruptions, it takes time and investment for the performance of the new technology to catch up to the old one. When AWS was first launched in 2006, the inherent limitations meant that for most developers, it made sense to continue to run on-premise solutions.</p><p id="52c7dcca-acbd-4652-af4d-27041599b913" class="">At some point though, the technology improves to the point where the disruption can start taking over from the previous paradigm.</p><p id="769deef8-2a54-419a-b602-3e330701f2c1" class="">The limiting factor until today for a cloud-based browser has often been the experience of using it. A user’s experience is limited by the speed of light; it limits the time it takes a user’s input to travel to the remote data center and be returned to their display. In a perfect world, this needs to occur within milliseconds to deliver a real time experience.</p><p id="a467dcb0-5de8-4ee5-b57f-1db4bbd7f26d" class="">Cloudflare has one very big advantage in solving that problem.</p><figure id="66d78776-b057-4410-a699-a0ffb1cc4373" class="image"><a href="Introducing%20Cloudflare%20Browser%20Isolation%20beta%20231b646cdff74a47b9e5a756051e6819/image2-17.png"><img style="width:700px" src="Introducing%20Cloudflare%20Browser%20Isolation%20beta%20231b646cdff74a47b9e5a756051e6819/image2-17.png"/></a></figure><p id="ed0acda0-430e-4152-90a3-d41a5af6e7a9" class="">To deliver real-time remote computing experiences, each of our 200+ data centers are capable of serving remote browsing sessions within the blink of an eye of nearly everyone connected to the Internet. This allows us to deliver a low latency, responsive stream of a webpage regardless of where you’re physically located.</p><h3 id="f28bbe63-b88f-4db2-bcaf-a069ee3d0959" class="">What’s next?</h3><p id="67d99fd6-6b5a-4969-97ac-4b4d45b94c5a" class="">But that’s enough talking about it. We’d love for you to try it! Please complete the form <a href="http://cloudflare.com/teams/lp/browser-isolation">here</a> to sign up to be one of the first users of this new technology in our network. We’ll be in touch as we expand the beta to more users.</p></div></article></body></html>

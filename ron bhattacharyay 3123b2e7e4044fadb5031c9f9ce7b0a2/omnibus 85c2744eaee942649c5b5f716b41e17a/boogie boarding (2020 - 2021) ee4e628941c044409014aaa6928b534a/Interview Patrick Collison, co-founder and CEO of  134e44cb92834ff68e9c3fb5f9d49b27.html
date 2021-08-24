@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Interview: Patrick Collison, co-founder and CEO of Stripe</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="134e44cb-9283-4ff6-8e9c-3fb5f9d49b27" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚡</span></div><h1 class="page-title">Interview: Patrick Collison, co-founder and CEO of Stripe</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://noahpinion.substack.com/p/interview-patrick-collison-co-founder" class="url-value">https://noahpinion.substack.com/p/interview-patrick-collison-co-founder</a></td></tr></tbody></table></header><div class="page-body"><figure id="4f03accf-0981-44bb-98e9-623aa6ca513b" class="image"><a href="Interview%20Patrick%20Collison,%20co-founder%20and%20CEO%20of%20%20134e44cb92834ff68e9c3fb5f9d49b27/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F9a49c605-2f86-488d-85b6-69a9c09ba7d8_400x400.jpeg"><img style="width:400px" src="Interview%20Patrick%20Collison,%20co-founder%20and%20CEO%20of%20%20134e44cb92834ff68e9c3fb5f9d49b27/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F9a49c605-2f86-488d-85b6-69a9c09ba7d8_400x400.jpeg"/></a></figure><p id="2aaa3a20-ddc6-444e-92cb-2f6593af9bf7" class="">In addition to being a friend and a Noahpinion subscriber, Patrick Collison is one of the world’s most successful founder-CEOs. Along with his co-founder and brother John, he built online payments company Stripe into a $36 billion behemoth in a decade. (Patrick and John hail from Ireland, continuing the hallowed tradition of Irish immigrants making it big in America.)</p><p id="dec080c5-dfb2-4a27-8adb-dac095aad4f5" class="">But in addition to being an ace businessperson, Patrick is one of the most intellectually curious human beings I’ve ever met. Hanging out with Patrick will typically always involve him asking you to explain ideas in your area of specialization, which he will typically grasp with unusual alacrity; at least once, he threw a party that consisted of people giving him seminar talks on topics of their choice! His biggest intellectual interest is the idea of technological progress — what it means, why it happens, and how to encourage more of it. Among his ideas is the field Progress Studies, an interdisciplinary field that studies the history and determinants of technological advancement and how it feeds into social progress more generally.</p><p id="9fc93013-daf9-43ad-8ea4-8c42c61658aa" class="">In the wide-ranging email interview that follows, I turn the tables and ask Patrick to explain his own ideas to me! We discuss the future of technology, what kinds of innovation humanity needs, whether innovation has slowed down and what to do about it, the proper roles of government and the private sector, how research funding can be reformed, how international competition (including U.S.-China competition) figures into the equation, and much more!</p><p id="e21f89e7-9a2b-4237-8398-9e2512496040" class=""><em><strong>N.S.: So, what are the three things that excite you most about the 2020s?</strong></em></p><p id="8f47c865-7ab1-4587-a2e7-dabf239a5dd6" class="">It&#x27;s hard to restrict to three! But here are the first that jump to mind:</p><p id="e39beda3-6315-41b0-b61c-38bf42f3be37" class="">First, the explosive expansion in access to opportunity facilitated by the internet. Sounds prosaic but I think still underestimated. Several billion people recently immigrated to the world&#x27;s most vibrant city and the system hasn&#x27;t yet equilibrated. When you think about how YouTube is accelerating the dissemination of tacit knowledge, or the number of creative outsiders who can now deploy their talents productively, or the number of brilliant 18 year-olds who can now start companies from their bedrooms, or all the instances of improbable <a href="https://kk.org/thetechnium/scenius-or-comm/">scenius</a> that are springing up... in the landscape of the global commons, the internet is <a href="https://ourworldindata.org/how-many-people-does-synthetic-fertilizer-feed">nitrogen fertilizer</a>, and we still have a long way to go -- economically, culturally, scientifically, technologically, socially, and everything in between. I challenge anyone to watch <a href="https://www.youtube.com/watch?v=MDG9opjktm8">this video</a> and not feel optimistic.</p><p id="b5fd7632-3a89-429e-8f97-dedc68263c2f" class="">Second, progress in biology. I think the 2020s are when we&#x27;ll finally start to understand what&#x27;s going on with RNA and neurons. Basically, the prevailing idea has been that connections between neurons are how cognition works. (And that’s what neural networks and deep learning are modeled after.) But it looks increasingly likely that stuff that happens <em>inside</em> the neurons -- and inside the connections -- is an important part of the story. One suggestion is that RNA is actually part of how neurons <em>think</em> and not just an incidental intermediate thing between the genome and proteins. Elsewhere, we&#x27;re starting to spend more time investigating how the microbiome and the immune system interact with things like cancer and neurodegenerative conditions, and I&#x27;m optimistic about how that might yield significantly improved treatments. With Alzheimer&#x27;s, say, we were stuck for a long time on variants of plaque hypotheses (“this bad stuff accumulates and we have to stop it accumulating”)... it&#x27;s now getting hard to ignore the fact that the immune system clearly plays a major -- and maybe dominant -- role. Elsewhere, we&#x27;re plausibly on the cusp of effective dengue, AIDS, and malaria vaccines. That&#x27;s pretty huge.</p><p id="a821b629-79a3-4bc3-ae2b-345e76c0c646" class="">Last, energy technology. <a href="https://arstechnica.com/science/2020/12/battery-prices-have-fallen-88-percent-over-the-last-decade/">Batteries</a> (88% cost decline in a decade) and <a href="https://energypost.eu/5-charts-show-the-rapid-fall-in-costs-of-renewable-energy/">renewables</a> are well-told stories and the second-order effects will be important. (As we banish the industrial combustion engine, for example, we&#x27;ll reap a significant dividend as a result of the reduction in <a href="https://patrickcollison.com/pollution">air pollution</a>.) Electric aircraft will <a href="https://www.youtube.com/watch?v=4wbFw165ar0">probably happen</a>, at least for shorter distances. Solar electricity is asymptoting to near-free, which in turn unlocks other interesting possibilities. (Could we synthesize hydrocarbons via solar powered atmospheric CO2 concentration -- that is, <a href="https://www.prometheusfuels.com/technology/">make oil out of air</a> -- and thereby render remaining fossil fuel use-cases carbon neutral?) There are a lot of good ideas for making nuclear energy safer and cheaper. France <em>today</em> gets three quarters of its electricity from nuclear power... getting other countries to follow suit would be transformatively helpful in averting climate change.</p><p id="9632d61e-e6ff-49ea-83f6-2dfd422e3721" class="">There&#x27;s lots more! New semiconductor technology. Improved ML and everything that that enables. Starlink -- cheap and fast internet everywhere! <a href="https://www.nasaspaceflight.com/2020/12/earth-to-earth-supersonic-airliners/">Earth-to-earth travel</a> via space plus flying cars. The idea of urbanism that doesn&#x27;t suck seems to be gaining traction. There&#x27;s a lot of good stuff on the horizon.</p><p id="ef2ff234-2e8d-4735-97c4-585c876002d8" class=""><em><strong>N.S.: I like that we&#x27;re basically </strong></em><a href="https://noahpinion.substack.com/p/techno-optimism-for-the-2020s"><em><strong>optimistic about the same things</strong></em></a><em><strong>! Or at least the same technology things; I&#x27;d wager I&#x27;m probably more optimistic than you about the improving quality of anime.</strong></em></p><p id="1113247d-fbed-4729-ae6e-9cc5469ea033" class=""><em><strong>OK, so about tech progress. You&#x27;ve been heavily involved in the nascent </strong></em><a href="https://patrickcollison.com/progress"><em><strong>Progress Studies</strong></em></a><em><strong> effort, a sort of integrated push to understand progress and figure out how to accelerate it. What are some of the biggest insights that effort has gleaned so far?</strong></em></p><p id="2aa89653-4d53-4e63-ab0e-027ddb4bb682" class=""><em><strong>On a related note, I&#x27;ve been </strong></em><a href="https://noahpinion.substack.com/p/answering-the-techno-pessimists-part-a3b"><em><strong>debating</strong></em></a><em><strong> some </strong></em><a href="https://applieddivinitystudies.com/stagnation/"><em><strong>people</strong></em></a><em><strong> who think our technological stagnation is basically inescapable at this point. What do you think about this thesis? Will advancing to a new cheaper source of energy for the first time in a century </strong></em><a href="https://noahpinion.substack.com/p/why-im-so-excited-about-solar-and"><em><strong>boost productivity growth</strong></em></a><em><strong> to a degree that digital &quot;bits&quot; technologies have not really succeeded in doing? Will we finally be able to get back on the </strong></em><a href="http://wimflyc.blogspot.com/2021/01/the-henry-adams-curve-closer-look.html"><em><strong>Henry Adams Curve</strong></em></a><em><strong>, and will it make a big difference if we do?</strong></em></p><p id="35003808-92ce-4fd6-989d-b1f36ac5898d" class="">Well, Tyler and I published that piece in the summer of 2019, so I think that Progress Studies -- whatever it turns out to be -- is in its larval stage. Most of all, I think the article yielded a term for a set of topics that plenty of others had been pursuing (often in great depth and for a long time) but that couldn&#x27;t be easily linked under any broad pre-existing conceptual category. (&quot;Innovation economics&quot; probably came closest but is still too specific.) Some early highlights for me include Jose Luis Ricon&#x27;s <a href="https://nintil.com/categories/research/">survey of the evidence</a> about science funding mechanisms, Matt Clancy&#x27;s <a href="http://matt-clancy.com/economics-of-innovation-detailed-reading-list/">class</a> (along with his <a href="https://mattsclancy.substack.com/">excellent Substack</a> -- you should subscribe), and the <a href="http://worksinprogress.co/">Works in Progress</a> magazine, which gives a home for writing on these topics more broadly. Much of our intent was to highlight the value of directly addressing problems that are relevant to progress. So, if someone somewhere is doing important and relevant work as a result of reading our article, I&#x27;m very happy about that, even if &quot;Progress Studies&quot; is never mentioned.</p><p id="4c98a959-4127-448c-9996-ab9837769cd6" class="">I emphatically reject the suggestion that technological stagnation is inescapable... with one caveat. The caveat is that &quot;stagnation&quot; may be a slightly too loaded term at this point because it tends to refer to particular measurements pertaining to the <a href="https://rootsofprogress.org/summary-the-rise-and-fall-of-american-growth">20th century experience in the US</a> -- Robert Gordon and all that. Gordon himself says at the end of <em>Rise and Fall</em> that we won&#x27;t see twentieth century-level rates of improvement in the future because of demographic headwinds (among other things). So, to the extent that you&#x27;re talking about particular macroeconomic time series, you suddenly scope in a whole bunch of definitional and deflator and measurement debates and all that. But if we ignore those and focus on the basic phenomena that we really care about: progress in science, advancement in technology, and the effective deployment of both such that broader societal welfare is enhanced -- yes, I would say that I&#x27;m certain that we can do very meaningfully better than we are doing today. I&#x27;ll claim that we could double our rate of progress.</p><p id="5d02f2fb-7b68-4d4a-ae99-6bb2c0c27622" class=""><em><strong>N.S.: Right. Aging, plateauing educational attainment, etc. will weigh on productivity as a whole, which is why </strong></em><a href="https://noahpinion.substack.com/p/20-predictions-for-the-2020s"><em><strong>I predict</strong></em></a><em><strong> only a very modest TFP acceleration this decade even though I&#x27;m optimistic about tech itself. But OK, if our rate of tech-driven economic progress will double, that raises the question of why it&#x27;s been </strong></em><a href="https://growthecon.com/blog/BLS-TFP/"><em><strong>as slow as it is</strong></em></a><em><strong>? Were we inventing tech that enriched our lives without showing up in GDP? Were we busy retooling from one sort of innovation to another? Or did we just not happen to hit one of those rich veins of technological ore, as it were?</strong></em></p><p id="c1778e9e-75ea-43ab-b9ca-128b3288de19" class=""><em><strong>And also: What do you think are the most important steps for government to take to speed progress along? Will reforming science funding, perhaps along the lines Ricon lays out, make a big difference? I&#x27;ve been calling for a big increase in federal science funding (the </strong></em><a href="https://www.young.senate.gov/newsroom/press-releases/young-schumer-unveil-endless-frontier-act-to-bolster-us-tech-leadership-and-combat-china"><em><strong>Endless Frontier Act</strong></em></a><em><strong> being advanced by Ro Khanna and Chuck Schumer). How much do you think we can expect from throwing more money at the problem? After all, federal spending on R&amp;D is about half of what it was in the 70s and 80s, as a percent of GDP.</strong></em></p><p id="a1b5c023-1da6-4e6b-bd3e-986070b4d891" class=""><em><strong>(Subscribed to Clancy&#x27;s Substack, by the way. Thanks!)</strong></em></p><p id="39404047-ab4a-4445-a488-158c8cc844dc" class="">&quot;Why is growth slowing?&quot; is a pretty big question, and anything I say will mostly just be skimming the approximate contours of explanations that lots of others have sketched out in much more detail. But I&#x27;ll give a few thoughts.</p><p id="e5b443bc-8c83-47b8-a156-31d5de61d703" class="">As a prefatory point, &quot;why has progress been slow?&quot; might be approaching things backwards -- maybe it&#x27;s better to puzzle over &quot;why is it ever fast?&quot; or “why does it exist at all?”. The vast majority of human societies generate very little meaningful frontier progress most of the time! (As compared to Solow-style catch-up growth.) Lots of people have sketched out reasons as to why the midcentury picture in the US was perhaps anomalously <em>good</em> and I think those stories probably all have truth to them. If I had to offer some hypotheses that tend to get a bit less attention, I&#x27;d throw out a few:</p><p id="d13542af-b8de-4585-b6eb-fcd75a1b4b5d" class="">(1) <strong>What&#x27;s going on in science? </strong>What we call &quot;science&quot; has changed immensely since WWII. For one thing, it’s way bigger. In 1950, the federal government gave about $100 million per year (in 2021 dollars) to universities for the purpose of basic research. That’s now more than $20B per year. If we look at R&amp;D across the economy as a whole (though that&#x27;s harder to measure reliably), nominal spending has supposedly grown by a similar magnitude. If we look at numbers of researchers, same story: about 10x more research doctorates are awarded every year today than were in 1950. And how we do it has changed. For example, peer review in the modern -- legitimacy-conferring -- sense of the term is a postwar invention and arose more as a result of funding bureaucracies and controversies than any scientific exigency. (Einstein was very offended in 1936 when the editor of <em>Physical Review</em> shared his now-famous EPR paper for an external opinion.) Lots of people have documented (and decried) the increasingly gerontocratic aspects of modern science and the <a href="https://marginalrevolution.com/marginalrevolution/2019/01/ratio-50-scientists-funded-nih.html">growing age</a> of grant recipients. However you cut it, what we&#x27;re talking about when we say &quot;science&quot; just isn&#x27;t close to the thing it was seventy years ago.</p><p id="6c7b52d3-2757-4206-af90-825a4f836999" class="">A priori, I think it&#x27;s completely plausible that many of the changes we&#x27;ve made have not been for the best. Most systems get worse in at least certain ways as they scale. The idea that science could have gotten worse in significant ways sometimes sounds strange to people -- like, we’re doing so much more, how could that be bad? -- but I think that misses the many examples of sensitivity of scientific processes to institutions and culture. Swiss nationals have won more than ten times more science Nobels per capita than Italians have. Ten times! And yet they&#x27;re neighbors, and Italy certainly isn&#x27;t lacking in scientific tradition -- Fermi, Galileo, the oldest university in Europe, etc. The &quot;how&quot; of science just really matters. At the micro level, when you look at the careers of individual scientists, the same thing is often striking -- if Born hadn&#x27;t recommended that Rockefeller give Delbrück a fellowship, he might well have dropped out of science... his track record up to that point wasn&#x27;t very impressive. But if he had, how far would that have set molecular biology back? So, given that science has changed <em>a lot</em>, we should push ourselves to really understand the effects of those changes, and we shouldn’t assume too casually that they’re all good.</p><p id="3308c570-6f75-46fd-af3f-54bcffeb97ef" class="">(2) <strong>Culture. </strong>As Ezra Klein recently <a href="https://www.nytimes.com/2021/02/11/opinion/california-san-francisco-schools.html">described</a> in the New York Times, and Marc Dunkelman has written about in his <a href="https://www.politico.com/news/magazine/2019/11/29/penn-station-robert-caro-073564">great piece</a> about Penn Station, a particular version of distorted, hypertrophic progressivism that took hold in the 1970s may have had (and still be having!) quite significantly stifling effects. We perhaps shifted from placing emphasis on our collective <em>effectiveness</em> in advancing prosperity and opportunity for people to the perceived fairness that was embodied in whichever particular steps we happened to take. Or, to say that another way, we shifted our focus from sins of omission to sins of commission. Take California, as Ezra does: there is almost endless attention paid to making sure that no single state project has even a tint of impropriety or suboptimality. The result of that cultural shift, however, is that the state <em>as a whole</em> is then often beset with awful results. With this ethos and panoply of strictures, it turns out that California is almost functionally incapable of constructing a high speed rail line connecting its two major metro regions. California has <em>less</em> civilizational capacity than the France of the 70s that built the TGV! (I spoke with Jerry Brown about this a few years ago and he commented that the change over the course of his lifetime on this cultural front was very striking.) California shifted mid century from being the US&#x27;s fastest-growing state -- 50% population growth between 1950 and 1960 -- to a state that is somehow, improbably, <em>shrinking</em>. This is, obviously, mostly because of the regulations the state&#x27;s inhabitants put in place that block the housing that&#x27;s required to support California’s economic success. As a result, California has lost the &quot;technology&quot; of being able to affordably house its inhabitants. In these ways and many others, technology is both advancing rapidly and yet often receding in the state. (Tenet is a movie about time moving backwards and forwards simultaneously… as a result of its policies, California is the Tenet of states.)</p><p id="a111d0cf-8ae6-4f07-845d-41bd4c0a21fb" class="">And it&#x27;s not just California. It&#x27;s hard to look at Germany, where <a href="https://www.pewresearch.org/global/2021/02/03/as-pandemic-continues-more-in-u-s-and-europe-feel-major-impact-on-their-lives/">77% of inhabitants</a> say that their government has done a good job responding to the pandemic, take stock of the COVID vaccination rate (under 5%, compared to more than 22% in the UK and 73% in Israel), and to not raise an eyebrow. So: what&#x27;s going on in our culture -- do we just not <em>want</em> good things?</p><p id="a90e8c6c-a004-4712-a45f-8def9763c09b" class="">(3) <strong>Institutions and first mover disadvantage.</strong> Mancur Olson was, I think, right in <a href="https://www.amazon.com/Logic-Collective-Action-Printing-Appendix/dp/0674537513">his focus</a> on institutional dynamics and how principal/agent issues and collective action problems seep into our systems over time. For example, the FAA was probably pretty good in its early days... to enable a successful aviation sector, there are lots of public goods to be provided in the domain (clear rules around airspace, air traffic control, navigational aids, airports, ...) and very few would argue that the optimal amount of aviation regulation is <em>none</em>. On the whole, the US did a great job of fostering aviation technology, and the people who went to the FAA in the early days <a href="https://www.amazon.com/Bonfires-beacons-aviation-Commerce-1926-1938/dp/B006ZWKLVK">were motivated</a> by the right things -- a desire to support and enable a burgeoning aviation sector. Today, the FAA is a sprawling, stodgy, entrenched bureaucracy. It has about 45,000 employees represented by multiple unions; there are lots of countervailing constituencies with vested interests to protect; there are endless accumulated outdated rules. For example, electric engines are, as of today, <em>prohibited </em>in certified aircraft! Despite the obvious potential drones have for everything from surveying to firefighting, the FAA still prohibits beyond-line-of-sight use. (In stark contrast to the deliberately permissive approach the FAA used during aviation’s infancy.) The avionics you see in cockpits are bafflingly primitive because it&#x27;s so hard, slow, and expensive to get the FAA to approve new technology. As a result, pretty much every pilot flies with an iPad running sophisticated flight planning software -- their connection to a world that the FAA doesn&#x27;t encumber. Now, <em>every</em> system suffers from some of this inertial dynamic, no matter what the culture around it is. No nefarious lobby is <em>opposed</em> to electric engines in aircraft, and the FAA will assuredly legalize electric engines at some point... there&#x27;s just the status quo bias that naturally ensues from &quot;well, we have a working system; that system naturally resists change&quot;.</p><p id="978da7d8-96bd-4cea-9517-76640a4ecaa4" class="">The period of the early twentieth century was an era of building in the broadest sense, from universities to government agencies to cities to highways. The byproduct of this period of building is maintenance and we haven&#x27;t figured out how to <em>meta-maintain</em> -- that is, how to avoid emergent sclerosis in the stuff we build. I see the exact same thing in financial services, by the way. Nobody in financial services thinks that real-time settlement is a bad idea. Cryptocurrencies show that it is a quite tractable problem. The &quot;enemy&quot;, such as it is, is the calcification that follows from an existing install base. And all cultural questions aside, the US simply has a very large existing install base of aged institutions and systems.</p><p id="224da9e3-e187-4b22-a40b-6f1c08a8604d" class="">(4) <strong>Talent allocation. </strong>Maybe there&#x27;s something about a substitution effect in where smart people go... perhaps certain sectors are hiring so many of the best people that other sectors have suffered. Most readers will probably have seen versions of the famous<a href="https://twitter.com/patrickc/status/1275288642022289410"> innovator immigration chart</a>. I&#x27;d be interested in sectoral versions of this. There&#x27;s a 1991<a href="https://scholar.harvard.edu/shleifer/publications/allocation-talent-implications-growth"> paper</a> from Kevin Murphy about some versions of this question, which includes this eye-catching table:</p><figure id="5639a03a-1755-422f-b345-a1ed2eeef9a7" class="image"><a href="Interview%20Patrick%20Collison,%20co-founder%20and%20CEO%20of%20%20134e44cb92834ff68e9c3fb5f9d49b27/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcd64cfd7-0f42-4a57-aa6a-d69056679193_1244x732.png"><img style="width:700px" src="Interview%20Patrick%20Collison,%20co-founder%20and%20CEO%20of%20%20134e44cb92834ff68e9c3fb5f9d49b27/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcd64cfd7-0f42-4a57-aa6a-d69056679193_1244x732.png"/></a></figure><p id="cb38f566-20ff-4060-8e44-dd40a0a89700" class="">His conclusion: “Our evidence shows that countries with a higher proportion of engineering college majors grow faster”. (Obviously the direction of the causality is still a question.)</p><p id="edfc4bde-3247-4d52-a85e-d52b1987e550" class="">More broadly, lots of<a href="https://www.oecd-ilibrary.org/economics/the-best-versus-the-rest_63629cc9-en"> papers</a> at this point show how across-firm productivity dispersion is increasing.. it&#x27;s possible that something is happening such that (a) certain kinds of firms (“frontier firms” in the paper just linked) are now disproportionately able to afford to hire the best people, or (b) dynamics around firms have changed such that it&#x27;s much harder for most firms to be as productive. Anyway, this is a big topic in its own right, so I won&#x27;t say too much here except to flag that &quot;allocation of talent across sectors&quot; is a big question and seems plausibly the source of a significant effect. Maybe people are just working on the wrong things. I wish there were more analyses here.</p><p id="cbb5d864-bfa7-4558-baa1-e67aa3e75f76" class="">(5) <strong>Our problems are </strong><a href="https://en.wikipedia.org/wiki/Wicked_problem"><strong>wickeder</strong></a><strong>.</strong> While we have to be careful to not over-diagnose explanations involving low-hanging fruit (since they can easily be excuses), I think it is clearly the case that the major open problems in many domains involve emergent phenomena and complex/unstable systems that often have lots of complex couplings and nonlinear effects and so on. In biology, cancer, autoimmune conditions, anything involving the microbiome... these are all just intrinsically harder problems than individual infectious diseases. In computing, modern machine learning is much more about experimentally figuring out what works in an emergent sense than, say, operating system or network protocol design, which are more about top-down architecture. (Those latter domains have their own emergent phenomena, too, but they&#x27;re more the exception than the rule.) You could probably extend the argument to <a href="https://futureofmatter.com/maps_of_matter.html">materials science</a> or condensed matter physics... these aren&#x27;t as neatly characterizable in closed forms as, say, basic mechanics or thermodynamics. It&#x27;s hard to say whether the proportion of important problems that are &quot;wicked&quot; has increased but I think it&#x27;s plausible that it has.</p><p id="6f3670c4-5286-4454-b347-18bf9dd6629d" class="">This answer is already too long, so I&#x27;ll stop here.</p><p id="875a5141-8c5e-41ac-ac71-f13d968894b0" class=""><em><strong>N.S.: So if I&#x27;m reading you right, you think a modern culture doesn&#x27;t value technological progress enough. Why do you think this culture changed? Did we simply get enough stuff that getting yet more became less urgent for us, and we instead started to care more about zero-sum fights over social status? That&#x27;s what happens when you climb up the ladder of </strong></em><a href="https://www.verywellmind.com/what-is-maslows-hierarchy-of-needs-4136760"><em><strong>Maslow&#x27;s Hierarchy</strong></em></a><em><strong>, right?</strong></em></p><p id="a51314f2-9129-4268-8799-034577a84b01" class=""><em><strong>Maybe we just aren&#x27;t envisioning the cool new stuff we could get? That brings me to another question: What are the new technologies that humankind needs the most right now? Many of us have been saying that </strong></em><a href="https://noahpinion.substack.com/p/why-im-so-excited-about-solar-and"><em><strong>cheap (green) energy</strong></em></a><em><strong> is the biggest, and of course everyone is excited about vaccines right now. Would you agree? And what others would top your list? What marvels that we could create today -- or are already creating today -- do we not even realize we need?</strong></em></p><p id="802fdedc-ffbf-45e1-9905-db6c1d792c2e" class=""><em><strong>And that brings me to yet another question, of a more personal nature: What got you interested in creating technology in the first place?</strong></em></p><p id="a8a69c35-2eb4-4771-9c24-e91bd1de79cb" class="">(1) To whatever extent that cultural change is one of the root causes... I don&#x27;t really know why it changed or how to best characterize that. I&#x27;d probably first try to better understand what happened between 1945 and 1970 in the US, since that seems to have been a locus, but maybe that&#x27;s a parochial perspective. (Even though I&#x27;m Irish.) And I&#x27;ll reiterate the point that <em>most</em> cultures through time haven&#x27;t been, I think, especially conducive to progress or innovation, so I&#x27;d also invert -- maybe we should just identify those that were and try to figure out what it was that was special about them. As a meta point, cultural questions are tough for anyone to write about since even true diagnoses will never be wholly convincing (we have no counterfactuals) and because culture is a topic that people are often quite sensitive about. I thought that this was a <a href="https://psyarxiv.com/d6qhu/">pretty neat paper</a> but lots of estimable onlookers <a href="https://twitter.com/prof_gabriele/status/1192656942658916352">strongly</a><a href="https://twitter.com/amyfullermorgan/status/1192767594379587585">disagreed</a>. As a result of these inhibitory forces, I suspect that good scholarship here is underprovisioned.</p><p id="6a6f052c-e7a2-4d6e-a158-42af23934186" class="">I think that Maslow&#x27;s Hierarchy-style explanations are decently plausible... it&#x27;s arguably the case that enough people in the US had climbed high enough on Maslow&#x27;s Hierarchy by, say, 1970 that other considerations became focal. It could also be true that time horizons shortened, maybe as a result of many needs being satisfiable quickly rather than slowly. Even if that’s locally good in many ways, being willing to operate on longer timescales is very important. It’s part of why I’m so drawn to the Long Now (on whose board I serve) and it’s the single biggest thing I’ve taken away from <a href="https://en.wikipedia.org/wiki/Reasons_and_Persons">Derek Parfit’s work</a>. As Jonas Salk said, it’s important to think about whether we’re being good ancestors!</p><p id="e3c7bb03-d395-48e7-89c4-f44d9c85230d" class="">(2) In terms of what the world <em>needs</em>, improvements in medical technology are probably still #1. Climate change mitigation technology (cleaner energy generation and CO2 sequestration and so on) is also quite high up. More broadly, we need to make all of the things that you and I enjoy every day cheap and efficient enough for billions more people to afford (with safety/security high on that list). But &quot;need&quot; is a tough framing. There&#x27;s obviously so much stuff that would be fabulously valuable and it&#x27;s hard to predict the magnitude of the impact upfront. Besides the obvious diseases, better cures for depression and mental illness and other psychiatric conditions would be hugely beneficial. $100 robotic surgeries. A machine for cheaply manufacturing arbitrary food -- a 3D printer for nourishment into which you just insert elemental &quot;ink cartridges&quot;. (And not just for replicating already-existing foods -- the possible design space is very large!) Flying cars, obviously. (Plus space-based <a href="https://www.youtube.com/watch?v=zqE-ultsWt0">earth-to-earth</a> transportation.) Fast-growing trees so that everywhere can be as blissfully arboreal as you like. Cities that <a href="https://twitter.com/patrickc/status/1214662478883241984">look like this</a>. Technology for comprehensively eliminating air pollution (not just from internal combustion engines but also sand, dust, etc). Ubiquitous detectors for toxins like lead, arsenic, and benzene. <a href="https://andymatuschak.org/books/">Smart books</a> that are better fit for purpose. A <a href="https://www.technologyreview.com/technology/babel-fish-earbuds/">babelfish</a> that works. Programming environments that are less hopelessly primitive than those today. (Take Mathematica/Squeak/Genera and go far beyond them.) Better education technology for everyone... what&#x27;s Khan Academy but 10 times better? Too-cheap-to-meter water desalination. Batteries with so much energy density that they need never be recharged. Nanotechnology -- self-repairing wood; flexible glass; translucent steel. Quantum computers that accurately simulate physical chemistry. Completely new kinds of matter. Better catalysts for all major existing chemical processes.</p><p id="516dd6c2-e8bc-45fb-9f09-82c4b962b8b1" class="">(3) Hmm... Isaac Asimov&#x27;s <a href="https://www.amazon.com/Asimovs-Guide-Science-Isaac-Asimov/dp/0465004733"><em>New Guide to Science</em></a>. I read that when I was 13 or 14 and thought it was just amazing. (I was an exchange student in Germany at the time. I didn’t learn much German but I did have my eyes opened to many aspects of science that I previously knew nothing about!) Some of John Gribbin&#x27;s <a href="https://en.wikipedia.org/wiki/John_Gribbin">books</a>, like <em>In Search of Schrödinger&#x27;s Cat</em>, really inspired me. Douglas Hofstadter -- especially <em>Metamagical Themas</em>. (I read GEB when I was a teenager but found it a bit of a slog.) But, honestly, I think I was always interested in creating technology to some extent. I spent hours and hours playing with Lego when I was young and then transitioned pretty quickly to programming. I remember being pretty certain that I&#x27;d love programming before I&#x27;d ever written a line of code and, sure enough, I did. So, maybe it&#x27;s just something about how my mind is wired.</p><p id="b42156ce-1d48-48bb-87b2-2d982dbde7f8" class=""><em><strong>N.S.: On the societal motivation front, what do you think of the idea -- which is super scary to me -- that war is a big driver? The Civil War gave us the railroads and accelerated manufacturing technology. World War 2 and the Cold War gave us modern electronics, vast leaps in computer science, medicinal improvements, the interstate highway system, materials science...tons of stuff, in addition to institutions like what ultimately became the NHS. Is there any chance that U.S.-China competition will drive tech forward in a similar way? And what do you think of the </strong></em><a href="https://www.young.senate.gov/newsroom/press-releases/young-schumer-unveil-endless-frontier-act-to-bolster-us-tech-leadership-and-combat-china"><em><strong>Endless Frontier Act</strong></em></a><em><strong>?</strong></em></p><p id="f302b7af-d3a8-44a8-981b-0a43d73e5743" class=""><em><strong>And another question, which might be a bit of a confrontational question because you are the head of a big superstar tech company that hires lots of superstar employees. There&#x27;s been this concern among some economists that leading companies are hogging all the top talent and all the </strong></em><a href="https://www.nber.org/papers/w25755"><em><strong>intellectual property</strong></em></a><em><strong> too, and that by doing so they&#x27;re stopping ideas and know-how from diffusing back down to all the second-tier companies, and that this is stymying productivity growth. This possibility was raised by some people at </strong></em><a href="http://www.oecd.org/economy/growth/Frontier-Firms-Technology-Diffusion-and-Public-Policy-Micro-Evidence-from-OECD-Countries.pdf"><em><strong>the OECD</strong></em></a><em><strong> a few years ago. Does this worry you? If all the top people in software, for example, just shuffle back and forth between Stripe and Google and a few other companies, does that mean there are fewer to bring know-how to the rest of the companies out there, or to start their own startups, etc.?</strong></em></p><p id="c9951623-48ca-45de-ae08-60d940e8d741" class="">War -- I think that demand pull is real (I&#x27;ve tweeted a few times recently about how <a href="https://www.hup.harvard.edu/catalog.php?isbn=9780674432833">Schmookler&#x27;s view of the world</a> is underrated compared to Schumpeter&#x27;s) and it&#x27;s clear that war can certainly accelerate some technologies. The atom bomb is the obvious example but there are tons of examples from WWII -- scaled-up penicillin manufacturing or plasmapheresis, for example. They were pretty significant! Vannevar Bush <a href="https://www.amazon.com/Pieces-action-Vannevar-Bush/dp/B0006CAJ44">suggested</a> that medical advances made during the war may have saved more lives than were lost during it. That said, I&#x27;m ultimately very doubtful that war is necessary or anything close to the best way to achieve scientific breakthroughs. (See <a href="https://www.amazon.com/Great-Leap-Forward-Depression-Financial/dp/0300188161">Field&#x27;s book</a> here too.) And e<em>ven if</em> World War 2 (for example) was unusually effective at fostering scientific invention, the relevant reference class is presumably something between &quot;all wars&quot; or &quot;all wars likely to involve developed countries today&quot; -- with respect to those, I think the EV in either research productivity or (more importantly) broader welfare looks very negative.</p><p id="5b2ec327-4628-4b15-9b76-db847d89526e" class="">Endless Frontier Act -- well, I&#x27;m glad that we&#x27;re thinking about these problems! Overall, my single biggest science <a href="https://twitter.com/patrickc/status/1258403494853136385">policy suggestion</a> would be to pursue far greater structural diversity in our mechanisms. More different kinds of grant making institutions, more different kinds of research organizations, more different career paths for participants, etc. That&#x27;s not easy to do -- bureaucracies by their nature seek to standardize which this fosters homogeneity. So, to the extent that the Endless Frontier Act can bring us closer to a more structurally varied world, I&#x27;m probably supportive relative to the status quo. My biggest qualm would probably be that it combines regional development policy with scientific policy. While the political merit is easy to see, I&#x27;m not sure that that&#x27;s a good idea. Talent clusters are real and I think it probably makes more sense to think about how best to improve those clusters than it does to foster underdog competitors.</p><p id="67af9c4b-03f8-4dd5-b03e-061489fbc087" class="">Talent concentration -- yeah, per my earlier answer, I think talent allocation is a pretty interesting area to dig into. When I started college in 2006 I remember reading that something like 40% of the previous graduating year in my school went into finance, even though technology would pretty clearly (even then) have been a more sensible choice on many levels. Like other systems involving collective investment decisions, it&#x27;s clear that the sociology can cause persistent misallocations or bubbles. I think it&#x27;s interesting to think through how the hysteresis, group incentives, economic factors, generational shifts, status dynamics, institutional forces, etc., etc., may all play off each other. Overall, though, I worry less about any sector gobbling up all the smart people -- if there really are great opportunities elsewhere, <em>some</em> smart people will see that and things will eventually correct (as happened with finance and tech) -- and worry more about some sectors being structurally inhospitable to very talented people. I don&#x27;t think that the ambitious upstarts who go into high-speed rail (in America, anyway) are going to have a great time or to have much success in convincing their friends to follow them. And I suspect that, for various reasons, too many domains look somewhat like high-speed rail -- what would a contemporary <a href="https://en.wikipedia.org/wiki/William_Rainey_Harper">William Rainey Harper</a>&#x27;s experience be? There&#x27;s a view that the internet is a frontier-of-last-resort and I don&#x27;t think it&#x27;s totally wrong.</p><p id="31e7b58c-f80a-430a-b963-5fb4b18a034a" class=""><em><strong>N.S.: To expand on the idea of government&#x27;s relationship to the private sector -- especially highly innovative businesses -- what&#x27;s your general view of the proper relationship? When I was young, lots of Silicon Valley people held a basically techno-libertarian view that the government should stay out of tech as much as possible. In recent years it seems like the winds have shifted; some people, including your former employee Saikat Chakrabarti (whom </strong></em><a href="https://noahpinion.substack.com/p/interview-saikat-chakrabarti-creator"><em><strong>I interviewed the other day</strong></em></a><em><strong>), are proposing a much more vigorous &quot;development state&quot;, that gets involved in all kinds of industrial policies. Then you have thinkers like Mariana Mazzucato, Simon Johnson, Jonathan Gruber, etc. who believe that government support of purposeful innovation projects (rather than just basic research) is upstream from corporate innovation. Do you have a general philosophy of how government should intervene and how it should not intervene in order to create a more robust private tech sector?</strong></em></p><p id="ad74f944-e76e-4cf2-b6f2-3871d20bd3c3" class=""><em><strong>And along these lines, what do you make of the current technological competition between the U.S. and China? Real, or hyped? Any thoughts on what our government should be doing to strengthen our hand? If you&#x27;re not allowed to talk about this, I completely understand!</strong></em></p><p id="258e2130-b705-44bf-9265-abe9a7e1e2a6" class="">I&#x27;m a big fan of &quot;government as buyer&quot;. I was reading <a href="https://www.nuclearinnovationalliance.org/search-spacex-nuclear-energy#:~:text=This%20report%20evaluates%20the%20successes,federal%20procurement%20to%20drive%20commercialization">this report</a> a few days ago that covers the NASA COTS program that SpaceX benefited from and makes the (sensible, I think) case that something like this could work well for nuclear energy. Similarly, while the US government&#x27;s response to the pandemic was overall very poor, Operation Warp Speed specifically was an excellent idea and has worked out great -- the Novavax vaccine <a href="https://www.notion.so/22d3805ec3044d95ae32f559ff34886a">wouldn&#x27;t exist</a> without it. And there are lots of antecedents here too if you go back further... NASA purchased a majority of all integrated circuits manufactured in the early/mid 60s. Over the decade, they fell in cost from ~$1,000 to $1 apiece, largely because of production increases and manufacturing learning curve progress stimulated by the government.</p><p id="a23be58c-8bcb-4cc4-81e2-4d8e08135f3f" class="">I also think that certain kinds of R&amp;D are public goods and that they&#x27;ll very likely be underprovided without deliberate mechanisms to address that (such as public funding of R&amp;D), and I&#x27;m conceptually strongly supportive of those mechanisms. High-quality R&amp;D work is among the most important things for our society to effectively support. As an aside, this view of the role of government is an area where I find myself often disagreeing with libertarian-inclined individuals. While I consider myself strongly pro-free market and pro-freedom, I am not a libertarian, and I think this is the kind of place where a traditionally libertarian approach simply doesn’t have much that’s useful to say.</p><p id="5c5fbe54-e19e-4aef-acee-3c2ffdf5d2cb" class="">Now, all of this positivity around the role of government notwithstanding, I think that Mazzucato overstates her case pretty substantially. Jose Luis Ricón wrote a <a href="https://nintil.com/mazzucato-and-the-iphone-ii-the-myth-of-the-entrepreneurial-state">very comprehensive</a> and I think correct critique.</p><p id="90f124c2-08e9-4e03-ac8b-7dd11281896e" class="">On the <a href="https://news.mit.edu/2019/public-investment-science-jump-starting-america-0417">Johnson/Gruber work</a>, I think that we should welcome informed and ambitious attempts to tackle tough questions, as they do in <em>Jump-Starting America</em>. It&#x27;s a lot easier and safer to say something narrowly correct on a less important issues. So, kudos to them! That said, I have two main issues with work like this. (There&#x27;s lots like it; I don&#x27;t mean to single them out.)</p><p id="cea5e890-4711-49dc-9ea7-7c2d1f481bfd" class="">First, my view is that it&#x27;s just not that meaningful to talk about &quot;science funding&quot; as a lump sum or to talk (as they do) about the aggregate returns on federal research dollars. <em>Which </em>dollars and allocated how? HHMI spends a lot less than the NIH does (about 98% less) and yet its awardees win a <em>lot</em> more prizes per dollar. You could protest that HHMI cherrypicks talented people -- and they certainly do -- but that&#x27;s the point: are we talking about the ROI of funding the best people or something else? In innovation, imputed average elasticities are going to be extremely misleading unless you&#x27;re very careful. (Would you get twice as many Ronaldos and Messis if you doubled soccer funding? Or, to be parochial, the returns to tech investing may be incredible or terrible <a href="https://www.sethlevine.com/archives/2020/10/vc-fund-returns-are-more-skewed-than-you-think.html">depending</a> on who&#x27;s doing the allocating, and the outcomes on the current margin would depend a great deal on the particulars.) So, I think that the industrial policy folks too often talk about &quot;the returns to publicly-funded R&amp;D&quot; as a monolithic whole. I would ask them: exactly how will you choose who gets funded? What will the relevant incentive structure for those people be? What&#x27;s your theory for how they&#x27;ll do <em>top-tier </em>science/research/innovation/etc.? These are tough questions! Building systems that allocate capital well at scale and through time is hard. If they have good answers, I&#x27;m probably supportive... more experimentation would be great. If not, I&#x27;m less hopeful.</p><p id="205b07be-b072-4be0-83a4-943961cbf923" class="">Second, I think that Johnson/Gruber also make their job too hard by again combining regional development policy with science policy. Regional development policy is an important problem, don&#x27;t get me wrong! I&#x27;m sympathetic to <a href="https://www.theatlantic.com/magazine/archive/1993/12/how-the-world-works/305854/">List-ian</a> views and the idea that the state should be a fairly active participant in the process, and, as a European citizen, I appreciate that the EU engages actively with these questions. But Ireland, say, didn&#x27;t need to <em>invent</em> the transistor or the endoscope in order to benefit immensely from their existence. As a society, our first and overriding priority should be to generate the innovation <em>at all</em>, anywhere. If I were setting US policy, I would argue for treating these (how best to boost science funding and how to foster regional development) as quite distinct questions. If we somehow get really good at both, we can always go for bonus points in the future by tackling the two issues in conjoined fashion.</p><p id="11b2e2c1-d55a-4691-aee7-2c1c50dbd3ff" class="">To your last question, the broad competition between the US and China is pretty real in the sense that many in both countries&#x27; ruling apparatuses view it as such. And it&#x27;s certainly the case that the Chinese Communist Party <a href="https://www.chinafile.com/document-9-chinafile-translation">sees</a> Western values, liberty, and liberal democracy as competitive (and threatening). In tech in particular I think it’s important to recognize that Chinese companies and the Chinese government have somewhat different outlooks and goals, coerced oaths of fealty notwithstanding. (For example, Zhang Yiming, the ByteDance founder, makes no secret of his <a href="https://www.notion.so/cc6483d1bc4c4511bc6f84df100cb999">affinity</a> for Hayek -- the latter not exactly one of the leading proponents of Party-aligned thought!) Within the technology ecosystem, I think that most companies simply want to work together effectively however it makes sense and aren’t particularly ideologically motivated. (I myself admire many Chinese CEOs and companies a great deal.) The challenge for everyone both in and outside of China is the occasional and unpredictable <a href="https://www.wsj.com/articles/forced-tech-transfers-are-on-the-rise-in-china-european-firms-say-11558344240">intercession</a> or <a href="https://www.bbc.com/news/business-50091931">retribution</a> from the Communist Party. Because it’s mostly driven by politics from above, though, I don’t think that “tech competition” is ultimately the right framing... I think there’s <em>government-driven</em> competition that sometimes shows up in tech and in other sectors whether they like it or not.</p><p id="edf4565b-f739-41dc-96e3-af1034a35e9a" class="">I&#x27;m out of my depth commenting on what the US government should do. I&#x27;ll just say that I find it somewhat discouraging that one of the biggest and clearest violations of liberty and human rights of our era -- the treatment of the Uyghurs by the Chinese government -- receives as little condemnation from those in power as it does. I get why, of course: it&#x27;s bad for business. But I think that our support for human rights and liberty should be somewhat closer to an absolute. (On this topic, <a href="https://www.pewresearch.org/global/2021/03/04/most-americans-support-tough-stance-toward-china-on-human-rights-economic-issues/">70% of Americans agree</a>.) In his <a href="https://history.fee.org/media/3699/121-a-world-split-apart.pdf">commencement address</a> at Harvard in 1978, Aleksander Solzhenitsyn claimed that civic courage was in decline. I don’t know whether or not it was (or is), but, whatever the trendline, it seems important to me to ensure that it <em>doesn’t</em>.</p><p id="7d288fa8-2b11-414d-9c70-ac4b3eeb49f0" class=""><em><strong>N.S.: My own problem with the idea of the &quot;entrepreneurial state&quot; is that I think it frames government as a competitor to private entrepreneurship, when in fact it&#x27;s usually just upstream. Almost any technological innovation can be traced back to some government-funded project, at least these days. We can ask whether that means government is necessary for the upstream science or whether it just offers its dollars unnecessarily. But either way, it seems like governments and companies just do different types of innovation (though the big corporate labs of the mid 20th century blurred this distinction). Government does more scientific research, companies do more applied product innovation. Which of course makes sense in terms of economic theory, since you can sell products, but scientific discoveries are hard to monetize and quickly leak across institutional and national borders. Ricón seems to recognize this innovation supply chain, drawing a distinction between &quot;the research side of the technologies (Scientific support)&quot; and &quot;the conversion of research into saleable artefacts&quot;. Do you think that this supply chain is a good way to think about government and industry with regards to innovation?</strong></em></p><p id="3297a883-77d4-4301-b042-60c40cd113eb" class=""><em><strong>And I know I should let you go and this interview is getting pretty long, so one last question: Other than expanding Stripe into a world-conquering technological behemoth, obviously, what&#x27;s on your plate? Are there philanthropic causes, policy efforts, or lines of intellectual inquiry that you&#x27;ll be pursuing in the near future?</strong></em></p><p id="0554b5b7-e30e-4a6b-a30a-a8933402166c" class="">I think the supply chain view is very directionally correct though there are obviously lots of examples of companies undertaking quite fundamental research and universities producing work that&#x27;s essentially immediately commercializable (like Genentech or Google). The jet engine and transistor, two of the great inventions of the twentieth century, were developed outside of academia, for example. Toyota and Panasonic have been doing a lot of work on solid-state batteries, which would be a very big deal if realized, and Toyota <a href="https://www.motortrend.com/news/toyota-solid-state-battery-ev-2021/">claims</a> that they&#x27;ll have a running prototype this year. (As a random tangent, I find it very inspiring that <a href="https://en.wikipedia.org/wiki/John_B._Goodenough">John Goodenough</a>, one of the inventors of the lithium-ion battery, is 98 and also <em>currently working on solid-state battery research</em>, with publications and patents actively flowing. Goals!) Anyway, I believe in messy innovation <em>clusters</em> and the supply chain model might suggest more separateness and unidirectional flow than is actually optimal (or manifested in practice).</p><p id="e4f57960-4688-4ab8-8276-68f1c909cc5e" class="">As for me... well, Stripe keeps me plenty occupied. Most of the world is unbanked! Pretty much every aspect of internet commerce is still shockingly primitive. I read <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20161385">this paper</a> this morning about some of the effects of fast internet on employment in Africa... &quot;fast internet&quot; is at this point a pretty mundane phenomenon for many of us and yet it turns out that its provision may be one of the very best developmental interventions. So, I remain a very big believer in infrastructure, and I think that Stripe is still early in its journey to unlock all sorts of entrepreneurship and economic activity that wouldn&#x27;t otherwise have occurred. Almost every week we ship an improvement that makes hundreds of thousands or <em>millions</em> of businesses better off -- and our ability to make such improvements is growing and not shrinking with time. How cool is that?! More broadly, John and I are thinking a lot about whether there are things we can do to help grow the tech sector in Europe, and we recently helped launch a <a href="https://software-engineering.ie/">new program</a> that we co-developed with the University of Limerick. Outside of Stripe, my partner works as a biomedical scientist, and we have a few ideas in that space. Maybe for a future interview.</p></div></article></body></html>

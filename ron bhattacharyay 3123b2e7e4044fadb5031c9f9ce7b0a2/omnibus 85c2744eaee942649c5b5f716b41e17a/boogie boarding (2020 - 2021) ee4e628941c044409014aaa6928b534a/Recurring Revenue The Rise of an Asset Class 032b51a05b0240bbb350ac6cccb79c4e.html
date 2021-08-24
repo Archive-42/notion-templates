@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Recurring Revenue: The Rise of an Asset Class</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="032b51a0-5b02-40bb-b350-ac6cccb79c4e" class="page sans"><header><h1 class="page-title">Recurring Revenue: The Rise of an Asset Class</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/@John_Street_Capital/recurring-revenue-the-rise-of-an-asset-class-eff0c4be9fa0" class="url-value">https://medium.com/@John_Street_Capital/recurring-revenue-the-rise-of-an-asset-class-eff0c4be9fa0</a></td></tr></tbody></table></header><div class="page-body"><blockquote id="40f57763-4725-4d57-a13a-93b0d40a759a" class="">“Software contracts are better than first-lien debt. You realize a company will not pay the interest payment on their first lien until after they pay their software maintenance or subscription fee. We get paid our money first. Who has the better credit? He can’t run his business without our software”- Robert Smith</blockquote><p id="4a2b2325-fcdf-4a97-9d74-97c6be89fe80" class="">In June we wrote a piece entitled <a href="https://medium.com/@John_Street_Capital/this-time-its-different-maybe-e0ae65b458dc"><em>This Time It’s Different: Maybe</em></a><em>?</em> where we highlighted the outperformance of Cloud / SaaS stocks vs. the broader market, while noting that within the sector, public market participants were bifurcating between what we referred to as “Central Nervous System” stocks or those with high Net Dollar Retention (NDR), and “Appendix” stocks or those with lower NDR.</p><p id="be40aa01-6252-462f-929f-77bda72164ce" class="">During the depths of the COVID-19 pandemic as companies went into survival mode we saw many of them forced to make difficult decisions as it pertained to laying off a significant percentage of their workforce, stopping all discretionary spending including marketing &amp; travel, halting payments on their lease or mortgage, accruing legal liabilities, etc… all in an attempt to do whatever was necessary to cut costs. A common theme we saw regardless of industry / business model was when it came down to certain software costs such as AWS / Azure / DataDog / Okta / Twilio, even If those represented a disproportionate amount of total spend, they were unable to turn those off; as they couldn’t operate their business without them, these systems were the “Central Nervous System” equivalent.</p><figure id="c821bbbf-5790-4dd3-aa9c-50649aa42351" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1wQUupgAP7hLIR_K3meq4OA.png"><img style="width:474px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1wQUupgAP7hLIR_K3meq4OA.png"/></a></figure><p id="da21bd79-7c27-42cb-af27-dc85e0dad2c5" class="">This theme might be best illustrated in the performance of a variety of public market stocks. The BVP Emerging Cloud Index is +54.4% YTD vs. the NASDAQ +18.7%, the S&amp;P 500 +1.9% and the Dow Jones (-4.2%). Lifting the hood those stocks with high net dollar retention have exhibited even greater outperformance YTD than those with lower Net Dollar Retention. While this is far from the only metric public market investors care about, it is perhaps one of the best metrics to quickly analyze the predictability of the “recurring” aspect of recurring revenue. This was even notable during the recent batch of SaaS IPO’s last week, with the highest NDR stock SNOW (158%) exhibiting the biggest Day 1 pop (+111.6%), and the lowest NDR stock SUMO (120%), exhibiting the lowest Day 1 move (+31.4%).</p><figure id="64f89f44-0280-4c08-8fe3-e9c78ba32bbc" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1RquZ3d4lqALf3nlIJUK2IA.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1RquZ3d4lqALf3nlIJUK2IA.png"/></a></figure><p id="25df9339-1849-472c-9c7c-48c76b666561" class=""><strong>Recurring Revenue as the 8th Wonder of the World</strong></p><p id="3fc11dbd-5313-4d30-a030-ed9f2631e32d" class="">Albert Einstein reportedly once said, “Compound interest is the eighth wonder of the world. He who understands it, earns it. He who doesn’t, pays it.” While there’s heathy debate as to whether or not this quote is actually attributable to Einstein, if he were alive today we think he would refer to recurring revenue in a similar vein.</p><figure id="cbd829ec-b83e-4e07-b6dd-02fdf2a27c44" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1009z0u1H8Pcl5CmclA1swQ.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1009z0u1H8Pcl5CmclA1swQ.png"/></a></figure><p id="a63ceda0-c80b-4b20-97cb-9cd674f36687" class="">Brian Feroldi from Motley Fool has several tweets discussing this idea. In March <a href="https://twitter.com/BrianFeroldi/status/1243143091374211072?s=20">he highlighted</a> a number of different ways thru which to find high quality businesses starting with recurring revenue:</p><p id="0aeb8af1-6681-4478-9240-822064fefa0a" class="">And <a href="https://twitter.com/BrianFeroldi/status/1300893943639416833?s=20">earlier this month</a> he called “Recurring Revenue” the gift that keeps on giving; highlighting industry leaders across a variety of sub-sectors where recurring revenue underpins their business model, and as a result is largely responsible for their “category leader” status.</p><figure id="48633099-7fcc-4112-b5f0-c68a344a13af" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1ypaevIv6NvEcbN2vH3c6AA.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1ypaevIv6NvEcbN2vH3c6AA.png"/></a></figure><p id="81eacc88-dad1-4d62-bbe7-0522a067ff9d" class="">While the market has clearly developed a favorable outlook on SaaS / Cloud stocks year-to-date; we’ve seen a multi-year rerating of even some of the world’s largest companies when their business mix shifts from perpetual license and / or hardware models to a higher percentage of recurring revenue.</p><p id="9eb5b9a9-939e-4447-8dee-88a292ae0ac5" class=""><strong>Adobe</strong></p><p id="4bc802a8-0bb6-4f2c-a5c5-285e33b4ebf3" class="">Adobe has had one of the most successful transitions from a license model to a SaaS model. From 2010-2019, recurring revenue as a percentage of total revenue increased from less than 10% to greater than 90%; and this shift has led to a much higher valuation. Over that same time period, Adobe’s trailing EV/S multiple has increased from 4.0x to 18.0x and its EV/EBITDA from 8.5x to 32.0x.</p><figure id="8473f5cf-1156-45a6-924c-3b743a1a9f6e" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1qX0OrrSfesZm7rLNbGRK2Q.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1qX0OrrSfesZm7rLNbGRK2Q.png"/></a></figure><p id="6954f5d0-2f38-44ae-8437-94e9ac60a182" class="">ADBE EV/S; Source: Koyfin</p><figure id="5526849a-baa0-4a70-bfe0-5575e14fed71" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1PtjvwP4Uxqb-EMFsi4a95A.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1PtjvwP4Uxqb-EMFsi4a95A.png"/></a></figure><p id="4d890320-a196-429c-81f7-77b538ee9f07" class="">ADBE EV/EBITDA; Source: Koyfin</p><p id="bb722179-7807-4b0d-817d-ced5b10e3a64" class=""><strong>Apple</strong></p><p id="c12ad992-22fc-4152-85e0-b4e73d35afe3" class="">If ADBE is the poster-child from re positioning the totality of your business, AAPL shows how much value can be unlocked with a greater emphasis on recurring revenue on even a smaller percentage of the overall pie. In 1Q14 AAPL earned ~$4.6B from service revenue or ~10% of total revenue, in the <a href="https://www.apple.com/newsroom/pdfs/FY20-Q3_Consolidated_Financial_Statements.pdf">most recent quarter</a> they earned $13.1B accounting for ~22% of overall revenue. Notably over that time period total revenue is +30% while service revenue is +186%.</p><p id="f153bce1-3b38-4485-935a-61fd793d762b" class="">AAPL has continued to emphasize its service revenue; with the most significant announcement to-date when they <a href="https://www.apple.com/newsroom/2020/09/apple-one-makes-enjoying-apple-subscription-services-easier-than-ever/">announced their</a> “Apple One” offering last week which offers customers Apple Music, AppleTV+, Apple Arcade, iCloud, and more in a singular plan. Over the past 2 -3 years AAPL’s EBITDA &amp; NI are roughly flat but as the mix shift has changed to more heavily skewed towards recurring revenue we’ve seen notable multiple expansion with EV/EBITDA going from ~10.0x to 20.5x on an NTM basis and P/E from 15.0x to 29.2x. This multiple expansion is almost entirely responsible for a ~178% increase in the stock price or ~$1.2 trillion of market cap.</p><figure id="93b5d0e5-97c2-493e-acd3-bd5754748950" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/13NMH9B-jO9AyeRLqFCiLSQ.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/13NMH9B-jO9AyeRLqFCiLSQ.png"/></a></figure><p id="0b32c5c9-fea9-4599-8c77-2cc61493fb36" class="">AAPL EV/EBITDA; Source: Koyfin</p><p id="e37291d7-b53d-42ca-b720-b4c8d19fbd3c" class=""><strong>Pipe &amp; The Rise of an Asset Class</strong>:</p><p id="1976737f-101f-4816-9df1-b3e033a82026" class="">In a world of negative rates, investors of all types are searching for alternative sources of yield. While the market has clearly developed a favorable outlook towards the equity of SaaS companies with recurring revenue models, and those businesses that are repositioning themselves with a greater mix shift of recurring revenue, what if you were able to isolate the subscriptions themselves for the creation of a “new” asset class? Investors will have the ability to earn a fixed income-esque rate of return on the underlying contracts as opposed to taking equity or credit risk. And as Robert Smith famously said:</p><p id="dd395a78-cb88-49c3-9a17-4021a2354638" class=""><em>“Software contracts are better than first-lien debt. You realize a company will not pay the interest payment on their first lien until after they pay their software maintenance or subscription fee. We get paid our money first. Who has the better credit? He can’t run his business without our software.”</em></p><p id="2e6203b1-bca4-40ab-8b9c-63a562f4925a" class="">The <a href="https://www.pipe.com/">Pipe team</a> took Bob Smith’s quote &amp; ran with it, creating a marketplace that treats recurring revenue contracts as assets in it of themselves. Pipe is a two-sided marketplace connecting companies that have monthly or quarterly recurring revenue with investors who bid to purchase these revenue contracts for their annual value, upfront.</p><p id="fa0d3dca-3658-46c4-8bc1-09f7d976ea66" class="">Pipe directly integrates with a company’s banking, payment processing and accounting systems to “rate” their business instantly, without disrupting any existing workflows or customer relationships. Pipe is able to automatically track paid subscriptions and once companies are approved, they will have access to the Pipe Trading Platform where they will see real-time bids for the full annual value of their subscriptions.</p><p id="82d85330-b837-4b22-be1b-a351ea1f4577" class="">The immediate pushback on this thesis is usually the need for the buyside to not only underwrite the business of the SaaS company, but in turn the credit risk of each of its clients. Through the use of bank data (current cash balance, historic cash inflows /outflows, burn, etc..), subscription data (volume, churn, payment history, growth patterns, cohort analysis, net dollar retention, etc…), and Accounting Data (Income Statement, Balance Sheet, Statement of Cash Flows), coupled with proper structuring of the asset purchase agreement you alleviate the need to underwrite the SaaS company clients themselves. This is the most senior part of the capital structure, and due to trading limits as a % of ARR, there is sufficient asset coverage for any buyside investor. If a subscriber on Pipe churns before the 12-month period, the company has two options:</p><p id="a5a0aaab-a3a4-47c8-823c-4312fc97acab" class="">· Select a new subscription of equal or greater value to cover the rebate of the churned account</p><p id="38e4307f-e808-4fd8-8f78-e5b2b2090e79" class="">· Rebate the capital they received upfront on a prorated basis for the remaining period</p><p id="30e312b2-9364-4dee-aa81-bb08331de2b5" class="">This agreement also helps to assuage adverse selection concerns that the SaaS company would look to monetize it’s “riskiest clients.”</p><p id="4466c9fa-f609-4491-b9a8-e9c5278146a8" class="">Pipe’s vetted investors make offers to buy month-to-month or quarterly paid subscriptions at a small discount to their annual value. The bid price for a company’s subscriptions depends on the size of the business, trading history, and a variety of company / sector specific variables, but it’s always significantly less than the 20–30% annual discounts afforded by companies to their customers to incentivize annual upfront payment terms. Based on a study of SaaS vendors, Pipe finds that just ~7% of clients convert to annual terms even with that level of discounting. This is important distinction from an Enterprise Value perspective as the market values these companies on an EV/S basis. When SaaS companies offer clients discounts, that reduces the top line and in turn the overall value of the entity. When a company trades on Pipe, the clients still pays 100 cents on the $1.00; this enables these companies to shorten sales cycles, and close more deals by offering more flexible payment terms to customers, while all else equal, leading to an increase in Enterprise Value versus traditional discounting practices. On the platform thus far the contracts are clearing between $0.85~$0.95 on $1.00 depending upon the underwriting criteria for each company.</p><p id="fd72de24-69be-4ec4-be86-f8537f1910ab" class="">If we look at the risk / return profile of investing directly into recurring revenue contracts themselves, at current rates returns are on par with junior tranches of fixed income risk despite significant “seniority” due to structuring. Recurring revenue contracts notably stand apart on a risk / return basis.</p><figure id="868c7242-8981-42c5-bc16-8fe9a9e753d4" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1IGtvnwGffOQ-yHBgutUiMw.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1IGtvnwGffOQ-yHBgutUiMw.png"/></a></figure><p id="addd3f3a-7691-468c-9aac-c66fb29aa214" class="">When both companies &amp; investors initially hear about Pipe they think this is akin to Revenue Based Financing and companies such as Clearbanc or Lighter Capital; but there are a number of important distinctions to be made. If a company engages in revenue based financing this is another form of debt. The lender takes a lien against the totality of one’s business (good luck getting any other capital raise in place); and while the fee appears to be de minimis to start; this becomes a term loan with no fixed term. If you’re a high growth company that can add up to 100%+ APR with caps as much as the 2–3x principal payment. So although a SaaS company may get access to cash flows up front, these couldn’t be more different structures.</p><p id="e926754c-b8da-4e08-83e4-9c0dae0e51a5" class="">If we look at Pipe versus other alternative financing mechanisms, it’s clearly the most beneficial for companies to consider.</p><p id="3a7083e3-63dc-481a-a8fb-cb768bae8119" class="">· <strong>Equity</strong>Equity is the most costly form of capital. We take a look at a hypothetical high growth SaaS company below that has $10.0M in ARR growing at 200% YoY Year 1 &amp; 100% YoY Year 2. They raise $20.0M at a 20.0x EV/S multiple which is for ~10% of the company. At the end of two years as growth has come in the multiple compresses to 15.0x and now they are valued at ~$900M on $60M of run-rate sales. That 10% cost of equity, which was $20M is now already valued at $90M. Alternatively, they can use Pipe.</p><p id="75a68033-907e-4311-af52-2fca26e91c52" class="">· <strong>Pipe</strong>Typically in those types of financing rounds a company is looking at their cash needs for the next 18–24 months. As opposed to a growth equity round a company can onboard to Pipe and is immediately able to “trade” 10% of its ARR; or in this case access $1.0M up-front. We straight line the growth trajectory of the company and allow them to transact up to 30% of revenue over a 2+ year period with the buyside compressing their bid over time as there is a longer trading history. In a comparable 24-month period that company was able to turn future ARR into immediate cash to the tune of $23.7M “costing” them a one-time fee of 6.82%. It’s important to note this “fee” is only incurred if the company is looking to access that cash, and they can simply choose not to trade future recurring revenue contracts, further reducing the cost of capital. Ultimately this fee will be wherever the buyside prices the “credit risk” and in a 0% interest rate world, we think the below are conservative assumptions on behalf of the sell-side.</p><p id="8c5fbf18-2cb8-4d5e-ba3d-c8456ae8257d" class="">· <strong>Venture Debt</strong>Venture Debt is expensive often low-to-mid double digit interest rates with warrant coverage. Depending upon the terms and conditions it can be prohibitive to raise additional capital with Venture Debt outstanding. The warrant coverage makes it incredibly expensive and oftentimes even a worse alternative to equity. Even for high growth companies there will be a number of constraints on the amount of capital they are able to access initially. In the hypothetical example given the revenue run-rate / growth we assumed they were able to access $2.0M which costs them 15% for a 4-year term or $700K of interest coupled with 5% warrant coverage which would be worth ~$45M at the $900M EV.</p><p id="a40bf946-dd2d-4258-bfc2-436dca3cbbe8" class="">· <strong>Revenue Based</strong><strong>Financing</strong>With RBF the devil is in the details. Often times lenders require a minimum rate of return, or set a term of 2–4 years at which point in time the capital can cost 100%+ APY; and similar to venture debt there will be a lien on the rest of the businesses assets with restrictions for alternative financings. In this hypothetical scenario it was ~65% APY cost of capital with a greater cash outlay for access to less cash than the Pipe alternative.</p><figure id="282e8eb7-22f4-4eff-84f5-7ec370642b99" class="image"><a href="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1HZuefdukiWuCm--D2u_xBQ.png"><img style="width:700px" src="Recurring%20Revenue%20The%20Rise%20of%20an%20Asset%20Class%20032b51a05b0240bbb350ac6cccb79c4e/1HZuefdukiWuCm--D2u_xBQ.png"/></a></figure><p id="dc2cea6b-ef30-48d6-9632-16e3be085ffb" class="">Hypothetical SaaS Co Financing Alternatives</p><p id="a6ab7b36-c867-4b65-aa40-796e6386abad" class=""><strong>Why SaaS Companies Should Care?</strong></p><p id="d04b69a1-7864-4d2d-8c57-59489d37f2e8" class="">Pipe solves a pain point for SaaS companies across the continuum including earlier stage startups, growth-stage ventures backed companies, the long tail of ~14,000+ mature software companies that serve broadly defined merchant end-markets, PE backed companies, and the largest public companies alike. As opposed to having &lt;10% of clients pay for annual contracts upfront at 20–30%+ discounts; SaaS companies will be able to turn MRR into ARR, continue to invest in growth, all without disrupting existing workflows. As illustrated above the cost of capital will be the cheapest form for private companies, and for public companies should be on par to a discount to the cost of even public debt; let alone converts.</p><p id="b4f25981-cc0b-4836-96b7-0b0b1f0da3dd" class="">This is a considerable value unlock for these companies who for the first time are able to monetize their most valuable assets; recurring revenue.</p><p id="00d9388f-7900-4787-8a23-f9cd1b5b4b4d" class=""><strong>Who is on the Buyside?</strong></p><p id="4060f47d-2945-4311-a508-937166aa4d40" class="">In a world post-financial crisis, we have seen a structural move lower in global rates with <a href="https://www.marketwatch.com/story/that-near17-trillion-pile-of-negative-yielding-global-debt-its-a-cash-cow-for-some-bond-investors-2019-08-22">an estimated</a> $17.0 trillion of negative yielding debt. The COVID-19 pandemic has only accelerated this trend due to the unprecedented global fiscal &amp; monetary stimulus with Central Bank’s (Fed, BoJ, Swiss National Bank, BoE, ECB) <a href="https://www.yardeni.com/pub/peacockfedecbassets.pdf">balance sheet’s expanding</a> by $5.5 trillion YTD from $16.0 trillion to $21.5 trillion (+34.0%), representing the biggest move since the depths of the GFC in 2008.</p><p id="9cde9f18-1afe-4712-9359-11458aa2a041" class="">As Pensions, Endowments, Foundations, Sovereign Wealth Funds, Banks, Institutional Asset Managers, and RIA’s alike all look for alternative sources of yield, these recurring revenue contracts are an ideal asset. They have asset coverage &amp; seniority greater than first lien debt, but a return profile that for the foreseeable future will provide excess returns over any traditional Fixed Income stream. They will also be uncorrelated vs. the balance of their portfolio which inherently de-risks their overall portfolio.</p><p id="52577a5a-e6ff-4e11-b088-8ff691bd1046" class="">In the future we can see software focused Private Equity firms look to “bundle” subscription revenue from multiple companies to create “Tier A” credit risk e.g., “Vista Equity Tranche I” that would likely trade inside the cost of debt for any one company specifically. This will create financial arbitrage opportunities for these firms and provide an entirely new way to finance growth, and M&amp;A.</p><p id="f6c44a36-0479-4d53-a9b7-ea56256c4e27" class=""><strong>What’s Next</strong>?</p><p id="3254041d-9e4c-4c4b-8207-9042440ac860" class="">Pipe has a number of internal initiatives along the product side for both the “Sell Side” and “Buy Side” that they are rolling out over the next 6–12 months to augment the product offering. Think tools for self-service SaaS companies (e.g., the Vertical SaaS solution for the SaaS industry), liquidity options for the buy-side, and much more.</p><p id="637e926a-61a1-45f0-9bf0-347a27caee32" class=""><strong>Recurring Revenue Offering ™</strong>(“RRO”)</p><p id="edb9259e-86bd-4e5f-b28d-67ccf2bffaf9" class="">It is our view that all recurring revenue can and soon be tradable. In an attempt to pioneer the creation of this asset class Pipe has also developed the “Recurring Revenue Offering<strong>™</strong>” or “RRO.” Unlike Pipe’s core product, this is a security and thus the RRO allows the company to “pre-sell” future recurring revenue contracts that haven’t been booked yet, whether they’re paid monthly, quarterly, annually, or multi-year deals.</p><p id="8a53e1f1-4b6a-422d-b62e-087216961fa6" class="">We think a RRO has the potential to be a great alternative to a Pre-IPO growth round, or Post-IPO debt facilities, and bond issuances with large arrangement fees and interest rates. These contracts are the most valuable assets and can and should be financed against.</p><p id="c891807c-5e26-412c-b6d6-8b81658d3aa1" class=""><strong>Subscriptions Beyond SaaS</strong></p><p id="fba30793-7ca9-4f41-bce2-e7df4179efd5" class="">Subscriptions aren’t unique to SaaS companies and in our view are just the beginning. Subscriptions are a core part of other incredibly large market revenue models including:</p><p id="ea082c32-414f-4ea9-bd49-5bb04c542de7" class="">· Wireless Telco’s- Globally valued at $1.74 trillion</p><p id="06d86d9d-cf5a-4517-ad20-dcca420880bd" class="">· ISP’s- $120 billion per year market</p><p id="a633a304-2592-46f2-968b-9f5a5ce8414c" class="">· OTT- $90B per year market</p><p id="05c6ac99-1e8e-45e9-90bd-4f3d1f27a52a" class="">· Connected Fitness- In the <a href="https://www.sec.gov/Archives/edgar/data/1639825/000119312519230923/d738839ds1.htm">PTON S1</a> they estimate their TAM at 67M households. As COVID-19 has changed health &amp; wellness trends &amp; competitors compete on an array of both products &amp; price points the connected fitness market is also likely a $50B+ market opportunity over time.</p><p id="9176b387-1fcb-4766-8137-bff911e0e9b9" class="">There’s no reason these companies couldn’t pursue a similar path to that of SaaS companies in accessing their contracted revenue earlier to invest in R&amp;D, CapEx, Sales &amp; Marketing, etc….</p><p id="d0494709-8125-40c2-91c3-6ef86b2b6b25" class="">In a zero interest rate world, where tech &amp; non-tech companies alike are pivoting their business models to subscription-based, it’s time for these assets to be treated &amp; traded as such, unbundled from the rest of the capital structure; and that’s where Pipe comes in.</p></div></article></body></html>

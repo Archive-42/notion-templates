@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Three Bull Cases for Starlink</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="392aa80b-9ee2-4be3-ac79-af0b3f2c3116" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚟</span></div><h1 class="page-title">Three Bull Cases for Starlink</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://diff.substack.com/p/three-bull-cases-for-starlink" class="url-value">https://diff.substack.com/p/three-bull-cases-for-starlink</a></td></tr></tbody></table></header><div class="page-body"><p id="05bfd052-fa01-4267-8ac3-9d2ec3f7889a" class="">In this issue:</p><ul id="9dbd9dea-689f-43ac-a674-1e310d10de32" class="bulleted-list"><li>Three Bull Cases for Starlink</li></ul><ul id="df284a9e-7c6a-4c09-9216-5314618539f1" class="bulleted-list"><li>Distributed Business Clusters</li></ul><ul id="94d74b78-3be3-46ed-b0eb-f2588aee4dfe" class="bulleted-list"><li>More on Texas</li></ul><ul id="aa00f875-7ae4-4b25-9185-2df169f525a9" class="bulleted-list"><li>The India Model</li></ul><ul id="d3d7b72a-fcf7-4d7b-a651-9eba6d81ea32" class="bulleted-list"><li>Clean Shipping</li></ul><ul id="a5ffbdae-ea20-451b-9ac4-d24aea1905ea" class="bulleted-list"><li>Price Discrimination</li></ul><p id="010f54f2-031f-4d15-ad50-952b852f6891" class="">Programming note: the situation in Austin remains bad, but is getting better. We have power, but no water, and plenty of backup bottled water and food. Next week should be more normal.</p><h2 id="6562b148-3758-4200-bf99-023a175ad55e" class="">Three Bull Cases for Starlink</h2><p id="efc3ba19-9afa-4440-afb2-798fb89d8a6f" class="">SpaceX recently <a href="https://www.cnbc.com/2021/02/16/elon-musks-spacex-raised-850-million-at-419point99-a-share.html">raised $850m at a $74bn valuation</a>, up 60% since August. One reason for this is the company&#x27;s plans for Starlink, which aims to provide low-latency Internet around the world through a constellation of 10,000+ satellites.</p><p id="eb1d1ec5-d885-4dfb-8c1a-9e540040339c" class="">Visualization via reddit.</p><figure id="acfbc85b-34be-40be-a044-b0428e6d2966" class="image"><a href="Three%20Bull%20Cases%20for%20Starlink%20392aa80b9ee24be3ac79af0b3f2c3116/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F85f547e6-d07c-4d29-8d7b-0f2e7375f915_906x868.png"><img style="width:700px" src="Three%20Bull%20Cases%20for%20Starlink%20392aa80b9ee24be3ac79af0b3f2c3116/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F85f547e6-d07c-4d29-8d7b-0f2e7375f915_906x868.png"/></a></figure><p id="4563ffcd-c8d0-428f-8282-1221e44ec39e" class="">Elon Musk has <a href="https://www.youtube.com/watch?v=kOneX_PvuQ8">noted</a> that low-earth orbit constellations have been tried before, and every single one of them has gone bankrupt. Is there any reason to think that this time is different? I have a few.</p><h3 id="6ae45b7d-cdfb-4fc5-b157-9b202d15f52a" class="">A Low Incremental Cost ISP</h3><p id="f7016a6c-7521-4989-9ced-2dcd6eb108d2" class="">The simplest way to look at Starlink is to consider what costs it&#x27;s avoiding. A typical ISP needs to run physical wires to physical houses, which requires an upfront expense. When Google was rolling out its fiber service, for example, researchers at Bernstein <a href="https://techcrunch.com/2013/04/08/google-fiber-cost-estimate/">estimated</a> that it was costing $564 per home just to <em>pass</em> homes so they&#x27;d be eligible for a connection, and another $464 to $794 to connect them. As a result of this, the industry tends to be concentrated: if one company passes a set of homes, it can name its own price; two companies can split the market; a third company has to pay the same capital expenditures but gets lower incremental returns. So <a href="https://ilsr.org/report-most-americans-have-no-real-choice-in-internet-providers/">most US households have little choice when they buy Internet service</a>. And the assumption that everyone pays the same cost is generous; incumbents can be <a href="https://arstechnica.com/information-technology/2014/04/one-big-reason-we-lack-internet-competition-starting-an-isp-is-really-hard/">litigious</a> (&quot;[Fiber ISP founder Michael] Wagner recalled about 10 lawsuits from Adelphia, and later Comcast, who took over Adelphia&#x27;s operations in 2006. &#x27;We&#x27;ve had lawsuits that we were tampering with their equipment; we had lawsuits that we were violating different FCC requirements for the cable plants...&#x27;&quot;)</p><p id="cafcf42b-48f4-4a5a-bf62-ea097caa220d" class="">That capital expenditure cost is also a function of distance: it&#x27;s easier to serve dense areas than spread-out ones, leading to cases of extreme sticker shock, like <a href="https://arstechnica.com/information-technology/2015/09/man-builds-house-then-finds-out-cable-internet-will-cost-117000/">this homeowner who found out, after he built his house, that it would cost $117,000 upfront to get Internet</a>.</p><p id="1802010b-a18c-41b5-b8e0-92bd856a7a78" class="">Starlink&#x27;s cost curve is different: their bandwidth and latency are a function of the number of satellites they launch, and they divide coverage into <a href="https://imgur.com/poj8cae">cells that can span several states</a>. More usage will eventually reach the network&#x27;s capacity, but launching more satellites lets Starlink continuously increase available bandwidth. So instead of having capital expenditures at the connection level, they&#x27;re at the network level. This gives Starlink an immediate comparative advantage in serving rural populations: <a href="https://www.satelliteinternet.com/providers/hughesnet/internet/?requestId=d68c9b7a-d7cc-4284-afeb-022a427a9386&amp;clientId=875982307.1613682394">HughesNet offers 25mpbs speeds with a 50GB cap for $149.99/month</a>, while Starlink charges a $499 setup fee and then <a href="https://www.reviews.org/internet-service/spacex-starlink-satellite-internet-review/">$99/month for 50-150mps speeds and no data caps</a>.</p><p id="b20992f4-044c-48dd-b04b-cece2f58fa2e" class="">Each Starlink launch, with roughly 60 satellites, costs <a href="https://spacenews.com/op-ed-can-spacex-profit-on-certain-starlink-launches/">around $28m, and declining</a>, with potential reductions in cost from selling some space on rockets to other customers. But costs could be <a href="https://thespacereview.com/article/3740/1">one tenth of this</a>, as the business scales.</p><p id="9299a542-5d26-414d-83c0-892a07c81dcf" class="">The uncertainty is over 1) how many satellites are required to produce acceptable coverage, and 2) what end demand looks like. But the quality of the connection should get better as the number of satellites go up; with more in orbit, the median distance between a random user and a satellite shrinks, and it&#x27;s easier to trade off between bandwidth and latency with more possible connections. Meanwhile, the cost of launching keeps dropping—the cost per kilogram of a launch <a href="https://ttu-ir.tdl.org/bitstream/handle/2346/74082/ICES_2018_81.pdf?sequence=1&amp;isAllowed=y">declined rapidly from the 1950s to 1970, was stable from the 70s through the early 2000s, and then dropped again once SpaceX started</a>. We will at some point reach the limits of scale, but at every step there will be another set of Internet users for whom Starlink is a marginally better option, and traditional ISPs are a marginally worse one. When a cost leader finds a way to use their product as an input into another product, it has a long runway for growth.</p><h3 id="ea99218d-b533-4cd8-adb1-0c167a1736c2" class="">Charismatic Capex</h3><p id="6256b1d8-250b-42f9-b116-d13a668af087" class="">One question that doesn&#x27;t necessarily come up in the early history of Microsoft is: why was their growth so slow? It&#x27;s an unasked question with a reasonable answer: early in Microsoft&#x27;s history, the company had an informal policy of keeping far more cash on hand than it generally needed—enough to take advantage of short-term deals, to pay for expenses when revenues slowed, and otherwise to keep the company nimble. This was not a strictly necessary constraint, but it was a useful one.<a href="https://diff.substack.com/p/three-bull-cases-for-starlink">1</a> It works fine for high-margin companies, but for a structurally low-margin company it&#x27;s a punitive standard. If Kroger wanted to achieve the same standard—pay for half a year of expenses assuming zero revenue—they&#x27;d have to keep a decade or two worth of profits on hand at all times.</p><p id="186f8447-ce15-44bd-8d95-adbcdb12f65b" class="">Many sophisticated investors look at capital intensity as one of the most important criteria for a good business. And there&#x27;s an element of truth to this: all else being equal, it&#x27;s better to own a business that can fund its growth from its own internal cash flow, and that can throw off dividends or buybacks while still growing the bottom line over time. But there are whole categories of businesses that naturally consume cash upfront, where growth is limited by external funding rather than just by internal execution. Aemonn Fingleton <a href="https://amzn.to/3bqduzI">has written</a> about capital-intensity as a competitive moat for manufacturing-centric economies, arguing that their upfront cost is a benefit once competitors run the math and decide not to compete after all.</p><p id="c592e0df-9b8c-4d33-989c-0698bb761cf2" class="">And Musk loves these businesses.</p><p id="3f5b9d5f-1633-40b6-8dc4-c3d970d7d926" class="">Payments can be a high-ROI business, but growing Paypal by paying a two-sided signup commission was one way to make it a mercilessly cash-consuming one. The auto industry is a notoriously voracious consumer of cash (US automakers spent a collective $29bn in capex last year). Building rockets is capital-intensive, especially if the plan is to indirectly compete with the biggest customer. Boring tunnels underground is also a high-upfront cost project; the payback period for that kind of infrastructure stretches out over decades. Even in Musk&#x27;s first startup, Zip2, he had disputes with the board because they wanted to pursue a low-risk, low-investment strategy, and he wanted to ramp up spending to expand faster.</p><p id="6e7535bd-cdea-4c2c-95ba-f680d0c290de" class="">There are great advantages to capital-light businesses. Owners don&#x27;t lose much sleep knowing that cash flows go just one way. The disadvantage is that <em>everyone knows this</em>, and any business that generates reliable free cash flow with very little reinvestment has already been assessed by private equity firms, strategic acquirers, and Berkshire Hathaway. Capital-intensive businesses are harder, and are a <em>much</em> worse way to get rich. (On average; Musk, who has been the richest person in the world in the recent past, is a clear exception.) Raising money constantly means getting constant dilution, or giving up control to lenders. But capital expenditures represent a kind of moat; since they&#x27;re so daunting, anyone who has successfully completed them is unlikely to see direct competitors duplicate their spending.<a href="https://diff.substack.com/p/three-bull-cases-for-starlink">2</a></p><p id="9df5174f-2d94-41ca-944b-ec761a99c8be" class="">Musk has a particular talent for getting people excited about businesses with a daunting upfront cost. This can reach extreme levels—it is incredibly hard to justify Tesla&#x27;s current valuation given traditional car company economics, and even harder now that many car companies are committed to becoming direct Tesla comps by transitioning away from internal combustion engines. But the talent works, and anyone with a comparative advantage at doing something that competitors are scared to do is formidable.</p><h3 id="18b6e209-4eae-4329-bd4b-2a583a244594" class="">Post-Nation States</h3><p id="408cf784-4d0a-49ec-a974-d55004b3e2c2" class="">Earlier, I summarized Elon Musk&#x27;s career as a mix of charisma and capital expenditures, but there&#x27;s another way to look at it: Paypal&#x27;s original mission was to prevent the controllers of currency from abusing holders of currency. Tesla was founded at a time when the US imported 12m barrels of oil per day, and was a bid to make the car tied to a more fungible energy source that could in principle be generated anywhere. And SpaceX, of course, aims to transcend the boundaries of earth. Musk, for all his flaws, is the world&#x27;s most effective <a href="https://en.wikipedia.org/wiki/Extropianism">extropian</a>, whose career has been devoted to knocking down barriers to positive liberty.</p><p id="907f837f-f74f-4f94-87ec-55d66a240a31" class="">SpaceX has hinted at being unbound by conventional laws; Starlink&#x27;s <a href="https://www.inverse.com/innovation/spacex-mars-city-starlink-terms-of-service-declares-free-planet">terms of service</a> say:</p><blockquote id="053bb5d6-8e06-4af7-845f-6979e08f6432" class="">For Services provided on Mars, or in transit to Mars via Starship or other colonization spacecraft, the parties recognize Mars as a free planet and that no Earth-based government has authority or sovereignty over Martian activities. Accordingly, Disputes will be settled through self-governing principles, established in good faith, at the time of Martian settlement.</blockquote><p id="9090826b-a99b-4ca7-ab8f-e87bfed4e1cd" class="">And Musk has also disregarded the earthly authority of the SEC, <a href="https://www.washingtonpost.com/technology/2020/05/11/musk-tesla-factory/">California&#x27;s stay-at-home order</a>, <a href="https://techcrunch.com/2021/01/19/elon-musk-said-it-was-not-a-flamethrower/">flamethrower regulations</a>, etc.</p><p id="8a7f4f88-d109-4976-8056-f74e514141a9" class="">SpaceX will raise some interesting governance questions if it does try to implement Mars Law, but Starlink raises more interesting questions right here on earth. As more countries start blocking content and regulating platforms, the ability to do so becomes part of the definition of national sovereignty. A country that can say &quot;no&quot; to Facebook, Amazon, Google, or Bytedance is different from one that can&#x27;t. Starlink will, of course, be subject to regulations just like any other earthbound service provider, but it will be hard to ban; some of the hardware is distributed to individual customers, and the rest is in low earth orbit.</p><p id="dc3758a6-295b-4059-ba93-e10082ef9a27" class="">The line between a vision and a sales pitch is always blurry, and Elon Musk is unusually good at using this to his advantage. There&#x27;s a reasonable case that Starlink is just a natural way to amortize the fixed cost of SpaceX&#x27;s investment in launch infrastructure. But a sufficiently compelling sales pitch has a way of coming true, and if part of the pitch of Starlink is that it&#x27;s a censorship-resistant communications medium that creates access to the global Internet, not individual countries&#x27; more restricted versions of it, then that may be what it becomes.</p><h2 id="c734727e-58ec-4317-93cf-27313edd5a33" class="">A Word From Our Sponsors</h2><p id="cd520a3c-8c9c-4808-957a-8b76e6d305e2" class="">Here&#x27;s a dirty secret: part of equity research consists of being one of the world&#x27;s best-paid data-entry professionals. It&#x27;s a pain—and a rite of passage—to build a financial model by painstakingly transcribing information from 10-Qs, 10-Ks, presentations, and transcripts. Or, at least, it was: <a href="https://bit.ly/2LqEuCG">Daloopa</a> uses machine learning and human validation to automatically parse financial statements and other disclosures, creating a continuously-updated, detailed, and accurate model.</p><p id="bd3c5581-7c1e-4bf4-bc40-340342d23cca" class="">If you&#x27;ve ever fired up Excel at 8pm and realized you&#x27;ll be doing ctrl-c alt-tab alt-e-es-v until well past midnight, you owe it to yourself to <a href="https://bit.ly/2LqEuCG">check this out</a>.</p><h2 id="41690b04-0dfd-454b-bd92-1ba349beac91" class="">Errata</h2><p id="c80b87d8-08ed-4bdb-bebf-cbbfd491a3ac" class="">In last week&#x27;s <a href="https://diff.substack.com/p/longreads-open-thread-8b4">Longreads + Open Thread</a>, I miss-transcribed something important from an <a href="https://conversationswithtyler.com/episodes/brian-armstrong/">interview with Coinbase&#x27;s CEO</a>: I accidentally wrote that Coinbase wants to have more lawyers than engineers; I intended to write that the company wants more engineers than lawyers. Apologies. And thanks to several readers for pointing this mistake out to me.</p><h2 id="710b396a-9b5f-4f75-bcbc-7a46c4ed852c" class="">Elsewhere</h2><h3 id="bf9161c9-a7f7-4b83-aac0-4a80425e0f41" class="">Distributed Business Clusters</h3><p id="210e6b94-2eb6-4a42-af52-d64f0af0123f" class=""><em>FT</em> has a good piece on one subset of the real estate market that&#x27;s doing especially well: <a href="https://www.notion.so/2baa83286ab7473a9af8cd242a27f014">ski resorts</a> ($). One way to model the new steady state is that some white-collar workers have flipped their approach: from living close to work and vacationing elsewhere to living at a vacation destination and sometimes flying in to major cities for work. It&#x27;s unclear how big a factor this is—real estate prices in these resort areas are partly responding to low, constrained supply—but it&#x27;s evidence that the recovery in business travel could happen sooner than it seems. (It will also make that recovery harder to track, since the routes in question will all be classic leisure travel routes.)</p><h3 id="c56173e8-e296-4c4e-b4b8-8a7a1ee20e97" class="">More on Texas</h3><p id="5d172b51-6ad1-47fc-9b98-214fac2f5ed0" class="">Earlier this week, I <a href="https://diff.substack.com/p/why-did-one-internet-subculture-spot">wrote</a> that one reason power prices got so crazy in Texas is that most consumers aren&#x27;t directly exposed to wholesale price fluctuations. Normally, higher prices cause conservation, especially if they&#x27;re expected to be temporary, but when the ultimate users of a resource aren&#x27;t exposed to its price, they don&#x27;t always respond optimally to shortages.</p><p id="2c72bba9-bcc8-4f96-a8ad-a95acc6d45f2" class="">As it turns out, some consumers <em>were</em> directly exposed: a company called Griddy offers electricity for $9.99/month plus the wholesale cost. Normally, this is cheap, but during an electricity short squeeze, it&#x27;s expensive. One customer <a href="https://www.msn.com/en-us/news/us/5-152-power-bill-texas-winter-storm-hell-only-gets-worse/ar-BB1dLKDE">saw her energy bill rise from $34/month last year to $2,500/day this year</a>. Which leads to an amendment of the earlier claim: rationing in response to wholesale price changes works if <em>everyone</em> is exposed to them. If only a few people are, those people get all the downsides of short-squeeze exposure, without the upside of a market that adjusts to constraints.</p><p id="cd224797-2e2a-4df8-91f9-e9312318a040" class="">And the post-mortems have already begun. The grid came <a href="https://www.texastribune.org/2021/02/18/texas-power-outages-ercot/">within minutes or seconds of being completely overwhelmed</a>, which would have made the restart process take months instead of days. If nothing else, Texas&#x27; situation illustrates that the non-linear effects of tail risk—at a certain level of badness, slightly worse problems produce dramatically worse outcomes—is not restricted to social phenomena, but applies to real-world systems, too. Finance provides a bigger sample size for black swan risks than other domains, because so many of them are self-fulfilling: a crash that causes cascading margin calls can quickly move outside the bounds of a normal distribution. But the general phenomenon of extreme downside risk is everywhere.</p><h3 id="f2efbf1d-c223-4aa4-9645-6eb19f85b63c" class="">The India Model</h3><p id="4c049996-6b7b-4a0a-9519-11ab38524174" class="">Apple is <a href="https://www.reuters.com/article/apple-india-idUSKBN2AI0UQ">lobbying India for more manufacturing incentives before it moves iPad production there</a>. This is complicated by the fact that 1) Apple has much more experience working with Taiwan-based, China-focused manufacturers, some of whom operate in India, and 2) the point of India&#x27;s manufacturing subsidies is to build a locally-owned supply chain:</p><blockquote id="1d0cc450-5698-44f5-9373-c131fc6c9a75" class="">“The government is asking Apple to get iPads assembled by its contract manufacturers here, the non-Chinese companies” one of the sources, a government official said.</blockquote><p id="c91afee7-bc54-439b-a57d-d986f0fd102c" class="">All else being equal, protectionism has a bigger impact on more complicated supply chains, since it can affect imports, exports, and direct investment. So the net effect of any drag on international trade or money transfers compounds when the producers in question use more foreign-sourced inputs and then export the results. It&#x27;s possible to run such a system effectively—China provides a successful model, albeit one that&#x27;s hard to copy. But the default result is that a more protectionist system works best for simple supply chains, which tend to produce low-value goods.</p><h3 id="9fae8e81-75f7-4bab-9622-76c9f40340dc" class="">Clean Shipping</h3><p id="e5c2775d-4060-4f2b-8e66-3f8837190899" class="">The rush to decarbonize continues. Maersk, the world&#x27;s largest shipping container company <a href="https://www.notion.so/79bc2ed9c0c44c29a4bde3ec5f3a440e">expects its first carbon-neutral ship to be operating in 2023, instead of a previously planned 2030</a> ($, <em>FT</em>). One possibility I&#x27;ve raised before about carbon-neutral companies is that the most emissions-heavy aspects of any given supply chain will be concentrated in the least visible parts of it. This story is evidence against it: if Maersk is using zero-emissions ships, their customers will be able to talk about products whose manufacturing <em>and</em> shipping is carbon-neutral, which will make it harder for other shipping companies not to do the same.</p><h3 id="40d7d73e-1f68-4cb8-8f7f-c8cb574fe189" class="">Price Discrimination</h3><p id="d3671e1c-3b2f-4c99-bad5-a2bda0099afb" class="">The GPU market is broadly driven by three forces: machine learning, cryptocurrency mining, and gaming. Of these, crypto is subject to the fastests swings in demand, because prices are so volatile. As a result, any new generation of GPUs will either be in immediate undersupply (because Ethereum mining is profitable) or oversupplied (if it&#x27;s not). This weakens the feedback loop that drives new GPU advances. Normally, gaming and machine learning users will adopt their products to the hardware they expect them to run on, but crypto&#x27;s volatility makes those expectations hard to model. Nvidia has a solution: <a href="https://wccftech.com/nvidia-launches-cmp-30hx-40hx-50hx-and-90hx-gpus-for-mining-cripples-hash-rate-of-rtx-3060/">some GPUs built for mining, and some that deliberately halve the hashrate for mining</a>. This is probably not a complete solution; at scale, it&#x27;s worth it for miners to find a way to override this hashrate limitation. But it should at least weaken the influence of cryptocurrency mining on GPU availability.</p><h2 id="bdbd0f36-1032-4e21-91f5-378cc9b8623c" class="">Reader Requests</h2><p id="f0d34b2f-574d-4899-ba4a-1e5fcd4cb440" class="">Two requests this week:</p><ol type="1" id="e45e5078-dcd1-45cd-8cc6-93ba8b2f2634" class="numbered-list" start="1"><li>Space has run a persistent trade deficit with the earth; we export pricey machinery, and we bring back rocks and some very compelling pictures. But this probably won&#x27;t last forever. I&#x27;d like to talk to anyone who is working on off-earth manufacturing.</li></ol><ol type="1" id="979e6bf1-81e1-4098-94ab-367983ea6028" class="numbered-list" start="2"><li>Responses to the Texas energy crisis are suspiciously similar to what respondents believed about the Green New Deal beforehand. I&#x27;d like to talk to anyone involved in power generation or trading who has thoughts on the nuances of the market.</li></ol><p id="8cbbd599-19e6-4863-9c7f-23c639593cd7" class="">I&#x27;ve written <a href="https://diff.substack.com/p/when-the-worlds-top-economic-think">elsewhere</a> ($) about Microsoft&#x27;s astonishingly smart employees. When the company was growing, the market for programmer talent was very inefficient, and a company willing to be patient and picky could hire much better employees for not much more money. In an inefficient hiring market, deliberately constraining growth is a good way to raise the bar. This is hard to quantify, as the endless debate over 10x programmers reveals. (Anyone who has worked for sufficiently big organizations models this as the &quot;#DIV/0! Programmer&quot; problem, of avoiding headcount growth that leads to a net <em>loss</em> of productivity.) But it&#x27;s clear that Microsoft was able to pick off a lot of great talent before programmer salaries reflected the value they could create.</p><p id="038b303c-0f9d-4a82-a75a-0db69cada64a" class="">Since I mentioned Berkshire, I should note that they&#x27;re not religious about the asset-light model. BNSF and MidAmerica Energy are huge parts of the business, and require lots of fixed assets—which were worth building, but are not worth building twice.</p></div></article></body></html>

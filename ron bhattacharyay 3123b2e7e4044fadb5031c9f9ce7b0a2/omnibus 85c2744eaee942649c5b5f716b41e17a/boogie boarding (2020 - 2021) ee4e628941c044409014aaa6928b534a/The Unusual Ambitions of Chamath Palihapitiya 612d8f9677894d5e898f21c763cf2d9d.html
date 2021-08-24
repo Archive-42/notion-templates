@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Unusual Ambitions of Chamath Palihapitiya</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="612d8f96-7789-4d5e-898f-21c763cf2d9d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏗️</span></div><h1 class="page-title">The Unusual Ambitions of Chamath Palihapitiya</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-default">Tech News</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.institutionalinvestor.com/article/b1lw211ts92n62/The-Unusual-Ambitions-of-Chamath-Palihapitiya" class="url-value">https://www.institutionalinvestor.com/article/b1lw211ts92n62/The-Unusual-Ambitions-of-Chamath-Palihapitiya</a></td></tr></tbody></table></header><div class="page-body"><figure id="4ba1c2f1-c657-447a-bfb0-d79943a0c7f4" class="image"><a href="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_1.jpg"><img style="width:700px" src="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_1.jpg"/></a></figure><p id="37ba7f3b-e55d-4dec-85ab-beb1ee6a47af" class="">Chamath Palihapitiya (Photographs by Cayce Clifford)</p><p id="481cb2fc-9aa0-4b0a-b206-d1bab3245d04" class="">Among the gilded denizens of Silicon Valley, it’s known as the “Who cares? rant.”</p><p id="a1581963-f26f-4e84-b1ea-51bf21e2ea15" class="">It began when Chamath Palihapitiya argued, in <a href="https://www.cnbc.com/2020/04/09/chamath-palihapitiya-us-needs-to-let-hedge-funds-billionaires-fail.html">a CNBC interview on April 9</a>, that “zombie companies” like airlines did not deserve a bailout from the U.S. government, despite a global pandemic that had shut down business — and travel — the world over.</p><p id="1918ae90-d57a-4a80-a09f-758ce787363a" class="">Then he took aim squarely at the men (and they are almost entirely men) running the hedge funds he blames for the corporate world’s inability to weather a crisis in the first place.</p><p id="4db7e262-bd48-4491-bc03-69fe08710eb0" class="">“The people that get wiped out are the speculators that own the unsecured tranches of debt or the folks that own the equity,” he stressed, unmuted insistence rising in his voice. “And by the way, those are the rules of the game. That’s right. Because these are the people who purport to be the most sophisticated investors in the world. They deserve to get wiped out.”</p><p id="4e66f25d-9319-4d00-9cb0-370ba65853d4" class="">Palihapitiya continued. “Who are we talking about? We’re talking about a hedge fund that serves a bunch of billionaire family offices. Who cares? Let them get wiped out. Who cares?” And then, with a practiced insouciance: “They don’t get to summer in the Hamptons? Who cares?”</p><p id="5a69a2f1-b888-40fe-8031-aa3349f6c397" class="">By the time of the interview, of course, hedge fund managers had already fled Manhattan for the Hamptons. It was also when tens of millions of Americans had signed up for unemployment and the coronavirus pandemic was at its peak in New York City, where hundreds of citizens — most of them working-class people of color — were dying in hospitals every day.</p><p id="4568b0fc-2521-4ffb-be2d-57962c192e08" class="">“On Main Street today, people are getting wiped out,” an utterly calm Palihapitiya reminded CNBC’s well-heeled viewers. “Hedge funds are not.”</p><p id="f16f114d-8684-4905-8aa4-2f335164fc29" class="">He offers a sly grin when reminded of the interview — which CNBC estimates has been viewed more than 10 million times — during the first of two Zoom interviews with Institutional Investor in May. However, Palihapitiya’s not having any of that rant business. “Rants, rants. I prefer to call them thoughtful commentary,” he says.</p><p id="7a5e5eaa-922b-4a52-9e2f-33747039602e" class="">“I just continue to want to say the things that are on my mind,” he explains, his large brown eyes leaning forward into the computer from a spacious sunroom in his Palo Alto home, the light illuminating the oversize houseplants and cream-colored easy chairs behind him. “I don’t think these things are controversial. These are the things that I believe. And I think what happens is that people are a little shocked by the radical candor in public because they’re not used to it.”</p><p id="5020c8bd-ac5d-4574-8e78-e6da82f82e3c" class="">These “people” should start getting used to it, for Palihapitiya, it is clear, is not taking on just hedge funds. Whether it’s value-investing “morons,” the Silicon Valley venture capitalist elite, or university endowments, to name a few of his targets, Palihapitiya — himself a billionaire — is doing one thing that many of similar means find abhorrent:</p><p id="4c735c7a-ccd2-487a-99fb-b5c5b08c16b7" class="">Turning on his own.</p><p id="ec29bafc-ac92-404f-847d-6bd819c8d9f3" class="">It was not his first rant, whatever he’d like to call it. In 2015, for example, Palihapitiya went after the free-spending hipster ways of San Francisco start-ups in what other VCs refer to as his “Kind bar rant.”</p><p id="af305acb-1d6d-4dff-80bd-8dc09287364a" class="">“It’s fine to fail,” he told attendees at a San Francisco StrictlyVC event that year. “But if you fail because you didn’t have the courage to move to Oakland, and instead you burned 30 percent of your cash on Kind bars and exposed brick walls in the office, you’re a fucking moron.”</p><p id="3f508abb-5de0-44c8-9c76-6159404384e3" class="">Then in 2018, Palihapitiya took on the serial fundraising of that world in his “Ponzi scheme rant.” In a 45-minute interview at a Launch Scale conference, he attacked the growth-at-all-costs imperative for start-ups forced to meet the constant fundraising, fee-making needs of their venture capital backers. “It’s gotten out of control,” he said, telling attendees they were “in the middle of an enormous, multivaried kind of Ponzi scheme.”</p><p id="b82496e7-3893-4d78-8aae-8ff970a894ed" class="">Palihapitiya has, of course, profited handsomely from the VC business model he so openly disdains. The 43-year-old founder of investment firm Social Capital — which for several years ran both a hedge fund and five venture capital funds — currently has a $6 billion balance sheet invested in everything from start-ups tackling thorny social, economic, and environmental issues to tech-enabled giants Amazon and Tesla.</p><p id="59939a78-06c7-4f91-9e0d-9529811f59e7" class="">Those two stocks — along with work messaging platform Slack Technologies (Palihapitiya owns 10 percent of the company, which went public last year) and space tourism pioneer Virgin Galactic (which he teamed up with founder Richard Branson to buy with his first blank-check company, or SPAC, and of which he is now chairman) — made up the bulk of Social Capital’s $1.7 billion profit last year.</p><p id="4bcc2111-5f68-48d6-81de-7f1de27336f1" class="">Such financial success has, of course, led some to view Palihapitiya’s attacks as hypocritical.</p><p id="f37ce4d8-9a1b-4fd1-bdf5-900c5697bf70" class="">“He’s persona non grata with a lot of Silicon Valley,” one individual says, mentioning several of those Palihapitiya has criticized by name. They include Marc Andreessen, Sequoia Capital, and even Mark Zuckerberg’s Facebook — Palihapitiya’s former employer.</p><p id="4bd583cf-c53f-4b73-a5cd-a4d4f7c8681f" class="">Yet the blunt-speaking investor has just as many backers within that ecosystem.</p><p id="aaf0f097-d2e2-4190-96c9-94f82a45a420" class="">“He speaks the truth. He says the stuff people are thinking but no one has the balls to say out loud,” says Tom McGovern, the managing director of Idealab, an early-stage investor.</p><p id="014b0b1b-a9d5-4f90-b473-c88063691116" class="">And he’s not doing it just for shock value. Says Raj Kapoor, chief strategy officer at Lyft: “Chamath wants to be an agent for change.” And however trope-ish, that comes as no surprise to those who’ve followed Palihapitiya’s journey from a South Asian island to the heart of modern American capitalism.</p><p id="5c2e93f7-b8c4-4d1a-afe9-08435ec62302" class="">Chamath Palihapitiya, a Sri Lankan native whose family received refugee status in Canada when he was a child, started as an outsider in the tech world. At Mayfield Fund, where he landed his first job in the VC world some 15 years ago, “Chamath wore the same jacket every day — a light-tan velour jacket — and jeans,” one former colleague recalls. When the colleague asked Palihapitiya about his sartorial choices at the time, the young analyst talked about “low ROI,” meaning he didn’t want to spend his time and money worrying about clothes.</p><p id="a2ec17e2-21be-4bfd-8003-9ff94c1ed74b" class="">The outfit was also a not-so-subtle way for Palihapitiya to thumb his nose at the Silicon Valley dress code of the era: khaki pants and blue blazer. “His attitude was ‘I’m not like all you guys. Fuck you. I’m smarter than you, and I’m going to show you,’” says the former colleague.</p><p id="85d4b176-f276-48c1-ba13-fd5e7e2fb301" class="">Kapoor, then a Mayfield principal who had hired Palihapitiya away from AOL, where the young man had a reputation as something of a wunderkind after heading its instant-messaging division, recalls him as particularly articulate. But Palihapitiya also had mastered what has become almost a cliché requirement for success in VC land: “He didn’t just think about where things were — but where they were going to go,” Kapoor notes.</p><p id="d2c0f38c-a57f-4b29-801e-4e324dfbe2bc" class="">In 2007, Palihapitiya left Mayfield for Facebook, where he is <a href="https://marker.medium.com/the-untold-history-of-facebooks-most-controversial-growth-tool-2ea3bfeaaa66">credited with helping orchestrate its massive growth</a>. His time at Facebook, and a personal investment in gaming company Playdom, which was sold to Disney, put him on the fast track. Palihapitiya had the capital and access to investors to start his own firm, which he named Social+Capital Partnership, in 2011.</p><p id="85f64d25-b864-4b1e-bcc2-6874f65cf002" class="">Kapoor says Palihapitiya’s “magnetic personality” drew in the big names. They have included such well-known VC giants as John Doerr of Kleiner Perkins and Reid Hoffman, co-founder of LinkedIn, along with hedge fund tech investor Chase Coleman, the Tiger Global founder. Palihapitiya also gained entrée into the so-called PayPal mafia of technology heavyweights when one of its founders, Peter Thiel — then on the board of Facebook — became an early investor and introduced him to other PayPal execs.</p><p id="03363520-fe49-4b63-a2f0-1827e4fdf6f5" class="">“People wanted to listen to him,” Kapoor says of Palihapitiya. “Lots of people can articulate ideas that everyone agrees with, but can you articulate with vision and logic ideas that are not mainstream? That’s his gift.”</p><p id="e454f1d5-944a-49d2-a5b7-2ca37028cb68" class="">Palihapitiya had opened his firm, along with his then-wife Brigette Lau, with a plan to invest in companies in fields being ignored by the VC world, like health, financial services, and education. But the VC game seems to have worn him down.</p><p id="7f0444e3-9743-4340-84f9-cdc57398b637" class="">And then he filed for divorce.</p><p id="bed2a216-99fe-4fec-ba96-3e672b78ecf4" class="">“Everything was so successful. I’m working and working and working, but I wasn’t happy,” he recalls. “And then as I sought happiness in my personal life, I found happiness in my professional life. I didn’t need to manage hundreds of people or thousands of people anymore. I wanted to be a real allocator of capital, because I wanted to change the parts of society I disagreed with.”</p><p id="53f625e8-f214-4c54-9d26-3be3d5143e10" class="">Social Capital was on the verge of raising a credit fund when Palihapitiya found he could not pull the trigger. “I could not sign the documents,” he says. “And that was the point where I was like ‘You know what? I’m better off doing what I want to do.’”</p><p id="628c99ac-a6c9-40e6-b3c0-e8bd1960a90e" class="">About this time, several of the firm’s top executives left. Mamoon Hamid, an early partner, went to Kleiner Perkins; a number of others, including former partner Ted Maidenberg, started a new VC firm called Tribe Capital.</p><p id="54da29a9-6621-43f1-9210-ff8e20c96f50" class="">By the end of 2018, Palihapitiya had closed the hedge fund he had launched to invest in publicly traded companies and shut his outstanding VC funds to new money. He says those steps were part of his plan to shrink the firm and change the way it was run.</p><figure id="8fafb6ca-f2ad-4b06-bf24-833cf1f0c6de" class="image"><a href="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_3.jpg"><img style="width:700px" src="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_3.jpg"/></a></figure><p id="f568c0c7-76da-40ed-8288-959668084725" class="">“I don’t think investing is a team sport,” he says, referring to arguments at the firm over what he calls “power-sharing agreements” that led to the departures — some voluntary, others not. (By all accounts, it was messy and Palihapitiya didn’t handle it well.)</p><p id="9054b961-399d-479e-a6c1-80b5929825cf" class="">“The fundamental underwriting decisions of great investors over long periods of time are very lonely individual decisions,” he explains. “It’s about a kind of pattern recognition that very few people have. I don’t know if I have it. But in order to find out, I need to isolate myself and do it myself.”</p><p id="2bb4d8de-5cb6-498e-9ba5-7f3260ad8ce5" class="">At the time, the scuttlebutt was that Social Capital would not survive. But Palihapitiya says the funds have compounded at 33 percent annually, with a 3-and-30 fee structure that resulted in net returns in the mid- to upper 20 percent range. To top those off, he recently raised more than $1 billion in two additional blank-check IPOs, including one launched in the midst of the pandemic.</p><p id="a5a5338e-23ad-4e72-8305-e9d177f1e1c8" class="">Palihapitiya says he prefers the money-raising process of a SPAC to that of a VC fund. “SPACs are short bursts of effort from a fundraising perspective, while VC fundraising requires more hand-holding and thus time and focus,” he notes. “As a head of a VC fund, you are no longer an investor; you become the head of investor relations. This is not a job I either liked or wanted to do.”</p><p id="54ef7f90-960f-480a-b26b-7809a5a90db1" class="">Palihapitiya adds, “I still have a couple of billion that I’m managing on behalf of others. But there’s a $4 billion balance sheet that’s mine. I don’t have to answer to anybody.” He then jokes that the $4 billion is “all fake, and I wouldn’t take that number very seriously. I am always 100 percent invested, and at any moment something cataclysmic could make it zero in an instant.”</p><p id="87c2b8bf-f541-44da-8e7a-d254e65e9fbc" class="">It was after he quit raising money for his VC funds that Palihapitiya became vocal in his criticisms about the VC model.</p><p id="53d149c1-896b-4a80-b503-7dd3bc795b0f" class="">As he explains it, “In the venture market, building has become harder. Companies take longer and longer to get any kind of material breakout, and they’re less and less likely to do so, which then means that these companies are private for 12, 13 years. But if a venture fund is to be in business, they need to raise money every two or three years. So they’re in the business of basically pumping up their companies. You show mark-to-market gains, you show fake IRR, and you raise more funds. And LPs are the fuel to all of this. They are the ones that are torching their money on fire, feeding this dynamic.”</p><p id="da7b9131-96c3-4c17-bd07-6225e24b7c8f" class="">Exposing what he sees as venture’s ugly truths has made him unpopular in some quarters. But, as one longtime limited partner points out, Social Capital is one VC firm that has actually returned money, not just unrealized gains, to investors in its funds.</p><p id="f483e3c6-a275-400c-b034-8b93af9911ba" class="">Hedge funds, of course, are also engaged in the hunt for fees. More capital is being raised by the funds, even as the universe of public companies they can invest in has shrunk. “Very quickly,” says Palihapitiya, “you realize that you want to optimize for short-term fees, because it’s harder and harder to have an edge.”</p><p id="d7449db9-b67f-4322-b8c2-cb460b1afbf6" class="">He argues that that dynamic drives a lot of short-term behavior, which is then imposed on the companies hedge funds invest in via buybacks or dividends. “Less than a third of S&amp;P companies actually have R&amp;D budgets. Do you think that’s by choice, or do you think that’s by investor pressure? I think a lot of it is the latter.”</p><p id="c0996ffd-4f3e-444f-9a85-e253ccc9efb1" class="">Palihapitiya has called for a ban on stock buybacks, which he considers “idiotic.”</p><p id="6537f813-767f-4a5c-a7fc-bc61c1f22a0b" class="">Provocative, yes. But his way with words, not to mention his wealth, gives Palihapitiya a platform — especially at a time when the rules appear to have suddenly changed.</p><p id="0159449a-4042-48c9-b374-0f91e9fbb96f" class="">Consider his massive gains on just two stocks that have soared — Amazon and Tesla. In 2017, as he likes to tell the story, Palihapitiya was almost laughed off the stage at the Sohn Investment Conference for recommending investors buy Tesla convertible bonds. At that time, seemingly everyone who was anyone in the world of finance was short Tesla. A year earlier his Amazon call at Sohn was also dismissed by attendees, including Greenlight Capital founder David Einhorn.</p><p id="bd0fee20-8f37-41c6-b3ad-0da772065363" class="">As the bull market of the past decade reached what seemed to be bubble proportions, value investors like Einhorn expected the bust to come from high-flying, unprofitable tech companies, and value investors who had suffered in the loose-money aftermath of 2008 would shine again. It hasn’t happened.</p><p id="2eb94e9a-36f0-45bf-8b3f-288ba29ba0db" class="">“Those guys are morons,” says Palihapitiya of many value investors. The historic way of determining value by looking at balance sheets and discounted cash flow no longer works, he asserts.</p><p id="052ce62d-f183-44a3-8dfb-805ba20060ae" class="">“Today, when money has no value, because we’ve essentially printed all the money in the world and we’ll continue to print it over and over, you have to find value in other parts of the balance sheet, so you have to go to things like brand or intangibles,” he says. “And this is where their mathematical models break, and then their brains explode.”</p><figure id="2b6471d9-9c72-4f4f-ae15-e6b185e57709" class="image"><a href="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_2.jpg"><img style="width:700px" src="The%20Unusual%20Ambitions%20of%20Chamath%20Palihapitiya%20612d8f9677894d5e898f21c763cf2d9d/Chamath_2.jpg"/></a></figure><p id="2ec05428-9558-4143-9c43-d31dbd058c78" class="">Palihapitiya, who moved to Canada when he was six years old, grew up with a father who was often unemployed and a mother who worked as a housekeeper, then a nurse’s aide. The family, which also includes his two sisters, lived in a small apartment above a laundromat and got by on welfare.</p><p id="16b4181e-941d-4854-b5e1-8974231ca06a" class="">Poverty fueled the young man’s ambition, but it also made him acutely aware of the importance of the country’s social safety net. “I went to one of the best schools in Canada, but it cost me $8,000 a year,” he says. (Palihapitiya earned a degree in electrical engineering from the University of Waterloo in 1999.) “I am a by-product of an enormous number of progressive ideals — universal health care, almost-free basic education, a social welfare policy to take care of the lowest rungs of society but give them a path of upward mobility.”</p><p id="e6175dcd-c35f-4d44-a671-a286e8effe58" class="">His goal, at an early age, was to make it onto the Forbes billionaire list. “I guess I’m like the 300th- or 400th- or 500th-richest person in the world now,” he says.</p><p id="55218ff4-73fd-4cda-9d72-bce6c38cd28f" class="">Palihapitiya acts like it doesn’t matter. “I can still only wear one pair of pants. I can only live in one house. I can only eat one thing at a time.” But he has hardly taken a vow of poverty. He owns three Teslas, as well as a stake in the NBA’s Golden State Warriors.</p><p id="a98636a0-5ea4-4ba5-ad05-283f135e339c" class="">Still, he insists he has loftier goals. “I care more that there’s change. I like to think that if all of these starting lines are evened up, there’s people way better than me who will do even more than me. I’d like to see some of that in my lifetime,” he says.</p><p id="00cfadc7-32b3-4ae4-91a4-29242f0338ad" class="">Davida Herzl, the founder and CEO of Aclima, a Social Capital portfolio company, refers to Palihapitiya’s path as the “long distance traveled.”</p><p id="86095454-88be-4fc8-9f07-6a6a698c7225" class="">She notes, “That journey creates a lot of grit. It gives you a different perspective on what’s possible.”</p><p id="66d0cdc2-9ba2-4aeb-861a-0d36e566af94" class="">Take Aclima, a maker of digital sensors that can take a block-by-block measurement of air pollution and greenhouse gases.</p><p id="d673a892-bfc0-4293-91d2-4c93af25883d" class="">“Why is that important?” asks Palihapitiya. “It turns out that when kids go to school near places that have high emissions, they have high absenteeism. They actually are more functionally and educationally, not pejoratively, retarded — like you’re held back relative to peers that go to other high schools or primary schools or middle schools in areas where there isn’t as much pollution. Turns out that socioeconomically, we do a really good job of putting immigrants and poor people near areas of high pollution.”</p><p id="a7d7f2ff-fd20-4adc-8687-17136e969b1a" class="">Aclima’s technology can pinpoint where those areas are, yet the company was starved of capital when Palihapitiya showed up to become its Series A lead investor, says Herzl. (Palihapitiya notes that Aclima was rejected by his partners, so “I just did it by myself.”)</p><p id="ee8760c7-8808-48e5-843f-e443ccaffd95" class="">As Herzl explains, “The kind of innovation in Silicon Valley applied to retail and consumer apps has not been applied to the biggest challenges facing society. That’s what Chamath is trying to do — take all of these amazing technologies and capabilities developed in Silicon Valley and apply them to the biggest challenges in society.”</p><p id="1bc555cb-1be2-4e5f-8c12-96f44a38e725" class="">Others in Palihapitiya’s portfolio include companies like Saildrone, which maps the ocean floor to understand climate change, and Cover, which eliminates the middleman for consumers and businesses buying insurance.</p><p id="c732a735-d8a3-46a6-9965-b025ee3d6b10" class="">But Palihapitiya also believes that the problems are much bigger than what technology can solve on its own. They need government. “That’s their job. One of the most important jobs, right after health and safety and security of citizens, is incentives. They shape behavior with incentives.”</p><p id="74919f2a-05fe-4117-b4a9-dd65f077a38e" class="">Speaking up about the role of government, and extolling his views on things like universal health care — which he considers a “no-brainer” — is something relatively new for Palihapitiya.</p><p id="e5c41886-e2c6-45bf-8a8e-d87f5b23339e" class="">“Up until about two or three years ago, I was fundamentally afraid of rejection. I think that was probably my greatest fear. And so I operated out of fear for a long time,” he says.</p><p id="d97c8d3f-7906-463b-9cb6-242636024177" class="">Palihapitiya traces that fear to growing up the child of an alcoholic.</p><p id="12129437-488f-4b24-a74b-d9e04e6b4595" class="">“When you go back to being a kid in a situation that is that complicated, you learn to basically do whatever it takes to get by,” he explains. “Because if the parent is drinking, then confrontation or dialogue or radical candor can go in a very bad direction. And so it becomes a coping mechanism.”</p><p id="1334ff80-79a7-4480-a67a-97d2959e1779" class="">Others suspect his wealth made Palihapitiya less concerned about what other people — presumably those in the financial world — think of him. He has an answer for that:</p><p id="60a9c149-bf3d-4b88-91fc-2b258b2d4a60" class="">“I actually think I care even more now what other people think, but I care more about the people that don’t have a voice as much” instead of some “random capital allocator who at some very basic level I don’t fundamentally respect because of the politics, or because of the game that the capital allocation process transforms it into.”</p><p id="5c5faa7b-2f43-4b46-862d-4bb8597b231e" class="">The coronavirus pandemic has had a way of altering reality by forcing even the richest people back to basics. Palihapitiya, for one, says he cleans the toilets twice a week and does all the vacuuming in the home he shares with his partner, Italian pharmaceuticals heiress Nathalie Dompe, the CEO of Dompe Holdings, and his four children. (His ex-wife, with whom he shares custody of three of those children, lives four minutes away.)</p><p id="8a13e523-4d45-42d9-babf-b0c56ae2b6a0" class="">It won’t last forever, of course. But Palihapitiya couldn’t have envisioned that that’s what 2020 would look like when he wrote Social Capital’s 2019 annual letter, which came out just before Covid-19 took hold of the global discourse. In it, he talks about the coming end of the gilded age, with its massive economic inequalities, and predicts that an era of reform will replace it, with tighter regulation and higher taxes.</p><p id="c4d43cfb-fbfb-419a-9ab0-ca95fb7f6971" class="">There are a growing number in his class who agree. “I think he’s absolutely right,” says Kapoor. “You can be a great investor and a great capitalist and at the same time rewrite the rules of how it’s all distributed.”</p><p id="6823b987-d476-41fe-8973-5446bb426972" class="">Palihapitiya still believes that reform is coming — but probably not until 2024. “Right now we are going to go through two or three years of pain. And then I think going into 2024 and out of it, we’ll have a political change, we’ll have an ideological change.”</p><p id="377b35c8-31fa-40a8-aeb5-6398378b57bb" class="">For the time being, he believes there will be deflation in the real economy and asset inflation at the same time, given the Fed’s recent moves to support financial markets. That might “unfortunately end in massive civil conflict,” Palihapitiya says. “The question is, how tumultuous is it from here to there? And can we get the next generation of leadership that keeps the lid on so that it doesn’t blow off?”</p><p id="7b95cd3d-9d6d-403f-9ff7-aa49c457520a" class="">Every day, it seems, his more than 340,000 Twitter followers look to Palihapitiya for such leadership, often begging him to run for president.</p><p id="7e68d02f-bff5-4c94-b95d-e19a3b80aafe" class="">He can’t.</p><p id="cf1fcc0d-2b81-492d-b7b7-539db456a69b" class="">“I’m Canadian, so I can rule that out,” he says. “Thank you, no.” But there is an alternative, he teases.</p><p id="1ab2cf3c-b6b9-4351-bf80-a07d07e24824" class="">“Maybe prime minister.”</p></div></article></body></html>

@@ -1,0 +1,644 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wildcard: Spreadsheet-Driven Customization of Web Applications</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d6294514-9306-4c15-9872-a8a915344a56" class="page sans"><header><h1 class="page-title">Wildcard: Spreadsheet-Driven Customization of Web Applications</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.geoffreylitt.com/wildcard/salon2020/#sec:demos" class="url-value">https://www.geoffreylitt.com/wildcard/salon2020/#sec:demos</a></td></tr></tbody></table></header><div class="page-body"><figure id="6bcd002f-8908-4316-bc9f-5cb9e35b01e2" class="image"><a href="Wildcard%20Spreadsheet-Driven%20Customization%20of%20Web%20A%20d629451493064c159872a8a915344a56/overview-300dpi.png"><img style="width:700px" src="Wildcard%20Spreadsheet-Driven%20Customization%20of%20Web%20A%20d629451493064c159872a8a915344a56/overview-300dpi.png"/></a></figure><p id="d7b297bf-6b52-458f-b5c2-07836ee7bffb" class="">Figure 1: An overview of spreadsheet-driven customization</p><p id="7263e1bf-ad55-4251-a0a0-92af9fa49b15" class="">The Wildcard extension is currently an early research prototype. We plan to continue testing the system with our own use cases to explore how the spreadsheet abstraction maps to real websites and customization needs. Eventually we plan to release the tool publicly in order to learn from real use cases, discover usability challenges, and to test the feasibility of building and maintaining site adapters. Section 6 describes open questions we plan to continue exploring, as well as our future plans.</p><p id="49bd96df-4fc9-4b32-830c-fe6884a1b8e8" class="">Here are some examples of using Wildcard to customize websites in useful ways.</p><h2 id="5342dd37-46f5-485f-9283-f6fb5c4b4d7f" class="">2.1 Augmenting search results</h2><p id="a83da8dc-f171-4490-9225-eb1976d16228" class="">In 2012, the travel site Airbnb removed the ability to sort accommodation searches by price. Users could still filter by price range, but could no longer view the cheapest listings first. Many users complained that the change seemed hostile to users. “It’s so frustrating! What is the logic behind not having this function?” said one user on the <a href="https://community.withairbnb.com/t5/Hosting/Sorting-listing-by-price/td-p/559404">Airbnb support forum</a>. Alas, the feature remains missing to this day.</p><p id="974c95ae-a4b9-4da6-b67e-6af536133512" class="">Using Wildcard, the user can fix this omission, while leaving the page’s design and the rest of its functionality unchanged. First, the user opens up the Wildcard panel, which shows a table corresponding to the search results in the page. As they click around in the table, the corresponding row in the page is highlighted to indicate the mapping between the views.</p><p id="a7bd6c78-1ee2-43a1-8a1e-54f647e9abfa" class="">Then, the user clicks on the price column header to sort the spreadsheet and the Airbnb UI by price. They also filter to listings with a user rating above 4.5 (another feature missing in the original Airbnb UI).</p><p id="66cd595d-a7f3-48e1-993f-53f764569f93" class="">After manipulating the data, the user closes the table view and continues using the website. Because the application’s UI usually has a nicer visual design than a spreadsheet, Wildcard does not aim to replace it—at any time, the user can use either the UI, the spreadsheet, or both together.</p><p id="29f25c3a-b6a4-40d2-acaa-2ffc9dda10f2" class="">Many websites that show lists of data also offer actions on rows in the table, like adding an item to a shopping cart. Wildcard has the ability to make these “row actions” available in the data table through the site adapter. In the Airbnb UI, saving multiple listings to a Favorites list requires tediously clicking through them one by one. Using Wildcard row actions, the user can select multiple rows and favorite all of them with a single click. Similarly, the user can open the detailed pages for many listings at once.</p><p id="1d11465e-7745-44dd-aa2c-8a174f32a618" class="">Next, the user wants to jot down some notes about each listing. To do this, they type some notes into an additional column in each row, and the notes appear inside the listings in the original UI. The annotations are saved in the browser and associated with the backend ID of the listing, so they will appear in future browser sessions that display the same listing.</p><p id="014b6480-abe2-4c3b-88ea-b64bcfa119d7" class="">Wildcard also includes a formula language that enables more sophisticated customizations. When traveling without a car, it’s useful to evaluate potential places to stay based on how walkable the surroundings are. Using a formula, the user can integrate Airbnb with Walkscore, an API that rates the walkability of any location on a 1-100 scale. When the user calls the <code>walkscore</code> formula with the listing’s latitude and longitude as arguments, it returns the walk score for that location and shows it as the cell value. Because the cell’s contents are injected into the page, the score also appears in the UI.</p><h2 id="8ca34830-1adf-4e0a-ba39-742375720a7c" class="">2.2 Snoozing todos</h2><p id="45a7282d-b05b-4bf9-a0c4-69c48553bb48" class="">In addition to fetching data from other sources, Wildcard formulas can also perform computations. In this example, the user would like to augment the TodoMVC todo list app with a “snooze” feature, which will temporarily hide a todo from the list until a certain date.</p><p id="9eb74e4b-47e0-4dd8-af82-56ec5c4b273f" class="">The user opens the table view, which shows the text and completed status of each todo. They start the customization by adding a new column to store the snooze date for each todo.</p><p id="9aa8a48f-cbf6-4444-a1e3-5227e61af772" class="">The next step is to hide snoozed todos. The user creates a <code>snoozed?</code> column, which uses a formula to compute whether a todo is snoozed—i.e., whether it has a snooze date in the future. Then, they simply filter the table to hide the snoozed todos.</p><p id="f64aaabe-73c7-4593-a5b2-fc3d7732899e" class="">Because the built-in <code>NOW()</code> function always returns the current datetime, snoozed todos will automatically appear once their snooze date arrives.</p><p id="2eb522bf-b513-4ceb-b8ba-87f53786982d" class="">Because this implementation of snoozing was built on the spreadsheet abstraction, it is completely decoupled from this particular todo list app. We envision that users could share these types of customizations as generic browser extensions, which could be applied to any site supported by Wildcard with no additional effort.</p><h2 id="5108a0fc-8948-4433-8df5-dc1c883c32e8" class="">2.3 Adding a custom datepicker</h2><p id="388afb52-b3dd-4c8e-8afb-0e6777476d9a" class="">It might seem that Wildcard is only useful on websites that display lists of tabular data, but the table metaphor is flexible enough to represent many types of data. For example, a flight search form on Expedia can be represented as a single row, with a column corresponding to each input.</p><p id="684c1cb8-6937-435a-a3d6-80eccd6e7e85" class="">In some of the previous examples, the table cells were read-only (because users can’t, for example, change the name or price of an Airbnb listing). In this case, the cells are writable, which means that changes in the table are reflected in the form inputs. This becomes especially useful when combined with GUI widgets that can edit the value of a table cell.</p><p id="394fd15f-0959-4050-90b8-51782486f0bf" class="">Filling in dates for a flight search often requires a cumbersome workflow: open up a separate calendar app, find the dates for the trip, and then carefully copy them into the form. In Wildcard, the user can avoid this by using a datepicker widget that shows the user’s personal calendar events. The user can directly click on the correct date, and it gets inserted into both the spreadsheet and the original form.</p><p id="5ad145a5-10f8-45d2-be1b-27ad836ec238" class="">In this section we’ve presented just a few use cases for spreadsheet-driven customization, to suggest some possibilities of the paradigm. We think the spreadsheet model is flexible enough to support a wide range of other useful modifications while remaining familiar and easy to use.</p><p id="aceaf2b6-7db1-4556-a284-2c91df98feb0" class="">Wildcard is written in Typescript. It is currently injected into pages using the <a href="https://www.tampermonkey.net/">Tampermonkey</a> userscript manager, but in the future we plan to deploy it as a standalone browser extension to make it easier to install.</p><p id="c2c01a7c-b744-455e-a638-3fc01db56411" class="">In order to promote extensibility, Wildcard is implemented as a small core program along with several types of plugins: site adapters, formulas, and cell editors. The core contains functionality for displaying the data table and handling user interactions, and is built on the <a href="https://handsontable.com/">Handsontable</a> Javascript library.</p><figure id="0a30e5c4-bddd-49c5-b578-aa67cfc64b73" class="image"><a href="Wildcard%20Spreadsheet-Driven%20Customization%20of%20Web%20A%20d629451493064c159872a8a915344a56/architecture-300dpi.png"><img style="width:700px" src="Wildcard%20Spreadsheet-Driven%20Customization%20of%20Web%20A%20d629451493064c159872a8a915344a56/architecture-300dpi.png"/></a></figure><p id="2af96e5d-c30f-4956-a26e-f2b3e2551ef8" class="">Figure 2: The architecture of the Wildcard prototype</p><p id="8437a657-79bf-4646-82e2-ccba4a71cc04" class="">Site adapters are a key part of Wildcard, since they specify the bidirectional connection between the web page and its structured data representation. Wildcard represents data in a relational table with named and typed columns, and provides an interface for concisely expressing how the DOM should be mapped to this structure. For example, here is a code snippet for extracting the name of an Airbnb listing.</p><pre id="b81435eb-dded-4593-8a29-52725b06bd5e" class="code"><code>{
+  // Field metadata:
+  fieldName: &quot;name&quot;,
+  type: &quot;text&quot;,
+  readOnly: true,
+
+  // Function to extract DOM element:
+  el: (row) =&gt; row.querySelector(&quot;._1ebt2xej&quot;),
+}</code></pre><p id="e6a77564-0e10-419b-beb0-c28f4be21e7f" class="">Sometimes, more advanced scraping techniques are necessary to extract data from the application. For example, we have prototyped a mechanism for site adapters to observe AJAX requests made by the browser and extract data directly from JSON responses. This mechanism was used to implement the Airbnb Walkscore example, since latitude and longitude aren’t shown in the Airbnb UI, but they are available in AJAX responses. This technique seems promising because AJAX responses already contain data in a structured form, and web applications are increasingly loading data using AJAX. Another technique we might consider is enabling site adapters to scrape data across multiple pages for paginated lists of results (as explored in [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">10</a>]).</p><p id="4c80369f-03b5-43ed-9923-db1f6eafae03" class="">Because Wildcard requires a live bidirectional connection between the UI and the structured data, there are some additional challenges beyond those typically associated with web scraping.</p><p id="09c80d9e-b9dd-4c7d-82f3-e2db800ce5a2" class="">First, the site adapter needs to support sending updates from the table to the original page. We have made this fairly straightforward, because most DOM manipulation is not performed directly by the site adapter. Instead, Wildcard automatically mutates the DOM to reflect the spreadsheet state, using the same specification that was used to extract the data. The only exception to this is row actions (like favoriting an Airbnb listing), which are implemented as Javascript functions that can perform arbitrary behaviors like simulating clicks on buttons or mutating the DOM.</p><p id="9f2e76de-87ea-49c0-8812-54418e8c0800" class="">Another challenge is triggering updates to the spreadsheet data in response to UI changes that happen after initial page load. Site adapters are responsible for recognizing these changes by observing the DOM. So far, we have been able to use event listeners and the MutationObserver API to successfully observe changes, but it may prove challenging to observe changes on some sites only through the DOM.</p><p id="26401d31-04df-4722-877f-4acf3b1393e6" class="">The idea of spreadsheet-driven customization is guided by three design principles, inspired by prior work and our own experimentation. We think these principles might also broadly inform the design of tools for end user software customization.</p><h2 id="4073221a-783a-47ec-aa64-4178419f1fd2" class="">4.1 Expose a universal data structure</h2><p id="6df754c0-11dc-4f29-bed0-dd577b93a6ff" class="">Today, most personal computing consists of using applications, which bundle together behavior and data to provide some set of functionality. While there are some limited points of interoperability, applications generally are designed to operate independently of one another.</p><p id="eb6f8a2f-4bef-4c3f-9bd1-6675426f23d4" class="">Computing does not need to be organized this way. For example, UNIX offers a compelling alternative: many small single-purpose programs, all of which manipulate a universal format of text streams. Users get high leverage from mastering a text editor and other text manipulation tools, since they can be applied to a huge variety of tasks. A user’s preferred text editor can even serve as an interactive input mechanism in shell programs, e.g. for editing git commit messages.</p><p id="f052a73b-1fc3-42d8-a6ce-c48964b33858" class="">Spreadsheet-driven customization aims to bring some of this UNIX ethos to the world of isolated Web applications by creating a consistent data structure to represent the data inside many applications. In UNIX, the universal format is a text stream; in Wildcard, it is a relational table. Because Wildcard maps the data from all applications to the table format, users can master the tools provided by Wildcard and apply them to customize many different applications.</p><p id="5ca5c708-7202-4068-8e30-d5f18355fb58" class="">This idea relates to Beaudouin-Lafon and Mackay’s notion of <em>polymorphic interface instruments</em> [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">2</a>], which are UI elements that can be used in different contexts (for example, a color picker that can be used in many drawing applications). It also relates to ideas of literacy in a medium. DiSessa notes that textual literacy depends on the fact that writing can be adapted to many different genres [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">8</a>]: if people needed to relearn reading and writing from scratch when switching from essays to emails, the medium would lose its potency. Generic tools are especially important for software customization, because a common barrier to customizing software is not having enough time [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">17</a>]—it’s more likely that people will customize software frequently if they can reuse the same tools across many applications.</p><p id="db2f4396-cf3c-4210-a063-f8b1fd05cab2" class="">This design principle leads to several challenges. First, any universal abstraction has its limits, and may not naturally express the data in every application. We plan to explore the limits of the table abstraction further by trying to build adapters for more sites with varied data formats. We expect that many types of data will fit easily into tables: lists of search results, news articles, and messages can all naturally be seen as relations. Documents (e.g. Google Docs) or graphs (e.g. social network friend graphs) may prove more challenging to map to the table abstraction.</p><h2 id="4635cfcf-195f-4d2e-9b37-99cf3927fc37" class="">4.2 Low floor, high ceiling</h2><p id="4ac44139-c54e-4533-afe0-4e5490d36f58" class="">Seymour Papert advocated for programming systems to have a “low floor,” making it easy for novices to get started, and a “high ceiling,” providing a large range of possibilities for more sophisticated users [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">21</a>]. Our goal is for spreadsheet-driven customization to meet both of these criteria.</p><p id="d0ce8d62-0d35-49f1-a382-73f584c67c33" class="">One of the most interesting properties of spreadsheets is that users familiar with only a tiny sliver of their functionality (e.g., storing tables of numbers and computing simple sums) can still use them in valuable ways. This supports the user’s natural motivation to continue using the tool, and to eventually learn its more powerful features if needed [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">20</a>]. In contrast, many traditional programming systems require an enormous upfront time investment before someone is able to write a program that helps them achieve a useful task.</p><p id="dcdbab4d-0807-495b-b756-71f43b9884ca" class="">As part of ensuring a low floor, we have focused on including features that have immediate value for novices. For example, a user can sort a table with a single click, or simply type in some annotations. We would expect many Wildcard users to start by using these simpler features before moving on to more sophisticated features like formulas.</p><p id="335b15be-e50e-4f1d-8503-bbdf8bba54ed" class="">Another aspect of providing a low floor is providing an “in-place toolchain” [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">25</a>]: minimizing the effort of moving from using to customizing by making customization tools available in the same environment where the user is already using the software. This quality is distinct from the level of technical skill needed to use the tool. For example, setting up a workflow in an end user programming system like <a href="https://ifttt.com/">IFTTT</a> does not require much programming skill, but it does require leaving the user’s normal software and entering a separate environment; conversely, running a Javascript snippet in the browser console requires programming skills, but can be done immediately in the flow of using a website.</p><div id="bfc8b91e-82c0-425d-b457-0aad2d349167" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>End user friendly</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Wildcard</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>IFTTT</th></tr></thead><tbody><tr id="e3c66d33-54d2-4d34-804e-561d1259c353"><td class="cell-title"><a href="Wildcard%20Spreadsheet-Driven%20Customization%20of%20Web%20A%20d629451493064c159872a8a915344a56/Untitled%20Database%20bfc8b91e82c0425db4570aad2d349167/Requires%20programming%20e3c66d3354d24d34804e561d1259c353.html">Requires programming</a></td><td class="cell-#&gt;?X">browser JS console</td><td class="cell-])]e">using Web APIs in Python</td></tr></tbody></table></div><p id="c103e852-2881-4113-ac48-0df858f81e9b" class="">Wildcard provides an in-place toolchain because the spreadsheet can be instantly opened in the browser window while using any supported website. Once the user starts editing, Wildcard also provides live feedback, so that even if a user isn’t yet totally familiar with Wildcard, they can learn to use the system through experimentation.</p><p id="98118a10-00bd-407f-b76f-8a6145a95ef3" class="">Since we have only built a few site adapters and demos so far, it is still too early to tell how high the ceiling is for the customizations that can be achieved with Wildcard. But we think that with enough built-in formulas (both standard spreadsheet formulas for computation, and formulas for fetching data from other sources), the language could support a wide variety of customizations. We plan to explore this aspect further by trying to solve real problems and observing where limitations emerge in practice (discussed more in Section 6).</p><h2 id="33a00b56-3728-4e62-a5a0-79a476d2a5ab" class="">4.3 Design for an ecosystem of users</h2><p id="4bea6d36-28ec-4a6e-b716-7dfada6a71aa" class="">Real-world spreadsheet usage is highly collaborative. Many users only perform simple changes, while their coworkers help with writing complex formulas or programming macros [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">19</a>]. Inspired by this collaborative dynamic, we aim for spreadsheet-driven customization to bring together the abilities of different users.</p><p id="fda7b329-14bb-491f-bccf-854b8ede3c2e" class="">The main way we do this is by separating website customization into two separate stages: structured data extraction, performed by programmers who code site adapters in Javascript, and then customization using the resulting spreadsheet, which is available to all end users. This architecture frees end users from needing to think about data extraction, and enables a community of end users to reuse the efforts of programmers building site adapters.</p><p id="2e431aed-e8ce-4ef0-b5a9-08c5a5162dcb" class="">The group of users building adapters does not necessarily need to be limited only to programmers. In the future, we plan to explore enabling end users to also create site adapters, drawing on related work in this area [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">6</a>,<a href="https://www.geoffreylitt.com/wildcard/salon2020/">10</a>]. But even then, we still envision a separation between highly motivated, tech-savvy end users building adapters, and more casual end users just using the spreadsheet view.</p><p id="80a44d91-5fd0-429b-af77-0dbbf14165d2" class="">The first party developers of the original software can also play a role in enabling customization. Although spreadsheet-driven customization does not depend on cooperation from first party website developers, their participation in exposing structured data would eliminate the need for third party site adapters. The first parties could themselves benefit from such a system; providing Wildcard support—a fairly low-effort undertaking for a developer with direct access to the structured data—would allow users to build extensions to fulfill some of their own feature requests. There is also precedent for first parties implementing an official client extension API: for several years, Google maintained an official extension API in Gmail for Greasemonkey scripts to use.</p><p id="79c3c4d8-4cfd-4873-a5e5-b5fbcab9ecaf" class="">Google no longer maintains its own API, but third parties have continued to maintain successful replacements—Gmail.js [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">22</a>] is an open source wrapper API with over 70 contributors and hundreds of commits. This library demonstrates another benefit of designing for an ecosystem: it’s easier for many programmers to collectively maintain a generic site adapter that can support many extensions, rather than each programmer creating custom scraping logic for their own single-purpose extension.</p><p id="c6eef36b-f666-45e0-9010-a34649d76bfd" class="">Spreadsheet-driven customization relates to existing work in four areas: malleable software, web customization, spreadsheet-driven applications, and web scraping.</p><h2 id="9477de2f-42c6-468b-889b-8b9d74129c31" class="">5.1 Malleable software</h2><p id="f70c7f43-a7c0-49b8-bda9-2378d34991c1" class="">In the broadest sense, Wildcard is inspired by systems aiming to make software into a dynamic medium where end users frequently create and modify software to meet their own needs, rather than only consuming applications built by programmers. These systems include Smalltalk [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">13</a>], Hypercard [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">12</a>], Boxer [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">7</a>], Webstrates [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">14</a>], and Dynamicland [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">23</a>]. In fact, the name Wildcard comes from the internal pre-release name for Hypercard, a project which doubly inspired our work by promoting both software modification by end users and the ideas behind the Web.</p><p id="b178ed80-6cf6-4afa-ba2b-fce6f36a421f" class="">Although Wildcard shares broad goals with these projects, it employs a different solution strategy. These other systems generally require building software from scratch in a new environment. On the other hand, Wildcard aims to maximize the malleability of software built with existing tools.</p><p id="ebc2a517-3d30-42ca-922e-cfbb877f18c2" class="">With substantial future work, we think Wildcard could become more similar to these other projects, growing from a platform for tweaking existing software into a platform for building new software from scratch. This would likely end up resembling existing tools for building spreadsheet-driven applications (discussed more below), but with an additional focus on customization by end users of the software.</p><h2 id="d9acf24d-b2fc-45c2-ad45-78ae733d985b" class="">5.2 Web customization</h2><p id="2ec5f446-49f0-4e4f-aea4-60c74ea1172a" class="">Wildcard’s goals are closely shared with other systems that provide interfaces in the browser for end users to customize websites.</p><h3 id="493add48-81e6-413a-9622-74c229600800" class="">5.2.1 Structured augmentation</h3><p id="c327c391-9de6-42eb-a7ac-aa848bcefe97" class="">Wildcard’s solution approach is most similar to other tools that identify structured data in a web page and then use that structure to support end user customization of the page.</p><p id="a811b444-8751-4587-8158-d761f1355c42" class="">Sifter [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">10</a>] enables users to sort and filter lists of data on web pages, which resembles Wildcard’s sorting functionality. The underlying mechanism is similar, since Sifter extracts structured data from the page to enable its user-facing functionality. However, the systems also have significant differences:</p><ul id="70308b42-4d67-461f-8f9b-6fdea4af2692" class="bulleted-list"><li>Wildcard hides data extraction from end users by having programmers develop site adapters, whereas Sifter uses a combination of automated heuristics and interactive user feedback to involve end users in extracting data. User studies of Sifter indicated that users were surprised by the need to participate in the data augmentation process, which influenced our decision to hide this process from the user. We suspect Wildcard’s workflow results in a simpler end user experience, but at the cost of only working with a smaller subset of supported websites.</li></ul><ul id="54d735e5-d0da-4a21-b863-9aa8c7b313c8" class="bulleted-list"><li>Wildcard supports a broad set of customizations. Sifter only supports sorting and filtering.</li></ul><ul id="b5418ae5-3467-4b12-9326-d27f9b19abe7" class="bulleted-list"><li>Wildcard shows the structured data table directly to the user. Sifter only shows sorting controls, and does not reveal the underlying data table.</li></ul><p id="d9cb3b33-3402-46f5-8881-c6e38c7a7c39" class="">Thresher [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">9</a>] enables users to create wrappers which map unstructured website content to Semantic Web content. Like Wildcard and Sifter, Thresher augments the page: once semantic content has been identified, it creates context menus in the original website which allow users to take actions based on that content. Wildcard and Thresher focus on complementary parts of the customization process. Thresher aims to enable end users to create content wrappers, but the actions available on the structured data are determined in advance. Conversely, Wildcard delegates wrapper creation to programmers, but gives end users more flexibility to use the structured data in an open-ended way.</p><h3 id="91240e26-10e8-49a4-b83a-f8ce2299643f" class="">5.2.2 Sloppy augmentation</h3><p id="7aa9568f-0d70-43bb-94b5-1953ef4bce34" class="">“Sloppy programming” [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">16</a>] tools like Chickenfoot [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">4</a>] and Coscripter [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">15</a>] enable users to create web automation scripts without directly interacting with the DOM. The scripts can perform actions like filling in text boxes and clicking on buttons. Users express the desired page elements in natural, informal terms (e.g. writing “the username box” to represent the textbox closest to the label “username”), and then the system uses a set of heuristics to determine which elements most likely match the user’s intent. This approach allows for expressing a wide variety of commands with minimal training, but it also has downsides [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">16</a>]:</p><ul id="907db25f-7477-411a-aa0d-2fff8bdf5d35" class="bulleted-list"><li><em>Reliability</em>: It can be difficult to know whether a command will consistently work over time. Changes to the website or to the system’s heuristics can cause unexpected changes in behavior.</li></ul><ul id="634f0802-1da6-4b22-835c-67a328343f95" class="bulleted-list"><li><em>Discoverability</em>: it can be difficult for users to explore the space of possible commands.</li></ul><p id="3810f6ed-2a69-4ff4-ae34-64c8d8d80da3" class="">Wildcard offers a sharp contrast to sloppy programming, instead choosing to expose a high degree of structure through the spreadsheet table. Wildcard offers more consistency; for example, clicking a sort header will always work correctly as long as the site adapter is maintained. Wildcard also offers clearer affordances for what types of actions are possible. On the other hand, Wildcard’s explicit site adapter approach means that fewer websites can be customized, and also that users can’t perform customizations if the relevant data is not exposed in the spreadsheet.</p><p id="b4e2a78e-4a43-45c8-85de-66f82c30e87c" class="">Another difference between Wildcard and these tools is that there is no way for users to express imperative workflows with sequences of actions in Wildcard. Chickenfoot and Coscripter have shown these types of workflows to be useful in practice so it might be worth considering how to incorporate them, but it’s not obvious how such workflows could fit into Wildcard. Spreadsheets have a fundamentally different computation model, and site adapters created by programmers cannot easily account for every possible action a user might want to perform in a page.</p><h2 id="e4a2098a-6494-442d-8411-e58d21b3bf5b" class="">5.3 Spreadsheet-driven applications</h2><p id="674dbd4e-fef5-4966-a59c-b8604b34d1e6" class="">Many researchers and companies have explored the idea of <em>spreadsheet-driven applications</em>: using spreadsheets as a backing data store and computation layer for interactive web applications, enabling end users to create such applications more easily. Research projects like Object Spreadsheets [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">18</a>], Quilt [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">3</a>], Gneiss [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">5</a>], and Marmite [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">24</a>], as well as commercial tools like Airtable [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">26</a>] and Glide [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">27</a>] allow users to view data in a spreadsheet table, compute over the data using formulas, and then connect the table to a GUI. Because many users are already familiar with spreadsheets, this way of creating applications tends to be much easier than traditional software methods; for example, in a user study of Quilt, many users were able to create applications in under 10 minutes, even if they expected it would take them many hours.</p><p id="cf125787-d668-48cd-a610-19d6d7accce6" class="">Wildcard builds on this idea, but applies it to modifying existing applications, rather than building new applications from scratch. For many people, we suspect that tweaking existing applications provides more motivation as a starting point for programming than creating a new application from scratch.</p><p id="3e9cf37a-f848-4632-82da-c117e736c7f7" class="">An important design decision for tools in this space is how far to deviate from traditional spreadsheets like Microsoft Excel or Google Sheets. Quilt and Glide use existing spreadsheet software as a backend, providing maximum familiarity for users, and even compatibility with existing spreadsheets. Gneiss has its own spreadsheet implementation with additional features useful for building GUIs. Marmite provides a live data view that resembles a spreadsheet, but programming is actually done using a separate data flow pane rather than spreadsheet formulas. Marmite’s approach led to some confusion in a user study, because users expected behavior more similar to spreadsheets [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">24</a>]. Airtable deviates the furthest: although the user interface resembles a spreadsheet, the underlying structure is a relational database with typed columns. Wildcard’s table is most similar to Airtable; the structure of a relational table is most appropriate for most data in websites, and we have not yet found a need for arbitrary untyped cells.</p><h2 id="f9e4a524-1f68-483c-ace5-533e95ff7b9c" class="">5.4 Web scraping / data extraction</h2><p id="c5754376-f047-43d4-bcd3-6ea29dc4e156" class="">Web scraping tools focus on extracting structured data out of unstructured web pages. Web scraping is closely related to the implementation of Wildcard, but has different end goals: web scraping generally extracts static data for processing in another environment, whereas Wildcard customizes the application’s UI by maintaining a bidirectional connection between the extracted data and the page.</p><p id="ad9f9283-06e9-4c97-a506-3315ddda9aae" class="">Web scraping tools differ in how much structure they attempt to map onto the data. Some tools like Rousillon [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">6</a>] extract data in a minimally structured relational format; other tools like Piggy Bank [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">11</a>] more ambitiously map the data to a rich semantic schema. In Wildcard, we chose to avoid semantic schemas, in order to minimize the work associated with creating a site adapter.</p><p id="bdb2a6b8-fd2c-4319-925e-386fecccfd33" class="">In the future, we might try to integrate existing web scraping tools, to help create more reliable site adapters for Wildcard with less work, and to open up adapter creation to end users. Although Wildcard has additional requirements beyond traditional web scraping as discussed in Section 3, there is still enough overlap that existing tools might prove helpful.</p><p id="843f114b-606b-4973-9f1d-3ccc663861ae" class="">In this paper, we have presented <em>spreadsheet-driven customization</em>, a technique that enables end users to customize software by augmenting an application’s UI with a spreadsheet. We still have many open questions which we hope to answer through targeted development and usage of Wildcard.</p><p id="bf2d10be-8cc5-4f14-b414-f6f73faea201" class="">The most important question is: what are the limits of this computational model? What types of useful customizations can it support or not support? While initial demos suggest a variety of use cases, we plan to develop more site adapters and demos to explore this question further. We will start by privately testing the system with our own needs and then eventually deploy the tool publicly once it has a stable API and can support a critical mass of sites and use cases. We also plan to run usability studies to evaluate and improve the design of the tool.</p><p id="84e62f4a-96d9-4fe0-8ea9-1202e616320b" class="">We suspect that some areas of the current model may prove overly simplistic. For example, Wildcard’s data model currently shows a single table at a time, without any notion of relationships between tables. A richer data model with foreign keys might help support certain use cases. For designing a spreadsheet interface on top of a richer relational model, we could learn from other systems with this design [<a href="https://www.geoffreylitt.com/wildcard/salon2020/">1</a>,<a href="https://www.geoffreylitt.com/wildcard/salon2020/">18</a>].</p><p id="e0689d8a-2639-4a56-bbc2-465e53b2d431" class="">Another question is how easily site adapters can be created and maintained for real websites, which often include complex markup and change frequently. We plan to explore this question by creating adapters for sites with different data structures and in different domains, and perhaps running user tests with programmers. Possible future improvements we’ve considered include developing automated heuristics to assist with the adapter creation process and developing new abstractions that make it easier for programmers to efficiently create robust adapters.</p><p id="9bed4496-bfb4-450b-a06f-b048872aba76" class="">Ultimately, we hope that spreadsheet-driven customization helps the Web reach its full potential as a dynamic medium that users can mold to their own needs.</p></div></article></body></html>

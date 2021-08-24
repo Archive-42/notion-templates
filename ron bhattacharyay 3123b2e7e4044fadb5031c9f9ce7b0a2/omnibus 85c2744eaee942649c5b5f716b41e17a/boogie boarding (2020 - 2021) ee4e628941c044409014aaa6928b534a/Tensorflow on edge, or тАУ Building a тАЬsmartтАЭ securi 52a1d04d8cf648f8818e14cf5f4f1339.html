@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tensorflow on edge, or – Building a “smart” security camera with a Raspberry Pi</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="52a1d04d-8cf6-48f8-818e-14cf5f4f1339" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏒</span></div><h1 class="page-title">Tensorflow on edge, or – Building a “smart” security camera with a Raspberry Pi</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-blue">Projects</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://chollinger.com/blog/2019/12/tensorflow-on-edge-or-building-a-smart-security-camera-with-a-raspberry-pi/" class="url-value">https://chollinger.com/blog/2019/12/tensorflow-on-edge-or-building-a-smart-security-camera-with-a-raspberry-pi/</a></td></tr></tbody></table></header><div class="page-body"><h2 id="f99085b7-e848-46a4-9d09-fcaa8a3931dc" class="">Introduction</h2><p id="e2a9ba83-53a6-487d-8390-02b1f8189df7" class="">The amount of time my outdoor cameras are being set off by light, wind, cars, or anything other than a human is insane. Overly cautious security cameras might be a feature, but an annoying one at that.</p><p id="1e6e2381-e31e-4986-8999-0923ac3ddcce" class="">I needed a solution for this problem, without going completely overboard. Something simple, elegant, yet effective.</p><p id="fabf2133-c36d-41fb-bd84-3684c6d61fb2" class="">Folks, meet what I lovingly call “<a href="https://github.com/otter-in-a-suit/scarecrow"><strong>Scarecrow-Cam</strong></a>”. A <strong>Raspberry Pi</strong> powered camera that detects people with <strong>Tensorflow Object Detection</strong> and greets them with exceptionally loud and harsh music (or a warning sound) the second they step onto my porch.</p><p id="bf76a5cd-0308-449c-ba95-fc5a7ae70e95" class="">Using real-time object detection with Tensorflow, a Raspberry Pi, a camera, a speaker, and Wifi, this ensures quiet evenings. Somewhat.</p><h2 id="816aceb8-56b6-4fa4-a494-7e55d9e3c72f" class="">What are we doing?</h2><p id="ba19353c-319c-4f24-8984-b6bcb9427eb6" class="">On more serious terms, using real-time video streams and machine-learning for object detection is an actual real-world use case. While most use cases are arguably incredibly creepy, I do find some value in detecting objects or people on private security cameras.</p><p id="a7ca1eb3-f82a-4375-aa51-fda0d0f12f53" class="">If a network of security cameras at home would be able to detect real, potential threats – humans and squirrels – and would react accordingly (for instance, by sending an alert), this would greatly improve the usefulness of these devices, which mostly rely on either motion detection or continuous video recordings – both either incredibly error-prone or reactive at most (showing you what happened after the fact).</p><h2 id="1f428887-61c1-4069-9f0c-e5b0b2f8b938" class="">On the topic of security cameras</h2><p id="6b61e21f-c4f6-4bba-8c19-f54d63648193" class="">However - Most consumer grade video surveillance systems are awful, plain and simple. Either they require expensive hard-wiring or rely on janky infrared and motion detection that sets of every 10 minutes because a car drives past the house, are dependent on the grace and software updates of 3rd party companies, often come as a subscription model, and are generally inaccessible via an API.</p><p id="83602e9d-782d-4967-910f-4de4a816330d" class="">My unnamed outdoor camera setup usually gets set off by Old Glory waving in the wind, as opposed to by a person.</p><h2 id="6fdc1ca1-6b3c-49db-956b-3571f891bb0b" class="">The solution</h2><p id="bf1f266c-e55e-4c2d-abbf-84c6448b2bee" class="">Here’s what we’re going to do:</p><p id="987f1dd8-5028-4f9e-a793-fd4819fdf478" class="">We’ll use a <a href="https://www.raspberrypi.org/products/raspberry-pi-4-model-b/">Raspberry Pi 4</a> with the <a href="https://www.raspberrypi.org/products/camera-module-v2/">camera module</a> to detect video. This can run continuously and won’t need to rely on motion sensors to set off.</p><p id="352c9784-21b6-4a2c-8dcd-30b087688b8b" class="">In order to detect objects, we’ll use the <a href="https://github.com/tensorflow/models/tree/master/research/object_detection">Tensor Flow Object Detection API</a> by Google. This library enables us to pretty much use object detection out of the box (more on that later), without the need for manually training and tuning a model or the need for a <a href="https://chollinger.com/blog/2019/07/a-look-at-apache-hadoop-in-2019/">cloud deployment</a>.</p><p id="a54653ff-45c3-48e8-927c-02dec3cd8d65" class="">In order to talk to the camera, we’ll rely on <a href="https://opencv.org/">OpenCV</a>.</p><p id="5af8739d-2178-4b1c-88c0-3c801b3b2d72" class="">Now, here’s an issue for you: My old RasPi runs a 32bit version of Raspbian. Tensorflow does not work with 32bit operating systems (granted, there might be <a href="https://www.balena.io/blog/balena-releases-first-fully-functional-64-bit-os-for-the-raspberry-pi-4/">alternatives</a>). Furthermore, while the new Raspberry is a powerful little machine, it is not remotely comparable to a modern computer – especially on 3 and earlier revisions.</p><p id="8081b1fe-6af8-427b-a9a4-6114ad637087" class="">In order to mitigate this, we will <strong>stream the video</strong> <strong>over the network</strong> on the Pi to a more powerful machine – a <a href="https://chollinger.com/blog/2019/04/building-a-home-server/">home server</a>, NAS, computer, an old laptop – and process the information there.</p><p id="0a94c543-6017-487f-81aa-d29b078de40e" class="">This is a concept called <strong>edge computing</strong>. With this concept, we essentially use less powerful, smaller machines to achieve low-latency communication by doing the heavy lifting on a machine physically close to the edge node – in this case, running the Tensorflow Object detection. By doing so, we avoid roundtrips over the internet, as well as having to pay for Cloud compute on e.g., AWS or GCP.</p><p id="11f2ae09-dd4c-4813-846a-8aab0c0f18e2" class="">In order to achieve this, we’ll use <a href="https://github.com/abhiTronix/vidgear">VidGear</a>, specifically it’s <a href="https://github.com/abhiTronix/vidgear/wiki/NetGear#netgear-api">NetGear API</a>, an API designed for streaming video over the network, using ZeroMQ. Just be wary of the a <a href="https://github.com/abhiTronix/vidgear/issues/45">bug,</a> requiring you to use the development branch.</p><p id="2e5ae669-f557-491b-a3a4-0fec22441eb7" class="">Once we’ve detected that there’s a human in the stream, we can send a signal to the Raspberry, using ZeroMQ, to play some really loud, annoying <strong>audio</strong> to scare people off.</p><figure id="e30cb073-0309-4f45-8728-21f864e1fbd2" class="image"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image.png"><img style="width:700px" src="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image.png"/></a></figure><p id="d95f6697-7e3d-4849-a71a-3719a1844491" class=""><em>(As some folks on </em><a href="https://old.reddit.com/r/raspberry_pi/comments/ea7b1s/tensorflow_on_edge_or_building_a_smart_security/"><em>reddit</em></a><em> have called out - there are alternatives to this, namely </em><a href="https://old.reddit.com/r/raspberry_pi/comments/ea7b1s/tensorflow_on_edge_or_building_a_smart_security/faojfa8/"><em>esp32cam</em></a><em> and </em><a href="https://old.reddit.com/r/raspberry_pi/comments/ea7b1s/tensorflow_on_edge_or_building_a_smart_security/faoicjh/"><em>TFLite</em></a><em>)</em></p><h2 id="547cf68c-2fba-4857-a4a5-24b385d62ed9" class="">Setting up a development environment</h2><p id="e882d76a-29ee-404c-82ae-9e8b0850a68f" class="">While arguably not the most fun part, first, we need a development environment. I am using Jupyter Notebooks with Python 3.7 on Linux for this.</p><p id="c0bd1227-00e4-4682-bb04-d7407b01d649" class="">We are going to base the work on the following tutorial: <a href="https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb">https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb</a></p><p id="7951a0e9-6204-4683-b7d5-9eb94820a065" class="">Side-note: As I’m using the Tensorflow 2.0 beta, I had to hack the API for tf.gfile to tf.io.gfile in ~/.local/lib/python3.7/site-packages/object_detection/utils/label_map_util.py.</p><p id="1cf8eca1-54f4-432c-8790-368baa635a49" class="">Clone the notebook, follow the instructions to set up a virtual environment, and install all dependencies.</p><h2 id="2ba17ac5-6ac3-4e63-804d-6d078ad2d799" class="">Testing** **Tensorflow** **locally</h2><p id="fbc1ab5c-f011-4477-b060-3c27f5038404" class="">Once that is done, we do probably want to loop a local video with test data without having to actually connect a live camera just yet.</p><p id="41ca7fb3-7a5f-4f26-b2c8-f0be79ad1caf" class="">All we really need to do here is to change the “while True” loop to bind to the OpenCV session. VideoCapture conveniently accepts either an integer (for a webcam) or a path to a video file.</p><div id="00df8531-2a78-4c1c-bf0a-152d5db2c646" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>def run_inference(model, cap, category_index, min_detections=10, min_confidence=0.5):</th></tr></thead><tbody><tr id="b05f99bb-3033-4c99-b5a9-32e61df9d007"><td class="cell-title"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/Untitled%20Database%2000df85312a784c1cbf0a152d5db2c646/max_score%20=%20output_dict%5B&#x27;detection_scores&#x27;%5D%5B0%5D#%5B&#x27;n%20b05f99bb30334c99b5a932e61df9d007.html">max_score = output_dict[&#x27;detection_scores&#x27;][0]#[&#x27;name&#x27;]</a></td></tr><tr id="bca589f5-6f08-4f6d-a16d-9eeb1b968898"><td class="cell-title"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/Untitled%20Database%2000df85312a784c1cbf0a152d5db2c646/if%20cv2%20waitKey(25)%20&amp;%200xFF%20==%20ord(&#x27;q&#x27;)%20bca589f56f084f6da16d9eeb1b968898.html">if cv2.waitKey(25) &amp; 0xFF == ord(&#x27;q&#x27;):</a></td></tr></tbody></table></div><div id="8f317b8f-63c6-48b2-a46a-5236a7648ef4" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>parser.add_argument(&#x27;--input&#x27;, &#x27;--i&#x27;, dest=&#x27;in_file&#x27;, type=str, required=True,</th></tr></thead><tbody><tr id="d13f0e35-a630-42a3-a9b0-1fa46a98bfb4"><td class="cell-title"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/Untitled%20Database%208f317b8f63c648b2a46a5236a7648ef4/for%20res%20in%20run_inference(detection_model,%20cap,%20cat%20d13f0e35a63042a3a9b01fa46a98bfb4.html">for res in run_inference(detection_model, cap, category_index, ):</a></td></tr></tbody></table></div><figure id="6970236d-5c4c-4cb0-b8d5-5c87b63a2bc1" class="image"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-1.png"><img style="width:653px" src="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-1.png"/></a></figure><p id="e11487e4-6952-47f9-b2fa-97d28d0f2f0e" class="">(Some parts of the image were manually blurred for privacy – also, those are invited visitors 😊 )</p><p id="5f59c089-ee6a-4538-b810-8ef52d841823" class="">As soon as you run the notebook, you should see the overlay of the detection model. Wonderful, the model works, and we can fine tune later.</p><h2 id="3da6797c-b447-4974-9704-d70cd533a3a9" class="">Network, network!</h2><p id="918cf5ec-b897-4f46-926a-9a32aecbff17" class="">As elaborated on before, we won’t rely on our Rasberry Pi to run the detection – so we’ll set up some network communication. I was originally thinking of writing this myself (I’m currently learning go, so that would have been a nice use case), but why bother if there’s a library?[1]</p><p id="a6590659-dd9d-4979-98ad-b1a540e2375f" class="">What you’ll need:</p><p id="3d2a9f53-c8f8-4f28-a585-9a0e9a3be0ba" class="">Here’s a sample writeup on how I’ve set up my Pi:</p><div id="1820f199-4385-4235-b1da-2b9931f956d3" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="3cb67d1a-096b-4a6f-8ecb-f75ec96df2c4"><td class="cell-title"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/Untitled%20Database%201820f19943854235b1da2b9931f956d3/git%20clone%20https%20github%20com%20otter-in-a-suit%20debian-%203cb67d1a096b4a6f8ecbf75ec96df2c4.html">git clone https://github.com/otter-in-a-suit/debian-scripts.git</a></td></tr></tbody></table></div><p id="d0846cc8-791d-426c-a2e4-e436796219ca" class="">Next, we’ll have to take the development branch of VidGear, as a certain bugfix is not on the master at the time of writing.</p><p id="bffea105-5a70-4cdc-a5c6-6e64b7d0ddcb" class="">Now, we can test streaming video locally:</p><p id="7259b755-fa7d-4507-bf30-f8ac43d05d26" class="">You should see the video playing back. You will notice some use of the multiprocessing library – we use this for ensuring the while loop gets terminated after a defined timeout, for development purposes.</p><p id="5f3337bc-faa8-453e-9174-8aa222863b98" class=""><em>[1] Jokes aside: Richard Hipp, the creator of SQLite, gives a lot of good reasons as to why that might be a bad idea in</em> <a href="https://changelog.com/podcast/201"><em>his interview</em></a> <em>on The Changelog Podcast – but for the sake of simplicity, we’ll stick to a library</em></p><h2 id="825d78b9-a9f7-468c-a27d-f8d262c409ea" class="">Putting 2 and 2 together</h2><p id="bc5bdd96-caa9-4913-b364-14e9515a9551" class="">Next, let’s actually deploy this onto 2 separate machines – as long as the server that will execute Tensorflow runs a 64-bit flavor of Linux (as in, a Linux kernel), we should be good to go. At home, I have a local gitlab and jenkins instance that does this for me. But realistically, any deployment option works – scp can be your friend.</p><p id="a6bad538-fb8d-41c1-aec8-77967e94e351" class="">We’ll need to make some small adjustments to the code by specifying IP address and port:</p><p id="d28f72c8-d98f-4e31-af84-4957e20f5b29" class="">Now, we can start the sender.py on the server, receiver.py on the client, and there we go: Video over the network. Neat!</p><h2 id="e57e4307-30fd-4369-a6f5-c46d94264699" class="">Integrating** **Tensorflow</h2><p id="929b2c67-e8d2-4021-8656-fd8ceaaeecd1" class="">The integration of tensorflow is trivial at this point: As we’ve already established how to do the following:</p><ul id="b829b568-d115-4c41-baa9-b68f5affe24c" class="bulleted-list"><li>Using OpenCV to loop a local video</li></ul><ul id="3529e526-97e8-4f09-8844-7d8357c83120" class="bulleted-list"><li>Using Tensorflow Object Detection to run the actual model on a local video</li></ul><ul id="69f423d0-0b2d-4f8b-9a8a-bfabcd3d44a4" class="bulleted-list"><li>Streaming video from one machine to the next</li></ul><p id="05dd3a5f-be47-479e-829a-a5e61bd796a9" class="">The last step can simply be achieved by importing our tensorflow_detector module, casting the received image to a numpy array (as this is what the API expects), and calling “run_inference_for_single_image(2)”. Easy peasy!</p><h2 id="e77abf7b-21eb-4769-8d1d-6f6e165777ad" class="">Talking to a camera</h2><p id="c4cb0d73-a522-492a-b94b-8bf9e3e0dd64" class="">Now, we can adjust our server code to actually use Tensorflow to detect images coming in from a different machine. But we don’t want canned images – we need a live stream.</p><p id="ecb6c13b-8ee4-4cc6-893f-62395c2d3576" class="">Fortunately, this is pretty straightforward, as we’ve already enabled the camera module during the setup of the Pi: Connect the ribbon cable of the camera to the Pi, boot it up, and run:</p><p id="647a36f3-c781-4dc1-b638-6c2410275fc9" class="">This should take a picture.</p><figure id="e615423b-da13-42bf-a44a-fdc3a9894cca" class="image"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-1.jpeg"><img style="width:700px" src="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-1.jpeg"/></a></figure><p id="a0d528c4-6982-47a2-8a42-af90ae6061cb" class="">My highly professional setup</p><p id="22d87712-c36a-473b-a97b-f10b421b9588" class="">In order to do the same with Python, OpenCV’s API is equally straightforward: By changing the source from a video file to the ID of the camera – 0, as we only have one – on the pi’s end, OpenCV will pick up the camera stream and send it to our server.</p><p id="007ec09e-18cb-4722-84c8-46f4a92c2f27" class="">Once we run this, we should see something like this:</p><figure id="1f0109ed-677d-47d5-b003-067e602c919b" class="image"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image.jpeg"><img style="width:648px" src="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image.jpeg"/></a></figure><h2 id="d248518d-b462-4b06-9786-10d2778e0792" class="">Triggering audio on the camera</h2><p id="6ff8d913-25ca-41ed-98c0-a96fad51488b" class="">Now, we are able to stream video from the Raspberry to the server and detect a person. The missing link now is to play audio, using the <a href="https://github.com/TaylorSMarks/playsound">playsound</a> library, with GStreamer under the hood. Other alternatives are using an <strong>os</strong> <strong>subprocess</strong> call or <strong>pygame</strong> – a configuration option can be set to change this behavior.</p><p id="dfd6a799-0138-4da0-9ed4-83dceac2b855" class="">(You can set the audio volume on the Pi by using `alsamixer`).</p><p id="d25083a7-500f-473d-9e0b-90673d65f0a2" class="">In order to do that, we are going to employ <strong>ZMQ</strong> again by starting a listener thread on the Pi that waits on inputs from the server, setting predefined enum values. Once the client receives those, it triggers an audio signal and plays a sound.</p><p id="21d27625-fcd1-4ced-a333-62f04ef1b978" class="">All of this is blocking the respective threads – meaning, as long as the audio plays, the listener won’t care about new messages and the server won’t be able to send a new message.</p><p id="9f524a9a-1a20-4613-b17d-27035934d172" class="">In order to avoid blasting the same message, we can employ a simple sempahore structure.</p><h2 id="ed5369bf-52a8-4fa5-a269-7397c39cad7f" class="">Testing everything</h2><p id="276730fb-25b7-418c-9434-f4dc38247bd7" class="">Now that everything is working, here comes the fun part: Setting it up.</p><p id="1eb9b9cd-530b-4d9c-ae90-089edd5c4192" class="">First, let’s position the camera somewhere:</p><figure id="3332ec84-c75a-4879-93d2-9c519473a936" class="image"><a href="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-2.jpeg"><img style="width:700px" src="Tensorflow%20on%20edge,%20or%20%E2%80%93%20Building%20a%20%E2%80%9Csmart%E2%80%9D%20securi%2052a1d04d8cf648f8818e14cf5f4f1339/image-2.jpeg"/></a></figure><p id="2b48d300-ba5a-4877-8aa9-040f8e5be3cf" class="">And start both server and client end and see what happens when we walk into the room!</p><p id="602c4742-a3cf-4aaf-8b2a-cf01c3ca5fbd" class="">As you can see, it takes a second to detect me – partly because of the camera angle, the model we chose, and some network latency. In a real life scenario where a person needs to walk up the door, this is less of an issue.</p><blockquote id="09b1418d-6fe5-411b-9273-c1e53a19e12d" class="">The message saying “Warning, you are…” is coming from that little speaker!</blockquote><h2 id="8e15fbe0-bd6a-432b-9171-0b6dae67f2eb" class="">Next Steps</h2><p id="7f21be49-88f0-4401-9a6d-69810bda346c" class="">While this already works fairly well – it streams video, detects people, and sends a signal to send audio – there is surely work to be done here.</p><p id="e098783c-8662-4d6e-b4f9-a7e2b2e8aff5" class="">However, there are several things we’ve ignored for the purpose of this project: The model we’re using is simply a <a href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md">pre-trained</a> one that has neither been tuned for our specific use case, nor does it necessarily offer the best balance for the machines that we’re using.</p><p id="89b703f0-24d6-4cc9-8190-518ec545f686" class="">Furthermore, some things in the code could use some improvements - the network latency is decent, but could use some work, the audio gets triggered very quickly in succession, and with our current ZeroMQ pattern, we can only support one client.</p><p id="b1b7b8e7-ecfa-4d0b-908c-6698cc91766d" class="">While using a cardboard box is almost the definition of perfection, a custom, 3D-printed Raspberry case and slightly better cooling would be probably a good idea.</p><h2 id="e50fd6d6-3672-46c5-87bc-10be634b0b06" class="">Conclusion</h2><p id="e6fb7646-4c06-4297-9d1c-6e2b3109f2ea" class="">In any case - I am happy with this little project, as it illustrates how relatively simple it can be to build your own security camera, connect it to the network, run object detection, and trigger an external factor - in this case audio, but that could easily be a phone notification or else - without using any Public Cloud offering, to save on latency on residential internet as well as cost.</p><p id="5b809ffc-4b2f-4e2e-80f4-8fdc35e58732" class=""><em>All development was done under PopOS! 19.04 on Kernel 5.5.1 with 12 Intel i7-9750H vCores @ 2.6Ghz and 16GB RAM on a 2019 System76 Gazelle Laptop</em>, <em>as well as a Raspberry Pi 4 4GB on Raspian 10.</em></p><p id="43bf8521-b4fd-4dce-9534-e814bc67448b" class=""><em>The full source is available on </em><a href="https://github.com/otter-in-a-suit/scarecrow"><em>GitHub</em></a><em>.</em></p></div></article></body></html>

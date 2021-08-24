@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The World Wide Web is Dead</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e5df385a-c3e0-4219-8c2e-32f5d9919ab1" class="page sans"><header><h1 class="page-title">The World Wide Web is Dead</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/@dacodanelson/the-world-wide-web-is-dead-b36aaebe708d" class="url-value">https://medium.com/@dacodanelson/the-world-wide-web-is-dead-b36aaebe708d</a></td></tr></tbody></table></header><div class="page-body"><figure id="cbd0430c-8f06-4ebe-9b37-b363d63df91b" class="image"><a href="The%20World%20Wide%20Web%20is%20Dead%20e5df385ac3e042198c2e32f5d9919ab1/1gt93qJ4N5g60vurQnMTZMw.jpeg"><img style="width:700px" src="The%20World%20Wide%20Web%20is%20Dead%20e5df385ac3e042198c2e32f5d9919ab1/1gt93qJ4N5g60vurQnMTZMw.jpeg"/></a></figure><p id="dcc53563-0a6f-48c3-83cb-489c7f6033f3" class="">Image by <a href="https://pixabay.com/users/kreatikar-8562930/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3411373">Mudassar Iqbal</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3411373">Pixabay</a></p><p id="47839c81-0cd8-4d71-a44d-f8dcb796ed48" class="">For as long as I’ve been browsing the Web I’ve been astounded by how poorly the internet, and especially the Web, have managed to evolve. It was probably my senior year of high school — a little over a decade now — when I had the stark realization that the World Wide Web was on track to become a failure.</p><p id="c0950336-3de2-4614-9f68-5a81740e52d9" class="">Today, as I write this, I can go a step further: the World Wide Web has failed.</p><p id="44a2e6dc-e458-4cfa-9275-f63d88f460bd" class="">Why has the World Wide Web been a failure? Two simple things: <em>references </em>and <em>citations</em>.</p><p id="2a0c9c09-3a1f-4bf9-b5ce-7070b483660d" class="">I know — citations? Look, it’ll make sense shortly. I know that the normal argument for people who worry that the Web is dying is that it’s all become so consolidated into the hands of a few websites and that’s actually very true; I agree with them entirely. As far as warning signs go, that is a tremendous warning sign that a system has been subverted and is now rotting from the inside out.</p><p id="83766c90-fb4d-457c-917a-3e2c42e1eed4" class="">However, I’m not arguing that the Web is dying, I’m arguing that the Web has failed. It’s not too late to turn things around and bring back a decentralized Web, a Web where people can host their personal pages on their own machines instead of sharing everyone on social media, or where we create fan pages on actual dedicated webpages, not pre-made, ad-monetized, template-based Wikis hosted in Google’s cloud infrastructure by a third party.</p><p id="5c0c7726-4e89-481b-ae8f-7d41e66ef823" class="">That’s all well and good, wresting control from the 20 or so websites that represent all anyone visits. It isn’t going to change the fundamental fact that the Web has failed. Whether fully centralized into one supreme internet being or decentralized to the extreme, we’d still be saving a Web that’s fundamentally broken and awful.</p><p id="c56a5d98-eba8-442a-b0a0-5d1d48037b0f" class="">(I realize that I am writing this on the Web and hoping that people will read it. Using a system, especially when it is the <em>de facto</em> system, does not preclude criticizing the system or working to improve it. Anyone who argues otherwise is the sort of person who will smugly point to silenced political dissidents in another country and proudly declare how great it is to live in America where you’re free to have opinions and make change, and only moments later tell somebody on Facebook who is criticizing American policies and tell them to move somewhere else if they don’t like it in America.¹)</p><p id="cd2d762e-0854-46f1-9ed2-2e15845bfab0" class="">The simplest way I can explain the connection (unintentional pun) between references, citations, and the failure of the Web, would be with a pithy comment I made the other day and was mildly pleased with myself for.</p><p id="a5f8caae-651b-4b45-8dbc-0b752c76ca8e" class=""><strong>The World Wide Web is as broken as the majority of its hyperlinks</strong>.</p><p id="1d7817a4-451e-4dcf-a476-08cb417a04ba" class="">I made this statement in reference to a phenomena called link rot. <a href="https://en.wikipedia.org/wiki/Link_rot">Link rot</a> is what happens when you click a link to another page and it doesn’t go anywhere. It’s distinct from other issues like a link being malformed, or a link to a <em>temporarily</em> unavailable webpage because link rot is what happens when a link points to a reference that doesn’t exist anymore <em>at all</em>.</p><p id="ae5c4434-c4fd-482e-8130-a518f042f490" class="">It’s a fascinating subject to look at and if you’re a fan of Wikipedia then you may have noticed that many links in the references sections are usually pointing to “mirrors” or “archived” versions of pages that were “last retrieved on” some date or another.</p><p id="0efa325f-1190-4a73-93b9-7397b74d9a41" class="">The reason that’s done is because Wikipedia would be virtually worthless if the links to the original pages were maintained. Sometimes the owners of those pages close the website down, change the domain, alter the document, change the name, get hacked, die, whatever. If you’re trying to write an encyclopedia article about something and all but one of your references is a 404-Page Not Found error then you’re not going to be a very usable source of information for your readers.</p><p id="6ebdcd9e-3339-4978-be84-0babac9c59e0" class="">To combat this, Wikipedia has bots and volunteers who go through these references and work with <a href="https://archive.org/">archive.org</a> and other places to keep copies of the originals so that they’ll be available more reliably. Still, there are really no guarantees.</p><p id="bc6158df-c4ad-4eef-aba4-5cde6c5bb125" class="">Therein lies the crux of the problem.</p><p id="ee6b06a1-bd20-47ea-a850-37e717cbdae1" class="">When I first started using the Web I was probably 11 or 12 years old, so 2001 or 2002, when my grandfather was the first person in our family to hook his customized Packard-Bell desktop into a modem and dial-in. Luckily I just narrowly managed to escape having my first experience with the Internet back when it was AOL and friends only, all in their own little walled-gardens, but you could make a convincing argument that the centralized monstrosity we call the Web today is more or less the same thing.</p><p id="f2c3e585-a06a-4992-8f28-8ecd4a6eb1fd" class="">Back then webpages were simple, mostly text with some grainy images. The coolest thing in the world to me at the time was when I figured out how to make my own personal webpage about UFO sightings (I was 12, do not judge me) and I had neon green text on a black background with a dim, gray starscape, and a small series of numbers would trail your mouse pointer around the page, displaying a little clock to the bottom right. Oh, those were the days.</p><p id="9d8d6e9b-cf99-4803-82b9-b2505621b881" class="">The way my grandfather described it to me as he taught me how to navigate was that the Web was there so people could share their ideas and talk with each other. It was a repository of knowledge and a place for discussion. It was also a place for art and self-expression, though I tend to lump those in with knowledge because well, they are.</p><p id="b6ad45d2-89b7-4add-acb7-bb7413e75624" class="">I’m not reminiscing because things were “better” back then; they weren’t. My webpage gave me endless grief when people would email me to inform me at least once a week that one of the links wasn’t working.</p><p id="43c734bd-ae89-4c1c-ac21-668c1f40414d" class="">Everything was organized into a series of information pages, with different UFO incidents on each one, my summary of the case, an image or two if they were available, and of course a list of links to other places where you could learn more about it. Many of those links were to other people’s personal webpages, who linked to other personal webpages, and so-on and so-forth.</p><p id="21ba729a-0a56-4514-9d5c-8f70b3cce143" class="">Personal webpages require maintenance. If this is neglected, the page can go down; sometimes for a minute, sometimes for days, and more often than not, they just go down forever.</p><p id="6f112205-5529-46b5-bd43-1085f4c5e3bf" class="">My webpage wasn’t up for very long, maybe a year at most, but in that time I remember being dismayed as over time I was being forced to mainly delete, rather than fix, dead links. I knew of no way to automatically check them but I did know that while there were hundreds of them all over my site, I only ever knew about the broken ones that people tried to follow; there could have been many more. Soon the long lists of “Read more about it!” I’d been so proud of compiling at the bottom of each case were less than half their original size.</p><p id="3097015d-436e-4b8a-ad9f-4cd973713e70" class="">I remember thinking it was a shame because the whole point of the Web was that I was supposed to be adding to a narrative. Instead I was just witnessing the rarefaction of sources to cite.</p><p id="661a466e-5197-4cb2-b4ca-74a6f254f3ae" class="">Even back then, before it was boiled down to nothing but Google, Facebook, Twitter, Spotify, Reddit, and Netflix, the Web had a fundamental flaw: everything was transitory.</p><p id="3e13d87f-d6c2-4e7f-a5de-917f305caeb6" class="">I should clarify that there are perfectly good reasons for transitory information on the Internet. Things change. The Internet is a place for a variety of use-cases and the Web is only one of them, but it’s the one that I’m discussing and it’s the one that didn’t end up being anywhere near as useful as it ought to have been.</p><p id="3cd2aeb4-7661-4306-88d7-0c4308a3ae30" class="">The Web was envisaged as a place where anyone could share a piece of information and have it accessible to anyone else, anywhere in the world, at the speed of electrical oscillations. The creators who built it could never have truly grasped just how much information would be available, but they did know that it would be a lot, and that there was going to have to be a way to traverse it in a meaningful way.</p><p id="4f16d2e1-9ae7-467d-95dd-ed74994e7202" class="">Think of going into a library to learn about a bird you’ve taken a picture of. You don’t know what it is, but you want to find out. This is the Twilight Zone though, so you’ve just walked into a totally empty New York Central Library, except someone has maliciously rearranged all the books by random and hasn’t catalogued them at all.</p><p id="740b78e3-395f-44a3-a07b-364ab35e69a6" class="">You’ve got nothing else to do so you start ambling around randomly, looking at the spines of books and hunting for words like birds, ornithology, or feathers. Eventually you find a very old British book about all the known species of bird, but it’s so old that there are no color photographs and you’re dismayed to discover that there are several birds of different families it could be, all depending on a characteristic coloring pattern that the book doesn’t describe and can’t be seen in the images.</p><p id="8cc927bb-1506-4262-b026-56c9b308c4a4" class="">Fortunately the book has lots of references though! Eagerly turning to the bibliography you jot down the information for several other books that mention the birds you’re interested in. You replace the book where you found it and then …</p><p id="6ec72a52-ad25-49cb-8d16-1d0362a44242" class="">Oh no! How are you going to get to those books? There’s no way to know where they’d be stored in the library, or even if they’re checked in a the time. There’s no reference system available so you can’t ever find what you’re looking for except by chance encounter, even though you know the author, title, and publication information.</p><p id="6797251c-2308-4a4f-b004-43e4620e3716" class="">That’s more or less what the situation would be like for the Web if it were just one giant catalogue of files it’s made up of. All that information is ready and waiting, but you’ll have to know the file name or be ready to spend a very long time skimming through things.</p><p id="1f72a6dc-e25d-4bde-8c2b-e67e225a8498" class="">Fortunately the creators of the Web were smart enough to devise a system for people to catalogue all that information with links. In the above library analogy, it’s similar to the traditional card catalogue system, where the cards contain a link to the location of the book.</p><p id="753d109a-1871-45d4-ad38-a02373ae7e28" class="">In this case, they’re called hyperlinks, and the fact you’re even on this page means that you’re probably familiar with them. Generally speaking, they work alright. Specifically speaking, they don’t work anywhere near as well as they ought to, and the fact that they tend to break so easily is a serious problem with the fundamental concepts the Web was trying to bring to reality.</p><p id="342a3b9d-f388-4f6d-b93a-f30387d45fcb" class="">A more appropriate name for hyperlinks might have been metalinks, because the core idea was that rather than producing a document the way we do on paper where it’s nothing but static text and references to other things, an online or digital document could be multi-dimensional; it could be <em>meta</em>.</p><p id="87d5cf7d-9c82-4ddf-af32-bdf354528f29" class="">As hyperlinks work now, they point to another location on the web and they automate a part of the referencing system, the part where you go to the location that was referenced. But what if the place the reference points no longer exists? What if the document that was at that location is changed somewhat, so that it no longer represents what your document was originally referencing? And what if I want to get a look at all the places that point to a document so that I can find out more without relying on the current document’s owner to link back?</p><p id="1c15612e-2ae6-4a37-8387-b6c831f09b0f" class="">The Web was meant to be … a web. You could start at any point and reach any other, simply by virtue of the fact that all information is interconnected. Looking at an actual spider’s web, every intersection — every <em>node</em> — has the ability to go forwards or backwards to the other places its branches lead to; there’s no directionality.</p><p id="a2ca1875-9a14-49a3-bacf-0cf9af4347f0" class="">Similarly, a spider’s web becomes less structurally sound whenever an intersection/node is broken. If you’ve ever seen a broken spider’s web it’s a sad thing, with the strands flailing gently in the wind, leading to nowhere and breaking the beautiful symmetry those terrifying creatures produce.</p><p id="3b41b77c-bfd1-4a59-890c-2d858791169d" class="">The Web itself has become a broken spider’s web, because it has never adhered to the basic concept it was meant to be built upon. Google’s PageRank system is the closest we have to a “back-link” system, where it would be possible to get a list of all the links to a certain page in order that you could follow them back and see what other people are saying about it. There are some Google-fu tricks you can do to try to find something similar, but it will always be reliant on Google having crawled every page on the Web and having an accurate database and returning all the results.</p><p id="d5b1402c-3fde-486a-8f13-d6625bc93fee" class="">Instead, this should have been inherent in the system to begin with. I would imagine this could have been moderately simple as well. If I create a hyperlink to a webpage then any browser that follows it to the page will carry some header info in the request saying “linked her from” and the host server will append a reverse link to a built-in catalogue that can be brought up and displayed on any page. There are some obvious concerns about dead links, spamming, and things like that, but there are general solutions to that problem and anyways, there would have been lots of time to refine those issues if the feature had been there from the start.</p><p id="4f69051c-a4fa-4680-9077-e1485b3124de" class="">Additionally, link rot has managed to turn the Web into a broken one. Here, though, the solution is not so simple. Permanent records of every single document that has ever existed on the internet, in every form it has ever existed, isn’t a wonderful idea. We still happen to live in a society, remember, and so maybe an old, ignorant blog post or some spicy Tweets ought to be taken down, either out of personal embarrassment or, preferably, out of a desire to remove inaccurate information. If someone stumbles across an old, incorrect version of something, believing it to be the correct version, then this system has been a disservice.</p><p id="7382475e-03c0-4d5d-82e2-d64855e2fb0e" class="">The solution here seems to be something that may now be impossible: a cultural change. Had the true concepts of the Web been implemented from the beginning, it would have influenced the way we use the Web as it developed over time, just as it has in its present form.</p><p id="ffa8c04a-63de-4e3b-ab07-2917e2b4b447" class="">In a situation where links to and from pages were built into that page, it would have become common-place for corrections to take the form of a newer version. Browsers could instantly check whether there was an updated version and display an indicator, allowing viewers to see what has changed over time; how ideas and thinking have evolved.</p><p id="3e968d87-5cce-4c1e-bf7e-8ff2f92148eb" class="">This would also have created a culture where, rather than relying on Google’s background, invisible, inscrutable, every-changing PageRank to decide whether a webpage is valuable enough to show up on the top page of results, individual viewers could take a look at the links coming in and out and decide whether those were the sorts of places that were reliable.</p><p id="4cd13cba-c5d0-4421-a758-076724324912" class="">To use the example of my childhood UFO page, it would have been fascinating to see who else had visited and added my site to their own pages. Were they referencing me? Were they lampooning me? From the perspective of a reader, I could take a look at the page and see whether the links coming in were reputable. Are there a lot of links referencing this page from well-known crank and conspiracy sites, or are there a lot of links from NASA and the ESA?</p><p id="f9b88329-e40f-4e09-ab2f-57f6a100ce8f" class="">In academia this is tracked because it’s important. Anyone can publish a “scientific” or “academic” journal and publish whatever papers they like, and anyone can claim to be published when they get into one. However, is anyone citing your research? Are other professionals in your field using your paper as a basis for their own arguments? It’s common when doing serious research to look into a few places where a paper is cited as well, because even though the <em>number</em> of citations might be high, those citations might be from other sources which are citing the paper as an example of <em>a bad paper</em>.</p><p id="4d19c120-7f78-4012-882f-6a7d10e0a481" class="">Academic publishing is absolutely not a bastion of perfection when it comes to the spread of knowledge and information. This is immediately, blatantly obvious the instant one tries to actually read a paper, only to discover that it’s hidden behind a paywall that wants $90 for 5 pages of text. There are numerous other issues in academic publishing regarding the peer-review process, implicit and explicit bias, <em>etc</em>., many of which would likely have made their way onto the Web in some analogue or another, but it still would have been an improvement over what it has come to be.</p><p id="4fedb4a1-a1c5-40bb-9e5c-299ef8f7ad79" class="">What it’s come to be is really nothing more than a written document². Any references are just textual links that your browser can follow to their path — whether what’s in its place when you get there is what the source document was originally referencing is up to chance. The Web today is less an improvement on paper as it is a replacement to printed documents, with some automation features added in.</p><p id="de617407-7284-4ec0-a128-487e1831e7e9" class="">This is a real shame because if the Web had been built the way it was envisaged, and if it had been utilized from the beginning in the way it was intended, it’d be a lot easier for all of us to find the information we’re looking for. Instead, we’re forced to live with a few giant tech companies and their search-engine tools which, while admittedly extremely useful, are still nothing more than a library’s reference desk in digital form.</p><p id="941e7f97-98ff-4f4b-a31c-fb97b45df6eb" class="">Perhaps something better will crop up soon, some new platform to take over the internet where the Web has failed us. Wikipedia is a great outline of a better web, although decentralizing the document-store would be helpful as well.</p><p id="564aa41e-b2b5-4712-b54c-704932360e46" class="">An actual Web, that’s what the world needs; not the directed acyclic graph we wound up with.</p><p id="156909af-8d27-4b51-a8dc-5661289050f0" class=""><em>Footnotes</em></p><p id="edb40019-36f0-4f9d-9a1d-b6a39d235e1f" class="">¹ Yes, these people exist. They seem to <em>especially</em> exist online, sadly; though that has nothing to do with why the Web has failed, <em>per se</em>.</p><p id="b89d6804-9a9d-4226-9397-5f531781a651" class="">² I’ve heard <a href="http://xanadu.com/"><em>Project Xanadu</em></a> use a similar phrase about how the Web is just a printed page. I don’t think this is something that’s wholly unique, that metaphor has been used a lot in referencing digital things in general, but I’ve been reading about Xanadu a lot recently and I should give them credit for having gotten the comparison stuck in my head.</p></div></article></body></html>

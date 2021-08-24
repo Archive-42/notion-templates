@@ -1,0 +1,648 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why WebAssembly is Faster Than asm.js </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="ce914435-b7ef-4128-80ed-1372c02edc4f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📇</span></div><h1 class="page-title">Why WebAssembly is Faster Than asm.js </h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://hacks.mozilla.org/2017/03/why-webassembly-is-faster-than-asm-js/" class="url-value">https://hacks.mozilla.org/2017/03/why-webassembly-is-faster-than-asm-js/</a></td></tr></tbody></table></header><div class="page-body"><figure id="6f5f44c9-507f-4845-8f2e-b2ffcd3084d1" class="image"><a href="Why%20WebAssembly%20is%20Faster%20Than%20asm%20js%20ce914435b7ef412880ed1372c02edc4f/hacks-meta-image.jpg"><img style="width:700px" src="Why%20WebAssembly%20is%20Faster%20Than%20asm%20js%20ce914435b7ef412880ed1372c02edc4f/hacks-meta-image.jpg"/></a></figure><p id="de3899b1-e2bc-4b7c-ad90-a1d54ebcfe35" class=""><a href="http://webassembly.org/">WebAssembly</a>, a new binary execution format for the Web, is starting to arrive in <a href="https://hacks.mozilla.org/2017/03/firefox-52-introducing-web-assembly-css-grid-and-the-grid-inspector/">stable versions of browsers</a>. A major goal of WebAssembly is to be <em>fast</em>. This post gives some technical details about how it achieves that.</p><p id="87b44525-c7ec-40bd-ab7f-f749a6732a30" class="">
+</p><p id="3721ad99-6268-4b4e-9d37-9ddf27ac70d2" class="">Of course, “fast” is relative. Compared to JavaScript and other dynamic languages, WebAssembly is fast because it is <a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">statically typed and simple to optimize</a>. But WebAssembly is also intended to be as fast as native code. <a href="http://asmjs.org/">asm.js</a> has already come <a href="https://hacks.mozilla.org/2013/12/gap-between-asm-js-and-native-performance-gets-even-narrower-with-float32-optimizations/">quite close to that</a>, and WebAssembly narrows the gap further. This post focuses therefore on why WebAssembly is faster than asm.js.</p><p id="aa20fb70-2b2c-4101-97c4-1bdce4d5777d" class="">
+</p><p id="6ab0aef0-0187-419e-a55e-cfc02d7a902c" class="">Before we start, the usual caveats: Performance is tricky to measure, and has many aspects. Also, in a new technology there are always going to be not-yet-optimized cases. So not every single benchmark will be fast on WebAssembly today. This post describes why WebAssembly <em>should</em> be fast; where it isn’t yet, those are bugs we need to fix.</p><p id="fe55afc3-8d9c-4357-882a-b550e7897309" class="">
+</p><p id="0bb624f0-2591-423d-bce9-c98ae902a93e" class="">With that out of the way, here is why WebAssembly is fast:</p><h2 id="2b1cf9e1-a1ab-4b21-b6be-b6a5e72a3d59" class="">1. Startup</h2><p id="801eec03-ff43-4d3b-a8ba-1a3f5197d68a" class="">WebAssembly is designed to be small to download and fast to parse, so that even large applications start up quickly.</p><p id="7a7075de-76d4-46ef-aed5-1e60d37e6cc2" class="">
+</p><p id="7f5b43ae-2d38-4c1a-bd56-6784ae1cd11d" class="">It’s actually not that easy to improve on the download size of gzipped minified JavaScript, as it’s <a href="http://mozakai.blogspot.com/2011/11/code-size-when-compiling-to-javascript.html">already fairly compact when compared with native code</a>. Still, <a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md">WebAssembly’s binary format</a> can improve on that, by being carefully designed for size in mind (indexes are <a href="https://en.wikipedia.org/wiki/LEB128">LEB128s</a>, etc.). It is often around <a href="http://kripken.github.io/talks/emwasm.html#/9">10–20% smaller</a> (comparing gzipped sizes).</p><p id="8bae3eee-9804-4177-b7b3-069d83d4bb39" class="">
+</p><p id="d6bdcf70-c7f1-40da-bbfa-71e8d4ea7412" class="">WebAssembly improves on parsing in a much bigger way: It can be parsed <a href="http://webassembly.org/docs/faq/#why-create-a-new-standard-when-there-is-already-asmjs">an order of magnitude faster than JavaScript</a>. This mostly comes down to binary formats being faster to parse, especially ones designed for that. WebAssembly also makes it easy to parse (and optimize) functions in parallel, which helps a lot on multicore machines.</p><p id="7d50cfc9-61d3-4095-a954-48a1ff41a052" class="">
+</p><p id="32ebc0e7-1410-4b05-a132-4b4fecd0fc65" class="">Total startup time can include factors other than downloading and parsing, such as the VM fully optimizing the code, or downloading additional data files that are necessary before execution, etc. But downloading and parsing are <em>unavoidable</em> and therefore important to improve upon as much as possible. All the rest can be optimized or mitigated, either in the browser or in the app (for example, fully optimizing the code can be avoided by using a <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1232205">baseline compiler</a> or interpreter for WebAssembly, for the first few frames).</p><h2 id="be6a7b03-62f4-44cc-af23-dabde3564111" class="">2. CPU features</h2><p id="f5b25525-f5d2-4367-8098-68df1845e4ec" class="">One trick that’s made asm.js so fast is that while all JavaScript numbers are doubles, in asm.js an addition will have a bitwise-and operation right after it, which makes it logically equivalent to the CPU doing a simple integer addition, which CPUs are very good at. So asm.js made it easy for VMs to use a lot of the full power of CPUs.</p><p id="8d5fd159-948e-4163-98f7-d7ee5aea5695" class="">
+</p><p id="8840b3c1-3243-4cc6-82fc-a44f106fe79d" class="">But asm.js was limited to things that are expressible in JavaScript. WebAssembly isn’t limited in that way, and lets us use even more CPU features, such as:</p><p id="70c3d9e8-bc33-47ce-a3b3-39c47c1bbbd1" class="">
+</p><ul id="2cc2b549-b2f6-4011-8407-724d0c4429d3" class="bulleted-list"><li>64-bit integers. Operations on them can be up to <a href="http://kripken.github.io/talks/emwasm.html#/11">4x faster</a>. This can speed up hashing and encryption algorithms, for example.</li></ul><ul id="08883f0f-5d95-474d-b863-5fa8c3fa5d27" class="bulleted-list"><li><a href="http://webassembly.org/docs/rationale/#loadstore-addressing">Load and store offsets</a>. This helps very broadly, basically anything that uses memory objects with fields at fixed offsets (C structs, etc.).</li></ul><ul id="9446c189-43b5-46f6-a257-888d3c1229f2" class="bulleted-list"><li>Unaligned loads and stores, avoiding asm.js’s need to mask (which asm.js did for Typed Array compatibility purposes). This helps with practically every load and store.</li></ul><ul id="69d0d4f7-8be2-40cf-85a8-339f117824af" class="bulleted-list"><li>Various CPU instructions like popcount, copysign, etc. Each of these can help in specific circumstances (e.g. popcount can help in <a href="https://en.wikipedia.org/wiki/Hamming_weight#Processor_support">cryptanalysis</a>).</li></ul><p id="49d351f7-3176-4cde-a297-e44ec37e520d" class="">How much a specific benchmark benefits will depend on whether it uses the features mentioned above. We often see a <a href="http://kripken.github.io/talks/emwasm.html#/10">5% speedup</a> on average compared to asm.js. Further speedups are expected in the future from CPU features <a href="https://github.com/WebAssembly/design/blob/master/FutureFeatures.md">like SIMD</a>.</p><p id="ab10669e-5fe9-48e1-b72d-01d713320d0e" class="">
+</p><h2 id="76e38c7a-1458-49a4-8a09-74d7da7c6652" class="">3. Toolchain Improvements</h2><p id="bf6be2c3-027f-487a-9ed3-11083187153e" class="">WebAssembly is primarily a compiler target, and therefore has two parts: Compilers that generate it (the toolchain side), and VMs that run it (the browser side). Good performance depends on both.</p><p id="fb960c18-e6ac-48d7-842f-f61a99396fe2" class="">
+</p><p id="ead62869-2b37-4435-8919-8c506f3553d3" class="">This was already the case with asm.js, and <a href="http://kripken.github.io/emscripten-site/">Emscripten</a> did a bunch of toolchain optimizations, running LLVM’s optimizer and also Emscripten’s asm.js optimizer. For WebAssembly, we <a href="http://kripken.github.io/emscripten-site/">built on top of that</a>, but have also added some significant improvements while doing so. Both asm.js and WebAssembly are not typical compiler targets, and in similar ways, so lessons learned during the asm.js days helped do things better for WebAssembly. In particular:</p><p id="57354a87-9f49-45b2-a549-51dfe5481d41" class="">
+</p><ul id="a05f1c7d-0c89-4b4a-8499-22c5cab9a4df" class="bulleted-list"><li>We replaced the Emscripten asm.js optimizer with the <a href="https://github.com/WebAssembly/binaryen">Binaryen</a> WebAssembly optimizer, which is designed for speed. That speed lets us run more costly optimization passes. For example, we <a href="https://github.com/WebAssembly/binaryen/blob/master/src/passes/DuplicateFunctionElimination.cpp">remove duplicate functions</a> by default when optimizing, which often shrinks large compiled C++ codebases by around 5%.</li></ul><ul id="658f8e60-076a-4879-a8de-cb1fa6e91899" class="bulleted-list"><li><a href="https://github.com/WebAssembly/binaryen/blob/master/src/passes/RelooperJumpThreading.cpp">Better optimizations for irreducible and convoluted control flow</a>, improving the <a href="https://github.com/WebAssembly/binaryen/blob/master/src/cfg/Relooper.h">Relooper algorithm</a>. Helps a lot on compiled interpreter-type loops.</li></ul><ul id="6abe96a7-f889-45d0-b430-ce1ee8728444" class="bulleted-list"><li>The Binaryen optimizer was designed with experimentation in mind, and <a href="https://github.com/WebAssembly/binaryen/pull/900#issuecomment-279186640">experiments with superoptimization</a> have led to miscellaneous minor improvements — things which could have been done in asm.js too, had we thought of them.</li></ul><p id="cbaab1cc-aa17-42d5-93df-df42e9bc4a36" class="">Overall, these toolchain improvements help about as much as moving from asm.js to WebAssembly helps us (<a href="http://kripken.github.io/talks/emwasm.html#/10">7% and 5% on Box2D, respectively</a>).</p><h2 id="4d3e542d-4a71-4fb7-a084-19d7253e366e" class="">4. Predictably Good Performance</h2><p id="810f7f9f-6854-4621-be8f-c121c16ce233" class="">asm.js could run at <a href="https://hacks.mozilla.org/2013/12/gap-between-asm-js-and-native-performance-gets-even-narrower-with-float32-optimizations/">basically native speed</a>, but it never actually did so in all browsers consistently. The reason is that some tried to optimize it one way, some another, with differing results. Over time things <a href="https://hacks.mozilla.org/2015/03/asm-speedups-everywhere/">started to converge</a>, but the basic problem was that asm.js was not an actual standard: It was an informal spec of a subset of JavaScript, written by one vendor, that only gradually saw interest and adoption from the others.</p><p id="7d36b207-3111-49d5-8b84-d22077e33439" class="">
+</p><p id="b717e606-a9cb-4a08-9fe5-60e8688e2ba8" class="">WebAssembly, on the other hand, has been designed jointly by all major browsers. Unlike JavaScript, which could be made fast only using very <a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">creative methods</a>, or asm.js, which could be made fast using simple methods but not all browsers did so, WebAssembly has more agreement upon how to optimize it. There is still plenty of room for differentiation in VMs (different ways to tier compilation, AOT vs. JIT, etc.), but a good baseline of predictable performance can be expected across the entire Web.</p></div></article></body></html>

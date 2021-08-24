@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How Shopify Uses WebAssembly Outside of the Browser</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="02c0e929-470d-4030-9c27-49f77b450906" class="page sans"><header><h1 class="page-title">How Shopify Uses WebAssembly Outside of the Browser</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://shopify.engineering/shopify-webassembly" class="url-value">https://shopify.engineering/shopify-webassembly</a></td></tr></tbody></table></header><div class="page-body"><figure id="29ea4261-eca1-4d20-bd4d-ea05435354ba" class="image"><a href="How%20Shopify%20Uses%20WebAssembly%20Outside%20of%20the%20Browse%2002c0e929470d40309c2749f77b450906/frustrated-man-on-computer.jpg"><img style="width:700px" src="How%20Shopify%20Uses%20WebAssembly%20Outside%20of%20the%20Browse%2002c0e929470d40309c2749f77b450906/frustrated-man-on-computer.jpg"/></a></figure><p id="a0629bd4-7400-4ce9-b757-f49d3b8ece05" class="">At Shopify we aim to make what most merchants need easy, and the rest possible. We make the rest possible by exposing interfaces to query, extend and alter our Platform. These interfaces empower a rich ecosystem of Partners to solve a variety of problems. The primary mechanism of this ecosystem is an “App”, an independently hosted web service which communicates with Shopify over the network. This model is powerful, but comes with a host of technical issues. Partners are stretched beyond their available resources as they have to build a web service that can operate at Shopify’s scale. Even if Partners’ resources were unlimited, the network latency incurred when communicating with Shopify precludes the use of Apps for time sensitive use cases.</p><p id="27afb954-6bc9-4e4a-98c5-909e41dadb8c" class="">We want Partners to focus on using their domain knowledge to solve problems, and not on managing scalable web services. To make this a reality we’re keeping the flexibility of untrusted Partner code, but executing it on our own infrastructure. We choose a universal format for that code that ensures it’s performant, secure, and flexible: WebAssembly.</p><h1 id="6cbfcdcc-c51d-4380-b7d8-ff9f5882278f" class="">WebAssembly</h1><p id="e6374283-e661-41fc-a94d-61469b6844ba" class="">What is WebAssembly? According to <a href="https://webassembly.org/">WebAssembly.org</a>:</p><p id="c98477a2-1dbf-480c-96a1-4dc27cb2a5dd" class="">“WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.”</p><p id="f60fd00d-166b-4e71-aaf1-8ac278b43ec7" class="">To learn more, see this series of <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">illustrated articles written by Lin Clark of Mozilla</a> with information on WebAssembly and its history.</p><p id="5496256c-2511-4a09-bbd8-54da1bf9461d" class="">Wasm is often presented as a performant language that runs alongside JavaScript from within the Browser. We, however, execute Wasm outside of the browser and with no Javascript involved. Wasm, far from being solely a Javascript replacement, is designed for <a href="https://webassembly.org/docs/non-web/">Web and Non-Web Embeddings alike</a>. It solves the more general problem of performant execution in untrusted environments, which exists in browsers and code execution engines alike. Wasm satisfies our three main technical requirements: security, performance, and flexibility.</p><h2 id="322ee5d8-2afe-44b1-be58-5e9d084919a7" class="">Security</h2><p id="4173cf0a-8393-4b9a-93e1-1240a8e930ba" class="">Executing untrusted code is a dangerous thing—it&#x27;s exceptionally difficult to predict by nature, and it has potential to cause harm to Shopify’s platform at large. While no application is entirely secure, we need to both prevent security flaws and mitigate their impacts when they occur.</p><p id="2fafffc9-f382-4561-8c77-21358ea52e1a" class="">Wasm executes within a sandboxed stack-based environment, relying upon explicit imports to allow communication with the host. Because of this, you cannot <strong>express</strong> anything malicious in Wasm. You can only express manipulations of the virtual environment and use provided imports. This differs from bytecodes which have references to the computers or operating systems they expect to run on built right into the syntax.</p><p id="d1c15069-9232-4ad7-a48b-61d6c0b3a5d5" class="">Wasm also hosts a number of features which protect the user from buggy code, including protected call stacks and runtime type checking. <a href="https://webassembly.org/docs/security/">More details on the security model of Wasm can be found on WebAssembly.org</a>.</p><h2 id="80766fa8-c1fc-43f0-a21f-13a41881ea9b" class="">Performance</h2><p id="eaa8f8d8-776e-4fc0-8a82-18947492a6a8" class="">In ecommerce, speed is a competitive advantage that merchants need to drive sales. If a feature we deliver to merchants doesn’t come with the right tradeoff of load times to customization value, then we may as well not deliver it at all.</p><p id="61465ea5-c3bb-4e51-900c-9b2029e31ef8" class="">Wasm is designed to leverage common hardware capabilities that provide it near native performance on a wide variety of platforms. It’s used by a community of performance driven developers looking to optimize browser execution. As a result, Wasm and surrounding tooling was built, and continues to be built, with a performance focus.</p><h2 id="d3515aed-f621-4bb7-b557-6e2d40aee785" class="">Flexible</h2><p id="5c892e1c-7b25-4dab-8f1a-7092640d3534" class="">A code execution service is only as useful as the developers using it are productive. This means providing first class development experiences in multiple languages they’re familiar with. As a bytecode format, Wasm is targeted by a number of different compilers. This allows us to support multiple languages for developer use without altering the underlying execution model.</p><h2 id="d066c26b-3f45-466e-83f1-13b33d60ab3a" class="">Community Driven</h2><p id="9dde8af0-81fe-4367-adbf-5fa80453c3e8" class="">We have a fundamental alignment in goals and design, which provides our “engineering reason” for using Wasm. But there’s more to it than that—it’s about the people as well as the technology. If nobody was working on the Wasm ecosystem, or even if it was just on life support in its current state, <strong>we wouldn’t use it</strong>. WebAssembly is an energized community that’s constantly building new things and has a lot of potential left to reach. By becoming a part of that community, Shopify stands to gain significantly from that enthusiasm.</p><p id="66b02d25-04a9-4f4b-9eab-231336fcb617" class="">We’re also contributing to that enthusiasm ourselves. We’re collecting user feedback, discussing feature gaps, and most importantly contributing to the open source tools we depend on. We think this is the start of a healthy reciprocal relationship between ourselves and the WebAssembly community, and we expect to expand these efforts in the future.</p><h1 id="420a756c-9858-42ab-808a-d0809a613ffc" class="">Architecture of our Code Execution Service</h1><p id="3a9cee58-895f-4a60-8537-be3ad7a3babe" class="">Now that we’ve covered WebAssembly and why we’re using it, let’s move onto how we’re executing it.</p><p id="0f830438-5619-43ba-bfc1-0f8472dd8d70" class="">We use an open source tool called <a href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">Lucet</a> (originally written by Fastly). As a company, Fastly provides a programmable edge cloud platform. They’re trying to bring execution of high-volume, short-lived, and untrusted modules closer to where they’re being requested. This is the same as the problem we’re trying to solve with our Partner code, so it’s a natural fit to be using the same tools.</p><h3 id="6a118104-2f1b-4ef1-9670-a1e825e345d6" class="">Lucet</h3><p id="5b36ff48-8adf-4328-aa17-d08d2dd58898" class="">Lucet is both a runtime and a compiler for Wasm. Modules are represented in Wasm for the safety that representation provides. Recall that you can’t <em>express</em> anything malicious in Wasm. Lucet takes advantage of this and uses a validation of the Wasm module as a security check. After the validation, the module is compiled to an executable artifact with near bare metal performance. It also supports ahead of time compilation, allowing us to have these artifacts ready to execute at runtime. Lucet containers boast an impressive startup time of <em>35 μs</em>. That’s because it’s a container that doesn’t need to do anything at all to start up. If you want the full picture, Tyler McMullan, the CTO of Fastly, did a great talk which <a href="https://www.youtube.com/watch?v=QdWaQOgvd-g">gives an overview of Lucet and how it works</a>.</p><p id="d0b8c58b-c1db-46ff-b3ab-d39db54143c1" class="">A flow diagram showing Shopify&#x27;s Wasm engine</p><p id="d07eda44-6024-4127-b462-b1d6e7b32bc9" class="">We wrap Lucet within a Rust web service which manages the I/O and storage of modules, which we call the Wasm Engine. This engine is called by Shopify during a runtime process, usually a web request, in order to satisfy some function. It then applies the output in context of the callsite. This application could involve the creation of a discount, the enforcement of a constraint, or any form of synchronous behaviour Merchants want to customize within the Platform.</p><h3 id="eb6a1189-48ba-42c4-9c81-714eaf7d2066" class="">Execution Performance</h3><p id="f23398fa-b316-4121-9b62-547dd370b2bc" class="">Here’s some metrics pulled from a recent performance test. During this test, 100k modules were executed per minute for approximately 5 min. These modules contained a trivial implementation of enforcing a limit on the number of items purchased in a cart.</p><p id="1ed509f6-baec-4cbc-adc0-039f8f3f8b6e" class="">Time taken to execute a module</p><p id="fd09780f-e567-456e-83fc-8bf52d4361fe" class="">This chart demonstrates a breakdown of the time taken to execute a module, including I/O with the container and the execution of the module. The y-axis is time in ms, the x-axis is the time over which the test was running.</p><p id="1115cc14-7e5f-41e0-af09-11e86fb42d31" class="">The light purple bar shows the time taken to execute the module in Lucet, the width of which hovers around 100 μs. The remaining bars deal with I/O and engine specifics, and the total time of execution is around 4 ms. All times are 99th percentiles (p99).To put these times in perspective, let’s compare these times to the request times of <a href="https://shopify.engineering/how-shopify-reduced-storefront-response-times-rewrite">Storefront Renderer, our performant Online Store rendering service</a>:</p><p id="f6e4cb8e-9825-47c3-bfb3-856edda5ce9a" class="">Storefront Renderer response time</p><p id="ea248c01-9656-4990-94d5-521c090bbc28" class="">This chart demonstrates the request time to Storefront Renderer over time. The y-axis is request time in seconds. The x-axis is the time over which the values were retrieved. The light blue line representing the 99th percentile hovers around 700 ms.</p><p id="32916c84-8f33-4b96-8574-dac062a06727" class="">Then if we consider the time taken by our module execution process to be generally under 5 ms, we can say that the performance impact of Lucet execution is negligible.</p><h2 id="bdc5e351-7637-49f7-b33e-06bdd2037918" class="">Generating WebAssembly</h2><p id="9264962f-21b5-4208-91c6-55748645babc" class="">To get value out of our high performance execution engine, we’ll need to empower developers to create compatible Wasm modules. Wasm is primarily intended as a compilation target, rather than something you write by hand (<a href="https://blog.scottlogic.com/2018/04/26/webassembly-by-hand.html">though you can write Wasm by hand</a>). This leaves us with the question of what languages we’ll support and to what extent.</p><p id="a6fccc03-8ba7-4839-9a9f-9b1a18123302" class="">Theoretically any language with a Wasm target can be supported, but the effort developers spend to conform to our API is better focused on solving problems for merchants. That’s why we’ve chosen to provide first class support to a single language that includes tools that get developers up and running quickly.At Shopify, our language of choice is Ruby. However, because Ruby is a dynamic language, we can’t compile it down to Wasm directly. We explored solutions involving compiling interpreters, but found that there was a steep performance penalty. Because of this, we decided to go with a statically compiled language and revisit the possibility of dynamic languages in the future.</p><p id="46a5890f-c378-43fd-bc0f-db6d9eb90e53" class="">Through our research we found that developers in our ecosystem were most familiar with Javascript. Unfortunately, Javascript was precluded as it’s a dynamic language like Ruby. Instead, we chose a language with familiar TypeScript-like syntax called <a href="https://www.assemblyscript.org/">AssemblyScript</a>.</p><h2 id="4da4b084-b216-400d-9c61-66370c9302b5" class="">Using AssemblyScript</h2><p id="c6db2c0a-3bf5-41e8-a44a-199b50e83fab" class="">At first glance, there are a huge number of languages that support a WebAssembly target. Unfortunately, there are two broad categories of WebAssembly compilers which we can’t use:</p><ul id="2401b072-f270-44db-be45-c4b4b6663f4d" class="bulleted-list"><li>Compilers that generate environment or language specific artifacts, namely node or the browser. (Examples: <a href="https://github.com/tweag/asterius">Asterius</a>, <a href="https://dotnet.microsoft.com/apps/aspnet/web-apps/blazor">Blazor</a>)</li></ul><ul id="91fddcda-b7a1-445c-be0c-2e8a4230cc4e" class="bulleted-list"><li>Compilers that are designed to work only with a particular Runtime. The modules generated by these compilers rely upon special language specific imports. This is often done to support a language’s standard library, which expects certain system calls or runtime features to be available. Since we don’t want to be locked down to a certain language or tool, we don’t use these compilers. (Examples: <a href="https://github.com/lumen/lumen">Lumen</a>)</li></ul><p id="d4de1575-b42c-4613-a972-096d1d4e8c08" class="">These are powerful tools in the right conditions, but aren’t built for our use case. We need tools that produce WebAssembly, rather than tools which are <em>powered</em> by WebAssembly. AssemblyScript is one such tool.</p><p id="1dd5e4d5-4e27-4e15-9a01-fb4e64dc2b21" class="">AssemblyScript, like many tools in the WebAssembly space, is still under development. It’s missing a few key features, such as closure support, and it still has a number of edge case bugs. This is where the importance of the community comes in.</p><p id="3f6870c4-6339-4568-b42f-4d1bc4b40244" class="">The language and the tooling around AssemblyScript has an active community of enthusiasts and maintainers who have supported Shopify since we first started using the language in 2019. We’ve supported the community through <a href="https://opencollective.com/shopify">an OpenCollective donation</a> and continuing code contributions. We’ve written <a href="https://github.com/saulecabrera/asls">a language server</a>, made some progress towards implementing closures, and have written bug fixes for the compiler and surrounding tooling.</p><p id="9334d2b9-8bcc-47e8-872d-272b677d717a" class="">We’ve also integrated AssemblyScript into our own early stage tooling. We’ve built integrations into <a href="https://github.com/Shopify/shopify-app-cli">the Shopify CLI</a> which will allow developers to create, test, and deploy modules from their command line. To improve developer ergonomics, we provide SDKs which handle the low level implementation concerns of Shopify defined objects like “Money”. In addition to these tools, we’re building out systems which allow Partners to monitor their modules and receive alerts when their modules fail. The end goal is to give Partners the ability to move their code onto our service without losing any of the flexibility or observability they had on their own platform.</p><h1 id="d0c631ec-7734-4f5b-a494-32ec22c72b7f" class="">New Capabilities, New Possibilities</h1><p id="0903c783-01d4-4d72-9251-a83317adde3f" class="">As we tear down the boundaries between Partners and Merchants, we connect merchants with the entrepreneurs ready to solve their problems. If you have ideas on how our code execution could help you and the Apps you own or use, please tweet us at @ShopifyEng. To learn more about Apps at Shopify and how to get started, visit <a href="https://developers.shopify.com/app-development">our developer page</a>.</p><p id="be8ffa3d-115b-4ecb-9fdc-aef219f2f13c" class="">Duncan is a Senior Developer at Shopify. He is currently working on the Scripts team, a team dedicated to enabling and managing untrusted code execution within Shopify for Merchants and Developers alike.</p><p id="33dd02e4-ad42-4c79-a9d1-d45170800c8f" class="">If you love working with open source tools, are passionate about API design and extensibility, and want to <a href="https://shopify.engineering/partners/blog/remote-work">work remotely</a>, we’re always hiring! Reach out to us or <a href="https://www.shopify.com/careers/teams/data?itcat=EngBlog&amp;itterm=Post">apply on our careers page</a>.</p><h3 id="8159b4a0-a6c7-46c8-b017-fd68dce89ebb" class="">Get stories like this in your inbox!</h3><p id="5eb92b8d-8548-4b35-965b-17e90c10e643" class="">Stories from the teams who build and scale Shopify, the leading cloud-based, multi-channel commerce platform powering over 1,000,000 businesses around the world.</p><p id="040e014c-77ab-4b3a-89ed-8474df6442e8" class="">Share your email with us and receive monthly updates.</p></div></article></body></html>

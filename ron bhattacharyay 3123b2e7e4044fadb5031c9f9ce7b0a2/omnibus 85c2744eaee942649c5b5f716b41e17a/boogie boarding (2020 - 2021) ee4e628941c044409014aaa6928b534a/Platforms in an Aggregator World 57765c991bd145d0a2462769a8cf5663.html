@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Platforms in an Aggregator World</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="57765c99-1bd1-45d0-a246-2769a8cf5663" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🛶</span></div><h1 class="page-title">Platforms in an Aggregator World</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-brown">Tech Strategy</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://stratechery.com/2020/platforms-in-an-aggregator-world/" class="url-value">https://stratechery.com/2020/platforms-in-an-aggregator-world/</a></td></tr></tbody></table></header><div class="page-body"><p id="e0198df4-523e-4d59-8f72-5f9b92d4ef6d" class="">In the month since I wrote <a href="https://stratechery.com/2020/the-anti-amazon-alliance/">The Anti-Amazon Alliance</a>, there has been two significant announcements from two of the principals in that alliance:</p><ul id="251d9a57-5e67-4c16-aeb0-39c024900c97" class="bulleted-list"><li>Shopify announced the Shop app</li></ul><ul id="23146f6b-37b2-46bc-8820-07fa5c5ac761" class="bulleted-list"><li>Facebook announced Facebook Shops</li></ul><p id="674483bf-27d9-470d-bf1a-885143db6069" class="">Many have argued that these announcements are related to each other: Shopify needs to build a customer-facing application in order to take-on Facebook, and the announcement of Facebook Shops is why. My takeaway is the opposite: the inevitability of Facebook Shops — thanks in part to a surprising culprit — is precisely why Shopify should not spend much time on end-user acquisition.</p><h3 id="6844a469-002c-4a1d-a623-a5fe926e6291" class="">The Anti-Amazon Alliance Redux</h3><p id="cadbd7d7-8e8f-4c79-9c49-281335fe0ec7" class="">In <em>The Anti-Amazon Alliance</em> I noted that brick-and-mortar retail served two functions: discovery and distribution. On the Internet, though, those functions have been split between two different value chains: Facebook is the top-of-funnel for discovery, while Amazon dominates search-driven distribution; the genesis of that article was driven by the news that Google was re-focusing Google Shopping away from pay-to-play to being a search engine that listed products from anyone, thus joining the <em>Anti-Amazon Alliance.</em></p><p id="41df30eb-1704-4da1-a76a-075f6f560982" class="">One of the most important companies in making both of the non-Amazon value-chains work is Shopify, which is a platform, not an Aggregator. Google and Facebook may collect the customers, but it is Shopify (and WooCommerce, its open-source competitor) that provides the infrastructure for merchants to actually sell things online; Shopify is also working to help merchants get the things they sell into customers hands with the Shopify Fulfillment Network, which I wrote about in <a href="https://stratechery.com/2019/shopify-and-the-power-of-platforms/">Shopify and the Power of Platforms</a>. At last week’s <a href="https://www.youtube.com/watch?v=J8WsGFF9fnk&amp;feature=youtu.be">Reunite Conference</a> the company announced that it now owned-and-operated seven warehouses across the U.S., has built an R&amp;D center to improve warehouse operations, and has incorporated <a href="https://news.shopify.com/shopify-to-acquire-6-river-systems">6 River Systems</a> in the form of “Chuck” robots to help with order fulfillment.</p><p id="50e8ea5a-f3c9-4306-bc2f-7c4daf5923d7" class="">One particularly clever component of the Shopify Fulfillment Network is that the same templates a merchant uses to customize their website also translate seamlessly to custom packaging; when you receive a package from a Shopify merchant — the goal is two days, anywhere in the world — it appears as if it came from that merchant, not from Shopify. That’s part and parcel of being a platform: you win when those on your platform win, even if customers never even know you exist.</p><p id="e291eed8-a060-4fb4-adcb-32d320fcab36" class="">This is also why <a href="https://stratechery.com/2020/shopify-shop-shopifys-reason-to-exist-googles-earnings/">I didn’t agree</a> with Shopify’s decision to rebrand their <em>Arrive</em> tracking app as the <em>Shop</em> app: it demotes merchants relative to Shopify itself (and the attempt to maintain some sort of brand prominence confuses the user experience).</p><h3 id="6f3d82be-845b-4dab-b643-dbfea8a171b4" class="">Facebook Shops</h3><p id="0bf67d7f-5c48-4808-acda-8fcd9a0a54f0" class="">Those that disagreed with my opinion on the Shop App generally cited Facebook and the fact that the social network is capturing an increasing amount of value from the direct-to-consumer space. I wrote about why this is happening earlier this year in <a href="https://stratechery.com/2020/email-addresses-and-razor-blades/">Email Addresses and Razor Blades</a>:</p><blockquote id="6fd769a0-32f8-480e-9b62-fa0869ef1040" class="">The problem is that in the process of depending on Google and Facebook for marketing, the DTC companies gave up their planned integration in the value chain, and the associated profits, to Facebook and Google:   The actual integrated players — Google and Facebook — integrate customers and research and development to dominate marketing; DTC may have online retail operations, but that is a modularized — and thus commoditized — part of the value chain (and meanwhile, Amazon was in the process of integrating retail and logistics).</blockquote><figure id="ea29fbf3-ac88-4376-9f14-617cf19706eb" class="image"><a href="Platforms%20in%20an%20Aggregator%20World%2057765c991bd145d0a2462769a8cf5663/Stratechery-20200225.png"><img style="width:700px" src="Platforms%20in%20an%20Aggregator%20World%2057765c991bd145d0a2462769a8cf5663/Stratechery-20200225.png"/></a></figure><p id="bcb2bc63-87d6-4be8-a264-76069f5a17c7" class="">However, suggesting that Shopify take responsibility for directly acquiring customers (as opposed to building tools to help merchants do so) is not only out of step with Shopify’s position in the value chain, but there is also no particularly good reason to believe that Shopify will be any better at this than their merchants. What Facebook is capable of in terms of customer acquisition is not trivial — that is precisely why they are able to charge a premium for it.</p><p id="d3ed61e7-645a-4af0-8d43-e3b4ff6f5520" class="">What is more concerning for Shopify — at least at first glance — is the possibility of Facebook backwards integrating, a la Facebook Shops. From the <a href="https://about.fb.com/news/2020/05/introducing-facebook-shops/">Facebook Newsroom</a>:</p><blockquote id="7f07fc2b-95bd-4808-8c11-4cfcf8bbec94" class="">Facebook Shops make it easy for businesses to set up a single online store for customers to access on both Facebook and Instagram. Creating a Facebook Shop is free and simple. Businesses can choose the products they want to feature from their catalog and then customize the look and feel of their shop with a cover image and accent colors that showcase their brand. This means any seller, no matter their size or budget, can bring their business online and connect with customers wherever and whenever it’s convenient for them.  People can find Facebook Shops on a business’ Facebook Page or Instagram profile, or discover them through stories or ads. From there, you can browse the full collection, save products you’re interested in and place an order — either on the business’ website or without leaving the app if the business has enabled checkout in the US.  And just like when you’re in a physical store and need to ask someone for help, in Facebook Shops you’ll be able to message a business through WhatsApp, Messenger or Instagram Direct to ask questions, get support, track deliveries and more. And in the future, you’ll be able to view a business’ shop and make purchases right within a chat in WhatsApp, Messenger or Instagram Direct.</blockquote><p id="a55d3ad4-a4fe-4ec2-b230-3ebbe0fc0bfb" class="">Bad news for Shopify, right? Except note the last paragraph:</p><blockquote id="768e7bc2-5756-4f48-9232-5d6708ba2fb4" class="">We’re also working more closely with partners like Shopify, BigCommerce, WooCommerce, ChannelAdvisor, CedCommerce, Cafe24, Tienda Nube and Feedonomics to give small businesses the support they need. These organizations offer powerful tools to help entrepreneurs start and run their businesses and move online. Now they’ll help small businesses build and grow their Facebook Shops and use our other commerce tools.</blockquote><p id="6e1ad753-3299-4d65-89ec-3eaddb73b647" class="">Shopify noted in their blog post on the subject…oh wait, there wasn’t a blog post (there is <a href="https://www.shopify.com/facebook">a web page</a> and 18 seconds in the Reunited keynote). This doesn’t appear to be the most willing of partnerships.</p><h3 id="eb99dc37-c947-4dd3-a516-f6a35aa7d2a5" class="">Shopify’s Business Model</h3><p id="164db092-5950-405b-a287-8cbca7dae22a" class="">Shopify’s original business model is labeled “Subscription Solutions”; merchants pay a subscription fee to use the Shopify platform — the price <a href="https://www.shopify.com/pricing">ranges from $29 to $299 per month</a> — and can use the payment provider of their choice. When Shopify IPO’d <em>Subscription Solutions</em> was 60% of their $67 million in quarterly revenue.</p><p id="77ea722c-98b9-4f0d-abce-aa7bd5e70aec" class="">Over the last five years, though, “Merchant Solutions” — which are a percentage of transactions, usually from using Shopify Payments — has been the primary growth driver. Last quarter it was <em>Merchant Solutions</em> that was 60% of Shopify’s $470 million in quarterly revenue.</p><p id="9ff74459-07f4-47db-98f0-8d75d0effef7" class="">This shift in Shopify’s business model is almost certainly why the company appears to be uncomfortable with this evolution of their “partnership” with Facebook. Sure, Facebook Shop integration will be a feature of Shopify’s <em>Subscription Solutions</em>, but Shopify will be locked out of sales made via Facebook Checkout, which means no <em>Merchant Solutions</em> revenue, and by extension, no participating in the upside of its merchants’ growth.</p><p id="eee25bf3-d9f1-49f8-b45b-2fe15ee29427" class="">What makes this a particularly bitter pill to swallow for Shopify is that Facebook’s move is really good for those merchants (and a far better solution than the overly complicated Instagram Shopping beta that didn’t integrate with outside services). At this point I’m going to assume that those of you who have bought a product from an Instagram ad outnumber those of you who haven’t,</p><p id="fdaf4452-2b5e-497a-b2b6-73c8484e863a" class="">and the truth is that it is a pretty janky experience tediously filling in all of your shipping and billing details. Sometimes it is easier to just abandon your purchase for that item you had no idea existed 30 seconds ago.</p><p id="0c0b3f32-2a19-43c9-8d07-d6e06252c901" class="">Facebook Checkout, on the other hand, would mean a purchase that is completed in seconds, not minutes. After all, if anyone knows who you are, it is Facebook!</p><p id="cc4cd7c9-b95f-4c5f-b7e6-497ca4060ac6" class="">That is going to mean a lot more conversions on Facebook and Instagram ads in particular — and Shopify isn’t going to see an incremental cent.</p><h3 id="a69c07d3-3173-4bf3-9bd5-c3a68299f825" class="">Firefighters and Arsonists</h3><p id="21262792-2d19-4075-aa83-f645c0557611" class="">It is very important to note that Facebook is setting itself up as the solution for a problem it played a major role in creating. To examine iOS specifically, Apple provides a user-friendly solution to the payment problem: Apple Pay. Apple Pay, though, <a href="https://developer.apple.com/documentation/apple_pay_on_the_web">is limited</a> to Safari and <code>SFSafariViewController</code> objects; the latter is the most straightforward way for developers to add a browser to their application — it looks like Safari, and has a button in the lower-right corner to load the page in Safari.</p><p id="4ee2fb31-0b0b-4657-a228-84dedc6c9ce1" class="">Compare and contrast an <code>SFSafariViewController</code> webview (in this case, from Twitter’s app) to what you get in Instagram:</p><figure id="0185a00a-d029-44c7-b5f8-dc5152fd932b" class="image"><a href="Platforms%20in%20an%20Aggregator%20World%2057765c991bd145d0a2462769a8cf5663/shopify-webviews-2.png"><img style="width:700px" src="Platforms%20in%20an%20Aggregator%20World%2057765c991bd145d0a2462769a8cf5663/shopify-webviews-2.png"/></a></figure><p id="706645b2-a3fe-4622-88d2-a84a4c64750e" class="">What Instagram</p><p id="d739a401-514c-49a0-b770-9d1216ba47c7" class="">has done is basically build their own browser within Instagram. It still uses iOS’s WebKit engine — that is an iOS requirement, which means that Chrome uses WebKit as well — but it is not otherwise controlled by Apple. And that, Apple has decreed, means no Apple Pay, which means that the purchase experience is worse in Instagram and Facebook than it could have been had either Facebook used <code>SFSafariViewController</code> or if Apple relaxed its policies around Apple Pay.</p><p id="e0495e68-da2b-4f10-8f7f-fda99ddbac79" class="">Notably, both Facebook and Apple are motivated by opposite sides of the same coin: Facebook uses its own browser because that allows it to capture far more data than they could from <code>SFSafariViewController</code>; Apple, meanwhile, puts a sandbox around <code>SFSafariViewController</code> for the purpose of keeping user data away from 3rd party developers, and incentivizes usage by both making <code>SFSafariViewController</code> far easier to use and also including benefits like Apple Pay integration.</p><p id="988f37ed-be2f-4598-a027-dbd1165f5fbc" class="">The conclusion I am sure many of you have already arrived at is to be grateful for Apple’s policies and irritated at Facebook’s. After all, Apple is just looking out for the user, and Facebook is looking to exploit them, right?</p><p id="e454dfb0-6229-4052-8b40-cf52abe56159" class="">In fact, it’s a bit more complicated than that, and cookies are a good example. Remember that a whole bunch of those Instagram advertisements are from Shopify merchants, all of whose websites are hosted on the same infrastructure. Image if Shopify could set a cookie when a user made a purchase on one website, and then when the user visited another Shopify website they were already logged in with all of their payment information ready to go. Notably, Shopify has built this infrastructure — it’s called <a href="https://help.shopify.com/en/manual/payments/accelerated-checkouts/shop-pay">Shop Pay</a> — but you have to log in on every distinct Shopify website.</p><p id="390fd4ac-59d1-40a8-bcc5-3a820fcc71c3" class="">The reason for this rigamarole is that for the last three years Apple has been leading the charge towards the elimination of 3rd-party cookies of the sort I just described. There are good reasons for this, specifically the elimination of 3rd-party trackers primarily loaded by advertisements. There are, though, real casualties along the way, including Shopify and its merchants.</p><p id="034cb7a1-ece2-490b-a952-e72128443af6" class="">I wrote about these tradeoffs last year in <a href="https://stratechery.com/2019/privacy-fundamentalism/">Privacy Fundamentalism</a>:</p><blockquote id="15f99ad8-07d4-4eb6-a846-bb5980130756" class="">Technology can be used for both good things and bad things, but in the haste to highlight the bad, it is easy to be oblivious to the good. Manjoo, for example, works for the New York Times, which makes most of its revenue from subscriptions; given that, I’m going to assume they do not object to my including 3rd-party resources on Stratechery that support my own subscription business?  This applies to every part of my stack: because information is so easily spread across the Internet via infrastructure maintained by countless companies for their own positive economic outcome, I can write this Article from my home and you can read it in yours. That this isn’t even surprising is a testament to the degree to which we take the Internet for granted: any site in the world is accessible by anyone from anywhere, because the Internet makes moving data free and easy.</blockquote><p id="be66ec9d-8bb9-4666-995b-7105e0a08d67" class="">This, unfortunately, better described the world of 2017 than the world of 2020. Yes, websites are still freely accessible, and thank goodness for that, but it is ever more difficult for those websites to be supported by critical infrastructure like Shopify (or, in my case, Stripe and WordPress). Privacy is a good thing, but so is entrepreneurship and competition; maximizing one without any consideration of the others leads to unintended outcomes.</p><p id="79cdeaa7-a01a-4a6f-85fa-5692b3609f69" class="">Facebook Shops is a perfect example: it is going to succeed because it is good for Shopify’s merchants, but the reason it is good for Shopify’s merchants is because Facebook and Apple effectively teamed up to make it impossible for Shopify to fix the payment problem on their own.</p><p id="07bdf397-442d-4202-b6f7-0793fa9287e0" class="">This makes me sad: the part of the Internet that fills me with the most optimism are platforms like Shopify and Stripe and Substack that make it possible for individual entrepreneurs to try and build their own businesses with world-class tools at their disposal; making it hard to utilize those tools primarily benefits established companies and apps.</p><h3 id="23f6521d-dc4e-4894-8ff3-bbc52b41bdf4" class="">Shopify’s Platform Prospects</h3><p id="55b3ecd9-6394-4b86-861f-a11f097eed6b" class="">This is the harsh reality for Shopify and anyone else competing in a value chain with an Aggregator: you are not going to beat Facebook at their own game, particularly given the technical limitations increasingly facing infrastructure providers. At the end of the day overcoming Facebook’s skill at acquiring customers must be the responsibility of the merchants themselves: what works — and what will always work, as long as the web exists — is creating something so compelling that people will go to you directly, and yes, fill out a payment form.</p><p id="8be049b0-33ce-4a94-941f-3f5cc58a8f57" class="">This, though, is why I remain so excited about the Shopify Fulfillment Network. I’m not completely sold on Shopify’s approach — I thought it might make more sense to try and create a common interface for merchants to interact with independent 3PL providers, as opposed to building out Shopify own logistics service (but I could very well be wrong about this) — but I absolutely endorse the company making massive investments in this space.</p><p id="bbf6bb47-2e93-425e-a6a8-64ef18f6711d" class="">First, this is a service that no merchant can build on its own; it is a perfect example of how a platform can create something for an ecosystem that would not exist otherwise. Moreover, this is specifically what is needed to fulfill the promise I laid out last year, of Shopify as an Amazon competitor, not because users choose to go to Shopify, but because they have no reason to know that Shopify exists.</p><p id="e40e3c5f-e424-4714-8d61-3a7326822181" class="">Second, this is a service that Facebook Shops is going to make more valuable, not less: all of those merchants increasing sales thanks to Facebook Checkout still need to ship their things, and there is zero chance that Facebook ever integrates into the real world.</p><p id="982e0a15-96ca-4b16-9a39-eca680d04039" class="">Third, this is a service no one else is going to build. Yes, it is very difficult to build fulfillment centers and develop robots and employ lots of workers, but within that difficulty is an escape from competition, i.e. a far more reliable way to make sustainable profits in the long run.</p><p id="cbf76676-1338-4706-9cac-004911cf761e" class="">I am also bullish about Shopify <a href="https://www.shopify.com/partners/blog/shopify-reunite-announcements-2020">moving into banking and financial services</a>; yes, there is certainly more competition here with the likes of Stripe — another Shopify partner</p><p id="e2fff024-dd01-4eba-bd81-c383b4c8dca0" class="">, but this is another area where taking on the sorts of risks that an Aggregator never would (and never should) makes sense for a platform provider.</p><h3 id="8fd3ba84-0baf-48ea-a4f4-c938a0e7f5b7" class="">A Reason to Build</h3><p id="acf93919-e478-462e-a7d5-70bf7de7b89c" class="">In <a href="https://stratechery.com/2020/how-tech-can-build/">my response</a> to Marc Andreessen’s <a href="https://a16z.com/2020/04/18/its-time-to-build/">It’s Time to Build</a> essay, I suggested three different ways the tech industry could make more of a difference in the world of atoms, not just bits; the second was as follows:</p><blockquote id="d3ad9778-5bb2-4745-b288-4f7f594422d3" class="">Second, invest in real-world companies that differentiate investment in hardware with software. This hardware could be machines for factories, or factories themselves; it could be new types of transportation, or defense systems. The possibilties, at least once you let go of the requirement for 90% gross margins, are endless.</blockquote><p id="2703dba8-d0f4-4c0f-841b-4ccbe8739faf" class="">That reminded me of these two “warnings” in Shopify’s <a href="https://s23.q4cdn.com/550512644/files/doc_financials/2020/Q1/22e00050-faec-44db-b50f-743c275ed9c3.pdf">most recent earnings report</a>:</p><blockquote id="d79e2e27-20d2-485d-9142-28f9a9546d6c" class="">Our expectation is that the gross margin percentage of merchant solutions will decline in the short term as we develop Shopify Fulfillment Network and 6 River Systems Inc. (“6RS”). Our expectation is that the continued growth of merchant solutions may cause a decline in our overall gross margin percentage.</blockquote><p id="b11cf1d5-0ac7-4a8e-a92e-ac7f0b8953c3" class="">In short, building fulfillment centers and developing robots and employing lots of workers isn’t great for margins. It is, though, at least in the ultra-competitive markets that Shopify operates in, good for building a moat. This is certainly something that Amazon discovered long ago; I wrote in 2018 in <a href="https://stratechery.com/2018/amazon-go-and-the-future/">Amazon Go and the Future</a>:</p><blockquote id="abc0be5f-b572-43f4-84e1-258248c9c6c0" class="">This willingness to spend is what truly differentiates Amazon, and the payoffs are tremendous. I mentioned telecom companies in passing above: their economic power flows directly from massive amounts of capital spending; said power is limited by a lack of differentiation. Amazon, though, having started with a software-based horizontal model and network-based differentiation, has not only started to build out its vertical stack but has spent massive amounts of money to do so. That spending is painful in the short-term — which is why most software companies avoid it — but it provides a massive moat.</blockquote><p id="8f3c1bd8-e7b8-46b1-b153-86dfdf6fd62e" class="">In this view, the upside of building in the real world is rooted in just how difficult it is; given that we have reached <a href="https://stratechery.com/2020/the-end-of-the-beginning/">The End of the Beginning</a>, it may be the highest upside available.</p></div></article></body></html>

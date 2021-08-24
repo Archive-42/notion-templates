@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Death of an Open Source Business Model</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8bfd77a1-37c6-4ff8-8673-f9f101a7a32a" class="page sans"><header><h1 class="page-title">Death of an Open Source Business Model</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://joemorrison.medium.com/death-of-an-open-source-business-model-62bc227a7e9b" class="url-value">https://joemorrison.medium.com/death-of-an-open-source-business-model-62bc227a7e9b</a></td></tr></tbody></table></header><div class="page-body"><p id="97c31f88-a0f0-4d3b-8516-173bcfd95d35" class=""><em>I work at </em><a href="https://www.azavea.com/"><em>Azavea</em></a><em>, but this is my personal blog. What’s written here is my personal opinion and nothing more. Yadda, yadda, yadda.</em></p><figure id="72cf81c6-e400-4fe5-ad51-eaa1189d2be6" class="image"><a href="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1l4pVw0DclFQMz4Ft2OjJiQ.jpeg"><img style="width:700px" src="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1l4pVw0DclFQMz4Ft2OjJiQ.jpeg"/></a></figure><p id="0e0f2dad-470c-4b82-84b8-fefe06c1a9c7" class="">Spooky. Photo by <a href="https://unsplash.com/@gypsycompassrose?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Wendy Scofield</a> on <a href="https://unsplash.com/s/photos/graveyard?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p><p id="d39a2d0c-51ec-4cd5-b003-7a4dd6c3ef27" class="">The news yesterday that <a href="https://news.ycombinator.com/item?id=25347310">the new version of Mapbox GL JS will be proprietary</a> shook me.¹</p><p id="4b056498-dca6-4348-bbf9-04d1cc702fe9" class="">I am not a zealot. I do not feel entitled to others’ intellectual property, even if they’ve given away their ideas in the past. I know from experience how exhausting, thankless, and exploitative the work of creating and maintaining open source software can feel.</p><p id="f78e102e-0d70-47a4-9883-788b90c2d0dc" class="">Until yesterday, I was still clinging to a few shreds of romantic optimism about open source software businesses. Mapbox is the protagonist of a story I’ve told myself and others countless times. It’s a seductive tale about the incredible, counterintuitive concept of the “open core” business model for software companies. In <a href="https://joemorrison.medium.com/three-models-for-commercializing-open-source-software-84d3130c82cd">a piece I wrote last year</a> that no one read, I defined the open core strategy thusly:²</p><blockquote id="95d0a1d0-c2f2-4d4c-8e9e-eb75591b5d34" class="">“Open core” businesses offer a free, open source version of their software and a paid version with additional proprietary features that would be a pain to replicate […]</blockquote><p id="0df1c84f-a890-4bd1-915f-3f6a76dad013" class="">For the best in-depth analysis of the concept of the “open core” business model I’ve come across, I highly recommend reading Joseph Jacks’ blog post <a href="https://medium.com/open-consensus/2-open-core-definition-examples-tradeoffs-e4d0c044da7c"><em>Open Core — Definition, Examples &amp; Tradeoffs</em></a>.</p><p id="bcb2b2b4-e6d7-40b2-ba06-ca1f94364794" class="">The whole idea is insane. No one believes it could possibly work when they first learn about it, and yet dozens of companies like <a href="https://www.elastic.co/">Elastic</a>, <a href="https://d2iq.com/">D2iQ</a> (formerly Mesosphere), <a href="https://www.mongodb.com/">MongoDB</a> and <a href="https://www.cloudera.com/">Cloudera</a> have all managed to achieve valuations in the billions of dollars by pursuing this batshit-crazy, reverse-psychology, let-it-all-hang-out strategy. Or, at least, they were open core businesses at some point…maybe not so much today. More on that later.</p><p id="a5469bd1-f88e-44d6-bebf-52d5327d5bfa" class="">Today, we’re gathered here on the internet to mourn the death of the open core business model. We’re here to tell stories of the before-times, to reminisce about how smart we thought we were. We went against consensus, and we were wrong. Because, open core is dead.</p><p id="0fc5f5da-d37f-4671-ae30-595c3effb2a9" class="">Cloud killed open core.</p><h1 id="1421923b-6b2b-4c1e-b2c7-01eff41df0f3" class="">Back to Mapbox</h1><p id="2e4f2a3d-c8b2-460e-b4a5-51b3eaf628c9" class="">In the case of Mapbox GL JS, Mapbox had previously decided to openly license the first two versions of the their browser-based map renderer (the same one that powers Snap Maps, the New York Times, and CNN among <a href="https://www.mapbox.com/showcase/">myriad others</a>). Ever since the <a href="https://blog.mapbox.com/introducing-mapbox-gl-7a1f4e960e16">initial release in 2014</a>, it’s been incredibly popular among web developers. Once you know what you’re looking for, you start to see it…everywhere.</p><figure id="769b9d5b-6ea9-4849-b2cd-653837a4fb98" class="image"><a href="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1F_2UsobA-BbD-BqTW9X6EQ.png"><img style="width:700px" src="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1F_2UsobA-BbD-BqTW9X6EQ.png"/></a></figure><p id="7fdb84ca-7f35-4ac9-b483-11d77f8fdbd3" class="">That big map John King so fondly stroked all night? It’s powered by Mapbox GL JS. Source: Washington Post.</p><p id="c67c6f1d-62a8-4965-ba27-a023b32cfdd3" class="">I personally experienced the power of Mapbox GL JS when my team at Azavea started building GroundWork, a tool for labeling satellite imagery. Using functionality from that library, GroundWork supports freeform drawings of complex geometries. The resulting shapes are cartographic — they’re projected onto a real location on earth, not just suspended in imaginary 2D space. It’s the type of feature that feels obvious and straightforward but is in fact extraordinarily difficult to engineer from scratch.</p><p id="0d7e1bf7-3d73-43b1-b0ee-edc1205f737b" class="">Even simple-looking shapes drawn with a freehand technique can contain thousands of individual vertices. Pretty quickly, you fill up your screen with hundreds of thousands of vertices worth of shapes and…oh, poop-and-a-half.³ Your browser crashes.</p><p id="51637dcd-b5dd-4b2b-bd52-b77dd6ad2545" class="">Mapbox GL JS helps to circumvent that problem by summoning help from the graphics card on your machine. There’s no way we could have built that feature within our budget and time constraints without piggybacking on Mapbox’s tens of thousands of hours of hard, low-level engineering work.</p><p id="b0f0e419-9ea5-4517-ad5b-f42e536c0e40" class="">A compute-intensive feature that Mapbox GL JS makes possible to do in the browser. Source: GroundWork.</p><p id="5a5ae314-b94c-416a-854a-2681c44d6254" class="">Mapbox’s decision this week to release a brand new version of Mapbox GL JS and keep it proprietary stunned me. Not only was v1 already a wildly popular open source library, but Mapbox’s reputation as a prolific creator of open source software is a cornerstone of their whole identity. Describing what makes Mapbox special without mentioning “open source” is like trying to describe chocolate milk to an alien without using the word “liquid.”</p><p id="d150b109-0654-455b-ad26-89ee24ef1bb3" class="">Mapbox still has <a href="https://github.com/mapbox">over 800 open source projects</a> to their name and has consistently <a href="https://www.freecodecamp.org/news/the-top-contributors-to-github-2017-be98ab854e87/">ranked in the top 40 organizations worldwide</a> in terms of Github activity on public repositories. They employ (and have previously employed) some of the highest-profile open source software contributors in the world, not just the mapping industry.</p><p id="479657ea-4c38-446e-b451-98287844a6cb" class="">So…what the <em>dickens </em>is going on here?</p><h1 id="bb06f5be-5920-4af1-b3b8-bf93f72422d6" class="">Open Core is No Longer a Tenable Business Model</h1><p id="d997e1fc-92b1-4b44-95dc-82ad819592ac" class="">Mapbox’s choice to keep v2 of Mapbox GL JS proprietary is a strong signal. But what precisely the signal is indicating is…less clear. Nonetheless, I’ll bite.⁴</p><p id="4684079f-041f-49b1-a2f0-d9a372ed549e" class="">I <em>think </em>it means we’ve reached the end of an era. I think it portends the death of “open core” as a viable business model. My suspicion didn’t start with Mapbox, but it has concluded with them.</p><p id="6f9bd479-ed45-4871-b879-4decdcf8a582" class="">To understand how a company like Mapbox decides to release a proprietary update to one of its most popular open source libraries, I think it helps to start by studying at the cautionary tales of two kindred spirits, <a href="https://www.mongodb.com/">Mongo DB</a> and <a href="https://redislabs.com/">Redis Labs</a>.</p><p id="9fe91750-d483-4a0b-bb2c-5448c0c7ceee" class="">Ben Thompson wrote an excellent summary in his piece <a href="https://stratechery.com/2019/aws-mongodb-and-the-economic-realities-of-open-source/"><em>AWS, MongoDB, and the Economic Realities of Open Source</em></a> almost two years ago. To summarize his summary: if you give your secret sauce away for free, and it gets popular enough, cloud providers will inevitably spin up competitive services using your very own code against you. They will ruthlessly, unapologetically, shamelessly bludgeon you with a rubber chicken of your own fashioning. They’ll take a dump in your front yard while your lawyer stands over your shoulder whispering, “nothing can be done.”</p><p id="cb7deb45-deff-4e94-a101-5bfbe8271da2" class="">Since Ben wrote about AWS launching a service directly competing with MongoDB and Redis’s paid offerings, AWS hasn’t exactly crushed the competition…in fact, MongoDB’s stock price has risen over 275% since then, and Redis <a href="https://redislabs.com/press/redis-labs-raises-100-million-series-f-financing/">just raised $100M to officially cross the magic $1B valuation threshold</a> a couple months ago.</p><figure id="2498c3c7-35bd-4c2a-ad5e-3e552a5ef2fc" class="image"><a href="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1sEdGXKLRmDj4tXS0O6wW7w.png"><img style="width:700px" src="Death%20of%20an%20Open%20Source%20Business%20Model%208bfd77a137c64ff88673f9f101a7a32a/1sEdGXKLRmDj4tXS0O6wW7w.png"/></a></figure><p id="25795784-7387-4e35-9f01-bcfd08c01d82" class="">Open core is dead, you say? Source: Google Finance</p><p id="cb13e23f-f6c1-4090-be9f-5a54b3228d3c" class="">The bigger story is not simply <em>that </em>Mongo and Redis thrived in response to getting shanked by AWS, but <em>how </em>they did it<em>. </em>Both fought back the way companies always fight back: with an army of IP lawyers. Redis adopted a strategy of <a href="https://jaxenter.com/redis-commons-clause-open-source-148558.html">adding a severely restrictive “commons clause”</a> to updated versions of their existing open source tools, prompting some prominent open source commentators to feel that they’d thrown the baby out with the bathwater:</p><p id="82cdc2de-2af6-4e96-84f8-cba83d99212e" class="">Someday, I hope to create something worthy of being called an “abrogation.”</p><p id="6b2488ae-aa24-4f13-b5ef-07f01a214ea8" class="">Redis later shifted to <a href="https://www.zdnet.com/article/redis-labs-drops-commons-clause-for-a-new-license/">an entirely novel and idiosyncratic license</a>, which can’t be worse than the commons clause fiasco, but almost certainly isn’t much better. MongoDB also took the “poison pill” legal strategy by <a href="https://www.zdnet.com/article/its-mongodbs-turn-to-change-its-open-source-license/">shifting to a new and equally made-up license for their software</a>, “Server-Side Public License (SSPL)” shortly after AWS launched its competitive “DocumentDB” service. In both cases, the moves were specifically aimed at making it harder for public cloud providers to screw them over.⁵</p><p id="333edefe-1baa-4ce0-8296-28d7f77b3c0c" class="">Perhaps more accurately, they made their open source offerings radioactive to any company large enough to have a department called “compliance.”</p><p id="301060c2-b4cd-4d5f-81a3-7a6b7f182ffa" class="">These changes made Redis and Mongo fundamentally less open. The companies have since done quite well, although perhaps at the expense of their original ideals and some of the goodwill of their early adopters. The open source community of evangelists and contributors felt that they’d been sold a lie and treated as a stepping stone in the process. And I tend to agree with them, although I don’t fault either Redis or Mongo for being rational economic actors.</p><h1 id="585ab00c-6e19-4f46-89fc-8ccb6470a14d" class="">Back to Mapbox, Again</h1><p id="60451999-3082-4fa1-b7d6-2ae0d6857ace" class="">There is at least one cloud provider that has publicly copy-and-pasted Mapbox code into services they charge for: Azure, Microsoft’s cloud service. Last year, Azure announced map styling powered by Mapbox GL JS and it remains a key feature of their “Azure Maps” service. Mapbox even <a href="https://blog.mapbox.com/azure-maps-adds-data-driven-styling-powered-by-mapbox-gl-f14d062b79f9">wrote an announcement about it on their company blog</a>.</p><p id="5349a501-5e37-4344-9ae1-c70996a0e9e0" class="">While Mapbox made the Azure announcement out to be a good thing, I suspect it was the beginning of the end for Mapbox GL JS remaining open source. After all —in the incomprehensibly competitive world of public cloud computing, once one cloud provider starts offering a service, the rest are surely soon to follow. Mapbox found themselves in a similar position to Mongo and Redis: they were subsidizing R&amp;D for a handful of trillion-dollar tech giants.</p><p id="c8b1cdb0-a8d6-4926-8ba5-bbf5414a090a" class="">Unlike Mongo and Redis, Mapbox resisted the urge to try to have their cake and eat it, too. Rather than change the fundamental license for the “open” part of their offering, they made a clean break. The old version, which is still a mature and extremely useful library, will retain its original, permissive license. Efforts are already underway to fork it and gather community members to maintain it indefinitely, which I’m hopeful will be successful.</p><p id="ae13fd61-1fa8-42a8-8f9d-4014c2532fb2" class="">The new version will remain public (the code is all published on Github <a href="https://github.com/mapbox/mapbox-gl-js/pull/10160">here</a>). It’s just not permissively licensed anymore. To me, this feels like a more honest approach than trying to thread the needle with a creative and totally unproven license or some “gotcha” clause.⁶</p><p id="6efa4bea-2028-4a0d-98cb-b7c2b826c274" class="">Some might feel that this is a tragedy because it means community contributions will probably fall off. It’s true that, despite a long <a href="https://github.com/mapbox/mapbox-gl-js/graphs/contributors">list of contributors</a>, current and former Mapbox employees contributed the lion’s share of investment in the library. But the project had attracted a massive, global community of engineers who built things with it, gave tech talks on it, and forked/remixed it countless times. Yesterday was a sad day for those enthusiastic users, there is no question. They’ll survive, but I can’t blame them for feeling a sense of loss.</p><p id="3b2f5770-37dc-48d4-a16f-15788a0165b8" class="">As for the question of whether or not this choice strays from Mapbox’s mission or culture, I think this tweet from a current employee who has been with the company since its founding about sums it up:</p><p id="7653c214-91e3-4d55-8bdd-68f8222f051e" class="">Preach, Saman.</p><h1 id="ce14f848-9c53-4fcf-9951-900e04facd94" class="">Remembering the Good Times</h1><p id="0c3cfddc-5b71-42ec-bf94-5593b62c8db3" class="">Once upon a time, I really thought you could give away your trade secrets and still be successful. I thought the scale of the internet had enabled a new genre of company that could become massive despite only capturing an infinitesimally small fraction of the value they created. I believed the act of building a company around open source software was virtuous and ethical. I saw it as an end in itself.</p><p id="33141244-e823-4307-be5a-4cf95d4690aa" class="">These days, I’m not so sure.⁷</p><p id="8b170ef8-67a1-49d8-bb17-6c630612433d" class="">I still believe open source software is a powerful force for good in the world. I still think companies can strategically and earnestly contribute to open source software in service of not only their own mission but also the collective good.</p><p id="429beff1-2e6f-471b-b4df-f814629b6f5c" class="">But, I no longer believe venture-backed companies can responsibly pursue a strategy of giving away the software at the core of their value proposition. I no longer think it’s a feasible model for companies with ambitions of becoming very large or those actively avoiding consulting work. Eventually, if they’re successful, they will be forced to choose between betraying their loyal early adopters and dying a long, slow death by rubber chicken bludgeoning.</p><p id="717deae7-a4d1-4e9c-b405-6d46cf393dd3" class="">Yesterday was a sad day, indeed. But not because Mapbox did something wrong or disappointing. Because yesterday, I finally conceded to myself:</p><p id="24c52adf-ead7-48bc-a512-c8ef559308ac" class="">Cloud killed open core.</p><p id="87ffc13a-e2cf-4699-b286-892b6e8a885c" class="">¹ For newcomers: <a href="https://www.mapbox.com/">Mapbox</a> is the preeminent software company focused on mapping. They produce an outsized share of innovation in the field — from Mapbox GL JS (their renderer for 2D maps), to autonomous driving and navigation libraries, to augmented reality, 3D visualization, and even video game tech. The reason this news is shocking is that their commitment to creating open source software, even the “secret sauce” at the very core of their work, is fundamental to the way many of their users perceive them and a huge part of why they are so commonly admired by software engineers.</p><p id="2af1f274-cb67-4a7b-99e9-745674823370" class="">² If you’ve already read that blog post, congratulations. You are one of the 106 people that I consider to be my closest friends.</p><p id="9d6afa34-02f0-4be5-b3d5-5b15d0d5a095" class="">³ My mother liked to use this expression when I was growing up, and I am still quite fond of it.</p><p id="643dc1f7-7559-40a8-ba64-be2f5db67b7d" class="">⁴ If you’re reading this blog, you’re desperate enough for answers about the geospatial software industry that you’ve turned to a guy that writes on Medium because he’s too technically illiterate to host his own website and too cheap to pay someone else to host it for him.</p><p id="a4a0adfb-a60a-43bc-b05a-ac47dd3b818d" class="">⁵ I am not a lawyer, but I play one on the internet. If you want to understand these licensing strategies in more depth, I suggest you start by getting a law degree, specializing in intellectual property and copyright, and then spending your entire life studying it.</p><p id="ae156059-01af-430a-b6c2-9903fada0cbd" class="">⁶ If you haven’t caught on by now, let me be clear: I think inventing your own license is almost always a bad idea<strong>. </strong>Contracts are enforceable in court. Either you plan to go to court a lot until the credibility of your license is well established, or you should pick one that is already credible. Personally, I don’t like to get sued. And if I must get sued, I want to feel confident I’m gonna win.</p><p id="9abedd32-e77f-4565-8c9e-672ee70fa967" class="">⁷ I’m reminded of the lyrics to one of my <a href="https://genius.com/Joe-pug-not-so-sure-lyrics">favorite Joe Pug songs</a>:</p><blockquote id="2c7e5b38-db83-4ed3-bb12-cc867bb47c42" class="">Stealin’ was so easy thenI wish that it still wereNow as I pick my own pocketI know that these daysI’m not so sure</blockquote></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Adjacent User Theory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e4ef4c1b-d918-4033-b620-ffd837d53a46" class="page sans"><header><h1 class="page-title">The Adjacent User Theory</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://andrewchen.co/the-adjacent-user-theory/" class="url-value">https://andrewchen.co/the-adjacent-user-theory/</a></td></tr></tbody></table></header><div class="page-body"><p id="17a71fb9-cb8a-4c43-af1e-901144257534" class=""><em>Guest Post by </em><a href="https://twitter.com/iambangaly"><em>Bangaly Kaba</em></a><em> (EIR @ Reforge, Former VP Growth @ Instacart, Instagram)</em></p><figure id="654828ce-2fae-4603-a9d5-a1843d850723" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/Bangaly-Kaba.jpg"><img style="width:300px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/Bangaly-Kaba.jpg"/></a></figure><p id="3fffa957-6dbd-441a-9e59-5de969e335a9" class=""><em>The following was written by Bangaly with contributions by other Reforge EIR’s </em><a href="https://www.linkedin.com/in/elenaverna/"><em>Elena Verna</em></a><em> (Miro, MongoDB, SurveyMonkey) and </em><a href="https://twitter.com/far33d"><em>Fareed Mosavat</em></a><em> (Slack, Instacart, Zynga). Reforge is a community for those leading and growing tech companies. To learn more from Bangaly, Elena, and Fareed check out the upcoming </em><a href="https://www.reforge.com/?utm_source=ac&amp;utm_medium=blog"><em>Career Accelerator Programs</em></a><em> like </em><a href="https://www.reforge.com/product-strategy?utm_source=ac&amp;utm_medium=blog"><em>Product Strategy</em></a><em>, </em><a href="https://www.reforge.com/multi-channel-marketing-strategy?utm_source=ac&amp;utm_medium=blog"><em>Marketing Strategy</em></a><em>, and </em><a href="https://www.reforge.com/retention-engagement-series?utm_source=ac&amp;utm_medium=blog"><em>Retention + Engagement Deep Dive</em></a><em>.</em></p><p id="3e3a640f-302c-4b77-bb6d-8571546fd192" class="">When I joined Instagram in 2016, the product had over 400 million users, but the growth rate had slowed. We were growing linearly, not exponentially. For many products that would be viewed as an amazing success, but for a viral social product like Instagram, linear growth doesn’t cut it. My job was to help the team accelerate and get back to exponential growth. Over the next 3 years, the growth team and I discovered why Instagram had slowed, developed a methodology to diagnose our issues, and solved a series of problems that reignited growth and helped us get to over a billion users by the time I left.</p><p id="f2c06fd0-ed9d-453d-b2e7-6fee04e8da92" class="">Our success was anchored on what I now call <em>The Adjacent User Theory</em>. <em>The Adjacent Users</em> are aware of a product and possibly tried using the it, but are not able to successfully become an engaged user. This is typically because the current product positioning or experience has too many barriers to adoption for them.</p><p id="dba87ec8-624a-4dfe-a215-c635ff9f1b7e" class="">While Instagram had product-market fit for 400+ million people, we discovered new groups of users who didn’t quite understand Instagram and how it fit into their lives. Our insight was that it is critical for growth teams to be continually defining who the adjacent user is, to understand why they are struggling, to build empathy for the adjacent user, and ultimately to solve their problems. And Adjacent User Theory doesn’t just apply to hyper-growth machines like Instagram, I’ve seen the dynamic play out again and again at plenty of other product-driven companies.</p><h1 id="a7b56f11-e08c-4548-8550-ce9d41d65692" class="">The Importance Of The Adjacent User</h1><p id="73ecd230-51f0-4349-b937-1d473a8396d0" class="">Solving for the Adjacent user is critical for a few reasons.</p><h2 id="5de461b3-232b-49db-8169-be1df0954c93" class=""><strong>Solving For The Adjacent User Captures The Potential Of Current Product Market Fit</strong></h2><p id="180d94c5-4b75-4464-b060-7f31d6fccf01" class="">When you have <a href="https://brianbalfour.com/essays/market-product-fit">Product-Market Fit</a>, you have healthy retention curves (they flatten out). But this isn’t the end goal. Your current retention doesn’t represent the true potential of your current product-market fit. There is a hypothetical retention curve that sits above that represents this true potential.</p><p id="4812025a-5543-4924-88ef-692cc588fd79" class="">What creates this gap? There are a set of users who show intent for your product but are not quite able to get over the hump. Those are your Adjacent Users. Solving for the Adjacent User through <a href="https://www.reforge.com/blog/product-work-beyond-product-market-fit?utm_source=ac&amp;utm_medium=blog">growth and scaling work</a> helps your product realize its true product-market fit potential.</p><figure id="1b56f0ee-0041-4ab3-a128-12106fdfbdf5" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/current-pmf-retention.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/current-pmf-retention.png"/></a></figure><h2 id="9b50fc91-a0e1-4af2-9330-5c28ebf2d612" class=""><strong>The Impact Of Solving For The Adjacent User Compounds Over time</strong></h2><p id="a7eecd08-e4b8-45e5-86d8-ff9da1b34afd" class="">Every year there are massive efforts to getting voters to register and get to the polls. Those voters not only impact the outcome of one election, but can change the engagement of future elections and generations of politics.</p><p id="99a59f51-aa65-475e-b41b-f1a09917d88d" class="">In a similar way, when you enable adjacent users to successfully experience the core value proposition, it not only changes the engagement of near term cohorts but flows through to creating impact for all future cohorts of users. This doesn’t just impact retention, but flows through your <a href="https://www.reforge.com/blog/growth-loops?utm_source=ac&amp;utm_medium=blog">growth loops</a> to <a href="https://www.reforge.com/blog/growth-metric-acquisition-monetization-virality?utm_source=ac&amp;utm_medium=blog">impact acquisition and monetization</a> as well.</p><h2 id="54c51751-4897-4968-ad32-650b7f9eeadc" class="">The Adjacent User Is A Different Way To Focus Product Efforts</h2><p id="ba402635-5161-4851-bc1d-5a38a758442a" class="">Most product teams know their existing users pretty well. But your future audience is always evolving. The challenges that these potential users face in adopting the product increase over time. Without a team dedicated to understanding, advocating, and building for your next set of users, you end up never expanding your audience. This stalls growth, and the product never reaches the level you aspire it to.</p><h1 id="6cdea564-6bb0-4847-b3d5-9e1efb32d58d" class="">Going Deeper On The Adjacent User</h1><p id="e98d22e6-d5f7-459f-8d35-da81484e438d" class="">You can think about your product as a series of circles. Each of these circles is defined by the primary user states that someone could be in. For example Power, Core, Casual, Signed Up, Visitor. Each one of these circles have users that are “in orbit” around it. These users have an equal or greater chance they drift off into space rather than crossing the threshold to the next state. There is something preventing them from getting over the hump and transitioning into the next state. These are your adjacent users and the goal is to identify who they are and understand their reasons struggling to adopt. As you solve for them, you push the edge of the circle out to capture more of that audience and grow.</p><figure id="6a5d4b06-c294-48cf-a90b-50c0b233e86a" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/adjacentuser.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/adjacentuser.png"/></a></figure><h2 id="ab3c54a7-ca7a-412f-97c7-205181fb820c" class=""><strong>Instagram Example Of The Adjacent User</strong></h2><p id="880e75f1-0c41-41c9-a8f1-36c9a53e4e17" class="">Lets go through a couple of examples, starting with Instagram. The primary thresholds that a user has to cross to becoming a core user:</p><ul id="ca34279f-40c6-4784-8d56-7daf3b7af33a" class="bulleted-list"><li>Not Signed Up → Signed Up</li></ul><ul id="470b7262-1379-4d4d-8220-bf9fd49ba8e5" class="bulleted-list"><li>Signed Up → Activated</li></ul><ul id="386f59ac-6567-4f1e-b150-0197e74b142d" class="bulleted-list"><li>Casual → Core Usage</li></ul><p id="4c7e025b-863f-4d5b-996e-6eb03fea7f0d" class="">At each one of these thresholds, there are users that are circling around them, that have an equal or greater chance of not crossing the threshold.</p><blockquote id="782bae16-7902-424c-9c28-dcddbed450cc" class="">Bangaly: “At Instagram, if a user had more than 10 followers in the first 7 days after signing up there was over a 65% chance that the user would become activated. There was always a group of users on that margin that would struggle to build their audience. But the reasons they struggled varied across different sets of user and changed over time.”</blockquote><figure id="578c2582-8701-4b7b-a17d-5b00eea88e94" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/instagramexample.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/instagramexample.png"/></a></figure><h2 id="a7c39ce7-27fc-40a8-be2a-44bca7589878" class=""><strong>Slack Example Of The Adjacent User</strong></h2><p id="d91965cb-ff41-40be-83fc-0d2a2a5d2f34" class="">Lets go through an example for Slack. The primary thresholds that user has to cross through are:</p><ul id="8060a204-2221-4cf7-98fb-480d97e51021" class="bulleted-list"><li>Not Signed Up → Signed Up (Acquisition Teams)</li></ul><ul id="4e0a8da6-c125-4a4c-bb55-217b925df4d0" class="bulleted-list"><li>Signed Up → Casual (Activation Teams)</li></ul><ul id="e66d9a76-378f-41b2-83ab-08d235fed3e3" class="bulleted-list"><li>Casual → Core Free (Engagement Teams)</li></ul><ul id="56978e7e-6009-4a07-ade2-c4d82a05e658" class="bulleted-list"><li>Core Free → <a href="https://www.reforge.com/blog/monetization-vs-growth-its-a-false-choice?utm_source=ac&amp;utm_medium=blog">Monetized</a> (Monetization Teams)</li></ul><p id="9d68d148-2927-47d3-a7b1-38ce9d054ec2" class="">At each one of these thresholds, there are users that are circling around them, that once again have an equal or greater chance of just drifting off into space.</p><blockquote id="d09472f9-f34c-4256-8cc1-9313150aae31" class="">Fareed: “At Slack, we found that if a user was active 3 days out of the last 7 (3d7), they were right on the edge and had a roughly 50/50 chance of churning or retaining the next week.”</blockquote><figure id="bdf7eebe-60c7-4c80-923c-bca421c95454" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/slackexample.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/slackexample.png"/></a></figure><h2 id="4e4478df-501e-4ef5-b19d-4f9e391d4ddf" class="">Why Teams Don’t Focus On The Adjacent User</h2><p id="e65a4863-9a4e-4b5a-8003-5ec48b5e5c61" class="">There are a few things that tend to lead teams away from focusing on the adjacent user:</p><ul id="45d0e6be-32f6-4239-a35f-8e4f564b3449" class="bulleted-list"><li>Focusing On The Power User</li></ul><ul id="75acffea-06cd-4ff8-bcf9-bff63afcce55" class="bulleted-list"><li>Personas Are The Wrong Tool</li></ul><ul id="2a5150b1-84cc-4f03-8221-51d040a6d7de" class="bulleted-list"><li>Trying To Hit A Home Run On Every Swing</li></ul><h2 id="bb49dc6e-5795-458b-9566-c75132488b98" class="">The Gravity Of The Power User</h2><p id="97fa54d5-6aa4-4826-aeee-6e64676e824f" class="">Product teams by nature are <a href="https://andrewchen.co/power-user-curve/">power users</a> of their own product. The parts of the product that the product team uses, tend to automatically get improved as the pain is right in front of them. But this leads to building for yourself (or your friends). While that can feed the ego, if you are only building for yourself or power users, you won’t grow. You need to constantly be building for that next user that doesn’t have the same level of knowledge, intent, or needs that you, your team, and your power users already have.</p><p id="b4dbbdb6-36e5-45c6-8ad2-86bcc19464d9" class=""><em><strong>Working on the adjacent user requires you to cross a cognitive threshold.</strong></em> You have to specifically seek out the definition to “see” them and understand their experience, which is likely to be dramatically different from what you see as an employee. Once you see them, you can build empathy for them and their struggles, which in turn informs what you build.</p><blockquote id="652127e0-3b02-4daf-bec1-a3005da354de" class="">Andrew: “At Uber, a lot of employees were power users of the Uber product. This led to a lot of voices thinking they knew what we needed to grow just because they used the product a lot. But these were rarely the things that pushed growth of Uber into new audiences.”</blockquote><h2 id="a9a92d69-30ac-46af-8bae-6ec1ec195efd" class="">Personas Tend To Be The Wrong Tool</h2><p id="e36be70a-6588-496a-9ac1-0dbe078c37ed" class="">When trying to answer the question of who they are trying to solve for, product teams often use their stated personas as the answer. But personas, as they are typically defined, have one or more of the following issues:</p><ol type="1" id="be67dbce-0c1a-4bb5-b641-465ff5bef710" class="numbered-list" start="1"><li><strong>Current User vs Next User –</strong> Product personas tend to describe <a href="https://caseyaccidental.com/different-persona-types">who your current users are</a>. The adjacent user is a forecast of who your next user is so that you can enable the things to make them successful.</li></ol><ol type="1" id="0bd6f0e6-edcf-40c7-9c09-f1490409912d" class="numbered-list" start="2"><li><strong>Too Static –</strong> A company will often come up with their personas and anchor on them for years, never evolving and updating them. The definition of your adjacent user should be evolving and changing more frequently as you solve for one and move to another.</li></ol><ol type="1" id="aa070082-2ef5-4965-89cb-e17ebde65b5b" class="numbered-list" start="3"><li><strong>Too Broad –</strong> Personas tend to be too broad to be actionable. Living beneath a lot of persona definitions are many sub-segments. <em><strong>The adjacent user is about having a view on those sub-segments living at the edge of who the product is working for today.</strong></em></li></ol><ol type="1" id="6bf90a23-5292-4d70-806e-76a07628f56e" class="numbered-list" start="4"><li><strong>Not Based on Usage</strong> – Companies often build personas based on demographic factors and emotional needs. While these are valuable for many applications, they won’t help you solve adoption issues for adjacent users unless you also include their usage barriers in your definitions.</li></ol><h2 id="984ba807-27e5-4192-bdc9-7a6a5535db86" class="">Trying To Hit A Home Run Every Time</h2><p id="f1592afc-9e18-4e70-b2ae-6934b2d0041d" class="">Product teams overvalue hitting home runs vs hitting 100 singles back to back. This leads them to take bigger swings by going after bigger markets of new users. <em><strong>They get bogged down by trying to establish product-market fit for a new set of users and never fulfill the potential of their current product-market fit.</strong></em></p><p id="5f12869e-5ce7-41f6-a538-5d8f51480fc3" class="">Remember, adjacent users are the users who are struggling to adopt your product today. Non-adjacent users could literally be everyone else in the entire world. Sure, non-adjacent users might be a larger market, but the barriers to their adoption are also dramatically higher. Companies that try to go too big too soon and often, skip the next obvious steps and fail to solve their current adoption problems.</p><p id="a0cfd327-e726-4e54-9956-32236d4200cb" class="">Solving for the adjacent user is often seen as “optimization”, which in some organizations is viewed poorly because they represent short-term thinking. <em><strong>Solving for your adjacent user is not short term thinking; it is this disciplined sequential execution that will enable your longer-term roadmap and faster growth</strong></em>. It is short turns on a longer term path, not short term.</p><h1 id="175bf89a-f1f4-48c8-ab4a-959df445898b" class="">How To Know The Adjacent User Is Here</h1><p id="ee2a20f9-17b0-44d2-8ffa-540d1d7fd3c4" class="">Until you recognize that they are adjacent users and commit to helping them, they will remain adjacent. <em><strong>They aren’t going to get there on their own.</strong></em> You have to be passionate about them and learn to view the product from their eyes. If you don’t focus on them, growth slows and your cohorts decay.</p><h2 id="de488dc8-4d05-4a9d-a577-8d7f769fc96f" class="">Cohort Decay Is Your Signal</h2><p id="74c64f61-2606-4668-9d4c-80386e5a047b" class="">At a high enough volume of users, you will start to see the effect of the adjacent user show up in your cohorts. Sitting at the edge of each user state is a quantitative metric that indicates conversion from one state to the next. For example, free to paid conversion or signed up to activated.</p><p id="9e46cd0a-34db-497c-8c84-8fa59c9ae791" class="">When you look at these variables on a cohorted basis, you will almost always see a decline from cohort to cohort over time. This is because there is some segment of adjacent users that are entering that state and struggling to convert to the next.</p><blockquote id="cf1b0ca7-2e1a-46d9-abb8-77f6f8cd271c" class="">Elena: “When you start investing into new channels (especially paid) it is typically a signal to the product org that adjacent users are coming. New channels bring in users that will be different on some vector. Lower intent, less solution aware, less brand aware, pain point not completely formulated, or something else.”</blockquote><h3 id="f7a331f4-9e50-4bf3-b113-7b456fce6259" class="">Slack Example of Cohort Decay</h3><blockquote id="55fa0562-c41b-4678-a314-30a422d21070" class="">Fareed: “A common thing I see across freemium SaaS companies I advise, is free to paid conversion decline from cohort to cohort. This is your signal that there are a set of adjacent users on the edge of this state that you need to start solving for.”</blockquote><p id="07f770a0-1de2-4351-b44c-7ef436a1ea5a" class="">What Fareed’s story is pointing out is that at the edge of Core Free → Paying User, the metric that monitors that edge is free to paid conversion. Over time, if you look at that metric on a cohorted basis, you will start to see the metric go down from cohort to cohort. This can happen at the edge of any user state (signup to activated, activated to core, etc).</p><figure id="13259887-bc55-445e-8c12-b46a0bbb3edd" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/cohortdecay.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/cohortdecay.png"/></a></figure><h1 id="b3d890a5-157f-40e7-a57a-8b01369405aa" class="">Discovering and Defining Your Adjacent Users</h1><p id="b6f9e976-06c2-42c4-84c1-17aec8b14c59" class="">The first step to seeing the product through the eyes of the Adjacent User is to build a hypothesis of who they are and why they are struggling. How do we do that?</p><h2 id="9bd464fd-39d2-48bc-aa7f-40a3b632b588" class=""><strong>The Goal Is To Get Visibility, But Not Perfect Visibility</strong></h2><p id="a133a417-b5af-4766-9978-c2c910888c3d" class="">The goal of defining your adjacent users is to get visibility, but not perfect visibility. You need to define the landscape in front of you to understand all your options and figure out which type of adjacent user to focus on. Knowing just one adjacent user segment isn’t enough because you often have several to choose from.</p><p id="8e7c8088-ab55-465f-a863-d93e84956f6b" class="">But there are equal problems trying to get perfect visibility. You will never have perfect visibility and perfect definitions. If you seek out understanding perfect visibility you will never get started.</p><p id="274d1d58-fea7-4235-ac27-5e439e7830f5" class="">The process is to lay out multiple hypotheses of who the adjacent users are, choose which one to focus on strategically, force your team to look at the product through their lens, experiment and talk to customers to validate and learn, then update the landscape to make your next choice. I like to think about it as a snowball. You know very little at first, but as the snowball turns you collect more information about the adjacent user, which helps you collect more snow (users).</p><h2 id="43c58a6c-5e4e-4e80-9bcf-ada41d4dd766" class="">Knowing Who Is Successful Today and Why</h2><p id="f7ae8a84-39d6-4a22-a16e-c1041d2f6432" class="">To understand your adjacent users, it is helpful to understand the attributes of who is successful today and why they are successful. The reason this is helpful is that your adjacent user is different on one or more of these attributes (but not all). These attributes create vectors of expansion. Lets go through an example.</p><p id="e6f31c04-c7b8-420e-b8fa-fec35abfdd9b" class="">At Instacart, we knew that over 75% of our core, healthy users were:</p><ul id="f61f81ce-88ec-4a56-92f7-c0c141ecdeb8" class="bulleted-list"><li>Women</li></ul><ul id="0deaedf1-d0f0-48c7-a49b-c6ca926c6a3e" class="bulleted-list"><li>Urban</li></ul><ul id="b216a174-031a-49d0-862c-d5df8512ec53" class="bulleted-list"><li>Located In Certain Cities</li></ul><ul id="8f849672-a0a8-466e-ab76-b6a915e65abd" class="bulleted-list"><li>Head of Household</li></ul><ul id="ef8e0b4c-4d02-4e6f-a288-62d96c68a801" class="bulleted-list"><li>Had one or more kids</li></ul><ul id="7d709525-de65-4640-9bab-7fffdc70181c" class="bulleted-list"><li>Were more affluent and less price sensitive</li></ul><ul id="3eff914e-0a07-49d7-9d84-2d40b8a34e2d" class="bulleted-list"><li>Willing to spend an hour filling up their Instacart Order</li></ul><p id="2f024f84-97ad-41a4-9063-3e326541783a" class="">Some of these things we knew from data. Some of these thing we knew from customer conversations. Some of them we knew by inference. Each one of these attributes creates vectors of expansion</p><ul id="3c1c814b-78db-4407-bd9e-8efb09149667" class="bulleted-list"><li>Women → Men</li></ul><ul id="60090107-1315-4f5d-8e32-0f4a6d315130" class="bulleted-list"><li>Urban → Suburban</li></ul><ul id="f82c1369-91ae-4138-8c2a-407ab5c3225d" class="bulleted-list"><li>Cities → Other Cities</li></ul><ul id="7c7437f2-5e95-43dc-8309-ebffcfdfd956" class="bulleted-list"><li>Head of Household → Members of households</li></ul><ul id="bc3787f0-e45c-4845-9aa3-5a4de959ff8c" class="bulleted-list"><li>1 Kid → Smaller Families, Couples, Singles</li></ul><ul id="543bf163-99ad-446d-9885-3f7487b1627e" class="bulleted-list"><li>More Affluent + Less Price Sensitive → More Price Sensitive</li></ul><ul id="f5134d8e-eb12-4be7-b672-6bda402e6098" class="bulleted-list"><li>Willingness to put effort in the cart → Less willingness to spend that time</li></ul><p id="a1ff045b-8b15-44c2-b370-944385649ef2" class="">The more granular you can get, typically the better. But there are a set of common categories for attributes. Which categories are relevant and most impactful depend on the product:</p><ul id="7ebc8f2e-eee5-41ad-be4d-c6de3752d6ba" class="bulleted-list"><li>Gender</li></ul><ul id="23d18201-8bbf-4e8a-90c4-d2af706a93ce" class="bulleted-list"><li>Age</li></ul><ul id="c349955f-b960-4901-badd-81c9cda920c0" class="bulleted-list"><li>Income</li></ul><ul id="eed2b832-2c23-4195-9974-efc2eae82736" class="bulleted-list"><li>Geo</li></ul><ul id="27f5286a-9c3e-4abf-b3cd-087597247119" class="bulleted-list"><li>Language</li></ul><ul id="fa387db6-3b8b-4076-b13e-e76938e2be63" class="bulleted-list"><li>Price Sensitivity</li></ul><ul id="c01a8ddd-e34d-4e17-96b5-13d804c39e94" class="bulleted-list"><li>Tech Enablement</li></ul><ul id="a4af5c57-83a6-45f1-b6a0-3f4fbf510cb1" class="bulleted-list"><li>Customer Maturity</li></ul><ul id="65c2426e-8e9f-4964-9e75-b8cd8808fbf5" class="bulleted-list"><li>Device Capability</li></ul><ul id="b82c6362-0548-483d-a5d8-05a13d58ded3" class="bulleted-list"><li>Use Case for The Product</li></ul><ul id="1e23778d-c5c0-4aa2-91c0-f9a99bf8347c" class="bulleted-list"><li>Role</li></ul><ul id="ec95ec10-7ce9-48aa-9370-a6fc12a2264e" class="bulleted-list"><li>Company</li></ul><figure id="a61bf4b2-36a1-47b8-8603-780fa9aa3af4" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/commonattribute.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/commonattribute.png"/></a></figure><h2 id="25a3e385-884b-4da3-9ccd-8cedc9e483e9" class="">Who Is The Adjacent User?</h2><p id="0e25eb12-5a22-47fb-a96e-acf9ec26e8bd" class="">Once you have hypotheses for who is successful and why they are successful, you can hypothesize possible adjacent users segments. This will involve changing one or more of the vectors that you identified.</p><p id="d5ee85f1-75ff-412c-b3dc-22c27e3ad59f" class="">I typically recommend starting with a bottoms-up analysis of your data. You do not need to spend weeks talking to users to get a sense for who your adjacent user is. Look at what is happening on the edges of these states in the data. The data will help you identify places in the product that people are dropping off. This is the starting point to help you develop hypotheses about <em>why</em> different segments of users are dropping off.</p><p id="2ee700f4-092f-4f0a-a8c5-6a1ff1989406" class="">At Instacart, when we initially looked at the data, we found that it took a really long time for current successful users to create their first order. As we looked through that flow, it became an understandable problem. For someone that had never placed an order, there were tens of thousands of products, and this person wanted to find a specific product quickly. Our hypothesis was that current users were very high intent users who were willing to spend an hour filling up their cart versus driving to the store. It led us to start focusing on the discoverability of products within first use to capture users with less intent.</p><p id="2911c205-a8d1-4f6a-b09c-5a840d308f8e" class="">At Instagram, when we first looked at the data, we started to see an enormous amount of organic web traffic showing up, but they weren’t converting to sign-ups and healthy users. We didn’t have any idea why. But through a lot of data exploration, we started to figure out where those users were coming from, why they were coming via web traffic, and other reasons that helped us define the adjacent user.</p><p id="794c0f78-4d1e-4335-8fa9-e60767af7f5c" class="">When you have an early hypothesis of who the adjacent user is from the data, use that to inform who you recruit for user research. Those customer conversations help you do two things: One, validate and fill in your hypotheses on who the adjacent user is; and two, start to build empathy for the adjacent user and understand why they are struggling.</p><h2 id="038462dd-2e43-4726-b986-a3d851324d72" class="">Why Are They The Adjacent User?</h2><p id="304c1f80-d2ca-466c-8977-1eac36036fda" class="">It is not enough to know who the adjacent user is, but you need to know why they are struggling. To do that, <em><strong>you have to build empathy with the adjacent user</strong></em>. This is the most important part.</p><p id="33b13aa3-df94-4f5c-8321-1a7ceae2992d" class="">Building empathy for the adjacent user is hard because by definition your team is not living the experience of the adjacent user. Your team are power users of the product. They know the product in and out. To build empathy with the adjacent user and create hypotheses of why they are struggling, I recommend four techniques:</p><ol type="1" id="06eceba3-b416-4de0-a136-70adfe4e4952" class="numbered-list" start="1"><li>Be The Adjacent User</li></ol><ol type="1" id="a52ef969-a50c-4cdd-8c54-f15b0e8319af" class="numbered-list" start="2"><li>Watch The Adjacent User</li></ol><ol type="1" id="1e7c810e-f950-47df-9e16-35d3d07a0555" class="numbered-list" start="3"><li>Talk To The Adjacent User</li></ol><ol type="1" id="785184ef-a13a-4a77-a97a-81e47a64ef01" class="numbered-list" start="4"><li>Visit The Adjacent User</li></ol><p id="18980ddc-2bc0-4f89-9d1d-48fdb849bee0" class="">Lets talk about each of these individually.</p><figure id="0a4ce9ce-b66e-4b25-8e65-3de23fb39c31" class="image"><a href="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/empathyadjacentuser.png"><img style="width:700px" src="The%20Adjacent%20User%20Theory%20e4ef4c1bd9184033b620ffd837d53a46/empathyadjacentuser.png"/></a></figure><h3 id="fc125e57-8369-44fb-911d-4bfe777d795d" class="">Be The Adjacent User</h3><p id="2ed68f01-ba6a-4108-90cc-8a03f17962c4" class="">You need to force the team to be the adjacent user by experiencing the product in the conditions and settings that the adjacent user is experiencing. This is commonly referred to as dog-fooding. This starts by making sure the team is constantly experiencing new user flows, empty states, and product states that require a certain amount of usage before they become valuable.</p><p id="a08e7d86-e0f5-4a6d-bb45-01b57a651e3d" class="">This eventually progresses to building tools to be able to simulate the experience of your adjacent users. For example, at Instagram as our adjacent users increasingly became more international, we needed to find a way to experience the product across many permutations of devices, network speeds, languages, and much more. Facebook built something called Air Traffic Control, which simulated elements of these permutations like network speed so the team could experience the product through the eyes of the adjacent user.</p><p id="976313dc-fcae-4665-97de-7e839937d131" class="">At Instacart, we had to find ways to experience the product through the eyes of someone in an expansion market like Overland, Kansas. There the store options, delivery windows, and other factors were completely different than what a PM or engineer on the team in San Francisco would be experiencing.</p><p id="9f12aa8c-a7e3-4a41-bc1d-c9f4aec7593f" class="">Living every day as the adjacent user uncovers hidden connections and dependencies in the product that impact the experience for the adjacent user that would have otherwise gone unnoticed.</p><h3 id="5ae3ff56-72d2-42ff-901b-9ed3a8a581e5" class="">Watch The Adjacent User</h3><p id="4fa217d6-fd8e-477d-94ad-55d4370445a3" class="">The second technique is to watch the adjacent user using your product through usability tests. Ideally this is done with trained researchers when possible. Watch the adjacent user try to sign up, activate, see what they struggle on, have them talk about why they are having challenges and what their expectations of the experience are.</p><p id="9f8c1d89-d442-4ed6-890a-5df77b62b8ac" class="">Do not help them until they get stuck so you can observer what kind of workarounds and hacks people create to get the outcomes they want. This is how you start uncovering behavior that explains aberrant data, or behavior for which data doesn’t exist.</p><h3 id="df0bf822-2e5f-4ef2-9c6b-5b7ad719dbe6" class="">Talk To The Adjacent User</h3><p id="3e28fbd9-7024-4abd-897e-6d6edf6b67b0" class="">The third technique is to talk to the adjacent user about why they are trying to use your product, what jobs they are trying to solve, and which <a href="https://brianbalfour.com/quick-takes/alternatives-not-competitors">alternatives</a> they are considering or have already tried. Surveys are fastest to deploy to get signal on where you should spend more time and focus. But surveys alone are not sufficient. You need to talk to users in person to go deeper.</p><p id="d9c79c60-61e1-4fb7-86ed-087111cbae3f" class="">At the beginning of the post I talked about the example at Instagram where we started to see a large increase in access churn (users logging out, then failing to log back in successfully). Two directions emerged. We could either make it harder for people to log out, or easier to log back in. But to determine which path was best, we needed to understand why people were logging out in increasing volumes.</p><p id="376fbea0-7b6d-4e91-b6fb-fe9111051018" class="">We decided to talk to a lot of users who were intentionally logging out. What we found were two things:</p><ol type="1" id="1a86a4f1-460a-4ed6-a2b5-c4d8206541e1" class="numbered-list" start="1"><li>People had a real use case for logging out. They logged out either because they had a prepaid phone plan and were worried about background data usage, or they were sharing the phone with a family member.</li></ol><ol type="1" id="33c30c3d-5c21-4cc0-9244-5103ec2b2f7d" class="numbered-list" start="2"><li>These users also commonly used fake email addresses. Email addresses are more of a western paradigm, and new people to the internet internationally don’t use email, they just text.</li></ol><p id="93ae4e52-4f53-4af9-907c-9f2c320b4259" class="">Once we understood these two things, it was clear the right strategic direction was to work on making it easier to log back in vs harder to log out and we were able to come up with some creative solutions for the use cases.</p><h3 id="d9275d19-3ceb-40f2-834b-097c1b43dee4" class="">Visit The Adjacent User</h3><p id="3858cc2f-4032-4d04-91c7-d31817c8b0c6" class="">The last technique is to visit the adjacent user in their environment. Seeing how your adjacent user uses a product in their environment expands your understanding of their workflow, constraints, and needs. Are B2B customers constantly sharing screens with colleagues for a product that you previously thought of as a personal tool? Are users having performance or usability issues in the real world that you otherwise wouldn’t have considered? Users tend to employ their authentic workarounds and habits in their own environment, which you won’t see in a lab or other manufactured setting.</p><h1 id="17d591ef-f4df-4a6a-a060-cf8cb09fb499" class="">Sequencing Your Adjacent Users</h1><p id="77bd7506-8e3d-4113-9e31-15c010b4f709" class="">One of the biggest failure points is sequencing your adjacent users incorrectly. You want to pick the right adjacent users to go after so that you are building towards longer term value over time.</p><p id="be111c0d-f197-40dd-9c87-a39245c18d07" class="">If you are familiar with Geoffrey Moore Crossing The Chasm, he referred to something similar called the bowling alley strategy. Find one niche audience that if you solve for them, helps you get to the next audience.</p><p id="c03b286b-c406-4f30-8989-c7a5334c0257" class="">The center of Moore’s framework was Customer Maturity: Innovators, Early Adopters, Early Majority, Late Majority, and Laggards. Moore theorized that by solving for the problems of next set of likely adopters you enable the following segments. Adjacent User theory is similar. By enabling your immediate next set of adjacent users, you create the conditions that enable future segments. You can push the boundaries of the core user outcomes down to a lot of vectors, customer maturity being just one.</p><h2 id="a4cd7338-36bb-4f48-afc9-f014415428a2" class="">How To Think About Sequencing</h2><p id="79c079a8-731d-4a2e-b796-6b3828eafd63" class="">There are a few keys to sequencing segments of Adjacent Users.</p><p id="158db5f8-89ac-43cb-987c-64796457459d" class=""><strong>1. Adjacent User Should Only Be Different On One or Two Attributes</strong></p><p id="67b6cde7-aaa8-40b3-9742-54b950bb140c" class="">Let’s say you have 5 different vectors you can expand on. If your adjacent user definition is different on all 5 of those vectors, or even the majority, choosing that segment is a bad choice. That is like trying to hit a home run on every swing. It is probably going to take too many changes that are too large to enable that segment.</p><p id="12de8d28-d555-42ef-8af3-efac62a1cb5f" class="">You need the conviction that you can build something to validate or invalidate the adjacent user definition pretty quickly. The adjacent user is not about capturing one large definition at once, it is about layering on micro definition after micro definition.</p><blockquote id="e056e179-c61f-405b-8ad8-08970ebd2488" class="">Elena: “A segment that is different on multiple attributes typically requires enabling a new value prop to bring them into the product. That’s a very big swing. But it’s not an “if” you should be going after them, it’s a question of “when.” If you can first add smaller features for adjacent users that only differ on one attribute you can maintain momentum and growth velocity while working up to a new value prop for those multi-attribute users.”</blockquote><p id="cd75681a-ccaa-44af-a51a-0452de6bdca5" class=""><strong>2. Not All Adjacent Users Are Opportunities</strong></p><p id="10b577ff-d038-4c6b-826b-12c1562baa61" class="">As you explore your adjacent users, you are going to find a lot of possible segments. But just because they exist, does not mean you should choose to serve them. The key here is that the segment still needs to align with the strategic direction of where the product is going.</p><p id="8c61a20e-008f-446a-8ec7-d7ab43eefbac" class="">Sometimes you will have a lot of insight that an adjacent user exists, but you are unsure if serving them is meaningful and aligns with the strategic direction. This happened while working on Instagram. As we solved access churn (people churning because they had trouble logging back in) we noticed feed posts were going up. At first, we didn’t know why, but we eventually discovered people had 2nd and 3rd accounts that they were logging back into. One account was public-facing, and one was more private for friends. So the question came up, should we be more intentional about making it easier to create and navigate across multiple accounts? Is that meaningful? Does it align with the strategic direction of the product? We didn’t have a clear answer and therefore punted on that adjacent user until we had further validation that the 2nd account was an additive opportunity within our strategic direction.</p><p id="a760e123-18f0-4ad3-9786-44081b6a4b3f" class=""><strong>3. Solve In-House Problems First</strong></p><p id="4faec67d-c9b9-4c6c-bb34-ede158820567" class="">When choosing your adjacent users, it is typically better to solve “in-house” problems first. These are users that are already showing up in your funnel and product vs brand new users who aren’t there yet. Those that are already showing up are displaying intent, but having trouble finishing. Solving for them typically creates more short term impact.</p><blockquote id="6ed9ec59-54d1-42fb-b644-efbdff25528b" class="">Elena: *”For B2B products, the way I like to think about sequencing is:</blockquote><ol type="1" id="ee313f7a-d772-43a5-9a9d-72f4c245f349" class="numbered-list" start="1"><li>First solve for those in the existing user base that can drive additional monetization.</li></ol><ol type="1" id="df72fa03-014e-4fc5-929f-17b2c28e0295" class="numbered-list" start="2"><li>Second, solve for those in the existing user base that drive additional value in indirect ways. For example, a user might not monetize well but drive tons of viral contribution.</li></ol><ol type="1" id="d3be812f-7555-4859-b728-3a48e342b6e1" class="numbered-list" start="3"><li>Third, solve for the brand new adjacent user. These are people not showing up in the user base, but still share traits with the existing user base.”*</li></ol><p id="a5e6bb1f-831e-43d4-8a08-64395c193bd6" class="">Part of the prioritization should be the impact that you think the adjacent user segment can drive if solved for. The impact is partially driven by the size of the segment today. But one mistake when thinking about impact is to not think about the impact on a longer time horizon. Often times one segment might be larger but not growing, while another could be smaller but have a much larger growth trajectory. When taking that trajectory into account, the second segment may be the better choice.</p><blockquote id="e6ab8245-5940-43e0-bdcd-4d388334d092" class="">Fareed: “When we were looking at international growth opportunities at Slack, we found that both users in France and India had far worse monetization. A lot of teams would have probably chosen to solve for French users since they are a higher income audience.</blockquote><p id="eaffd6df-2486-40a1-b5b3-8b68c61fd1bd" class="">But users in France weren’t growing and we didn’t have a clear hypothesis of why they weren’t monetizing. On the other hand, India was growing way faster and had a clear hypothesis as to why they weren’t paying. When looking at it on a slightly longer term horizon, solving for users in India was clearly the higher ROI opportunity.”</p><h1 id="97c9eb61-bf20-40b1-92f3-26825004346a" class="">The Evolving Adjacent User Landscape</h1><p id="4cf21e2e-0d32-4419-9e30-5339f0d56b17" class="">The landscape and understanding of your adjacent users are always evolving. When I started at Instagram, the Adjacent User was women 35 – 45 in the US who had a Facebook account but didn’t see the value of Instagram. By the time I left Instagram, the Adjacent User was women in Jakarta, on an older 3G Android phone with a prepaid mobile plan. There were probably 8 different types of Adjacent Users that we solved for in-between those two points.</p><p id="84300626-3739-4a66-854d-42ca3c70d77d" class="">Your Adjacent User is constantly changing for a few different reasons:</p><ol type="1" id="fb865efd-2bd1-43b3-83d6-c1c620c0c716" class="numbered-list" start="1"><li><strong>New Information</strong>As you experiment and solve for one adjacent user, you are constantly gaining new information. This can happen in a few ways:  <ul id="fb2b501c-c3ca-4f2e-93c5-b5e04e86610c" class="bulleted-list"><li><strong>Unexpected Result –</strong> You run an experiment and get a result you did not expect.</li></ul><ul id="9a224778-657f-41d7-ae17-c08348fecc85" class="bulleted-list"><li><strong>New Instrumentation –</strong> New data instrumentation creates visibility into what is happening in areas you didn’t have visibility before.</li></ul><ul id="db55b765-73aa-4560-ab6b-888f0e372ffc" class="bulleted-list"><li><strong>New Research –</strong> Through the course of user research to validate hypotheses, you uncover new hypotheses you hadn’t thought about before.</li></ul><p id="770f5bae-0e2f-402d-b25a-85d380da7087" class="">This new information informs updates to your current adjacent user hypotheses and possibly creates entirely new adjacent user segments.</p></li></ol><ol type="1" id="5211fff6-3460-4f4e-8787-7660b8d42d17" class="numbered-list" start="2"><li><strong>New Users Showing Up</strong>As you unlock value for one type of adjacent user, they often start bringing in a new type of adjacent user into your orbit. All healthy products have some acquisition through word of mouth. So when you solve for one adjacent user, their word of mouth brings in their friends who just might be your next type of adjacent user.Unlocking the 35-45yo women in US and Europe on IG brought WOM growth through families. This is an important age group for mothers who would create private IG accounts to share family and kid photos. This influenced their friends to do the same, inspired other relatives to sign up just to see these photos, and their partners ended up joining as well</li></ol><ol type="1" id="af6732b9-ab69-4ec6-91f9-634b580ade44" class="numbered-list" start="3"><li><strong>New Value Props</strong>As the product team enables new value props in the product, it can fundamentally change what the experience needs to be at the edges of user states for adjacent users to experience the product.At Instagram, this occurred when we launched Stories. Stories didn’t help activate new users. It actually made it harder. It was hard for new users to have available Stories content because it disappeared after 24hours. Users needed to follow a lot more accounts to have enough content on any given day. The bar was higher and it changed the experience of how we created activation and engagement.</li></ol><p id="4a4696b2-331b-409c-b53a-fff5fc772146" class="">Knowing that the adjacent user is constantly changing, we would reevaluate our understanding of the adjacent user every quarterly planning cycle based on l<a href="https://www.reforge.com/experimentation-testing?utm_source=ac&amp;utm_medium=blog">earnings from experimentation</a> and research. In addition, we would tend to have one off insights a couple of times per year from various events like unexplainable experiment results, press, surveys, or something else. This evolving landscapes highlights the importance of a few different things:</p><ol type="1" id="07baba1c-a8dc-4152-bfaa-cac39bfd3c95" class="numbered-list" start="1"><li><strong>Taking Time To Understand </strong><em><strong>The Why</strong></em>Too often teams move on from the positive/negative result of an experiment without understanding why the experiment generated that result. You must take the time to <a href="https://www.reforge.com/blog/good-experiment-bad-experiment?utm_source=ac&amp;utm_medium=blog">understand “the why’ behind your experimental results</a>. The why helps you understand the next adjacent user. If you don’t do this you can miss incredibly important shifts in user mindsets as you move from adjacent segment to segment. If you don’t take the time to understand the why behind your results, you miss the opportunity to build empathy and solve your adjacent user’s real problems.</li></ol><ol type="1" id="6e0fbf26-65eb-45a3-a5e2-75b01d057ca2" class="numbered-list" start="2"><li><strong>Constantly Working On the Fundamentals Of Registration, Activation, Engagement and Monetization</strong>Too often teams treat key flows in their product as projects. But the adjacent user highlights why you need to be constantly working on the fundamentals of registration, activation, engagement, and monetization. It’s a continuously evolving user challenge that you need to be constantly re-evaluating. The work never stops.Fareed: “In the early days of Instacart, the best performing landing page was an all white page, that said “<em>Instacart, Groceries delivered to your door, put your zip code in”</em>. Nothing else performed better. The user at that time was very high intent, tech savvy, urban millennial who knew what Instacart was because they heard about it from a friend through the press. As Instacart grew over time, you had to explain what Instacart was, why does it matter, who it is for, what stores we have. The same experiment on the white page a year later had dramatically different results because the adjacent user had changed.”</li></ol><ol type="1" id="dcea91f5-390b-44ff-9647-1975f093e9f8" class="numbered-list" start="3"><li><strong>Continually Cross The Cognitive Threshold Of Your Adjacent User</strong>At the beginning of this post, we talked about how working on the adjacent user requires you cross a cognitive threshold of seeing the product experience through their eyes. As the landscape of the adjacent user evolves, you and the team need cross this threshold over and over. It is easy to get sucked back into the gravity of your existing user base. But your job is to constantly expand the definition of who is successful with your product.</li></ol><p id="b4438b78-e3a7-4534-9356-12d83b6466a6" class="">All successful products must eventually shift their focus from core to adjacent users in order to maintain growth rates. Rapid success in your first audience will inherently lead to saturation and declining growth in that segment. While this is certainly an enviable problem to have, solving it is one of the most complex challenges in technology. The most successful companies are the ones that can continuously evolve to serve more adjacent users. The art is selecting the right groups of adjacent users to go after next. If you try to solve all problems for everyone, you’ll drown across too many issues and waste time acquiring users who have no chance of being successful today.</p><p id="c7214f76-b12d-4a64-b2cb-160e1c5dad5b" class="">Adjacent User Theory demands an entirely different approach to being ‘user centric’. Static personas are OUT. Dynamic evolving personas that incorporate product adoption behavior are the standard to strive for. Every 3-6 months during hyper growth, you have to reorient your team around the next adjacent user, what they care about, and what problems you are solving for them.</p><p id="ba0efe7c-af78-45dc-ac78-2959b53d347d" class="">As you are succeed, you’ll see improving cohort retention, engagement, and monetization in your target adjacent users. You’ll maintain your growth rate on larger and larger install bases. And you’ll continuously discover the next adjacent user who could use your product with just a little more help.</p><p id="857e5173-02cf-455b-9547-a4497530d9d2" class=""><em>If you want to learn more from Bangaly and other leaders from top tech companies, check out Reforge’s upcoming </em><a href="https://www.reforge.com/?utm_source=ac&amp;utm_medium=blog"><em>Career Accelerator Programs</em></a><em> such as </em><a href="https://www.reforge.com/growth-series?utm_source=ac&amp;utm_medium=blog"><em>Growth Series</em></a><em>, </em><a href="https://www.reforge.com/experimentation-testing?utm_source=ac&amp;utm_medium=blog"><em>Experimentation and Testing</em></a><em>, and </em><a href="https://www.reforge.com/monetization-pricing?utm_source=ac&amp;utm_medium=blog"><em>Monetization Deep Dive</em></a><em>. Reforge programs distill invaluable knowledge from top leaders and deliver decades of career experience in an intensive 6-week part-time format.</em></p><p id="c71db783-31fd-4dfb-a769-b90939bb0808" class=""><strong>PS. Get new updates/analysis on tech and startups</strong></p><p id="c8569879-2363-4490-bec2-ac30040a10b8" class="">I write a high-quality, weekly newsletter covering what&#x27;s happening in Silicon Valley, focused on startups, marketing, and mobile.</p><p id="56325fd4-8efe-49f7-acd7-fcbc56dbe974" class="">Views expressed in “content” (including posts, podcasts, videos) linked on this website or posted in social media and other platforms (collectively, “content distribution outlets”) are my own and are not the views of AH Capital Management, L.L.C. (“a16z”) or its respective affiliates. AH Capital Management is an investment adviser registered with the Securities and Exchange Commission. Registration as an investment adviser does not imply any special skill or training. The posts are not directed to any investors or potential investors, and do not constitute an offer to sell -- or a solicitation of an offer to buy -- any securities, and may not be used or relied upon in evaluating the merits of any investment.</p><p id="80ca769d-ebad-4963-91fc-13b44455ff59" class="">The content should not be construed as or relied upon in any manner as investment, legal, tax, or other advice. You should consult your own advisers as to legal, business, tax, and other related matters concerning any investment. Any projections, estimates, forecasts, targets, prospects and/or opinions expressed in these materials are subject to change without notice and may differ or be contrary to opinions expressed by others. Any charts provided here are for informational purposes only, and should not be relied upon when making any investment decision. Certain information contained in here has been obtained from third-party sources. While taken from sources believed to be reliable, I have not independently verified such information and makes no representations about the enduring accuracy of the information or its appropriateness for a given situation. The content speaks only as of the date indicated.</p><p id="dc4e1e0b-b206-4553-9834-7a24c1dc0325" class="">Under no circumstances should any posts or other information provided on this website -- or on associated content distribution outlets -- be construed as an offer soliciting the purchase or sale of any security or interest in any pooled investment vehicle sponsored, discussed, or mentioned by a16z personnel. Nor should it be construed as an offer to provide investment advisory services; an offer to invest in an a16z-managed pooled investment vehicle will be made separately and only by means of the confidential offering documents of the specific pooled investment vehicles -- which should be read in their entirety, and only to those who, among other requirements, meet certain qualifications under federal securities laws. Such investors, defined as accredited investors and qualified purchasers, are generally deemed capable of evaluating the merits and risks of prospective investments and financial matters. There can be no assurances that a16z’s investment objectives will be achieved or investment strategies will be successful. Any investment in a vehicle managed by a16z involves a high degree of risk including the risk that the entire amount invested is lost. Any investments or portfolio companies mentioned, referred to, or described are not representative of all investments in vehicles managed by a16z and there can be no assurance that the investments will be profitable or that other investments made in the future will have similar characteristics or results. A list of investments made by funds managed by a16z is available at https://a16z.com/investments/. Excluded from this list are investments for which the issuer has not provided permission for a16z to disclose publicly as well as unannounced investments in publicly traded digital assets. Past results of Andreessen Horowitz’s investments, pooled investment vehicles, or investment strategies are not necessarily indicative of future results. Please see <a href="https://a16z.com/disclosures">https://a16z.com/disclosures</a> for additional important information.</p></div></article></body></html>

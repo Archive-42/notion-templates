@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Man-Computer Symbiosis</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="50eb79f5-17b6-43e8-a5d2-0edbae6429b6" class="page sans"><header><h1 class="page-title">Man-Computer Symbiosis</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-gray">Classic</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://groups.csail.mit.edu/medg/people/psz/Licklider.html" class="url-value">https://groups.csail.mit.edu/medg/people/psz/Licklider.html</a></td></tr></tbody></table></header><div class="page-body"><h2 id="5cd3406b-a46d-4bb6-9a75-8119774ee1f8" class="">Summary</h2><blockquote id="c045a412-196c-41e1-a15b-aa79712cb3bb" class="">Man-computer symbiosis is an expected development in cooperative interaction between men and electronic computers. It will involve very close coupling between the human and the electronic members of the partnership. The main aims are 1) to let computers facilitate formulative thinking as they now facilitate the solution of formulated problems, and 2) to enable men and computers to cooperate in making decisions and controlling complex situations without inflexible dependence on predetermined programs. In the anticipated symbiotic partnership, men will set the goals, formulate the hypotheses, determine the criteria, and perform the evaluations. Computing machines will do the routinizable work that must be done to prepare the way for insights and decisions in technical and scientific thinking. Preliminary analyses indicate that the symbiotic partnership will perform intellectual operations much more effectively than man alone can perform them. Prerequisites for the achievement of the effective, cooperative association include developments in computer time sharing, in memory components, in memory organization, in programming languages, and in input and output equipment.</blockquote><h2 id="03ea5e3c-8053-4bc2-8b34-d6098b071784" class="">1.1 Symbiosis</h2><p id="25066475-5cf9-4d11-b75f-5eb7a47a277c" class="">The fig tree is pollinated only by the insect Blastophaga grossorun. The larva of the insect lives in the ovary of the fig tree, and there it gets its food. The tree and the insect are thus heavily interdependent: the tree cannot reproduce wit bout the insect; the insect cannot eat wit bout the tree; together, they constitute not only a viable but a productive and thriving partnership. This cooperative &quot;living together in intimate association, or even close union, of two dissimilar organisms&quot; is called symbiosis [27].</p><p id="f15b36b1-ad17-492c-becb-25e15c8f6a3d" class="">&quot;Man-computer symbiosis is a subclass of man-machine systems. There are many man-machine systems. At present, however, there are no man-computer symbioses. The purposes of this paper are to present the concept and, hopefully, to foster the development of man-computer symbiosis by analyzing some problems of interaction between men and computing machines, calling attention to applicable principles of man-machine engineering, and pointing out a few questions to which research answers are needed. The hope is that, in not too many years, human brains and computing machines will be coupled together very tightly, and that the resulting partnership will think as no human brain has ever thought and process data in a way not approached by the information-handling machines we know today.</p><h2 id="7bedcb92-8512-41af-a14e-b375a2822e53" class="">1.2 Between &quot;Mechanically Extended Man&quot; and &quot;Artificial Intelligence&quot;</h2><p id="4f132637-6198-44cf-b116-d69d694049f1" class="">As a concept, man-computer symbiosis is different in an important way from what North [21] has called &quot;mechanically extended man.&quot; In the man-machine systems of the past, the human operator supplied the initiative, the direction, the integration, and the criterion. The mechanical parts of the systems were mere extensions, first of the human arm, then of the human eye. These systems certainly did not consist of &quot;dissimilar organisms living together...&quot; There was only one kind of organism-man-and the rest was there only to help him.</p><p id="2e9bb7b8-6083-4154-90b6-3a151931a7fe" class="">In one sense of course, any man-made system is intended to help man, to help a man or men outside the system. If we focus upon the human operator within the system, however, we see that, in some areas of technology, a fantastic change has taken place during the last few years. &quot;Mechanical extension&quot; has given way to replacement of men, to automation, and the men who remain are there more to help than to be helped. In some instances, particularly in large computer-centered information and control systems, the human operators are responsible mainly for functions that it proved infeasible to automate. Such systems (&quot;humanly extended machines,&quot; North might call them) are not symbiotic systems. They are &quot;semi-automatic&quot; systems, systems that started out to be fully automatic but fell short of the goal.</p><p id="8f0ee75d-6828-4ec2-b1ae-98c2b98b367c" class="">Man-computer symbiosis is probably not the ultimate paradigm for complex technological systems. It seems entirely possible that, in due course, electronic or chemical &quot;machines&quot; will outdo the human brain in most of the functions we now consider exclusively within its province. Even now, Gelernter&#x27;s IBM-704 program for proving theorems in plane geometry proceeds at about the same pace as Brooklyn high school students, and makes similar errors.[12] There are, in fact, several theorem-proving, problem-solving, chess-playing, and pattern-recognizing programs (too many for complete reference [1, 2, 5, 8, 11, 13, 17, 18, 19, 22, 23, 25]) capable of rivaling human intellectual performance in restricted areas; and Newell, Simon, and Shaw&#x27;s [20] &quot;general problem solver&quot; may remove some of the restrictions. In short, it seems worthwhile to avoid argument with (other) enthusiasts for artificial intelligence by conceding dominance in the distant future of cerebration to machines alone. There will nevertheless be a fairly long interim during which the main intellectual advances will be made by men and computers working together in intimate association. A multidisciplinary study group, examining future research and development problems of the Air Force, estimated that it would be 1980 before developments in artificial intelligence make it possible for machines alone to do much thinking or problem solving of military significance. That would leave, say, five years to develop man-computer symbiosis and 15 years to use it. The 15 may be 10 or 500, but those years should be intellectually the most creative and exciting in the history of mankind.</p><p id="4bc4c738-5b2b-4535-b94a-b5987ffc6ab5" class="">Present-day computers are designed primarily to solve preformulated problems or to process data according to predetermined procedures. The course of the computation may be conditional upon results obtained during the computation, but all the alternatives must be foreseen in advance. (If an unforeseen alternative arises, the whole process comes to a halt and awaits the necessary extension of the program.) The requirement for preformulation or predetermination is sometimes no great disadvantage. It is often said that programming for a computing machine forces one to think clearly, that it disciplines the thought process. If the user can think his problem through in advance, symbiotic association with a computing machine is not necessary.</p><p id="14db1e1f-57d4-4a51-a36b-9a22ec734768" class="">However, many problems that can be thought through in advance are very difficult to think through in advance. They would be easier to solve, and they could be solved faster, through an intuitively guided trial-and-error procedure in which the computer cooperated, turning up flaws in the reasoning or revealing unexpected turns in the solution. Other problems simply cannot be formulated without computing-machine aid. Poincare anticipated the frustration of an important group of would-be computer users when he said, &quot;The question is not, &#x27;What is the answer?&#x27; The question is, &#x27;What is the question?&#x27;&quot; One of the main aims of man-computer symbiosis is to bring the computing machine effectively into the formulative parts of technical problems.</p><p id="3f2db01f-3659-4ac9-999c-1649c64b3856" class="">The other main aim is closely related. It is to bring computing machines effectively into processes of thinking that must go on in &quot;real time,&quot; time that moves too fast to permit using computers in conventional ways. Imagine trying, for example, to direct a battle with the aid of a computer on such a schedule as this. You formulate your problem today. Tomorrow you spend with a programmer. Next week the computer devotes 5 minutes to assembling your program and 47 seconds to calculating the answer to your problem. You get a sheet of paper 20 feet long, full of numbers that, instead of providing a final solution, only suggest a tactic that should be explored by simulation. Obviously, the battle would be over before the second step in its planning was begun. To think in interaction with a computer in the same way that you think with a colleague whose competence supplements your own will require much tighter coupling between man and machine than is suggested by the example and than is possible today.</p><p id="f4f30c49-c7a6-4b0f-b450-ce270ac22727" class="">The preceding paragraphs tacitly made the assumption that, if they could be introduced effectively into the thought process, the functions that can be performed by data-processing machines would improve or facilitate thinking and problem solving in an important way. That assumption may require justification.</p><h2 id="1a9036f3-f809-4cac-a377-34cc1c61d725" class="">3.1 A Preliminary and Informal Time-and-Motion Analysis of Technical Thinking</h2><p id="55971ce2-13c1-4d79-8154-355259a52212" class="">Despite the fact that there is a voluminous literature on thinking and problem solving, including intensive case-history studies of the process of invention, I could find nothing comparable to a time-and-motion-study analysis of the mental work of a person engaged in a scientific or technical enterprise. In the spring and summer of 1957, therefore, I tried to keep track of what one moderately technical person actually did during the hours he regarded as devoted to work. Although I was aware of the inadequacy of the sampling, I served as my own subject.</p><p id="92ca7087-d55a-4a9a-aed5-33a4808c856e" class="">It soon became apparent that the main thing I did was to keep records, and the project would have become an infinite regress if the keeping of records had been carried through in the detail envisaged in the initial plan. It was not. Nevertheless, I obtained a picture of my activities that gave me pause. Perhaps my spectrum is not typical--I hope it is not, but I fear it is.</p><p id="ea261452-279c-45bb-8611-af53bdf84843" class="">About 85 per cent of my &quot;thinking&quot; time was spent getting into a position to think, to make a decision, to learn something I needed to know. Much more time went into finding or obtaining information than into digesting it. Hours went into the plotting of graphs, and other hours into instructing an assistant how to plot. When the graphs were finished, the relations were obvious at once, but the plotting had to be done in order to make them so. At one point, it was necessary to compare six experimental determinations of a function relating speech-intelligibility to speech-to-noise ratio. No two experimenters had used the same definition or measure of speech-to-noise ratio. Several hours of calculating were required to get the data into comparable form. When they were in comparable form, it took only a few seconds to determine what I needed to know.</p><p id="82b0d897-2c9d-4ca6-abc2-6f0c9ea38741" class="">Throughout the period I examined, in short, my &quot;thinking&quot; time was devoted mainly to activities that were essentially clerical or mechanical: searching, calculating, plotting, transforming, determining the logical or dynamic consequences of a set of assumptions or hypotheses, preparing the way for a decision or an insight. Moreover, my choices of what to attempt and what not to attempt were determined to an embarrassingly great extent by considerations of clerical feasibility, not intellectual capability.</p><p id="24f9957a-a888-484a-87eb-c7b55aa8c131" class="">The main suggestion conveyed by the findings just described is that the operations that fill most of the time allegedly devoted to technical thinking are operations that can be performed more effectively by machines than by men. Severe problems are posed by the fact that these operations have to be performed upon diverse variables and in unforeseen and continually changing sequences. If those problems can be solved in such a way as to create a symbiotic relation between a man and a fast information-retrieval and data-processing machine, however, it seems evident that the cooperative interaction would greatly improve the thinking process.</p><p id="c53556b8-6aea-4c8c-a1f5-116b80503920" class="">It may be appropriate to acknowledge, at this point, that we are using the term &quot;computer&quot; to cover a wide class of calculating, data-processing, and information-storage-and-retrieval machines. The capabilities of machines in this class are increasing almost daily. It is therefore hazardous to make general statements about capabilities of the class. Perhaps it is equally hazardous to make general statements about the capabilities of men. Nevertheless, certain genotypic differences in capability between men and computers do stand out, and they have a bearing on the nature of possible man-computer symbiosis and the potential value of achieving it.</p><p id="869e7bf6-234d-4d28-a239-99384aff6f35" class="">As has been said in various ways, men are noisy, narrow-band devices, but their nervous systems have very many parallel and simultaneously active channels. Relative to men, computing machines are very fast and very accurate, but they are constrained to perform only one or a few elementary operations at a time. Men are flexible, capable of &quot;programming themselves contingently&quot; on the basis of newly received information. Computing machines are single-minded, constrained by their &quot; pre-programming.&quot; Men naturally speak redundant languages organized around unitary objects and coherent actions and employing 20 to 60 elementary symbols. Computers &quot;naturally&quot; speak nonredundant languages, usually with only two elementary symbols and no inherent appreciation either of unitary objects or of coherent actions.</p><p id="63e93c45-35ce-46fd-8416-b9225575a0c3" class="">To be rigorously correct, those characterizations would have to include many qualifiers. Nevertheless, the picture of dissimilarity (and therefore p0tential supplementation) that they present is essentially valid. Computing machines can do readily, well, and rapidly many things that are difficult or impossible for man, and men can do readily and well, though not rapidly, many things that are difficult or impossible for computers. That suggests that a symbiotic cooperation, if successful in integrating the positive characteristics of men and computers, would be of great value. The differences in speed and in language, of course, pose difficulties that must be overcome.</p><p id="ffba9763-b75d-4668-af86-4bd8d3288a23" class="">It seems likely that the contributions of human operators and equipment will blend together so completely in many operations that it will be difficult to separate them neatly in analysis. That would be the case it; in gathering data on which to base a decision, for example, both the man and the computer came up with relevant precedents from experience and if the computer then suggested a course of action that agreed with the man&#x27;s intuitive judgment. (In theorem-proving programs, computers find precedents in experience, and in the SAGE System, they suggest courses of action. The foregoing is not a far-fetched example. ) In other operations, however, the contributions of men and equipment will be to some extent separable.</p><p id="b840cfb3-63d8-414a-8afa-10ee70e5bcf1" class="">Men will set the goals and supply the motivations, of course, at least in the early years. They will formulate hypotheses. They will ask questions. They will think of mechanisms, procedures, and models. They will remember that such-and-such a person did some possibly relevant work on a topic of interest back in 1947, or at any rate shortly after World War II, and they will have an idea in what journals it might have been published. In general, they will make approximate and fallible, but leading, contributions, and they will define criteria and serve as evaluators, judging the contributions of the equipment and guiding the general line of thought.</p><p id="7d3c7a51-3175-4e20-b522-25f0b54fa56a" class="">In addition, men will handle the very-low-probability situations when such situations do actually arise. (In current man-machine systems, that is one of the human operator&#x27;s most important functions. The sum of the probabilities of very-low-probability alternatives is often much too large to neglect. ) Men will fill in the gaps, either in the problem solution or in the computer program, when the computer has no mode or routine that is applicable in a particular circumstance.</p><p id="c9016554-eb3a-4f07-8c04-8698cc1f2e24" class="">The information-processing equipment, for its part, will convert hypotheses into testable models and then test the models against data (which the human operator may designate roughly and identify as relevant when the computer presents them for his approval). The equipment will answer questions. It will simulate the mechanisms and models, carry out the procedures, and display the results to the operator. It will transform data, plot graphs (&quot;cutting the cake&quot; in whatever way the human operator specifies, or in several alternative ways if the human operator is not sure what he wants). The equipment will interpolate, extrapolate, and transform. It will convert static equations or logical statements into dynamic models so the human operator can examine their behavior. In general, it will carry out the routinizable, clerical operations that fill the intervals between decisions.</p><p id="effad399-71b3-445d-9279-8d5edb8e1efb" class="">In addition, the computer will serve as a statistical-inference, decision-theory, or game-theory machine to make elementary evaluations of suggested courses of action whenever there is enough basis to support a formal statistical analysis. Finally, it will do as much diagnosis, pattern-matching, and relevance-recognizing as it profitably can, but it will accept a clearly secondary status in those areas.</p><p id="b4f645ba-f942-45eb-b762-c573d54575bc" class="">The data-processing equipment tacitly postulated in the preceding section is not available. The computer programs have not been written. There are in fact several hurdles that stand between the nonsymbiotic present and the anticipated symbiotic future. Let us examine some of them to see more clearly what is needed and what the chances are of achieving it.</p><h2 id="09c0e17b-bec1-489f-a745-496d0af7b46a" class="">5.1 Speed Mismatch Between Men and Computers</h2><p id="db4502e1-af21-42e0-87d9-a69a035a8800" class="">Any present-day large-scale computer is too fast and too costly for real-time cooperative thinking with one man. Clearly, for the sake of efficiency and economy, the computer must divide its time among many users. Timesharing systems are currently under active development. There are even arrangements to keep users from &quot;clobbering&quot; anything but their own personal programs.</p><p id="108374af-ce1d-4cae-a5dd-c159ff4fe095" class="">It seems reasonable to envision, for a time 10 or 15 years hence, a &quot;thinking center&quot; that will incorporate the functions of present-day libraries together with anticipated advances in information storage and retrieval and the symbiotic functions suggested earlier in this paper. The picture readily enlarges itself into a network of such centers, connected to one another by wide-band communication lines and to individual users by leased-wire services. In such a system, the speed of the computers would be balanced, and the cost of the gigantic memories and the sophisticated programs would be divided by the number of users.</p><h2 id="2955c17d-a503-4d0a-acb3-54f95f1d43b8" class="">5.2 Memory Hardware Requirements</h2><p id="24c3a50c-e0d0-4c55-91d7-6726e9fcdd7c" class="">When we start to think of storing any appreciable fraction of a technical literature in computer memory, we run into billions of bits and, unless things change markedly, billions of dollars.</p><p id="01910bb1-3329-4381-880e-fd34936a4d89" class="">The first thing to face is that we shall not store all the technical and scientific papers in computer memory. We may store the parts that can be summarized most succinctly-the quantitative parts and the reference citations-but not the whole. Books are among the most beautifully engineered, and human-engineered, components in existence, and they will continue to be functionally important within the context of man-computer symbiosis. (Hopefully, the computer will expedite the finding, delivering, and returning of books.)</p><p id="70ef5322-0024-4169-82ea-6e40cd6000ba" class="">The second point is that a very important section of memory will be permanent: part indelible memory and part published memory. The computer will be able to write once into indelible memory, and then read back indefinitely, but the computer will not be able to erase indelible memory. (It may also over-write, turning all the 0&#x27;s into l&#x27;s, as though marking over what was written earlier.) Published memory will be &quot;read-only&quot; memory. It will be introduced into the computer already structured. The computer will be able to refer to it repeatedly, but not to change it. These types of memory will become more and more important as computers grow larger. They can be made more compact than core, thin-film, or even tape memory, and they will be much less expensive. The main engineering problems will concern selection circuitry.</p><p id="d566a06f-b3dc-42d9-9bae-d8e1afb999b7" class="">In so far as other aspects of memory requirement are concerned, we may count upon the continuing development of ordinary scientific and business computing machines There is some prospect that memory elements will become as fast as processing (logic) elements. That development would have a revolutionary effect upon the design of computers.</p><h2 id="5585f689-6012-4711-a224-4705981e701e" class="">5.3 Memory Organization Requirements</h2><p id="ea9c39ab-b1aa-40df-bde0-f9ee839e0a97" class="">Implicit in the idea of man-computer symbiosis are the requirements that information be retrievable both by name and by pattern and that it be accessible through procedure much faster than serial search. At least half of the problem of memory organization appears to reside in the storage procedure. Most of the remainder seems to be wrapped up in the problem of pattern recognition within the storage mechanism or medium. Detailed discussion of these problems is beyond the present scope. However, a brief outline of one promising idea, &quot;trie memory,&quot; may serve to indicate the general nature of anticipated developments.</p><p id="91b22230-ca6b-4ca6-ba30-a6cb4f8b951e" class="">Trie memory is so called by its originator, Fredkin [10], because it is designed to facilitate retrieval of information and because the branching storage structure, when developed, resembles a tree. Most common memory systems store functions of arguments at locations designated by the arguments. (In one sense, they do not store the arguments at all. In another and more realistic sense, they store all the possible arguments in the framework structure of the memory.) The trie memory system, on the other hand, stores both the functions and the arguments. The argument is introduced into the memory first, one character at a time, starting at a standard initial register. Each argument register has one cell for each character of the ensemble (e.g., two for information encoded in binary form) and each character cell has within it storage space for the address of the next register. The argument is stored by writing a series of addresses, each one of which tells where to find the next. At the end of the argument is a special &quot;end-of-argument&quot; marker. Then follow directions to the function, which is stored in one or another of several ways, either further trie structure or &quot;list structure&quot; often being most effective.</p><p id="fc6cb949-82eb-4e56-bba0-7e5be2a55c3d" class="">The trie memory scheme is inefficient for small memories, but it becomes increasingly efficient in using available storage space as memory size increases. The attractive features of the scheme are these: 1) The retrieval process is extremely simple. Given the argument, enter the standard initial register with the first character, and pick up the address of the second. Then go to the second register, and pick up the address of the third, etc. 2) If two arguments have initial characters in common, they use the same storage space for those characters. 3) The lengths of the arguments need not be the same, and need not be specified in advance. 4) No room in storage is reserved for or used by any argument until it is actually stored. The trie structure is created as the items are introduced into the memory. 5) A function can be used as an argument for another function, and that function as an argument for the next. Thus, for example, by entering with the argument, &quot;matrix multiplication,&quot; one might retrieve the entire program for performing a matrix multiplication on the computer. 6) By examining the storage at a given level, one can determine what thus-far similar items have been stored. For example, if there is no citation for Egan, J. P., it is but a step or two backward to pick up the trail of Egan, James ... .</p><p id="9cf0a672-02f3-48cc-b095-1e289673dd45" class="">The properties just described do not include all the desired ones, but they bring computer storage into resonance with human operators and their predilection to designate things by naming or pointing.</p><h2 id="82dda540-a5a4-4b25-b0e1-2fe1018d0444" class="">5.4 The Language Problem</h2><p id="2e849e5b-3df1-4fc9-80a5-30a81a641002" class="">The basic dissimilarity between human languages and computer languages may be the most serious obstacle to true symbiosis. It is reassuring, however, to note what great strides have already been made, through interpretive programs and particularly through assembly or compiling programs such as FORTRAN, to adapt computers to human language forms. The &quot;Information Processing Language&quot; of Shaw, Newell, Simon, and Ellis [24] represents another line of rapprochement. And, in ALGOL and related systems, men are proving their flexibility by adopting standard formulas of representation and expression that are readily translatable into machine language.</p><p id="43484e6e-5238-4d60-a3e1-8596681c4357" class="">For the purposes of real-time cooperation between men and computers, it will be necessary, however, to make use of an additional and rather different principle of communication and control. The idea may be highlighted by comparing instructions ordinarily addressed to intelligent human beings with instructions ordinarily used with computers. The latter specify precisely the individual steps to take and the sequence in which to take them. The former present or imply something about incentive or motivation, and they supply a criterion by which the human executor of the instructions will know when he has accomplished his task. In short: instructions directed to computers specify courses; instructions-directed to human beings specify goals.</p><p id="d0c3298f-de0b-489c-b059-b9b86d5a540b" class="">Men appear to think more naturally and easily in terms of goals than in terms of courses. True, they usually know something about directions in which to travel or lines along which to work, but few start out with precisely formulated itineraries. Who, for example, would depart from Boston for Los Angeles with a detailed specification of the route? Instead, to paraphrase Wiener, men bound for Los Angeles try continually to decrease the amount by which they are not yet in the smog.</p><p id="c71008f4-f8a5-49d8-8b59-3332a9e42b61" class="">Computer instruction through specification of goals is being approached along two paths. The first involves problem-solving, hill-climbing, self-organizing programs. The second involves real-time concatenation of preprogrammed segments and closed subroutines which the human operator can designate and call into action simply by name.</p><p id="33a2eaca-e03d-404a-8433-2c259743997c" class="">Along the first of these paths, there has been promising exploratory work. It is clear that, working within the loose constraints of predetermined strategies, computers will in due course be able to devise and simplify their own procedures for achieving stated goals. Thus far, the achievements have not been substantively important; they have constituted only &quot;demonstration in principle.&quot; Nevertheless, the implications are far-reaching.</p><p id="0d5e1520-b4e5-49ae-925a-5d3613411ea6" class="">Although the second path is simpler and apparently capable of earlier realization, it has been relatively neglected. Fredkin&#x27;s trie memory provides a promising paradigm. We may in due course see a serious effort to develop computer programs that can be connected together like the words and phrases of speech to do whatever computation or control is required at the moment. The consideration that holds back such an effort, apparently, is that the effort would produce nothing that would be of great value in the context of existing computers. It would be unrewarding to develop the language before there are any computing machines capable of responding meaningfully to it.</p><h2 id="fe163c29-c02b-402b-b3fb-3020e55e650f" class="">5.5 Input and Output Equipment</h2><p id="aaacbba2-20bf-480b-a1c6-c4daeedee5f9" class="">The department of data processing that seems least advanced, in so far as the requirements of man-computer symbiosis are concerned, is the one that deals with input and output equipment or, as it is seen from the human operator&#x27;s point of view, displays and controls. Immediately after saying that, it is essential to make qualifying comments, because the engineering of equipment for high-speed introduction and extraction of information has been excellent, and because some very sophisticated display and control techniques have been developed in such research laboratories as the Lincoln Laboratory. By and large, in generally available computers, however, there is almost no provision for any more effective, immediate man-machine communication than can be achieved with an electric typewriter.</p><p id="f52d3805-a605-479d-a641-fd0c3c22b33f" class="">Displays seem to be in a somewhat better state than controls. Many computers plot graphs on oscilloscope screens, and a few take advantage of the remarkable capabilities, graphical and symbolic, of the charactron display tube. Nowhere, to my knowledge, however, is there anything approaching the flexibility and convenience of the pencil and doodle pad or the chalk and blackboard used by men in technical discussion.</p><p id="aa4083b9-6b3f-4c3b-80b9-b4edcd2c2f65" class="">1) Desk-Surface Display and Control: Certainly, for effective man-computer interaction, it will be necessary for the man and the computer to draw graphs and pictures and to write notes and equations to each other on the same display surface. The man should be able to present a function to the computer, in a rough but rapid fashion, by drawing a graph. The computer should read the man&#x27;s writing, perhaps on the condition that it be in clear block capitals, and it should immediately post, at the location of each hand-drawn symbol, the corresponding character as interpreted and put into precise type-face. With such an input-output device, the operator would quickly learn to write or print in a manner legible to the machine. He could compose instructions and subroutines, set them into proper format, and check them over before introducing them finally into the computer&#x27;s main memory. He could even define new symbols, as Gilmore and Savell [14] have done at the Lincoln Laboratory, and present them directly to the computer. He could sketch out the format of a table roughly and let the computer shape it up with precision. He could correct the computer&#x27;s data, instruct the machine via flow diagrams, and in general interact with it very much as he would with another engineer, except that the &quot;other engineer&quot; would be a precise draftsman, a lightning calculator, a mnemonic wizard, and many other valuable partners all in one.</p><p id="45e8bd47-5e39-4a49-8f58-743950078f85" class="">2) Computer-Posted Wall Display: In some technological systems, several men share responsibility for controlling vehicles whose behaviors interact. Some information must be presented simultaneously to all the men, preferably on a common grid, to coordinate their actions. Other information is of relevance only to one or two operators. There would be only a confusion of uninterpretable clutter if all the information were presented on one display to all of them. The information must be posted by a computer, since manual plotting is too slow to keep it up to date.</p><p id="cd538487-ef06-4dae-ba77-226482d6473e" class="">The problem just outlined is even now a critical one, and it seems certain to become more and more critical as time goes by. Several designers are convinced that displays with the desired characteristics can be constructed with the aid of flashing lights and time-sharing viewing screens based on the light-valve principle.</p><p id="07cb32b6-7b1b-4fe3-b5a2-d26f8d4f9b7c" class="">The large display should be supplemented, according to most of those who have thought about the problem, by individual display-control units. The latter would permit the operators to modify the wall display without leaving their locations. For some purposes, it would be desirable for the operators to be able to communicate with the computer through the supplementary displays and perhaps even through the wall display. At least one scheme for providing such communication seems feasible.</p><p id="640b39fe-8141-40d2-b6de-cd21fe1d9d1f" class="">The large wall display and its associated system are relevant, of course, to symbiotic cooperation between a computer and a team of men. Laboratory experiments have indicated repeatedly that informal, parallel arrangements of operators, coordinating their activities through reference to a large situation display, have important advantages over the arrangement, more widely used, that locates the operators at individual consoles and attempts to correlate their actions through the agency of a computer. This is one of several operator-team problems in need of careful study.</p><p id="c70d3900-44ba-4c20-8de1-c275f333e2c5" class="">3) Automatic Speech Production and Recognition: How desirable and how feasible is speech communication between human operators and computing machines? That compound question is asked whenever sophisticated data-processing systems are discussed. Engineers who work and live with computers take a conservative attitude toward the desirability. Engineers who have had experience in the field of automatic speech recognition take a conservative attitude toward the feasibility. Yet there is continuing interest in the idea of talking with computing machines. In large part, the interest stems from realization that one can hardly take a military commander or a corporation president away from his work to teach him to type. If computing machines are ever to be used directly by top-level decision makers, it may be worthwhile to provide communication via the most natural means, even at considerable cost.</p><p id="69826456-c848-4742-9c86-f88eb20b85dd" class="">Preliminary analysis of his problems and time scales suggests that a corporation president would be interested in a symbiotic association with a computer only as an avocation. Business situations usually move slowly enough that there is time for briefings and conferences. It seems reasonable, therefore, for computer specialists to be the ones who interact directly with computers in business offices.</p><p id="57d70a04-2527-4abd-8ecd-8322c25e07ce" class="">The military commander, on the other hand, faces a greater probability of having to make critical decisions in short intervals of time. It is easy to overdramatize the notion of the ten-minute war, but it would be dangerous to count on having more than ten minutes in which to make a critical decision. As military system ground environments and control centers grow in capability and complexity, therefore, a real requirement for automatic speech production and recognition in computers seems likely to develop. Certainly, if the equipment were already developed, reliable, and available, it would be used.</p><p id="9705d925-bc53-4e82-9d89-08e1a15bd394" class="">In so far as feasibility is concerned, speech production poses less severe problems of a technical nature than does automatic recognition of speech sounds. A commercial electronic digital voltmeter now reads aloud its indications, digit by digit. For eight or ten years, at the Bell Telephone Laboratories, the Royal Institute of Technology (Stockholm), the Signals Research and Development Establishment (Christchurch), the Haskins Laboratory, and the Massachusetts Institute of Technology, Dunn [6], Fant [7], Lawrence [15], Cooper [3], Stevens [26], and their co-workers, have demonstrated successive generations of intelligible automatic talkers. Recent work at the Haskins Laboratory has led to the development of a digital code, suitable for use by computing machines, that makes an automatic voice utter intelligible connected discourse [16].</p><p id="cafd008a-aed0-410c-b877-abb9f48c6c2c" class="">The feasibility of automatic speech recognition depends heavily upon the size of the vocabulary of words to be recognized and upon the diversity of talkers and accents with which it must work. Ninety-eight per cent correct recognition of naturally spoken decimal digits was demonstrated several years ago at the Bell Telephone Laboratories and at the Lincoln Laboratory [4], [9]. To go a step up the scale of vocabulary size, we may say that an automatic recognizer of clearly spoken alpha-numerical characters can almost surely be developed now on the basis of existing knowledge. Since untrained operators can read at least as rapidly as trained ones can type, such a device would be a convenient tool in almost any computer installation.</p><p id="76cbd569-0c04-4388-a541-b2f9af4f27e7" class="">For real-time interaction on a truly symbiotic level, however, a vocabulary of about 2000 words, e.g., 1000 words of something like basic English and 1000 technical terms, would probably be required. That constitutes a challenging problem. In the consensus of acousticians and linguists, construction of a recognizer of 2000 words cannot be accomplished now. However, there are several organizations that would happily undertake to develop an automatic recognize for such a vocabulary on a five-year basis. They would stipulate that the speech be clear speech, dictation style, without unusual accent.</p><p id="995847ed-de7e-4203-bddf-278db734f2d7" class="">Although detailed discussion of techniques of automatic speech recognition is beyond the present scope, it is fitting to note that computing machines are playing a dominant role in the development of automatic speech recognizers. They have contributed the impetus that accounts for the present optimism, or rather for the optimism presently found in some quarters. Two or three years ago, it appeared that automatic recognition of sizeable vocabularies would not be achieved for ten or fifteen years; that it would have to await much further, gradual accumulation of knowledge of acoustic, phonetic, linguistic, and psychological processes in speech communication. Now, however, many see a prospect of accelerating the acquisition of that knowledge with the aid of computer processing of speech signals, and not a few workers have the feeling that sophisticated computer programs will be able to perform well as speech-pattern recognizes even without the aid of much substantive knowledge of speech signals and processes. Putting those two considerations together brings the estimate of the time required to achieve practically significant speech recognition down to perhaps five years, the five years just mentioned.</p><p id="1d06fa2f-722d-4776-bc3f-45f59628656e" class="">[1] A. Bernstein and M. deV. Roberts, &quot;Computer versus chess-player,&quot; Scientific American, vol. 198, pp. 96-98; June, 1958.</p><p id="c10c0f3c-5c14-42ce-bf75-0f51f379a86a" class="">[2] W. W. Bledsoe and I. Browning, &quot;Pattern Recognition and Reading by Machine,&quot; presented at the Eastern Joint Computer Conf, Boston, Mass., December, 1959.</p><p id="257191d1-6618-406d-b15c-1390274e7ef9" class="">[3] F. S. Cooper, et al., &quot;Some experiments on the perception of synthetic speech sounds,&quot; J. Acoust Soc. Amer., vol.24, pp.597-606; November, 1952.</p><p id="caa761e6-5368-43c9-96fb-f969cf5e5e04" class="">[4] K. H. Davis, R. Biddulph, and S. Balashek, &quot;Automatic recognition of spoken digits,&quot; in W. Jackson, Communication Theory, Butterworths Scientific Publications, London, Eng., pp. 433-441; 1953.</p><p id="0d2eec63-9b28-4b1f-bcfd-d8588ce005bc" class="">[5] G. P. Dinneen, &quot;Programming pattern recognition,&quot; Proc. WJCC, pp. 94-100; March, 1955.</p><p id="fe30cbab-085c-4288-8f79-6a15a9831ca1" class="">[6] H. K. Dunn, &quot;The calculation of vowel resonances, and an electrical vocal tract,&quot; J. Acoust Soc. Amer., vol. 22, pp.740-753; November, 1950.</p><p id="cdb81394-e679-492d-a07b-603ed5668f0a" class="">[7] G. Fant, &quot;On the Acoustics of Speech,&quot; paper presented at the Third Internatl. Congress on Acoustics, Stuttgart, Ger.; September, 1959.</p><p id="db95873c-e1e8-4a25-899c-1735654bc1a0" class="">[8] B. G. Farley and W. A. Clark, &quot;Simulation of self-organizing systems by digital computers.&quot; IRE Trans. on Information Theory, vol. IT-4, pp.76-84; September, 1954</p><p id="43418711-f55c-47f5-8684-270bbfddf7ec" class="">[9] J. W. Forgie and C. D. Forgie, &quot;Results obtained from a vowel recognition computer program,&quot; J. Acoust Soc. Amer., vol. 31, pp. 1480-1489; November, 1959</p><p id="003eaad2-18d1-4fbd-a9a4-a5e1a891268b" class="">[10] E. Fredkin, &quot;Trie memory,&quot; Communications of the ACM, Sept. 1960, pp. 490-499</p><p id="ee524bec-69f9-4880-8b8d-349906520ecc" class="">[11] R. M. Friedberg, &quot;A learning machine: Part I,&quot; IBM J. Res. &amp; Dev., vol.2, pp.2-13; January, 1958.</p><p id="65cd4cb9-1392-4291-9e43-2d7cc39cde42" class="">[12] H. Gelernter, &quot;Realization of a Geometry Theorem Proving Machine.&quot; Unesco, NS, ICIP, 1.6.6, Internatl. Conf. on Information Processing, Paris, France; June, 1959.</p><p id="d4670931-bfea-401c-a48d-7aa7952287d9" class="">[13] P. C. Gilmore, &quot;A Program for the Production of Proofs for Theorems Derivable Within the First Order Predicate Calculus from Axioms,&quot; Unesco, NS, ICIP, 1.6.14, Internatl. Conf. on Information Processing, Paris, France; June, 1959.</p><p id="45b95d95-60a7-496d-b64d-b2937122b91f" class="">[14] J. T. Gilmore and R. E. Savell, &quot;The Lincoln Writer,&quot; Lincoln Laboratory, M. I. T., Lexington, Mass., Rept. 51-8; October, 1959.</p><p id="8fd5d2e8-b4bb-4086-a848-ab11675381d1" class="">[15] W. Lawrence, et al., &quot;Methods and Purposes of Speech Synthesis,&quot; Signals Res. and Dev. Estab., Ministry of Supply, Christchurch, Hants, England, Rept. 56/1457; March, 1956.</p><p id="ca47607d-30c6-42c1-ba2e-241c17e23611" class="">[16] A. M. Liberman, F. Ingemann, L. Lisker, P. Delattre, and F. S. Cooper, &quot;Minimal rules for synthesizing speech,&quot; J. Acoust Soc. Amer., vol. 31, pp. 1490-1499; November, 1959.</p><p id="4fbd5c54-c58c-437a-a1f4-630be1cfdb82" class="">[17] A. Newell, &quot;The chess machine: an example of dealing with a complex task by adaptation,&quot; Proc. WJCC, pp. 101-108; March, 1955.</p><p id="b564d051-7755-46f9-95f7-ff33fe5cee30" class="">[18] A. Newell and J. C. Shaw, &quot;Programming the logic theory machine.&quot; Proc. WJCC, pp. 230-240; March, 1957.</p><p id="1af60250-4810-48f8-b26d-0ead4258b44c" class="">[19] A. Newell, J. C. Shaw, and H. A. Simon, &quot;Chess-playing programs and the problem of complexity,&quot; IBM J. Res &amp; Dev., vol.2, pp. 320-33.5; October, 1958.</p><p id="705ed63e-1a42-4be0-8743-2cc1aadf24d1" class="">[20] A. Newell, H. A. Simon, and J. C. Shaw, &quot;Report on a general problem-solving program,&quot; Unesco, NS, ICIP, 1.6.8, Internatl. Conf. on Information Processing, Paris, France; June, 1959.</p><p id="9856ad31-037b-4d4d-8e4c-a871d2dba82f" class="">[21] J. D. North, &quot;The rational behavior of mechanically extended man&quot;, Boulton Paul Aircraft Ltd., Wolverhampton, Eng.; September, 1954.</p><p id="bbf0ee42-4b08-40e6-816b-fea72083b47f" class="">[22] 0. G. Selfridge, &quot;Pandemonium, a paradigm for learning,&quot; Proc. Symp. Mechanisation of Thought Processes, Natl. Physical Lab., Teddington, Eng.; November, 1958.</p><p id="7aaec07c-a2eb-4579-8d3c-e657e5d7727d" class="">[23] C. E. Shannon, &quot;Programming a computer for playing chess,&quot; Phil. Mag., vol.41, pp.256-75; March, 1950.</p><p id="dab17664-3d5d-4594-8a95-9fb6f894b801" class="">[24] J. C. Shaw, A. Newell, H. A. Simon, and T. O. Ellis, &quot;A command structure for complex information processing,&quot; Proc. WJCC, pp. 119-128; May, 1958.</p><p id="29f4794c-0b6a-4d54-948d-a5116ea960c4" class="">[25] H. Sherman, &quot;A Quasi-Topological Method for Recognition of Line Patterns,&quot; Unesco, NS, ICIP, H.L.5, Internatl. Conf. on Information Processing, Paris, France; June, 1959</p><p id="ed024404-1f95-4a2f-b27c-278850f7a1de" class="">[26] K. N. Stevens, S. Kasowski, and C. G. Fant, &quot;Electric analog of the vocal tract,&quot; J. Acoust. Soc. Amer., vol. 25, pp. 734-742; July, 1953.</p><p id="2a301499-7835-464d-b11c-64647d4d0abc" class="">[27] Webster&#x27;s New International Dictionary, 2nd e., G. and C. Merriam Co., Springfield, Mass., p. 2555; 1958.</p></div></article></body></html>

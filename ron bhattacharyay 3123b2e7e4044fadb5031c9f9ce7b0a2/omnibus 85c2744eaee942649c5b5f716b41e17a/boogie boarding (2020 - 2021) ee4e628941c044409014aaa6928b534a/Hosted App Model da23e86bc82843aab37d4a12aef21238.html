@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Hosted App Model</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="da23e86b-c828-43aa-b37d-4a12aef21238" class="page sans"><header><h1 class="page-title">Hosted App Model</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blogs.windows.com/windowsdeveloper/2020/03/19/hosted-app-model/" class="url-value">https://blogs.windows.com/windowsdeveloper/2020/03/19/hosted-app-model/</a></td></tr></tbody></table></header><div class="page-body"><p id="257528b6-7f60-457f-9075-505867ee9b35" class="">In Windows 10 version 2004, we are introducing the concept of Hosted Apps to the Windows App Model. Hosted apps are registered as independent apps on Windows, but require a host process in order to run. An example would be a script file which requires its host (eg: Powershell or Python) to be installed. By itself, it is just a file and does not have any way to appear as an app to Windows. With the Hosted App Model, an app can declare itself as a host, and then packages can declare a dependency upon that host and are known as hosted apps. When the hosted app is launched, the host executable is then launched with the identity of the hosted app package instead of its own identity. This allows the host to be able to access the contents of the hosted app package and when calling APIs it does so with the hosted app identity.</p><h1 id="3f2bb795-7253-4ad1-8746-cfaa7d52448c" class="">Background</h1><p id="6206e62d-3307-401f-9038-fc34fe9723c1" class="">Modern apps are defined to Windows via signed MSIX packages. A package provides identity, so it is known to the system and contains all the files, assets, and registration information for the app it contains. Many apps have scenarios where they want to host content and binaries, such as extensibility points, from other apps. There are also scenarios where the host app is more of a runtime engine that loads script content. On top of it all, there is a desire to have these hosted apps to look and behave like a separate app on the system – where it has its own start tile, identity, and deep integration with Windows features such as BackgroundTasks, Notifications, and Share. Using the Hosted App Model, a retail kiosk app can easily be rebranded, or a Python or Powershell script can now be treated as a separate app.</p><p id="091043c9-4f38-4f8b-a53d-1de8c1778a26" class="">Developers attempt to accomplish this today in either of two ways. First, they simply use a shortcut on the desktop to launch the host. But this experience does not have any deep integration with Windows and the shell, as the ‘app’ is the host executable not the script. To get a more deeply integrated experience, the alternative is for developers to create a packaged app that includes the host binaries within the package. While the package would now be a separate app and have the ability for deep Windows integration, this approach is inefficient as each app would need to redistribute the host and can have potential servicing and licensing issues.</p><p id="98701a7c-b8f5-4523-9762-a06ff9465fd8" class="">The Hosted App Model solves the needs of these hosted apps. The Hosted App Model is dependent upon two pieces, a “Host” which is made available to other apps, and a “Hosted App” that declares a dependency upon the host. When a hosted app is launched, the result is that the host is then running under the identity of the hosted app package, so it can load visual assets, content from the Hosted App package location, and when it calls APIs it does so with the identity declared in the Hosted App. The Hosted App gets the intersection of capabilities declared between the Host and Hosted App – this means that if a Hosted App cannot ask for more capabilities than what the Host provides. In this initial release of the Hosted App Model packaged desktop apps are supported, and we will be expanding support to UWP hosts in future releases.</p><h1 id="9c42205b-40b4-426d-94ea-36de10a33b03" class="">What is a Host and a Hosted App?</h1><p id="e7c436e7-e0d4-4e5d-9cdb-320e9c4fb25e" class="">More specifically, a Host is the executable in a package declared by the HostRuntime extension which points to the main executable or runtime process for the hosted app. The HostRuntime extension has an Id attribute, and this identifier is referenced as a dependency by the Hosted App in its package manifest. A host can determine the package identity it is currently running under by referring to the Windows.ApplicationModel.Package.Current api.</p><p id="95a1fb37-428b-483d-8135-f3290305061d" class="">A Hosted App is an app that declares a package dependency on a Host, and leverages the HostRuntime Id for activation instead of specifying an Entrypoint executable in its own package. It typically contains content, visual assets, scripts, or binaries that may be accessed by the host. Hosted App packages can be Signed or Unsigned:</p><ul id="51ad4639-4587-44bb-95c7-0b28f10a05f9" class="bulleted-list"><li>Signed packages may contain executable files. This is useful in scenarios that have an extension mechanism, allowing the host to load a dll or registered component in the hosted app package.</li></ul><ul id="dd7e147c-ffa3-4bb5-ab67-344afe638023" class="bulleted-list"><li>Unsigned packages can only contain non-executable files. This is useful in scenarios where the hostruntime only needs to load images, assets and content such as script files. Unsigned packages must include a special Unsigned Publisher OID in their Identity or they won’t be allowed to register. This prevents unsigned packages from spoofing a signed package identity.</li></ul><h2 id="da378a79-f8ba-411a-b6d6-9ddd9dca1631" class="">Declaring a Host</h2><p id="4f3ab3de-261f-41e8-bcd0-5b48872d9e24" class="">Declaring a Host is quite simple. All you need to do is to declare the HostRuntime package extension in your AppxManifest.xml. The HostRuntime extension is package-wide and so is declared as a child of the package element. Below is an excerpt from an example AppxManifest.xml showing the HostRuntime entry that declares an app as a Host with Id “PythonHost.”</p><figure id="fbdb08ba-0c3c-4af2-8ff9-eacbd6246ff3" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/59f80d789bdc8f0c151ef5f1dbda66f6.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/59f80d789bdc8f0c151ef5f1dbda66f6.png"/></a></figure><ul id="b3e72d33-f3e2-4558-9021-d3f92bf6ade9" class="bulleted-list"><li><em>hostRuntime</em> – a package-wide extension defining runtime information used when activating a Hosted App.</li></ul><ul id="0c816acf-5a79-42b0-88d4-8eb08983334b" class="bulleted-list"><li><em>Executable – </em>The executable binary that will be the host process</li></ul><ul id="b101ea29-0ae8-486e-9263-05eb05025b12" class="bulleted-list"><li><em>RuntimeBehavior</em> and <em>TrustLevel</em> – A hosted app will run with the definitions expressed in the extension. For example, a hosted app using the Host declared above will run the executable PyScriptEngine.exe, at mediumIL trust level.</li></ul><ul id="951683cf-d4f3-4260-99f5-bdd908ffc6a3" class="bulleted-list"><li><em>HostRuntime Id</em> – A unique identifier used to specify a Host in a package. A package can have multiple Host Apps, and each must have a unique HostRuntime Id. This identifier is referenced by the Hosted App.</li></ul><h1 id="8e8065c0-55ed-4d13-9abf-c5f2686cc42a" class="">Declaring a Hosted App</h1><p id="31906628-5b2d-4d25-8562-a6cb94e688a9" class="">A hosted app must declare a package dependency upon the host, and specify the HostId to use. If the package is unsigned, it must include the Unsigned Publisher OID to ensure the package identity does not conflict with a signed package. Also the TargetDeviceFamily should match the host so it does not attempt to deploy on devices that are not supported by the host. The following is an example of a manifest for a Hosted App that takes a dependency upon the Python host.</p><figure id="5d3d63a7-d426-4e4f-96ab-50e32b6bf85a" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/f95b5ba18106db31b531cdce78a91e4b.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/f95b5ba18106db31b531cdce78a91e4b.png"/></a></figure><ul id="abbdc31c-d79c-4e2a-94dd-79a5da649806" class="bulleted-list"><li><em>Unsigned Publisher OID</em> – <em><strong>2.25.311729368913984317654407730594956997722=1</strong></em> This identifier is required when a Hosted App will be unsigned. The identifier ensures any unsigned package cannot spoof the identity of a signed package.</li></ul><ul id="dbf9c60d-38e7-4988-a2f0-efaecfafbc03" class="bulleted-list"><li><em>HostRuntimeDependency</em> – A Hosted App package must declare a HostRuntimeDependency on the Host app. This consists of the Name and Publisher of the Host package, and the min version it depends on. These can be found under the &lt;Identity&gt; element in the Host package. When deployed, if the HostRuntimeDependency cannot be found, the registration fails.</li></ul><ul id="ce4c7324-69f7-455d-8d5a-9ce2d242fca1" class="bulleted-list"><li><em>HostId</em> – Instead of declaring the usual Executable and EntryPoint for an app or extension, the HostId attribute expresses a dependency on a Host app. As a result, the Hosted App inherits the Executable, EntryPoint and runtime attributes of the Host with the specified HostId. When registered, if the HostId is not found, the deployment fails.</li></ul><ul id="5ef79364-b452-499e-8035-7a5ac80f14dd" class="bulleted-list"><li><em>Parameters</em> (optional)– parameters that are passed on the command line to the host app. The host needs to know what to do with these parameters, and so there is an implied contract between the host and hosted app.</li></ul><h1 id="c073d41a-6382-4ac2-aaa4-f162359d624c" class="">Dynamic Registration for Unsigned Hosted Apps</h1><p id="2df32d12-38e2-4233-83d7-709b5e75c99a" class="">One of the advantages of the new HostRuntime is that it enables a host to dynamically register a hosted app package at runtime. This dynamically registered package does not need to be signed. This allows a host to dynamically generate the content and manifest for the hosted app package and then register it. We are working with the new Microsoft Edge browser to take advantage of the Hosted App Model for Progressive Web Apps (PWAs) – converting the web app manifest into an app manifest, package the additional web content into an MSIX package and register it. In this model, a PWA is its own independent app registered to the system even though it is being hosted by Edge.</p><p id="d8e4f911-9878-4608-ad5c-431bc39dd72e" class="">The new APIs for registering a package are:</p><ul id="b5f81ae1-4a12-4722-94da-71b3844d85c5" class="bulleted-list"><li>Management.Deployment.PackageManager.AddPackageByUriAsync() is used for registering an MSIX package</li></ul><ul id="f493b3ee-182b-493c-8d13-dc0e71c5fbf7" class="bulleted-list"><li>Management.Deployment.PackageManager.RegisterPackageByUriAsync() is used for registering a loose file AppxManifest.xml file.</li></ul><p id="2bd7923c-b910-46bb-ace1-546d481799f1" class="">In the case where the hosted app is unsigned, its manifest must meet the following requirements:</p><ol type="1" id="4f8b0503-0aac-4756-9f9c-bf202e18d837" class="numbered-list" start="1"><li>The unsigned package cannot contain any Executable attributes in its Application or Extension elements (e.g.: no &lt;Application Executable=…&gt; or &lt;Extension Executable=…&gt;), and it can’t specify any other activation data (Executable, TrustLevel, etc). The Application node only supports the HostId and Parameters elements.</li></ol><ol type="1" id="5afb1381-7f33-4652-953b-7adbc12994bc" class="numbered-list" start="2"><li>An unsigned package must be a <a href="https://docs.microsoft.com/en-us/uwp/api/Windows.Management.Deployment.PackageTypes">Main</a> package type – it cannot be a Bundle, Framework, Resource or Optional package.</li></ol><p id="bb19ba17-102e-43f9-adcc-7f2dca5e6a89" class="">In turn, the host process registering an unsigned hosted app package must meet the following requirements:</p><ol type="1" id="eaad1d79-7afb-4eb2-ab22-b9f9da81d3f1" class="numbered-list" start="1"><li>The process must have package identity</li></ol><ol type="1" id="3011c9d6-b2c3-43e7-857a-0cb0d687451b" class="numbered-list" start="2"><li>The process must have the package management capability &lt;rescap:Capability Name=”packageManagement”/&gt;</li></ol><h1 id="bf25fb0c-d2c6-434b-b55b-da3279d5d72f" class="">A Host and Hosted App Examples</h1><p id="67c54f00-b62f-4a22-bd3c-eadee4a0c48b" class="">Let’s have a look at two examples. The first, WinFormsToastHost, is a Host with a signed Hosted App that shows how to include an extension that is dynamically loaded into the host. The second, NumberGuesser, an example of using python as a host and a script file as a hosted app package. You can find the sample code for both at <a href="https://aka.ms/hostedappsample">https://aka.ms/hostedappsample</a>.</p><h2 id="28cd0179-eae7-4d09-a870-66d6bcdfa35b" class="">WinFormsToastHost</h2><h3 id="5784e29c-85c1-49d2-8d83-c0aef5673e70" class="">Host</h3><p id="9504b2e2-c7cd-480a-b059-cc565be3a047" class="">The host in this example is a simple Windows Forms app that displays its package identity, location, and calls the ToastNotification APIs. It also has the capability to load a binary extension from a hosted app package. When run under its own identity, it does not display the extension information. The app is packaged with the Windows App Packaging Project which includes the manifest declarations for being a host.</p><h3 id="611e53a5-db22-4dfb-9d2a-b1443969e47a" class="">WinformsToastHost-Extension</h3><p id="61aa28b5-651b-47ba-8e42-80a8186f3b39" class="">The hosted app is a .NET dll that implements an extension mechanism for the host to load. It also includes a packaging project that declares its identity and dependency upon the hostruntime. You will see this identity reflected in the values displayed when the app is run. When registered, the hostruntime has access to the hostedapp’s package location and thus can load the extension.</p><h3 id="35817f77-5528-4955-a340-b570172865cc" class="">Running the sample</h3><p id="aa259d9a-7398-4f8d-8ec4-8fad3677dc67" class="">You can load the source code in Visual Studio as follows:</p><ol type="1" id="56c128f9-b063-4601-b3c3-c43512e40978" class="numbered-list" start="1"><li>Open WinformsToastHost.sln in VS2019</li></ol><ol type="1" id="f89351b4-4621-47fe-901f-b46b58e2679e" class="numbered-list" start="2"><li>Build and deploy WinformsToastHost.Package</li></ol><ol type="1" id="1ed1bec2-632d-42d5-9368-2736e3da4e3f" class="numbered-list" start="3"><li>Build and deploy HostedAppExtension</li></ol><ol type="1" id="55f5d21b-e276-4e4d-99b5-f28d40555af2" class="numbered-list" start="4"><li>Goto Start menu and launch ‘WinformsToastHost’</li></ol><ol type="1" id="e9cb1a63-7848-4e86-aa31-a8c68be4473a" class="numbered-list" start="5"><li>Goto Start menu and launch ‘Hosted WinformsToastHost Extension‘</li></ol><p id="47f8fd15-8346-4983-8e86-25316ce542c2" class="">Here is a screenshot of the host running. Notice its package identity and path, and the UX for loading an assembly is not available because it is not running as a hosted app.</p><figure id="36dbd84f-2367-45de-a2bf-ba91b4b42003" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/dd66dd9f6c224910385873a60038464a.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/dd66dd9f6c224910385873a60038464a.png"/></a></figure><p id="fbb3cb4b-c428-46f5-812f-aa3ea0bb24b4" class="">Now launch the hosted app. Notice the identity and path have changed, and that the UX for dynamically loading an extension assembly is enabled.</p><figure id="a2c83ee4-856f-4c94-90bf-74d73aae8a5e" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/36d5d01a836d97a9a5980e6d2ded162c.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/36d5d01a836d97a9a5980e6d2ded162c.png"/></a></figure><p id="fab84dca-7b33-4d9a-8739-1a0f62e8cde4" class="">When the “Run hosted” button is pressed, you will get a dialog from the binary extension:</p><figure id="acce87e5-e36d-40ec-b36d-7b726a8ab482" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/ee986b9b517a8100bf689cb72b722a69.png"><img style="width:449px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/ee986b9b517a8100bf689cb72b722a69.png"/></a></figure><p id="b90ee119-9ba3-482b-999f-10e5dbb7dda2" class="">Here is the Task Manager details view showing both apps running at the same time. Notice that the host binary is the executable for both:</p><figure id="8de9e2c8-75f2-4f0e-bf0e-3301c6ac32ef" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/059da19390ff41271aba8a583ad60e8b.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/059da19390ff41271aba8a583ad60e8b.png"/></a></figure><p id="d852a5c0-e9ba-4ff0-90d1-aae1de242e7e" class="">And when clicking on the Show Toast button for each app, the system recognizes the two different identities in the action center:</p><figure id="34adde09-7a99-4fc7-b16a-0b7c3090d753" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/7738ccf993491c45e8ff930f1949a7b4.png"><img style="width:439px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/7738ccf993491c45e8ff930f1949a7b4.png"/></a></figure><h1 id="1808bcfd-443c-4900-a33e-34efb98ad2da" class="">NumberGuesser – A Python Host and Game</h1><h2 id="854ea6f8-a933-4910-94de-6f10f81e50f9" class="">The Host</h2><p id="0b99b7e2-f047-445e-b08d-c36794ff3771" class="">In this example, the host is comprised of 2 projects – first is PyScriptEngine which is wrapper written in C# and makes use of the Python nuget package to run python scripts. This wrapper parses the command line and has the capability to dynamically register a manifest as well as launch the python executable with a path to a script file. The second project is PyScriptEnginePackage which is a Windows App Packaging Project that installs PyScriptEngine and registers the manifest that includes the HostRuntime extension.</p><h2 id="fc666332-5ab4-447a-8d18-109229a4bb74" class="">The Hosted App</h2><p id="8f1fe934-ae57-4c76-b5f6-538d5303626b" class="">The Hosted App is made up of a python script, NumberGuesser.py, and visual assets. It doesn’t contain any PE files. It has an app manifest where the declarations for HostRuntimeDependency and HostId are declared that identifies PyScriptEngine as its Host. The manifest also contains the Unsigned Publisher OID entry that is required for an unsigned package.</p><h2 id="0b2af26c-c34d-4280-bff1-8d1fb12540d8" class="">Running the sample</h2><p id="b863389e-a3d2-4144-a778-135345fed559" class="">To run this sample you first need to build and deploy the host, then you can use the host from the commandline to dynamically register the hosted app.</p><ol type="1" id="64c71546-f4d3-4500-85fd-622b4633ab53" class="numbered-list" start="1"><li>Open PyScriptEngine.sln solution in Visual Studio</li></ol><ol type="1" id="4a495985-9ecd-4e8a-bca8-a0731253c512" class="numbered-list" start="2"><li>Set PyScriptEnginePackage as the Startup project</li></ol><ol type="1" id="a8345bac-3d00-4ef2-914e-4bc0fe90e362" class="numbered-list" start="3"><li>Build PyScriptEnginePackage</li></ol><ol type="1" id="095ab0c2-afc9-4e18-8265-c2e8f8c5b865" class="numbered-list" start="4"><li>Deploy PyScriptEnginePackage</li></ol><ol type="1" id="6527aa01-ffcc-4cd7-a608-dd4614296f84" class="numbered-list" start="5"><li>Because the host app declares an appexecutionalias, you will be able to go to a command prompt and run “pyscriptengine” to get the usage notice:</li></ol><figure id="b4a3452f-0561-4260-9b66-ca6d68e8e535" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/f07d6201c2020c05a0e36e22d157dec6.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/f07d6201c2020c05a0e36e22d157dec6.png"/></a></figure><p id="8f6f3ee3-c39a-465d-89f2-cbc896bfa77f" class="">6. Use the python host to register the NumberGuesser game from the commandline:</p><figure id="bef968cc-d4fd-43d6-b86f-b09aedb2ddb2" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/e0038a446103cb4e3852812a2c34ab64.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/e0038a446103cb4e3852812a2c34ab64.png"/></a></figure><p id="920c71c0-bf84-4d22-85c7-34123a46b2c6" class="">7. Now, click on “Number Guesser (Manifest)” in your start menu, and run the game! See how many tries it takes you to guess the number:</p><figure id="fc23ef28-5ea8-4bfd-a0d5-462c37201d13" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/17c0d6a8862cf37a8aaf10636b13ebf3.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/17c0d6a8862cf37a8aaf10636b13ebf3.png"/></a></figure><p id="eeb23eea-edde-4954-aee2-686d4bd25fe7" class="">Let’s confirm what is running. Notice how PyScriptEngine is executing under the package identity of NumberGuesser!</p><figure id="34bbbcb7-172d-4e8e-bcab-43abc93e87f2" class="image"><a href="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/e77024398c3d846f7d769b52563673f7.png"><img style="width:700px" src="Hosted%20App%20Model%20da23e86bc82843aab37d4a12aef21238/e77024398c3d846f7d769b52563673f7.png"/></a></figure><h1 id="6efa7c8d-4afe-4565-95cf-3568535310c7" class="">Wrapping it up</h1><p id="bfd94ec8-d7bf-4ad4-b430-bb30993f7b73" class="">In summary, we are pleased to bring you more power and features to the windows platform, and we are excited to see what creative ideas you have for the Hosted App Model. In addition to Microsoft Edge, we are working with teams across the company and expect to see more apps leveraging the Hosted App Model in the future.</p></div></article></body></html>

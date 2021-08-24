@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Challenges of Removing Particulate</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6e7dfa68-eeb0-4f2a-990a-837d307d5fe1" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⛺</span></div><h1 class="page-title">The Challenges of Removing Particulate</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-default">Climate</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://charmindustrial.com/blog/2020/4/22/the-challenges-of-removing-particulate" class="url-value">https://charmindustrial.com/blog/2020/4/22/the-challenges-of-removing-particulate</a></td></tr></tbody></table></header><div class="page-body"><p id="17e3fa0a-84b2-48e1-bb25-f4c02ff8c526" class="">Charm had a major milestone recently - the company turned 2 years old! More than ever, the team is driven to return the atmosphere to 280ppm CO2, and to do so profitably. We have been working hard designing, building and testing a gasifier that produces cost-competitive industrial hydrogen from biomass. (Did you know hydrogen is an existing $150B/year market and is responsible for 3% of global CO2 emissions?)</p><p id="70638974-fcdb-45cd-99a3-cdd099b26c07" class="">A year ago at this time, we were developing a solution to reliably feed biomass into our gasifier <a href="https://www.charmindustrial.com/blog/2019/3/17/making-grass-flow-like-water">(see our previous blog post)</a>. Since then, we’ve tested the gasifier, iterated its design, grown the team, learned a ton, and—of course—run into new challenges!</p><p id="14bbfa9f-6a67-43ca-876b-23f74fd8e5c9" class="">The challenge this blog post is going to focus on is particulate loading. <strong>Particulate loading refers to micron-scale particles becoming entrained in the gas stream, causing downstream maintenance issues and contaminating the purity of the end product.</strong></p><p id="3763c9eb-32cd-4b3d-8e7f-4096dbc8eb1a" class="">To provide some background, there are two main stages of our gasification process: pyrolysis and reformation. During pyrolysis, biomass is heated to high temperatures (700°C in our latest test campaign) in the absence of oxygen. This causes the biomass to rapidly decompose, separating into volatile products and solid carbon-rich char. During reformation, the volatile products are heated to even higher temperatures at which thermal cracking occurs, reacting hydrocarbons with oxygen and steam to produce carbon monoxide and hydrogen (collectively known as synthesis gas, or “syngas”). A general overview of the process is shown in the figure below. We’ll dive deeper into the intermediate steps soon!</p><figure id="da96c60e-a334-4f01-92a6-3a22a1551de8" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.00.58AM.png"><img style="width:700px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.00.58AM.png"/></a></figure><p id="16e0bd74-90ca-43c3-9931-183b51a6f7b5" class=""><em>Figure 1: Pyrolysis and Reformation are the two main stages of our gasification process. The rest of the diagram shows how our system is set up currently. The “Cyclone” and “Filter” stages are prevalent to particulate removal.</em></p><p id="6aca10cb-2c50-4bca-bd09-7bbcbde957f5" class="">Particulate from biomass solids becomes entrained in the gas stream during pyrolysis. These particles are carried through the rest of the system, coating the walls in soot, clogging orifices, and contaminating the hydrogen we produce. Therefore, it’s crucial that we remove this particulate from the gas stream. How do we do that? Well, so far we’ve learned a lot of methods that don’t work, and we think we are approaching a method (or rather, a combination of methods) that do. Removing micron-scale particles from biomass-based pyrolysis gas streams has been heavily researched in the past 15 years. Cyclones [1][2], electrostatic precipitators [3][4], wet scrubbers [5][6], and ceramic filters [7][8], among other particulate removal methods, have been employed with varying degrees of success under different operating conditions [9][10].</p><p id="23294ea4-8026-4437-a1b5-4f0003ab7cb2" class="">Before choosing a particulate removal method, it helps to understand the tradeoffs between where it is located in our gasification system. If it is located before the reformer, hydrocarbons (tars) are still present in the gas stream. These hydrocarbons condense around 400°C, which means the particulate removal system would need to be heated to at least that temperature to prevent tar from condensing on and clogging it.</p><p id="8f7a2d00-24a2-4dcc-8660-ce11fff43274" class="">If the particulate removal system is located after the reformer, there is nothing stopping the particulate from building up on its inlet nozzle, which could lead to clogs. Furthermore, at high temperatures within the reformer, particle deposits could lead to coking, a phenomenon in which volatile contents are driven off and a carbon-heavy residue is left behind. This residue interrupts gas flow and encourages further build up of particulate and hydrocarbons. Locating a particulate removal system after the reformer also means that the system must be able to withstand super-heated gas temperatures (up to 1000°C).</p><p id="702a49d9-2296-4e46-ab0c-a43d45c76c5e" class="">We located our first particulate removal method prior to the reformer. It was a candlestick filter, affectionately known as “Filbert.”</p><p id="4870a5ac-2720-4fe4-9ff3-01f5e0d2a42d" class="">Filbert had a stainless steel housing surrounding 4 cylindrical “candle” filters, together known as a “baghouse filter.” For gas to pass through Filbert, it had to pass through the walls of the candle filters, then pass through a zinc oxide (ZnO) bed, which removed sulfur that may have been present in the gas stream. If particulate began to accumulate on the surface of the filters, a “puff” of inert gas was blown backward through it to dislodge any build-up.</p><figure id="10bf2485-e5d8-428c-9bf4-629f59cbaeeb" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.09AM.png"><img style="width:447px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.09AM.png"/></a></figure><p id="045e887b-522c-4e0a-a93d-6ac6e3fbaedf" class=""><em>Figure 2: A baghouse filter assembly consists of a housing surrounding cylindrical “candle” filters. Dirty gas must pass through the walls of the candle filters before it can continue flowing downstream. [11]</em></p><p id="e8aa7179-2125-4b8c-833e-174065df0e91" class="">Seems foolproof right? If only it were that easy... as we might’ve guessed, the surface of the filtering media became coated not only in particulate, but also in tars which, when cooled, polymerized, essentially coating the filters in a plastic-concrete hybrid and clogging the system. The puffers didn’t stand a chance. When Filbert clogged during tests, pressure began to build in the pyrolyzer, forcing us to abort. From further literature review, particularly <a href="https://pubs.acs.org/doi/full/10.1021/ef400177t">this 2013 study</a>, and lessons learned through other gasifiers, we learned that filtering particulate using a baghouse design is effective if the gas stream has a low tar content [12]. Filbert may be useful downstream from the reformer in the future, but for the sake of testing other filtering methods, Filbert was removed from the system to make room for particulate-remover iteration #2. RIP Filbert.</p><p id="c102b0b9-16cb-4081-a662-92dba0baebe4" class="">Because we were in the middle of a test campaign when Filbert was removed, we wanted to keep the priority on testing and gathering gas samples for analysis. We needed another solution, and quickly. We brainstormed particulate-removing mechanisms that had already been designed for applications other than hydrogen production, and landed on Diesel Particulate Filters (DPFs). You may have seen these before... they’re usually mounted to semi-trucks to reduce vehicle emissions. Inside a DPF is a monolithic honeycomb structure made of a synthetic ceramic called cordierite (dare you to say that five times fast… and if you’re interested, cordierite’s chemical formula is 2MgO•2Al2O3•5SiO2!). These structures consist of thousands of channels (the channel density can range from 100 channels per square inch to 600 channels per square inch), and every other channel is intentionally blocked at one end. Similar to the candlestick filters, the gas must pass through the walls of the channels so it can exit the other side.</p><figure id="9dd7bfaf-e5e1-4305-82ce-9515f7c037c4" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.16AM.png"><img style="width:700px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.16AM.png"/></a></figure><p id="481621db-9194-429c-a9d3-a7f3d10e8d7e" class=""><em>Figure 3: Every other channel in a diesel particulate filter is blocked at one end, so gas is forced to pass through the channel walls before it can flow out the other end of the filter. [13]</em></p><p id="ee2009f9-bf7a-4e87-b5cf-9c42efa7a2aa" class="">We found a DPF on Ebay, purchased it, and had it delivered the following morning. By that afternoon, we had it insulated and ready to be installed in the system. But where to put it...</p><p id="b35672c7-b09f-4ef4-b0b1-a19f1b2fa2b7" class="">If we put it before the reformer, it ran the risk of collecting tar the same way Filbert did. If we put it after the reformer, it increased the risk of clogging the reformer’s inlet. Since the reformer inlet diameter is smaller than the preceding tubing in the system, the gas velocity increases as it passes through. We decided that with this increased velocity, the chance of particulate accumulation in the reformer inlet was small. In addition, we wrapped the inlet tubing in a heater to prevent condensation. With fingers crossed, we then located the DPF after the reformer. This configuration would allow thermal cracking reactions to eliminate the remaining tars before they reached the DPF. To monitor whether or not the DPF was becoming clogged, we set up a differential pressure sensor, comparing the pressure at its inlet to that at its outlet. If pressure started to build, we’d assume it was clogging, and shut down the test. Another foolproof plan.</p><p id="453fa2f9-c616-4346-9d5b-45f2e316a2ef" class="">We heated up the system, fed in biomass, and held our breath. For a while, things seemed ok. In fact, they seemed better than they had ever been. But after a while, the differential pressure of the DPF began to climb. When the sensor was close to saturated, we shut down the test. Investigation later indicated that soot had covered the inlet channels of the DPF. At least it wasn’t tar.</p><figure id="505b19dc-9a2f-4814-bba1-48932c9371bd" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.25AM.png"><img style="width:700px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.25AM.png"/></a></figure><p id="61e4ab89-9ec4-4371-a962-16452f1ce752" class=""><em>Figure 4: The differential pressure across the DPF was tracked during testing. The steadily increasing pressure suggests that the DPF was becoming clogged.</em></p><figure id="fa6ab6e2-cd35-4933-a1e4-a48a96f71ba0" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.33AM.png"><img style="width:668px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.33AM.png"/></a></figure><p id="33483bc5-da86-44ac-8c63-01893afc9342" class=""><em>Figure 5: A probe was used to take pictures of the cordierite surface within the DPF after vacuuming it. Some channels appear to be unblocked, but others are still clogged.</em></p><p id="07497edf-00aa-492c-9c24-d1a1491f34c1" class="">We tried vacuuming it out, which cosmetically made things look better, but did little to dislodge the particulate that had travelled down the lengths of the channels. More drastic measures were necessary. We removed the DPF from the system, which was an endeavor in itself because, in our haste to install it, we mounted it in the only place we would not have to break apart other components of our system... inside the 30 inch diameter stainless steel tube we use as our flare. Getting it out meant 2 people climbing inside the flare, unscrewing bolts with barely enough room to turn a wrench, and awkwardly lifting the very large, heavy semi-truck relic down from its throne. Fun times.</p><figure id="57aad55c-b47b-4fee-b44c-a62119220019" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.47AM.png"><img style="width:477px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.47AM.png"/></a></figure><p id="2fa519fc-2d55-45da-91bc-991285d10154" class=""><em>Figure 6: Believe it or not there are actually 2 people in there.</em></p><p id="e81c139d-ccd2-4a14-832c-3f71db3b5f24" class="">Once the DPF was removed, it was power-washed (thanks YouTube!). Amazingly, we watched the soot flow out of the DPF with the water. Success! Or so we thought. . . When we tried to lift the DPF, we found out it weighed about 4 times more than it did before. Cordierite is a very porous material and it soaked up water like a sponge. We pointed a heat gun into the DPF to speed up the drying process, but it took nearly two days and delayed our test campaign. The next time it needed a cleaning, we turned on the trace heaters and baked it out, getting the drying time down to one day.</p><p id="a530b246-2a4d-4049-aeb8-2899e834f952" class="">After one test in particular, power washing wasn’t working as well as it had previously. The DPF was really and truly clogged. This can happen even when the units are installed in semi-trucks. To keep them working, a cleaning process known as “regeneration” is performed. In scientific terms, “regeneration” means “heating the snot out of the cordierite.” We pointed our burner, normally used to heat the pyrolyzer, into the DPF, and fired it up. After a couple hours of being immersed in flame, the cordierite was glowing red hot, but it was clean.</p><figure id="82c698e4-86b8-4bfc-81a8-dbf91bbd0c93" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.56AM.png"><img style="width:700px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.01.56AM.png"/></a></figure><p id="47cff49d-c1c0-4b77-a5fc-9965ec6685f5" class=""><em>Figure 7 and 8: The DPF was “regenerated” by heating the cordierite inside to extremely hot temperatures using our burner (normally used to heat the pyrolyzer).</em></p><p id="5a4ef42f-f500-4f06-95ee-81773133c5d9" class="">Things continued like this for a few more tests, but each DPF cleaning was extremely labor-intensive. Another particulate-removal method was needed. Enter the char-bed filter.</p><p id="47b1e020-0735-4019-8433-950d78b81fee" class="">We figured activated charcoal is a widely-used filtering media, and we were producing our own char, so why couldn’t we use our own by-product to filter our gas? It seemed resourceful, so we gave it a shot.</p><p id="985e846e-ac91-41cd-91f8-1d52085cd791" class="">We filled a sanitary spool with char, and used perforated end-caps lined with steel wool to hold it in place. Again, we insulated it and installed it in our system, located just after the reformer and just before the DPF. Fingers crossed and system heated, we began to feed biomass. Spoiler alert . . . it didn’t work.</p><figure id="94f15843-d071-4047-b766-9f32d3e3d456" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.02.08AM.png"><img style="width:391px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.02.08AM.png"/></a></figure><p id="5eba7877-d913-47f5-8fe3-9479122ecb14" class=""><em>Figure 9: At low flow rates, the char bed filter effectively captured particulate from the gas stream (shown mixed with char). But once the flow rates and the test duration increased, the char broke down and caused more particulate to enter the gas stream.</em></p><p id="70970432-0843-4b26-b3cb-c46e51175493" class="">Remember how we mentioned anything downstream of the reformer needed to be able to withstand up to 1000°C? As it turns out, steel wool does not. The steel wool lining the end caps of the char bed filter completely disintegrated. Moreover, at that temperature, the hydrocarbons in the char further broke down due to thermal cracking, leaving the char more brittle and dust-like. The addition of steam and oxygen into the gas stream, combined with a raised temperature, increased the gas volumetric flow rate (and therefore, increased speed) downstream from the reformer. All of these factors led to bits of char blowing through the holes in the perforated end caps of the filter. The filter accomplished the opposite of what it was meant to do, and was adding more particulate into our gas stream. Back to the drawing board.</p><p id="ef9dc6fb-948a-4177-87a1-c0064dd70a8d" class="">We recognized a pattern: though filters may effectively catch particulate in the gas stream, the very act of doing so causes them to clog, leading to more frequent downtime for maintenance and shorter run times. While a filter may be a beneficial gas-purification component, we needed to make their job a little easier. Time to look at methods that remove particulate from the gas stream without the use of a filtering media that clogs over time. There are several different methods, including cyclones, wet scrubbers, and electrostatic precipitators. Leaving no stone unturned, we looked into all of them.</p><p id="faee393a-0bdb-40b0-a16b-b616bd2b9e69" class="">Cyclones are the easiest method to test, so we started there. A cyclone works similar to a centrifuge; just before entering a cyclone the tube diameter decreases, increasing the gas speed. Gas enters the cyclone at the outermost edge and circles the inner surface, creating a vortex. Centrifugal force keeps relatively large particles at the edges of the cyclone as gravity pulls them downward. At the bottom of the cyclone, the particles fall into a catch pot, while the particulate-free gas flows up the center of the vortex, and out the exit at the top of the cyclone.</p><p id="594700e6-5fa6-42e9-8325-0919def651d3" class="">We installed two cyclones in series to increase the particulate removal efficiency; in theory, if each cyclone removes ~75 - 80% of gas stream particulate, then two cyclones will reduce total particulate by roughly 95%. The two cyclones were installed into the system before the reformer.</p><p id="3058968d-3e04-4c47-9c8b-706564100401" class="">Based on the preliminary calculations and the success we’ve seen other gasifiers achieve with cyclones, we had high hopes for them. So far, we have not seen the same level of performance, so we’re building a better understanding of particle size distribution and loading at different stages of our gas stream. This will give us insight into the efficiency of the cyclones, and provide important design information for the development of future particulate removal systems.</p><p id="5088d942-9b07-4fec-a908-7bc11e2bedf9" class="">Though cyclones can effectively remove large particles, another method is needed to address small particles, &lt;5 microns in diameter. Our research into wet scrubbers indicated they may be a viable option. Wet scrubbers can be parallel-flow or counter flow, though counter-flow tends to be more efficient. Gas enters a chamber and is sprayed with a liquid mist (usually water, but other chemicals and oils can be used). Particulate becomes captured in the liquid droplets, which are separated from the gas. The cleaned gas stream flows out the top of the scrubber, while the waste liquid is collected and either disposed of or cleaned for reuse. Waste handling tends to be the leading challenge associated with the use of wet scrubbers. Additionally, our prototypes have shown there is a delicate balance with regard to water droplet size. Fine mists are more likely to catch particulate but can be carried downstream with the gas, negating their effectiveness. Larger droplets, on the other hand, will fall to the bottom of the scrubber where they can be collected, but may allow some particulate to escape through the system.</p><p id="da2dd894-179b-4fda-91d0-482be5e09312" class="">Electrostatic precipitators (ESPs) can also be very effective at capturing small particles. An ESP consists of 2 electrodes of opposite charges. When particles pass the first electrode, they obtain the same charge as that electrode. Downstream, when those same particles pass the next electrode of opposite charge, they are attracted to it, and are pulled out of the gas stream. If our system is designed for it, periodically cleaning off electrodes will be less labor intensive than cleaning or replacing filter media. However, the tradeoff associated with using ESPs is the power consumption. We’re currently limited by the power capacity of our facility, and the ESP may demand more power than we have available.</p><p id="6a1b8dea-e7b2-4092-a9b4-ff72c88cd37a" class="">Below is a graph illustrating the separation efficiency of these particulate removal systems, with respect to particle diameter.</p><figure id="44f4afc5-bac8-4ca7-aa01-077084d67271" class="image"><a href="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.02.22AM.png"><img style="width:700px" src="The%20Challenges%20of%20Removing%20Particulate%206e7dfa68eeb04f2a990a837d307d5fe1/ScreenShot2020-04-22at7.02.22AM.png"/></a></figure><p id="94bc3af9-0791-408e-9b08-5c7bd9fac46a" class=""><em>Figure 10: Typical separation efficiencies of gas cleaning systems. [14]</em></p><p id="2708dc89-93b8-4839-b272-ccc97d06f244" class="">So where does that leave us now? Well, fun things lie ahead. The next big step for Charm is a new home! That’s right, we are moving to a new, larger facility. The new facility has more available power, so an ESP is now an option. We believe if we better insulate and heat our cyclones, and take measures to stabilize our gas stream velocity, the majority of particles &gt;10 micron in diameter will be removed. The addition of a wet scrubber, ESP, or well-understood baghouse should remove the remaining small particulate, leaving a particulate-free product gas.</p><p id="88ac84a1-a408-4f08-be71-a558d12f9ff5" class="">The product gas will then flow through a water-gas-shift reactor, which reacts steam and carbon monoxide to produce hydrogen and carbon dioxide. It will then flow through a pressure swing adsorber, which removes nearly all contaminants out of the gas stream, leaving high-purity hydrogen gas as our output.</p><p id="399b0f98-9195-44ac-9543-7e0cd3723475" class="">We’re excited to learn more about our system, and are developing some interesting alternative applications for our technology as well. These applications, along with the downstream systems, will deserve their own blog posts, so stay tuned!</p><p id="b629854d-49bc-4b5d-afb0-ac1876ec202a" class="">[1]: “Design and Analysis of Cyclone Dust Scrubber”, http://www.ajer.org/papers/v5(04)/O050401300134.pdf</p><p id="6ddb50fa-0fec-4d48-b0f5-05e51c240168" class="">[2]: “Cyclone Separator”, https://energyeducation.ca/encyclopedia/Cyclone_separator</p><p id="d1f9811b-3308-48a4-833c-f40fd0f148d8" class="">[3]: “Knocking Down the Dust”, http://biomassmagazine.com/articles/2069/knocking-down-the-dust</p><p id="867b08be-3235-4e09-a515-314c967f7bdf" class="">[4]: “Electrostatic Precipitator”, https://energyeducation.ca/encyclopedia/Electrostatic_precipitator</p><p id="29bf4ebe-0b8d-46bd-8faf-a5644adf291e" class="">[5]: “Wet scrubber”, https://energyeducation.ca/encyclopedia/Wet_scrubber</p><p id="b8d10b94-fe7e-4d09-ab08-75798527009c" class="">[6]: “Section 6: Particulate Matter Controls”, https://www3.epa.gov/ttncatc1/dir1/cs6ch2.pdf</p><p id="eff0cd5f-8598-4c1b-a4e4-0a48eadfa7b5" class="">[7]: “Hot Gas Particulate Cleaning Technology”, https://www.osti.gov/servlets/purl/835769</p><p id="d69bcb2c-ee08-4c03-b6af-cf4485cdd452" class="">[8]: “Ceramic filters for removal of particulates from hot gas streams”, https://www.osti.gov/servlets/purl/7152444</p><p id="4454ddfc-96e4-4216-8660-d65f248e2857" class="">[9]: “Ancillary equipment for biomass gasification”, https://www.sciencedirect.com/science/article/pii/S0961953402000387</p><p id="9188c8ef-2af6-4b77-a7b9-db60b65b4bf4" class="">[10]: “Air Pollution Control Technologies: Compendium”, http://capacitydevelopment.unido.org/wp-content/uploads/2014/11/25.-Air-Pollution-Control-Technologies-Compendium.pdf</p><p id="6b75d067-f2b2-4aed-9c8b-2ca94fdc5317" class="">[11]: Image from http://www.craftsmancolorado.com/blog---from-the-home-inspectors-blog/baghouse-inspection</p><p id="cce6d109-1813-46c0-b533-bd0762772be5" class="">[12]: “Bio-oil Stabilization and Upgrading by Hot Gas Filtration”, https://pubs.acs.org/doi/10.1021/ef400177t</p><p id="09726bec-cc91-4de3-b8d3-a2b896f4e2fa" class="">[13]: Image from https://www.researchgate.net/figure/Diesel-Particulate-Filter-DPF-technology-channels-are-sealed-at-the-inlet-in-a_fig2_269632291</p><p id="a62b278e-33e5-480a-9b05-5ccbd35ce98c" class="">[14]: Thambimuthu KV: Gas cleaning for advanced coal-based power generation, IEA Coal Research, 1993.</p></div></article></body></html>

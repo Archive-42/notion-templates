@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>software is polluting the world</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c96bac21-77ab-4ef2-a851-d262ded52aaf" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎟️</span></div><h1 class="page-title">software is polluting the world</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.kentdebruin.com/blog/software-is-polluting-the-world" class="url-value">https://www.kentdebruin.com/blog/software-is-polluting-the-world</a></td></tr></tbody></table></header><div class="page-body"><p id="b5beb781-d7ef-4271-a4c9-80f4c76b800c" class=""><em>By Danique de Bies and Kent de Bruin</em></p><h2 id="4c5d5d7d-624b-4bec-b362-6b537e23a746" class="">1. Introduction to Internet Pollution</h2><p id="13cd18c1-761f-4d46-b68a-02b1ae9dd8a7" class="">&quot;Please consider the environment before printing this email&quot;.</p><p id="866d838a-12a7-4cbb-96bd-911c6defedd6" class="">You have probably seen this line at the bottom of an email before. By now it&#x27;s widely known that you should pay attention to what you print to reduce your carbon footprint. But how much does it cost sending this email in the first place?</p><figure id="d5e4a866-cc31-4f50-9ca3-5250a8d5724d" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf277bb8d39c91d87838ae_printer.gif"><img style="width:497px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf277bb8d39c91d87838ae_printer.gif"/></a></figure><p id="2c1d430d-28ea-4133-8c41-6d3aa3b5ad21" class="">What few people realise is that there is also something called digital pollution. When we send emails we are using computational energy; this energy usage increases our carbon footprint and can have a big impact in the long run. That makes &quot;Please consider the environment before <strong>sending</strong> this email&quot; a valid statement as well.</p><p id="9d859052-20a1-43aa-a78b-0a2c0c5af69c" class="">The Internet consumes large amounts of electricity in data centers, telecoms networks and consumer devices. If the Internet was a country, it would be the 6th largest polluter in the world. (<a href="https://www.nature.com/articles/d41586-018-06610-y">Nature.com, 2018</a>).</p><blockquote id="d914c7d9-e7fc-4254-b68b-2edd1828ef22" class="">“If the Internet was a country, it would be the 6th largest polluter”</blockquote><p id="d7003e1d-5a67-4895-ba4d-43754b8915ba" class="">Carbon emissions and their impact on the environment are luckily widely discussed in the modern day. So much so, that a certain sense of embarrassment has arisen when becoming aware of your own carbon footprint. One of the new terms that has come from this is &#x27;flygskam&#x27;, the Swedish word that describes the feeling of shame that comes from traveling by airplane with the knowledge of how much pollution it causes.</p><figure id="6274ce9a-58c6-4640-9f43-b48f7c462eba" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2b7c30994e214f116b99_World_Illu01.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2b7c30994e214f116b99_World_Illu01.png"/></a></figure><h3 id="528900de-cc10-411f-bd3a-909d751bbff5" class="">How much is your entertainment worth?</h3><p id="84fba783-06a1-4ab2-828e-94ce48b3ca5a" class="">When you binge-watch your Netflix series, group call on Houseparty (thank you, Covid-19) or buy Bitcoin, you are indirectly emitting carbon emissions into the world. Binge-watching shows on Netflix for a month straight contributes to as much carbon emissions as a flight from London to New York (<a href="https://www.atmosfair.de/en/offset/flight/">Atmosfair, 2020</a>).</p><p id="3ba57390-f244-4cf7-93ae-60c66b64416d" class="">And then you could ask, &quot;Who binges Netflix for a month straight?&quot;, but that&#x27;s besides the point. The Internet is a numbers game where even the slightest changes can have a big impact on the total.</p><blockquote id="b823e327-cb2d-4c34-af11-1fbdd9b82162" class="">“Binge-watching shows on Netflix for a month straight contributes to as much carbon emissions as a flight from London to New York.”</blockquote><p id="b4941373-adab-4783-a741-d041769448bf" class="">Take, for example, YouTube: the video giant has over 60 million-page views per day. According to researchers (<a href="https://dl.acm.org/doi/10.1145/3290605.3300627">Preist et at, May 2019</a>) YouTube&#x27;s annual carbon footprint is about 10Mt CO2e (Million Metric tons of carbon dioxide equivalent) — about the output of a city the size of Rotterdam (600.000 inhabitants).</p><figure id="84079d32-ad33-4bf8-9b4d-85cc562750af" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2b99153c287468674a84_YouTube_Illu_2.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2b99153c287468674a84_YouTube_Illu_2.png"/></a></figure><p id="8843843e-d425-4f66-a1b8-2b0af4f23e03" class="">Given the vast number of YouTube users across the planet, a slight optimisation of the UI adds up. That&#x27;s 60 million times that the logo gets downloaded and displayed. With these numbers, even the slightest changes in design and engineering influence footprint. That&#x27;s why nowadays, YouTube&#x27;s displayed logo is only about 5kb (<a href="http://edu.derfunke.net/topics/data-and-matter/computer-power">Der Funke, 2020</a>). It&#x27;s optimised to reduce energy usage and make the overall browsing experience as fast as possible.</p><h3 id="ab05b981-26a4-4c18-8cfa-9df32aeb443c" class="">Sustainability vs good design</h3><p id="eccf30b7-eb05-43df-93f0-4aabe1c05fc6" class="">With the rising awareness of carbon footprints, some designers also started considering sustainability in their work. Enter the term &#x27;sustainable UX&#x27;. This movement &quot;takes into account its responsibility to the environment and utilizing practices that reduce harm to the environment&quot;, (<a href="https://www.rossul.com/2019/blog/sustainable-ux-design/">Rossul, July 2019</a>).</p><p id="960d246b-44b1-4a6c-bce4-95d37a32e5e4" class="">Those in the tech industry have an important role to play, as they can tackle the problem at the source. We as designers have the choice to make more sustainable decisions in the work we deliver, or we could nudge our users into becoming more sustainable themselves. But if we focus on this, will we still be able to deliver good design?</p><p id="930e3168-be28-442d-80f1-fd047f3eab8f" class="">Sustainable UX is a movement that is still in its infancy. Some companies, however, are already doing their part in creating a smaller carbon footprint for themselves and their users. These measures differ from big to small, but all show a certain awareness of digital pollution.</p><p id="f74ecdfc-22ef-457d-b72a-f10ef9f340fe" class="">We identified two different ways designers and developers are pushing sustainability: small nudges, in which the user is (maybe unwittingly) prompted to choose more sustainable options, and content optimization, in which content is optimised as energy efficient. In this piece we will discuss both.</p><h2 id="db685ece-4685-4984-b0e0-f0c50c188e7d" class="">2. How small nudges can make a big change</h2><p id="74812071-9ac4-46f7-b9cf-789c3b141a29" class="">Designers can use small prompts in their interface to reduce the carbon footprint of their users. They don&#x27;t necessarily tackle the problem of pollution by changing their content; instead, they present it in a way that allows the user to make better decisions for the environment.</p><figure id="dbb13f0f-f9e6-44ee-acc0-b28bc948bdbf" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2baa85c94f40c8b34e60_Bicyclepush_illustration.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2baa85c94f40c8b34e60_Bicyclepush_illustration.png"/></a></figure><h3 id="f08fc7e5-ccb3-4a9d-a812-fe4e184203ee" class="">Starting out small</h3><p id="17f050e8-20c0-43cb-927c-da47f22cf22c" class="">To reduce plastic waste, Deliveroo has introduced an opt-out option of plastic cutlery from the restaurant. Automatically, the option to receive cutlery is turned off with a small text as to why this option would be better for the environment. Users can still decide for themselves if they want to receive plastic cutlery by switching the toggle.</p><figure id="4a8c385a-c885-42db-aeb2-63c71ece6b68" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2bd1b41a94a6afbe400a_cutlery_option.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2bd1b41a94a6afbe400a_cutlery_option.png"/></a></figure><h3 id="a469e4ae-bef3-412b-9265-d4ba2a546e10" class="">How we could do more</h3><p id="1378c2a0-4196-4b06-b6f9-f56ea1789c98" class="">In <a href="https://uxdesign.cc/product-design-for-sustainability-3fffbb2a7f0e">Artiom Dashinsky&#x27;s article &#x27;Product Design for Sustainability&#x27;</a> (2016), he proposes different ways in which existing interfaces could push for more sustainability, discussing &quot;how small-effort improvements can affect the environment&quot;.</p><p id="009a8c6a-1f43-4b1d-a793-878a9d18c21b" class="">In a first example, Dashinsky presents a more sustainable way of printing documents. Sometimes, the last page of a printed document only contains a few lines. If the interface would give an option to scale down the document (or do this automatically), a lot of paper could be saved</p><figure id="1db7675e-02d8-4088-9174-c7222d0da6af" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2bf2b41a94243abe4367_print_setup.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2bf2b41a94243abe4367_print_setup.png"/></a></figure><figure id="fa922d5f-c4bd-4fe5-8d7b-b1b04fde9c95" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c0ea0d3e41edc6ae783_print_pages.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c0ea0d3e41edc6ae783_print_pages.png"/></a></figure><p id="09505b3d-9842-4d4e-b1e7-91e395008869" class="">For Google Maps, Dashinsky proposes to present more sustainable options of transport first. If the app promoted public transportation or biking over cars or cabs, people might be nudged into using the prior options, even though they would take longer.</p><figure id="6522c8aa-cb7d-4d4a-8117-de393e39b8b7" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c29f728bb151639a685_google_maps.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c29f728bb151639a685_google_maps.png"/></a></figure><h3 id="bd6a5eab-0c66-49f6-a06d-f85b3876b32a" class="">Our Take: Messages &amp; Image Compression</h3><p id="44165931-5d25-474e-9998-cc7241a92452" class="">Similarly to Artiom Dashinsky, we challenged ourselves to look at apps we use on a daily basis and think about ways in which we could reduce our own carbon footprint without limiting ourselves in phone usage.</p><p id="1615fcdb-0467-4d6a-af7d-d77471b455c5" class="">Nowadays, messaging apps go beyond the simple text message. We&#x27;re constantly sharing data with others: from emojis to short videos. We love the fact that our contacts receive this data within a few seconds. But we probably forget about the real impact of this data-sharing.</p><blockquote id="468f2826-7d8f-4c2d-be6d-4d11e51d5f36" class="">45,000,000 images sent through iMessenger every day</blockquote><p id="f12f3864-25c8-49dc-9e9a-3490a2bb3901" class="">When you send content such as photos such as through WhatsApp, it is automatically compressed. To the average user, this compression is visually unnoticeable. In contrast, images through iMessage are sent in full resolution. Even a random selfie to your best friend is sent in an unnecessarily pixel perfect quality. This requires extra computational energy resulting in a higher impact for the environment.</p><p id="b003ce15-9737-4f1e-b93c-9227b392e5ad" class="">Taking inspiration from WhatsApp (automatically compressing photos) and the Apple Mail application (giving users the option to compress email attachments), we created a small UI change for iMessage.</p><p id="addbade8-a746-4d23-8d40-1984b52a79a6" class="">Our suggestion provides the user with different size options in which they can send their photos. We decided to leave the choice of compression to the user because, sometimes, people still want to be able to send photos in full size and not lose any quality. To nudge people into sustainable behaviour, the smallest picture size option is automatically selected. Users can change this selection by simply clicking the option they would prefer.</p><figure id="342226d2-bec1-403c-afef-b295a653b284" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c3bf728bb53d739a844_iMessage_tweak.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c3bf728bb53d739a844_iMessage_tweak.png"/></a></figure><p id="0be28ecf-552f-4de5-a9ce-94c00b7da079" class="">Does such a small change in UX make any difference on a larger scale? Let&#x27;s run some calculations.</p><p id="1b4c1a12-8d43-4200-9968-cbcc705abe1a" class="">According to research on Wonder (<a href="https://askwonder.com/research/text-photo-messages-sent-using-top-messaging-apps-globally-day-b7kn9xrj7?fbclid=IwAR13qJm7axH4vnKOs7P_08OY5iiCo_h21jUkezBM79vQ1UMNxOjDfsAqWgg">Wonder, 2016</a>) an average of 1.8 billion digital images are loaded (globally) each day, totaling around 657 billion photos sent per year. Unfortunately, the percentage of images sent with iMessage is unknown. To make an estimation, we will use WhatsApp&#x27;s statistics as a placeholder. 2.5% of the messages sent through their service are images. So on a daily basis, assuming this is the same for iMessage, 45,000,000 images are sent through the app everyday.</p><blockquote id="50d8e4da-957f-4bbc-9631-5489c43a281a" class="">The CO-2 emitted from the images sent through iMessage each day is equal to 11,862 people flying from Paris to New York.</blockquote><p id="2afd3bdd-fee9-4dd1-aef3-0fd5cd7ca00f" class="">Taking the average size of phone images (13.18 MB (<a href="https://www.cnet.com/news/iphone-6s-camera-filesizes-4k-live-photos-hdr/">S. Hollister, CNet, 2015</a>), this brings us to a total of 593,100,000 megabytes worth of data sent each day, or 593.1 terabytes. With this, we emit 11,862 tons of CO-2 per day, equal to 11,862 passengers flying from Paris to New York (<a href="https://www.energuide.be/en/questions-answers/what-exactly-is-a-tonne-of-co2/2141/">Energuide, n.d.</a>).</p><p id="fd9239db-6202-4f13-90d2-47526f78839e" class="">By compressing the images we send, we can bring this number back by about 40%. The rate of a JPG2000 compression is 1.72, which would make the total amount of data shared 345 terabytes. We could even take it a step further by using an AI-based compression. This could further reduce the data to 280 terabytes a day. Instead of 11,862 people taking that flight from Paris to New York, it would be around 5,600. All of these calculations are based on the paper &#x27;<em>Integer Discrete Flows and Lossless Compression&#x27;</em> (<a href="https://arxiv.org/pdf/1905.07376.pdf">Hoogeboom, 2019</a>).</p><figure id="b11f037a-1f67-4dac-84f6-3348229812ca" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c47cd114611317cf911_Illustration_Calculation.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c47cd114611317cf911_Illustration_Calculation.png"/></a></figure><h3 id="6439efdb-2ca8-4c98-b70e-1494a46dc0c4" class="">Friction vs. Seamless</h3><p id="477de22d-bcb1-4079-a02d-3a91723699b9" class="">As mentioned earlier, WhatsApp compresses images automatically, keeping the user out of the process. This is, partly, a financial consideration. After all, smaller picture sizes mean fewer servers, which means fewer running costs. This can be an important factor for a company that pays for their own servers while running a &#x27;free&#x27; product. But, an even bigger consideration is that of design friction. Friction is anything that prevents users from accomplishing their goals or getting things done as quickly as possible. It is usually the opposite of being intuitive or effortless. However, it doesn’t mean that it’s always bad for users.</p><blockquote id="56ca818e-2ac7-4fbb-8bfc-4b08533e5a36" class="">Are messaging apps supposed to hoist the sustainability flag?</blockquote><p id="b9f21985-45bd-494b-ba0f-cc93b8120154" class="">iMessage and WhatsApp are all about seamless messaging. Sending a picture just works. Adding an extra interaction to stimulate sustainability adds an &#x27;unnecessary&#x27; friction to that experience. But maybe this &#x27;friction in the experience&#x27; is exactly what consumers need.</p><p id="2967dcb1-8227-4755-b78a-7172b0a8dcfd" class="">Up to now, consumers have not typically considered the computational energy needed to deliver their messages. The whole product is organised so that the end user doesn&#x27;t have to care. By adding an extra interaction, you could let users realise that there is a downside of sending an image — you can make them aware. The question then remains: Is a functional messaging product like iMessage or WhatsApp created to spread such a message?</p><h2 id="a25903de-e348-4281-bc86-aa8e9cbc4159" class="">3. Content for Optimisation</h2><p id="34e29182-40fe-4559-bc13-3c32a9e4eb90" class="">&quot;Data is the culprit behind the monster carbon footprint of our websites.&quot; In their article, Sustainable UX design: saving the environment with smarter websites, the tech company Parker Software discusses their views on the impact of data on the environment. They see that the ever-increasing creation of websites is demanding more and more energy. By making the right decisions in our designs we can improve this energy usage.</p><figure id="0a420eda-049d-43a2-b269-8cb36162e0e8" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c59b8d39c6b5f7854b5_Instagram20squeeze.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c59b8d39c6b5f7854b5_Instagram20squeeze.png"/></a></figure><h3 id="dd4a0e75-68bb-4f2d-a012-f8316bde9c17" class="">Lost in the web</h3><p id="a1e74d31-740e-4c22-a87d-a40b411e1bca" class="">When users visit a page, all of the data on that page has to be downloaded. Energy is used to receive all the necessary content and present it on the screen. Depending on the goal of the user, all of that loaded data might not even be interesting for them, causing a waste of energy. Webshops, in particular, are notorious offenders. When you navigate to a specific item, you have to click through category upon category and retrieve new data every time. With every click to open a new page, your website becomes less sustainable, so it&#x27;s important to make your material as accessible as possible. But, how do we ensure the content is right there for the taking?</p><blockquote id="22f2e8d8-3f4a-446c-a074-931df3db2823" class="">With every click to open a new page, your website becomes less sustainable, so it&#x27;s important to make your content as accessible as possible.</blockquote><p id="16f2826f-4fdb-4e66-95b9-5e9dd8c75080" class="">On their website, Ikea is tackling it well. With a clear navigation panel and suggested products when searching, users are able to find items they&#x27;re looking for as quick as possible. Like in most webshops, Ikea uses the navigation panel to let their users filter through different product themes. From a UX standpoint, this is clearly done to make searching for products in a huge database easier. But, it also avoids the necessity to load in product data that the user doesn&#x27;t want or need to see.</p><figure id="4d6e541b-dd65-441c-945f-9a37a0a51827" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c76b8d39c8261785617_Ikea_Navigation.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c76b8d39c8261785617_Ikea_Navigation.png"/></a></figure><p id="0a1a3148-37ff-40a0-b73d-307ac165ba6d" class="">When typing a product into the search bar, the Ikea website automatically suggests popular products that match this search term. By immediately presenting possibilities for the user, they can find the product they&#x27;re looking for even faster. With this, Ikea also avoids that users load entire pages of, let&#x27;s say, mirrors, and therefore an entire page of energy usage is spared.</p><figure id="4b09bdce-260a-4bf2-83d7-fa7d2649c610" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c85b8d39c5c68785691_Ikea_Search.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c85b8d39c5c68785691_Ikea_Search.png"/></a></figure><h3 id="bbda5f04-43f9-4d73-9081-8dd39dd45008" class="">Now make it smaller</h3><p id="0518547e-69a0-4f35-bd8d-42f360c7e09c" class="">To reduce the impact of our designs on the world, we need to start removing those extra bytes of data. A company that is really aiming for the smallest content size possible is Low-tech Magazine. With their solar-powered website they try to &quot;radically reduce the energy use associated with accessing [their] content&quot;. They’ve made several choices in design to reach this goal. The website is fully static, and so, asks for less computational energy to load, avoids custom typefaces and logos, and images are converted with a &#x27;dithering&#x27; technique.</p><figure id="57bb65f6-dc57-4ff9-b6e5-364de0abe980" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c915c6b730e61226c9d_LowTech.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2c915c6b730e61226c9d_LowTech.png"/></a></figure><h3 id="9a4d122e-763f-4ef3-82d5-50a9307a1fdd" class="">Our suggestion: An optimal filter for Instagram</h3><p id="96011e55-dfcb-44ed-b246-a0693d47fffb" class="">The biggest culprit of our daily data usage might just be Instagram. With its ever refreshing images &amp; videos and its endless loop of stories, Instagram is a data polluter.</p><p id="07ac0dbf-1560-40d7-bb92-b0f74f3f45b6" class="">In 2015, Instagram updated their standard 640 px square picture format in order to support the vertical and horizontal formats (16:9). Since then, an Instagram Story picture has the dimension of 1080 x 1920 px, and a maximum of 30MB in size.</p><p id="08d78ed7-cdf0-475d-a0fe-3e822c3ed6c4" class="">To reduce the size of the content shared in Instagram Stories, we created an environmentally conscious AR filter. For this, we were inspired by Low-tech Magazine and the way they dither images on their website. Our Instagram filter uses a halftone effect, which compresses images into dots rather than tones. A lot less data is needed to fill up the images, which makes their size significantly smaller.</p><figure id="d8a2aa24-278f-45aa-a2b4-151dafd9ed55" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2ca06c54ed164f9e9459_Instagram_tweak.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2ca06c54ed164f9e9459_Instagram_tweak.png"/></a></figure><p id="6d532016-a5d0-4dff-9218-8f48322aa757" class="">With the use of the AR filter, we want to reduce the size of the Instagram Story at the source. The filter reads and creates a dithered image of reality in which some pixels won&#x27;t have to be shown. The result is a remarkably smaller filtered picture size than the original. In fact, by using our filter, Instagram users can reduce the size of their original picture by over 50%.</p><figure id="a498925f-77e0-4b7c-aef4-0958f992cd0f" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2caf5c6b737ff9226de7_instagram_story.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2caf5c6b737ff9226de7_instagram_story.png"/></a></figure><p id="b3c6cb04-f78e-430c-97f5-e02a960ef6fb" class="">With the introduction of a new sustainable filter in Instagram, we might have users unknowingly becoming more sustainable. We don&#x27;t have to push any sort of choice for them, but can simply make the filter available for them to use. Optimisation in content doesn&#x27;t have to be thrown in the user&#x27;s face. It can be done in the background and still make a big difference.</p><figure id="1364caa4-4a6a-418d-b238-365eddecb4a1" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2cc0f728bb40fe39acf2_Comparison20halftone.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2cc0f728bb40fe39acf2_Comparison20halftone.png"/></a></figure><p id="63cfae61-27f7-4542-a39f-947d825e4cf2" class="">The Sustainable Dot filter has launched on Earth Day, Wednesday 22 April and is available for all Instagram users. Simply go to the Instagram profile page of Master Digital Design (@master.digital.design) and check the middle filter icon just above the profile’s feed.</p><h3 id="ca8e3a7f-6a1a-4b0c-a234-9b83911d8667" class="">Good UX is Sustainable UX</h3><p id="0851d050-9c02-4c4e-b7d5-a575b7ffd7c9" class="">In the article by Parker Software, it&#x27;s proposed that badly executed UX design in a website could indicate that it isn&#x27;t that sustainable. They might be right. A big part of good UX is making content easily accessible and speed, of course, plays a role in this. We see this too in the examples presented in our article. As designers, we have to avoid wasting the user&#x27;s time with endless navigating or slow loading content.</p><p id="36ee876a-1dc4-4c08-8337-b2dca2701585" class="">With every design of a new page, we should be consciously considering what effect the addition of this content is going to have. First, the user&#x27;s experience was our biggest motivation in this. How would people navigate to this page? How would they use it? Where could they go from here? Pages would be optimised to make the journey through products as easy as possible.</p><p id="93f3b39a-6408-49fd-9caf-e26521d1951b" class="">Now that we&#x27;re actively, and almost naturally, making a seamless flow in our work, we could maybe take it one step further. How can we revise our work so much, that the impact we have on the environment is as little as possible?</p><h2 id="d578822d-4634-48ca-ba84-3b7941c19e37" class="">4. Sustainable UX: Some Closing Thoughts</h2><p id="3208a5ea-5c31-4e42-b5aa-d82485f06ba5" class="">In this essay, we’ve touched upon the emergence of the field of Sustainable UX. It&#x27;s a subject-matter that is still in its infancy. Most people have yet to realize that software can pollute our planet. A dirty factory chimney or a polluted car is easy to label as unsustainable. But the intangible nature of software makes pollution too abstract to get a grasp on. We simply can&#x27;t imagine that sending a message from our phones has an impact too. Data moves from place to place through machines that are powered by electricity. These machines consume energy that emits CO2 if it doesn&#x27;t come from renewable sources.</p><p id="2e075ab1-89ca-428e-9f8b-ead2c5b2922a" class="">So what&#x27;s the solution? Do we stop using digital tools altogether? In the world we’re living in, that’s difficult to imagine. We could start pointing fingers at streaming services, as they’re one of the biggest digital polluters, but we won’t stop binge-watching our favourite series. So, reducing emissions in digital products has to be tackled in another way. As designers, we can do this with a set of focus points for the next couple of years.</p><h3 id="e4b363b5-c7bc-4d1d-bcb7-242c2ff8d03d" class="">It starts with awareness</h3><p id="855234b2-d73b-420e-b36c-0063c460f8ee" class="">To fight the problem of computational energy usage, we need to create an awareness of data usage and its impact on the environment. We hope that this series of articles has already shed some light on the subject. If we, as designers, make each other aware of movements like Sustainable UX, we can actively consider the impact of our designs and how we can make them greener. We all share and use the web, just as we all share this planet, and can come together to fix it. By sharing knowledge through articles like these, we can actually use the ‘problematic’ data slurping Internet as a solution.</p><figure id="fc3e8557-f760-4697-a8af-2177578b0729" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2ccdcd11463de17cfdad_Screentime.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2ccdcd11463de17cfdad_Screentime.png"/></a></figure><h3 id="86283b72-ee58-46bf-961c-e2048de01ef3" class="">Measuring is key</h3><p id="3371bb83-546f-4387-a03e-aef2dcb22afe" class="">To make sustainability more understandable we need better tools to measure Internet pollution. It&#x27;s important to understand that measuring is much more complex than it seems. Sustainability acts in a system of actors that all influence each other. Measuring sustainability includes so many aspects that it’s not always easy to understand which decision is right sustainability-wise. There isn&#x27;t yet a reliable model for energy modeling in interactive applications.</p><blockquote id="beb89d02-7d75-449e-baeb-3639fb536ab2" class="">“We need better tools and methods to measure internet pollution.”</blockquote><h3 id="dc2baaaa-ff9e-461a-9fd5-af0905099848" class="">Participate</h3><p id="4fe37ffe-3d77-4dc6-92f1-f0427635ad04" class="">Designers, product managers, engineers, and entrepreneurs have the responsibility to consider the web as a polluter. It is up to us to create something that is good for the user as well as the planet. We can create good design by choice without compromising aesthetics and functionality. Good UX-design might equal sustainable UX-design. For the user experience, we strive to bring the user through our products in the fastest way possible. Now, we can bring it a step further. We have to consider how we can prevent our users from loading more data than needed and we can tweak our work accordingly. Reduced data leads to reduced energy consumption.</p><figure id="736fc2e6-2079-47b4-b4d9-e43981c5e0a6" class="image"><a href="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2cdf00e6c6148cf2e531_Emitting20loading.png"><img style="width:700px" src="software%20is%20polluting%20the%20world%20c96bac2177ab4ef2a851d262ded52aaf/5eaf2cdf00e6c6148cf2e531_Emitting20loading.png"/></a></figure><h3 id="e4413e11-0c9f-4710-804b-b1a11dd399b2" class="">Scale does matter</h3><p id="96b22d37-7db6-4523-8758-126f4d9a8078" class="">From our own experiments this week and looking at what others have done in the field of sustainability, we have seen how small we can start out. The changes we make in our solutions are small but can have a big effect in the long run. Every conscious design choice helps in the reduction of our computational energy usage.</p><p id="19309d88-b08d-4d40-9664-6fb19f7a4b7e" class="">Small nudges in UX can go a long way. By presenting more sustainable options to our users clearly, we can help them make more environmentally friendly decisions. Options don’t have to be pushed, but can simply be presented (or even automatically selected). Unwittingly, people can make a choice to save the planet.</p><blockquote id="b5af4cac-1187-450c-8542-ab41cbb0c1ce" class="">&quot;The moment we create digital products or services we become part of the problem.&quot;</blockquote><p id="b93d4176-4d4d-49b4-9db8-a9822a7c12b3" class="">Even systematic changes to reduce small bits and pieces in an interface can massively change the emission rate. The simple compression of an image can have a big impact once it goes around the world. The internet is a numbers game and scale does matter. Think about what impact everything you design and build would have if 10 million people would use it.</p><p id="3304200d-f560-4199-92d3-9057ee7f9cb7" class="">You may wonder whether as a designer it is your responsibility to design more sustainably or to bring this awareness to the user. But from the moment we create digital products or services we become part of the problem. The question is whether you would like to be part of the solution as well.</p><h2 id="e62e36a2-ce95-49de-93d3-d7bd4eb294d7" class="">Acknowledgements</h2><p id="d7779849-a9f0-492f-9656-89e3c3fc13f1" class="">This essay has been written together with Danique de Bies. Illustrations are by Matthijs Nolst Trenité. The development of the Instagram Filter and calculations are by Gabriela Onu.</p><p id="334c70e0-b496-4603-8528-e786c55619cf" class="">Thanks to Cintia Taylor, and Freya von Noorden Pierce for reading drafts of this piece.</p><p id="5a6b80d0-5be2-4533-91a1-769c8bd77761" class="">The title is a reference to the famous essay by Marc Andreessen called &#x27;<a href="https://a16z.com/2011/08/20/why-software-is-eating-the-world/">Why Software is Eating the World</a>&#x27;.</p></div></article></body></html>

@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How Discord Handles Two and Half Million Concurrent Voice Users using WebRTC</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="06ae64c4-f6d1-4a3c-a9f2-b7e1937cf46d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎁</span></div><h1 class="page-title">How Discord Handles Two and Half Million Concurrent Voice Users using WebRTC</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blog.discord.com/how-discord-handles-two-and-half-million-concurrent-voice-users-using-webrtc-ce01c3187429" class="url-value">https://blog.discord.com/how-discord-handles-two-and-half-million-concurrent-voice-users-using-webrtc-ce01c3187429</a></td></tr></tbody></table></header><div class="page-body"><figure id="d57a941a-8e02-4655-b6df-e9fe82431a0c" class="image"><a href="How%20Discord%20Handles%20Two%20and%20Half%20Million%20Concurren%2006ae64c4f6d14a3ca9f2b7e1937cf46d/1maPImYoUp2vfPm8DuSCjFQ.png"><img style="width:700px" src="How%20Discord%20Handles%20Two%20and%20Half%20Million%20Concurren%2006ae64c4f6d14a3ca9f2b7e1937cf46d/1maPImYoUp2vfPm8DuSCjFQ.png"/></a></figure><p id="c68bf6ba-0b0d-4a80-86c7-7f31b0cddbbe" class="">From the very start, we made very conscious engineering and product decisions to keep Discord well suited for voice chat while playing your favorite game with your friends. These decisions enabled us to massively scale our operation with a small team and limited resources.</p><p id="dbcf8530-8b60-480a-a8e0-bcc2ed42e16c" class="">
+</p><p id="a81e8fc8-b14c-42ae-899c-35159c14ca57" class="">This post gives a brief overview of the different technologies Discord uses to make audio/video communications a seamless reality.</p><p id="45dad15d-46a0-4eb2-97d0-cf34b55735b9" class="">
+</p><p id="d6c58e52-82d8-432e-b01a-0015eefec027" class=""><em>For clarity, we will use the term “guild” to represent a collection of users and channels — they are called “servers” in the client. The term “server” will instead be used here to describe our backend infrastructure.</em></p><h1 id="f65e7afb-4ca9-4621-9c3d-d07da72d988c" class="">Guiding Principles</h1><p id="b9207bcb-28a7-4639-9b8d-8df55550749c" class="">Every audio/video communication in Discord is multiparty. Supporting large group channels (we have seen 1000 people taking turns speaking) requires client-server networking architecture because peer-to-peer networking becomes prohibitively expensive as the number of participants increases.</p><p id="11420872-099d-4cf8-9bad-96bc6c362e69" class="">
+</p><p id="2279db0e-2bbc-4e63-b827-46cf314cad68" class="">Routing all your network traffic through Discord servers also ensures that your IP address is never leaked whether you use text, voice, or video — preventing anyone from finding out your IP address and launching a DDoS attack against you. Routing audio/video through media servers offers other advantages as well, such as moderation. For example, administrators can disable audio/video for offending participants.</p><p id="20f8edb8-0c4f-403a-91c7-5b36d9d834f8" class="">
+</p><p id="5306951a-ba4e-45b2-9798-166982f90cc7" class="">Discord runs on lots of platforms.</p><ul id="379aeb55-b0dc-4a64-ade5-e9aeb7f783a9" class="bulleted-list"><li>Web (Chrome/Firefox/Edge, etc.)</li></ul><ul id="f3e4c1cc-6434-40dd-bd8f-3d3e9885d160" class="bulleted-list"><li>Standalone app (Windows, MacOS, Linux)</li></ul><ul id="d4983ab7-d743-4189-b501-08d3966574a3" class="bulleted-list"><li>Phone (iOS/Android)</li></ul><p id="8faac00b-8e0f-4777-a690-74c8d0def6eb" class="">
+</p><p id="d8c7786c-a947-448b-b8b0-17e1303aab18" class="">The only way our team can support all these platforms is to take advantage of code re-use and <a href="https://www.w3.org/TR/webrtc/">WebRTC</a>. WebRTC is a specification for real-time communication comprised of networking, audio, and video components standardized by both <a href="https://www.w3.org/">World Wide Web Consortium</a> and <a href="https://ietf.org/">Internet Engineering Task Force</a>. WebRTC is available in all modern browsers and also as a native library to embed into applications.</p><p id="3892fb92-cebd-4cc4-aa14-883fdadf686d" class="">
+</p><p id="1867eb05-3c92-4124-bca9-699f8294e193" class="">Discord’s audio and video features are implemented using WebRTC. This means our browser app relies on the WebRTC implementation offered by the browser. Our desktop, iOS, and Android applications, however, make use of a single C++ media engine built on top of the WebRTC native library — specifically tailored to the needs of our users. This means that certain features work better in the installed application than in the browser. For example, in our native apps we can:</p><ul id="b6d8d0ab-3853-4546-85b0-459858ab6b54" class="bulleted-list"><li>Circumvent auto-ducking behavior of the default communications device on Windows. Ducking, or volume attenuation, means that <a href="https://docs.microsoft.com/en-us/windows/desktop/coreaudio/stream-attenuation">Windows automatically reduces volume of all applications when communications device is used</a>. This is undesirable when you are playing a game and using Discord to coordinate a raid.</li></ul><ul id="250d1f51-8d7e-4af6-ba92-cd00a43b3a9c" class="bulleted-list"><li>Implement our own volume control to avoid changing your global operating system volume.</li></ul><ul id="fc2eee3d-37de-4892-b7f3-e3cb79d303f8" class="bulleted-list"><li>Access raw audio data to perform voice activity detection and share both game audio and video.</li></ul><ul id="4b6875b8-2f00-4bcc-8569-89673d8a5709" class="bulleted-list"><li>Reduce your bandwidth and CPU consumption during periods of silence — even very large voice channels only have a few concurrent speakers at any given time.</li></ul><ul id="f19fe991-bbd3-4aa5-b7f7-b50b3d27b9dc" class="bulleted-list"><li>Provide system-wide push to talk functionality.</li></ul><ul id="1254e9be-6388-4022-9b6a-b03f27c40415" class="bulleted-list"><li>Send extra information along with audio/video packets (such as indicating priority speaker).</li></ul><p id="8610e8b0-f596-4a32-8192-26a7d830b5ca" class="">
+</p><p id="681a3433-677e-4b83-b302-03528eb04054" class="">Having a customized version of WebRTC means that we need to keep up-to-date with frequent updates which is a painstaking process that we are working on automating. However, providing specific features to our gamers is well worth the extra effort.</p><p id="fe7f7e01-24ae-461f-8a0c-03e850cf2aa4" class="">
+</p><p id="7f313349-0883-4439-a162-559530fbe4fa" class="">In Discord, voice/video communication is initiated by entering a voice channel or call. This means that the communication is always initiated by the client, which reduces both client and backend complexity and also increases resilience against errors. In case of infrastructure failure, participants can simply re-connect to a new backend server.</p><h2 id="52dfc11e-4f2b-418a-b16c-d3122575dc91" class="">Making It Our Own</h2><p id="8a24776a-a3b3-4ac7-a9a5-5bb0ef1c2034" class="">Since we have control of the native library, we do some things differently in the native app than what you see in the browser’s WebRTC implementation.</p><p id="efa57e84-b3b2-46b7-bb8f-cfcdc915bf8f" class="">
+</p><p id="fdd10699-d816-4ae2-8087-6d573f3c4b44" class="">First, WebRTC relies on the Session Description Protocol (<a href="https://www.html5rocks.com/en/tutorials/webrtc/basics/">SDP</a>) to negotiate audio/video information between participants (which can be close to ten kilobytes in size round-trip). Using the WebRTC native library allows us to use a lower level API from WebRTC (<code>webrtc::Call</code>) to create both send stream and receive stream. We exchange a minimal amount of information when joining a voice channel. This includes the voice backend server address and port, encryption method and keys, codec, and stream identification (about 1000 bytes).</p><p id="52fbb649-23ad-4c5d-8ea4-28505e39ef74" class="">
+</p><p id="7cbbcc10-e606-4d8b-98ba-74d5126a93b3" class="">Moreover, WebRTC uses Interactive Connectivity Establishment (<a href="https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/#after-signaling-using-ice-to-cope-with-nats-and-firewalls">ICE</a>) to determine the best communication path between participants. Since every client connects to our media relay server, we do not need ICE. This allows us to provide a much more reliable connection when you’re behind a NAT, as well as keep your IP address secret from other parties in the channel. Clients send periodic ping messages to ensure that the firewall remains open all the time.</p><p id="636164d0-e941-47ef-99c9-97e64e22989c" class="">
+</p><p id="9a574e47-19ae-4669-aa50-14e9ade27410" class="">Lastly, WebRTC uses the Secure Real-time Transport Protocol (<a href="https://en.wikipedia.org/wiki/Secure_Real-time_Transport_Protocol">SRTP</a>) for media encryption. The encryption keys are set up using Datagram Transport Layer Security (<a href="https://en.wikipedia.org/wiki/Datagram_Transport_Layer_Security">DTLS</a>), which is based on the Transport Layer Security protocol used in your browser every day. The native WebRTC library lets you implement your own transport layer using the <code>webrtc::Transport</code>API.</p><p id="e23048e1-81d6-4fcc-b769-761d228b5521" class="">
+</p><p id="165e183f-c687-431b-a191-6d23ab8b316b" class="">Instead of DTLS/SRTP, we decided to use the faster <a href="https://en.wikipedia.org/wiki/Salsa20">Salsa20 encryption</a>. In addition, we avoid sending audio data during periods of silence — a frequent occurrence especially with larger groups. This results in significant bandwidth and CPU savings — however, both client and server must be prepared to cease receiving audio data any time and rewrite audio/video packet sequence numbers.</p><p id="461d5a14-0478-48bf-a07c-cedd3d219745" class="">
+</p><p id="bb03f56d-f634-465c-b4ed-c8d3b0328d45" class="">Because our browser app uses the browser <a href="https://www.w3.org/TR/webrtc/">WebRTC API</a>, we make use of SDP/ICE/DTLS/SRTP. We exchange all necessary information between client and server (less than 1200 bytes round trip) and SDP is synthesized from this information at the clients. Our voice backend infrastructure is responsible for bridging the differences between desktop and browser applications.</p><p id="169d0f6d-7f71-4a67-9fc7-6cf54c75c69e" class="">
+</p><p id="0d0604c8-8dc9-40c4-bcb3-a04c9a831de4" class="">There are several backend services that make voice possible, but we will focus on three of them — Discord Gateway, Discord Guilds and Discord Voice. All of our signaling servers are written in <a href="https://elixir-lang.org/">Elixir</a> allowing lots of code re-use.</p><p id="96062d7d-be89-463b-95ac-cb32c21221d8" class="">
+</p><p id="4e587868-2b49-490d-ba51-23e452ae5b83" class="">When you are online, your client maintains a WebSocket connection to a Discord Gateway (we call this the <em>gateway</em> WebSocket connection). Your client receives events through this gateway connection related to guilds, channels, messages, presence, etc.</p><p id="02df3df2-c28b-4974-b4ce-7682e2bbfe6c" class="">
+</p><p id="4f222795-f088-4f66-8fd3-79cb056f7ea0" class="">When you are connected to a voice channel, the connection status is represented by the <a href="https://discordapp.com/developers/docs/resources/voice">voice state object</a>. The client updates its voice state object using the gateway WebSocket connection.</p><p id="a04da156-57f6-4c2f-aa0f-64ff05fef155" class="">
+</p><p id="41dc1636-a9cb-4fdc-b82c-11f44e2310e1" class="">When you join a voice channel, you are assigned to a Discord Voice server. The Discord Voice server is responsible for transmitting every member’s audio to the channel. All the voice channels within a guild are assigned to the same Discord Voice server. If you are the first voice participant in the guild, Discord Guilds server is responsible for assigning a Discord Voice server to the guild using the process described below.</p><h2 id="55eb6cc9-bbc4-4996-b6d4-7feb0f2b43ac" class="">Assigning a Voice Server</h2><p id="342ad8f0-9ce4-4bf5-902f-43142a439576" class="">Each voice server periodically reports its health and load, and this information is curated and placed into our service discovery system (we use <a href="https://coreos.com/etcd/">etcd</a>) as we’ve discussed in a <a href="https://blog.discordapp.com/we-care-about-your-voice-engineering-special-c6348d7dc068">previous blog post</a>.</p><p id="7ebb1a55-eb3c-4489-a048-85f6be72cdb6" class="">
+</p><p id="50a27cb4-902e-4fcd-8396-4668b138e992" class="">The Discord Guilds server watches the service discovery system and assigns the least utilized voice server in the given region to the guild. When a Discord Voice server is selected, all the voice state objects (also maintained by Discord Guilds) are pushed to voice server so it knows how to set up audio/video forwarding. Clients are also notified about the selected Discord Voice server. The client opens a <em>second</em> WebSocket connection to the voice server (we call this the <em>voice</em> WebSocket connection) which is used for setting up media forwarding and speaking indication.</p><p id="233fa7dc-8034-4e58-92a6-0ec0b852b034" class="">
+</p><p id="3cd79af0-314f-436c-b1ea-36e9f29d31fe" class="">When a client displays “Awaiting Endpoint,” it means that the Discord Guilds server is looking for the best Discord Voice server. When a client displays “Voice Connected,” it means that the client successfully exchanged UDP messages with the selected Discord Voice server.</p><p id="2fec0188-7f58-4d7e-8e5e-c3ab2a505f35" class="">
+</p><p id="abdcef55-b95f-43d4-ac83-c083d526076e" class="">Discord Voice server contains two components: a signaling component and a media relay component called the selective forwarding unit or <a href="https://webrtcglossary.com/sfu/">SFU</a>. The signaling component fully controls the SFU and is responsible for generating stream identifiers and encryption keys, forwarding speaking indication, etc.</p><p id="378173c0-2ff4-4075-a44f-44c759f63e5f" class="">
+</p><p id="152ac203-3d5b-4b7e-8a65-0b65a41e9066" class="">Our homegrown SFU (written in C++) is responsible for forwarding audio and video traffic within channels. Our SFU is tailored to our use case offering maximum performance and thus the lowest cost. When offending users are moderated (server mute), their audio packets are dropped. The SFU also acts as a bridge between native and browser applications. It implements a transport and encryption for both browser and standalone applications and translates between the two as it forwards media packets. Finally, the SFU is also responsible for handling the real-time control transport protocol (<a href="https://en.wikipedia.org/wiki/RTP_Control_Protocol">RTCP</a>), which is used for video quality optimization. It collects and processes RTCP reports from receivers and notifies senders how much bandwidth is available for video.</p><p id="b168bd24-663f-451c-b575-170132ef1141" class="">
+</p><p id="38f685a7-6b3a-4cae-a539-ad2a2bce3273" class="">Since it’s the only service directly accessible from the public Internet, we will focus on Discord Voice server failovers.</p><p id="1fe19d6d-2a64-405c-b534-2faf182c8b4a" class="">
+</p><p id="e73f689c-35e1-4ecc-acea-c7af077f2dbe" class="">The signaling component constantly monitors the SFU. If the SFU crashes, it is restarted right away causing minimal service interruption (few dropped packets). The state on the SFU is reconstructed by the signaling component without any client interaction. Although SFU crashes are rare, we use the same mechanism for zero-downtime SFU updates.</p><p id="6af2eb18-a579-40e6-9f15-2ed34e4af24c" class="">
+</p><p id="3b507b43-c377-445b-9942-c16909910a5a" class="">When a Discord Voice server dies, it fails the periodic ping and gets removed from the service discovery system. The client also notices server failure due to the severed voice WebSocket connection and requests a <em>voice server ping</em> through the gateway WebSocket connection. The Discord Guilds server confirms the failure, consults the service discovery system, and assigns a new Discord Voice server to the guild. Discord Guilds then pushes all the voice state objects to the new voice server. Every client is notified about the new voice server and creates a voice WebSocket connection to the new voice server to start media setup.</p><p id="159ab58c-cd74-420f-8a85-598e6dd8db3b" class="">
+</p><p id="f3e53443-9cc7-496c-8bf1-82ee5ee81ae8" class="">It is quite common that a Discord Voice server suffers a DDoS attack (which we observe from the rapid increase of incoming IP packets). We perform the same procedure as for Discord Voice server failure: remove the impacted Discord Voice server from the service discovery system, select a new Discord Voice server for the guild, push all the voice state objects to the newly selected Discord Voice server, and notify clients of the new voice server for reconnection. When a DDoS attack subsides, the server is added back to the service discovery system for serving voice traffic.</p><p id="d0e8d0f7-2e3a-44d7-8177-740d74385bc7" class="">
+</p><p id="5af8c67e-b10e-4919-9322-860ca0c11a7e" class="">When the guild owner decides to select a new voice region, we perform a very similar procedure as described above. The Discord Guilds server selects the best available Discord Voice server within the new voice region by consulting the service discovery system. It pushes all the voice state objects to the newly selected server and notifies clients about the new voice server. Clients tear down their voice WebSocket connection to the old Discord Voice server and create a new voice WebSocket connection to the new Discord Voice server.</p><p id="64f2b193-22ac-4b36-9745-df45065049e5" class="">
+</p><p id="de288094-ae7f-4b95-8e37-c7f8fd8d6a50" class="">Discord Gateway, Discord Guilds and Discord Voice are all horizontally scalable. Discord Gateway and Discord Guilds are running at Google Cloud Platform.</p><p id="362a8a64-73ed-41d1-9ecc-7009ac1372be" class="">
+</p><p id="bf436003-8fcd-453b-a054-912966da748e" class="">We are running more than 850 voice servers in 13 regions (hosted in more than 30 data centers) all over the world. This provisioning includes lots of redundancy to handle data center failures and DDoS attacks. We use a handful of providers and use physical servers in their data centers. We just recently added a South Africa region. Thanks to all our engineering efforts on both the client and server architecture, we are able to serve more than 2.6 million concurrent voice users with egress traffic of more than 220 Gbps (bits-per-second) and 120 Mpps (packets-per-second).</p><p id="63a9cb3c-dfe0-462d-9126-c70af24aab51" class="">
+</p><p id="f938b69b-bcd8-42a2-bd58-f5f21b44801d" class="">We are constantly monitoring voice quality (clients report quality metrics to our backend servers). In the future, we want to use this information to automatically detect and reduce voice degradation issues.</p><p id="2c4a945b-4c5a-430e-9bf9-7115b856c941" class="">
+</p><p id="c1b0ac45-28b9-4865-8b9b-157351d7090d" class="">Although we released video chat and screen sharing about a year ago, you can currently only use it with direct messaging. When compared to audio, video requires significantly more CPU power and bandwidth. It is a challenge to balance the amount of bandwidth and CPU/GPU resources used to provide the best video quality, especially when a group of gamers in a channel may be on a range of different devices. <a href="https://en.wikipedia.org/wiki/Scalable_Video_Coding">Scalable Video Coding</a> could be the solution to provide seamless video experience.</p><p id="6f872acb-ca57-4c7c-91fc-5bc094ccdb69" class="">
+</p><p id="4cbcaf78-aeb7-4872-a923-2c98278434b5" class="">A big part of Discord is about sharing your gaming experiences with your friends. Screen sharing requires even more bandwidth due to higher frame rate and resolution than your ordinary webcam. We are adding hardware video encoding to our desktop application for a better experience.</p><p id="be9589ea-44a6-413b-b06c-2e02d824130c" class="">
+</p><p id="377c5a2c-57b4-4f3c-b061-2a0f19d48620" class="">We have a handful of engineers working on both client and server components and looking after operations as well. We are investing heavily in our voice and video clients and infrastructure to make Discord the best voice and video experience for gamers.</p><p id="c2206f2b-5dfd-447a-884d-8d75a89c2ab0" class="">
+</p><p id="5ebebe63-ce4f-43d3-912a-fc4e2906489c" class=""><em>We’re always looking for the next great addition to our engineering teams at Discord. If you are passionate about working with audio and video, </em><a href="https://discordapp.com/jobs"><em>check out our jobs page!</em></a></p></div></article></body></html>

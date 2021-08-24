@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Screen As Room: An Architectural Perspective on User Interfaces</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="72074e42-5689-4859-a9d3-17fa922b78e0" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧵</span></div><h1 class="page-title">Screen As Room: An Architectural Perspective on User Interfaces</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.christophlabacher.com/notes/screen-as-room" class="url-value">https://www.christophlabacher.com/notes/screen-as-room</a></td></tr></tbody></table></header><div class="page-body"><p id="aed3968c-657a-4bae-9dee-19d73df9f6d6" class="">With the use of video games as social spaces being observed for several years (1) and the increased focus put on virtual social spaces due to the scarceness of physical social spaces in the last months, the concept of “spatial interfaces” is once again at the center of discussions. — In particular, I am referring to John Palmer’s <a href="https://darkblueheaven.com/spatialsoftware/">recent essays</a>. I want to try and add an alternative perspective to this, looking at the properties of physical spaces as metaphors, rather than models, for interfaces and exploring seven of them in more detail.</p><p id="06587e43-c63a-4d1d-adf0-fad81dfe444e" class="">The idea of spatiality is deeply embedded in the discipline of designing user interfaces: the concept of using spatial metaphors to make computing accessible was already put to use masterly in the interface of the original 1984 Macintosh, as well as in some of its precursors at Xerox PARC. It is interesting to compare this to Engelbart’s “<a href="https://en.wikipedia.org/wiki/NLS_(computer_system)">NLS</a>”, demoed in 1968, whose pioneering use of spatial ideas in the interface is of course much cruder. (2) The shift in fidelity can likely be attributed to the innovation of using overlapping windows in the Smalltalk interface, developed at Xerox PARC in the early ’70s. Of this, Alan Kay writes: “It occurred to me (in a shower, my favorite place to think) that FLEXtype <strong>windows on a bit-map display could be made to appear as overlapping documents on a desktop</strong>. When an overlapped one was refreshed it would appear to come to the top of the stack. At the time, this did not appear as the wonderful solution to the problem but it did have the effect of magnifying the effective area of the display enormously, so I decided to go with it.” (3) It did turn out to be a “wonderful solution” and its ripple effects can still be felt today.</p><figure id="11162a06-0c37-402b-ba5a-99ffc2d91913" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/cover.png"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/cover.png"/></a></figure><p id="b8a330f6-b20b-4830-9fe3-416761b4b0c1" class="">Overlapping windows in Smalltalk and Lisp</p><p id="1c1ee72c-e60c-4b0b-ab5a-c0cc80f0db8f" class="">Recognizing this rich history it is hard to overstate the mileage interaction designers have gotten from designing interfaces that are, to varying degrees, spatial, in the past 50 years.</p><h2 id="471568a8-6b29-4569-ac31-a7c74682349b" class="">Rooms as Metaphors — not as Models</h2><p id="1dcefad2-bb58-4a95-8c7e-502d84ca2a72" class="">Taking a few steps back, let’s start by considering what we mean when speaking of “Spatial interfaces”. John Siracusa’s concise definition seems enlightening:</p><blockquote id="552ddba9-daea-4a2e-9247-2387885c602f" class="">‘Spatial interface’ is a shorthand description of an interface that predominantly utilizes spatial qualities and relationships as a means of identifying and interacting with objects.</blockquote><p id="80cb54cf-acc4-47dc-8758-fda6e9de1aca" class="">This is what I call “space as model” (4). The point made in favor of this is most commonly a pragmatic one: It is argued that <strong>humans have an innate sense of space, which can be utilized to make the behavior of objects in an interface unconsciously predictable and therefore intuitively usable</strong>. Another important idea is that of “remembering where things were”, which builds on <a href="https://www.christophlabacher.com/notes/notes-on-notation#enactive-representation">Jerome Bruner’s ideas on enactive representation</a> as the most primal form of representation of knowledge (5).</p><p id="5502c808-286a-4ff7-979f-f9f62ddb6cca" class="">In this essay however, I want to try and take a different perspective than this classic idea of “spatial interface”. While this mode of thought focuses on the physical properties of space — namely its dimensionality — and how they can be taken to inform the behavior of the digital, I instead want to think about the subjective and metaphoric properties of rooms: <strong>Not how rooms are constructed or how they are physically behaving, but how they are experienced and how they “feel”.</strong> Speaking of rooms and buildings here, rather than “spaces”, is a conscious choice; I want to highlight their artificial qualities as human-made environments, rather than the often discussed “natural” properties of space. I call this approach “space as metaphor”. (6)</p><h2 id="935b9108-1c4e-484b-b628-d81c7830e3b9" class="">Why Compare Interfaces to Buildings?</h2><p id="48e1f58a-012b-440b-a78c-93d60fce79fc" class="">In his influential 2013 article “<a href="https://frankchimero.com/blog/2013/what-screens-want/">What Screens Want</a>” Frank Chimero looks at screens as “material” and tries to infer their natural affordances. He concludes that “screens are aesthetically neutral, so the looks of things are not a part of their grain” and finds as their defining property “the capacity for change”: “[I]t becomes apparent that web and interaction design are just as much children of filmmaking as they are of graphic design. Maybe even more so. After all, we both work on screens, and manage time, movement, and most importantly, change.” Even traditional user interfaces are fundamentally three-dimensional — the third dimension in this case being time — and in this regard, they are similar to films.</p><p id="d7919348-9e51-4ecf-90a4-de5e928717b3" class="">However I have long been drawn to the use of architectural, rather than cinematic, language to express my experience of interfaces (7) and have been most inspired as a designer by reading about architecture. I believe this is because <strong>the comparison to films misses a central property of interfaces, that is so constitutive that it outweighs the other similarities: Agency</strong> — it is human action that is indispensable to an interface. Like visitors to a building, users of an interface are given the agency to choose their own path, to move through it at their own speed and discretion: to wander and to linger, to move swiftly and purposefully, or to explore. Another striking similarity is that <strong>interfaces are, like buildings, never experienced all at once, but piecemeal</strong>: screen by screen, or room by room. It is only in the user’s mind that they are shaped into a coherent entity, are seen as a uniform whole.</p><p id="d7f77d46-8eea-47a4-9678-4a487d5376da" class="">It is due to these remarkable parallels that many of the challenges that designers of user interfaces face can also be articulated in the language of architecture and that many of the solutions architecture has found can teach valuable lessons to interface designers. (8)</p><h3 id="a5a89ba1-0b67-42d1-a561-08e05a2bab68" class="">Architectural Culture as a Role Model for Digital Design</h3><p id="1fe01b1c-9b92-421a-a5dc-2ea27a3fdc5b" class="">On a side note, I want to express my admiration of architecture’s intellectual culture. With two millennia of <a href="https://en.wikipedia.org/wiki/De_architectura">written architectural theory</a> there is a vast amount of knowledge, analyses, and discussions that modern architects can draw from.</p><figure id="24bb65ad-6373-4681-9586-83edf91009d8" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/de-architectura.jpg"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/de-architectura.jpg"/></a></figure><p id="3ad0ec45-008c-4e22-b7ab-63452279fd48" class="">Sketches from Vitruvius Pollio’s “Architittura”, written between 30 and 15 BC. [1536. Houghton Library, Harvard University]</p><p id="de5aa17d-e2ac-409d-8faa-04589eba2007" class=""><a href="https://tobyshorin.com/">Toby Shorin</a> writes: “Within the deep and rich history of architecture is embedded a current of thoughtful and critical literature. With my limited knowledge, I would even propose that architecture has constantly been guided forward by a selective group of architect-thinkers who do most of the producing of said literature. […] [D]igital design is in its happy, ambitious youth. Digital design believes it is ready to change the world and take on challenging problems, and its discourse is self-congratulatory and mostly single-minded.” (9) Comparing the quality of architectural discourse (and critique) with modern-day writing on digital design (which in the mainstream feels to consist mostly of lists of “10 UX tips to make your users more addicted”) is a frustrating pursuit.</p><p id="6e60d510-3d15-436b-9a14-d60e71cffdd0" class="">Architecture has managed to stake a claim where it is positioned between engineering and art, and it is unquestionably recognized as being a substantive discipline in either of those realms. In order for digital design to stop being seen as mostly superficial and intellectually trivial (or even outright harmful), valuable lessons from architectural culture can be drawn.</p><h2 id="f314f5d2-d09c-4d54-8079-b96ce79fefa1" class="">The Qualities of Good Rooms</h2><p id="057d0ad9-540c-490d-b3ef-f9c09bf4a686" class="">I picked seven qualities of “good” — well-designed — rooms, which reflect some of the questions that architecture is concerned with:</p><ol type="1" id="08d917ec-58aa-40d6-b147-35eaa167b9a3" class="numbered-list" start="1"><li>Sense of Agency</li></ol><ol type="1" id="5fde7a96-b64c-4334-a85c-3fbae2169e4e" class="numbered-list" start="2"><li>Sense of Proportion</li></ol><ol type="1" id="1f7a59b4-1d36-44d9-871c-6e47588b9b77" class="numbered-list" start="3"><li>Sense of Protection</li></ol><ol type="1" id="7ab986e6-761f-4452-b851-f16702de8fd3" class="numbered-list" start="4"><li>Room as Base for Customization</li></ol><ol type="1" id="9318ff12-53a9-44ca-b640-d19bd345f40c" class="numbered-list" start="5"><li>Room as Shared Space</li></ol><ol type="1" id="72bc4d9c-274f-4ea3-b8b7-69edaac46b9e" class="numbered-list" start="6"><li>Room as Shaper of Behavior</li></ol><ol type="1" id="583b49c7-e4b9-4f90-8457-233c4fc493fd" class="numbered-list" start="7"><li>Room as Purposefully Articulated Space</li></ol><p id="971eebd9-c628-4694-93a5-2ad0afd1e4c9" class="">I personally have found each of them thought-provoking when applying them to interfaces. In the following sections, I want to explore them one by one and try and see how they can be used to inform the design of user interfaces.</p><h3 id="44acef1c-84ac-4528-a296-ef2706ee33d0" class="">(1) Sense of Agency</h3><p id="4d842bd5-0a5a-4283-a797-a72a64ebe224" class="">No architect has articulated the agency of the visitor of a building more drastically than Le Corbusier with his concept of the “Architectural Promenade”.</p><blockquote id="1e738a56-1307-43b3-abea-cc86b0803275" class="">Architecture is experienced as one roams about in it and walks through it… So true is this that architectural works can be divided into dead and living ones depending on whether the law of ‘roaming through’ has not been observed or whether on the contrary it has been brilliantly obeyed.</blockquote><p id="7737abff-bc93-4956-9f9b-188aeff01199" class="">The Architectural Promenade does not just mean visitors should roam freely through a building (or landscape or city) but instead that <strong>there is a dramatic composition that is designed to be self-discovered</strong>. The architect anticipates where visitors will stand and which pathways they will take and designs a dramatic composition based on this expectation. A building that has not been designed in anticipation of a visitor’s perspective is a weak building.</p><figure id="336e5fd2-656c-41a6-849c-ad482da27d1f" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/savoye.jpg"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/savoye.jpg"/></a></figure><p id="e630a09f-de89-451e-94d7-1b495472fa1a" class="">Le Corbusier’s Villa Savoye, with its various paths through the building, is a prime example of the Architectural Promenade. Original Sketch. [Fondation Le Corbusier]</p><p id="22972f06-d488-4be4-a12e-c87f1d5f7a8d" class="">So what makes a good Architectural Promenade? I think it’s about pace — is there a sense of rhythm to the flow of rooms; is there enough coherence to form a whole, but also enough contrast to stay interesting; are there moments of (positive) surprise? But the element that makes it great is the affordance of large degrees of freedom: Designing a building so that there is a single pathway with great perspectives on the building is one thing, but designing a building so that it can be explored freely and still have the visitor never find a spot or perspective which has not been considered — still giving them a sense of pace and flow even when they are on their own — is the true art.</p><figure id="cc071195-e0da-4cd0-b0d8-99cc736694c1" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/paul-rudolph.jpg"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/paul-rudolph.jpg"/></a></figure><p id="795480fe-1411-472f-afe9-48a40077803b" class="">Sketch of Mies van der Rohe’s Barcelona Pavilion [discussed in section 7] by Paul Rudolph, indicating the various perspectives on the building of a visitor following a typical path. [1986. Library of Congress]</p><p id="bc44226e-4d5d-4ccf-a767-9fc6fd2d872c" class="">Transferring this to the design of interfaces is rather straightforward. An interface that allows users to end up in a nirvana of erroneous states is a “dead” one, so is one that is merely a sequence of monotonous screens, and one that only allows a single succession of steps is barely alive. A great interface is one that has users in control, lets them choose their own way — and makes sure this way is pleasing functionally and aesthetically —, but also ensures they can’t wander off into a situation that was not considered during the design of the interface. <strong>A great interface is able to offer many affordances, as in “options for possibilities of action” (10) at any instant, but at the same time makes sure all of these options have been considered and made formidable.</strong></p><h3 id="412e615d-b0e7-44da-a617-c251b8f673ac" class="">(2) Sense of Proportion</h3><p id="f1e5ebbe-d92d-40cc-b91a-6c62a4223f3d" class="">Three websites that all take up the same amount of pixels on your screen can each induce a completely different sense of space: One might feel like a skyscraper — overarching, uniform, impersonal —, one might feel like an eclectic living room — personal, warm, a bit cramped — and one might feel like a public park — copious, entwined, overgrown or trimmed, clean or full of litter. Creating these impressions purposefully is one of the central hallmarks of great visual design. I single out the discipline of visual design here because even though disciplines like information architecture, as well as the general amount of content on the site certainly contribute to this sense of size, skillful designers do often manage to create a certain sense of proportion, regardless of the actual “size” of the website.</p><p id="7c62603b-e7d8-4f2b-a92c-217d53e92cd5" class="">Designers can use this ability to create an intense sense of space and create several subpages (or screens of an app) that evoke different sensations, to create variety and interest. Not gratuitously, but deliberately — much like architects have mastered combining rooms of different sizes (and often shapes) into a building to create a meticulously articulated flow of space that has a certain rhythm to it (11): Start to think about your user flow as a floor plan. <strong>The implications of this idea contradict the common practice of using only as few page templates as possible and create as many uniform screens as one can get away with.</strong></p><h3 id="17acc868-0e80-4bbf-91a8-7a19ad7f6f5d" class="">(3) Sense of Protection (Enclosure vs. Boundary)</h3><p id="a0863fc4-910c-4203-b8a8-9f93788c5b64" class="">A room is defined by its walls, which separate it from the unstructured space around it. Walls always serve a double purpose: they are an enclosure, keeping what’s inside in (warmth, a private conversation), and a boundary, keeping what’s outside out (the cold, uninvited visitors). It is because of this double-sided nature they offer a sense of protection. Great digital products do this as well, giving users a secure place to leave their thoughts or a safe space for conversation. (12) <a href="https://en.wikipedia.org/wiki/Surveillance_capitalism">Surveillance capitalism</a> has made this the exception and has gotten us used to algorithms eavesdropping on us.</p><p id="964965a7-8bf6-4d5f-b060-4c562f420f46" class="">Boundaries afford protection, but they are complex — they must not be impermeable, lest they stifle any interchange: “[…] boundaries function to protect their contents from harmful intrusion, to allow for the solution of smaller design problems, and to preserve and encourage diversity. On the other hand, solutions developed at small scales are of limited utility if they cannot be adapted for use on larger scales. There must be communication and connection in order for bounded entities to live. Perfectly impermeable boundaries result in stasis and death, in social and biological life as in the game of Go.” (13) As designers of digital products we too struggle with the question of where to place boundaries and how permeable to make them, both in the relationships of private and public; open and closed; or approachable and occlusive. <strong>Understanding the complex nature of the boundaries we draw may be one of the biggest shifts possible away from superficial UI design.</strong> When observing architecture I am particularly interested in rhetoric boundaries: elements of buildings that visually suggest a division, but don’t enforce it. When are implied walls enough?</p><figure id="2b92083b-3534-40bc-9047-5d17f4e33bd7" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/rethoric-boundary.jpg"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/rethoric-boundary.jpg"/></a></figure><p id="f91291d1-9287-4eec-b9e7-2ceb3a7b0b39" class="">A rhetoric boundary — clearly separating, but still permeable.</p><p id="31c76e7b-19d0-4193-9f65-8f64f2193305" class="">As closed off as it may be, a building never stands on its own. It is always part of an ecosystem, be that a neighborhood, a city, a landscape. Because of this, builders have a responsibility that does not end at the confines of their plot. There is a constant push and pull between a private property — what happens “inside the walls” — and the impact it has on the public sphere. Of course, not all builders acknowledge that: many would like to optimize their buildings only for their own gain regardless of the costs that society would have the bear. We have come up with a solution to that: zoning and environmental regulations define what can and can’t be done in an area. (14) Their enforcement is meant to make sure that a building has a positive impact for all. <strong>I do wonder what governmental zoning regulations for a healthy digital ecosystem might look like.</strong></p><h3 id="d07725af-f75d-46d1-affe-036b5b5a7dca" class="">(4) Room as Base for Customization</h3><p id="83290dda-44e2-4df5-8cb6-8b9dc68bbd2b" class="">Even the most short-lived buildings are often designed to last decades. Something that is unheard of — and <a href="https://www.christophlabacher.com/notes/planned-obsolescence-and-digital-freedom-of-movement">usually unnecessary</a> — in the digital domain. Nonetheless, the longevity of buildings results in some interesting features; I want to focus on adaptability. Of course, most buildings are created for a specific purpose: there are residential and commercial buildings, administrative or sacred buildings. But within these broad categories buildings are immensely flexible (15). Just look at the flat you live in: a few superficial changes — a bit of wall color, a few pieces of furniture — and a place where someone else used to spend their life is suddenly yours, reflecting your lifestyle and your character, and most importantly making you feel safe.</p><p id="078302a4-1e9f-4f4f-9682-e8ca1bf29a9b" class="">How adaptable to a specific user (or use!) are our interfaces? I still fondly remember the early versions of Windows Phone (16). For all its faults (and there were many), its maxim “focus on the individual” was taken seriously and resonated through the entire OS. Initially, I looked at it rather critically, but I came around to it after I watched a talk (17), where someone from the design team described how because of its minimalist design and single color UI Windows Phone seemed impersonal and cold when you looked at screenshots in reviews, but quickly started to become much more personalized than iOS and Android after you used it for a while. By turning every unit of data (contacts, groups, photos, albums, songs, records, playlists, artists, locations) into an object which could be shared, moved around, pinned, it enabled users to express their personality without needing to break the rigid grid. It struck a balance between visual clarity and user-defined content — two things that are usually polar opposites. The OS provided the walls, the users filled them with their belongings.</p><p id="3f6d5b62-0495-4357-841b-7be5e99c00ae" class="">Another way to interpret the quality of adaptability for digital design is to look at software that can be used as a toolkit for users to build their own applications. Think of spreadsheet applications like Excel: You can use it to add up the expenses for your utility bills, sure, but it has also been used to “build” software that entire companies (if not economies) run on. It is probably the most general-purpose software that is in wide use.</p><p id="99c4970d-77d0-4620-a136-25f400146f86" class="">Programmability gives vast freedoms to users and enables them to use a piece of software for whatever purpose they please. This is not unheard of in architecture: the categories of buildings which I stated earlier can be transcended, a process known as <a href="https://en.wikipedia.org/wiki/Adaptive_reuse">adaptive reuse</a>. Often the most characterful buildings in a neighborhood have undergone this process, which keeps the fabric of a building while radically changing its purpose. In the digital domain, a radical shift like that is only possible in tools that embrace openness or that strongly support end-user programming. Without it it wouldn’t be possible to <a href="http://www.excelunusual.com/coaster/">simulate rollercoasters</a> or <a href="https://mashable.com/2014/08/27/microsoft-excel-games">create games</a> in Excel! However so far most digital applications built by transcending the intend of the original software’s creators suffer from a lack of rigor in the interface — UI design is, by all means, a very purpose-bound discipline. A notable exception are game mods, some of which have <a href="https://en.wikipedia.org/wiki/List_of_video_games_derived_from_mods">become entire franchises in their own right</a>.</p><p id="6a99050e-411d-483c-b045-b3dde5be4520" class=""><strong>It is interesting how a DIY-approach to home-improvement has become a part of mainstream culture, while end-user programming is still on the fringes of the collective consciousness</strong>: “despite forty years of commercial products, open-source, and deep academic work, we have yet to reach an end-user programming utopia. <strong>In fact, the opposite: today our computing devices are less programmable and less customizable than ever before.</strong>” (18)</p><h3 id="4bfdb625-146e-4b04-845c-dbf0c3509afa" class="">(5) Room as Shared Space</h3><p id="8019971d-1370-49a9-95a8-c46647f3edac" class="">It seems probable that the renewed interest in interfaces that strongly model spatiality lies in the proliferation of “multiplayer applications”: Software where several users can interact with each other in real-time or even work on a single document simultaneously. Though the idea for digitally mandated real-time collaboration has been around since Engelbart’s Demo in 1968, it is only in recent years becoming a part of mainstream applications. In order for it to reach its full potential, the ability for users to express fine-grained notions of intent is paramount.</p><p id="56eb6751-c08f-456c-86ce-391beabd9c45" class="">The relationship between spaces, places, rooms, and body as mediated by culture is, by all means, intricate (19) and the applicability of established theories on digital spaces warrants investigation that goes way beyond the scope of this essay. However, I do want to point out some concepts. <a href="https://en.wikipedia.org/wiki/Proxemics">Proxemics</a> is the sub-discipline of nonverbal communication that is concerned with the use of space. In rooms, we use the relationship between our bodies to express intent — being close or far, turned towards or away from, looking up or down. Someone who is deeply focused on their work may not want to be distracted: a clear tip-off in physical space gets easily lost in digital communication. <a href="https://en.wikipedia.org/wiki/Social_presence_theory">Social Presence Theory</a> looks at how different mediums handle transmitting social clues and in particular the “awareness of others” — something that is natural in physical spaces but needs specific cues in virtual ones. <strong>“[Social presence] is often measured as the perceived warmth, conveying a feeling of human contact, sociability, and sensitivity embodied in a medium”</strong> (20). What comes to mind are highlighted avatars of active collaborators in Google Docs, but also the “…” bubbles in chat messaging that indicate that the partner of the conversation is active. The most brute-force method might be WhatsApp’s “… is online” message. An approach that allows for much nuance is Figma’s display of the partner’s cursor, which allows for active communication — e.g. when the partner is pointing at something — as well as passive observation.</p><p id="373e4cf5-13cf-4abd-89f1-4381afe57fde" class="">A defining feature of space that we may miss in digital applications is that distance adds vagueness — visual information becomes blurry, sound becomes ambiguous. But apart from the physical features of spatiality we also use the manufactured features of rooms to communicate. Sitting in an alcove to do focused work, leaving a door open or closed to strongly indicate if we appreciate social interaction.</p><p id="eb15eb8b-9c81-47ee-bbc4-2781c2fc817a" class="">“In human spatial cooperation, the interactants share and sustain a space that is equally and exclusively reachable to them. <strong>In such interaction the partners’ reach-spaces, the so called peripersonal spaces, may overlap and establish a shared reach-space defined as their interaction space.</strong>” (21) What rooms — with defined areas for certain tasks — make possible is to enable this kind of interaction both synchronously and asynchronously. Because of its dedicated meaning, the interaction space in a room can be sustained for long periods of time: Imagine putting a pot of water on the stove, waiting for it to boil then leaving the room in a hurry only for your roommate to come in, see the boiling water, realize your intent and put the spaghetti in. — The room becomes a medium for communication. As more and more interfaces become shared spaces, designers need to start imagining what happens when these behaviors are taken to the digital world — finishing your roommates cooking is one thing, cleaning up after them another; and <strong>how do you close the metaphorical door when you want to work on your own?</strong></p><p id="5604c301-df9e-4645-8b62-c566ee030a9c" class="">An idea that works great in digital spaces is that of room as agent: Philosopher Yi-Fu Tuan creates an interesting distinction between space and place and argues for a “Humanistic Perspective” on geography. This reflects quite accurately the distinction that I am trying to draw in this essay, differentiating between space and room. While space remains a static backdrop, through “habit and practice” it can become a place, or room, and acts as actor in and of itself: “Spatial structures can be standardized and transferred from place to place, which is the case with the standardized facilities of sports. Place, in contrast, is unique — it is only here or there. Locality is related to identity. <strong>People play in a certain place — and create the place by play and game. The place plays with the people, as a co-player.</strong>” (22)</p><h3 id="20292c4c-bc6b-43ed-8070-f83c44eb655f" class="">(6) Room as Shaper of Behavior</h3><p id="cea7bae9-f3ee-45b7-adfa-56d4fdf55085" class="">A computer is a general-purpose machine: it can do pretty much anything — or at least, software could be created to make it do pretty much anything. Therefore, in theory, a user “entering” an application for the first time must assume that they are able to do anything in it but then learn very quickly where the limits of the application are. <strong>Thus, making software useable is as much about designing what can not be done as it is about designing how to do things.</strong></p><p id="0e9a7f16-219d-4286-985b-bd553f58a917" class="">These constraints on what is possible can be explicitly stated, in manuals and alerts announcing errors. But it is far more powerful if they are communicated implicitly, are made obvious through context. Of deriving constraints on behavior from context, Brenda Laurel writes: “<strong>Constraints should be applied without shrinking our perceived range of freedom of action: Constraints should limit, not what we can do, but what we are likely to think of doing.</strong> Such implicit constraints, when successful, eliminate the need for explicit limitations on our behavior. Context is the most effective medium for establishing implicit constraints. The ability to recognize and comply with implicit, context-based constraints is a common human skill, exercised automatically in most situations and not requiring concentrated effort or explicit attention. […] The limitations on behavior are not likely to be explicitly known or consciously mulled over; they arise naturally from our growing knowledge of the context.” (23)</p><p id="f4b7a1e7-4031-4a3e-b85f-265efa1d9158" class="">Rooms provide us with plenty of context: In particular, it is social norms that certain kinds of rooms make clear evocatively. A courtroom, a church, and a concert hall are all large rooms, that are (usually) constructed in a way that focuses all attention on a central point in the front. Through this, they shape the behavior of those visiting these spaces and communicate what kind of behavior is expected. At the same time there is an even finer granularity to the norms — each of the three rooms warrants slightly different behaviors that are made clear not directly by the room’s spatial arrangement, but by the rooms symbolic character (which in turn is communicated through certain spatial features): not just what the room “is”, but also what it “stands for”.</p><p id="396498f9-faaf-49b9-bf94-f126b98bc5bd" class="">Can this be transferred to digital spaces? It certainly seems so. In his 2006 paper “<a href="https://www.are.na/block/4640007">Real Places in Virtual Spaces</a>” David Kolb expands on the idea of places (which he contrasts with spaces) as providers of norms:</p><blockquote id="7d19fd8d-5524-4cf5-a146-bc7c73da4701" class="">A place in my sense of the word is an area of space that has social norms defining appropriate actions and movements. Places, in this sense, involve areas of space permeated by social norms that lay out spatial possibilities for action.</blockquote><p id="85871be3-1783-43cb-9a40-8f19167e0831" class="">He continues: “Those norms prescribe divisions within the area and govern what is expected or appropriate to do and not do there. Place norms are very explicit in highly ritualized areas such as a courtroom or a parliament. But less explicit and looser norms apply to a dining room or a corridor, and there are norms involved in temporary places, as when a group sets up a picnic blanket or rearranges chairs at a restaurant table. Here is where you sit, and if you move that chair too far you are violating a (temporary) expectation and so making a statement about your role in the conversation.” [p. 70] He contends that virtual spaces can become places just as well: “Virtual places are created by social norms that make use of the textures and features of a virtual area, just as happens in physical space, where the textures and geometry of an area may be more appropriate for some actions than for others.” [p. 73] When Kolb speaks about virtual spaces he seems to think primarily about simulations of physical space, of virtual worlds — his examples are games and other 3D environments. However, I do believe that the same conclusion can be drawn for traditional two-dimensional user interfaces as well. Just like an interface can use affordance (in the <a href="http://contemporary-home-computing.org/affordance/#fn25">Don Norman sense</a>) to imply the possibility of certain actions, it can also subtly imply the improperness of others. Kolb concludes: <strong>“As with places in physical space, [the value of virtual places] depends on the detailed character of their spatiality, how well it harmonizes with their functions, and above all on the complexity and humaneness of the actions guided by their social norms.”</strong> [p. 75] Interfaces defining social norms that encourage humane actions are <a href="https://www.theverge.com/2017/12/11/16761016/former-facebook-exec-ripping-apart-society">desperately needed</a>.</p><p id="d34341e0-4239-4155-954a-e692c938561a" class="">Of course, there is a different side to the ability of rooms to influence the behavior of those within: <a href="https://en.wikipedia.org/wiki/Nudge_theory">Nudge theory</a> holds that the mere spatial order of elements can change the way people interact with them (24), but spatial interventions need not be so subtle, or work in favor of those affected: The whole discipline of “<a href="https://en.wikipedia.org/wiki/Hostile_architecture">hostile architecture</a>” is concerned with creating spaces that are adversarial to the needs of some of their visitors (usually the least affluent ones) and thwart some behaviors while encouraging others. These kinds of interventions are all too well known to designers of digital products, as most of them are familiar with using dark patterns to nudge users towards behavior that isn’t in their interest. There are few professions that <a href="https://www.goodreads.com/book/show/22668729-hooked">pride themselves on leaving people hooked</a> — architects of casinos maybe?</p><h3 id="44820f04-be88-4da1-ba5c-56e7b580d2ef" class="">(7) Room as Purposefully Articulated Space</h3><p id="76c6dcaf-d65b-4a4c-a869-7ee8f0ff5e8c" class="">In German, there is a powerful word for the specific sense of space that a particular room induces: Raumgefühl. “The sense of space [Raumgefühl], in contradistinction to the abstract idea of space, corresponds in the visual realm to musicality in the acoustical.” (25) It is more than mere spatiality because it is dependent on an observer; an individual that I chose to call a visitor or a user, depending on whether I was talking about a room or an interface. But “Raumgefühlt” is not just a question of aesthetics — it is closely tied to purpose.</p><blockquote id="51a8050c-a645-49e6-a38b-ff65d8c42f19" class="">Architecture inquires: how can a certain purpose become space; through which forms, which materials? All factors relate reciprocally to one another. Architectonic imagination is, according to this conception of it, the ability to articulate space purposefully. It permits purposes to become space. It constructs forms according to purposes.</blockquote><p id="4fff7a5c-0a17-42a0-a466-fe82bdf7f14e" class="">Constructing form according to a purpose while making a space become alive is the great conundrum of architecture: “Laymen like to charge sometimes that these designers have sacrificed function for the sake of clarity, because they are out of touch with the practical details of the housewife’s (sic!) world, and preoccupied with their own interests. This is a misleading charge. What is true is that designers do often develop one part of a functional program at the expense of another. But they do it because the only way they seem able to organize form clearly is to design under the driving force of some comparatively simple concept. On the other hand, if designers do not aim principally at clear organization, but do try to consider all the requirements equally, we find a kind of anomaly at the other extreme. Take the average developer-built house; it is built with an eye for the market, and in a sense, therefore, fits its context well, even if superficially. But in this case the various demands made on the form are met piecemeal, without any sense of the overall organization the form needs in order to contribute as a whole to the working order of the ensemble.” (26) Substitute “developer-built house” with “developer-designed software” and Alexander’s assessment becomes contemporary and all too relatable for the designer of digital products.</p><p id="92d488b8-cbce-481d-a010-ce0880706917" class="">Figuring out the right problems to solve and the right amount of problems to tackle at once may well be our biggest dare. Even the greatest architects struggled with this: “All problems can never be solved. … Indeed it is a characteristic of the twentieth century that architects are highly selective in determining which problems they want to solve. <strong>Mies [van der Rohe], for instance, makes wonderful buildings only because he ignores many aspects of a building. If he solved more problems, his buildings would be far less potent.</strong>” (27) Reading this quote reminds me of <a href="https://culturedcode.com/things/">Things</a> by Cultured Code, an exquisitely designed task-management app. It is often cited as one of the best-designed apps ever and every detail of the app has been given extensive polish. But how is this possible? Well, its feature set is rather small, which is appropriate given its narrow focus: it’s a single-user to-do list application. When the ability to set reminders for tasks was added it felt like a breakthrough feature. Many apps try to look like Things, but fail to realize that the high-quality minimalist visual design is a direct result of its decision to only solve very few problems. Just like Mies van der Rohe’s <a href="https://miesbcn.com/the-pavilion/">Barcelona Pavilion</a> it is a breathtaking piece of design whose approach is often revered and imitated without understanding the context that it was created for. Would you want to live in Mies’ Pavilion? I wouldn’t, and obviously neither would Mies: It is a representational building and as such solves only a very limited set of problems, which are very different from those of a residential building.</p><figure id="5efc16eb-bde7-467e-b33e-e791605c376b" class="image"><a href="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/pavilion.jpg"><img style="width:700px" src="Screen%20As%20Room%20An%20Architectural%20Perspective%20on%20Use%2072074e4256894859a9d317fa922b78e0/pavilion.jpg"/></a></figure><p id="dedf9f4e-2ee2-4839-8152-9b2eed8312a3" class="">Sketch for the Barcelona Pavilion. [1928. New York, Museum of Modern Art]</p><p id="88f48d79-9003-434f-a090-998ebae2ec9e" class="">On the other side of the spectrum we find the <a href="https://en.wikipedia.org/wiki/McMansion">McMansions</a> of digital applications. Behemoths like Photoshop or Jira which, while solving lots of problems, have grown over decades, becoming ever more ponderous and unsightly! If we are looking for guidance on how to design good applications, this is certainly no role-model.</p><p id="036530ad-9f0a-4697-a806-f8cedcf57aa8" class="">As in architecture, minimalism seems like the more attractive strategy, but given the complexity of the world it is often of limited utility: “Mies van der Rohe’s Farnsworth house, though marvelously clear, and organized under the impulse of certain tight formal rules, is certainly not a triumph economically or from the point of view of the Illinois floods.”, writes Alexander (28). Venturi makes the same point: “Mies’ exquisite pavilions have had valuable implications for architecture, but their selectiveness of content and language is their limitation as well as their strength.” (29) The idea of “keep it simple, stupid” has become a mantra for digital designers, and following it has given us some great applications, but maybe even more bad ones:</p><blockquote id="7493abf4-503d-498f-b1d8-fdb8446d6940" class="">Forced simplicity results in oversimplification. […] Where simplicity cannot work, simpleness results. Blatant simplification means bland architecture. Less is a bore.</blockquote><p id="6ec3b646-5838-4f7d-a0b1-c38fdf0c6e88" class="">Looking at most of the digital products I use, I couldn’t agree more.</p><h2 id="798e9e4b-8996-4582-9802-348bb3d17b5c" class="">What Can’t We Learn From Rooms?</h2><p id="7b6a621b-c226-437f-95bf-6aacf1fca74a" class="">Looking at these seven aspects of well-designed rooms it seems clear to me that there is a lot that designers of digital products can learn by understanding their interfaces not just as spaces, but as metaphorical rooms. Both in observing architecture in everyday life as well as in reading architectural literature and cultural studies on the social impact of architecture we can find inspiration and guidance.</p><p id="181e337b-0f4e-45e1-b741-6b556a2c9db8" class="">It is out of the question that the idea of screens as rooms will only grow in importance over the next years, as more and more applications become shared spaces and tougher questions on the role existing digital social spaces play are being asked. Virtual reality may not even be the most determining factor in this change — two-dimensional screens can become places just as well and require the same rigor in design.</p><p id="e83ed779-dd3f-425d-a91d-4c37a2c78d95" class="">Like any metaphor, “screens as rooms” only goes so far: It fails to capture the dynamic aspect of interfaces, as well as their fleeting nature. While it acknowledges their role as environments it discounts their tool-like character. <strong>It must remain only one of many metaphors we choose to use when speaking about interfaces, but its rich history and strong intellectual culture make it one of the most potent ones we can find.</strong></p><h2 id="2d95164e-a003-4aa8-b028-021c5b37c93e" class="">Further Reading</h2><p id="90b3da4c-5401-4d16-82fc-9fd39834fb9a" class="">Since writing this piece I’ve stumbled upon these publications, which I plan to incorporate into this essay once I find the time:</p><ul id="82c37f9d-157c-4fa8-b663-c44d89e4c9ec" class="bulleted-list"><li>David Kirsh, 2019: “<a href="https://dl.acm.org/doi/10.1145/3301425">Do Architects and Designers Think about Interactivity Differently?</a>”</li></ul><ul id="83a762b4-4af7-47e9-84f3-0a7233144b2c" class="bulleted-list"><li>Nicholas S. Dalton, Holger Schnädelbach, Mikael Wiberg, Tasos Varoudis (eds.), 2016: “<a href="https://www.springer.com/de/book/9783319300269">Architecture and Interaction. Human Computer Interaction in Space and Place</a>”</li></ul><ul id="baf3a4d2-6bfd-4206-baac-c13006e17799" class="bulleted-list"><li>Malte Müller, 2019: “<a href="http://www--arc.com/">Web Design as Architecture</a>”</li></ul><ul id="3f7dd8e4-acc0-4d90-8854-5701a9488d39" class="bulleted-list"><li>Laurel Schwulst, 2018: “<a href="https://thecreativeindependent.com/people/laurel-schwulst-my-website-is-a-shifting-house-next-to-a-river-of-knowledge-what-could-yours-be/">My website is a shifting house next to a river of knowledge. What could yours be?</a>”</li></ul><ul id="077f0013-142a-4668-9869-4339072e2d1b" class="bulleted-list"><li><a href="https://twitter.com/geoffreylitt/status/1272542423001022467">Twitter thread</a> by Geoffrey Litt, discussing how insights from Stewart Brand’s “How Buildings Learn” can be applied to software design</li></ul><ul id="f49e4204-f200-4d9c-9f14-d296fe06af19" class="bulleted-list"><li><a href="https://twitter.com/yoshikischmitz/status/1208625526966902784">Twitter thread</a> by Yoshiki, especially <a href="https://twitter.com/yoshikischmitz/status/1208625529412210688">this tweet</a> on boundaries: “To be ‘inside’ of a folder there has to be some meaningful ‘outside’, implying further outsides, and so on.”</li></ul><ul id="a05c2458-ac65-4167-b358-a459e3181395" class="bulleted-list"><li>Andy Matuschak’s note on <a href="https://notes.andymatuschak.org/z3DaBP4vN1dutjUgrk3jbEeNxScccvDCxDgXe">Enabling Environments</a></li></ul></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why People Share: The Psychology Behind &quot;Going Viral&quot;</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="166d4215-6a0a-4228-8838-238c6951f79a" class="page sans"><header><h1 class="page-title">Why People Share: The Psychology Behind &quot;Going Viral&quot;</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.nfx.com/post/why-people-share/" class="url-value">https://www.nfx.com/post/why-people-share/</a></td></tr></tbody></table></header><div class="page-body"><p id="b2f24477-236b-4902-acf6-046a771e2773" class=""><em>by James Currier (</em><a href="https://twitter.com/JamesCurrier"><em>@JamesCurrier</em></a><em>). James is a General Partner at NFX, a seed-stage venture firm headquartered in San Francisco.</em></p><figure id="5bc3d68f-cde9-4fab-8205-abbd7f8cb3c1" class="image"><a href="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/OG-Final.jpg"><img style="width:700px" src="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/OG-Final.jpg"/></a></figure><p id="9e38f448-f1d5-4f76-8575-a7a44a3a735a" class="">From 2000-2006, I ran the world’s largest psychological testing website — Tickle.com. We had 5 psychology and statistics PhDs on staff at the company, and our goal was to develop a system for understanding human motivations in order to get products to go viral.</p><p id="72508d43-6f83-4a97-8a99-3a0e46a5684e" class="">The project was essentially a success. Over years of studying psychological research and running experiments, we mapped 27 human motivation clusters, many of which help when trying to get people to share your product.</p><p id="16c2b127-e028-4470-b705-881630c5c5af" class="">Putting these learnings into practice, we were able to virally grow our user base to more than 150 million people when there were only about 1B people on the Internet. It was one of the big social media viral success stories.</p><p id="246d4441-10fb-42d9-a304-ea6072dfd895" class="">Since then, we’ve continued to apply what we learned to help startups grow. We’ve now helped 12 companies get to at least 10 million users each, including companies like Poshmark and Goodreads.</p><p id="12df099b-5ed0-4288-9ca5-04e143ac9bc6" class="">What I’ve learned is that the foundation of viral growth is rooted in motivational psychology and <a href="https://www.nfx.com/post/your-company-name-matters/">language</a>.</p><p id="7f6ca047-013c-4a43-9428-93fee0fae252" class="">Today we want to share 8 of the motivation clusters that we found to cause people to share so that you can use them to engineer your product to make it more shareable and more viral.</p><p id="15d69fcb-f4a9-4f79-84e3-08b189f9b011" class="">Although <a href="https://www.nfx.com/post/viral-effects-vs-network-effects/">virality and network effects</a> are two different things, developing features and motivations that make your product a <a href="https://www.nfx.com/post/network-effects-bible/#multiplayer-vs-single-player-mode">multiplayer game</a> can lead to network effects. Thus, thinking through how to make your product viral often helps you plan to give it <a href="https://www.nfx.com/post/network-effects-manual/">network effects of various kinds</a>.</p><p id="f0c0c309-03ae-4dee-85d7-a18c4519077d" class="">One of our goals at NFX is to encourage more founders to build network effects businesses. We hope helping you think through why people share will guide you down this path.</p><h2 id="0f94c874-4ef3-4f96-bf43-1303986740ab" class="">Baseline Viral Thinking</h2><p id="a1261cc4-328d-4a7f-b89d-039b6c9cb29c" class="">Each of the motivations we discuss below may or may not apply to your product. But there are several things that always apply.</p><p id="c979c509-6c2a-4c24-a571-0bf757940046" class="">First, is <strong>our pack animal psychology</strong>. As a pack animal, we’re constantly thinking about our status, how we’re perceived, where we fit in, etc. Those constant mental loops serve as the foundation of our motivations to share. We all worry about how sharing will make us look.</p><p id="859b8caf-88c7-4175-b087-aff3741760f8" class="">Second,<strong> reduce the friction to sharing</strong>. Design your product so that it minimizes the effort and thinking required to share.</p><p id="983443cb-0d8d-44d9-9ee1-71a920b9f58e" class="">Third, think about how to <strong>make your product broken unless people share</strong>. If they can’t get the utility that they want, they will look for ways to share.</p><p id="563c376d-69de-4456-827e-aafb8fb014ac" class="">Fourth, <strong>make your language about the user, not about you</strong>. This is very challenging for most product people, who are proud of what they have built and want to be recognized by users for their accomplishments. But this is juvenile. As product people and marketers, you have to transcend your own self-interest in favor of your users’ own self-interest. It’s more generous and more effective.</p><p id="8c96d947-6cb7-46a7-a193-1bbbd79af53f" class="">In short, when any of us consider sharing something online or offline, we unconsciously make a trade-off between benefit and costs:</p><ol type="1" id="b637d114-197b-45cb-ad8e-87f3066ce360" class="numbered-list" start="1"><li>How might sharing this benefit me (the sharer) or you (the audience/recipient) either via utility or via status/reputation?</li></ol><ol type="1" id="5cb1c37d-5912-46a6-a578-bfc084fd160a" class="numbered-list" start="2"><li>How much <em>time and effort</em> (friction) will I have to spend to share this?</li></ol><p id="84846b3b-12b9-42d1-b904-a689d3aa0b77" class="">The differential between 1 and 2 will give you higher conversion to sharing, and A/B testing can help you with that differential. Growth tactics often focus on this.</p><p id="b32e229c-17e0-45ad-8d5d-689814432f54" class="">Understanding psychological motivations expands your toolkit to maximize the differential and really speak to your users.</p><figure id="196d2f34-ac6d-448c-8c5d-1caea253d810" class="image"><a href="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/CU-1-1.jpg"><img style="width:700px" src="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/CU-1-1.jpg"/></a></figure><h2 id="8f08b7cf-878b-4e3c-8cd2-df110ac7272b" class="">8 Clusters of Motivation That Trigger Sharing</h2><p id="0cec946e-8ccf-49f2-b5ef-ea8da5f82d9d" class="">Here are 8 motivations that trigger sharing. There are more, but these give you a good starting point. If you want to do more research, track down writings on the subject by Freud, Maslow, McClelland, Murray, Costa &amp; McCrae, and Erhard.</p><p id="121430b4-952a-4c34-b311-0a40e4fe0cfe" class="">With each cluster, we’ve chosen a word that we think best represents a cluster of words that speak to this core motivation. In each case, we list the other terms we’ve found similar. We include them all because each word could trigger a different idea in your mind as you think about how it could apply to your product.</p><h3 id="1bac57dd-7ecf-4757-8ab2-ae70639a4d26" class="">1. Status</h3><p id="ef7d8c8b-5bbc-4186-bb9f-371911b03bed" class="">This is the big one. It can also be termed “belonging,” “prestige,” “respect,” “scarcity” or “in-the-know.” People often try to show this by associating themselves with other high-status people or <a href="https://www.nfx.com/post/network-effects-bible/#nodes-and-links">central nodes</a> in the network. Most of us intuitively understand that <a href="https://en.wikipedia.org/wiki/Preferential_attachment">high-status nodes in a network tend to mostly associate with other high-status nodes</a>.</p><p id="18a0c924-8d38-4068-bd97-a495e7c3c52d" class="">They also try to show this by joining products that are exclusive, like <a href="https://www.nfx.com/post/network-effects-facebook/">Facebook was at the beginning</a> when they were just in colleges, or like Superhuman or Clubhouse have been recently.</p><p id="93bb58ad-cab0-440c-8e0a-cc8774ec91e4" class="">People also try to show their status within products. On social media, people share the accomplishments of their friends, for instance, congrats for making 30 under 30, raising a $X million VC round, getting a new job. They are happy for their friends, but the reason to do this publicly is also because of how it makes <em>them</em> look <em>by association</em>. The same thing is true in a CRM where you put in the data that makes you high status among the sales team.</p><p id="ab5a5b20-4161-4700-a66f-5489617762ff" class="">Status is by nature scarce because it indicates the hierarchy of us in the pack. There is only one top position, one 2nd position, etc. Access to something scarce or exclusive motivates people to share because they can get high status from the people they share it with. Note that despite the high profile cases where this has worked, very few products can achieve high enough status at launch so that scarcity tactics work for sign up. Scarcity typically works more easily for things like discounts or tickets that are limited in number or time.</p><h3 id="7967678e-62f4-455a-aea8-64bb8489cbdf" class="">2. Identity Projection</h3><p id="6420840f-6e75-49e8-abef-c270b886b4f7" class="">Other words in this cluster include: “tribalism,” “vindication,” and “confirmation bias.” We want to be able to show who we are and be vindicated in our identity.</p><p id="4033410d-ece6-441a-a574-996994541feb" class="">This motivation is especially visible with outrage-sharing on social media. When we express outrage around something, we’re drawing a clear line around <em>what we aren’t</em>. This is the reason why so much of what people share online is in the camp of “I told you so” or “this vindicates my perspective.” “I’m right.” “My team is winning, so I’m worthy.”</p><p id="e072d059-4c73-438d-8e07-81308dd4ab1c" class="">Sharing an outraged Yelp review or political Facebook post helps us define what we stand against, and by implication what we stand for.</p><p id="dd58b24c-eeaa-44d4-ac8a-98b01f734764" class="">It gives us an opportunity to have a point of view — a statement that people can agree with or disagree with. We mostly seek validation in that point of view. Sometimes, however, interestingly enough, we share to help us explore our own identities, or to explore the identities of others. To see who has a like-mind. Examples of this are things like Roblox or having multiple accounts on Instagram.</p><p id="911ad500-2135-432b-983e-b238311f934d" class="">“Tribalism” is a powerful human motivation baked deep in our psychology that says we are right and they are wrong. We will be successful and they will not be successful. We want to be part of the pack, and when we share, it is sometimes to either A) signal that we belong or B) help us find our tribe.</p><p id="428db494-746d-48c2-857d-08e1a81f098c" class="">Community-driven sharing that signal belonging is evident in online communities like WallStreetBets, where using common lingo (“Diamond Hands”, “To The Moon”, “Hold The Line”) signals belonging and helps grow the tribe by increasing awareness of it.</p><p id="4a692fa8-2c78-45ba-be2a-02ee4869db72" class="">It’s not just online communities that are shared out of the motivation to belong. Many types of products can <a href="https://www.nfx.com/post/15th-network-effect-tribal/">build tribal network effects</a>. Such products will draw on the underlying psychology that motivates people to share, either to recruit new people into their tribe, to signal their membership in it, or defend their tribe — and thus themselves — from others.</p><h3 id="1a44f0c9-f9c8-41a0-8366-27ac54a22847" class="">3. Being Helpful</h3><p id="5ffb3591-71b6-41e4-9361-e0bce03d26e0" class="">“Utility.” “Better.” “Cheaper.” We are compelled to share things that we find useful because we want to be perceived as helpful and nurturing to our tribes. It feels good to be looked at as someone who is competent and knows what you’re doing.</p><p id="6832ffd7-176d-49a0-a356-1d4958b72c0e" class="">Whether that be a new product that we feel really improves our lives by producing a lot of value or something that produces that value at a lower price.</p><p id="67722e7a-219a-4ace-95d6-bfa39538205b" class="">For instance, in the early days of Airbnb, people were motivated to share the product because it produced so much cheap value for them as users, and they wanted to share that utility with their friends. The same thing was true of Salesforce in the early days, $50/month for a CRM in SaaS form.</p><p id="393c81a9-68eb-43d8-84c1-55fc23f51510" class="">Note that language is important here, especially if your product provides some new or unprecedented utility. If you can give your users the language to express the utility of your product in a clear, pithy, and compelling way, it will 10x the word of mouth. It’s the difference between saying “access an online rideshare marketplace” and “get a ride in 3 minutes.”</p><h3 id="038ae0f1-53e5-41bb-94ee-279f2518dea2" class="">4. Safety</h3><p id="0e4ab165-3738-4980-9934-1985ffaeb31f" class="">“Fear.” “Compliance.” “Prevent harm.” “Security.” Fear is embedded in the most primal part of our psychology. If we sense danger, our brain has evolved to pay attention.</p><p id="f3443bad-e0b1-4f37-8851-bee0aa9ea9ce" class="">Any perceived threat to safety — whether physical, financial, or emotional — can be a powerful reason why people share. News media have long understood this. As they say in the biz, “If it bleeds, it leads.” And it’s why the cliche way for the 6 pm TV news to get you to watch their 11 o’clock news is “Are your children safe? News at 11.”</p><p id="83cbe29e-d666-408f-ad5b-68962a29c0bc" class="">Products that offer safety or security are shared because of the same emotions. For example, Nextdoor’s early growth came from people wanting to know what was going on in their neighborhood and what kind of threats to their safety they might face. The app Citizen grew for a similar reason, and it was also why Trulia’s crime map helped them grow.</p><p id="1164cced-20ce-4a52-af93-8df65ebffa18" class="">The same applies to digital safety products like Norton Antivirus or password protectors like 1Password. Users share with their friends and family to help protect them from danger.</p><p id="a3cd9077-c918-4aaa-bb1a-ddd164341cb2" class="">Related to safety is compliance — people are highly motivated to prevent harm and maintain stability. Customers of compliance SaaS software, for example, will be motivated to share with others in their company so that they can be perceived as wanting to prevent harm and being a protective, stabilizing force.</p><h3 id="ba9ca8e4-6407-40aa-84a5-ba3284ad5a76" class="">5. Order</h3><p id="346a371b-45aa-4992-a5bb-c4f5fabbe558" class="">“Organize.” “Collect.” One of the <a href="https://en.wikipedia.org/wiki/Big_Five_personality_traits">Big Five personality traits</a> is conscientiousness — people fall on a spectrum between personality types that like to be highly organized and efficient and those who are naturally messier.</p><p id="9db8df48-e5a8-44c5-b30a-0998ca350c2b" class="">People who are trying to organize their world because of their personality are highly motivated to share tools that help them to optimize and organize.</p><p id="a61d46fa-64b3-43f4-9a9f-5d2d5b6aafa0" class="">This is one of the big drivers between the rapid growth of a cult-like following behind note-taking apps like Roam Research and Notion, which have been virally growing for the past few years. It is the same thing that drove the growth in the early days of productivity software like Asana and Airtable.</p><p id="9c7eddc0-56be-44e4-bbe5-58a266ffd6c8" class="">People share them not only because it makes others perceive them as more organized and efficient, but also because it helps them bring other people into the same protocol of organization— whether it be co-workers or friends and acquaintances.</p><h3 id="176ebdee-b615-4a97-935d-1399772cda4e" class="">6. Novelty</h3><p id="4308d1f6-f4b6-4314-8a5f-6fbd74878a19" class="">“Entertainment.” “The new.” Another aspect of personality identified as part of the Big Five is openness to experience — where we fall on a spectrum of being driven by seeking novelty and curiosity to being cautious and preferring familiarity.</p><p id="51775999-d921-4f00-9aa3-d5a0df7bbd41" class="">The attraction of novelty was identified early on by Wilhelm Wundt, one of the founders of modern psychology who came up with the <a href="https://www.google.com/url?q=https://dictionary.apa.org/wundt-curve&amp;sa=D&amp;source=editors&amp;ust=1612561753655000&amp;usg=AOvVaw0W0aCEXU15Ljx6vJD6vlgN">Wundt curve</a> — a bell-curve distribution between novelty at one end and familiarity at the other.</p><p id="3405b656-7a8f-4053-8fa2-dcf1307dc979" class="">The sweet spot is in the middle — we are attracted by things that are new enough to not be stale, but not too new to be strange.</p><figure id="6fc0847f-5d1b-403d-9d11-0971e100603e" class="image"><a href="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Image-from-iOS.jpg"><img style="width:700px" src="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Image-from-iOS.jpg"/></a></figure><p id="160ba628-1b75-4423-b1f0-6bfcf02a83ee" class="">This novelty sweet spot can be seen in internet memes, where people share remixes of the same formulas which contain elements that are both familiar and new. Formulas from 2020 like “how it started… How it’s going.” “Nobody:… “Absolutely nobody.”</p><p id="506192b2-f0ff-4e12-a5bf-3a104ee7c87d" class="">At some arbitrary point, the meme moves past the sweet spot and becomes stale, after which people stop sharing it because they’ll be mocked for being behind the curve.</p><p id="55816105-c35e-4da7-aa97-9d9a0b66c300" class="">At the same time, we are always looking for the next new thing. We are motivated to share new products and new information because it makes us look like we’re ahead of the (Wundt) curve.</p><p id="6a1cf735-4aaa-45ca-baf1-a9d0c8a32b1d" class="">People share things that are entertaining because the risks are low and it allows people to interact and bond in ways that feel safe and warm.</p><p id="85d2c815-38e6-46a6-8b1c-b82a76d55280" class="">My threshold to send something to you drops if I know it’s going to be entertaining or fun. The perceived risk of sharing something entertaining is always low, while there’s a clear benefit of being perceived as having good taste for entertainment.</p><p id="849678cb-d404-4073-bb09-aa6d84edb8f7" class="">Competition makes entertainment virality a difficult motivation to capture. Worst of all, it’s very hit or miss and then fleeting even when you do hit. You often need to create 50 pieces of novel, entertaining content before one “hits” and then it typically lasts for a few days or weeks before it gets forgotten in the market under a torrent of new novel pieces.</p><h3 id="149ea5cd-4bfa-4bd7-b94e-13a74fc448db" class="">7. Validation</h3><p id="d0fb14ee-a2d8-4aac-83ff-16e831d82ae7" class="">“Positive.” “Happy.” “Smart.” A lot of what we share online has to do with the fact that we want to get a boost, believe we are good, believe we are smart or believe we are worthy. We want to feel positive about ourselves and our place in the world.</p><p id="daf94c77-ab5c-4c58-97b0-0e3fd0c0592f" class="">At Tickle, we noticed this a lot with personality tests. People shared their results because they wanted to be validated and boost their self-esteem. Even today, people are often eager to share the results of their Myers-Briggs or Big Five personality tests with their friends because they seek that validation.</p><p id="89930e24-160e-4725-a690-5187542691bf" class="">You want to know what people think of you, and you will share products that help you do that. You also want to feel positive and uplifted. Upworthy, for example, went viral because it helped people feel good about who they were and validated their positive views of themselves and the world.</p><h3 id="98e5eda1-da4f-4ade-8a6c-c7d313057f7f" class="">8. Voyeurism</h3><p id="4dd8a2c3-c26a-4ee3-a7e5-588bc7780e0d" class="">“Window.” “Schadenfreude.” “Access.” There are two related motivations that cause people to share out of voyeurism.</p><p id="b3f9cef4-40ad-4e5e-a5e4-f45804174ce9" class="">On the one hand, you have vicarious enjoyment. People share things that allow others to vicariously live through them, whether it’s instagramming their food and vacations or sharing a product unboxing on YouTube.</p><p id="d2a86dee-29a7-4ea0-b91a-56e65a0f2cf4" class="">On the other hand, there’s schadenfreude. People are highly motivated to share things like celebrity scandals, gossip about high-profile people or people they don’t like because it helps unit them with others in common judgment/disdain.</p><p id="a80b366c-a9e3-481a-99ba-91f43ce4ddc0" class="">Although this isn’t pretty, it’s two sides of the same coin. Voyeurism is a powerful motivation in why people share.</p><h2 id="0c523a27-3409-4565-9996-2dd0c50e9c11" class="">Always Return to the Psychology</h2><p id="82cfc763-1cc2-4c2f-a63b-b80ec2f6c9fc" class="">As a Founder, understanding the psychology of why people share is one of the keys to unlocking growth. Experimenting with language to connect with these motivations is the work to be done.</p><p id="36afbec4-157f-41d7-964f-9bb42f6d272a" class="">Too often, we miss the forest for the trees — we overly focus on A/B testing, optimizing conversion funnels and landing pages and app designs, while not focusing enough on the psychological and language fundamentals that motivate our users to share our product (or not).</p><p id="fc91c9fc-f2d6-42da-ad76-7d10df53da80" class="">Understanding and applying the psychology of why people share is the Pareto Principle of marketing — it’s the 20% of what you do in marketing and product design that will ultimately lead to 80% of the growth.</p><figure id="0a4c8b63-4bde-45fc-81dd-e998d573ca1e" class="image"><a href="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Medium-Banner-scaled.jpg"><img style="width:700px" src="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Medium-Banner-scaled.jpg"/></a></figure><figure id="436093e8-0b71-40e8-a5ba-83fdc6e3f6d9" class="image"><a href="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Partner-Card-James-Currier.jpg"><img style="width:700px" src="Why%20People%20Share%20The%20Psychology%20Behind%20Going%20Viral%20166d42156a0a42288838238c6951f79a/Partner-Card-James-Currier.jpg"/></a></figure></div></article></body></html>

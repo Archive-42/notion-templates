@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Serverless Functions the Fast Way</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8060ae47-3449-4cbc-bc20-42d7b1273111" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚗</span></div><h1 class="page-title">Serverless Functions the Fast Way</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blog.postman.com/serverless-functions-the-fast-way/" class="url-value">https://blog.postman.com/serverless-functions-the-fast-way/</a></td></tr></tbody></table></header><div class="page-body"><figure id="99de822d-a0cb-4a34-a532-d2dc7d04aa94" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Jason-Lengstorf.jpg"><img style="width:660px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Jason-Lengstorf.jpg"/></a></figure><p id="7ff77b89-3c99-4310-a926-c8d8fba75fc6" class=""><em>This is a guest post by </em><a href="https://lengstorf.com/about/"><em>Jason Lengstorf</em></a><em>, principal developer experience engineer at </em><a href="https://www.netlify.com/"><em>Netlify</em></a><em>.</em></p><p id="fe78f28d-26fd-4c52-90a0-ecd4258c8f3b" class="">For frontend developers, one of the biggest hurdles to creating full-blown web apps is the backend. In fact, there are often multiple hurdles hiding in the backend. For example, how do you process form submissions? And how can you store data? It might seem that you need to create and manage a full-blown server in order to handle these types of use cases. But what if you could handle form submissions, requests to and from a database, and other server-like activities with a single JavaScript function, deployed with two lines of configuration?</p><p id="0aea0185-56ad-4e9e-b741-0481b1c3a918" class="">With “serverless functions,” you can do exactly that. In other words, yes, it’s possible to create complete backends—which can handle many server-like activities—using only JavaScript functions.</p><p id="bb03a9c7-0f45-4f7e-bd23-d1ba15a1c9e8" class="">In this tutorial, we’ll learn what serverless functions are, how to create them, and how you can deploy them in minutes with <a href="https://www.netlify.com/products/functions/?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex">Netlify Functions</a>.</p><h3 id="a3b7d54a-bcd2-48d7-a229-db1197063a17" class="">What is a serverless function?</h3><p id="52673d8d-a826-42f9-aee3-0d32e1de93b8" class="">Serverless functions are a way to encapsulate event-driven, server-like logic without the boilerplate steps of setting up a full-blown server. Serverless functions can talk to databases, call third-party services, process user input, and more. They <em>cannot</em> store data themselves or keep a long-running process available.</p><h3 id="39aabec8-1f28-4907-b404-873ecc2af27a" class="">What does “serverless” mean?</h3><p id="88801fd2-3f21-4ca4-a96a-90db5bcb5eeb" class="">A serverless function doesn’t actually mean that there is no server. It means that you, the developer, are not responsible for setting up or managing the server infrastructure—all you need to worry about is the actual business logic that needs to be performed.</p><p id="32060811-8619-47f7-bf41-d0f79323e28b" class="">Now, let’s get started with the tutorial, which will walk through these five steps:</p><ol type="1" id="de4b5a00-0635-4120-9243-4f363cd6c16e" class="numbered-list" start="1"><li>Create your first serverless function</li></ol><ol type="1" id="ff98ea65-2823-46cc-afa0-b4fb281a254b" class="numbered-list" start="2"><li>Deploy the functions to Netlify</li></ol><ol type="1" id="382bd83a-779f-4450-992e-4811a712c48d" class="numbered-list" start="3"><li>Handle form data</li></ol><ol type="1" id="4aa028c8-9f7c-4569-8ff9-61436b7d5ccd" class="numbered-list" start="4"><li>Send authorized requests to third-party APIs</li></ol><ol type="1" id="5092ec66-f178-4c34-9542-e570a0eee726" class="numbered-list" start="5"><li>Deploy the form</li></ol><h3 id="58388845-a436-4aab-88d9-d53f9987fc7e" class="">1. Create your first serverless function</h3><p id="91cf7c12-cdfd-4553-bfff-0dd2132a2083" class="">Let’s start by creating the simplest possible serverless function and deploying it to the internet. This should take about five minutes. 🤯</p><h3 id="f2ea99eb-641f-4880-9c58-251fa88d86fc" class="">Create the project and function file</h3><p id="14423c58-eaa4-4412-911b-bbc0418b7ac7" class="">On your computer, create a new folder for the functions to live in:</p><pre id="5eae44ac-c064-452d-ba2d-b0b3dbdd69ef" class="code"><code># create a new folder
+mkdir serverless-functions-the-fast-way
+
+# move into the new folder
+cd serverless-functions-the-fast-way/</code></pre><p id="6af1da2d-bb1a-4ba5-b003-c964af05a084" class="">Next, make a functions folder in the new folder:</p><pre id="5d58a8c4-e1f4-4627-97e9-b7ad148ca274" class="code"><code># create a directory called functions
+mkdir functions</code></pre><p id="eacd031b-8f60-4d77-9f45-cf59775074d2" class="">Inside the functions folder, create a new file called <code>hello-world.js</code>—this will be your serverless function:</p><pre id="45aad8a0-de5f-4af3-bf24-12108fa412b7" class="code"><code># create the file for your first serverless function
+touch functions/hello-world.js</code></pre><p id="9085218f-7628-4119-a03e-97d2f67f94dd" class="">Inside <code>hello-world.js</code>, add the following code:</p><pre id="b245f869-30dc-4138-bb5c-8c3636bd6237" class="code"><code>exports.handler = async () =&gt; {
+  return {
+    statusCode: 200,
+    body: &#x27;Hello world!&#x27;,
+  };
+};</code></pre><p id="3f9115b0-75c3-441b-82dc-a6545cbaa28c" class="">This is a complete serverless function. No joke. This JavaScript function returns an <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP status code</a> of 200 (for “OK”) and a plain text body of “Hello world!”</p><p id="5c50c55a-f409-49f8-8b88-8a2460b836e8" class="">Now that we’ve created the serverless function, let’s get set up to test it locally.</p><p id="007c0e5b-5d5c-4cc2-af2f-c57911e2ad12" class="">First, install the <a href="https://docs.netlify.com/cli/get-started/?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex">Netlify CLI</a> on your computer and log in to make sure that you have access to your Netlify account:</p><pre id="4581a52d-f7f0-4035-849e-2d535082143d" class="code"><code># install the Netlify CLI 
+npm i -g netlify-cli 
+
+# log into your Netlify account 
+ntl login</code></pre><p id="c2d87979-f05e-49f1-aaba-400ff668c228" class=""><em><strong>Note:</strong></em><em> If you don’t already have a Netlify account, you can </em><a href="https://app.netlify.com/signup?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex"><em>set one up for free</em></a><em> using your GitHub, GitLab, Bitbucket, or email address in a few seconds.</em></p><p id="2e9a4cbd-c474-48b4-804b-37e12fa515cf" class="">Next, create <code>netlify.toml</code> at the root of your project:</p><pre id="83f04d58-575c-4569-a6e2-6e8caa12db21" class="code"><code># create a Netlify config file in the project root 
+touch netlify.toml</code></pre><p id="fa57b2a4-6a25-4788-b261-8f9e1df51b2f" class="">Inside <code>netlify.toml</code>, configure Netlify Functions by adding two lines of config:</p><pre id="0755db85-91d9-4d91-802f-60c29d4ad1c2" class="code"><code>[build]
+  functions = &quot;functions&quot;</code></pre><p id="deef1514-96ea-4ac1-b3b6-1121f93d4db9" class="">This tells Netlify that you want to enable Netlify Functions and that it should look in the <code>functions</code> folder to find them. Once you’ve set this, Netlify will do the rest!</p><p id="72e17c2e-8e8f-4131-ab13-acf38ea904ca" class="">You have access to a local development server called <a href="https://www.netlify.com/products/dev/?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex">Netlify Dev</a> that supports serverless functions. To run it, you’ll use the CLI:</p><p id="c1371b72-57d1-4a2b-b076-37d6bea453ab" class=""><code>ntl dev</code></p><p id="25ccf299-966c-4d7d-817a-b3ddd2a7b3c9" class="">This starts up a local server with your serverless function available for testing:</p><figure id="1e83307f-9664-4b13-ac57-18352781af58" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/1-2-2048x1435.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/1-2-2048x1435.png"/></a></figure><p id="5e44cbba-9d89-41d2-8ef0-e3b5610044d8" class="">Netlify makes serverless functions accessible by URL using the format <code>{SITE_URL}/.netlify/functions/{FUNCTION_FILE_NAME}</code>—this means that your test function is available locally at <code>http://localhost:8888/.netlify/functions/hello-world</code>. You can try out your serverless function by sending a request in Postman:</p><figure id="2014c36a-b1d4-469c-8fe9-99faf6b5c745" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/2-2-2048x1270.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/2-2-2048x1270.png"/></a></figure><p id="8da61113-57d2-4c1c-aa44-520df17e38a4" class="">You can see that the result comes back with a “200 OK” response and the text “Hello world!” Congratulations, you’ve just written and tested your first serverless function!</p><h3 id="2e9b9a44-9322-4737-8919-c74cfd73ba10" class="">2. Deploy the functions to Netlify</h3><p id="b460a19c-a6b2-44e7-8085-415a53c11cb7" class="">Next, let’s get this function live at a public URL, so it can be used from anywhere in the world.</p><h3 id="010732e7-df96-4966-9698-81d1c4eeb8ac" class="">Create a new GitHub repository and push your code to it</h3><p id="c71800a7-9a42-46ce-9fcd-6794479a7010" class="">First, go to your GitHub account and <a href="https://github.com/new">create a new repository</a>:</p><figure id="8a1f4170-0ac7-4cf3-af7f-e620755c0ce7" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/3.-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/3.-2048x1224.png"/></a></figure><p id="dabfebd1-ee5f-464a-acfa-bdb1bf9572a6" class="">Next, you’ll need to:</p><ul id="5f754468-2281-403e-a2a2-9881cb851cec" class="bulleted-list"><li>Initialize the project folder as a Git repository</li></ul><ul id="fc25bbd2-7e8a-483b-892b-c0b6d5f01144" class="bulleted-list"><li>Add the GitHub repo as its remote origin</li></ul><ul id="3765579e-f82a-4b12-bf30-a142e3aef4aa" class="bulleted-list"><li>Add all the files and commit them</li></ul><ul id="1fd32767-c78f-4100-ac76-192750bad714" class="bulleted-list"><li>Push the code to your GitHub repo:</li></ul><pre id="0c4dc17d-9560-4c9d-834f-e717ad8ff235" class="code"><code>git init
+
+# NOTE: don’t forget to add your own username and repo here!
+git remote add origin git@github.com:yourusername/serverless-functions-the-fast-way.git
+git add -A
+git commit -m &#x27;first serverless function!&#x27;
+git push origin master</code></pre><p id="cfb10564-9f8e-40a0-90a9-c3e19e923552" class="">Now that your code is available on GitHub, you’ll need to initialize a new Netlify site. Using the CLI, this takes a single command:</p><pre id="f529545c-6c4d-4ea5-ab15-7e759b68e6ce" class="code"><code>ntl init</code></pre><p id="851ce6ec-b599-4118-a34e-cec130fb3983" class="">The CLI will guide you through creating a new site and then show you your new site’s URL and other details. Choose “Create &amp; configure a new site” when prompted. You don’t need a build command and you’re going to keep static files in the repo root, so you can keep the default answers to those CLI prompts.</p><p id="aa12aa42-bdc7-48f3-aa8a-93574d25d7a0" class="">The CLI will guide you through creating a new site and then show you your new site’s URL and other details. Choose “Create &amp; configure a new site” when prompted. You don’t need a build command and you’re going to keep static files in the repo root, so you can keep the default answers to those CLI prompts.</p><figure id="2607819b-15d6-4bde-99f4-9dc260e8519d" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/4-1-2048x1435.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/4-1-2048x1435.png"/></a></figure><p id="a10301e4-73f2-44f5-8f23-32ca3b7bb9d6" class="">Once the site is live, you can send a request to the live function by replacing <code>http://localhost:8888</code> with your new Netlify site URL:</p><figure id="d3dc3d13-e7bb-47fa-8bca-db820af66045" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/5-1-2048x1182.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/5-1-2048x1182.png"/></a></figure><p id="558caf0b-0148-467b-8876-04f15159dcb5" class="">We’re using the <a href="https://www.postman.com/product/api-client/">Postman API Client</a> in this example, but this also works if you visit your function in the browser. (You can see my function by visiting <a href="https://pedantic-perlman-2f1bba.netlify.app/.netlify/functions/hello-world">https://pedantic-perlman-2f1bba.netlify.app/.netlify/functions/hello-world</a>.)</p><p id="f17c412e-4fbe-4b21-8fdf-47caa765a6df" class=""><strong>At this point, you’ve successfully built, tested, and deployed a serverless function.</strong> Not bad for writing six lines of JavaScript and two lines of config!</p><h3 id="8972fb7e-68a6-4336-845b-3c0643b4d90c" class="">3. Handle form data</h3><p id="8f3be036-830d-40c1-8b40-794bc71aa5db" class="">To take your serverless functions to a more practical place, let’s create a simple HTML form that will allow your site visitors to search for an image, which you’ll get using the <a href="https://unsplash.com/developers">Unsplash API</a>.</p><p id="1205ddb3-1807-4d7b-9887-cbc52c7f1e44" class="">To start, let’s create an HTML file at the root of your project called <code>index.html</code>. Inside, create a form with a single field, named query that takes a search <code>query</code> as input and submits it to a serverless function called <code>search</code> (you’ll create this in the next step):</p><pre id="e81781a4-36d3-4430-a720-72f66c04377d" class="code"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;Search for a Photo!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;main&gt;
+      &lt;h1&gt;Search for a Photo!&lt;/h1&gt;
+      &lt;form action=&quot;/.netlify/functions/search&quot; method=&quot;POST&quot;&gt;
+        &lt;label for=&quot;query&quot;&gt;Search&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;query&quot; name=&quot;query&quot; /&gt;
+        &lt;button&gt;Submit&lt;/button&gt;
+      &lt;/form&gt;
+    &lt;/main&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre><p id="c13aed51-5217-4a47-95f8-3e84981419ff" class="">Next, add a new function called <code>search.js</code> in the <code>functions</code> folder and add the following, which uses Node’s built in <code>querystring</code> module to parse the form data and return it:</p><pre id="8d707018-b1aa-4d31-8a62-c2654878b8f0" class="code"><code>const qs = require(&#x27;querystring&#x27;);
+
+exports.handler = async (event) =&gt; {
+  const { query } = qs.parse(event.body);
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ query }),
+  };
+};</code></pre><p id="f7e7a1d7-da80-402a-b317-a61b4fe97ba0" class="">To test, stop the server if it’s still running (press control + C), then run <code>ntl dev</code> and send a POST request to <code>http://localhost:8888/.netlify/functions/search</code> with a <a href="https://learning.postman.com/docs/postman/sending-api-requests/requests/#url-encoded">URL-encoded body</a> of <code>query=corgi</code>. The function will respond with the query:</p><figure id="7ecccfe2-b289-4696-b194-9952a9930b54" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/6-2048x1182.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/6-2048x1182.png"/></a></figure><p id="1f64b7f9-271c-4ca3-b4e6-60b8ebfc2d93" class="">Now you’ll need to send this query off to Unsplash to get photos back.</p><p id="6329388b-3e23-4bf7-a0fd-2bc45b743063" class="">Because requests to the Unsplash API require private credentials, you can’t send requests from the client-side—that would expose the credentials and allow anyone to impersonate you when making API calls. Fortunately, serverless functions can make requests securely with credentials, which means you can safely use your Unsplash API key in your serverless function to search.</p><p id="64af6a7f-de76-4a69-a922-4d84264278bf" class=""><em><strong>Note:</strong></em><em> Joyce Lin and I talked all about </em><a href="https://www.learnwithjason.dev/protect-secret-keys-in-jamstack-apps"><em>keeping sensitive credentials secure in Jamstack apps</em></a><em> on Learn With Jason. Check it out for more details!</em></p><p id="17087006-fd3a-4460-88f8-b69fa97aa2dd" class="">Head over to <a href="https://unsplash.com/developers">https://unsplash.com/developers</a>, sign in, create an app, and get your access key:</p><figure id="76a20fc7-a147-4742-aa14-ebe54d9a859a" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/7-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/7-2048x1224.png"/></a></figure><p id="e07f0321-b5a8-453b-a5a8-0bab0afb285d" class="">Next, you’ll need to store the Unsplash access token as an environment variable for your Netlify site. This is done through the Netlify web app, which you can quickly open through the CLI:</p><pre id="f73f2978-b9ab-4c45-9910-ffd5454f9123" class="code"><code>ntl open</code></pre><p id="a670554f-c1e6-4123-865c-04c1d301083e" class="">Inside the app UI, click “Settings,” then “Build &amp; deploy,” and finally, “Environment.” Add a new environment variable called <code>UNSPLASH_API_TOKEN</code> with the access token as its value:</p><figure id="63672a54-270a-4f92-acfa-045a4b56e23b" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/8-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/8-2048x1224.png"/></a></figure><p id="fe7eb904-8d19-4a87-b855-321d5cdd3bfe" class="">Now that you have the access token in your environment, you can update the function to send search requests to Unsplash.</p><p id="a1899ed1-a84b-41c8-8553-8a35690ae229" class="">First, let’s initialize your project with a <code>package.json</code> and install <code>node-fetch</code> so you can make requests using the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">Fetch API</a>:</p><pre id="89d3c045-1ebd-44db-bd5d-6c17a62f5ffb" class="code"><code># create a package.json for this project
+npm init -y
+
+# install dependencies
+npm install node-fetch</code></pre><p id="1d5f8501-d6c2-4ab6-84d9-3746612f955e" class="">Next, let’s refactor your function to make a secure request to Unsplash and return the results as JSON:</p><figure id="1ea294c2-c735-4ec0-9f9e-04df66e7da0c" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Netlify-Diff-1.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Netlify-Diff-1.png"/></a></figure><p id="eb7ccef8-3fe4-41a7-a948-993a13bb0d28" class="">To test this, run <code>ntl dev</code>—note that the environment variable is loaded automatically for local testing:</p><figure id="61b9f60f-4136-4a3f-b92e-17c8096d5dd3" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/9-2048x1343.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/9-2048x1343.png"/></a></figure><p id="7b56fd85-d338-4072-a567-8012a956ad5e" class="">You can re-run your <code>POST</code> request and you’ll see the Unsplash response come back:</p><figure id="75c0736d-6e6a-4d2e-bc2b-05211f73d8f1" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/10-2048x1182.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/10-2048x1182.png"/></a></figure><p id="88df3764-91ef-4e82-a42c-3805d013c906" class="">In addition to JSON, you can return HTML (or any content type, really!). Let’s refactor your function to return an HTML <code>&lt;img&gt;</code> tag to display the first image returned from Unsplash:</p><figure id="c53c2657-129b-451b-a175-1a7870d0a631" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Netlify-Diff-2.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/Netlify-Diff-2.png"/></a></figure><p id="d4c0bf4a-126d-45cd-8297-83e552062210" class="">After saving this change—note that <code>ntl dev</code> automatically reloads the function when you save—you can re-run your <code>POST</code> request and see that the image HTML is returned:</p><figure id="b3b78dd1-90cf-437d-993a-34538ec564b9" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/11-2048x1182.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/11-2048x1182.png"/></a></figure><h3 id="1236d0a6-f7a5-4d13-b756-118c9d03546d" class="">5. Deploy the form</h3><p id="9cf2df49-6d9f-40be-9085-5c09fae3a9c2" class="">The last step is to deploy your search form to production.</p><p id="2f420f1f-749f-49a5-a002-a30321201394" class="">To start, you’ll need to add <code>node_modules</code> to the <code>.gitignore</code> file:</p><pre id="799a398e-2510-4d4f-9ba4-4bd5585d75fa" class="code"><code>  # Local Netlify folder
+  .netlify
++ node_modules</code></pre><p id="698df783-bb26-48c8-bff2-0ea485bfb3d6" class="">Next, let’s commit the rest of your new files:</p><pre id="93f2f6ef-33a9-40a1-8385-234b67d8026d" class="code"><code>git add -A
+git commit -m &#x27;add search form and function&#x27;
+git push origin master</code></pre><p id="87dba72e-48f5-4e34-bcd3-e9c4a13121e5" class="">The site will automatically rebuild because you pushed changes to Git. You can see it rebuilding if you open up the Netlify web app:</p><figure id="83219f9e-5318-46af-ba78-c385051d8b39" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/12-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/12-2048x1224.png"/></a></figure><p id="f283a327-6ae3-4916-b169-3aedea48ad79" class="">Once the site finishes deploying, visit the live site and you’ll see your search form:</p><figure id="8a970817-ae09-4bc9-aa94-0b516684ce09" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/13-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/13-2048x1224.png"/></a></figure><p id="d5216d34-ec72-4202-808c-d5aeca30349e" class="">Enter in a search term, press the submit button, and you’ll see an Unsplash image!</p><figure id="4ae36768-6d46-48c6-8389-de94c54e2ea7" class="image"><a href="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/14-2048x1224.png"><img style="width:700px" src="Serverless%20Functions%20the%20Fast%20Way%208060ae4734494cbcbc2042d7b1273111/14-2048x1224.png"/></a></figure><p id="a57b9ada-ba76-44fa-9e8e-02ffe17d9e5d" class="">You’ve now written, tested, and deployed two serverless functions, as well as sent authenticated requests to third-party APIs. That’s a whole bunch of backend-style code without having to build, configure, or manage any actual backends!</p><p id="37df20f4-b0a7-42a6-9e3d-f9cc85c08b96" class="">This tutorial covered the essentials of building and deploying serverless functions with Netlify. From here, you have all the building blocks to create anything you can imagine using serverless functions. Whether you want to <a href="https://www.netlify.com/blog/2019/11/18/what-are-microservices/?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex">build serverless microservices</a>, create a <a href="https://www.netlify.com/blog/2020/04/13/learn-how-to-accept-money-on-jamstack-sites-in-38-minutes/?utm_campaign=devex&amp;utm_medium=stripe-jl&amp;utm_source=blog?utm_source=postman-blog&amp;utm_medium=sls-intro-jl&amp;utm_campaign=devex">Stripe-powered Jamstack e-commerce store</a>, or do something entirely new and different, the principles you’ve learned in this tutorial will help get you there!</p><p id="d912d4bb-c0fd-4042-b5e7-1b0466ad5262" class="">Write a public comment</p></div></article></body></html>

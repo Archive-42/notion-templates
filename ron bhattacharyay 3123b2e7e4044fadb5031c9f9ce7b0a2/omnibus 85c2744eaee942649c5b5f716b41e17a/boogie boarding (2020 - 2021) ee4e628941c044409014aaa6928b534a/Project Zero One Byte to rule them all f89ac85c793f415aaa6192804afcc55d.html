@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Project Zero: One Byte to rule them all</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f89ac85c-793f-415a-aa61-92804afcc55d" class="page sans"><header><h1 class="page-title">Project Zero: One Byte to rule them all</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://googleprojectzero.blogspot.com/2020/07/one-byte-to-rule-them-all.html" class="url-value">https://googleprojectzero.blogspot.com/2020/07/one-byte-to-rule-them-all.html</a></td></tr></tbody></table></header><div class="page-body"><p id="288a130f-ab26-4274-8dd2-cf5910a15ea1" class="">One Byte to rule them all, One Byte to type them,</p><p id="f419fdf0-8f62-4301-bdb8-face4c453d21" class="">One Byte to map them all, and in userspace bind them</p><p id="fc4c6d58-4294-42ca-86af-5592d723141c" class="">-- Comment above vm_map_copy_t</p><p id="dbd9f7fd-cfc8-46ae-8fdf-55804023c9c9" class="">For the last several years, nearly all iOS kernel exploits have followed the same high-level flow: memory corruption and fake Mach ports are used to gain access to the kernel task port, which provides an ideal kernel read/write primitive to userspace. Recent iOS kernel exploit mitigations like PAC and zone_require seem geared towards breaking the canonical techniques seen over and over again to achieve this exploit flow. But the fact that so many iOS kernel exploits look identical from a high level begs questions: Is targeting the kernel task port really the best exploit flow? Or has the convergence on this strategy obscured other, perhaps more interesting, techniques? And are existing iOS kernel mitigations equally effective against other, previously unseen exploit flows?</p><p id="b87d2820-24d3-4c99-ba37-bdc0229483d1" class="">In this blog post, I&#x27;ll describe a new iOS kernel exploitation technique that turns a one-byte controlled heap overflow directly into a read/write primitive for arbitrary physical addresses, all while completely sidestepping current mitigations such as KASLR, PAC, and zone_require. By reading a special hardware register, it&#x27;s possible to locate the kernel in physical memory and build a kernel read/write primitive without a fake kernel task port. I&#x27;ll conclude by discussing how effective various iOS mitigations were or could be at blocking this technique and by musing on the state-of-the-art of iOS kernel exploitation. You can find the proof-of-concept code <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1986#c7">here</a>.</p><h1 id="e155c755-63af-47f6-81cd-9ecb91193f87" class="">I - The Fellowship of the Wiring</h1><h2 id="c87271ec-c03a-4f1e-94ae-2c9e4765bba1" class="">A struct of power</h2><p id="ed29b67e-10c5-4446-bb2c-d2a6eda9c32f" class="">While looking through the XNU sources, I often keep an eye out for interesting objects to manipulate or corrupt for future exploits. Soon after discovering <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1986">CVE-2020-3837</a> (the oob_timestamp vulnerability), I stumbled across the definition of vm_map_copy_t:</p><p id="7bc1a4ce-a6f5-4a1a-8f0c-65312968241a" class="">struct vm_map_copy {</p><p id="5dc3e721-a22f-4dba-b3c0-239fde222abe" class="">int type;</p><p id="1fc1a2ea-f7cc-4297-bf4c-b26c98d551da" class="">#define VM_MAP_COPY_ENTRY_LIST 1</p><p id="6b554c00-faf8-4f7a-a104-7a61d293e30d" class="">#define VM_MAP_COPY_OBJECT 2</p><p id="281aef4c-fceb-45a4-937f-8f726e4dd003" class="">#define VM_MAP_COPY_KERNEL_BUFFER 3</p><p id="3d886196-6ab1-48b2-8817-9cd28a59b667" class="">vm_object_offset_t offset;</p><p id="42b0324f-6f4b-47cf-8a0a-4848bd8b1573" class="">vm_map_size_t size;</p><p id="78e7a7cb-42dd-4c68-9a35-206e37cec1cb" class="">union {</p><p id="bcdd6fd7-80e9-4111-9268-a8bfb152bf18" class="">struct vm_map_header hdr; /* ENTRY_LIST */</p><p id="7f0dfb8a-d3f6-4f88-8dce-70250d4aa96e" class="">vm_object_t object; /* OBJECT */</p><p id="009afa29-d564-4dde-9f49-3d7c889767e9" class="">uint8_t kdata[0]; /* KERNEL_BUFFER */</p><p id="ebe9de37-c8d0-45de-9378-0fe80ac78ed1" class="">} c_u;</p><p id="64646207-df9a-4b93-88ef-c79246867cab" class="">This looked interesting to me for several reasons:</p><ol type="1" id="5b9d9f7a-3219-43e2-9312-73fc98e87ed2" class="numbered-list" start="1"><li>The structure has a type field at the very start, so an out-of-bounds write could change it from one type to another, leading to type confusion. Because iOS is little-endian, the least significant byte comes first in memory, meaning that even a single-byte overflow would be sufficient to set the type to any of the three values.</li></ol><ol type="1" id="6c286c8c-3f3c-4001-b509-c5979f9711e1" class="numbered-list" start="2"><li>The type discriminates a union between arbitrary controlled data (kdata) and kernel pointers (hdr and object). Thus, corrupting the type could let us directly fake pointers to kernel objects without needing to perform any reallocations.</li></ol><ol type="1" id="b9761676-b862-4c01-b434-47397c7be001" class="numbered-list" start="3"><li>I remembered reading about vm_map_copy_t being used as an interesting primitive in past exploits (before iOS 10), though I couldn&#x27;t remember where or how it was used. vm_map_copy objects were also used by Ian Beer in <a href="https://googleprojectzero.blogspot.com/2019/04/splitting-atoms-in-xnu.html">Splitting atoms in XNU</a>.</li></ol><p id="fd05af65-9bb7-4a26-912d-15563e4d13f9" class="">So, vm_map_copy looks like a possibly interesting target for corruption; however, it&#x27;s only truly interesting if the code uses it in a truly interesting way.</p><p id="023adda3-1045-4c0f-9bbb-f85dca012d28" class="">Digging through osfmk/vm/vm_map.c, I found that vm_map_copyout_internal() does indeed use the copy object in a very interesting way. But first, let&#x27;s talk a little more about what vm_map_copy is and how it works.</p><p id="8cca0b99-2c9a-4332-97ea-3dd9ffc10ea9" class="">A vm_map_copy represents a copy-on-write slice of a process&#x27;s virtual address space which has been packaged up, ready to be inserted into another virtual address space. There are three possible internal representations: as a list of vm_map_entry objects, as a vm_object, or as an inline array of bytes to be directly copied into the destination. We&#x27;ll focus on types 1 and 3.</p><p id="5ffccdc3-a0e2-40a3-a8d5-448ec8dbd0d1" class="">Fundamentally, the ENTRY_LIST type is the most powerful and general representation, while the KERNEL_BUFFER type is strictly an optimization. A vm_map_entry list consists of several allocations and several layers of indirection: each vm_map_entry describes a virtual address range [vme_start, vme_end) that is being mapped by a specific vm_object, which in turn contains a list of vm_pages describing the physical pages backing the vm_object.</p><figure id="346d2d45-ba14-4570-b1f8-e23dcf89bf49" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image18.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image18.png"/></a></figure><p id="15291169-453a-4717-950f-c99f12609f5c" class="">Meanwhile, if the data being inserted is not shared memory and if the size is roughly two pages or less, then the vm_map_copy is simply over-allocated to hold the data contents inline in the same allocation, no indirection or further allocations required.</p><figure id="495c7e0a-2f2f-45d1-94e2-4b16738fa6a1" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image5.png"><img style="width:140px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image5.png"/></a></figure><p id="5c111247-938a-4ca4-9059-4a811d702924" class="">As a consequence of this optimization, the 8 bytes of the vm_map_copy object at offset 0x20 can be either a pointer to the head of a vm_map_entry list, or fully attacker-controlled data, all depending on the type field at the start. So corrupting the first byte of a vm_map_copy object causes the kernel to interpret arbitrary controlled data as a vm_map_entry pointer.</p><figure id="649a43e9-d606-489b-bab0-7555580698ce" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image6.png"><img style="width:464px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image6.png"/></a></figure><p id="b6449527-8c86-40ae-b0bc-06d65aaa9779" class="">With this understanding of vm_map_copy internals, let&#x27;s turn back to vm_map_copyout_internal(). This function is responsible for taking a vm_map_copy and inserting it into the destination address space (represented by type vm_map_t). It is reachable when sharing memory between processes by sending an out-of-line memory descriptor in a Mach message: the out-of-line memory is stored in the kernel as a vm_map_copy, and vm_map_copyout_internal() is the function that inserts it into the receiver&#x27;s process.</p><p id="f61bff8b-c91c-4be8-8a7a-ffcb605d008a" class="">As it turns out, things get rather exciting if vm_map_copyout_internal() processes a corrupted vm_map_copy containing a pointer to a fake vm_map_entry hierarchy. In particular, consider what happens if the fake vm_map_entry claims to be wired, which causes the function to try to fault in the page immediately:</p><p id="9135cbed-9ea5-49dc-80d3-464f16d63c1e" class="">kern_return_t</p><p id="9ebe11e9-92f3-4c4b-b3ef-5ab9e42468c6" class="">vm_map_copyout_internal(</p><p id="6f025a4d-575c-41f1-87c1-57f459504812" class="">vm_map_t dst_map,</p><p id="9862f5fd-524a-4f8b-901c-d07d52e72efe" class="">vm_map_address_t *dst_addr, /* OUT */</p><p id="439495b1-5b48-4005-bbec-81bce428cadd" class="">vm_map_copy_t copy,</p><p id="bfab3dc4-6a93-4dd4-b4aa-2fc44f0a0034" class="">vm_map_size_t copy_size,</p><p id="a508566d-c2fb-4205-93f8-542f88ab11f8" class="">boolean_t consume_on_success,</p><p id="907a84f1-9252-4286-927e-abb4a51fbb35" class="">vm_prot_t cur_protection,</p><p id="eeb0e97c-d6b4-45e7-b854-55a35fbb30b8" class="">vm_prot_t max_protection,</p><p id="c2371235-a4da-4e24-b98d-7b4cd2412842" class="">vm_inherit_t inheritance)</p><p id="a1db448a-0c20-4999-9408-d694be8bfe41" class="">...</p><p id="96c579d6-979d-4566-93f1-99902c5418ae" class="">if (copy-&gt;type == VM_MAP_COPY_OBJECT) {</p><p id="aeb1c91e-1f6e-4a8b-9164-99bd6237768b" class="">...</p><p id="01f909dc-bea0-468e-9520-6a914a9cc7ac" class="">...</p><p id="458e59e7-6bca-4428-b29c-bdc5c69265f1" class="">if (copy-&gt;type == VM_MAP_COPY_KERNEL_BUFFER) {</p><p id="ae444a2c-ece1-45fc-afc9-67809ab71642" class="">...</p><p id="919839c9-e129-490e-9e7f-33e6b2a1d7e8" class="">...</p><p id="7f439739-18b4-4870-a884-ad8457df55fb" class="">vm_map_lock(dst_map);</p><p id="eca57267-25b8-4bbc-84d0-34a69bc56f90" class="">...</p><p id="c06f57d6-5686-4004-8e90-a6046a12f212" class="">adjustment = start - vm_copy_start;</p><p id="382ce613-eb01-4b8b-92b3-3b7dcbafbde5" class="">...</p><p id="14a1010e-a4a3-4991-93f4-3669f2837c5d" class="">/*</p><p id="70317778-0e1b-43bc-9f56-748ac7050843" class="">* Adjust the addresses in the copy chain, and</p><p id="ce5a08a9-a672-48ae-a225-114388e23e09" class="">* reset the region attributes.</p><p id="e9a22148-509b-4a8d-ac16-14588bfad52e" class="">*/</p><p id="10f443c1-5435-4eca-b413-e9e512ea7cd5" class="">for (entry = vm_map_copy_first_entry(copy);</p><p id="5b053582-1d06-40ef-92bf-04e205475be7" class="">entry != vm_map_copy_to_entry(copy);</p><p id="d2e35ec6-9611-45df-94c9-d79d7a88b3ce" class="">entry = entry-&gt;vme_next) {</p><p id="ea64aca4-7fc1-45ce-a84a-c0dc0e35c801" class="">...</p><p id="c3ddeb47-eeef-459e-94bc-451fcd790566" class="">entry-&gt;vme_start += adjustment;</p><p id="37b50f67-2c59-498a-a72a-036134756b37" class="">entry-&gt;vme_end += adjustment;</p><p id="fb6307a7-2ea4-41bc-89c0-ae758545257e" class="">...</p><p id="ea17dc4e-40ae-4420-9e38-189495855527" class="">/*</p><p id="d4ea87b1-6109-4ae3-84a8-c8b0009dcaad" class="">* If the entry is now wired,</p><p id="1a142107-2d83-4354-b5a3-9f4cf46dc4f0" class="">* map the pages into the destination map.</p><p id="8a4ee030-8934-4d45-ab29-7d07ae809152" class="">*/</p><p id="61598901-0980-44fb-92ec-bcec81fc02d8" class="">if (entry-&gt;wired_count != 0) {</p><p id="2d6f913f-c82b-46b2-8fb7-8199d9602fbb" class="">...</p><p id="aa875c0f-7fbb-495f-9db3-9cdc717f3c5e" class="">object = VME_OBJECT(entry);</p><p id="58ac0b13-8226-4d41-90cb-20bbcc0c354c" class="">offset = VME_OFFSET(entry);</p><p id="92bce9a4-a490-4efb-b709-f14429ba61b3" class="">...</p><p id="40e30eb7-ee3a-4a76-83c2-ebcb016553bd" class="">while (va &lt; entry-&gt;vme_end) {</p><p id="1f03a004-1bac-4162-933f-11a4845d6bb0" class="">...</p><p id="ad1b0c68-c0b1-4ca3-9367-b9bdede55afb" class="">m = vm_page_lookup(object, offset);</p><p id="2c359773-b13c-4939-824a-135db6d1e8f1" class="">...</p><p id="b9d44fc5-b638-41e1-8362-3c8bfe9a84e9" class="">vm_fault_enter(m, // Calls pmap_enter_options()</p><p id="4701dde7-b14a-4e96-b8b2-680fb6c89361" class="">dst_map-&gt;pmap, // to map m-&gt;vmp_phys_page.</p><p id="88bc45df-9df8-4956-ae7c-a911a4b2d194" class="">va,</p><p id="6e23a21b-ac9b-49ad-b656-af60c0976ec4" class="">prot,</p><p id="af105a33-debc-4f9a-b7be-7ea3803b3e88" class="">prot,</p><p id="0bdf3c54-c113-4902-a212-0782168941ea" class="">VM_PAGE_WIRED(m),</p><p id="fd648ff8-aa16-4e6a-bb2c-02ecf43983bb" class="">FALSE, /* change_wiring */</p><p id="759e0209-d7aa-4056-bb5b-dbe86543f3ed" class="">VM_KERN_MEMORY_NONE, /* tag - not wiring */</p><p id="4ee2fd05-135e-46e2-aeb1-59625bbad9e4" class="">&amp;fault_info,</p><p id="df8cd66b-ff8b-4a44-9827-b89541f40fc3" class="">NULL, /* need_retry */</p><p id="dd7c9571-874a-4295-b1da-b5cff7e4c871" class="">&amp;type_of_fault);</p><p id="46d4d4d0-fb73-4423-854b-de1d00b4557d" class="">...</p><p id="c491c3e5-0a0c-4757-a69a-4893f83e67c8" class="">offset += PAGE_SIZE_64;</p><p id="e091aa03-7fb5-408f-a4e8-3620a95b5337" class="">va += PAGE_SIZE;</p><p id="0e87d084-2fae-402e-8d03-b0c745e1143c" class="">...</p><p id="561d0c93-c3af-41d2-a53e-ca569c7c07be" class="">vm_map_copy_insert(dst_map, last, copy);</p><p id="60dfd5ef-ca70-4a63-88bb-b7c9d4b1adbe" class="">...</p><p id="c7279199-51e0-40ba-9cf0-7fa00323b8c9" class="">vm_map_unlock(dst_map);</p><p id="e9eff9e5-219b-4fb0-b0e1-72b54c6835ca" class="">...</p><p id="bd9279db-7ac0-4133-a05c-c6941f5c3888" class="">Let&#x27;s walk through this step-by-step. First, other vm_map_copy types are handled:</p><p id="98555d9e-8f92-4dab-9e8d-506c999654de" class="">if (copy-&gt;type == VM_MAP_COPY_OBJECT) {</p><p id="38fef17d-d62c-48fa-824d-1ffcf0f38328" class="">...</p><p id="2eed8ad6-c74f-401a-9318-904d3558b8ed" class="">...</p><p id="f94312dd-d27f-46d5-bb65-36fc1557ce78" class="">if (copy-&gt;type == VM_MAP_COPY_KERNEL_BUFFER) {</p><p id="8935e9d6-e097-480c-a888-6b1571c658ea" class="">...</p><p id="68392e6c-3bde-495b-a786-d1614a611cfa" class="">The vm_map is locked:</p><p id="6c16fb02-33aa-4a59-bd94-fdd8138cf2c0" class="">vm_map_lock(dst_map);</p><p id="9fd8e386-0846-421e-9779-540b62c70890" class="">We enter a for loop over the linked list of (fake) vm_map_entry objects:</p><p id="453095ec-5101-48d9-87bf-977d7f9cce5c" class="">for (entry = vm_map_copy_first_entry(copy);</p><p id="a52118d5-6db8-49e6-abf3-075646b18ad2" class="">entry != vm_map_copy_to_entry(copy);</p><p id="4fc2ad50-a8e5-4df9-be06-59aee54b25c5" class="">entry = entry-&gt;vme_next) {</p><p id="115c498e-098b-4a19-806e-635a8ce502f1" class="">We handle the case where the vm_map_entry is wired and should thus be faulted in immediately:</p><p id="185a8895-6382-4418-ae73-3740515b5790" class="">if (entry-&gt;wired_count != 0) {</p><p id="d9701fe7-90a3-4f43-8e96-51321ff51da5" class="">When set, we loop over every virtual address in the wired entry. Since we control the contents of the fake vm_map_entry, we can control the object pointer (of type vm_object) and offset value that are read:</p><p id="eb4c1ea4-b521-4bcc-a429-a0d7d2d0de9f" class="">object = VME_OBJECT(entry);</p><p id="4b447d22-36ff-46ec-a2d1-1e46ba1df090" class="">offset = VME_OFFSET(entry);</p><p id="5b9cfbd2-f50a-40fc-9439-032af1f7089f" class="">...</p><p id="e7c18207-11c5-4115-8534-bcd21157c99e" class="">while (va &lt; entry-&gt;vme_end) {</p><p id="1434b63a-5e4e-4cd5-a7d0-665e4404fd1d" class="">We look up the vm_page struct for each physical page of memory that needs to be wired in. Since we control the fake vm_object and the offset, we can cause vm_page_lookup() to return a pointer to a fake vm_page struct whose contents we control:</p><p id="5a5a4dad-842a-45ce-a050-6f7401e23c8a" class="">m = vm_page_lookup(object, offset);</p><p id="81d31ddb-d9d9-43d8-8fcc-8c1f348d8926" class="">And finally, we call vm_fault_enter() to fault in the page:</p><p id="f40988cd-597a-479c-ba41-c2a91b21a79f" class="">vm_fault_enter(m, // Calls pmap_enter_options()</p><p id="e7638ff1-4769-424a-ba04-8c52dc6f7f2c" class="">dst_map-&gt;pmap, // to map m-&gt;vmp_phys_page.</p><p id="071c2b2c-9aec-462b-bffb-d8fdf1be5892" class="">va,</p><p id="45e2d0f1-3fed-4712-971a-510ac9a89be5" class="">prot,</p><p id="ed100bef-ddd4-4fa4-99ae-7cef80be6ba5" class="">prot,</p><p id="9d5ec097-f114-4644-8ca9-6db2bb32c64b" class="">VM_PAGE_WIRED(m),</p><p id="eb8b0b4a-24b3-4bfc-b4ec-b81156a7742c" class="">FALSE, /* change_wiring */</p><p id="f3bc4c13-f3a6-46a5-aed9-83643fe7acdf" class="">VM_KERN_MEMORY_NONE, /* tag - not wiring */</p><p id="78b46497-ed6b-43ec-8ab1-5a84b160f775" class="">&amp;fault_info,</p><p id="47914b51-7979-4a83-802a-ceb20951abe4" class="">NULL, /* need_retry */</p><p id="e1cd22d6-b64b-4de7-bd37-90a9824f29f8" class="">&amp;type_of_fault);</p><p id="ae4051f4-a367-4d78-8f89-fd2086fc0097" class="">The call to vm_fault_enter() is rather complicated, so I won&#x27;t put the code here. Suffice to say, by setting fields in our fake objects appropriately, it is possible to navigate vm_fault_enter() with a fake vm_page object in order to reach a call to pmap_enter_options() with a completely arbitrary physical page number:</p><p id="145f1c27-895a-4de2-b88a-80f0303361a4" class="">kern_return_t</p><p id="25fedc61-d5fa-48b5-9a83-c5c0f0a9d7e9" class="">pmap_enter_options(</p><p id="49e2419e-e0ce-441b-9660-17b0c0515a08" class="">pmap_t pmap,</p><p id="0df484cc-6b2f-4d83-9fd1-bf37e7637b24" class="">vm_map_address_t v,</p><p id="59c2ede2-cadf-4466-ae6e-2b4034064f27" class="">ppnum_t pn,</p><p id="56cc3ba4-4b72-4c2f-b54c-dc0d34b83a2f" class="">vm_prot_t prot,</p><p id="0ce64846-ae4b-40e5-994f-934fb99840d2" class="">vm_prot_t fault_type,</p><p id="d34e63ec-a1c9-4016-9a30-08ac37fc0e2e" class="">unsigned int flags,</p><p id="cebb2363-a98c-404b-bf6a-3767c77e18b2" class="">boolean_t wired,</p><p id="2cc78b11-f6d6-44ff-835e-4ae3764cfa1b" class="">unsigned int options,</p><p id="52e2191b-2701-434a-a22c-addf0f43b1e5" class="">__unused void *arg)</p><p id="fb964dd8-474d-4c15-ac51-122087cab27b" class="">pmap_enter_options() is responsible for modifying the page tables of the destination to insert the translation table entry that will establish a mapping from a virtual address to a physical address. Analogously to how vm_map manages the state for the virtual mappings of an address space, the pmap struct manages the state for the physical mappings (i.e. page tables) of an address space. And according to the sources in osfmk/arm/pmap.c, no further validation is performed on the supplied physical page number before the translation table entry is added.</p><p id="6ef3a771-942c-4207-9345-da7f9aae7fed" class="">Thus, our corrupted vm_map_copy object actually gives us an incredibly powerful primitive: mapping arbitrary physical memory directly into our process in userspace!</p><figure id="0c7d7d86-ebe7-4a96-9cc3-da271d622432" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image14.png"><img style="width:639px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image14.png"/></a></figure><h2 id="b7e4b4a4-0d52-49a8-9790-4b069a2b67fc" class="">An old friend</h2><p id="d4bdaf84-8652-4836-9e16-ac6d1b2b3c65" class="">I decided to build the POC for the vm_map_copy physical memory mapping technique on top of the kernel read/write primitive provided by the <a href="https://bugs.chromium.org/p/project-zero/issues/detail?id=1986">oob_timestamp exploit</a> for iOS 13.3. There were two primary reasons for this.</p><p id="0d39ba99-3b77-477e-87cd-ed7a23617a42" class="">First, I did not have a good bug available to develop a complete exploit with it. Even though I had initially stumbled upon the idea while trying to exploit the oob_timestamp bug, it quickly became apparent that that bug wasn&#x27;t a good fit for this technique.</p><p id="53bd872a-54e8-4e1f-8728-1ab2bef9f2f5" class="">Second, I wanted to evaluate the technique independently of the vulnerability or vulnerabilities used to achieve it. It seemed that there was a good chance that the technique could be made deterministic (that is, without a failure case); implementing it on top of an unreliable vulnerability would make it hard to evaluate separately.</p><p id="6b6fb4fd-cfde-473f-b911-1530c4589c72" class="">This technique most naturally fits a controlled one-byte linear heap overflow in any of the allocator zones kalloc.80 through kalloc.32768 (i.e., general-purpose allocations of between 65 and 32768 bytes). For ease of reference in the rest of this post, I&#x27;ll simply call it the one-byte exploit technique.</p><h2 id="ea4fbfb4-69ef-4fa9-9bf3-ba27138708ac" class="">Leaving the Shire</h2><p id="699360ac-e146-4842-bfb5-4f59c544cf6c" class="">We&#x27;ve already laid out the bones of the technique above: create a vm_map_copy of type KERNEL_BUFFER containing a pointer to a fake vm_map_entry list, corrupt the type to ENTRY_LIST, receive it with vm_map_copyout_internal(), and get arbitrary physical memory mapped into our address space. However, successful exploitation is a little bit more complicated:</p><ol type="1" id="f60d1aea-a0e2-4f23-adf1-9a683b36f9d0" class="numbered-list" start="1"><li>We still have not addressed where this fake vm_map_entry/vm_object/vm_page hierarchy will be constructed.</li></ol><ol type="1" id="da169398-8d14-4352-9d99-ed2d2ac02a16" class="numbered-list" start="2"><li>We need to ensure that the kernel thread that calls vm_map_copyout_internal() does not crash, panic, or deadlock after mapping the physical page.</li></ol><ol type="1" id="3a09a1dc-15a5-4404-824c-99e3c154b6ea" class="numbered-list" start="3"><li>Mapping one physical page is great, but probably not sufficient by itself to achieve arbitrary kernel read/write. This is because:</li></ol><ol type="1" id="fc1b5791-3169-4743-8308-72b91f6b156a" class="numbered-list" start="4"><li>The kernelcache&#x27;s exact load address in physical memory is unknown, so we cannot map any specific page of it directly without locating it first.</li></ol><ol type="1" id="11272254-5591-4234-b65f-014198bb33fe" class="numbered-list" start="5"><li>It is possible that some hardware device exposes an MMIO interface that is powerful enough by itself to build some sort of read/write primitive; however, I&#x27;m not aware of any such component.</li></ol><p id="dbcff3e7-c934-43b1-8a35-9816a0be6dc1" class="">Thus, we will need to map more than one physical address, and most likely we will need to use data read from one mapping to find the physical address to use for another. This means our mapping primitive can not be one-shot.</p><ol type="1" id="a05dd60e-c42e-448b-947f-0ce53d217c44" class="numbered-list" start="1"><li>The call to vm_map_copy_insert() after the for loop tries to zfree() the vm_map_copy to the vm_map_copy_zone. This will panic given a vm_map_copy originally of type KERNEL_BUFFER, since KERNEL_BUFFER objects are initially allocated using kalloc().Thus, the only way to safely break out of the for loop and resume normal operation is to first get kernel read/write and then patch up state in the kernel to prevent this panic.</li></ol><p id="76887987-b251-40c2-b108-d56ac2c32e79" class="">These constraints will guide the course of this exploit technique.</p><h2 id="8e16d180-9435-4edd-b3b7-178fbf26fcb8" class="">A short cut to PAN</h2><p id="2bb49411-e2ae-4fc4-93cc-447bf43c7597" class="">An important prerequisite for the one-byte technique is to create a fake vm_map_entry object hierarchy at a known address. Since we are already building this POC on oob_timestamp, I decided to leverage a neat trick I picked up while exploiting that bug. In the real world, another vulnerability in addition to the one-byte overflow might be needed to leak a kernel address.</p><p id="9b2b2124-f0bc-475a-bcc4-3f6baa505367" class="">While developing the POC for oob_timestamp, I learned that the AGXAccelerator kernel extension provides a very interesting primitive: IOAccelSharedUserClient2 and IOAccelCommandQueue2 together allow the creation of large regions of pageable memory shared between userspace and the kernel. Having access to user/kernel shared memory can be extremely helpful when developing exploits, since you can place fake kernel data structures there and manipulate them while the kernel accesses them. Of course, this AGXAccelerator primitive is not the only way to get kernel/user shared memory; the physmap, for example, also maps most of DRAM into virtual memory, so it can also be used to reflect userspace memory contents into the kernel. However, the AGXAccelerator primitive is often much more convenient in practice: for one, it provides a very large contiguous shared memory region in a much more constrained address range; and for two, it&#x27;s easier to leak addresses of adjacent objects to locate it.</p><p id="9232a09c-3043-4448-9588-597d25ca207f" class="">Now, before the iPhone 7, iOS devices did not support the Privileged Access Never (PAN) security feature. This meant that all of userspace was effectively shared memory with the kernel, and you could just overwrite pointers in the kernel to point to fake data structures in userspace.</p><p id="c5df67bd-1a7b-40f7-9ee6-a9b6f12ce8ad" class="">However, modern iOS devices enable PAN, so attempts by the kernel to directly access userspace memory will fault. This is what makes the existence of the AGXAccelerator shared memory primitive so useful: if you can establish a large shared memory region and learn its address in the kernel, that&#x27;s basically equivalent to having PAN turned off.</p><p id="df9bf502-1360-48bc-bb10-efe2548d5649" class="">Of course, a key part of that sentence is &quot;and learn its address in the kernel&quot;; doing that usually requires a vulnerability and some effort. Instead, as we already rely on oob_timestamp, we will simply hardcode the shared memory address and note that finding the address dynamically is left as an exercise for the reader.</p><h2 id="732f775a-7822-442b-a73c-f11d770b9e49" class="">At the sign of the panicking POC</h2><p id="d1adfa2a-dabb-47ab-95b5-d96859d54b4e" class="">With kernel read/write and a user/kernel shared memory buffer in hand, we are ready to write the POC. The overall flow of the exploit is essentially what was outlined above.</p><p id="5706aecb-028d-4fce-8e45-935c735b221a" class="">We start by creating the shared memory region in the kernel.</p><p id="7882bf4c-4a29-44b6-8b66-5c51fcf19714" class="">We initialize a fake vm_map_entry list inside the shared memory. The entry list contains 3 entries: a &quot;ready&quot; entry, a &quot;mapping&quot; entry, and a &quot;done&quot; entry. Together these entries will represent the current state of each mapping operation.</p><figure id="1d928159-320b-430d-abb9-09a112fe1a67" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image11.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image11.png"/></a></figure><p id="ec4f6b9f-d008-4e6d-99c8-dc9f91a0a60f" class="">We send an out-of-line memory descriptor containing a fake vm_map_header in a Mach message to a holding port. The out-of-line memory is stored in the kernel as a vm_map_copy object of type KERNEL_BUFFER (value 3).</p><figure id="80518d68-7e5d-4dc9-a83b-e91bc2bc6866" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image13.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image13.png"/></a></figure><p id="88bfeb8f-0ee5-4bbb-b51b-ad38b3896839" class="">We simulate a one-byte linear heap overflow that corrupts the type field of the vm_map_copy, changing it to ENTRY_LIST (value 1).</p><figure id="38391289-1b1a-4652-b64d-3e00b37a9ef1" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image12.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image12.png"/></a></figure><p id="c2c0f896-5e4e-4940-a6bf-17229a50a829" class="">We start a thread that receives the Mach message queued on the holding port. This triggers a call to vm_map_copyout_internal() on the corrupted vm_map_copy.</p><p id="1fd6641d-c93f-4583-aabb-c97624df2e7d" class="">Due to the way the vm_map_entry list was initially configured, the vm_map_copyout thread will spin in an infinite loop on the &quot;done&quot; entry, ready for us to manipulate it.</p><figure id="5e2d6e00-c77c-4e79-91ca-398d01e79083" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image19.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image19.png"/></a></figure><p id="4547cfbb-d9d4-48eb-969a-d24dc33e6af1" class="">At this point, we have a kernel thread that is spinning ready to map any physical page we request.</p><p id="0442f1f8-c456-49ec-9a82-7db9274096bc" class="">To map a page, we first set the &quot;ready&quot; entry to link to itself, and then set the &quot;done&quot; entry to link to the &quot;ready&quot; entry. This will cause the vm_map_copyout thread to spin on &quot;ready&quot;.</p><figure id="8f326869-b5f1-41ec-a5a0-8fef7570dd22" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image17.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image17.png"/></a></figure><p id="b54e0db6-5476-4a10-b02d-b5361faa6094" class="">While spinning on &quot;ready&quot;, we mark the &quot;mapping&quot; entry as wired with a single physical page and link it to the &quot;done&quot; entry, which we link to itself. We also populate the fake vm_object and vm_page to map the desired physical page number.</p><figure id="acb07ab7-7185-48db-a63b-ca0e421d62df" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image9.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image9.png"/></a></figure><p id="bd473047-dac9-4f83-8f5b-3827a21c47fe" class="">Then, we can perform the mapping by linking the &quot;ready&quot; entry to the &quot;mapping&quot; entry. vm_map_copyout_internal() will map in the page and then spin on the &quot;done&quot; entry, signaling completion.</p><figure id="0a0a07be-c4b8-4f4a-96b8-cdc29a8e54e5" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image16.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image16.png"/></a></figure><p id="bfecca1f-fd35-4ec9-9c6b-c3daa7681b2f" class="">This gives us a reusable primitive that maps arbitrary physical addresses into our process. As an initial proof of concept, I mapped the non-existent physical address 0x414140000 and tried to read from it, triggering an LLC bus error from EL0:</p><figure id="4b0cf33e-a168-434f-b9b9-3be533616428" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image20.png"><img style="width:539px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image20.png"/></a></figure><h2 id="2ec55f93-5de8-4fa1-8552-b0b5fdba2361" class="">The mines of memory</h2><p id="0d822745-3355-4e34-adc5-3a48a6764417" class="">At this point we have proved that the mapping primitive is sound, but we still don&#x27;t know what to do with it.</p><p id="c25397d5-7cfe-47d9-bb10-d6c1c9d90306" class="">My first thought was that the easiest approach would be to go after the kernelcache image in memory. Note that on modern iPhones, even with a direct physical read/write primitive, <a href="https://googleprojectzero.blogspot.com/2019/10/ktrw-journey-to-build-debuggable-iphone.html">KTRR</a> prevents us from modifying the locked down portions of the kernel image, so we can&#x27;t just patch the kernel&#x27;s executable code. However, certain segments of the kernelcache image remain writable at runtime, including the part of the __DATA segment that contains sysctls. Since sysctls have been (ab)used before to build read/write primitives, this felt like a stable path forward.</p><p id="dbeb8043-04b8-44b8-940b-23a0491d9ad1" class="">The challenge was then to use the mapping primitive to locate the kernelcache in physical memory, so that the sysctl structs could then be mapped into userspace and modified.</p><p id="64e731ca-037c-43a5-a397-ca19b1391b53" class="">But first, before we figure out how to locate the kernelcache, some background on physical memory on the iPhone 11 Pro.</p><p id="e3520063-184d-4999-88f6-8013f5aab20a" class="">The iPhone 11 Pro has 4 GB of DRAM based at physical address 0x800000000, so physical DRAM addresses span 0x800000000 to 0x900000000. Of this, the range 0x801b80000 to 0x8ec9b4000 is reserved for the Application Processor (AP), the main processor of the phone which runs the XNU kernel and applications. Memory outside this region is reserved for coprocessors like the Always On Processor (AOP), Apple Neural Engine (ANE), SIO (possibly Apple SmartIO), AVE, ISP, IOP, etc. The addresses of these and other regions can be found by parsing the <a href="https://www.notion.so/1faef1a6fe396b820a43170b43e38be1">devicetree</a> or by dumping the iboot-handoff region at the start of DRAM.</p><figure id="f0f562b1-cce4-49b4-a863-b047c21849ae" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image4.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image4.png"/></a></figure><p id="9e2f9d3e-3f40-4ad1-bb06-cc903a9a24bf" class="">At boot time, the kernelcache is loaded contiguously into physical memory, which means that finding a single kernelcache page is sufficient to locate the whole image. Also, while KASLR may slide the kernelcache by a large amount in virtual memory, the load address in physical memory is quite constrained: in my testing, the kernel header was always loaded at an address between 0x805000000 and 0x807000000, a range of just 32 MB.</p><p id="ec07f052-b2c4-423d-91c4-fa60f91d5ed0" class="">As it turns out, this range is smaller than the kernelcache itself at 0x23d4000 bytes, or 35.8 MB. Thus, we can be certain at runtime that address 0x807000000 contains a kernelcache page.</p><p id="958bcbe9-896a-4921-9304-a50b999c289f" class="">However, I quickly ran into panics when trying to map the kernelcache:</p><p id="4e70c1e8-9ee7-45da-bcf7-116e39143510" class="">panic(cpu 4 caller 0xfffffff0156f0c98): &quot;pmap_enter_options_internal: page belongs to PPL, &quot; &quot;pmap=0xfffffff031a581d0, v=0x3bb844000, pn=2103160, prot=0x3, fault_type=0x3, flags=0x0, wired=1, options=0x1&quot;</p><p id="724f2c31-c046-4ce7-be09-813f44d638e6" class="">This panic string purports to come from the function pmap_enter_options_internal(), which is in the open-source part of XNU (osfmk/arm/pmap.c), and yet the panic is not present in the sources. Thus, I reversed the version of pmap_enter_options_internal() in the kernelcache to figure out what was happening.</p><p id="2428b520-1cdb-40a8-95d2-e1df30a9a562" class="">The issue, I learned, is that the specific page I was trying to map was part of Apple&#x27;s <a href="https://support.apple.com/guide/security/page-protection-layer-sec38dc659b4/web">Page Protection Layer</a> (PPL), a portion of the XNU kernel that manages page tables and that is considered even more privileged than the rest of the kernel. The goal of PPL is to prevent an attacker from modifying protected pages (in particular, executable code pages for codesigned binaries) even after compromising the kernel to obtain a read/write capability.</p><p id="3be24074-d592-4915-b9ae-439c27600f03" class="">In order to enforce that protected pages cannot be modified, PPL must protect page tables and page table metadata. Thus, when I tried to map a PPL-protected page into userspace, it triggered a panic.</p><p id="916150c3-09f1-421c-8824-3a1e88b62c33" class="">if (pa_test_bits(pa, 0x4000 /* PP_ATTR_PPL? */)) {</p><p id="f5b86eb1-f1d9-46a7-b603-8da2e7d2ee3e" class="">panic(&quot;%s: page belongs to PPL, &quot; ...);</p><p id="e6860672-c947-4291-bea3-8bc1d4ff820e" class="">if (pvh_get_flags(pai_to_pvh(pai)) &amp; PVH_FLAG_LOCKDOWN) {</p><p id="901a91d6-9b18-45ac-84b4-7489cf6a44e6" class="">panic(&quot;%s: page locked down, &quot; ...);</p><p id="293e591f-1aea-42df-9784-71e027ba15e7" class="">The presence of PPL significantly complicates use of the physical mapping primitive, since trying to map a PPL-protected page will panic. And the kernelcache itself contains many PPL-protected pages, splitting the contiguous 35 MB binary into smaller PPL-free chunks that no longer bridge the physical slide of the kernelcache. Thus, there is no longer a single physical address we can (safely) map that is guaranteed to be a kernelcache page.</p><p id="eeb83b14-0a0e-42f8-8bc9-7274e837c56f" class="">And the rest of the AP&#x27;s DRAM region is an equally treacherous minefield. Physical pages are grabbed for use by PPL and returned to the kernel as-needed, and so at runtime PPL pages are scattered throughout physical memory like mines. Thus, there is no static address anywhere that is guaranteed not to blow up.</p><div id="4035264f-2685-4662-96c9-eddfff396917" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="b5c3a0ff-0ecc-4dc2-8807-75172f9671ba"><td class="cell-title"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/Untitled%20Database%204035264f2685466296c9eddfff396917/A%20map%20showing%20the%20protection%20flags%20on%20every%20page%20o%20b5c3a0ff0ecc4dc2880775172f9671ba.html">A map showing the protection flags on every page of AP DRAM on the A13 over time. Yellow is PPL+LOCKDOWN, red is PPL, green is LOCKDOWN, and blue is unguarded (i.e., mappable).</a></td></tr></tbody></table></div><p id="bdb7b37e-5c32-4c9f-b0bc-24590a9bcf43" class="">II - The Two Techniques</p><h2 id="3c893b2b-000a-4562-a6b2-c8e81de7f5c0" class="">The road to DRAM&#x27;s guard</h2><p id="11ad7f0b-e169-4b93-a8c7-b1c79a2736a1" class="">Yet, that&#x27;s not quite true. The Application Processor&#x27;s DRAM region might be a minefield, but anything outside of it is not. That includes the DRAM used by coprocessors and also any other addressable components of the system, such as hardware registers for system components that are typically accessed via memory-mapped I/O (<a href="https://en.wikipedia.org/wiki/Memory-mapped_I/O">MMIO</a>).</p><p id="ffb2697b-4d0c-491e-952e-82f0fd1c86fa" class="">With such a powerful primitive, I expect that there are a plethora of techniques that could be used to build a read/write primitive. And I expect that there are many clever things that could be done by leveraging direct access to special hardware registers and coprocessors. Unfortunately, this is not an area with which I&#x27;m very familiar, so I&#x27;ll just describe one (failed) attempt to bypass PPL here.</p><p id="15bc58c9-de36-4a34-8419-ad70de18c9b8" class="">The idea I had was to take control of some coprocessor and use execution on both the coprocessor and the AP together to attack the kernel. First, we use the physical mapping primitive to modify the part of DRAM storing data for a coprocessor in order to get code execution on that coprocessor. Next, back on the main processor, we use the mapping primitive a second time to map and disable the coprocessor&#x27;s Device Address Resolution Table, or <a href="https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/KernelProgramming/vm/vm.html">DART</a> (basically an <a href="https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit">IOMMU</a>). With code execution on the coprocessor and the corresponding DART disabled, we have direct unguarded access from the coprocessor to physical memory, allowing us to completely sidestep the protections of PPL (which are only enforced from the AP).</p><p id="10848376-3c54-47be-b5cf-6ba775b35f26" class="">However, whenever I tried to modify certain regions of DRAM used by coprocessors, I would get kernel panics. In particular, the region 0x800000000 - 0x801564000 appeared to be readonly:</p><p id="f0880c9e-72d4-4340-92ea-a08e37b5b70c" class="">panic(cpu 5 caller 0xfffffff0189fc598): &quot;LLC Bus error from cpu1: FAR=0x16f507f10 LLC_ERR_STS/ADR/INF=0x11000ffc00000080/0x214000800000000/0x1 addr=0x800000000 cmd=0x14(acc_cifl2c_cmd_ncwr)&quot;</p><p id="7aa1c3e2-2e09-4b9a-8e0e-68a7dc118433" class="">panic(cpu 5 caller 0xfffffff020ca4598): &quot;LLC Bus error from cpu1: FAR=0x15f03c000 LLC_ERR_STS/ADR/INF=0x11000ffc00000080/0x214030800104000/0x1 addr=0x800104000 cmd=0x14(acc_cifl2c_cmd_ncwr)&quot;</p><p id="cd80dd7a-228e-448d-b15f-452651dd427f" class="">panic(cpu 5 caller 0xfffffff02997c598): &quot;LLC Bus error from cpu1: FAR=0x10a024000 LLC_ERR_STS/ADR/INF=0x11000ffc00000082/0x21400080154c000/0x1 addr=0x80154c000 cmd=0x14(acc_cifl2c_cmd_ncwr)&quot;</p><p id="79de3a2a-d9d0-4699-aea0-4a98228e6eec" class="">This was very weird: these addresses are outside of the KTRR lockdown region, so nothing should be able to block writing to this part of DRAM with a physical mapping primitive! Thus, there must be some other undocumented lockdown enforced on this physical range.</p><p id="aaf1f2bd-bdaa-4d8b-a0b3-5009a35ed86d" class="">On the other hand, the region 0x801564000 - 0x801b80000 remains writable as expected, and writing to different areas in this region produces odd system behaviors, supporting the theory that this is corrupting data used by coprocessors. For example, writing to some areas would cause the camera and flashlight to become unresponsive, while writing to other areas would cause the phone to panic when the mute slider was switched on.</p><p id="fee0838d-1fa8-4315-a004-bed96d6fd439" class="">To get a better sense of what might be happening, I identified the regions in this range by examining the <a href="https://www.notion.so/1faef1a6fe396b820a43170b43e38be1">devicetree</a> and dumping memory. In the end, I discovered the following layout of coprocessor firmware segments in the range 0x800000000 - 0x801b80000:</p><figure id="372112dc-a7b7-476c-9744-5269eb963f0a" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image7.png"><img style="width:638px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image7.png"/></a></figure><p id="b3826228-1d86-4e4d-9213-302a1cb4730c" class="">Thus, the regions that are locked down are all __TEXT segments of coprocessor firmwares; this strongly suggests that Apple has added a new mitigation to make coprocessor __TEXT segments read-only in physical memory, similar to KTRR on the AMCC (probably Apple&#x27;s <a href="https://en.wikipedia.org/wiki/Memory_controller">memory controller</a>) but for coprocessor firmwares instead of just the AP kernel. This might be the undocumented CTRR mitigation referenced in the originally published xnu-6153.41.3 sources that appears to be an enhanced replacement for KTRR on A12 and up; Ian Beer suggested CTRR might stand for Coprocessor Text Readonly Region.</p><p id="2426af9f-2905-4a7a-9b2e-fe3af5a0bef8" class="">Nevertheless, code execution on these coprocessors should still be viable: just as KTRR does not prevent exploitation on the AP, the coprocessor __TEXT lockdown mitigation does not prevent exploitation on coprocessors. So, even though this mitigation makes things more difficult, at this point our plan of disabling a DART and using code execution on the coprocessor to write to a PPL-protected physical address should still work.</p><h2 id="8f5d1feb-3f49-4592-9e2c-330c9da6bb6e" class="">The voice of PPL</h2><p id="2c8762c8-f87d-402f-b8bd-68e7f10d3669" class="">What did turn out to be a roadblock however was the DART/IOMMU lockdown enforced by PPL on the Application Processor. At boot, XNU parses the &quot;pmap-io-ranges&quot; property in the devicetree to populate the io_attr_table array, which stores page attributes for certain physical I/O addresses. Then, when trying to map the physical address, pmap_enter_options_internal() checks the attributes to see if certain mappings should be disallowed:</p><p id="60f58588-5977-4693-941c-5608315d077f" class="">wimg_bits = pmap_cache_attributes(pn); // checks io_attr_table</p><p id="b5053e7b-1995-4192-b240-52fe473e6068" class="">if ( flags )</p><p id="7a1980c5-8014-45db-8403-3c80fcb3c29b" class="">wimg_bits = wimg_bits &amp; 0xFFFFFF00 | (u8)flags;</p><p id="ed8f4787-9b5f-4cb8-be0f-7cc9339cc53f" class="">pte |= wimg_to_pte(wimg_bits);</p><p id="122e00db-d1fd-4e0f-8edb-d20e64abbd24" class="">if ( wimg_bits &amp; 0x4000 )</p><p id="14750c04-6e76-46e9-bc1b-945441c9c3c8" class="">xprr_perm = (pte &gt;&gt; 4) &amp; 0xC | (pte &gt;&gt; 53) &amp; 1 | (pte &gt;&gt; 53) &amp; 2;</p><p id="f938d841-24cb-4f5b-90f1-dcb982003670" class="">if ( xprr_perm == 0xB )</p><p id="0bb4ea4a-07ab-46c6-985e-dbcc48aa4c87" class="">else if ( xprr_perm == 3 )</p><p id="ec25643a-3254-4508-9818-e1c65834639a" class="">else</p><p id="916b79d3-233e-4152-be16-6191f5f00c03" class="">panic(&quot;Unsupported xPRR perm ...&quot;);</p><p id="307d1aba-5c34-4bc7-96d0-0e507cadbd0a" class="">pte = pte_perm_bits | pte &amp; ~0x600000000000C0uLL;</p><p id="c4cb2d40-62de-44a7-8268-cdb4e774a0a3" class="">pmap_enter_pte(pmap, pte_p, pte, vaddr);</p><p id="3f33193b-5362-4048-b83c-f27319784348" class="">Thus, we can only map the DART&#x27;s I/O address into our process if bit 0x4000 is clear in the wimg field. Unfortunately, a quick look at the &quot;pmap-io-ranges&quot; property in the devicetree confirmed that bit 0x4000 was set for every DART:</p><p id="742639c9-1845-45a2-b1bd-0d725101548d" class="">addr len wimg signature</p><p id="1784dbf6-be3e-437d-9016-3402e8becaba" class="">0x620000000, 0x40000000, 0x27, &#x27;PCIe&#x27;</p><p id="6cd2dd41-46f9-4627-80cb-740cd4cd2ecf" class="">0x2412C0000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-sep</p><p id="25aad690-3ec5-4aa2-bf18-af06af5f09c9" class="">0x235004000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-sio</p><p id="bb8b607b-f960-4a2a-9d62-5177196a361e" class="">0x24AC00000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-aop</p><p id="c6edfb0c-a439-4b75-977a-4f3cd573aba3" class="">0x23B300000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-pmp</p><p id="bf005fd6-0057-46aa-8467-dc90aef740a0" class="">0x239024000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-usb</p><p id="30d11bb4-3070-4f16-bd2c-4607aab31d1d" class="">0x239028000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-usb</p><p id="01e3d42c-dc86-48b9-94fc-12734beb4d42" class="">0x267030000, 0x4000, 0x4007, &#x27;DART&#x27; ; dart-ave</p><p id="7138af35-4be9-4b6d-bbad-cad5eb07ba58" class="">0x8FC3B4000, 0x4000, 0x40004016, &#x27;GUAT&#x27; ; sgx.gfx-handoff-base</p><p id="6263f655-0571-40da-a368-017b8b3642d5" class="">Thus, we cannot map the DART into userspace to disable it.</p><h2 id="095d904b-5c0b-4909-9654-c489c973c9e0" class="">The palantír</h2><p id="e7009bae-16da-466e-9e0c-a05000f432fa" class="">Even though PPL prevents us from mapping page tables and DART I/O addresses, the physical I/O addresses for other hardware components are still mappable. Thus, it is still possible to map and read some system component&#x27;s hardware registers to try and locate the kernel.</p><p id="b0087d92-9f34-44a8-be68-a62883363b48" class="">My initial attempt was to read from IORVBAR, the Reset Vector Base Address Register accessible via MMIO. The reset vector is the first piece of code that executes on a CPU after it resets; thus, reading IORVBAR would give us the physical address of XNU&#x27;s reset vector, which would pinpoint the kernelcache in physical memory.</p><p id="ee38c412-a486-40d2-b908-bf0b6c43c848" class="">IORVBAR is mapped at offset 0x40000 after the &quot;reg-private&quot; address for each CPU in the devicetree; for example, on A13 CPU 0 it is located at physical address 0x210050000. It is part of the same group of register sets containing CoreSight and DBGWRAP that had been previously used to <a href="https://googleprojectzero.blogspot.com/2019/10/ktrw-journey-to-build-debuggable-iphone.html">bypass KTRR</a>. However, I found that IORVBAR is not accessible on A13: trying to read from it will panic.</p><p id="96243083-71d3-46a7-92ff-646690dc65ad" class="">I spent some time searching the A13 SecureROM for interesting physical addresses before Jann Horn suggested that I map the KTRR lockdown registers on the AMCC, Apple&#x27;s memory controller. These registers store the physical memory bounds of the KTRR region in order to enforce the KTRR readonly region against attacks from coprocessors.</p><figure id="53705670-5e78-49cb-a52a-41404c53cc41" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image8.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image8.png"/></a></figure><p id="04b09aa2-142c-41fc-90dc-aa640cee47e3" class="">Mapping and reading the AMCC&#x27;s RORGNBASEADDR register at physical address 0x200000680 worked like a charm, yielding the start address of the lockdown region containing the kernelcache in physical memory. Using security mitigations to break other security mitigations is fun. :)</p><h2 id="ea6973d4-2984-40b2-a8e4-66453b96a06e" class="">The back gate is closed</h2><p id="6dda7039-d49e-4933-941b-3b72b67748b1" class="">After finding a definitive way forward using AMCC, I looked at one last possibility before giving up on bypassing PPL.</p><p id="67447c26-4bc6-4614-8361-005db76743bb" class="">iOS is configured with 40-bit physical addresses and 16K pages (14 bits). Meanwhile, the arbitrary physical page number passed to pmap_enter_options_internal() is 32 bits, and is shifted by 14 and masked with 0xFFFF_FFFF_C000 when inserted into the level 3 translation table entry (L3 TTE). This means that we could control bits 45 - 14 of the TTE, even though bits 45 - 40 should always be zero based on the physical address size programmed in TCR_EL1.IPS.</p><p id="0a6e3326-3f20-4c70-8a1f-620882a23df3" class="">If the hardware ignored the bits beyond the maximum supported physical address size, then we could bypass PPL by supplying a physical page number that exactly matches the DART I/O address or page table page, but with one of the high bits set. Having the high bits set would cause the mapped address to fail to match any of the addresses in &quot;pmap-io-ranges&quot;, even though the TTE would map the same physical address. This would be neat as it would allow us to bypass PPL as a precursor to kernel read/write/execute, rather than the other way around.</p><p id="c3bd331e-74a5-463c-b03f-68d2d2c9be6f" class="">Unfortunately, it turns out that the hardware does in fact check that TTE bits beyond the supported physical address size are zero. Thus, I went forward with the AMCC trick to locate the kernelcache instead.</p><h2 id="453acbab-7a51-4551-a8e9-7d3fe5445fab" class="">The taming of sysctl</h2><p id="3faa9e50-5375-4766-b460-e2f6c863cea7" class="">At this point, we have a physical read/write primitive for non-PPL physical addresses, and we know the address of the kernelcache in physical memory. The next step is to build a virtual read/write primitive.</p><p id="c3088297-d561-4a63-b7d4-6a86dac17fec" class="">I decided to stick with known techniques for this part: using the fact that the sysctl_oid tree used by the sysctl() syscall is stored in writable memory in the kernelcache to manipulate it and convert benign sysctls allowed by the app sandbox into kernel read/write primitives.</p><p id="ec692375-2755-428a-a754-078b56ea63af" class="">XNU inherited <a href="https://en.wikipedia.org/wiki/Sysctl">sysctls</a> from FreeBSD; they provide access to certain kernel variables to userspace. For example, the &quot;hw.l1dcachesize&quot; readonly sysctl allows a process to determine the L1 data cache line size, while the &quot;kern.securelevel&quot; read/write sysctl controls the &quot;system security level&quot; used for some operations in the BSD portion of the kernel.</p><p id="28b102e7-fed0-437f-b4c6-6a9c8eb76b77" class="">The sysctls are organized into a tree hierarchy, with each node in the tree represented by a sysctl_oid struct. Building a kernel read primitive is as simple as mapping the sysctl_oid struct for some sysctl that is readable in the app sandbox and changing the target variable pointer (oid_arg1) to point to the virtual address we want to read. Invoking the sysctl then reads that address.</p><figure id="7cf391d5-e5db-49ba-9c28-3405f64f5462" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image1.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image1.png"/></a></figure><p id="0db4b14f-dabc-486f-b964-c21a872ed246" class="">Using sysctls to build a write primitive is a bit more complicated, since no sysctls are listed as writable in the container sandbox profile. The <a href="https://github.com/doadam/ziVA">ziVA</a> exploit for iOS 10.3.1 worked around this by changing the oid_handler field of the sysctl to call copyin(). However, on PAC-enabled devices like the A13, oid_handler is protected with a PAC, meaning that we cannot change its value.</p><p id="ead49cac-ff54-479d-a0af-cd48b703999b" class="">However, when disassembling the function hook_system_check_sysctlbyname() that implements the sandbox check for the sysctl() system call, I noticed an interesting undocumented behavior:</p><p id="c473eed2-daab-4728-bf98-6b0c206c3843" class="">// Sandbox check sysctl-read</p><p id="70a70d33-908d-439a-935a-eaa6bf99eafb" class="">ret = sb_evaluate(sandbox, 116u, &amp;context);</p><p id="c42bcc90-5247-4a4d-93ca-43e3512d4523" class="">if ( !ret )</p><p id="fe99c22f-9e69-4cca-8bb6-006fa1f3811d" class="">// Sandbox check sysctl-write</p><p id="b311bacf-bc66-43f2-b03f-6b746b44b7c6" class="">if ( newlen | newptr &amp;&amp; (namelen != 2 || name[0] != 0 || name[1] != 3) )</p><p id="6e6a000b-7c97-4899-98ad-913d114d8717" class="">ret = sb_evaluate(sandbox, 117u, &amp;context);</p><p id="6b387aec-32b0-4b27-8030-f9ca1405a467" class="">else</p><p id="86326cd9-14ff-4c29-bc7c-03d7f19aff87" class="">For some reason, if the sysctl node is deemed readable inside the sandbox, then the write check is not performed on the specific sysctl node { 0, 3 }! What this means is that { 0, 3 } will be writable in every sandbox from which it is readable, regardless of whether or not the sandbox profile allows writes to that sysctl.</p><p id="1a4ee0c7-020a-4bec-92db-09fe37f9d514" class="">As it turns out, the name of the sysctl { 0, 3 } is &quot;sysctl.name2mib&quot;, which is a writable sysctl used to convert the string-name of a sysctl into the numeric form, which is faster to look up. It is used to implement sysctlnametomib(). So it makes sense that this sysctl should usually be writable.</p><p id="c9ca006f-4989-4d43-bd3c-7c88e71a0cad" class="">The upshot is that even though there are no writable sysctls specified in the sandbox profile, sysctl { 0, 3 } is in fact writable anyways, allowing us to build a virtual write primitive alongside our read primitive. Thus, we now have full arbitrary kernel read/write.</p><h1 id="f6784f74-a4f7-48a2-a59e-0493b395e3d7" class="">III - The Return of the Copyout</h1><h2 id="4137d5e5-2763-4b7e-85a4-151465b679bb" class="">The battle of pmap fields</h2><p id="9d8998cc-f079-44c6-b64b-1a9681517889" class="">We have come far, but the journey is not yet done: we must break the ring. As things stand, vm_map_copyout_internal() is spinning in an infinite loop on the &quot;done&quot; vm_map_entry, whose vme_next pointer points to itself. We must guide the safe return of this function to preserve the stability of the system.</p><figure id="21725755-fa8d-476d-bf4b-f60039c7fd67" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image10.png"><img style="width:639px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image10.png"/></a></figure><p id="75681710-16e8-404a-ae76-304cc8c20019" class="">There are two basic issues preventing this. First, because we&#x27;ve inserted entries into our page tables at the pmap layer without creating corresponding virtual entries at the vm_map layer, there is currently an accounting conflict between the pmap and vm_map views of our address space. This will cause a panic on process exit if not addressed. Second, once the loop is broken, vm_map_copyout_internal() has a call to vm_map_copy_insert() that will panic trying to free the corrupted vm_map_copy to the wrong zone.</p><p id="b822d4ce-fc26-423b-98cf-10c5109ed13a" class="">We will address the pmap/vm_map conflict first.</p><p id="0b5f1bb2-e514-4bf6-8350-e78720eab09c" class="">Suppose for the moment that we were able to break out of the for loop and allow vm_map_copyout_internal() to return. The call to vm_map_copy_insert() that occurs after the for loop walks through all the entries in the vm_map_copy, unlinks them from the vm_map_copy&#x27;s entry list, and links them into the vm_map&#x27;s entry list instead.</p><p id="79f171cb-9516-4be3-b8a1-b466550fe0b7" class="">static void</p><p id="c97c2b0d-4573-4c05-a5e9-cdeac81509a4" class="">vm_map_copy_insert(</p><p id="bdd701f1-824d-4d0c-90e3-495a6d8ca2de" class="">vm_map_t map,</p><p id="4b3f4d72-4588-4938-b25f-9dca7a54bcc9" class="">vm_map_entry_t after_where,</p><p id="6c029a01-6139-42ee-9cd3-3cd113c54354" class="">vm_map_copy_t copy)</p><p id="86aee05b-0663-4a45-ba8c-d4b9ea4fb6de" class="">vm_map_entry_t entry;</p><p id="a88be914-e2f8-4c43-b665-61c69057c9cc" class="">while (vm_map_copy_first_entry(copy) !=</p><p id="48a39b40-d414-4bc5-9ad8-6919503f048a" class="">vm_map_copy_to_entry(copy)) {</p><p id="c61e9f25-78e4-4c28-8740-a4063a0be05c" class="">entry = vm_map_copy_first_entry(copy);</p><p id="5c98ff1f-4eed-4591-921f-497b0aa1af07" class="">vm_map_copy_entry_unlink(copy, entry);</p><p id="8e8bc4ae-a85a-4dda-8cdb-228d7efb1b89" class="">vm_map_store_entry_link(map, after_where, entry,</p><p id="e6258198-2f88-4c99-8dcb-1a1a8333f565" class="">VM_MAP_KERNEL_FLAGS_NONE);</p><p id="66c16dd1-7d0a-4371-8a76-e0b3bfe91d6e" class="">after_where = entry;</p><p id="64b7e5cc-6aae-4a42-8e07-a4ef467e2565" class="">zfree(vm_map_copy_zone, copy);</p><p id="59e308c8-11ae-4dec-b4e9-0318bbd9bfd5" class="">Since the vm_map_copy&#x27;s vm_map_entrys are all fake objects residing in shared memory, we really do not want them linked into our vm_map&#x27;s entry list, where they will be freed on process exit. The simplest solution is thus to update the corrupted vm_map_copy&#x27;s entry list so that it appears to be empty.</p><p id="c6977690-0785-441b-8a68-9706da716390" class="">Forcing the vm_map_copy&#x27;s entry list to appear empty certainly lets us safely return from vm_map_copyout_internal(), but we would nevertheless still get a panic once our process exits:</p><p id="c1d16c08-5997-4b20-a6b9-72f06ef94b2d" class="">panic(cpu 3 caller 0xfffffff01f4b1c50): &quot;pmap_tte_deallocate(): pmap=0xfffffff06cd8fd10 ttep=0xfffffff0a90d0408 ptd=0xfffffff132fc3ca0 refcnt=0x2 \n&quot;</p><p id="6eb26341-0e79-46a1-a89f-8886b43ce379" class="">The issue is that during the course of the exploit, our mapping primitive forces pmap_enter_options() to insert level 3 translation table entries (L3 TTEs) into our process&#x27;s page tables, but the corresponding accounting at the vm_map layer never happens. This disagreement between the pmap and vm_map views matters because the pmap layer requires that all physical mappings be explicitly removed before the pmap can be destroyed, and the vm_map layer will not know to remove a physical mapping if there is no vm_map_entry describing the corresponding virtual mapping.</p><p id="9077bac9-a43b-4515-afb7-f8b5f3f3a5e2" class="">Due to PPL, we can not update the pmap directly, so the simplest solution is to grab a pointer to a legitimate vm_map_entry with faulted-in pages and overlay it on top of the virtual address range at which pmap_enter_options() established our physical mappings. Thus we will update the corrupted vm_map_copy&#x27;s entry list so that it points to this single &quot;overlay&quot; entry instead.</p><h2 id="aa6007b5-a431-4074-a3ce-8c7fa3e9e803" class="">The fires of stack doom</h2><p id="353e8a33-183a-4f1b-845f-3a1609b5efc3" class="">Finally, it is time to break vm_map_copyout_internal() out of the for loop.</p><p id="9e439d85-c88f-4380-996b-921813a2e9e4" class="">for (entry = vm_map_copy_first_entry(copy);</p><p id="1990c60f-f52e-4c80-8eed-b1b389ecb243" class="">entry != vm_map_copy_to_entry(copy);</p><p id="ba87cf06-b897-4502-ade1-8f916f27d785" class="">entry = entry-&gt;vme_next) {</p><p id="fb76e916-64f2-4d40-b273-7c3794f9d2fa" class="">The macro vm_map_copy_to_entry(copy) expands to:</p><p id="628523bc-9904-4c09-82d2-7c74462cb287" class="">(struct vm_map_entry *)(&amp;copy-&gt;c_u.hdr.links)</p><p id="90bc9353-eb3e-42c6-918c-64a0f92313e3" class="">Thus, in order to break out of the loop, we need to process a vm_map_entry with vme_next pointing to the address of the c_u.hdr.links field in the corrupted vm_map_copy originally passed to this function.</p><p id="75389a1c-6f81-4629-bb51-fa7855f063c7" class="">The function is currently spinning on the &quot;done&quot; vm_map_entry, and we need to link in one final &quot;overlay&quot; vm_map_entry to address the pmap/vm_map accounting issue anyway. So the simplest way to break the loop is to modify the &quot;overlay&quot; entry&#x27;s vme_next to point to &amp;copy-&gt;c_u.hdr.links. and then update the &quot;done&quot; entry&#x27;s vme_next to point to the overlay entry.</p><figure id="123276be-f214-4022-ac92-f9ae9701b106" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image15.png"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image15.png"/></a></figure><p id="0e61b104-ac89-4af8-b29a-05b41e8e8ab4" class="">The problem is the call to vm_map_copy_insert() mentioned earlier, which frees the vm_map_copy as if it were of type ENTRY_LIST:</p><p id="f19051c7-38ca-40f1-8541-09a08cb62bc5" class="">zfree(vm_map_copy_zone, copy);</p><p id="bb18719f-9ee9-431b-b479-96534e686060" class="">However, the object passed to zfree() is our corrupted vm_map_copy, which was allocated with kalloc(); trying to free it to the vm_map_copy_zone will panic. Thus, we somehow need to ensure that a different, legitimate vm_map_copy object gets passed to the zfree() instead.</p><p id="95410b2e-87c8-431c-ad35-ddc5c967d2bb" class="">Fortunately, if you check the disassembly of vm_map_copyout_internal(), the vm_map_copy pointer is spilled to the stack for the duration of the for loop!</p><p id="75640b7a-b99b-4afd-87e1-762df505377e" class="">FFFFFFF007C599A4 STR X28, [SP,#0xF0+copy]</p><p id="09144356-79c8-4d65-a636-5027b2c8af1b" class="">FFFFFFF007C599A8 LDR X25, [X28,#vm_map_copy.links.next]</p><p id="f3cede9f-091a-4502-b04e-8ff35276afb5" class="">FFFFFFF007C599B0 B.EQ loc_FFFFFFF007C59B98</p><p id="99e72082-7073-44db-aaec-163a3cdcb335" class="">... ; The for loop</p><p id="aaaa0e11-e967-446b-a35c-f88a56c0f859" class="">FFFFFFF007C59B98 LDP X9, X19, [SP,#0xF0+dst_addr]</p><p id="592713c5-92b6-46e6-8d1d-c8fe1c5db117" class="">FFFFFFF007C59B9C LDR X8, [X19,#vm_map_copy.offset]</p><p id="5a985bd5-7f2b-4cdd-9d5c-8533fffdb699" class="">This makes it easy to ensure that the pointer passed to zfree() is a legitimate vm_map_copy allocated from the vm_map_copy_zone: just scan the kernel stack of the vm_map_copyout_internal() thread while it&#x27;s still spinning and swap any pointers to the corrupted vm_map_copy with the legitimate one.</p><figure id="5a4d75d1-c9eb-4d1f-8ffb-5bf65864b33a" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image21.gif"><img style="width:640px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image21.gif"/></a></figure><p id="c5d59ae8-710c-49ab-8b35-24a82d1993a7" class="">At last, we have fixed up the state enough to allow vm_map_copyout_internal() to break the loop and return safely.</p><h2 id="38a57289-333e-415a-bc39-83d213fdd010" class="">Homeward bound</h2><p id="271cc419-4cf0-47cb-8b54-18e377128169" class="">Finally, with a virtual kernel read/write primitive and the vm_map_copyout_internal() thread safely returned, we have achieved our goal: a stable kernel compromise achieved by turning a one-byte controlled heap overflow directly into an arbitrary physical address mapping primitive.</p><p id="0f0bacc1-9f03-4f42-bd46-14b093c17433" class="">Or rather, a nearly-arbitrary physical address mapping primitive. As we have seen, PPL-protected addresses like page table pages and DARTs cannot be mapped using this technique.</p><p id="11b287ea-7475-4829-b915-29eb851fb8a5" class="">When I started on this journey, I had intended to demonstrate that the conventional approach of going after the kernel task port was both unnecessary and limiting, that other kernel read/write techniques could be equally powerful. I suspected that the introduction of Mach-port based techniques in iOS 10 had biased the sample of publicly-disclosed exploits in favor of Mach-port oriented vulnerabilities, and that this in turn obscured other techniques that were just as promising but publicly less well understood.</p><p id="5425340f-d95d-46f3-a9f5-7eb55427d52f" class="">The one-byte technique initially seemed to offer a counterpoint to the mainstream exploit flow. After reading the code in vm_map.c and pmap.c, I had expected to be able to simply map all of DRAM into my address space and then implement kernel read/write by performing manual page table walks using those mappings. But it turned out that PPL blocks this technique on modern iOS by preventing certain pages from being mapped at all.</p><p id="5c74d2e7-3164-4f00-a6df-40d230bfe513" class="">It&#x27;s interesting to note that similar research was touched upon years ago as well, back when such a thing would have worked. While doing background research for this blog post, I came across a presentation by Azimuth called <a href="https://conference.hitb.org/hitbsecconf2012kul/materials/D1T2%20-%20Mark%20Dowd%20&amp;%20Tarjei%20Mandt%20-%20iOS6%20Security.pdf">iOS 6 Kernel Security: A Hacker’s Guide</a> that introduced no fewer than four separate primitives that could be constructed by corrupting various fields of vm_map_copy_t: an adjacent memory disclosure, an arbitrary memory disclosure, an extended heap overflow, and a combined address disclosure and heap overflow at the disclosed address.</p><figure id="a08019bb-dd61-48b0-9612-15a1ecf4aef9" class="image"><a href="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image2.png"><img style="width:639px" src="Project%20Zero%20One%20Byte%20to%20rule%20them%20all%20f89ac85c793f415aaa6192804afcc55d/image2.png"/></a></figure><p id="d27d2b32-5c99-4756-8ab4-a4ddb61aeb72" class="">At the time of the presentation, the KERNEL_BUFFER type had a slightly different structure, so that c_u.hdr.links.next overlapped a field storing the vm_map_copy&#x27;s kalloc() allocation size. It might have still been possible to turn a one-byte overflow into a physical memory mapping primitive on some platforms, but it would have been harder since it would require mapping the NULL page and a shared address space. However, a larger overflow like those used in the four aforementioned techniques could certainly change both the type and the c_u.hdr.links.next fields.</p><p id="98041c16-9f23-45fb-a89c-d974265f5cae" class="">After its apparent public introduction in that <a href="https://conference.hitb.org/hitbsecconf2012kul/materials/D1T2%20-%20Mark%20Dowd%20&amp;%20Tarjei%20Mandt%20-%20iOS6%20Security.pdf">Azimuth presentation</a> by Mark Dowd and Tarjei Mandt, vm_map_copy corruption was repeatedly cited as a widely used exploit technique. See for example: <a href="http://blog.azimuthsecurity.com/2013/02/from-usr-to-svc-dissecting-evasi0n.html">From USR to SVC: Dissecting the &#x27;evasi0n&#x27; Kernel Exploit</a> by Tarjei Mandt; <a href="https://conference.hitb.org/hitbsecconf2013kul/materials/D2T2%20-%20Stefan%20Esser%20-%20Tales%20from%20iOS%206%20Exploitation%20and%20iOS%207%20Security%20Changes.pdf">Tales from iOS 6 Exploitation</a> by Stefan Esser; <a href="https://www.blackhat.com/docs/eu-15/materials/eu-15-Todesco-Attacking-The-XNU-Kernal-In-El-Capitain.pdf">Attacking the XNU Kernel in El Capitan</a> by Luca Todesco; <a href="https://recon.cx/2016/resources/slides/RECON-0xA-Shooting_the_OSX_El_Capitan_Kernel_Like_A_Sniper_Chen_He.pdf">Shooting the OS X El Capitan Kernel Like a Sniper</a> by Liang Chen and Qidan He; <a href="https://gsec.hitb.org/materials/sg2016/D2%20-%20Stefan%20Esser%20-%20iOS%2010%20Kernel%20Heap%20Revisited.pdf">iOS 10 - Kernel Heap Revisited</a> by Stefan Esser; <a href="https://census-labs.com/media/iOS-kernel-exploitation-archaeology.pdf">iOS kernel exploitation archaeology</a> by Patroklos Argyroudis; and *OS Internals, Volume III: Security and Insecurity by Jonathan Levin, in particular Chapter 18 on TaiG. Given the prevalence of these other forms of vm_map_copy corruption, it would not surprise me to learn that someone had discovered the physical mapping primitive as well.</p><p id="52e2d73a-778d-4428-b849-659b88dd1800" class="">Then, in OS X 10.11 and iOS 9, the vm_map_copy struct was modified to remove the redundant allocation size and inline data pointer fields in KERNEL_BUFFER instances. It is possible that this was done to mitigate the frequent abuse of this structure in exploits, although it&#x27;s hard to tell because those fields were redundant and could have been removed simply to clean up the code. Regardless, removing those fields changed vm_map_copy into its current form, weakening the precondition required to carry out this technique to a single byte overflow.</p><h2 id="6244bc92-95d2-4ab4-b7da-486aee998619" class="">The mitigating of the Shire</h2><p id="181a8557-d1f5-4f79-aa57-4c4b78ad74ed" class="">So, how effective were the various iOS kernel exploit mitigations at blocking the one-byte technique, and how effective could they be if further hardened?</p><p id="79cc4b3f-d9f3-4b4d-90c1-0ead351a6ba5" class="">The mitigations I considered were KASLR, PAN, PAC, PPL, and zone_require. Many other mitigations exist, but either they don&#x27;t apply to the heap overflow bug class or they aren&#x27;t sensible candidates to mitigate this particular technique.</p><p id="8b06d3c2-91f9-4896-9c9a-0a976e616c16" class="">First, kernel address space layout randomization, or KASLR. KASLR can be divided into two parts: the sliding of the kernelcache image in virtual memory and the randomization of the kernel_map and submaps (zone_map, kalloc_map, etc.), collectively referred to as the &quot;kernel heap&quot;. The kernel heap randomization means that you do need some way to determine the address of the kernel/user shared memory buffer in which we build the fake VM objects. However, once you have the address of the shared buffer, neither form of randomization has much bearing on this technique, for two reasons: First, generic iOS kernel heap shaping primitives exist that can be used to reliably place almost any allocation in the target kalloc zones before a vm_map_copy allocation, so randomization does not block the initial memory corruption. Second, after the corruption occurs, the primitive granted is arbitrary physical read/write, which is independent of virtual address randomization.</p><p id="2d36a14e-1193-4e06-ac47-13727f5ca17e" class="">The only address randomization which does impact the core exploit technique is that of the kernelcache load address in physical memory. When iOS boots, iBoot loads the kernelcache into physical DRAM at a random address. As discussed in Part I, this physical randomization is quite small at 32 MB. However, improved randomization would not help because the AMCC hardware registers can be mapped to locate the kernelcache in physical memory regardless of where it is located.</p><p id="3d52f3df-bc0c-4a30-8c42-155a3d9d2dc7" class="">Next consider PAN, or Privileged Access Never. This is an ARMv8.1 security mitigation that prevents the kernel from directly accessing userspace virtual memory, thereby preventing the common technique of overwriting pointers to kernel objects so that they point to fake objects living in userspace. Bypassing PAN is a prerequisite for this technique: we need to establish a complex hierarchy of vm_map_entry, vm_object, and vm_page objects at a known address. While hardcoding the shared buffer address is good enough for this POC, better techniques would be needed for a real exploit.</p><p id="4f41e30b-8e83-400b-a477-c9c6c174396e" class="">PAC, or <a href="https://www.qualcomm.com/media/documents/files/whitepaper-pointer-authentication-on-armv8-3.pdf">Pointer Authentication Codes</a>, is an ARMv8.3 security feature introduced in Apple&#x27;s <a href="https://googleprojectzero.blogspot.com/2019/02/examining-pointer-authentication-on.html">A12 SOC</a>. The iOS kernel uses PAC for two purposes: first as an exploit mitigation against certain common bug classes and techniques, and second as a form of kernel control flow integrity to prevent an attacker with kernel read/write from gaining arbitrary code execution. In this setting, we&#x27;re only interested in PAC as an exploit mitigation.</p><p id="76e612c6-672e-4e0a-9901-8b17257c8411" class="">Apple&#x27;s website has a <a href="https://support.apple.com/guide/security/pointer-authentication-codes-seca5759bf02/1/web/1">table showing how various types of pointers are protected by PAC</a>. Most of these pointers are automatically PAC-protected by the compiler, and the biggest impact of PAC so far is on C++ objects, especially in IOKit. Meanwhile, the one-byte exploit technique only involves vm_map_copy, vm_map_entry, vm_object, and vm_page objects, all plain C structs in the Mach part of the kernel, and so is unaffected by PAC.</p><p id="b52fd963-88c6-4387-8546-39b5e96e2900" class="">However, at BlackHat 2019, Ivan Krstić of Apple <a href="https://i.blackhat.com/USA-19/Thursday/us-19-Krstic-Behind-The-Scenes-Of-IOS-And-Mas-Security.pdf">announced</a> that PAC would soon be used to protect certain &quot;members of high value data structures&quot;, including &quot;processes, tasks, codesigning, the virtual memory subsystem, [and] IPC structures&quot;. As of May 2020, this enhanced PAC protection has not yet been released, but if implemented it might prove effective at blocking the one-byte technique.</p><p id="8f3669e6-71ae-43d5-a29b-7367781d436d" class="">The next mitigation is PPL, which stands for <a href="https://support.apple.com/guide/security/page-protection-layer-sec38dc659b4/web">Page Protection Layer</a>. PPL creates a security boundary between the code that manages page tables and the rest of the XNU kernel. This is the only mitigation besides PAN that impacted the development of this exploit technique.</p><p id="149873cd-13a1-47c7-9adb-4f3611b74f00" class="">In practice, PPL could be much stricter about which physical addresses it allows to be mapped into a userspace process. For example, there is no legitimate use case for a userspace process to have access to kernelcache pages, so setting a flag like PVH_FLAG_LOCKDOWN on kernelcache pages could be a weak but sensible step. More generally, addresses outside the Application Processor&#x27;s DRAM region (including physical I/O addresses for hardware components) could probably be made unmappable for most processes, perhaps with an entitlement escape hatch for exceptional cases.</p><p id="0d22e6f2-d5da-4016-bed0-a732e37f5da8" class="">Finally, the last mitigation is zone_require, a software mitigation introduced in iOS 13 that checks that some kernel pointers are allocated from the expected zalloc zone before using them. I don&#x27;t believe that XNU&#x27;s zone allocator was initially intended as a security mitigation, but the fact remains that many objects that are frequently targeted during exploits (in particular ipc_ports, tasks, and threads) are allocated from a dedicated zone. This makes zone checks an effective funnel point for detecting exploitation shenanigans.</p><p id="9c2cf1f8-ab67-4975-8b49-f27e87ba405c" class="">In theory, zone_require could be used to protect almost any object allocated from a dedicated zone; in practice, though, the vast majority of zone_require() checks in the kernelcache are on ipc_port objects. Because the one-byte technique avoids the use of fake Mach ports altogether, none of the existing zone_require() checks apply.</p><p id="aa52049c-ece0-46ac-a308-fe93226b4bf5" class="">However, if the use of zone_require were expanded, it is possible to partially mitigate the technique. In particular, inserting a zone_require() call in vm_map_copyout_internal() once the vm_map_copy has been determined to be of type ENTRY_LIST would ensure that the vm_map_copy cannot be a KERNEL_BUFFER object with a corrupted type. Of course, like all mitigations, this isn&#x27;t 100% robust: using the technique in an exploit would probably still be possible, but it might require a better initial primitive than a one-byte overflow.</p><h2 id="0097d114-fca5-434a-8f66-8485e7220ace" class="">&quot;Appendix A&quot;: Annals of the exploits</h2><p id="aa3089b1-e8ab-4d4e-81ab-930bced50209" class="">In my opinion, the one-byte exploit technique outlined in this blog post is a divergence from the <a href="https://googleprojectzero.blogspot.com/2020/06/a-survey-of-recent-ios-kernel-exploits.html">conventional strategies</a> employed at least since iOS 10. Fully 19 of the 24 original public exploits that I could find since iOS 10 used dangling or fake Mach ports as an intermediate exploitation primitive. And of the 20 exploits released since iOS 10.3 (when Apple initially started locking down the kernel task port), 18 of those ended by constructing a fake kernel task port. This makes Mach ports the defining feature of modern public iOS kernel exploitation.</p><p id="880dc8fd-7ed4-4afe-a00c-310351289dd8" class="">Having gone through the motions of using the one-byte technique to build a kernel read/write primitive on top of a simulated heap overflow, I certainly can see the logic of going after the kernel task port instead. Most of the exploits I looked at since iOS 10 have a relatively modular design and a linear flow: an initial primitive is obtained, state is manipulated, an exploitation technique is applied to build a stronger primitive, state is manipulated again, another technique is applied after that, and so on, until finally you have enough to build a fake kernel task port. There are checkpoints along the way: initial corruption, dangling Mach port, 4-byte read primitive, etc. The exact sequence of steps in each case is different, but in broad strokes the designs of different exploits converge. And because of this convergence, the last steps of one exploit are pretty much interchangeable with those of any other. The design of it all &quot;feels clean&quot;.</p><p id="5dd5f843-e9fd-434a-a8f7-30f457d6e01e" class="">That modularity is not true of this one-byte technique. Once you start the vm_map_copyout_internal() loop, you are committed to this course until after you&#x27;ve obtained a kernel read/write primitive. And because vm_map_copyout_internal() holds the vm_map lock for the duration of the loop, you can&#x27;t perform any of the virtual memory operations (like allocating virtual memory) that would normally be integral steps in a conventional exploit flow. Writing this exploit thus feels different, more messy.</p><p id="7531c4bc-6808-43d7-9eb4-741b4a9016f8" class="">All that said, and at the risk of sounding like I&#x27;m tooting my own horn, the one-byte technique intuitively feels to me somewhat more &quot;technically elegant&quot;: it turns a weaker precondition directly into a very strong primitive while sidestepping most mitigations and avoiding most sources of instability and slowness seen in public iOS exploits. Of the 24 iOS exploits I looked at, 22 depend on reallocating a slot for an object that has been recently freed with another object, many doing so multiple times; with the notable exception of SockPuppet, this is an inherently risky operation because another thread could race to reallocate that slot instead. Furthermore, 11 of the 19 exploits since iOS 11 depend on forcing a zone garbage collection, an even riskier step that often takes a few seconds to complete.</p><p id="fcc45b04-df03-4a6c-a206-38e603682850" class="">Meanwhile, the one-byte technique has no inherent sources of instability or substantial time costs. It looks more like the type of technique I would expect sophisticated attackers would be interested in developing. And even if something goes wrong during the exploit and a bad address is dereferenced in the kernel, the fact that the vm_map lock is held means that the fault results in a deadlock rather than a kernel panic, making the failed exploit look like a frozen process instead of a system crash. (You can even &quot;kill&quot; the deadlocked app in the app switcher UI and then continue using the device afterwards.)</p><h2 id="9764f12e-fd0f-4f99-bb46-8994ea04c9f6" class="">&quot;Appendix B&quot;: Conclusions</h2><p id="cd8d4455-d2ca-4eea-be1e-d08a46ca1014" class="">I&#x27;ll conclude by returning to the three questions posed at the very beginning of this post:</p><p id="80a5bf99-921a-49c2-9d70-3a3e2c41e8cc" class="">Is targeting the kernel task port really the best exploit flow? Or has the convergence on this strategy obscured other, perhaps more interesting, techniques? And are existing iOS kernel mitigations equally effective against other, previously unseen exploit flows?</p><p id="62073273-be89-4f36-9531-7759e37b16ca" class="">These questions are all too &quot;fuzzy&quot; to have real answers, but I&#x27;ll attempt to answer them anyway.</p><p id="48de7572-20f9-4702-80d1-1ca5c97c444b" class="">To the first question, I think the answer is no, the kernel task port is not the singular best exploit flow. In my opinion the one-byte technique is just as good by most measures, and in my personal opinion, I expect there are other as-yet unpublished techniques that are also equally good.</p><p id="e3efd264-dd75-43f7-8c92-3b776eb2cb23" class="">To the second question, on whether the convergence on the kernel task port has obscured other techniques: I don&#x27;t think there is enough public iOS research to say conclusively, but my intuition is yes. In my own experience, knowing the type of bug I&#x27;m looking for has influenced the types of bugs I find, and looking at past exploits has guided my choice in exploit flow. I would not be surprised to learn others feel similarly.</p><p id="9e8bdbf2-0f89-4506-98bc-ba88788b8da8" class="">Finally, are existing iOS kernel exploit mitigations effective against unseen exploit flows? Immediately after I developed the POC for the one-byte technique, I had thought the answer was no; but here at the end of this journey, I&#x27;m less certain. I don&#x27;t think PPL was specifically designed to prevent this technique, but it offers a very reasonable place to mitigate it. PAC didn&#x27;t do anything to block the technique, but it&#x27;s plausible that a future expansion of PAC-protected pointers would. And despite the fact that zone_require didn&#x27;t impact the exploit at all, a single-line addition would strengthen the required precondition from a single-byte overflow to a larger overflow that crosses a zone boundary. So, even though in their current form Apple&#x27;s kernel exploit mitigations were not effective against this unseen technique, they do lay the necessary groundwork to make mitigating the technique straightforward.</p><h2 id="c66a3f7a-67f8-4119-a017-5cb3fdda6118" class="">Indices</h2><p id="9e3d3a8a-20f5-4cbd-97cf-797124f21665" class="">One final parting thought. In <a href="https://googleprojectzero.blogspot.com/2018/10/deja-xnu.html">Deja-XNU</a>, published 2018, Ian Beer mused about what the &quot;state-of-the-art&quot; of iOS kernel exploitation might have looked like four years prior:</p><p id="3a37e131-b252-44e1-ab67-742491804014" class="">An idea I&#x27;ve wanted to play with for a while is to revisit old bugs and try to exploit them again, but using what I&#x27;ve learnt in the meantime about iOS. My hope is that it would give an insight into what the state-of-the-art of iOS exploitation could have looked like a few years ago, and might prove helpful if extrapolated forwards to think about what state-of-the-art exploitation might look like now.</p><p id="959bb16f-8135-4eb4-b405-c56ef0df0b95" class="">This is an important question to consider because, as defenders, we almost never get to see the capabilities of the most sophisticated attackers. If a gap develops between the techniques used by attackers in private and the techniques known to defenders, then defenders may waste resources mitigating against the wrong techniques.</p><p id="8fc7c2c5-7ad8-4ea6-a7ee-4427e4e90886" class="">I don&#x27;t think this technique represents the current state-of-the-art; I&#x27;d guess that, like Deja-XNU, it might represent the state-of-the-art of a few years ago. It&#x27;s worth considering what direction the state-of-the-art may have taken in the meantime.</p></div></article></body></html>

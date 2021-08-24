@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>User Research in your Niche Communities (Without Breaking Trust)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f286b0f9-1b1c-4267-9140-19418d4aa5c2" class="page sans"><header><h1 class="page-title">User Research in your Niche Communities (Without Breaking Trust)</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/clay-test/how-to-map-your-niche-communities-without-breaking-trust-297febba0241" class="url-value">https://medium.com/clay-test/how-to-map-your-niche-communities-without-breaking-trust-297febba0241</a></td></tr></tbody></table></header><div class="page-body"><p id="ac0d6f52-c0ee-4d69-9b29-ba4665dcfd05" class="">Startup professionals are drawn to niche communities, whether it’s the people avidly starring and forking your GitHub repo or chatting up a storm in your Slack channel. You pour time into forging connections and you listen closely to see how your work is received. But many founders are very shy about using these community channels for user research.</p><p id="9eae5a70-04f9-40fa-9405-2eb5f1fbe27e" class="">To be fair, there’s a good reason for the taboo against reaching out to community hubs: Being too aggressive in a forum that’s supposed to be a safe space can squander credibility in the community and scare away the people you’re trying to attract. But it’s also a mistake to sit on your hands and say nothing when a community member is an active user and has a problem <em>you know your product can solve</em>.</p><p id="fb37f4e0-c8b8-4eae-a023-e3b01d7bbd82" class="">So yes, there is a way to engage in effective user research in niche communities without becoming a nuisance. First, choose who to approach with surgical precision, making your selection based on deep insights into individual community members. Then, with humanity, humility, and curiosity, reach out to those people.</p><p id="7050bf5c-8bdd-419f-8908-43059e15d106" class="">To make this process efficient, you need to automate step one and give the human touch to step two.</p><figure id="8b7f1440-98c8-4e81-baf3-63aa664799c0" class="image"><a href="User%20Research%20in%20your%20Niche%20Communities%20(Without%20B%20f286b0f91b1c4267914019418d4aa5c2/15Gy1gInhN871H5ms3WAG5A.png"><img style="width:700px" src="User%20Research%20in%20your%20Niche%20Communities%20(Without%20B%20f286b0f91b1c4267914019418d4aa5c2/15Gy1gInhN871H5ms3WAG5A.png"/></a></figure><h1 id="66661782-641c-46ea-b966-f3a9c61c1b68" class="">Step 1: Import Community Data into Clay</h1><p id="e29bd270-f3e0-4731-8150-19b65bae270e" class="">Your goal is to find community members who meet your ideal user profile. For example, let’s say you’re combing through your GitHub stargazers, looking for analytics engineers at B2C companies with over 100 employees. Before you can segment your community, you need a bird’s-eye view of everyone in it, and Clay can help you get it. (<em>Note, this could also be your Slack community, Instagram followers or Twitter mentioners)</em></p><p id="c45fcaf9-8f64-4cd2-879e-863d4ae0ed72" class="">In the old days, learning more about your community members would have meant searching line by line for information and opening endless tabs of individual profiles. That’s deeply tedious work, and if you’re a startup founder or a one-person sales team, you definitely don’t have the time. But Clay does this busywork for you by self-populating a spreadsheet with the data you need.</p><p id="771e3950-4e86-484d-8a27-70ac16a06ee4" class="">In this repos example, you’ll first want to import your stargazers into a Clay spreadsheet, a process that takes only three clicks. Select the Clay Stargazer template, paste your repo URL, and stream in all stargazers! The data you’re pulling in this step includes user URL and username, as well as when they starred you and will continue to update every 24 hours (we love live and high intent data).</p><p id="6959c615-e272-4e61-888d-8dce04b9fb47" class="">Getting started with Clay’s Stargazers template</p><p id="78d06b99-be57-4e03-919d-6ac5b6e02681" class="">This data alone doesn’t tell you much. Half of these stargazers could be hobbyist developers you’re not trying to reach for user research. Without adding more information to the spreadsheet, you have two options, neither of them great:</p><ol type="1" id="2c1e5662-dedf-4a54-81ca-2ddee9563dc3" class="numbered-list" start="1"><li>You can try to manually match this data with actual people, probably by scouring their Github and other linked profiles (e.g. twitter, linkedin) to piece together who they are. This is inefficient and will leave you feeling anxious about whether you emailed the right person or a complete stranger with the same name.</li></ol><ol type="1" id="5cc83541-230f-49e9-9b9b-f199c7ddec14" class="numbered-list" start="2"><li>You can send out the same generic message to everyone, hoping you’ll catch a lead. But that is ineffective and risks annoying community members, which is exactly what you’re trying to avoid.</li></ol><p id="46265f58-fb23-4054-a480-0a0e1d5fc848" class="">Remember, you want to approach community members only if you have a high degree of confidence that you can genuinely help them, and vice versa. To do that, you need more data.</p><h1 id="1c1e0254-6909-4833-b2af-f80c581303c7" class="">Step 2: Enrich Data to Find Your Target Customer</h1><p id="e4f88192-f3c1-4467-a4c0-ac7f7a4f8e26" class="">To conduct truly targeted outreach and build out a strong feedback council, you need a lot more information than someone’s name and email address and whether they’re a community member. You need to know who these people are and whether you can actually help them. So Clay pulls in data — both from your community and from other publicly available sources — and gets the answers to your most important questions. Here’s what it looks like in practice, using our GitHub example.</p><p id="5048fde8-257e-4136-bfc1-381ff8099ccc" class="">Your first question should be, <strong>who are these community members, and how likely are they to use your product?</strong></p><p id="34ef52d4-612d-462c-9c7a-1fefd8b808ac" class="">Clay can search GitHub profiles to scan for keywords like analytics, container, or security and filter for the community members with a stated interest in your space. If they link their Twitter profiles to their GitHub, Clay does the same thing with their Twitter bios.</p><p id="979e25b5-a765-4ecd-a9f7-99a8412f5b7b" class="">You can also use Clay’s integrations with <a href="https://clearbit.com/">Clearbit</a> or <a href="https://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=DChcSEwjpjsa_2oztAhWLiMgKHXBKDGIYABAAGgJxdQ&amp;ae=2&amp;ohost=www.google.com&amp;cid=CAESQOD2gdlmSQNnQxgX3buHrwRArpSFRn1mQQkJvhFag8Z6gTwKCsARp_AexJy9hJQF6PTLrQVFlsEyplAdWFq009w&amp;sig=AOD64_2FbQhETizX9u1M1AZWs6Tp_SkWZw&amp;q&amp;adurl&amp;ved=2ahUKEwjmurm_2oztAhUHP60KHQhlDS0Q0Qx6BAgbEAE">People Data Labs</a> to check for profiles elsewhere on the web — for example, LinkedIn — to build a more robust profile.</p><p id="c8ec13d8-77a7-4373-adf5-dcd3147630f7" class="">Naturally, you’ll probably want to know <strong>where community members work and whether those companies are potential customers. </strong>Clay can extract company names from user GitHub profiles (and even include their logos). From there, simply “Enrich Company” and Clay will pull the company attributes you’re looking for — if you’re only interested in U.S.-based companies with over 100 employees, you’ve just narrowed your list significantly.</p><p id="6b90a201-1581-4725-8a6d-dc0411c30412" class="">It’s also important to ask <strong>how likely an individual is to engage with your outreach</strong>, so you can direct your resources wisely. One metric we’ve seen is to taking a look at a users following versus followers numbers to determine the individual’s engagement. If a community member has 4000 followers but only follows 40, contributes to one repos and have starred only two, they may be less likely to engage. Again, Clay will automatically populate your spreadsheet with that data.</p><h1 id="e54e4f57-bfb4-48bb-91b5-893becbdd364" class="">Step 3: Craft the Right Kind of Personalized Outreach</h1><p id="eee736bf-14ac-4dfe-9bf3-649b4679e7d6" class="">If you’ve followed the steps above, you should be left with a list of stargazers worth getting in touch with. After all your preparation, now it’s time to stick the landing with effective messaging.</p><p id="b121d14b-ecaa-4380-9bc1-092bbc50b4fb" class="">Here are some general guidelines for your head of growth, product or community (whatever that person’s actual title happens to be).</p><h1 id="4f0cb74c-e072-441d-9653-bd904f605fb1" class="">Personalized email vs. campaigns</h1><p id="2afddbed-a181-46a3-a8c9-a3ed5c2a40c5" class="">The right approach here depends on your company’s stage and your own comfort level with outbound outreach. If this is your first foray into cold outreach in your community, it’s worth taking the time to write direct emails to your initial list of prospects. If you’re a founder trying to drum up enthusiasm early in your company’s life cycle, you can definitely make a big impression (especially among other founders) by writing these emails yourself. That’s also true if you stumble upon a particularly exciting individual and you want to go the extra mile to get their attention.</p><p id="e5ba4f55-dcb0-4bd7-9e12-7cf95a9fd30e" class="">Once you’ve workshopped your approach with personal emails, you can run larger campaigns with a more hands-off approach. With Clay, you can direct qualified leads to specific campaigns in Mailchimp, Mailshake or Outreach.</p><h1 id="92f08200-d733-48bc-b126-1ed693a4175c" class="">Keep it Casual</h1><p id="ad64ec80-7e69-44d9-abbb-f0b0991a068c" class="">These are your people, so strike a conversational tone that tells readers you understand their challenges because you belong to the same community. Make sure your messaging, starting with the subject line, focuses on the pain point, not your product. (A good litmus test is to ask yourself whether <em>you</em> would open the email you’re writing.)</p><p id="9546b12b-a559-43f7-b0cf-499ff4f212a1" class="">But while casual and personal messaging is good, you don’t want to make your prospects uncomfortable by being too personal. So just because you can see from someone’s Twitter bio that they have a parakeet named Pete, it doesn’t mean you should bring that up in your email.</p><p id="2e2030b4-871c-4343-9892-a8d157051d02" class=""><strong>The Right Tone: </strong>“Hey Sara, I noticed you’d starred our repo on GitHub and that you seem to be an analytics pro! I’d be curious to hear about your experiences so far and to talk about what you’re looking for in a tool right now.”</p><p id="f1c59ef7-831a-4a46-8a7c-e0ef888860da" class=""><strong>The Wrong Tone:</strong> “Hey Sara, you starred our GitHub yesterday afternoon, and given that you’re an analytics pro in a company that just got some major Series A funding, I’m assuming you have the budget to invest in our product.”</p><h1 id="c0b2c377-8be2-4ad8-bee4-a7de778494d3" class="">Approach with humility and curiosity</h1><p id="9df5abdb-ca54-4e87-a8c6-f170a899fafb" class="">By humility and curiosity, we mean that your outreach email should have the same qualities as the community forum where you found this person: common interests and mutual respect. Immediately switching from a conversation between peers to full-on sales mode is like interrupting a delicate violin concerto with a trombone solo.</p><p id="52470152-e405-4db4-8000-da01d6d2f03f" class="">A good place to start is by asking individuals for their opinions or experiences with your product or industry. If they’ve starred your repo, find out why. If they’ve brought up an issue in Slack you think you can fix, ask more about their situation. On the small scale, you can do this with a personalized note, and with a larger campaign, you can ask them to fill out a survey.</p><h1 id="67c5469f-bb86-447c-b74a-a9af47d9f21d" class="">Focus on recency</h1><p id="eb771f16-14d3-45f5-8e3e-e4675ced9136" class="">The right time for outbound marketing is when you are fresh in someone’s mind, so contact people within the first few days of joining your Slack channel/starring your GitHub repo.</p><p id="83823797-798b-4ddd-a13e-983f8510c1d6" class="">With Clay, you can stay on the ball by programming your base to notify you when you have a new community member who’s in your target demo. Clay can send Slack you notification, send you email summaries or create a Zendesk ticket reminding you to follow up with this person.</p><h1 id="16058c8f-2635-49b7-a59c-871ee98a5291" class="">Thoughtful Prospecting Keeps Communities Healthy</h1><p id="349c068a-252a-42ec-9959-0e823b08015e" class="">The niche communities we build and belong to are delicate ecosystems, where people come to escape from the vast, noisy marketplace of the internet. These communities take time to build, and are built on genuine interest and authenticity.</p><p id="32366fb4-1653-4052-a165-bbff4aff7e22" class="">But you’re not a carnival builder trying to make a quick sale and get out of town; you’re a community member with something exciting to share. When you have the right data at your disposal and the right message to deliver, you can engage in prospecting that serves your community.</p></div></article></body></html>

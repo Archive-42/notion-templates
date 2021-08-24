@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>PalanThiel: The Uncola</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dbf5c7d0-a279-43de-81b5-2aa87ff595ae" class="page sans"><header><h1 class="page-title">PalanThiel: The Uncola</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.profgalloway.com/palanthiel-the-uncola" class="url-value">https://www.profgalloway.com/palanthiel-the-uncola</a></td></tr></tbody></table></header><div class="page-body"><p id="09eb7d77-8d94-478b-8950-c226c0bcd262" class=""><em>8-min read</em></p><p id="21f7afa2-0ee3-40fc-a33a-0d74280f2ae6" class="">Variation is an aspect of natural selection that helps a population’s gene pool to develop new traits. Those traits allow the next generation to adapt to changing environments. Symmetry of facial features is attractive, as it indicates an absence of maladies. We’re also drawn to people from different places, as it’s less likely we’ll cross the same two defective genes, like Tay-Sachs or hemophilia.</p><p id="704b7f4d-37a7-489f-b244-17137622cbad" class="">The subtle instincts of natural selection play out in our consumer choices, such as choosing branded denim or which artificially colored carbonated water, mixed with phosphoric acid, to stock in the fridge. Our subconscious desire to have more adaptable offspring rears its symmetrical head and decides that if Dad is wearing Nikes, I need Adidas.</p><p id="0ca9b186-ed2c-415b-8815-fffc397d2d0b" class="">In the sixties, the 7UP company faced a dilemma — how to carve share from brands Coke and Pepsi, who had the good judgment to put an addictive substance, caffeine, in their product. 7UP’s “Uncola” campaign was a breakthrough, positioning the cola brands as the establishment when the country was feeling especially anti-establishment, in the sixties. Featuring Trinidadian dancer and actor Geoffrey Holder, 7UP’s <a href="https://www.youtube.com/watch?v=AXmc7DG4uu8">“Uncola” campaign</a> broke racial barriers and held the promise of a different type of soft drink — and diversifying your gene pool with a Trinidadian dancer. (Note: Mr. Holder played a Bond villain, was married to a spectacular dancer/choreographer, Carmen de Lavallade, for 59 years, and passed away at 84 — a nice life.)</p><p id="4a5da9fb-fea6-4053-8ee8-5b7d4315e576" class="">The Uncola of a sector gains relevance around the time everyone throws in the towel, all new entrants mimic the leader, and the sector has the variance of your Dockers-wearing dad. The most innovative Uncola of the last decade is Shopify, who became the non-Amazon Amazon. Shopify taps into a reservoir of ill will from third-party retailers, who were forced to surrender data, custody of the consumer, and merchandising options so they could access the largest ecommerce platform in history.</p><p id="4b91f095-892f-4af1-9135-b75f0362c80a" class="">Shopify boasts a market cap greater than Boeing and Southwest Airlines, combined. Shopify should acquire FedEx and Simon Properties. This would enable NewCo (“Shopify-Ex”) to offer small- and medium-sized commerce firms the second-best last-mile solution and the best retail real estate in the country, possibly on a short-term basis. Shopify would maintain 60% ownership of Shopify-Ex and provide a new generation of brands and retailers access to technology, fulfillment, and brick and mortar that were previously unavailable to any firm sub a billion. Truly disruptive. But I digress.</p><figure id="b9491fae-1b53-4cb6-b5b2-bdd20210070d" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/F9YzMC3RG-u_JGzAZDublAgw4kNVgqRb-LS99Tg8MTmDEvjIMPodU-c-CIa-qXVI4lTpJ-DcEV522HNhBNfaGyhY6IPWyI6qqcFlpgChMbK-of2l5eDSFWmbZYFIup-j1d8To3_3"><img style="width:625px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/F9YzMC3RG-u_JGzAZDublAgw4kNVgqRb-LS99Tg8MTmDEvjIMPodU-c-CIa-qXVI4lTpJ-DcEV522HNhBNfaGyhY6IPWyI6qqcFlpgChMbK-of2l5eDSFWmbZYFIup-j1d8To3_3"/></a></figure><p id="a2e00f09-b9dc-4a0f-ad48-3549aea186bc" class="">Apple has brilliantly positioned itself as the Uncola, despite being a Cola — one of the incumbents. A focus on privacy depositioned Google and Facebook, making their business model (harvesting personal data) feel “drunk uncle.” Since Tim Cook <a href="https://www.nbcnews.com/tech/tech-news/apple-ceo-tim-cook-slams-facebook-privacy-human-right-it-n860816">told</a> Kara Swisher “Privacy is a human right; it’s a civil liberty,” the firm’s stock has tripled, adding $1.3 trillion in value.</p><h1 id="c9e12c5d-2648-4a4d-a88e-45b0adb9a7b6" class="">PalanThiel</h1><p id="72219fe0-7b69-465d-a8e8-43da9d6c3fb4" class="">The firm attempting to position itself as the non-tech tech firm is Palantir, who filed for a direct listing last month. Instead of smearing lipstick on a pig — Facebook’s pages of grandmothers rescuing dachshunds and Ms. Sandberg pretending to be an advocate for women while condoning lies for profit — Palantir has decided to put the prize hog up front. As Google and Facebook employees conduct virtual walkouts in protest of their firms’ work with the government (that’ll show ’em), Palantir has wrapped itself in the flag, claiming:</p><blockquote id="c1e453f1-8fba-476e-a81d-a6a2724547be" class="">“Our software is used to target terrorists and to keep soldiers safe. If we are going to ask someone to put themselves in harm’s way, we believe that we have a duty to give them what they need to do their job. We have chosen sides, and we know that our partners value our commitment. We stand by them when it is convenient, and when it is not.&quot;</blockquote><p id="05d78cb4-4586-44dc-a143-9bddf8145339" class="">I agree with that statement, and think that Facebook/Google employees doing their best impression of Cesar Chavez, if Mr. Chavez was a total bitch, is performative … at best. The U.S. government is the most noble customer in history, whether you support the person in the White House or not. In addition, Palantir doesn’t work with nations viewed as adversaries. However, wrapping yourself in a flag when your founder, Peter Thiel, is a libertarian is a bit like wearing a chinchilla to a PETA benefit. The definition of <em>libertarian</em>, according to the Institute of Humane Studies at George Mason University is:</p><blockquote id="554eb3ed-9957-418a-ac57-00ea25a2eeac" class="">“One who advocates maximizing individual rights and minimizing the role of the state.”</blockquote><p id="3d490f6c-91d9-4094-977b-a7e1f5ca0e3c" class="">Minimizing the role of government? The firm has worked with U.S. Customs and Border Protection to <a href="https://www.theverge.com/2016/12/21/14012534/palantir-peter-thiel-trump-immigrant-extreme-vetting">track immigrants at the border</a>, and it secretly <a href="https://www.theverge.com/2018/2/27/17054740/palantir-predictive-policing-tool-new-orleans-nopd">tested its predictive policing software</a> in New Orleans. So, minimize the state … unless they are our client … and we can help them surveil others. It only gets stranger from there. The S-1 claims:</p><blockquote id="243a3270-3daa-4035-89f8-95c6ba166122" class="">“Government agencies have faltered in fulfilling their mandates and serving the public. Some institutions will struggle to survive. Others will collapse.”</blockquote><p id="2ff18a40-d953-46eb-be5a-4c18853213f6" class="">Ok, so buy our stock, as our growth is only limited by how stupid our customer (the government) is … and they’re really stupid. And so is any tech firm that is <em>not</em> Palantir. Again, from the S-1:</p><blockquote id="4e4f1bb1-e650-4270-874a-23068b553219" class="">“The engineering elite of Silicon Valley may know more than most about building software. But they do not know more about how society should be organized or what justice requires.”</blockquote><p id="18279e2d-821b-4184-982f-b492e4c51cb8" class="">But Palantir knows how society should be organized, as they (wait for it) relocated their HQ to Denver and have several dozen engineers who reached level 20 in Dungeons and Dragons in high school. Does this mean Western Union and Liberty Media, also in Denver, are better suited to save the world?</p><p id="db843d0b-78a9-4b91-8b71-bb165311ab67" class="">A word cloud of the S-1 reads like a survivalist manifesto. Pro tip: if you interview at Palantir and everyone is wearing black Nikes that day, skip drinks with the team after work.</p><figure id="875c60d2-8e91-4371-977a-0bc597aa38d4" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091820_Word_Mentions2_Artboard-3-copy-2.png"><img style="width:700px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091820_Word_Mentions2_Artboard-3-copy-2.png"/></a></figure><p id="5da0f0a0-1d56-4890-bc06-9b7acf64ebd9" class="">Palantir is the Rudy Giuliani of tech — just give them a few minutes/pages and they’ll begin contradicting themselves, making no sense and muddying the waters in hopes that investors will ignore a central truth.</p><p id="f9f4cc6c-57cc-4f90-9cf5-8015f63cb9a9" class="">Another red flag — the idolatry of Thiel and Karp as reflected in the S-1:</p><figure id="39965782-38d2-43f2-bb70-f8d578a5fde4" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_Mentions_in_Filings.png"><img style="width:700px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_Mentions_in_Filings.png"/></a></figure><p id="db7eeb28-efb9-4267-be1c-f711d742984c" class=""><strong>The Most Impressive Group of People</strong></p><p id="97be4c4a-239b-45ab-8976-64c83bd7dc4e" class="">What do Ken Chenault, Susan Desmond Hellman, Erskine Bowles, and Reed Hastings have in common? There are few groups of people (i.e., none) one could better trust to lead a business or government, or to raise our kids. The thing that unites them is they all decided they couldn’t stomach the leadership and governance at Facebook — they left early. Instead, the constant on the board, the invisible hand of delay, obfuscation, election interference, rage, hate, and teen depression is Peter Thiel.</p><p id="8d406d18-9389-4c93-87d6-6c50d1d98455" class=""><strong>Shavings of Sh*t on a Sh*t Salad</strong></p><p id="f4e04b37-6802-4775-8a5a-e11ead72c337" class="">Palantir states their mission is to become “the default operating system for data across the U.S. government.” So, is Peter Thiel the person (and do we ever want “a” person) to default to for influence/control of the operating systems for relationships, and now government? Is Mr. Thiel our go-to for who controls the guy who controls the media for <a href="https://qz.com/1446712/one-third-of-everyone-on-earth-uses-a-facebook-product-every-month/">one third</a> of the planet, and now the data behind the surveillance apparatus of America?</p><figure id="9bc8f6d5-eeba-4c7f-9f37-f03369e29355" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_Thiel-Quarter.png"><img style="width:700px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_Thiel-Quarter.png"/></a></figure><p id="8c5d08c8-8dc6-4929-b8ac-23e504d49f4f" class="">Do we look at the outcomes from Facebook and think, “We should definitely put the guy overseeing Mark Zuckerberg in charge of the algorithms controlling what data the government collects on us, and what behaviors it/he deems as a security threat”? The shavings of sh*t on a sh*t salad here are the proposed Class F shares, meaning the invisible hand of Facebook (Thiel) could control Palantir, and the operating system of government, until he dies.</p><p id="a2aaba3b-50f1-466a-9095-d949f9948be4" class="">What. Could. Go. Wrong?</p><p id="701e7764-1a60-4a3b-998a-b5db44a154d4" class=""><strong>The Men of the Night’s Watch</strong></p><p id="f7a8485f-ab6f-4a45-935c-a0cbd859374b" class="">What stands between us and the White Walkers — Zuck and Thiel? Is it our institutions? Our elected officials? The public, who will rise, as they have a sixth sense for this type of threat? Or the media, which will cover the story without fear or favor? No. The only thing standing between two men grasping for control of media, the economy (Libra), and government surveillance is capitalism. Specifically:</p><p id="315490d3-ede1-4317-865f-51ce18ad458b" class="">Palantir. Is. A. Sh*tty. Business.</p><p id="8ecbd622-28b8-4f7b-98c4-a5c61595cc60" class="">It took Amazon <a href="https://abcnews.go.com/Business/story?id=87393&amp;page=1">8</a> years to get to profitability, Netflix <a href="https://dazeinfo.com/2019/01/22/netflix-revenue-profit-by-year-graphfarm/">6</a>, Facebook <a href="https://www.statista.com/statistics/277229/facebooks-annual-revenue-and-net-income/">5</a>, and Google <a href="https://www.statista.com/statistics/266472/googles-net-income/">3</a>. Palantir is old enough to see an R-rated film, get a pilot&#x27;s license or (with parental consent) join the armed services. But at 17 years of age, and after raising $3 billion, the “start-up” has never made money. In 2019, Palantir lost $580 million on approximately $740 million in revenues. The idiot client they serve (U.S. government) lost 25 cents on the dollar ($1 trillion deficit vs. $3.5 trillion in revenues) in 2019 vs. 78 cents at Palantir. Shouldn’t Uncle Sam be advising Palantir?</p><p id="17ba42be-210a-44c6-bd9a-affcc1d0e3c8" class="">The firm spent $911 million in marketing over the last 24 months, roughly half of what Tide detergent spent over the same period. The firm has 125 clients, 3 of them accounting for 28% of revenues. Palantir feels more like a services firm, with tech at its core (e.g., Accenture), but one that, unlike a services firm, is massively unprofitable.</p><p id="3a16936f-1386-4915-aa35-57a6969c911f" class="">This is not to say that unprofitable firms (Uber, Snap) don’t have value. Brand, distribution, customer relationships, and IP can be assets that should fling the bling or splash the cash down the road. As we are now 17 years in, it feels as if the pitch here would be something around the IP or customer relationships. There is little mention of defensible IP, but the deep relationship with the deepest pocket, Uncle Sam, is a huge asset. Except, with Palantir, it’s also the biggest risk.</p><p id="3c1e9551-9a99-40ba-b809-1b2ee32e3be8" class=""><strong>Oligarchy for Dummies</strong></p><p id="ec5ec8d6-c922-46c4-b621-d424a4ccfa09" class="">The key to being a successful oligarch is to leverage your proximity to power, without becoming so close that you become contaminated should “your guy” lose power (be voted out of office). Peter Thiel is no dummy and recognizes this. It’s not an accident that about the time Biden’s polls numbers went up, the president went from Mr. Thiel’s bff to bffn (best friend for never). (Note: people close to Thiel say it’s the president’s poor handling of the pandemic that has come between them. Right.) Expect Palantir’s valuation in the private markets (approximately <a href="https://markets.businessinsider.com/news/stocks/palantir-direct-listing-prospectus-valuation-ipo-billion-nyse-stock-market-2020-9-1029590185#">$19.9 billion</a>) to be inversely correlated to Biden’s poll numbers. Do you think Senator Kamala Harris will ever agree to be in the same room with Peter Thiel, who recently <a href="https://www.buzzfeednews.com/article/rosiegray/peter-thiel-donald-trump-white-nationalist-support">agreed to be in the same room with white nationalists?</a></p><p id="c16a11b5-db6b-40cf-9b29-1e650d3df82c" class=""><strong>Distancing</strong></p><p id="c37483d4-7745-4766-8de2-6af59af9a285" class="">Based on recent news, I would venture that Thiel’s better judgment has him distancing from Trump:</p><figure id="e7413a1d-78e9-4056-bdac-a75bc15c52f5" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_google.png"><img style="width:700px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_google.png"/></a></figure><p id="7f6681da-8a0e-4faf-a314-9ac759ddd3c3" class=""><strong>Distancing, Norweigan Style</strong></p><p id="8013503c-b845-4fc6-bc9f-fd6072936792" class="">In another Giulianiesque move, after paying himself $12 million, CEO Alexander Karp began pimping his self-proclaimed socialism. Yeah, he feels Norweigan … if they paid their CEOs tens of millions to operate firms hemorrhaging cash that surveil people.</p><figure id="97a7bc26-8a3e-4015-a223-350146fa7bf0" class="image"><a href="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_CEO_Compensation.png"><img style="width:700px" src="PalanThiel%20The%20Uncola%20dbf5c7d0a27943de81b52aa87ff595ae/NMNM_091120_CEO_Compensation.png"/></a></figure><p id="0421d0ed-dca2-488f-b4e4-2eb6eb66b45b" class="">I reached out to early Facebook investor, and total gangster, Roger McNamee for his take:</p><blockquote id="d218e9e4-d11f-4cb2-88a3-0bc5e678e572" class="">“Palantir exists to allow law enforcement to investigate citizens without obtaining a warrant. The data sets come from third parties and (presumably) are filled with the errors and implicit bias that infect almost all data sets, whether by design or accident. The business model of Palantir undermines civil rights.”— Roger McNamee</blockquote><p id="a3e1c77e-f9d3-4369-b327-c1175dce7ef9" class="">What happens:</p><p id="32619212-8b0d-41c0-9ae9-54cf2eda1f9d" class="">The success of the Palantir listing is a bet on one of two opposing forces. If we get another stimulus, chased by young men on Robinhood in their parents’ basements, and Trump is reelected, then the consensual hallucination between Palantir and the markets — a 17-year-old firm, hemorrhaging cash, that is not growing that fast but is valued at 27x revenues — may continue. The opposing forces that may stop Palantir at the border? Capitalism and math.</p><p id="c6ea4367-1037-4194-9e03-698b34b6e48e" class="">The analytics firm is attempting to position itself as the “Uncola,” the non-tech tech firm. A more apt metaphor is Zima. Palantir is all of the calories of Facebook (scaled sociopathy) with none of the great taste (profits).</p><p id="7ddccb83-af4f-45fe-b02a-a6cde41c2043" class="">Life is so rich,</p><p id="247b99f7-81f0-45be-9488-6e0f16302597" class="">P.S. This week on <a href="http://youtu.be/lNBsxT-v7BQ">YouTube</a>: If you could buy a get-out-of-jail-free card for less than 1% of your net worth, what would you do? #Robinhood. And I’m back at NYU teaching brand strategy this Tuesday. If that makes you feel FOMO, join the <a href="https://register.section4.com/brand-sprint-oct-nov/?utm_source=nmnm&amp;utm_medium=blog&amp;utm_campaign=0918ps">Brand Sprint</a>, an intensive version of the same course, starting Oct 27. Also, we want to make sprints that are relevant to you and your career. Fill out the <a href="https://docs.google.com/forms/d/e/1FAIpQLSft58dhs4aQRMUmY9mmpD0tTcIEzA_UDyqqa2xOh4-LJTVsMQ/viewform">survey</a> — we want to hear from you.</p></div></article></body></html>

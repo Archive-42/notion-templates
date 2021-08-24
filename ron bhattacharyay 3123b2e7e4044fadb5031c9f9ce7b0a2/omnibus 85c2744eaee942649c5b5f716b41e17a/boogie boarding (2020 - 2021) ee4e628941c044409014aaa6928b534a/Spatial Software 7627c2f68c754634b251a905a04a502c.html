@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spatial Software</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7627c2f6-8c75-4634-b251-a905a04a502c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕐</span></div><h1 class="page-title">Spatial Software</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://darkblueheaven.com/spatialsoftware/" class="url-value">https://darkblueheaven.com/spatialsoftware/</a></td></tr></tbody></table></header><div class="page-body"><p id="d1abc6fb-007d-4261-9de8-c90032e9dab3" class="">I published <a href="https://www.darkblueheaven.com/spatialinterfaces">Spatial Interfaces</a> about seven months ago. This is a follow-up on that essay, starting with some updates on the over-arching thesis from the original piece, then moving on to a framework for thinking about spatial software. I close by discussing some examples of spatial software I&#x27;ve used in the past few months.</p><p id="365ddd25-915f-4407-aa4c-29a938ec1825" class="">To recap the thesis from Spatial Interfaces: Software applications can utilize spatial interfaces to afford users powerful ways of thinking and interacting. Though often associated with gaming, spatial interfaces can be useful in any kind of software, even in less obvious domains like productivity tools or work applications. We will see spatial interfaces move into all verticals, starting with game-like interfaces for all kinds of social use-cases.</p><h1 id="2d3b220e-be1d-4c54-809a-ecec1dab0f48" class="">Thesis Updates</h1><p id="fcb67311-c566-40ae-9762-0cc3f1731324" class="">When I wrote the original piece last fall, I thought my thesis would play out gradually, over the next several years. The main update here is less of a thesis change and more of an acceleration in the timeline. While unpredictable and not part of my original thesis, this global pandemic and the social distancing that comes with it are pushing us towards spatial software more forcefully than any of the factors mentioned in the first essay.</p><p id="8b84dfef-2495-45b3-9841-f99ad7a0c9a2" class="">Social distancing has placed the whole world in a new context. People everywhere are feeling a need for the presence of others, analogous to what we have in the real world. Social media isn&#x27;t enough. In fact, none of our social apps are really enough. Because our current software is too plain, based on a purely utilitarian exchange of information.</p><p id="dce02b03-a3bc-4c73-b016-e2caa8647a92" class="">Messaging apps are stacks of bubbles. Video calls are faces inside static rectangles. There are only so many degrees of freedom for users inside of these apps, which makes them simple to use. But this simplicity also strips away so much of the freedom we have during in-person interactions. You can type any message, but typing a message is all you can do. You can call any person, but talking directly into your camera is all you can do once you&#x27;re connected. Without spatial interfaces, our current software doesn&#x27;t give us much expressive control.</p><p id="7bd0f953-aa4e-46b3-af88-80a33756f681" class="">Additionally, when we use non-spatial social apps, we often understand that another&#x27;s cognitive presence is there, but we can&#x27;t feel the more human presence we&#x27;re wired to need. When we&#x27;re not social distancing, we fulfill this need elsewhere, outside of software. We meet for coffee. We go on a walk. We play a game, or show a friend something funny on our phone and watch them laugh. We have infinite options at our disposal for relating to others. Though the lack of these same options inside the software we use is sometimes inconvenient, we can usually get over it.</p><p id="df50752f-e9bf-4524-ad67-61014e825d9c" class="">But things are different right now. We&#x27;re constrained to rely almost exclusively on software for social interaction. What are usually minor inconveniences in our existing applications are now the main factor preventing us from fulfilling our social needs.</p><p id="ab926898-069c-4fd0-a86c-888fd22701b0" class="">Because of this, we&#x27;ve already leaped into the first phase of the thesis above: spatial software gaining rapid adoption in social applications.</p><p id="13f25cec-c4a3-45d0-8064-0ec6eb9e5ebf" class="">This is where the thesis has become more specific. In social applications, spatial software has at least three advantages. These three advantages often overlap and bleed into each other.</p><ol type="1" id="582d07d9-54af-4df8-b501-52c6743d76db" class="numbered-list" start="1"><li><strong>Afforded Intuition</strong>: Our natural understanding of space makes spatial software easier to use.</li></ol><ol type="1" id="4693343d-5142-45bb-8214-594d297a7cf7" class="numbered-list" start="2"><li><strong>Expressiveness</strong>: In a spatial interface, more degrees of freedom mean users can interact more creatively with software and with each other.</li></ol><ol type="1" id="9025f553-b13c-4301-bf25-e06552ddf703" class="numbered-list" start="3"><li><strong>Presence</strong>: In many spatial interfaces, we can sense other users through the presence of an avatar or figure.</li></ol><h1 id="d21c8727-d080-4568-a764-fee8dc532ecc" class="">Spatial Software Framework</h1><p id="d430f0c2-5240-4f6f-ac20-a74c63bcbf5f" class="">Why does spatial software provide the benefits above? Mainly, spatial software takes advantage of how our brains understand space. It uses parallels to the real world as the organizing logic of its interface. After all, the real, outer world we live in day to day is characterized by the free movement of bodies and objects within a spatial environment.</p><p id="6c877086-edbd-4118-a3ad-bd8d5116abbe" class="">Here is a picture of the world. It contains elements that can move about freely.</p><figure id="1e7cd462-c509-44b7-ad05-8c546220c7c2" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram1-6c6f3d4abb605c394c0e55f7b9e0231c.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram1-6c6f3d4abb605c394c0e55f7b9e0231c.png"/></a></figure><p id="97520503-8787-45d5-80ff-c8782e275be5" class="">Optionally, we can separate elements into two categories: bodies and objects. A body is an element that represents a being. An object is an element that does not represent a being. Here is one more picture of the world.</p><figure id="547047a4-d60d-4023-a343-75fd671e5171" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram2-ba07e3d53c0286ef71762291a0e0f903.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram2-ba07e3d53c0286ef71762291a0e0f903.png"/></a></figure><p id="38beb631-6b2d-487a-9a4e-2ab79f97f2af" class="">Here is a picture of an interface. It puts constraints on the placement and movement of its contents.</p><figure id="a0372f2c-485e-4ce8-9fa7-373ae3ce7b02" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram3-7719370c355211d59cb55d2c983051b8.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram3-7719370c355211d59cb55d2c983051b8.png"/></a></figure><p id="e1bf0c32-1932-427c-8855-ab4bf375ac51" class="">Spatial software contains a world within its interface.</p><figure id="e74c5f67-d34b-40c9-911e-9162e20989a5" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram4-4c86da9156e8f61344abb4cd3dd10d8d.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram4-4c86da9156e8f61344abb4cd3dd10d8d.png"/></a></figure><p id="a5b8a1cf-6553-4cc9-b7ca-0fe6899e1ec3" class="">This is our definition of spatial software. It is characterized by the ability to move bodies and objects freely, in a parallel to the real world. This is opposed to traditional software, which uses some other logic to organize its interface.</p><p id="f6313a2b-030b-4810-8493-edb8e85d4892" class="">Figma and Second Life are examples of spatial software. They contain worlds where the relationships between objects on a canvas, or bodies in an environment, respectively, are the organizing logic of the interface. WhatsApp is not spatial software. The organizing logic of its interface is recency of messages, not spatial relationships.</p><p id="c7586765-92a7-4585-97d7-288c3678bff4" class="">As mentioned above, the real, outer world we live in day to day is also characterized by the free movement of bodies and objects within a spatial environment. And all visual interfaces exist within this real world. We can zoom out on our previous diagram.</p><figure id="8c900644-a08c-4240-9ab5-9313de2d0818" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram5-c8dfe982f7101fe09f3c70b6e9e6b9b4.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialDiagram5-c8dfe982f7101fe09f3c70b6e9e6b9b4.png"/></a></figure><p id="f10c8ecb-e2bd-4891-a231-f160c5d6618b" class="">Now we have full context. When we zoom out, we see that the real world and a virtual world are characterized by the same core trait: free movement of bodies and objects in space. A virtual world can also mirror qualities of the real world in ways beyond that. It can have an environment full of mountains and trees, or physics that behave similarly to Earth, or objects that look the same as objects we use outside of software, to name a few examples. This adds color to the term &quot;skeuomorphic spatial affordance&quot; from my previous essay.</p><p id="8e00e464-f0b1-4187-a731-7e8a1603359e" class="">So, looking back at the previous examples, we now have clear guidelines for thinking about spatial software. Within this framework, there is a spectrum along which all spatial software lies, based on how closely its virtual world mirrors space as it exists in the real world.</p><p id="8fec63ee-b5c2-462b-9f04-45fe26d4cd9d" class="">On one end of that spectrum are more limited examples, like the app-switching interface in iOS. In the middle of the spectrum are applications like Figma, where the world is an open spatial canvas where objects can be moved freely. Finally, on the more literal end are MMO RPG&#x27;s like Second Life or World of Warcraft, where users are given bodies and can move about an environment with landscapes and physics that mirror the real world.</p><p id="ee835ed7-2bee-4158-aaf9-723e60433ac5" class="">Additionally, it&#x27;s now clear that traditional messaging interfaces are not spatial software at all, since they do not present a world that allows for free movement of its contents.</p><h1 id="7ec2bfb1-c1ad-491b-812f-5a569d2e117f" class="">References</h1><h3 id="f064347f-b121-4c08-8fab-e82fbaabf9b4" class="">1. Figma</h3><figure id="c19c7e89-761c-4851-972d-353cabf2868a" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialFigma-5f5cfb50509ea11269d21b09faa169af.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialFigma-5f5cfb50509ea11269d21b09faa169af.png"/></a></figure><p id="4784ceb1-2e5e-4b62-9c76-03aa42099633" class=""><a href="https://www.figma.com/">Figma</a> doesn&#x27;t mirror the real world as closely as many game-like interfaces, but it has created an incredible virtual world. It allows for free movement and manipulation of all elements inside the world, which expands infinitely in every direction.</p><p id="998c5499-b262-4942-b668-788b8643df30" class="">While it&#x27;s positioned as design software, the openness of Figma&#x27;s world means it can be used for almost anything. I use it for my job as a product designer, to design software applications, but I also use it to hang out and talk with friends. Others have used Figma for playing games of Pictionary or building <a href="https://www.figma.com/file/VIyGjdIshMAtIKYdUM214Z/Stay-At-Home-Valley?node-id=0%3A1">virtual towns</a>. I even used Figma with my friends at Blogger Peer Review to brainstorm concepts for this essay.</p><p id="faf82701-7a51-4651-9e4c-7a5b652d9ea5" class="">When you start to think about Figma as a world, and not just another app, you realize that this world can contain other applications within itself. For example, right now you can embed a Figma file inside a website. But what if you could deploy a website inside of a Figma file? You could place pages beside, above, or below each other. Visitors could see each others&#x27; cursors while they looked around the site. Or they could zoom out and see an entire website at once, then choose which page to visit based on which was the most visually interesting, instead of just choosing a link to click. Technically, a web browser could add this functionality by scraping an entire sitemap and rendering all the pages side by side at once. But if websites lived inside of Figma, this functionality would come for free, and it would give web designers more creative freedom.</p><p id="797f3142-7812-4147-89ec-f91e3affe091" class="">Many applications could be reimagined to live inside Figma, and Figma&#x27;s plugin system is already providing early evidence of that. I&#x27;ll stop here for now, but I&#x27;ll eventually write a full essay on the full potential of Figma&#x27;s world.</p><h3 id="3fa286cc-3b11-4b9d-bd2b-f79ab93e0daa" class="">2. Muze</h3><p id="bbb181e2-6012-4d83-8ef9-14a9f96c4835" class=""><a href="https://www.muze.nyc/">Muze</a> is a spatial chat app. It uses a virtual world very similar to Figma&#x27;s. Users can place text, images, art, and gifs onto a vertically expanding canvas. Think of it like a more constrained, lightweight Figma on your phone.</p><figure id="5f66d076-9bd9-4b49-83dc-4977646bde4d" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialMuze-75bdf4f3a7b520b4d50c44b28e7ddcc8.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialMuze-75bdf4f3a7b520b4d50c44b28e7ddcc8.png"/></a></figure><p id="16832b6c-3405-4d7e-a0d6-3a2ab33a95c7" class="">It&#x27;s striking that Muze and Figma are positioned for completely different tasks, while making use of nearly identical virtual worlds as their main interfaces. This is evidence of the unlimited versatility of spatial software. These two apps could really be made by the same company, or at least be running on the same engine.</p><h3 id="74f9c431-d956-43a3-a24d-22b764394a27" class="">3. Animal Crossing: New Horizons</h3><figure id="362008ba-7f7e-4245-b83b-370f628ba5c2" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialAnimalCrossing-f645f08ddf807d5bc7fd3670653c93e4.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialAnimalCrossing-f645f08ddf807d5bc7fd3670653c93e4.png"/></a></figure><p id="fc4462df-2341-42ff-9157-ab8210af97af" class="">Animal Crossing: New Horizons is probably the most popular game release from the past month. The timing of its release was perfect. It&#x27;s a cute, nostalgic game that came out just as people everywhere went into self-quarantine. But it would be a mistake to attribute the popularity of this game to it being a well-known title that came out when people had a lot of free time on their hands - it&#x27;s a lot more than that.</p><p id="69728590-6a42-4ab1-b0dd-2996bea4ad28" class="">It&#x27;s not just that people have a lot of free time right now; they&#x27;re also socially isolated. And the new Animal Crossing isn&#x27;t just any popular game. It&#x27;s unique in two ways. First, it provides a customizable space to hang out. Second, the point of the game is mostly social, focused on creating your space and spending time in it. On top of this, it&#x27;s easy to control and accessible to a mainstream audience. These factors combined mean the game is giving people a viable alternative to hanging out in real life. The openness of the virtual world is the game&#x27;s primary strength. There&#x27;s a reason people have used it for everything from <a href="https://www.washingtonpost.com/video-games/2020/04/02/animal-crossing-wedding-coronavirus/">weddings</a> to <a href="https://twitter.com/shawnww15/status/1246491001025228801?s=20">a mini design conference</a> to <a href="https://twitter.com/maxschramp/status/1246108193119444994?s=20">date nights</a> to <a href="https://twitter.com/OfficialLeels/status/1242293922602176513?s=20">surprise birthday parties</a>. You can&#x27;t replicate these kinds of activities on Zoom or WhatsApp.</p><p id="9d98389c-8dfe-446a-bb7b-9f2625b6f0a6" class="">The downside to Animal Crossing is that there are still barriers to entry. You need a Switch to play, and even if you want one, those are sold out everywhere right now. I think there&#x27;s potential for similar games to have much wider usage if built as free-to-play, multi-platform games like Fortnite.</p><p id="116e9285-1635-4ae5-831d-c46b8fe9cb58" class="">Final notes on the accessibility of this game: Even more than games like Minecraft or Roblox, Animal Crossing has made 3D creation tools really easy to use. Through more constrained options and simpler controls, Animal Crossing makes landscaping a virtual environment easy for anyone. The game has struck a really nice balance between giving the player freedom but keeping some strong constraints.</p><p id="84495f76-f4f6-4d8d-b546-76e92f2d201d" class="">This makes me think about design tools more generally. In the early days of the web, you could show off your creativity by creating your own static webpage. Maybe you&#x27;d design it using Photoshop or make it directly using CSS. Now that the web has evolved to a point where dynamic web applications are commonplace, we also have great design tools like Figma and Sketch.</p><p id="2a306bdf-796b-4e39-b5ac-22f4368fbb45" class="">It seems like we&#x27;re now in the early days of the spatial web, and 3D design tools aren&#x27;t yet tailored to the specific goals we might have moving forward. Lots of 3D tools exist, depending on what you&#x27;re trying to make: Unity, Unreal, Blender, Maya, AutoDesk, etc. And there are also simpler options like the Roblox Studio, or just using Minecraft to design something. However, nothing has yet struck the right balance between ease-of-use and freedom for me.</p><p id="3c7b8d79-a2a3-4672-a9bf-63f66169af21" class="">What will design tools look like in a world where instead of a static webpage, we all have, for example, our own virtual island?</p><h3 id="6a6ad7ee-e004-4e2c-a6c0-7346c3dfb000" class="">4. Online Town</h3><figure id="50980b58-7a37-4e9c-808e-51d728898050" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialOnlineTown-36dfb6a08891d660f51d8aa6e5710456.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialOnlineTown-36dfb6a08891d660f51d8aa6e5710456.png"/></a></figure><p id="ac00966f-dff4-4d1a-82fd-d7a85f6975b1" class="">This <a href="https://town.siempre.io/">website</a> launched last week, and while it&#x27;s still very young, it&#x27;s a really interesting application. Online Town is a game where players walk around a 2D space to chat and hang out.</p><p id="f4005e40-2f0f-48d2-9009-41381bd1407f" class="">The main innovation here is the way the game handles audio and video streams between players. Similar to real life, walking closer to someone means you can see and hear them. Walking far away means you can&#x27;t. The same behavior exists in <a href="https://hubs.mozilla.com/#/">Mozilla Hubs</a>, which is a similar app but in 3D.</p><p id="8de7cb7e-50a2-4232-be25-aa4315327b69" class="">This is a chance to point out the way a consumer social app can drive innovation that translates into business software.</p><p id="9026b8aa-a44d-48d1-afbb-eb6c41bf2315" class="">I work on an entirely remote team that holds meetings on Zoom every week. Sometimes, our 11-person team needs to split into smaller group conversations, then reconvene afterwards. We use Zoom&#x27;s &quot;breakout rooms&quot; feature to do this, but it&#x27;s so clunky to configure that we frequently have to quit the call and start three new ones. Then we message on Slack when we&#x27;re done and go back to the original call.</p><p id="9012a288-9b76-4bcc-8c73-ec4ac3a72439" class="">An application like Online Town works much better for this use-case. If you have people all talking in a video call, and you want to break out into a smaller group, the solution is really graceful. You just...walk away. The world gives you that kind of freedom. As the people in the smaller group walk away, their video drops away from the larger team, but they remain connected to each other, allowing them to have their own meeting.</p><p id="a17c799c-116f-4278-8bd9-beab520edfef" class="">This kind of behavior is much easier to understand and navigate, and could be used in business conferencing software as well.</p><h3 id="b83b88c5-c0cf-46c6-a4eb-c1a17e04b2dd" class="">5. Nototo</h3><figure id="5914b276-37fb-403f-ae39-795887fa4c8a" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialNototo-f5a61511a60d3c32d314be8b62e225b2.png"><img style="width:700px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/SpatialNototo-f5a61511a60d3c32d314be8b62e225b2.png"/></a></figure><p id="86c64a11-a064-4c96-98b1-4e085500aeee" class="">This one is actually not social, so it&#x27;s a good example of spatial interfaces having explicitly useful qualities outside of social interaction.</p><p id="d965bf2a-18c9-495c-8c8a-2f0315cd9088" class=""><a href="https://www.nototo.app/">Nototo</a> is a spatial note-taking app. It lets you build an ever-expanding, topographical map containing your notes and writing. The app is designed this way to take advantage of another aspect of spatial interfaces: our brains remember spaces better than raw information. In this regard, Nototo is like a software manifestation of a <a href="https://en.wikipedia.org/wiki/Method_of_loci">memory palace</a>.</p><p id="e17a7b20-0a4a-49af-83de-7a86afe06f87" class="">Design-wise, Nototo is doing something really cool, taking a mechanic familiar to &quot;no-code&quot; apps and converting it to 3D. Whereas in many no-code apps, users can drag and drop different kinds of &quot;blocks&quot; around the app to control an interface, users in Nototo can drag 3D blocks onto their virtual map, customizing and expanding its territory.</p><h3 id="684e99d5-4c27-44b9-8407-18781826041c" class="">6. Spatial Chatroom</h3><p id="9cc30c31-f4eb-4faf-a444-cd0f1c298cae" class="">One thing I&#x27;ve really loved about using the apps referenced above is how much playfulness and discovery comes built into spatial software. A perfect example comes from something I built recently.</p><p id="459a92b8-a433-45ce-a51e-ba9e3f6e65cc" class="">Last week I built my own spatial chatroom app, where users get an avatar and a speech bubble for talking to each other. Within minutes of testing out the app with me, my friends discovered we could play tag for fun, or have little footraces around the map. Behaviors I didn&#x27;t design into the app at all.</p><figure id="91e86d7f-1c48-4891-84c8-f8dd2630a662" class="image"><a href="Spatial%20Software%207627c2f68c754634b251a905a04a502c/roomchat-0aee69fc2032da2d018a599fa25c5cac.png"><img style="width:594px" src="Spatial%20Software%207627c2f68c754634b251a905a04a502c/roomchat-0aee69fc2032da2d018a599fa25c5cac.png"/></a></figure><p id="3956c7b1-324c-4ac6-b6fd-aa5342a33105" class="">Because spatial software comes with more degrees of freedom, whether to move around or view things differently, there are creative ways of using the software, not just designing it.</p><h1 id="a799748e-65fd-4652-bac4-74f9a8b3246c" class="">What&#x27;s Next</h1><p id="e7a1c1e3-3fa4-4356-b96b-ed39bdea4e06" class="">The global pandemic happening right now has brought with it an urgent need for software that can fulfill our social needs.</p><p id="fef0d4af-036b-4e8b-b7a0-ead4fdd0679d" class="">A whole wave of spatial social applications will be born out of this time, and these applications will serve as the breeding ground for insights that make their way out of social and into other major verticals. This will be an extremely generative time for insights and innovation in the way we build software. Designers and developers will begin using spatial interfaces in non-traditional ways, taking design patterns from gaming and applying them to non-competitive, explicitly social use-cases.</p><p id="7e37c920-0456-44d6-bad8-66a8c7b06c06" class="">I hope that with the new framework introduced in this essay, it&#x27;s easier to think of all kinds of ways we can build spatial software. Simply add a virtual world to an application.</p><p id="9baa9388-bdd1-4ac2-a49c-270268f0b0c1" class="">Like a remake of AIM, where each user gets a house that can friends can stop by to visit. Or like a web browser with a topographical view, where users work together to build a spatial map of related websites. Or a video conferencing app where people can go on a walk together. In fact, you can put a world inside of almost any interface. Even a blog post.</p><h1 id="5bdb76f3-20b2-4351-87df-201b729525c6" class="">Discuss this post</h1><p id="7fc163da-5d30-46e6-9fcf-84cbb7099d0d" class="">The room is temporarily disabled.</p><h3 id="b8bd02d8-5bc3-4be6-a16a-f77af03bb77c" class="">Contributors</h3><p id="eddf2d66-c78b-424e-a91d-52fec736d334" class="">Thank you to <a href="https://tobyshorin.com/">Toby Shorin</a>, <a href="https://twitter.com/karakittel">Kara Kittel</a>, and <a href="https://twitter.com/geomorphologies">Édouard Urcades</a> for your thoughts and feedback, and for help developing this framework.</p><p id="e39faa3b-07c1-4000-b0a4-5cd424f7f042" class=""><strong>Note: </strong>My friends Toby, Kara, and Édouard are brilliant and all offer independent consulting in various capacities. If you ever get the chance, hire them to help you with design, writing, or exploratory research.</p></div></article></body></html>

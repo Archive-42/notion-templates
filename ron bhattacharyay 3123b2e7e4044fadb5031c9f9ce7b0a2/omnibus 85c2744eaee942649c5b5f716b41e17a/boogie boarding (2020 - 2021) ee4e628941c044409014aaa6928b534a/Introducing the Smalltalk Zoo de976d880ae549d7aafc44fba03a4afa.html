@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Introducing the Smalltalk Zoo </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="de976d88-0ae5-49d7-aafc-44fba03a4afa" class="page sans"><header><h1 class="page-title">Introducing the Smalltalk Zoo </h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://computerhistory.org/blog/introducing-the-smalltalk-zoo-48-years-of-smalltalk-history-at-chm/" class="url-value">https://computerhistory.org/blog/introducing-the-smalltalk-zoo-48-years-of-smalltalk-history-at-chm/</a></td></tr></tbody></table></header><div class="page-body"><h2 id="aa789373-c2b0-47a5-b805-d466effd3ac3" class="">48 Years of Smalltalk History at CHM</h2><p id="af3a0d26-8303-4688-bb9c-bcdeb66a0795" class="">In commemoration of the 40th anniversary of the release of Smalltalk-80, the Computer History Museum is proud to announce a collaboration with Dan Ingalls to preserve and host the “Smalltalk Zoo.” Below, computer scientist Adele Goldberg explains the vision behind Smalltalk.</p><h2 id="deab77e5-0b5d-4c78-aca0-f3b3041df1e1" class="">What is Smalltalk, and what is the Smalltalk Zoo?</h2><p id="009386f8-4245-4a71-aa6f-3751cdd3d8de" class="">The Smalltalk Zoo is a collection of historical versions of the revolutionary graphical programming and user environment Smalltalk, originally developed at Xerox PARC, ranging from the 1972 version all the way to the modern “Squeak” version whose development began in 1995. These emulated Smalltalk environments run in your web browser and are hosted by CHM at <a href="https://smalltalkzoo.thechm.org/">smalltalkzoo.thechm.org</a>.</p><figure id="66f1bf06-7e12-4d27-a6ab-182ecc560cd4" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-on-Alto.jpg"><img style="width:624px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-on-Alto.jpg"/></a></figure><p id="62e28105-1c01-477f-9787-360aba678041" class="">Screenshot of Smalltalk-74 on a Xerox Alto computer. ©PARC. CHM Object ID 500004657.</p><p id="56033e10-b297-4bfe-b4e5-ea27ef1b3866" class="">Smalltalk was a revolutionary system developed by the Learning Research Group (LRG) at Xerox PARC in the 1970s, led by Alan Kay. Smalltalk was comprised of a programming language, a development environment, and a graphical user interface (GUI), running on PARC’s groundbreaking Alto computer. In fact, it is most famous for being the GUI that inspired Steve Jobs when he and a group of Apple engineers visited PARC in 1979. Smalltalk pioneered overlapping windows, popup menus, and paned browsers, all controlled by a mouse. All of these UI elements have come down to us today through systems like the Macintosh and Microsoft Windows. Smalltalk was also one of the earliest, and most influential, object-oriented programming languages, which make up the most dominant type of programming languages today. Object-oriented languages are designed to make it easy to reuse existing pieces of code, but in a flexible way. Python, Java, Ruby, and Objective-C, among others, all owe debts to ideas originally developed in Smalltalk.</p><figure id="b9953ff9-a464-4c25-b778-64385534a0e7" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Dynabook-users-cartoon.jpg"><img style="width:468px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Dynabook-users-cartoon.jpg"/></a></figure><p id="c983ccc5-2679-4470-9e90-bc490f0d4428" class="">Cartoon of two children using their Dynabooks, drawn by Alan Kay. From “<a href="http://www.vpri.org/pdf/hc_pers_comp_for_children.pdf">A Personal Computer for Children of All Ages,</a>” by Alan Kay, Xerox PARC, 1972.</p><p id="a3ca7e77-3079-456c-a420-43cd1c555dfd" class="">Alan Kay’s vision for Smalltalk was that it would be easy to use by children. It would provide the user environment for his vision of personal computing, the “Dynabook,” a tablet-like computer that he mocked up. Kay understood that computers were a form of media, but unlike traditional print or broadcast media, they could be easily tailored to the particular interests and needs of the user. A computer running Smalltalk, in other words, would be a “personal dynamic medium.” For Kay, this meant that users, and especially children, needed to be able to program their system. These ideas were tested on a classroom of middle-school children in a pilot project designed and run by PARC scientist Adele Goldberg, in which students experimented with Smalltalk in a lab with Xerox Alto computers. The students, by modifying existing code, were able to create programs such as graphics editing tools, animation tools, and music composition programs.</p><figure id="54829188-a629-47e7-8f89-e34905ca38f4" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-and-children.jpg"><img style="width:624px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-and-children.jpg"/></a></figure><p id="85dea086-76e2-4bfd-ab68-f5ccdc4e17a9" class="">Children animating horses in Smalltalk-72 on an Alto computer. Courtesy of the PARC Library. © PARC. CHM Object ID 500004466</p><p id="6bbe10b2-6651-451b-8f8f-bc078ff49903" class="">These ideas were further illustrated in the famous demos of Smalltalk to Steve Jobs and Apple, which inspired Jobs to make the Lisa and Macintosh computers based on a similar graphical interface. Dan Ingalls was one of the demonstrators. In the most famous of the demos, Dan showed how a user could change the text selection behavior from being a solid black box with inverted text to an outline around the text, all by tweaking just a few lines of code while the system was running. Most systems of the day required recompilation and reloading for any change to take effect.</p><figure id="a8844fe1-584a-43c0-baf1-b22e40a31577" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-78-emulation-1024x818.png"><img style="width:700px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-78-emulation-1024x818.png"/></a></figure><p id="17e558fc-b200-45bf-988c-c6d322fc2841" class="">Screenshot of Smalltalk-78 emulation running in the Smalltalk Zoo. This shows the demo given to Steve Jobs in which Dan Ingalls changed the text highlighting behavior from black box with inverted text (seen in the browser panes) to the two-pixel outline around the selected text. The actual text selected here is the very code that implements the change. A similar code snippet was run manually to invert the elf cartoon twice, resulting in a thick rectangle framing the elf.</p><p id="b7b4e6bb-b5c6-49a2-9b73-0758d8071f31" class="">Later in the demo, Jobs observed that the scrolling behavior of the text views was jerky, rather than smooth and asked if that could be changed as well. Line-by-line scrolling had seemed most natural for editing code, but during a lunch break, Dan reorganized some code to make this possible. When Jobs returned, Dan demonstrated that with a simple change, he was able to make the window scroll smoothly, a pixel at a time, instead of a line at a time, again while the system was still running. Dan has repeated this demonstration for CHM on our restored Xerox Alto, both in a live event and in the following recorded video demo. The selection behavior demo begins at 39:04, and the scrolling behavior demo begins at 44:48. These specific demos take place in Smalltalk-76 running on a Xerox Alto.</p><p id="16e83004-3d1a-483d-8228-833f3a788bc8" class="">Dan Ingalls demonstrates Smalltalk-76 on an Alto at a CHM Live event.</p><p id="11881693-4f00-4955-8166-c8e6be6430dd" class="">Dan Ingalls demonstrates various versions of Smalltalk through the years.</p><p id="fabb08e2-cfeb-43c7-b936-e8e75e6a08e4" class="">While Alan Kay is famous for articulating the vision behind Smalltalk (and coining the term “object-oriented programming”), Dan Ingalls was the lead programmer and responsible for many features and design changes that took place as the LRG developed Smalltalk further. The first version of Smalltalk, the version that the children played with, was Smalltalk-72. (Each version of Smalltalk is named for roughly the year it was developed, with Smalltalk-72 coming out in 1972.) A running version of Smalltalk-72 is hosted at the Smalltalk Zoo <a href="https://smalltalkzoo.thechm.org/HOPL-St72.html?snippets">here</a>.</p><figure id="b4c95cff-7e0d-4de6-9a96-ec3707f295ca" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-emulation-in-Smalltalk-zoo.png"><img style="width:700px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-emulation-in-Smalltalk-zoo.png"/></a></figure><p id="8ef01d9d-f36f-4bb5-80be-e591f167ff78" class="">Screenshot of Smalltalk-72 emulation running in the Smalltalk Zoo.</p><p id="9af38b61-e2a6-46a9-988a-4ea5b9d0b5cd" class="">Smalltalk-72 had a number of limitations, and some minor improvements were made in the next version, Smalltalk-74. Two of the most important improvements were a virtual memory system called OOZE, developed by Ted Kaehler, and a new graphics routine called BitBLT, developed by Ingalls. BitBLT (pronounced “bit-blit”) was a new graphics primitive that copied pixels from one memory location to another in a fast and efficient manner. This operation would come to be known as “blitting.” This was used anywhere that bitmapped graphics needed to be quickly moved around, such as scrolling text or animation. In earlier versions of Smalltalk, both text and graphics had their own versions of this routine, duplicating functionality. Ingalls united them and reimplemented the routine in the Alto’s microcode to make it fast. Today, blitting operations are used everywhere, including in 2D video games, where it is the basis for animating sprites.</p><figure id="cbb2d843-3366-4e05-a4ac-5761a8cb7772" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-76.png"><img style="width:624px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-76.png"/></a></figure><p id="17cc5ee3-6e23-47e5-b157-93bf301bdba0" class="">Screenshot of Smalltalk-76, image from Wikipedia article on Xerox Alto.</p><p id="eba82823-e0be-436c-a4e6-629b10389198" class="">The next major version, Smalltalk-76, was an even bigger upgrade. Smalltalk-76 changed the design of the Smalltalk language, incorporating a feature that is often seen as synonymous with object-oriented programming, “inheritance.” It also introduced a syntax that could be compiled, adding keyword-labelled parameters, something that is familiar to today’s Objective-C and Swift programmers. For interested technical readers, Dan Ingalls’s paper “<a href="https://dl.acm.org/doi/10.1145/3386335">The Evolution of Smalltalk: From Smalltalk-72 through Squeak</a>” has many more details.<a href="https://computerhistory.org/blog/introducing-the-smalltalk-zoo-48-years-of-smalltalk-history-at-chm/">[1]</a> Smalltalk-76 established the design that most modern versions of Smalltalk follow today.</p><p id="fbf49111-f5a1-4283-99e6-a234c32c2d01" class="">Like 74 and 76 before them, the next two versions of Smalltalk at PARC were a minor update (78) followed by a major one (80). Smalltalk-78 was a port of Smalltalk-76 to the NoteTaker, a portable computer designed largely by Doug Fairbairn and powered by Intel 8086 microprocessors. This version of Smalltalk stripped out the OOZE virtual memory, and made key changes that facilitated portability in the next phase, Smalltalk-80.</p><p id="0fd73784-e47b-4f91-845b-6a749a377200" class="">An emulation of Smalltalk-78, which runs very similarly to Smalltalk-76, is hosted in the Smalltalk Zoo <a href="https://smalltalkzoo.thechm.org/HOPL-St78.html?base">here</a>.</p><figure id="cad8cd92-8951-4d8c-bc26-363b539f8b70" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-80-GUI.jpg"><img style="width:624px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/Smalltalk-80-GUI.jpg"/></a></figure><p id="1535e2db-012b-4204-bd76-2fcd02430bce" class="">Smalltalk-80 graphical user interface, ca 1980. Courtesy of the PARC Library, © PARC. CHM Object ID 500004472.</p><p id="d1f7599a-5a67-4978-965c-2bc5c8a8c394" class="">Smalltalk-80 was an effort led by <a href="https://www.computerhistory.org/collections/catalog/102702319">Adele Goldberg</a>, who by 1980 was the manager of LRG, to publicize and make Smalltalk available outside of Xerox PARC. Licenses were granted to four corporate partners who would develop Smalltalk to run on their own systems: Tektronix, DEC, Apple, and HP. A key change in this effort was to translate the use of special keyboard characters specific to Xerox hardware into ASCII standard equivalents. A special issue of <a href="https://archive.org/details/byte-magazine-1981-08"><em>Byte Magazine</em></a> was devoted to Smalltalk in August 1981, with contributions by LRG members including Ingalls, Goldberg, Kaehler, <a href="https://www.computerhistory.org/collections/catalog/102717252">Larry Tesler</a>, and others. This publication had a big impact on the computer industry in spreading object-oriented programming ideas. For one example, this <em>Byte</em> issue motivated Brad Cox to combine Smalltalk concepts with the C programming language to create Objective-C. (See “<a href="https://medium.com/chmcore/a-short-history-of-objective-c-aff9d2bde8dd">A Short History of Objective-C</a>” also “<a href="https://doi.org/10.1145/3386332">The Origins of Objective-C at PPI/Stepstone and Its Evolution at NeXT</a>.”<a href="https://computerhistory.org/blog/introducing-the-smalltalk-zoo-48-years-of-smalltalk-history-at-chm/">[2]</a> Several books on Smalltalk, also by LRG researchers, were also published. (<a href="https://www.computerhistory.org/collections/catalog/102709623"><em>Smalltalk-80: The Language</em></a>, <a href="https://www.computerhistory.org/collections/catalog/102623824"><em>Smalltalk-80: The Language and its Implementation</em></a>, <a href="https://www.computerhistory.org/collections/catalog/102676668"><em>Smalltalk-80: The Interactive Programming Environment</em></a>, and <a href="https://www.computerhistory.org/collections/catalog/102676845"><em>Smalltalk-80: Bits of History, Words of Advice</em></a>.) Smalltalk-80 became the basis for all future commercial versions of Smalltalk. A version of Smalltalk-80 can be run <a href="https://smalltalkzoo.thechm.org/HOPL-Squeak.html?earlyst80">here</a>.</p><p id="f97ced6d-39ab-4f05-b56d-f9335fd74188" class="">By the mid-1980s, Kay, like other ex-PARC colleagues Larry Tesler and Dan Ingalls, had joined Apple. In 1995, after a hiatus from the computer industry, Ingalls rejoined Kay’s group to produce a new, portable version of Smalltalk derived from the free Apple Macintosh version. Called “Squeak,” this version supported full color and contained many improvements, including an updated version of the BitBLT routine called “WarpBlt” that supported rotation and scaling effects. A cool example of WarpBlt can be found <a href="https://smalltalkzoo.thechm.org/HOPL-Squeak.html?mandala">here</a>. Squeak also supported a new effort to make a children’s educational computing environment, eToys. eToys can be run <a href="https://smalltalkzoo.thechm.org/HOPL-Squeak.html?etoys">here</a>. Squeak was released as open source in 1996, and remains in active development today. Thanks to Vanessa Freudenberg’s SqueakJS (an implementation of Squeak in JavaScript), you can now run most versions of Squeak in the Smalltalk Zoo <a href="https://smalltalkzoo.thechm.org/HOPL-Squeak.html?launch">here</a>.</p><figure id="42e09d84-3b04-45bf-92b6-62d7afa7c939" class="image"><a href="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/WarpBlt.png"><img style="width:700px" src="Introducing%20the%20Smalltalk%20Zoo%20de976d880ae549d7aafc44fba03a4afa/WarpBlt.png"/></a></figure><p id="89822821-5e75-4243-bf1e-cd31b2f74931" class="">The WarpBlt mandala effect in the Squeak emulation running in the Smalltalk Zoo.</p><p id="4a2bdb60-932d-43e6-b25f-e3756a48427e" class="">Over its almost 50-year history, there have been many versions of Smalltalk, many of which have had significant impacts on the wider computer industry. From today&#x27;s perspective, in which mice and graphical user interfaces are ubiquitous, it can be difficult to imagine how radical the GUI was back in the 1970s. In addition, early PARC GUIs differed in key ways from the user interfaces we use today, be they Windows PCs or iPhones. For one, the dynamic, live nature of these systems, in which users were also programmers of their own systems and could change things immediately, at will, has been lost in favor of security and consistency. Text-based descriptions of these systems simply do not do them justice. They have to be seen. <a href="https://www.youtube.com/watch?v=uknEhXyZgsg">Recorded demos</a>, such as those done by Ingalls and published by the Software History Center at CHM, do a much better job of capturing the experience.</p><p id="fb24d045-77ce-445f-93af-8610fb60ac82" class="">It is this dynamic nature of Smalltalk, and a sense that the locked-down user interfaces of today have lost the flexibility and tinkerability of early Smalltalk that has motivated its creators to return to it and bring it back to life. Alan Kay’s complete vision of personal dynamic media remains unfulfilled in modern computing. In order to grasp that original vision and its revolutionary impact, one must experience first-hand Smalltalk’s dynamism, its “liveness.” To do so, one must be able to run a version of Smalltalk, play with it, make changes live and see how it works. Of course, most people don’t have access to a working Xerox Alto. Fortunately, for many years, Dan Ingalls has, in collaboration with others, created an emulation environment called LivelyWeb, implemented in JavaScript and running in any web browser, that can host various historical simulations of Smalltalk, from Smalltalk-72 all the way to Squeak. This is the Smalltalk Zoo: a menagerie of historical Smalltalk emulations running live in your web browser and accessible to all.</p><p id="7d0fc62c-4a55-4989-8c11-f73e32def557" class="">CHM, in partnership with Dan Ingalls, is proud to host the Smalltalk Zoo, which you can access at <a href="http://smalltalkzoo.thechm.org/">smalltalkzoo.thechm.org</a>. The Smalltalk Zoo site is also the companion to Ingalls’ ACM History of Programming Languages 2020 paper “<a href="https://dl.acm.org/doi/10.1145/3386335">The Evolution of Smalltalk: From Smalltalk-72 through Squeak</a>,” as the paper refers to the live Smalltalk emulations as examples. As the premier non-profit institution committed to the preservation of and access to computer history for years to come, CHM is the ideal place to archive and experience such historical software artifacts.</p><p id="cfa78383-db7b-4d02-ac91-4bf66af10ccc" class="">[1] Daniel Ingalls, “The Evolution of Smalltalk: From Smalltalk-72 through Squeak,” <em>Proceedings of the ACM on Programming Languages</em> 4, no. HOPL (June 12, 2020): 85:1–85:101, <a href="https://doi.org/10.1145/3386335">https://doi.org/10.1145/3386335</a>.</p><p id="7859c36e-d13f-490b-89cb-f2dcfca4455e" class="">[2] Brad J. Cox, Steve Naroff, and Hansen Hsu, “The Origins of Objective-C at PPI/Stepstone and Its Evolution at NeXT,” <em>Proceedings of the ACM on Programming Languages</em> 4, no. HOPL (June 12, 2020): 82:1–82:74, <a href="https://doi.org/10.1145/3386332">https://doi.org/10.1145/3386332</a>.</p><p id="b1e80261-913d-4e70-ad45-f502dc817dc8" class="">Alto System Project: <a href="https://www.computerhistory.org/collections/catalog/102738723">Dan Ingalls demonstrates Smalltalk</a></p><p id="dd365b1d-f68a-460b-bd44-312e20f47e2f" class="">From Smalltalk to Squeak, lecture by Dan Ingalls</p><p id="c02db029-b1e4-4e2a-ac43-b88838488d0d" class="">Goldberg, ParcPlace, and Xerox PARC <a href="https://www.computerhistory.org/collections/catalog/102773512">videotapes and DVDs</a></p><p id="bc0ded55-cc57-487a-8d71-9a75de876848" class="">Alto System Project: <a href="https://www.computerhistory.org/collections/catalog/102738551">Larry Tesler demonstration of Gypsy</a></p><p id="0a435e87-0ced-467b-8f4b-5d292ef16691" class="">Larry Tesler Oral Histories:</p><p id="af298ee0-5230-415d-83bc-8ae9d1492eba" class=""><a href="https://www.computerhistory.org/collections/catalog/102702957">Alan Kay: The Dynabook—Past, Present, and Future</a></p><p id="82382e27-78b1-46f9-8a45-8155919737da" class="">Alan Kay’s University of Utah <a href="https://www.computerhistory.org/collections/catalog/102623237">Doctoral Thesis</a>. <a href="https://www.computerhistory.org/collections/catalog/102719594">The Reactive Engine; and Flex</a></p><p id="084100cd-bee1-45c0-9621-ce8daa256302" class="">Doing with Images Makes Symbols</p><p id="6cdefe7d-61b1-471c-9836-6d697d648843" class=""><a href="https://www.computerhistory.org/collections/catalog/102658340">Alan Kay Oral History</a> (2008)</p><p id="46dd111e-848d-436a-935e-317c2a69f8ed" class="">Back to the Future of Software, Lecture by Alan Kay:</p><p id="f57a37d4-c378-47df-b760-53ce3e7dee0f" class="">40th Anniversary of the Dynabook, <a href="https://www.computerhistory.org/collections/catalog/102695024">CHM Lecture by Alan Kay</a></p><h3 id="6c72cab4-096c-4706-bb8c-7f7b2bd4bc68" class="">Software</h3><p id="2785f2b3-e554-4455-b8b3-4fc8f6ad4680" class=""><a href="https://www.computerhistory.org/collections/catalog/102719827">Smalltalk-80 Virtual Image 2.2 / Virtual Machine 1.1 Atari ST</a></p><p id="51f4dfdf-81b0-4ad9-afe6-230be8a7335f" class="">Smalltalk-72 and 80 manuals:</p><h3 id="6bcfaa6a-1140-4b66-a134-c042dddd3eeb" class="">Hardware</h3><p id="9c84c76a-d4d8-4f20-9eaf-cd38661cf4d7" class="">Xerox Alto:</p><h3 id="2b92a2e9-cb7d-4f81-b59d-577b3c27a666" class="">COVER IMAGE: The 1981 issue of <em>Byte</em> magazine featured Xerox’s Smalltalk, a groundbreaking graphical environment and programming language that introduced object-oriented programming to a large audience.</h3></div></article></body></html>

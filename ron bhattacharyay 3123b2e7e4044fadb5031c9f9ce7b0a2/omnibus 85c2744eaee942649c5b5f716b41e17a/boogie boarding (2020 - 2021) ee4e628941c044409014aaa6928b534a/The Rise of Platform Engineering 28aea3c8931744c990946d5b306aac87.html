@@ -1,0 +1,665 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Rise of Platform Engineering</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="28aea3c8-9317-44c9-9094-6d5b306aac87" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚲</span></div><h1 class="page-title">The Rise of Platform Engineering</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span><span class="selected-value select-value-color-green">Tech Impact</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://softwareengineeringdaily.com/2020/02/13/setting-the-stage-for-platform-engineering/" class="url-value">https://softwareengineeringdaily.com/2020/02/13/setting-the-stage-for-platform-engineering/</a></td></tr></tbody></table></header><div class="page-body"><figure id="32d4bec8-1ab4-47ee-9c25-f42ebe100438" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/Feature_RIse_of_plat_eng.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/Feature_RIse_of_plat_eng.png"/></a></figure><p id="e1c0d4d5-a9cf-419e-b935-f8831da24e4c" class="">The rise of microservices, container orchestration, and the like have introduced novel engineering challenges. Platform engineering teams have formed at a number of organizations to shoulder these responsibilities. In some respects, the role of a platform engineer hasn’t drastically changed from that of other DevOps related roles. There is truth in noting that the title, “Platform Engineer” is nothing but a new title. However, a number of factors are, and continue to, cause the traditional responsibilities of a Site Reliability Engineer (SRE) to shift.</p><p id="3179d1bc-f018-4e73-a368-2ee54a5f8ea2" class="">
+</p><p id="637fad55-6c15-4f95-8462-d103f6c747e2" class="">These factors include the increased popularity and extensibility of cloud providers, Kubernetes, and infrastructure as code. Paradigms introduced by these factors unlock many superpowers for an organization, such as service discovery and the ability to horizontally scale with ease, which could potentially lead to more money in the bank.</p><p id="9cced80e-9fca-4970-9228-2151deae4124" class="">
+</p><figure id="dfc8d599-66b7-4bff-a563-c9bacdb3aa95" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image1-1.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image1-1.png"/></a></figure><p id="9509b9cd-0aa1-439a-9426-2aa492bad8ee" class="">Mature companies with legacy infrastructure are mobilizing in preparation for the great migration to the cloud, and cloud providers are ready to accept them with open arms. But, with this migration comes a need for expertise in the cloud and container orchestration. So, organizations are beginning to question whether they should form a platform engineering team. Companies born recently before, or during, the cloud doesn’t have as many of these concerns; there are fewer, if any, legacy systems to wrestle. It’s very common for companies to begin, and remain, on cloud providers without ever managing on-prem systems.</p><p id="d0e05848-749c-4973-bfad-27cebf97f1f9" class="">
+</p><p id="d869b7e9-7add-4422-8fe4-92776a69e066" class="">As mentioned, the role, “Platform Engineer” is considered by some to just be a different title for a job that has been traditionally performed by an infrastructure team. To understand why this is not exactly true, let’s take a closer look at what platform engineering looks like today.</p><p id="3dc03cd6-8484-4b53-b6d4-76327019b4d5" class="">
+</p><figure id="3613a0cd-f8ab-45ce-b471-6dda2bf4d54c" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image7.png"><img style="width:500px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image7.png"/></a></figure><p id="254e6a95-6510-4c2d-8b03-f8567dbe5c09" class=""><strong>What is platform engineering?</strong></p><p id="5bc27ab2-75ce-44fe-9bb8-cb02ab3dffe5" class="">
+</p><p id="d7818d21-2f89-4f57-ac77-cdb51a707684" class="">This is a loaded question. Asking ten engineers this same question would likely yield ten different answers. That said, there would probably be a number of similar themes. The most prominent theme would likely be similar to the idea of bridging the gap between software and hardware. In other words, platform engineers enable application developers to put software into the hands of users in an easier manner. This broad stroke manifests itself in a number of different ways. Some of these ways could be standardizing an organization’s Kubernetes deployments, ensuring infrastructure is auditable, automating various deployment processes, and writing documentation for application developers.</p><p id="3b35baa0-9d63-4f3b-8ed6-418cb7077bd0" class="">
+</p><p id="ae1fd6d2-6e6b-4158-b287-ef6be99e9696" class="">The responsibilities of a platform engineering team should not be confused with those of a DevOps team. They’re similar in some respects, though they vary in others. Examining where platform engineering and DevOps diverge can help to explain the growing popularity of this new team. For one, the concept of DevOps predates that of platform engineering and has matured in sync with technological progress. Originally, DevOps was fairly ad hoc. For example, if a team within an organization wanted to host a new website, coordination between this team and a DevOps team was necessary. Contrast this with the notion of platform engineering. Platform engineers build systems that allow teams to build on. To continue the example, if the same team had a platform that would take care of hosting the website, no coordination would be necessary between this team and the platform engineering team.</p><p id="b357b70f-2f62-4df6-9ca2-daccd32ec384" class="">
+</p><figure id="ca26e52d-a786-4100-a6d1-8382e57bea51" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image5-1.png"><img style="width:432px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image5-1.png"/></a></figure><p id="3b687714-bfb8-454b-a239-b7a1073f7d7b" class="">
+</p><p id="369667c0-5163-4aec-bb19-e709d4c768e9" class="">Another significant difference is the role of an API boundary, as well as how explicit this boundary is, within the context of each role’s responsibilities. This ties in with the suggestion that DevOps tends to be more ad hoc than platform engineering. DevOps and platform engineering teams are concerned with deployments, service accounts, and infrastructure. However, DevOps teams aren’t building platforms that offer explicit APIs and abstractions that offer flexibility for application developers; platform teams are building these types of platforms.</p><p id="7292f6be-8a32-4d02-a362-72b59ebf53bd" class="">
+</p><p id="6f713f45-c6b3-4206-b386-fcfb168f07df" class="">To further describe the role of platform engineering plays in an organization, let’s consider an example. Suppose an insurance company that was founded in the 1980s has started to shift their infrastructure to the cloud. Now, suppose that within this organization, the software engineers are split into two categories: application development and infrastructure. Before the cloud era, it was common for the infrastructure engineers to resemble a backend team that offered APIs.</p><p id="c3fde735-4e23-4b3b-8bd5-967b8456899a" class="">
+</p><p id="6af7bb77-6b5e-4f80-a926-7d20bfeca1de" class="">These responsibilities are most often fulfilled through the use of infrastructure as code (IaC). Some common infrastructure as code tools are Terraform, Vagrant, Chef, Puppet, and AWS CloudFormation. A number of these tools are open source. Generally, the platform built by platform engineers is composed of these open-source tools. An organization’s platform engineers tailor infrastructure as code tools to the needs of the organization’s application developers. Below is a figure that illustrates how infrastructure as code and platform engineers fit into a development team, as well as how these tools, ultimately, lead to more features.</p><p id="9470229c-8a5a-4ba6-9fb5-e38a28ea0bc3" class="">
+</p><figure id="60fd2438-7834-416a-8a0d-cde03b6e5d31" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image3-1.png"><img style="width:444px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image3-1.png"/></a></figure><p id="32966d7d-5d08-413a-9a83-eb74491ee597" class=""><strong>Infrastructure as code</strong></p><p id="56429793-a8e9-4b21-a3d9-1cfc2ee9785c" class="">Infrastructure as code is one of a number of factors that have helped boost the notion of a platform engineer within the collective conscience. But, it underpins many of these additional factors, so it deserves a closer examination. Before the era of infrastructure as code, a human had to manually configure infrastructure.</p><p id="84c89ef0-8f13-46f1-beb8-9ef54bb11bc9" class="">
+</p><p id="91a597bb-1bf2-4af5-9135-870b4faa95ea" class="">In retrospect, manually configuring infrastructure is problematic; the element of human error is always a risk. Humans are more error-prone and expensive than computers. Oh, and humans are literally billions of times slower. Infrastructure as code removes the risk of human error, reduces cost, and improves the speed at which teams within an organization can iterate. The fewer humans involved in a systematic process, the better.</p><p id="e4c90c26-2b3a-4cc1-8deb-85eb179f36b2" class="">
+</p><p id="8e1d7352-047d-4be8-a587-02a8cfff041c" class="">One notable benefit of infrastructure as code is its ability to be checked into version control. This is especially beneficial for enterprises that may be ramping up cloud infrastructure quickly. Version control platforms, like GitHub, provide context for a system’s infrastructure by facilitating and keeping records of changes and, arguably equally as important, the reviewal process. GitHub’s pull request reviewal process is a great example of this; it’s a place for discussion to take place. Whether this type of review is ideal for all kinds of pull requests is arguable. But, it is a huge upside for infrastructure as code.</p><figure id="72debd78-f76e-452e-9e4d-1c9eccb4ae84" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image8.jpg"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image8.jpg"/></a></figure><p id="9d5df297-380c-4d3b-b4c7-5193225b77ff" class="">As with many technologies, there are different approaches to infrastructure as code. The most common are declarative and imperative models. Declarative frameworks, such as that offered by Kubernetes, require users to define a desired state. Users don’t specify how this state should be achieved. In a declarative model, the system develops a plan to reach and maintain the specified state. Imperative frameworks require users to specify commands in a particular order, in order to reach a desired state.</p><p id="331bcbfc-8f84-4437-8331-e32aae2308e3" class="">
+</p><p id="2b1cabf3-7b81-4b6c-9afd-9c2f48e08dd7" class="">At first, the imperative model may be more intuitive, as a number of popular programming languages are considered procedural, like Go. However, it is not the popular approach to infrastructure as code. For one, the imperative model does not scale. Complexity scales exponentially, at best, in relation to the number of components in a system; users have to execute the correct commands in the correct order for more machines. Contrast this with the declarative model: users describe the desired end state. Then, it is the responsibility of the framework to develop and execute a plan to reach this desired state. Complexity scales logarithmically, or at least far better than linearly, in relation to the number of components in a system; the framework takes care of all the heavy lifting.</p><p id="6183d8b2-7c17-40f0-b1db-a3c8b3015804" class="">
+</p><figure id="7158cf15-4087-4992-8cd8-dc6bed22d834" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image6.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image6.png"/></a></figure><p id="aa07ed8a-87ca-41b6-bf7b-07862d6c7ff2" class="">In some cases, the flexibility an imperative model offers is preferable to a declarative model that abstracts it away. Thankfully, there are tools that offer an imperative approach to infrastructure as code that minimizes complexity, such as <a href="https://www.terraform.io/">Terraform</a>, <a href="https://www.vagrantup.com/">Vagrant</a>, and <a href="https://aws.amazon.com/cloudformation/">CloudFormation</a>. If you’re interested in learning more about these technologies, check out <a href="https://softwareengineeringdaily.com/2016/04/05/automating-infrastructure-hashicorp/">this episode</a> of Software Engineering Daily. This episode is a conversation with Mitchell Hasimoto, the founder of Hashicorp, about application development and why the importance of automation scales with the complexity of infrastructure.</p><p id="6007ea17-d8db-4ff9-9d80-8c17a6342a86" class="">
+</p><p id="c3ee1ac3-363e-4e53-af26-6b122e2ed09f" class=""><strong>When does an organization need a platform engineering team?</strong></p><p id="0e6108ca-05f1-445e-9453-0cbe133ed98b" class="">
+</p><p id="f79a6b5c-0134-48d9-8c02-5a6960807288" class="">There are tradeoffs organizations often consider when considering building a platform engineering team. On one hand, building a platform engineering team detracts resources from building business logic and developing features. However, a platform engineering team may build tooling and infrastructure that increases engineering productivity. Without a platform team in place, it’s likely that some engineers have taken it upon themselves to assume a platform engineer-like role. Organizationally, this can become a challenge and place a burden on all engineers in an organization. Without a definitive set of engineers responsible for an organization’s platform, rogue engineers acting in a platform engineering capacity will probably not be effective. Put simply, considering building a platform engineering team can be thought of as weighing short-term gains against long-term gains.</p><p id="969e2cf2-b201-4327-a463-b9c552fc4b97" class="">
+</p><p id="65b294df-02e5-44ef-a43f-2a357354677e" class="">Building a platform engineering team is easier said than done. The following may come as a surprise to readers living in the Bay Area: legacy infrastructure is common within enterprise organizations and can result in a lot of confusion about platform engineering. Platform engineering at a startup founded in the cloud era looks very different from platform engineering at a pre-cloud era enterprise. Unlike startups born in the cloud era, many pre-cloud era enterprises have on-prem systems that yet to be migrated to the cloud. Additionally, as if migrating to the cloud wasn’t challenging enough, pre-cloud era enterprises tend to have more red tape and bureaucracy standing in the way of organizational changes. The short-term downsides to creating a platform engineering team can be magnified by these types of organizational barriers.</p><p id="d3476058-5af1-4279-a0cf-6fbbd0fd8b9b" class="">
+</p><figure id="47a128da-0508-4d99-a361-4a865509c22c" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image10.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image10.png"/></a></figure><p id="2dd8da0f-0d66-4f35-90f1-0bf8211760df" class="">Organizations should consider the short-term losses that creating a platform engineering team may cause. A strong indication that an organization that a platform engineering team would be beneficial is the observation of different product teams building similar features or trying to accomplish similar tasks. Product teams could experience an increase in productivity, if a platform team is formed. Platform engineering is interesting because it can cause an entire organization’s efficiency to increase. This should be taken into consideration before writing off the need for a platform engineering team.</p><p id="548a9043-2ee7-44b9-909a-e471b1f759ab" class="">
+</p><p id="a744b26c-3450-4f5e-a15a-f8cc55cc4c4c" class="">If an enterprise organization does form a platform team, an effort to continue, or begin, migrating to the cloud is almost inevitable. Migrating to the cloud forces organizations to choose which cloud vendor, or vendors, to use. Let’s examine how the choice between using a single, as opposed to multiple, cloud vendors may affect an organization.</p><p id="aa0457a7-eaa2-4957-af74-7086e03bd444" class="">
+</p><p id="d5391245-995c-4a83-933f-b20c0980cccc" class=""><strong>To multi-cloud, or not to multi-cloud, that is the question</strong></p><p id="6332c3ad-6f42-4a3e-b38b-df91fccb5ed3" class="">The first step in developing a cloud strategy is deciding if a multi-cloud strategy is needed. The best multi-cloud strategy may be to not use services from different vendors and embrace all that one has to offer. Sure, using a single cloud provider has drawbacks, but it can prove to be vastly simpler than any multi-cloud approach. This isn’t to say the benefits of going multi-cloud don’t outweigh those of the simplicity of using a single cloud vendor. Examining both the benefits and drawbacks of multi-cloud architecture can shed light on how going multi-cloud may affect a given organization.</p><p id="4c8a58d1-a929-4c5d-b3ae-6c8fd1f742b6" class="">
+</p><p id="cb1828bf-0537-47e6-9396-9a5fd2354825" class="">The benefits of going multi-cloud include being able to use the best services available for a given task and limit the risk of outages in any given geographical region. The benefit most frequently touted by multi-cloud advocates is the freedom it provides: you’re not locked into any single vendor’s ecosystem. Vendor lock-in is the idea that the vendor is one of the organization’s dependencies and wouldn’t be able to substitute alternative solutions. The fear is that the work associated with substituting a current dependency for another would be far too costly.</p><figure id="b05d4a30-2b43-4981-a90b-ef1e9d8221d3" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image9.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image9.png"/></a></figure><p id="87eaed63-7885-4331-80ec-5b719202b9c9" class="">There are different ways one could interpret the notion of cloud-vendor lock-in. On one hand, there’s the risk that an organization using a single vendor deems a critical service as sub-par and wants another option. Or, suppose this critical service begins to cost more than anticipated. In this scenario, it would be difficult to decide what the next step should be. However, it could be argued that this service isn’t actually critical for the organization. Popular cloud vendors offer a wide array of products; it’s possible that the alleged critical service could simply be replaced. Additionally, these cloud vendors have guides on migrating to and from their platforms.</p><p id="f61fbe15-45cc-440c-a56b-d5281345f17c" class="">
+</p><p id="a11d46d0-960b-40db-8f7c-62214b78c959" class="">Yes, there are some benefits to going multi-cloud. There are also some downsides. One downside is the fact that there’s more organizational complexity; this is difficult to deny. For example, each platform’s security accounts must be managed. Aside from organizational complexity, it can be difficult to find engineers who are knowledgeable about multiple cloud platforms. More ramp-up time might need to be allocated for new hires if a multi-cloud system is in place. Another downside to a multi-cloud environment is the increased surface area for potential threats. Organizations may weigh this downside differently, depending on the kinds of data an organization deals with. But, generally, it’s safe to assume your organization values security.</p><p id="21dffd75-9a9c-48b6-a9cc-fce6c48256e1" class="">
+</p><figure id="266f579b-d712-478a-a4ba-4d75766c88a9" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image2.jpg"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image2.jpg"/></a></figure><p id="5b8c7722-44f8-4b33-b003-141dd472202d" class="">To conclude this examination of the multi-cloud option, let’s take a closer look at using only a single cloud. Sure, there are risks of lock-in and not being able to use the best services for a given task. However, in many cases, using one cloud-vendor can greatly simplify a system. Going all-in on a cloud vendor will inevitably have less organizational and engineering overhead. A cloud’s unique products and capabilities is a primary reason to choose a vendor, rather than opt for the least common denominator of multiple cloud vendors. Finally, there’s no point in worrying whether a particular cloud will fail to meet your organization’s needs, at some point in the future. There’s fierce competition amongst the top cloud vendors. Competitive pressures minimize the risk of any single cloud vendor not delivering top-notch products.</p><p id="5166cb2a-33b2-490f-9b92-ea098132d745" class="">
+</p><p id="9e7ae523-8122-4e8c-b170-a7e54aa2da88" class=""><strong>Looking ahead</strong></p><p id="4bbe0854-d98d-4fa9-ad42-04d5e82a5872" class="">In <a href="https://softwareengineeringdaily.com/2020/01/07/amazon-kubernetes-with-abby-fuller/">this episode</a> of Software Engineering Daily, Abby Fuller, a principal technologist at Amazon, noted that “…folks [organizations] should always have a modernization plan.” Broadly, plans for modernization have been ubiquitous across all industries, but they often have implications for upgrading technology being used. The need for modernization amongst enterprise organizations stems from a number of factors, all of which have strong ties to the rise of cloud computing. These factors include the rise of Big Data, increased popularity of microservices, and momentum behind Kubernetes in the container orchestration space.</p><p id="60bd7d29-6973-45f0-8c2c-93e5919a92bc" class="">
+</p><p id="87bf96f5-67f6-44fb-8a79-ffa41667eb32" class="">The notion of container orchestration and its difficulties gave rise to Kubernetes. Kubernetes won the orchestration wars. This has allowed engineers to develop transferable skills. Mindshare continues to build around Kubernetes and a number of pre-cloud organizations have started their migrations to Kubernetes. So, many organizations migrating to the cloud, and that are using microservices, are considering using Kubernetes as their container orchestration framework. Not only does it simplify the container orchestration process, but it can attract more developers who are interested in technologies closer to the bleeding edge. This demographic of developers tends to be attractive to pre-cloud organizations that are interested in moving more of their infrastructure to the cloud.</p><p id="f3d5a692-c2ec-4972-b367-e87b6e547114" class="">
+</p><figure id="c37ff3cb-6cc0-4366-ac44-2b14163f4bec" class="image"><a href="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image4-1.png"><img style="width:700px" src="The%20Rise%20of%20Platform%20Engineering%2028aea3c8931744c990946d5b306aac87/image4-1.png"/></a></figure><p id="0ba4ee99-e0a4-49c8-b09a-980141e3805f" class="">Forming a platform engineering team is one way an organization could begin modernizing their engineering culture. The aforementioned trends, like the prominence of cloud vendors and the shift to a microservice architecture, make forming a platform engineering team even more appealing. But, modernizing engineering culture can be achieved in other ways, as well. A platform engineering team should not be created for the sake of having a platform engineering team. As with most things in the technology space, it depends.</p><p id="df8c52c0-2569-4e4a-95df-90532ffc73e0" class="">
+</p><p id="7c36fe58-8dec-4001-a148-47750d8c8720" class="">One article will most likely not be enough for an organization to form a strong opinion about whether a platform engineering team would be beneficial. Building, and maintaining, awareness of the technology landscape can help an organization form a stronger opinion. If you’re interested in learning more about the role of software platforms within organizations, check out <a href="https://softwareengineeringdaily.com/2019/12/17/kubernetes-at-cruise-with-karl-isenberg/">this episode</a> of Software Engineering Daily covering Cruise’s approach to platform engineering.</p><p id="ec09c9db-ac78-407a-a700-2e9c1941a8a9" class="">
+</p><p id="e9327ea7-0ddd-4b17-8954-890fea9f0a78" class="">Nick Daigler is a student at Tufts University studying Computer Science. You can learn more about him at<a href="https://nickdaigler.github.io/CV/"> </a><a href="https://nickdaigler.github.io/CV/"><strong>his personal website</strong></a> and <a href="https://www.youtube.com/nickdaigler"><strong>YouTube channel</strong></a>.</p></div></article></body></html>

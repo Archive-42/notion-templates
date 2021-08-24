@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Home Lab Beginners guide</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4880a009-474e-4319-bf79-b7b2b47f207a" class="page sans"><header><h1 class="page-title">Home Lab Beginners guide</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://haydenjames.io/home-lab-beginners-guide-hardware/" class="url-value">https://haydenjames.io/home-lab-beginners-guide-hardware/</a></td></tr></tbody></table></header><div class="page-body"><p id="9007290b-1a40-4707-96c4-465a9983430e" class="">Until recently, and for well over the past decade, my wife and I have been nomads. Moving from the Caribbean to Miami, New York, Las Vegas, Vancouver, and now back home. This has meant that for many of those years, my home office basically comprised of a few laptops and screens.</p><figure id="10dc15b9-33a9-4907-99c5-4444e293fe9c" class="image"><a href="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/868x300-2.jpg"><img style="width:700px" src="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/868x300-2.jpg"/></a></figure><p id="a092e7a4-8226-43db-a3f5-a701e6de6ae1" class="">These days, we are more settled; my wife has completed her studies, now works full time, and my full-time job remains remote, via a home office <a href="https://haydenjames.io/web-server-services/">supporting Linux servers</a> and <a href="https://stacklinux.com/">hosting them</a>.</p><p id="f354f5b6-cfd4-419e-b690-70fddfb97232" class="">Last week, after a short trip to Antigua, I had a brief meeting with a tech friend of mine, <a href="http://www.yvesephraim.com/">Yves Ephraim</a>. He was an Engineer with <a href="https://www.cwnetworks.com/">Cable &amp; Wireless</a> for 20 years (until 2003). Yves left C&amp;W shortly before I started there in 2004. He’s a champion of the internet and technological developments in Antigua &amp; Barbuda.</p><p id="e6e338c2-e491-47be-94c8-1023850e1d80" class="">We sat in his home office where he told me a bit about his current projects; as well as his dabbling’s with <a href="https://www.google.com/intl/en/ipv6/statistics.html">IPv6</a>, web hosting, mail, <a href="https://www.bgp4.as/">BGP4</a>, among other things. Most of which he does via his very capable home lab.</p><h2 id="6336662c-2606-40a9-b41a-1957ad3429ca" class="">What is a Home Lab?</h2><figure id="be3c9dcd-c472-46cc-9d17-13a610e008c2" class="image"><a href="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/my_homelab.jpg"><img style="width:700px" src="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/my_homelab.jpg"/></a></figure><p id="7d347878-7d11-470f-8525-13e1a65bf08a" class="">My current Home lab in a 12u rack as of May 2020</p><p id="be377576-ec77-4bd2-8b72-87aefd6dd894" class="">Think of a home lab as a place where you can fail in the privacy of your own home. As Thomas A. Edison said: <em>“I have not failed. I’ve just found 10,000 ways that won’t work.”</em> I consider myself an expert at failure. But seriously, I would like to fail a lot more and a home lab will create endless opportunities for me to fail. Of course, all the while seeking success, but you got that already.</p><p id="4e08bac2-9792-4263-a89e-f3e18e00a47f" class="">In general, a lab is a place where you can safely perform experiments. Most of you reading this article are techies and sysadmins. As you know, trying out new things on production equipment never ends well. Shush… it’s OK, I know, I know, you didn’t think that one command would take everything offline. This risk is the reason why we build ourselves a sandbox environment to dabble, test and fail in, all from the comfort of our own homes.</p><p id="d0824142-8450-457f-9030-aae141aa5116" class="">To date I host my test labs on servers in North America and Europe. I’m creating a customized network and server home lab; to fill those areas where I would like to become more familiar. I will also be using my home lab for remote backups, <a href="https://haydenjames.io/20-top-server-monitoring-application-performance-monitoring-apm-solutions/">network monitoring and alerting of remote servers</a>, and to setup wired UAP APs, among other things.</p><h2 id="9b6ce9de-bef2-408b-b765-9bfac9b178b7" class="">May we inspire each other to great home labs</h2><p id="54b6ad4d-7da1-4cbd-ad59-f8320c25a1ba" class="">As I told Yves, our chat had me revisiting the idea. In fact, I think my exact words were, “Yves, I see your home lab and I’ll raise you mine”. As always, I’m certain there’s a lot more to learn through discussion. In light of this fact, I wanted to share this journey with you, starting with the selection process of the hardware for my home lab.</p><p id="81773f8e-a22d-4615-9643-c6e4f5ed2b14" class="">Of course, over the years, I’ve had equipment lying around, but that stops today. Well sort of. So, if you have ever been interested in building a home lab or if you already have one, then let’s mingle, share and dabble together.</p><p id="88a6e4dd-c75f-45b8-a447-8367f5d1c620" class="">Where do we begin? Not to sound cliché, but let’s start from the ground up, or wall forward. What I’m trying to say is, we need storage space, physical storage space; for our new home lab.</p><figure id="e3cd51d6-2db7-4c27-94dd-0fb5bf3865e6" class="image"><a href="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/868x300.jpg"><img style="width:700px" src="Home%20Lab%20Beginners%20guide%204880a009474e4319bf79b7b2b47f207a/868x300.jpg"/></a></figure><h2 id="6c6527e6-b5e4-4cba-a2e9-c31429abb44b" class="">Home lab location, it’s all about location</h2><p id="1d42d85f-74e3-4093-a90c-27710af85795" class="">Location, Location, Location. It’s all about location! Please excuse the lack of originality – i’m a sysadmin, not a writer. I’ll try my best to get you to the end of this article.</p><p id="63113440-33fe-47ab-8eee-fe58c6cc763d" class="">Location is critical for a number of reasons. The choice between the home office, living room, closet, attic, basement or garage all depends on a range of important variables. These include room temperature and ventilation, workable space around your equipment, ease and distance of network cable runs, foot traffic, 24-hour ease of access, power, noise levels from your home lab, and more.</p><p id="b95e89e2-e0a8-41ef-8cf3-046a7aa68b23" class="">Here’s a quick list of Pros vs Cons I’ve compiled, to get us thinking about all the possible home lab locations. Choose wisely:</p><p id="2e219728-210b-4d54-9247-76b6a4502254" class=""><strong>Home office</strong></p><ul id="cbbe6f0b-a44e-4aee-b253-b5e55ed2b7f7" class="bulleted-list"><li>Pros: Proximity to work area/desk/devices, fewer cable runs, and you can watch lights flash all day.</li></ul><ul id="92ad39a4-c718-4a10-aa6c-ba95d3c1c8cf" class="bulleted-list"><li>Cons: no home office or you already spend too much time in your home office.</li></ul><p id="fc76a41d-d476-40a0-bfe4-4ade97d4a46a" class=""><strong>Living room</strong></p><ul id="818222c1-2316-472c-9aee-3d1d305fd947" class="bulleted-list"><li>Pros: Usually cool, lots of space/setup options, blinky-blinky sci-fi movie nights, and counts as family time.</li></ul><ul id="7bdde86c-ddfb-4a92-b6d2-0213c0c6d8f2" class="bulleted-list"><li>Cons: divorce, foot traffic, could get damaged, or damaged during the divorce.</li></ul><p id="be09e531-81fd-4fb1-abcf-faf133e5777d" class=""><strong>Closet</strong></p><ul id="870ec156-899f-46c2-bac5-d567211e8214" class="bulleted-list"><li>Pros: Easily accessible, stealthy, and you get to say: “Look at what I have hiding in my closet”</li></ul><ul id="584aec5e-8a67-459c-80bb-42c074ac63ee" class="bulleted-list"><li>Cons: Poor ventilation (excess heat), lack of space, and one less closet = unhappy wife.</li></ul><p id="88315a30-0597-4350-beac-4ad159f58fa4" class=""><strong>Basement</strong></p><ul id="96246a61-21e7-4ea8-9698-22bb5a3e93ee" class="bulleted-list"><li>Pros: Usually cooler temps, and volunteering to do laundry (maybe con?).</li></ul><ul id="686e36da-6b24-4df9-832f-3a295476db1a" class="bulleted-list"><li>Cons: don’t have a basement, flooding, spiders, or no access when injured.</li></ul><p id="6516addd-1dd5-4c7f-9816-e044eb92109a" class=""><strong>Attic</strong></p><ul id="16854d76-e456-42a2-9799-548357a05904" class="bulleted-list"><li>Pros: Less noise, easier cable runs.</li></ul><ul id="147c6d56-7d9e-4d28-98f7-71bcd16e26e4" class="bulleted-list"><li>Cons: can get hot depending on where you live, roof leaks, humidity/condensation, and creepy at night.</li></ul><p id="77aefcae-00db-4685-80c2-97cb3b1169d4" class=""><strong>Garage</strong></p><ul id="865ecc86-659a-42c2-8f25-16b94e770322" class="bulleted-list"><li>Pros: Less noise in the house, completely out of sight, wife won’t even notice.</li></ul><ul id="bff42ff7-e704-4555-b7f2-1c0d63225f36" class="bulleted-list"><li>Cons: A Bug’s Life <em>in</em> your lab, excess heat (if no AC), dust, could require longer cables, or gets wrecked when parking the car.</li></ul><p id="feca6360-fa34-42ad-945e-932af5d844d1" class="">For my lab, I’m going to build it out in my home office. In my office I have laptops, a desktop, a server and other devices so this location will require shorter cable runs. When selecting your location, also consider the coolest area of the room/space, avoid direct sunlight and consider reserving space for future expansion.</p><p id="39fd3a8c-e9cf-48fd-af2f-e265ff675aba" class="">It’s wise if you draw/sketch out a home network diagram or <a href="https://www.smartdraw.com/network-diagram/how-to-draw-network-diagrams.htm">use network design software</a>. Keep in mind your floor plan and how you will accomplish the cable runs. For example, most of the homes on this island have 6″ concrete interior walls. Think about these things before, not after. In other words, map everything out, make notes and create lists.</p><h2 id="cc6c4247-95cb-4075-acd5-df967ccd80e3" class="">Network vs. Server Racks vs. Cabinets?</h2><p id="1b6a1450-05c8-4376-b0a1-f21f41021b3d" class="">Next, we need to decide how we will store the equipment (modems, routers, switches, servers, patch panels, UPS systems, power strips, cooling fans, etc.).</p><p id="880e97c9-68b6-4d9f-9021-f9b14424b2a1" class="">Network cabinets and racks, are often confused with S<em>erver</em> cabinets and racks. Routers, switches, patch panels, and the like, are usually much shallower than servers. As such, Network Cabinets and Racks are usually not as deep as Server Cabinets and Racks. Also, networking devices often produces less heat than servers. You will find some network cabinets will have glass doors that may not leave enough ventilation for servers.</p><p id="4a85517f-34d3-4234-8c94-0bb9c02008f9" class="">After deciding the depth and ventilation requirements for your home lab, there are a couple of other things to consider. A cabinet is an enclosed space with door(s) and/or removable sides, whereas a rack is a semi or fully open (4 sides open) frame. To help you decide whether to use a cabinet or rack, consider the following:</p><ul id="f8c49bc4-1c77-49f9-bc23-2e8f7426f480" class="bulleted-list"><li>If you are <strong>installing large, heavy servers</strong>, then the extra stability of cabinets or four sided racks should be considered.</li></ul><ul id="e94b5fe7-6e05-4a9a-87af-6f22760440fa" class="bulleted-list"><li>If you <strong>need frequent access</strong> to the sides or rear of equipment, then an open rack or cabinet with removable sides would work well.</li></ul><ul id="a8968bf6-9e40-4e65-bc49-ee1a81d319f9" class="bulleted-list"><li>If your <strong>equipment requires extra cooling</strong>, an enclosed cabinet will need more attention when it comes to cooling and ventilation.</li></ul><ul id="4afbb4fb-634f-4567-8da2-0f5843ac220c" class="bulleted-list"><li>If the <strong>room is prone to dust</strong>, the extra protection of a cabinet will go a long way in keeping it out of your equipment.</li></ul><ul id="d7e9d35d-5054-4822-b8fe-f32ca5d42d56" class="bulleted-list"><li>If you are <strong>installing in a general living area</strong> frequented by house guests, consider an enclosed cabinet that can often look neater in appearance when locked. However, a well-maintained open rack with tidy power and network cable runs can look just as neat!</li></ul><ul id="0946e758-b9a7-4dc8-8b22-f4f0fffe27ba" class="bulleted-list"><li>If <strong>restricted access/security</strong> is required, many enclosed cabinets often offer lock and key access control for better security.</li></ul><h2 id="c5145501-5e16-409a-b410-769ed087c393" class="">Recommended Home Lab Hardware</h2><p id="f70540ac-1bf8-430b-9b8f-96b0c29a46fd" class="">Now that you have already measured the maximum depth of your equipment and considered all the above advice, it’s time to buy your first piece of hardware. Or not. You could have probably skipped to this section if you prefer more em’, creative methods for hosting your home lab. However, most of the above advice applies even if you plan to setup your home lab in your existing <a href="https://imgur.com/a/HSwkXE9">living room cabinet</a>, <a href="https://imgur.com/r/homelab/oaLKS">on a bookshelf</a>, <a href="https://imgur.com/Sq8TLlL/">under your desk</a>, or in a cardboard box. No, seriously…</p><p id="4eb05ce3-3a0e-42bc-b5f0-c0efce158df5" class=""><a href="https://www.reddit.com/r/homelab/comments/ep9bqy/i_see_your_fancy_rack_and_raise_you_a_stylish_rack/"><em>Image</em></a><em>: Fancy cardboard box cabinet.</em></p><p id="45164f7b-ff33-45c9-a7b4-07e98cc159db" class="">As a reminder, in some countries you can get most of the equipment listed below via Craigslist, Universities and other local second-hand options. Prices on this page reflect Amazon’s current pricing, which is subject to change. If links to manufacturer pages become broken over time, please let me know, as it seems to always happen. Let’s move on to the recommended home lab hardware.</p><h3 id="b50f33d1-a212-4d58-848b-a564a12dfd2f" class="">To replace or not to replace: ISP Cable Modem</h3><p id="35436039-3dc8-4553-af56-afd6940f06b6" class="">Before we delve a bit deeper into my home lab recommendations, if you are a beginner to switching and routing, then a lot of the hardware below may seem to be a bit of an overkill. You can get your feet wet by merely replacing your ISP’s cable modem (ISP or Internet Service Provider), you know, that thing with all the flashing lights that you constantly have to unplug to reset to regain internet access. Yup, that one, the mini heater in your living room.</p><p id="a3b8a17b-3317-4b36-b195-518f7fa2d52c" class="">Most US ISPs charge monthly rental for that thing. Buying your own could make some financial sense. As well as, giving better performance, reliability and security. Bet you were already sold with the financial bit eh? But it gets better; most of these modems provided by ISPs are usually of poor quality, used, and lack features. Lastly, your ISPs Modem/Router combos often cannot independently update firmware versions as new exploits emerge. Which means you are at the mercy of your ISP to push new patched firmware.</p><p id="546cd049-d7b2-437b-b675-9a35b736db27" class="">Now, if you have a great ISP and this does not apply to you, then stick with your modem. The only reason to replace it in such circumstances will be if you want to have access to additional network features and to create a home lab where you can test away! I replaced the modem/router combo from my ISP. I went with the <a href="https://amzn.to/32lbV1h">Motorola MB7420 16×4 Cable Modem</a>.</p><p id="29c9c7f5-44ed-40d1-bbcf-24922204f75b" class="">If you would like to keep things simple then go with a <a href="https://amzn.to/3a5Lmzx">Modem + Wi-Fi router combo</a>. Otherwise continue if you would like to build out a home lab to manage Firewall, NAS storage, VPN, VLANs, PoE (Power over Ethernet), Virtualization, remote network infrastructure monitoring/alerting, wired APs, web servers, backup servers, the list goes on.</p><p id="25bfbd80-7a71-42ef-afe2-2ca839226bd4" class=""><em><strong>Update:</strong></em><em> This modem, similar to most I’ve used, gives off quite a bit of heat. Something to consider when deciding placement, I would suggest toward the top, or leave space below and above. That said, I love this modem! Unlike the ISP’s modem it shows the quality of your connection including Freq. (MHz), Pwr (dBmV), SNR (dB), corrected and uncorrected, and even allows manual downstream frequency setting if needed by your ISP.</em></p><h3 id="b1e7da30-5a75-4664-8372-201f6ce4c74f" class="">Selecting Your Home Lab Rack</h3><p id="9d537d74-7767-4225-ac1f-0e8f50682b83" class="">A rack <em>unit</em> (abbreviated <em>U</em> or <em>RU</em>) is a unit of measure defined as 1 3⁄4 inches (or 44.45 mm). It’s the unit of measurement for the height of 19-inch and 23-inch rack frames and the height of the equipment. The height of the frame/equipment is expressed as multiples of rack units. A typical full-size rack is 42U high. Racks and cabinets are then listed as 1U, 2U, 3U, 4U, and so on.</p><p id="18ac6dfd-56c3-4ec7-926c-84bd050d76d1" class="">Here’s an example below of a 6U rack (labeled):</p><ul id="e2b951a8-4285-4252-9487-ac7747436790" class="bulleted-list"><li><a href="https://amzn.to/39XLcdz">StarTech 12U Wall Mount Rack – 13.5″ Deep / 19″ wide / 125lbs Capacity</a> – $118 (<a href="https://www.startech.com/Server-Management/Racks/12u-wall-mount-rack~WALLMNT12">specs</a>) – During my search for a wall mounted rack, I almost purchased the 6U version of this rack, then at the last minute I switched to the 12U version for possible future expansion.</li></ul><ul id="793a58af-8b68-4d9d-a632-6d695f02346a" class="bulleted-list"><li><a href="https://amzn.to/2STvDy3">Samson SRK-12 Universal Equipment Rack Stand</a> – $230 (<a href="http://www.samsontech.com/samson/products/accessories/racks/srk8/">specs</a>) – This was my first choice, this is an audio equipment rack that is fully compatible with shallow-mount equipment. One advantage is that it’s supported on wheels, so you don’t have to fix it to a wall or floor. However, I’m 6’2″ and I want to mount my rack about 4′ off the ground, so as you will see, I have also purchased a 2U cooling fan (intake) which I will place at or to the bottom of my setup. If your room is air conditioned 24/7 and you don’t mind the low-to-floor setup, then this may be the rack for you. Here’s a <a href="https://imgur.com/BAGlEvA">great example of how clean this Rack can look when setup</a>.</li></ul><ul id="0fcc28d2-0034-4df3-89d1-c70d34fba24e" class="bulleted-list"><li><a href="https://amzn.to/3974q0c">NavePoint 9U Basic IT Wall Mount Network Rack Locking Glass Door</a> – $135 (<a href="https://navepoint.com/navepoint-9u-450mm-depth-wallmount-networking-cabinet-assembled-basic-series/">specs</a>) – This is a very beautiful looking Network Cabinet. The issue for me is that I only use the AC in my office in the summer, and I don’t want the heat ever to be an issue, thus for my home setup, an enclosed cabinet wasn’t right for me.</li></ul><p id="cd15eac5-0102-440a-b9a9-2203efdd5a12" class=""><em><strong>Update: </strong></em><em>This is a very solid wall mount rack. I can confirm that what you see, is what you get. No issues to report. It does exactly what it’s supposed to.</em></p><h3 id="25534453-de1d-47c3-94ff-a6aa5545212d" class="">Home Lab UPS (Uninterruptible Power Supply)</h3><p id="1634d7dc-7075-463b-95da-6220f4f1e6ff" class="">At home, we have a backup generator that runs on propane. It can run for up to a week which is useful in the tropics. Other than hurricane season, power cuts are extremely rare here. So far for 2020 we have had one outage that was due to a lightning strike on a nearby electrical post.</p><p id="af41dd58-506b-485a-84e8-5b0200a1f3f9" class="">It takes a minute or so to fail over to the backup generator. So the rack mount UPS solution I’m looking for is something that will be able to support between 100W and 200W for a couple of minutes. Long enough to fail-over to the backup gen or to shut down all the equipment cleanly. In the future, I may expand this with larger batteries but with no way of returning anything I purchase, I’m a bit wary on investing in a larger backup battery only to find out it’s a dud. Will test for a year first and so here’s what I decided on:</p><ul id="ba3679be-6788-4610-a31f-588f786541a0" class="bulleted-list"><li><a href="https://amzn.to/38QM7wi">CyberPower OR500LCDRM1U UPS, 500VA/300W, 6 Outlets, AVR, 1U Rackmount</a> – $175 (<a href="https://www.cyberpowersystems.com/product/ups/smart-app-lcd/or500lcdrm1u/">specs</a>) – A small 1U rack mount UPS coming in at 20lbs which should give me around 10 to 15 minutes of runtime.</li></ul><p id="9f9702c0-258f-4310-9307-917e53be1bf9" class="">Ultimately, you will have to decide whether you even require uninterruptible power supply at home. From experience, UPS batteries are almost always a disappointment and this is largely because of the cost vs return. If you really need to have a UPS, you could spend thousands just to have a long enough runtime. If you work form home or host critical services hosted from home – you probably shouldn’t – then it may by worthwhile. My advice, get a UPS which provides just enough runtime for everything to shutdown cleanly and only use the UPS for the most essential and efficient devices in your home lab. With all things considered, I’ll have to circle back to this section before recommending any other UPS models.</p><p id="85f61ba2-6c74-4f86-acc5-fbb43a0f372d" class=""><em><strong>Update:</strong></em><em> Surprisingly, the battery performance of this UPS so far, is above my expectation. I ran it down to around 50% and that gave me just over 30 mins of run time which also included powering</em><a href="https://amzn.to/2vdi1EO"><em> 2 PoE APs</em></a><em> and a </em><a href="https://amzn.to/339Tux0"><em>27″ monitor</em></a><em>. As mentioned later in this article, pay attention to your power consumption. This was something I considered and it’s paid off thus far. The APs for example, max power consumption is just 6.5W per AP. The max load is currently about 20% to 30% of UPS capacity.</em></p><h3 id="4c56d066-361e-4b51-ad49-0b64804fa6a2" class="">Universal Home Lab Rack Shelf</h3><p id="5bd9201b-c973-41bd-8434-4e66a2995a18" class="">Did you notice that the CyberPower 1U UPS does not have rack mounts? Of course, you could rest it on top of other equipment; however, I wouldn’t recommend that because we should keep the batteries as cool as possible and leave space between equipment to reduce the amount of trapped heat. Lastly, for this setup, it will look more professional if placed on a ventilated 1U rack shelf:</p><ul id="92313f52-9368-49f5-b4c4-88408fe1153a" class="bulleted-list"><li><a href="https://amzn.to/2SVmwga">AC Infinity Vented Cantilever 1U Universal Rack Shelf, 10″ Deep, for 19”</a> – $25 (<a href="https://www.acinfinity.com/rack-accessories/rack-shelves/vented-cantilever-1u-rack-shelf-10/">specs</a>) – These shelves are available from 6″ to 16″ deep. The backup battery is 9.5″. Pay attention to the depth of your rack/cabinet and equipment before deciding what you need.</li></ul><p id="b41dc65f-2ae2-44fd-b8e0-c45b281e272d" class=""><em><strong>Update:</strong></em><em> Very sturdy, great for keeping equipment cool and cable management thanks to the vents and slots.</em></p><h3 id="abc02ac7-a02d-409f-844b-e136f74cd9b1" class="">Rack Mount Home Lab Power supply</h3><p id="0c477a4a-a27c-40b5-985b-be5b4daf7ce1" class="">The aforementioned CyberPower UPS comes with six outlets – four backup /w surge + two surge only. Currently under my desk I’m using seven outlets, and this is before ordering a replacement ISP modem, router, switch, servers and does not consider any future expansion. Right above the UPS I will be mounting the following:</p><ul id="8a254078-8761-4b22-951a-e5e67cfb3b06" class="bulleted-list"><li><a href="https://amzn.to/2SWNG6p">ADJ Products AC POWER STRIP (PC-100A)</a> – $ (<a href="https://www.adj.com/pc-100a">specs</a> / <a href="https://amzn.to/3c4nbDx">alternative</a>) – will plug this into the 1U CyberPower UPS.</li></ul><p id="4dcb7deb-8940-4602-ab74-7727e7bc09c2" class=""><em><strong>Update:</strong></em><em> This is very convenient piece of hardware. It plugs direct into the UPS and allows easy on/off switching of other equipment and devices.</em></p><h3 id="619459e2-4b74-461f-a8e1-7dd59ddc6da7" class="">Rack Mount Home Lab Cooling Fans</h3><p id="1a40d1f0-802e-41f3-b81f-db011f3f622c" class="">Maintaining an optimal temperature for rack-mounted equipment prevents overheating, ensures consistent performance and extends their lifespan. The plan is to mount an intake fan at the bottom rack unit position (remember hot air rises). Then after testing, I will decide whether I’ll need an exhaust fan at the very top of the rack.</p><ul id="bb0a0fdd-7b24-4a1a-8e6a-238c005cfbe0" class="bulleted-list"><li><a href="https://amzn.to/2T65qes">AC Infinity CLOUDPLATE T7-N, Rack Mount Fan Panel 2U, Intake for 19” Racks</a> – $110 (<a href="https://www.acinfinity.com/component-cooling/rack-fan-systems/cloudplate-t7-n-quiet-rack-cooling-fan-system-2u-intake/">specs</a>) – an intelligent cooling fan system providing quiet high airflow cooling. The system is housed in a solid aluminum 2U case that’s less than 4 inches deep. It includes a thermostat for automatic fan speed during varying temperatures. A max airflow rating of 220 CFM will provide useful cooling to server, network, and other equipment.</li></ul><ul id="fbb15961-22c9-4c8d-8056-b4e07e75815d" class="bulleted-list"><li><a href="https://amzn.to/2T65qes">AC Infinity CLOUDPLATE T1-N, Rack Mount Fan Panel 1U, Intake for 19” Racks</a> – $120 (<a href="https://www.acinfinity.com/component-cooling/rack-fan-systems/cloudplate-t7-n-quiet-rack-cooling-fan-system-2u-intake/">specs</a>) – A more compact 1U design which moves less air (up to 60 CFM) if you are low on free rack units.</li></ul><ul id="03d903f2-9681-40cf-9f5b-dc226e698cd8" class="bulleted-list"><li><a href="https://amzn.to/38VfUUt">AC Infinity CLOUDPLATE T2, Rack Mount Fan Panel 1U, Top Exhaust for 19″ racks</a> – $120 (<a href="https://www.acinfinity.com/component-cooling/rack-fan-systems/cloudplate-t2-quiet-rack-cooling-fan-system-1u-top-exhaust/">specs</a>) – This 1U top exhaust cooling fan can move up to 300 CFM. At 13.5″ deep it will be either a tight squeeze or will need modification for my rack. So I have not ordered this until I can examine closer.</li></ul><p id="43c39c67-3de8-4f33-9edd-e241a4950841" class=""><em><strong>Update:</strong></em><em> At the lowest fan speed, this cools rack temps by about 2 to 3 degrees Fahrenheit. I’ll update my thoughts again in the summer.</em></p><h3 id="20de8f96-8c48-43eb-8476-4b5dae018b30" class="">Home Lab Routers and switches</h3><p id="5a1d02b3-78c4-4c35-b458-e7603d429333" class="">After many weeks of research, online comparisons, reading reviews, watching YouTube videos and countless hours spent on <a href="https://www.reddit.com/r/homelab/">/r/homelab</a>, I can safely say that the following three companies’ devices will fully cover all of your routing and switching needs: <a href="https://www.cisco.com/c/en_my/solutions/small-business/products/routers-switches.html">Cisco</a> &gt; <a href="https://store.ui.com/collections/routing-switching">Ubiquiti</a> &gt; <a href="https://www.tp-link.com/en/business-networking/">TP-Link</a>. Sorry TP, nothing personal you are just 3rd, but not last, is that better?</p><p id="ee1f80e0-c827-427f-8884-379b6e62657e" class="">For my setup I’m going more small-business than home office, as far as equipment goes. I’d like to be able to have future access to more features. I plan to circle back to this section and post another article with my new network setup. The following were my selections, followed by the runner ups.</p><p id="bc356cc2-4ae9-4152-8231-f634241ac7c1" class=""><strong>Routers</strong></p><ul id="726b9e48-3de2-4b33-9892-653e065f8822" class="bulleted-list"><li><strong>Enterprise features:</strong> <a href="https://amzn.to/38WhPIE">Ubiquiti EdgeRouter ER-10X, 10 Port Gigabit Router with PoE Flexibility</a> – $110 (<a href="https://www.ui.com/edgemax/edgerouter-10x/">specs</a>) – (10) Gigabit RJ45 Ports, PoE Passthrough on Port 10, Dual-Core, 880 MHz, MIPS1004Kc Processor, 512 MB DDR3 RAM, 512 MB NAND Flash Storage, Internal Switch, Serial Console Port.</li></ul><ul id="7b3634ce-6dea-49c4-99a3-27a4e8ccae8b" class="bulleted-list"><li><strong>Enterprise Proven:</strong> <a href="https://amzn.to/2T7roxE">Cisco RV160 VPN Router with 4 Gigabit Ethernet (GbE) Wired Ports</a> – $150 (<a href="https://www.cisco.com/c/en/us/solutions/small-business/networking/routers.html#~on-premise">specs</a>) – 1 Gigabit WAN +4 Gigabit LAN Ports, Dual-Core, NAT throughput: 600 Mbps.</li></ul><ul id="cfdb2143-44db-43b5-9ac9-3fef0cbb0d6a" class="bulleted-list"><li><strong>Home lab Value:</strong> <a href="https://amzn.to/2SVMb8D">TP-Link Safestream Multi WAN VPN Router (TL-R600VPN)</a> – $60 (<a href="https://www.tp-link.com/us/business-networking/vpn-router/tl-r600vpn/">specs</a>) – 1 Gigabit WAN +3 Gigabit WAN/LAN +1 Gigabit LAN Port | IPsec/L2TP/PPTP VPN Supported | SPI Firewall | DoS Defense | Lightning Protection</li></ul><p id="a81e945b-946f-4c36-bde2-87a5dffd7a21" class=""><strong>Switches</strong></p><ul id="8fcbb76d-08c8-4a78-8368-131c028b7a21" class="bulleted-list"><li><strong>Enterprise features:</strong> <a href="https://amzn.to/2HPDuGi">Ubiquiti EdgeSwitch ES-10XP, Managed 10-Port Gigabit Switch with PoE</a> – $115 (<a href="https://www.ui.com/edgemax/edgeswitch-10xp/">specs</a>) – (8) Gigabit RJ45 Ports, (2) SFP ports, 24V passive PoE output on all RJ45 ports, 10 Gbps Total Non-Blocking Throughput, 20 Gbps Switching Capacity.</li></ul><ul id="4c4ed1aa-e28d-44fa-b913-5982c29f4528" class="bulleted-list"><li><strong>Enterprise Proven:</strong> <a href="https://amzn.to/2SSmHsH">Cisco SG250-08HP-K9-NA Smart Switch 8-Port Gigabit with 45W PoE</a> – $150 (<a href="https://www.cisco.com/c/en/us/support/switches/sg250-08hp-8-port-gigabit-poe-smart-switch/model.html">specs</a>) – (8) Gigabit, VLANs, QoS, Voice VLAN, GVRP, MSTP, and IGMP Snooping, Access Control List, 802.1X / RADIUS, SSH/SSL.</li></ul><ul id="6852fa61-c9ad-49cc-8d55-bda666cba636" class="bulleted-list"><li><strong>Home lab Value:</strong> <a href="https://amzn.to/3a4v0Yi">TP-Link 8-Port Gigabit Ethernet Easy Smart Switch (TL-SG108E)</a> – $40 (<a href="https://www.tp-link.com/en/business-networking/easy-smart-switch/tl-sg108e/">specs</a>) Unmanaged Pro, Plug and Play, Shielded Ports.</li></ul><p id="075b0a6b-2217-44b6-976a-7346c277b6e7" class="">There’s also <a href="https://www.netgear.com/home/products/networking/switches/">Netgear</a>, <a href="https://www.pfsense.org/">pfSense</a>, and many, many, other options but you want me to complete this article, don’t you? Of course, this means that you will still have to research the recommendations on your own, as not all of my picks may fit your requirements.</p><p id="135a91e0-422f-49a3-8cef-8010fb91db48" class=""><em><strong>Update</strong></em><em>: Just what I needed. The router runs modified Debian. How cool! Its packed with enterprise features. I’m excited to learn full command line management.</em></p><h3 id="dd2b8067-310a-4282-b28a-1b339bf7cfa4" class="">Home Lab Patch Panels and Network Cables</h3><p id="89781a97-d58d-4c3b-9484-b4cc25ac7138" class="">With hindsight, I should have gone with the <a href="https://amzn.to/2Tflgn9">24 port patch panel</a>. Instead, I went with <a href="https://amzn.to/2Vh9lYA">this 16 port patch panel</a> because, well, I liked how centered and less-busy it looked. I know. I don’t wanna hear it. But look at that thing! If it isn’t already obvious by the 16 ports, it’s the image just above.</p><p id="af964fc6-c5a8-4ed6-bed5-c0f51615b88b" class="">The fastest internet plan available from <a href="http://www.thecable.net/">my ISP</a> is 160Mbps down / 30Mbps up. Thankfully, you do get what you pay for, and kudos to them! For my home lab I probably won’t be needing CAT8 or CAT7 anytime soon and I don’t have the need for high LAN traffic. So I purchased <a href="https://amzn.to/2PldEy5">250′ of regular CAT6 reel</a> and <a href="https://amzn.to/37XehEK">some different lengths Cat6</a> as I’m ok with the 1000Mbps limit. Yeah, I also like my coffee black. If you want smoother network traffic then by all means, go for at least <a href="https://blog.tripplite.com/cat6-vs-cat6a-ethernet-cables-everything-you-need-to-know">CAT6a</a>. However, make sure you go with a <a href="https://amzn.to/2w07tc3">shielded patch panel</a>. Going CAT7 cable or Cat6a is a waste of money if your RJ45 connectors and patch panels don’t support it. “Keep it simple stupid!” No, I’m not talking to you, that was me speaking to myself while selecting patch panel and cables.</p><p id="d86270c6-d0b2-4cca-9ddc-95ed7ff72083" class=""><em><strong>Update:</strong></em><em> High quality! Easy to punch down. All my patch connections worked on the first try.</em></p><h3 id="711df636-d7b5-417a-8e63-f4c5d6ae7a51" class="">Home Lab Servers</h3><p id="28c1e00f-a495-4e40-ac3f-f3f677e01de1" class="">For the purpose of this article, I won’t recommend any specific servers because this will vary a ton depending on what you will be hosting. NAS storage, VMs, web servers, backup servers, mail servers, ad blocker, and all the rest. For my requirements I purchased a <a href="https://www.lenovo.com/us/en/desktops/thinkcentre/m-series-tiny/m73/">ThinkCentre M73</a> and <a href="https://www.lenovo.com/us/en/desktops-and-all-in-ones/thinkcentre/m-series-tiny/ThinkCentre-M715q-Tiny/p/11TC1MT715Q">ThinkCentre M715q</a> both used off eBay. As far as full fledged servers go, some good options are <a href="https://www.dell.com/en-us/work/shop/servers/cp/servers-storage-networking">Dell</a>, <a href="https://www.hpe.com/us/en/servers.html">HP,</a> <a href="https://www.cisco.com/c/en/us/products/servers-unified-computing/index.html">Cisco</a> and <a href="https://www.lenovo.com/gb/en/data-center/servers/c/servers">Lenovo</a>. For home labs, these are often best purchased <em>used</em> from Craigslist or Ebay. You can use Wikipedia to search the specs of older generations for example, <a href="https://en.wikipedia.org/wiki/List_of_Dell_PowerEdge_Servers">Dell PowerEdge model history</a>.</p><p id="ce6e4de2-e1d5-4c1f-bb5e-0ff94910fc95" class=""><em><strong>Update:</strong></em><em> AMD has really raised the bar. I’m most impressed with the CPU performance of the M715q. They both run quiet and cool, with Ubuntu server and Windows 10.</em></p><h2 id="0f708f6f-55a8-4adc-ba83-e291f74121ef" class="">Summary and Conclusion</h2><p id="62d1d371-e159-4b75-abd3-82130bc4536d" class=""><a href="https://imgur.com/gallery/i8YdrnU"><em>Image</em></a><em>: your setup, should be your setup. As traditional or as custom as you’d like!</em></p><p id="9e7ba2d1-469c-4f32-bc9d-221f79e501d4" class="">When writing this guide I tried my best to convey my passion, thoughts, and considerations throughout the selection process. It’s important that you find your passion when it comes to building your home lab. What will you use it for? How will it benefit you and others?</p><p id="e6bbde51-b4d9-4119-8371-f9c9377fe6d4" class="">If you have a plan, and if your lab is going to be something you enjoy learning, failing and succeeding with, then it will pay for itself in one way or another. That said, be careful with the power consumption! You don’t want to end up with… <em>mortgage $1,100, power bill $1,200, the feeling when walking into your home lab… NOT priceless.</em></p><p id="4e76ddf9-d18b-41ad-87b2-7c0b4055efa3" class="">Plan with room to expand and feel free to start small. You don’t have to start with a rack, cabinet, patch panels and all the other gear. Get your feet wet, replace your ISP modem, then build from there. Avoid making rash decisions on hardware, instead, sleep on it. While you sleep, post a question or two in <a href="https://www.reddit.com/r/homelab/">/r/homelab</a> to get valuable feedback from other techies and sysadmins. You will find that the more you research, it will open up additional ways to get things just right, or very wrong. More importantly, have fun! Share your home lab goals with your spouse, colleagues, kids and that neighbor across the street who still only waves after five years.</p><p id="87751824-2a91-40b9-9f56-85f0ed8d4e84" class="">I hope that this article was an enjoyable read, inspiring and that it opens a dialog between us. Feel free to contact me. I love hearing, supporting and learning from you guys!</p><p id="b1a48afd-b8b1-4e40-bdb4-fe03aaf6be7e" class=""><em><strong>Update 1 – March 10th 2020:</strong></em><strong> </strong></p><p id="130eb1d2-246e-4e43-a8b0-e4a1c6ed4a45" class="">As of today, I’ve almost completed setup of my new Home lab and it’s now fully functional. I’m pleased with all of the items purchased. For this update, I’ve added to the article some highlights, tips and findings below each hardware item in <em>italics</em>.</p><p id="b3f2f5c2-f2a4-4e56-b741-d3f82f4ba2b8" class="">One thing I missed in the original article and Home lab setup was the coaxial cable. The existing cable turned out to be about three feet shorter than required. Tomorrow I’ll replace with a longer cable. As you can see I’ve also replaced the ISP modem with the Motorola model listed below.</p><p id="87608fd4-7623-4bf1-bc7c-048f4ccf83e0" class="">Unfortunately, the <a href="https://www.ui.com/products/#edgemax">Ubiquiti EdgeRouter and EdgeSwitch</a> turned out to be about an inch too wide. This was something I failed to consider because I measured their combined width, then compared that measurement to the rack’s interior width, instead of the width of the rack shelf. Oops! Now, so that the switch doesn’t remain sitting on the router, I’ve just ordered two <a href="https://amzn.to/2PZPFVu">Ubiquiti rack mounts</a>. Better cooling and aesthetics, but also the rack mounts will allow positioning the router and switch directly below the 16 port patch panel pictured below. Check back in a week or two for another update.</p><p id="b4b62d68-c5e3-47ea-a4a9-0ed487736055" class=""><em>My Home lab – a work in progress (everything pictured is listed below)</em></p><p id="4cb7bd75-6911-4b3d-9da7-b591b4f4ee03" class=""><em><strong>Update 2 – March 25th 2020: Will follow up with details and feedback shortly. Here’s an updated status photo:</strong></em></p><p id="d488ebd8-e816-4f9d-8664-32c4518eeb47" class=""><em><strong>Update 3 – April 19th 2020.</strong></em></p><p id="11a398c1-6cad-4d8a-a046-0b0125d3ac0b" class="">Over the past few weeks, I’ve added a few things.</p><ul id="3e018775-b221-40a9-b2cb-14d35082599b" class="bulleted-list"><li>A <a href="https://amzn.to/2wNWCTg">Netgear 4G LTE modem</a> (and <a href="https://amzn.to/2XORKIE">antenna</a>) for internet auto fail-over from ISP1 (cable internet) to ISP2 (4G internet).</li></ul><ul id="daa9c58b-efdb-472f-b9b1-1c5de011fa8a" class="bulleted-list"><li><a href="https://amzn.to/2XPIC6v">1U Blanking Panels</a> to improve the efficiency of the cooling fans.</li></ul><ul id="01278371-29d0-4804-a0ff-6e0ac4f4bad5" class="bulleted-list"><li>The previous two vented 1U blanks are now at the top of the rack. Will be used to mount a monitor. (see to do’s below)</li></ul><ul id="fd3ab28b-7564-4251-b217-0f9f4c2c280c" class="bulleted-list"><li>Quick access <a href="https://amzn.to/2XLWejd">1u mess cover</a> to prevent accidental power switch toggling.</li></ul><ul id="11889b84-c418-40b3-95e7-d0a51052576c" class="bulleted-list"><li>Cleaned up all wires and cables. Labeled network cables but didn’t label the patch panel, of course!</li></ul><ul id="8c1a5617-20d2-4ea7-89b8-bd3726154f8b" class="bulleted-list"><li>Added VLANs, restricted bandwidth of guest devices as well as some other home devices, hardened firewall.</li></ul><ul id="c169e657-8621-40ed-afdb-5c2033e8feab" class="bulleted-list"><li>Installed Zabbix server for additional monitoring of 150+ remote servers.</li></ul><ul id="2fe9e8a6-afcc-40f5-8e70-5baf0e67bafa" class="bulleted-list"><li>Added a domain to static IP. Which has a couple of public facing subdomains.</li></ul><ul id="48a875a7-fdd6-4f59-8c03-666d8c829cfc" class="bulleted-list"><li>Removed or smoked-out’ some of the logos and text for a cleaner look. (aka. OCD)</li></ul><ul id="81462efa-96af-4e85-9c62-bd008830163b" class="bulleted-list"><li>Added <a href="https://amzn.to/3bn1YEc">x2 UAPs</a> and <a href="https://amzn.to/3anxuAq">x2 beacons</a>.</li></ul><ul id="16a31830-913a-4a9c-84fc-e91d9e3e7b77" class="bulleted-list"><li><a href="https://amzn.to/2VFwkez">Outlet savers</a> so I could make use of all available power outlets.</li></ul><ul id="5e183069-db91-4ef5-912d-57218a4848ac" class="bulleted-list"><li>Added push notification for when ISP1 goes down since switching to backup ISP2 is completely seamless.</li></ul><p id="07f1b047-cb0a-4e42-b69b-7b5fb5b078f9" class="">To do’s:</p><ul id="a0cabd12-5f25-4c12-9813-4f1df662c89b" class="bulleted-list"><li>Add a separate 21″ monitor to display Zabbix hosts/dashboard.</li></ul><ul id="4e6f1b8e-796c-4386-8862-6b3ae1bd7826" class="bulleted-list"><li>Dabble with <a href="https://www.pfsense.org/">psfense</a>. Reset everything to defaults and reconfigure with lessons learned.</li></ul><ul id="e9bfb607-9edc-4b7a-b81c-b59054d6a802" class="bulleted-list"><li>Add indoor PoE surveillance cameras (currently only outdoor cams).</li></ul><ul id="df5aa06c-78f5-4c0f-90f8-c0411ec35738" class="bulleted-list"><li>Setup KVM desktop switch to be able to switch easier between the two servers and desktop.</li></ul><ul id="9f6a2c8e-ca64-4933-b63d-354182c85448" class="bulleted-list"><li>Check rack temperatures from June to August to determine if setup is as cooling efficient as planned.</li></ul><p id="75e2f077-9563-4592-b977-420679096092" class="">Latest home lab photo:</p><p id="c2f70d8c-b350-4946-a6c3-8da761f9f5d0" class=""><em><strong>Update 4 – May 1st 2020:</strong></em></p><ul id="9564464d-cf99-484f-8f9a-03264bdd3243" class="bulleted-list"><li>Added separate 21″ monitor to display remote hosts/dashboard using Raspberry Pi and Zabbix.</li></ul><p id="c219e710-58e2-45a1-b93f-ef96dec2881f" class=""><em><strong>Update 4 – June 7th 2020:</strong></em></p><ul id="cfdd07f8-e8ea-404b-8be5-72868f444909" class="bulleted-list"><li>Added keyboard and mouse for walk-by access to Zabbix UI.</li></ul><ul id="8a663682-7ea8-4164-879c-61cceabfc9fe" class="bulleted-list"><li>Swapped out mesh security cover with tinted plexiglass.</li></ul><ul id="2096aa2f-baa6-47dd-8782-7d0edc370d9c" class="bulleted-list"><li>At this point my home lab is complete. Is it ever? :)</li></ul></div></article></body></html>

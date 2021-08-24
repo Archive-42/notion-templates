@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Extract or Die</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7caa4182-23ed-48fc-81d0-1b33c6633cbe" class="page sans"><header><h1 class="page-title">Extract or Die</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://solana.substack.com/p/extract-or-die" class="url-value">https://solana.substack.com/p/extract-or-die</a></td></tr></tbody></table></header><div class="page-body"><p id="b4bf4f99-2a8a-499a-b01c-f060a48699d8" class=""><strong>Digging for microcode.</strong> As the catastrophic state of California’s finances finally begins to set in among politicians, anti-tech media personalities, and far left cultural influencers, the narrative on California’s techxodus — that is, the migration of California’s technology industry out of the state — has shifted from mockery, and “we’ll be better off without you,” to a far more sober, and increasingly-desperate “leaving California is immoral.”</p><p id="b80d85ac-d72e-4889-8270-4769091cc01c" class="">As it is simply too embarrassing for politicians to admit the state needs the technology industry after more than a decade of antagonizing the men and women who built it, and as it is political suicide for incumbent politicians in a one-party state to admit that every one of the problems we’re facing has been created by our elected leaders, a moral argument for tech’s responsibility to California, and specifically the Bay Area, has recently been produced. It goes something like this: young ambitious people moved to the state, and struck gold. But rather than “give back” to the land, they’re leaving with resources they “took” from the region<em>. </em>Like the milkshake guy from <em>There Will Be Blood, </em>sucking oil from the earth. Like the evil army people from <em>Avatar</em>, and their unquenchable thirst for unobtanium. It’s the <a href="https://solana.substack.com/p/substack-billionaire">Substack Billionaire Boy’s Club</a> at it again, but this time with shovels and axes and the exploitative fantasy of<a href="https://twitter.com/taylorlorenz/status/1340866618541232129?s=10"> eating up all the “low-income”</a> <a href="https://therealdeal.com/miami/2020/12/17/tech-investor-keith-rabois-pays-record-29m-for-venetian-islands-home/">29 million dollar mansions in Miami Beach.</a></p><p id="100f2bdf-879f-4ebf-8274-6c1f5f1332bc" class="">One of the most popular, early threads on the subject, retweeted by a handful of high-profile tech journalists, began as follows:</p><p id="3d9599c4-3a5c-4934-bdca-3838a35ce902" class=""><a href="https://twitter.com/tiffani/status/1336719033748623360?s=20">The thing I like least about the folks who leave SF + Silicon Valley for Texas and Miami and wherever else is the crapping on the place they left *after* they&#x27;ve extracted all they can from it. The Bay Area helped you build your immense wealth and that&#x27;s the thanks it gets. smh.</a></p><p id="7e414c4f-a8fc-4645-ae4d-fac514210bf1" class="">“Extracted,” she says. Smh. A week or so later, in the psychotic San Francisco Board meeting where our local representatives <a href="https://www.vox.com/recode/2020/12/3/22151273/mark-zuckerberg-general-hospital-san-francisco-naming-vote">voted 10 to 1 to officially condemn Mark Zuckerberg for donating 75 million dollars to a hospital</a> (really, this happened), the word came up again. When the floor was opened to the public, an activist downplayed what was, as Teddy Schleifer reports, “the largest single private gift to a public hospital ever,” and accused Zuckerberg of “extraction.” Our local politicians did not think this strange.</p><p id="d3555b34-33e2-451c-b653-6f9754859bf7" class="">The following week, Jeff Lawson, cofounder and CEO of Twilio, echoed the extraction sentiment. In a viral thread of his own, he sharply critiqued the industry for thanklessness and immorality.</p><p id="b046bb50-cf67-4424-b1ff-34ea8da96619" class=""><a href="https://twitter.com/jeffiel/status/1339996375581396999?s=20">🧵 With many of the Valley’s richest companies fleeing the Bay mid-pandemic, I feel compelled to speak out. There’s no question that California is imperfect. The cost of living, taxes and policies, among other things, make it difficult for lots of people to succeed here. (1/9)</a></p><p id="cbb240b2-a44e-4545-a2f9-56e0afe24c52" class="">And here, his essential point:</p><p id="2508121c-cf50-49dd-b091-30a5d9930b26" class=""><a href="https://twitter.com/jeffiel/status/1339996509211922433?s=20">What I take issue with is our leaders—people of means— abandoning our community when it needs us most. Reaping the benefits of Silicon Valley’s talent, tech incubators, mentors, professional network, and culture until they no longer need it. (3/9)</a></p><p id="41b305fa-d525-4ef6-981e-22f854a95465" class="">I don’t know Jeff. I have no sense of the personal or professional reasons that have so passionately committed him to the region, and I do think it’s commendable to stay and fight, even if donating to charities doesn’t constitute fighting, nor will it correct the Bay Area’s cascading series of political disasters. But I take extreme issue with the notion that industry leaders have taken something from the “community,” defined here as the “talent,” the “incubators,” and the “mentors.” This is precisely the opposite of reality. The men and women leaving <em>are </em>the talent, they have started the incubators, they have built the companies, they have funded the startup ecosystem, and they have mentored countless young people. This is the “network.” <em>They are the network</em>. Technology workers do not “extract” value from the region, they are what makes the region valuable.</p><p id="4d17e26a-6728-41b9-ab1f-c4f0f9f6032a" class="">California is beautiful — San Francisco is truly, I think, one of the most beautiful cities in the world — but the soil isn’t made of magic, there’s no such thing as digging for microcode, and the Bay Area’s nativist, anti-immigration political climate has certainly not created the tech community, which is populated largely by immigrants, be they from out of the state or out of the country.</p><p id="43ed6207-6d5f-48b9-b709-2d644ec9bbd0" class="">Among many things, including talent, opportunity, and soft power, the technology industry has brought tremendous tax revenue to the Bay Area. <a href="https://twitter.com/micsolana/status/1337079253586702337?s=20">The budget of San Francisco literally doubled this decade</a>, from around six billion to over twelve billion dollars. With our government’s incredible, historic abundance of wealth, the Board of Supervisors has presided over: a dramatic increase in homelessness, drug abuse, crime — now including home invasion — and a crippling cost of living that can be directly ascribed to the local landed gentry’s obsession with blocking new construction. This latter piece is important, as it appears to be the only thing our Board cares about. Increasing the local housing supply would decrease the value of the multi-million dollar homes almost everyone on the Board owns, and we could never have that.</p><p id="054ffeec-c715-459b-a347-63630a4f922a" class="">These past ten years I often wondered where the city’s money went. Could the leadership really be this stupid, or was there corruption? Turns out both. <a href="https://www.sfchronicle.com/crime/article/City-Hall-corruption-case-What-s-next-for-15767978.php">We’ve recently discovered our politicians are literally criminals</a>, <a href="https://www.sfchronicle.com/bayarea/heatherknight/article/S-F-City-Hall-scandal-Why-were-lavishly-paid-15777995.php">but they’re also bad at crime</a>.</p><p id="c60411f5-f955-4a3f-b7c4-ededf0a8f292" class="">The San Francisco ruling class did secure a few wins this decade. They managed to ban vapes, scooters (effectively), electric bikes (kind of), and those little plastic swords that free men in free countries are still allowed to stick in cocktail fruit. They failed to ban busses and cafeterias, though somehow succeeded in turning both into symbols of billionaire greed. They also <a href="https://sfgov.legistar.com/View.ashx?M=F&amp;ID=6221071&amp;GUID=295F9D30-10B1-4719-87E8-EA7A7981F892">instituted the “San Francisco Office of Emerging Technology,”</a> which in theory prohibits almost every future company and technology from existing in the city without prior approval from the local government. Laws aren’t enforced in San Francisco, so the OET hasn’t really come up. But a company in this city can now be attacked by the Board at any moment, for almost any reason. This is the nature of ambiguous laws in one-party states. In a country where nothing is technically legal, punishment can be meted out for almost any whim or unjust personal reason that can be imagined by small-minded people with political power.</p><p id="6e081b59-c520-481b-814c-a4e27ddd50bc" class="">The Bay Area housing, homeless, and drug crises are all exacerbated by the state government, which is as incapable of managing its finances as it is incapable of managing its public land; we are now teetering on the edge of true financial ruin in a state of <a href="https://solana.substack.com/p/the-2020-gavin-newsom-fires">endemic, constant wildfire</a>. But let’s take a closer look at this issue of money. On one hand we have insane, nativist property tax codes, which punish new homeowners at the expense of longtime landlords, and on the other our income taxes have skyrocketed. Since income taxes are structured progressively, the state has backed itself into a position of extreme uncertainty, as the<a href="https://www.kqed.org/forum/2010101867426/californias-top-1-pays-almost-half-of-the-states-income-tax-is-that-a-problem"> top one percent of earners pay half the state’s taxes</a> — while politicians argue the state’s wealthiest men and women, who already pay more in taxes than the wealthiest men and women of any other state and most free countries in the world, are not paying their “fair share.” As if rudimentary economic threats were not enough, politicians have made cultural platforms of their anti-technology, <a href="https://www.abcactionnews.com/news/national/coronavirus/calif-politician-tweets-f-k-elon-musk-after-ceo-threatens-to-move-company-over-covid-19-shutdown">anti-industry attitudes</a>, and have done everything in their power to drive our top one percent of earners out of the state. In this, <a href="https://www.kusi.com/elon-musk-confirms-he-left-california-and-moved-to-texas/">our politicians are succeeding</a>.</p><p id="3f6d262d-8edc-4c7b-8ce1-ae14f4ff9051" class="">Such success in driving top earners from the state only further exacerbates the state’s political disasters, with our government of bloated, corrupt services now starving for income. This has in turn increased the political appetite for all manner of draconian, anti-business practices among politicians with no apparent ability to conceive of the second order effects of their legislation, a deficiency in basic intelligence that <a href="https://solana.substack.com/p/state-of-disaster">led, for example, to the unmitigated disaster that was AB5</a>. In other words, everything is structured to further deteriorate.</p><p id="f748a959-1e70-4eb3-bb2f-423cee59a379" class="">A donation to the food bank? Not gonna fix this.</p><p id="04379472-bca5-4aa9-b0d5-3271fdf95fba" class="">For the last half century, entrepreneurship in tech has been positive sum, which is to say almost everyone who participated won. For decades, new companies and technologies were built almost from nothing. They were not discovered, and they were not mined from the earth. They were created by the men and women who, for the tremendous, historical wealth <em>they brought to the state of California, </em>and specifically to the Bay Area, have in turn been demonized, scapegoated, and punitively targeted by a land lording political class of leeches who have themselves built nothing.</p><p id="a1137940-1200-463f-9203-7d2117b36c56" class="">Fortunately, tech industry “extraction” is something other regions of the country are welcoming with open arms.</p><p id="e00296b0-865f-4dfb-8c19-3e6f35588c91" class=""><a href="https://twitter.com/FrancisSuarez/status/1335037068108554241?s=20">How can I help? ok guys hear me out, what if we move silicon valley to miami</a></p><p id="6de3b88c-7c15-443d-a22d-f244bb14da37" class=""><strong>Taking the L.</strong> A lot of people just tuning in don’t understand why the relationship between the technology industry and the governments of California appears to be so broken. There’s the sense the technology industry “lost” some kind of fight. But with such tremendous wealth and creativity, how was this possible?</p><p id="929f3f23-c43d-4098-b1c4-632aede07dfb" class="">It’s pretty simple, really. We never actually fought.</p><p id="e258d7fa-67db-4763-9647-0de0c212710c" class="">There is a tremendous irony in the notion that tech workers have ruined the region, for which we are now constantly being blamed while at the same time being told that leaving is tantamount to violence. The truth is, had tech workers actually assumed a significant measure of political influence, and led in local politics, San Francisco would today be one of the greatest cities in the world. But not only was such political influence not achieved, it was never attempted. Throughout the most recent technology boom of the last fifteen years, there has been almost no meaningful engagement in local politics from the industry.</p><p id="e29fb14e-befd-44a1-961c-317a2ee5c437" class="">As has now been well established, the Bay Area’s landed gentry class, which is in complete political control of the region and has been for decades, did almost everything in its power to block construction as demand to live in the region skyrocketed. This artificially ballooned real estate values — along with the cost of rent — to historic, national highs. While the technology industry generates tremendous sums of money for the region in tax revenue, the number of actual technology workers has always been relatively small. In San Francisco, we were never anything close to a voting majority, and of the minority of workers who lived in the city most were not politically active. From here, it was a tale as old as time: politicians in San Francisco scapegoated tech workers for the housing crisis the government created. The scapegoating, amplified by a thoughtless press, catalyzed anti-tech sentiment that increasingly influenced ballot propositions and local political races. Tech workers, ensconced in the world of their work, remained more or less oblivious of these developments.</p><p id="328553bf-1731-4cad-8b4d-363b8f560dc2" class="">I do think the technology industry can and should be blamed for one thing: taking this bullshit for as long as it has. While the industry has caused none of the problems it’s accused of causing, absence of tech workers from local politics has been problematic, if understandable. The technology industry is ripe with opportunity, and attracts people excited by the prospect of building technologies and companies that have never before existed, unencumbered by bureaucracy, and limited only by the bounds of their imagination. No one moved to San Francisco because they wanted to run for the local Board of Supervisors. <em>I get it</em>. But if 2020 proved anything, it’s local politics is almost the only thing that matters in terms of our day-to-day existence, and if the deterioration of San Francisco can’t be stopped, I at least hope it will be remembered. We can ignore local politics, but local politics will nonetheless shape our lives, and a sufficiently unhinged City Hall can destroy almost anything.</p><p id="2e1430b6-d3ba-4df9-85fd-c3a1f302885d" class="">Many tech workers have promised to stay in San Francisco, and to help fix the system. Among the few who aren’t merely throwing a few guilty millions into the black hole of local non-profits and calling it a day, a grim and shocking reality will quickly be discovered:</p><p id="3be544e7-c484-4838-912a-7ac6174d6965" class="">Nothing in San Francisco can be set on a path to slow correction until at least six of the eleven district board seats along with the mayorship belong to sane, goal-oriented leaders cognizant of our city’s many problems, and single-mindedly focused on solving them. These politicians will likewise need to be extremely well-funded. This is to say we need a political class, funded by a political machine, neither of which currently exist. Even were both the class and the funding apparatus to rapidly emerge, and even were the new political coalition to win an undefeated string of miracle elections, it would take four years to seize meaningful political power from the resident psychotics in charge, who, as per the last election, appear to be very popular among <a href="https://amgreatness.com/2020/12/05/something-strange-in-the-city-by-the-bay/">close to ninety percent of voters</a> (a curiosity for another wire). This is to say nothing of the broader Bay Area political toxicity, nor the state political dynamics, which are poised to exacerbate every one of our problems. It is a multi-front political catastrophe.</p><p id="08ca973d-d8c4-45f2-80cc-c7b7968f7a02" class="">Fight or flight? There is no right answer here. I’m still figuring it out myself. The only thing I know for sure is “extraction” didn’t do this, and if what the technology industry has given the Bay Area constitutes “exploitation,” then for the love of God, Mark Zuckerberg, exploit me next.</p><p id="b6ddd56a-0cca-474d-908d-d1b6d28beca2" class="">In any case, regardless of the city we land in, we have to get involved. There’s no ignoring the rest of the world anymore. Grab your shovels, folks, we’ve got work to do.</p><p id="f4426400-0b01-42a1-ae0c-85ac3d33d03f" class="">Extract or die.</p><ul id="1e8a3987-0437-45fe-97cf-a71427659659" class="bulleted-list"><li>SOLANA</li></ul><figure id="fc76e491-3d56-431c-ad00-6d879547fc28" class="image"><a href="Extract%20or%20Die%207caa418223ed48fc81d01b33c6633cbe/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F2eacf528-d2b4-4a56-b480-e58af01d3a84_1280x720.jpeg"><img style="width:700px" src="Extract%20or%20Die%207caa418223ed48fc81d01b33c6633cbe/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F2eacf528-d2b4-4a56-b480-e58af01d3a84_1280x720.jpeg"/></a></figure></div></article></body></html>

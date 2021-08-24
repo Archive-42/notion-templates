@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Startup financial models - 12 templates compared for SaaS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3f8f15dc-e9f0-46ca-a567-2d70a67fce11" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">✏️</span></div><h1 class="page-title">Startup financial models - 12 templates compared for SaaS</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-orange">Finance</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.stephnass.com/blog/startup-financial-model" class="url-value">https://www.stephnass.com/blog/startup-financial-model</a></td></tr></tbody></table></header><div class="page-body"><figure id="a6f60fd6-4273-427d-8116-e8ccec9f3ebb" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/2c0a206c-765a-4390-8548-62109d411e0c.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/2c0a206c-765a-4390-8548-62109d411e0c.png"/></a></figure><p id="341c5e81-5fb1-4bd1-9787-d38f2f39a745" class="">As a founder, there comes a time when you need a business plan, complete with financial forecasts, income statements, and fancy graphs that will impress your investors.</p><p id="6c39456a-695c-4ba4-b1e4-9450dbf8a703" class=""><strong>Don&#x27;t build it from scratch - use an existing model.</strong></p><p id="8cf2aa4e-5c9f-4623-beff-94e39cd02b33" class="">A financial model allows you to draft financial projections easily, fast, and in a professional manner. A great template will also force you to think through all the aspects of your project and make sure you really get the financial logic behind your business.</p><p id="d0805cfc-8723-49da-ac5e-af91ed08170b" class=""><strong>It can be annoying but trust me, it&#x27;s worth your time.</strong></p><p id="1c3c8e90-7f3e-49dc-b43a-1be854bbea05" class="">This post compares the top 12 templates of financial models for SaaS startups. I have personally tested each model. I have ranked them on 40+ items along 5 categories. I&#x27;ve looked at both spreadsheets and SaaS apps, and both free and paid solutions.</p><p id="8ebf23de-d622-4650-99d2-602a9f55707f" class="">If you are looking at building your SaaS financials, this article is for you.</p><h2 id="f7e7c72d-02ed-4496-933b-40de49dd4942" class="">Table of content</h2><h2 id="b8b9b290-aeca-4ec9-9956-ae6c6689e61e" class="">Methodology - What makes a great financial model for SaaS startups?</h2><p id="a9594409-c9ad-4e6b-af02-c2b239f445fa" class="">Here is the methodology I used to build this benchmark.</p><p id="0f25f204-817c-496d-9219-c3341d5de4dd" class="">I compared 40 points across 5 categories: (a) financial statements, (b) analysis capabilities, (c) revenue modeling, (d) cost modeling, (e) extra features. A detailed analysis of each model is available below. In each case, I tested the software/spreadsheet myself.</p><h3 id="c1a1190f-36fd-4096-bd48-8a97e428047d" class="">Criteria 1: Financial statements</h3><ul id="d8faa89c-731a-4f23-ba8c-0a0f70e3a79f" class="bulleted-list"><li><strong>Time scale</strong>: Are the statements over 1 year, 3 years or more? You usually want 3 years as a minimum when you speak with professional investors.</li></ul><ul id="afcd1f38-e17d-4605-a426-000d6f5a0c85" class="bulleted-list"><li><strong>Income statement</strong>: Does the template include an income statement? You usually want a monthly income statement, at least for year 1.</li></ul><ul id="1fe5d05a-de92-44c0-b6ff-1763de32c79f" class="bulleted-list"><li><strong>Cash flow statement</strong>: Same as income statement</li></ul><ul id="2ff34d83-1586-4422-b068-4585d0a0403a" class="bulleted-list"><li><strong>Balance sheet</strong>: Same as income statement</li></ul><ul id="e9e58add-863a-4039-bdd6-233e953aa066" class="bulleted-list"><li><strong>GAAP/IFRS</strong>: Are the statements compliant with GAAP and/or IFRS rules?</li></ul><ul id="0337c73d-a289-4cf9-a1d6-f21184ad75b2" class="bulleted-list"><li><strong>Currency</strong>: How many currencies are available?</li></ul><h3 id="b31a8c12-3d4c-43eb-a90b-8d58092f9b18" class="">Criteria 2: Analysis capabilities</h3><ul id="39f10b4b-37bd-40f2-b416-ae3523cec871" class="bulleted-list"><li><strong>Financial analysis</strong>: Number of typical financial metrics included e.g. breakeven point, quick ratio, average inventory, etc.</li></ul><ul id="e361f65f-b75b-41c1-871e-2fb0ab5b9cba" class="bulleted-list"><li><strong>SaaS analysis</strong>: Number of typical SaaS metrics included e.g. MRR growth, SaaS magic number, CAC/LTV, etc.</li></ul><ul id="83d6e3d7-4fc2-40fa-a5fc-a8fb8f2c6b88" class="bulleted-list"><li><strong>Graphs</strong>: Number of built-in graphs</li></ul><ul id="19cd8530-d3db-446d-99b4-2747334fd29e" class="bulleted-list"><li><strong>Costs by P&amp;L category</strong>: Does the template break down costs into P&amp;L categories (CoGS, RD, G&amp;A, etc.)</li></ul><ul id="5a24098b-fb34-48ff-9388-e3a590b56eeb" class="bulleted-list"><li><strong>Costs by departments</strong>: Does the model break down costs into departments (sales, marketing, CS, engineering, etc)</li></ul><ul id="faad0557-ce9e-40ab-82b1-e3af597ad0b3" class="bulleted-list"><li><strong>VS Scenarios</strong>: Does the template allow you to compare multiple scenarios?</li></ul><ul id="80fa3f48-047f-4aca-bd34-e6bafd082fcd" class="bulleted-list"><li><strong>VS Industry comparables</strong>: Does the template compare your financials against industry comparables?</li></ul><ul id="2115a9f4-29f0-472c-8575-4b6eaa639f8b" class="bulleted-list"><li><strong>VS Actuals</strong>: Does the template allow you to run your model versus your actual numbers?</li></ul><h3 id="e6816e9a-de14-4edd-923f-ba5cf94a9182" class="">Criteria 3: Revenue modeling</h3><ul id="21627f42-5ebf-48c7-b421-de6acc560632" class="bulleted-list"><li><strong>New client acquisition</strong>: How do you enter new clients into the model? Possibilities include: entering a number manually for each month or year (it sucks); autofill the model from a base number and a growth rate (sucks a bit less); autofill several streams - each stream represents a different type of client e.g SMB/enterprise (better); or even fully model each acquisition channel (the best, very rare)</li></ul><ul id="b28438ef-e08f-4b79-91d3-156619f19604" class="bulleted-list"><li><strong>Offerings</strong>: How many offers can you define and how precisely can you model them? This includes the possibility to create one-off offers, recurring offers, or a combo, but also the possibility to create introduction times and end times for specific offers.</li></ul><ul id="c53e06d7-1cc7-423d-9190-8404c4b4997f" class="bulleted-list"><li><strong>Pricing model</strong>: How many pricing models can you define and how precisely: tiers (free, basic, premium), revenue models (per seat, per usage, etc), automatically increase or decrease the plans price over years.</li></ul><ul id="ec2eddec-a253-4d11-80ca-8c607bd969f1" class="bulleted-list"><li><strong>Existing clients</strong>: Can you model expansion, contraction, churn, reactivation?</li></ul><ul id="fb9cd38a-fc0f-4dc7-8c6d-dfb3f3fc1b18" class="bulleted-list"><li><strong>Commitment</strong>: Can you model monthly VS yearly VS multi-annual contracts?</li></ul><ul id="2b8e443f-d14f-413f-ac97-5c5ce30bea87" class="bulleted-list"><li><strong>Service revenue</strong>: Can you model punctual service revenue on top of all the other pricing models and offerings?</li></ul><ul id="8dd8fecf-78b3-4f44-b3ba-f01357477b9a" class="bulleted-list"><li><strong>Enterprise specific</strong>: Does the template offer specific features to model complex enterprise sales, such as landing/expansion, custom product developments, various sales cycles, etc?</li></ul><h3 id="fd98bd1d-c7fa-46c7-9304-d9b437b79ab4" class="">Criteria 4: Costs modeling</h3><ul id="0976d7c5-1b2b-4b3e-8b62-8c86e46dbbd1" class="bulleted-list"><li><strong>Direct labor costs</strong>: The best templates allow you to correlate direct labor costs with relevant metrics. For example, your sales staff is calculated based on forecasted income and sales target per account executive. Same for customer success payroll with number of customers and workload target per CS staff.</li></ul><ul id="abb2b46a-ec2c-4234-8e17-dc1488b1e92f" class="bulleted-list"><li><strong>Direct non-labor costs</strong>: just like with labor costs, the best templates allow you to link some direct non-labor costs with relevant metrics. For instance, server costs can be a % of MRR.</li></ul><ul id="9e5f500a-b49d-41e2-9dad-64cd005585e4" class="bulleted-list"><li><strong>Indirect labor costs</strong>: same as above. Even for indirect costs, some templates find smart ways to tie them to some aspect of the business.</li></ul><ul id="5989f0b7-84c4-439e-a762-fcb530518d7a" class="bulleted-list"><li><strong>Indirect non-labor costs</strong>: same as above</li></ul><ul id="253e58e5-a92f-4873-a1ef-88f73af445ec" class="bulleted-list"><li><strong>Payment terms</strong>: Can you define the payments terms with your vendors and suppliers? May be useful if there is a hardware component to your offer.</li></ul><ul id="4c282693-1516-47b9-89bf-22d7fe5be643" class="bulleted-list"><li><strong>Hardware-friendly</strong>: This is a special mention for templates that model things like shipping costs, inventory delay, etc.</li></ul><h3 id="a829e3e3-a124-4fa9-b6f5-17fd11947204" class="">Criteria 5: Extra features</h3><ul id="e4766339-6513-41ce-a145-796e41c27fc2" class="bulleted-list"><li><strong>Documentation</strong>: Is there proper documentation in the model and on the website? Are there good explainer videos? What kind of direct support (chat, email) comes with the template?</li></ul><ul id="46cd0d69-19c9-487b-928b-bde4b0804320" class="bulleted-list"><li><strong>Languages</strong>: In what language is the template available?</li></ul><ul id="79f01cf9-f949-4704-8b26-fde269a8a930" class="bulleted-list"><li><strong>Third-party integration</strong>: Third-party integrations can be useful to input or update data over time, or to display advanced graphs.</li></ul><ul id="8d160284-643f-4c0e-bcde-505449d244bb" class="bulleted-list"><li><strong>Excel spreadsheet</strong>: Can you access your financials as a Microsoft Excel spreadsheet? This is a must if you need to share it with investors.</li></ul><ul id="b3ea0189-01da-4fe5-944a-67d6454aa072" class="bulleted-list"><li><strong>Google Sheets</strong>: Does the model work in Google Sheets? Not all models that work in Microsoft Excel work in Google, so you may want to consider that point.</li></ul><ul id="5fc94aad-2e39-43ee-b69b-c5a528b85f1e" class="bulleted-list"><li><strong>Editable formulas</strong>: Some templates do not allow you to modify formulas - which is a massive bummer when it comes to customization.</li></ul><p id="eddb6708-eec9-4f00-99fc-46ff6b1b7e57" class="">Granted, it&#x27;s not a perfect methodology. One could argue forever about whether cap tables should be included in a startup financial model. But it&#x27;s the best I could come up with - without being a finance nerd myself :)</p><h2 id="ce364ea0-313c-48ad-acf9-88981b1f0c7c" class="">Disclaimers: affiliation, impartiality, and non-finito</h2><p id="519d0135-faa7-4958-9d80-2e1beb2325a2" class="">Before jumping to the heart of the matter, please allow me three disclaimers:</p><ul id="a07232b9-6035-4f76-b8ca-9c7774affdb1" class="bulleted-list"><li>Affiliation: Some links in the article are affiliated - which means that if you end up buying a template through one of those links, I&#x27;ll get a few $$$. This doesn&#x27;t cost you anything, and allows me to keep writing useful articles for you.</li></ul><ul id="99455db0-4de5-459e-8c5a-4cd2b22cd69b" class="bulleted-list"><li>Impartiality: Regardless of whether there is a referral in place or not, I am committed to providing you with an honest opinion. I take great pride in being an independant, honest, and trusted source of information for entrepreneurs.</li></ul><ul id="1f6f1ba6-603b-4c01-b0cf-28bedc85421f" class="bulleted-list"><li>Non finito: This is a non-finite work. I am happy to update the article if you bring new, relevant information to my knowledge. I am also happy to fix any mistake or clarify any confusion that you may find in the article.</li></ul><h2 id="aabb9c0d-3664-499d-8d2a-c0893d872691" class="">1. &quot;FISY Innovation Plan&quot; by Remi Berthier</h2><p id="6a5c4a24-581b-4f5e-8921-cfb3d349e41c" class="">For years, this template has been the go-to financial model for French entrepreneurs. However, it didn&#x27;t age well.</p><p id="8153a33a-dc50-480a-b85d-f0b5d59e09d2" class="">Analysis capabilities are limited: only a handful of financial metrics, zero SaaS metrics, a couple of graphs, and it&#x27;s impossible to categorize costs. Modeling, be it for revenue or costs, is all too basic and requires a lot of manual input. Also, it&#x27;s entirely in French.</p><p id="aa9140a5-c415-4e05-93b3-48624d02220a" class="">Having said that, it remains a free-of-charge, easy-to-use, easy-to-customize template that covers all the basics while including specificities to the French ecosystem such as CIR, JEI, etc.</p><p id="42cc9caa-e772-4eaf-a9f0-05380e9d4bc4" class="">This model makes a lot of sense for French entrepreneurs looking for a simple solution. For the others, keep on reading.</p><figure id="272d31a4-1a42-4d17-a04f-c0ff52325079" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/da5b29d2-0384-4006-a20d-668bcbe3f8f2.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/da5b29d2-0384-4006-a20d-668bcbe3f8f2.png"/></a></figure><h2 id="a17325ed-bb77-47c4-abc7-16fc4ebd7a8a" class="">2. &quot;SaaS Financial Plan 2.0&quot; by Christoph Janz</h2><p id="120cf63b-17bc-40da-87f8-8de092f7e162" class="">This template was built by SaaS apostle Christoph Janz, and you can tell. It packs a punch of SaaS knowledge in a sleek, clear spreadsheet. You&#x27;ll find lots of good stuff: basic/pro/enterprise plans, churn/upgrade/downgrade, an elegant client acquisition model and a wealth of graphs and charts.</p><p id="ecd60238-2e48-416d-93ae-85afc013d4b5" class="">It&#x27;s not all rosy, though. You want a 5 years forecast? No, you only need 2. You want to sell annual pro plans? Too bad, pro plans are monthly and that&#x27;s that. Also, no balance sheet.</p><p id="659fd56a-60ba-429d-898b-464cb9732520" class="">This template works great if you are a typical SaaS startup and fits the vision that Christoph put into his financial plan. If not, you may be better off considering templates with broader horizons.</p><figure id="3bbd371e-a7b7-4b17-b741-24f74f133e88" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c532a404-3097-4ee7-a084-94b8fe1a8df6.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c532a404-3097-4ee7-a084-94b8fe1a8df6.png"/></a></figure><figure id="3ac517cb-2457-4b00-a4be-c49db4554b06" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/8d4a4926-11a5-4c5d-9adc-7e50425cbe74.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/8d4a4926-11a5-4c5d-9adc-7e50425cbe74.png"/></a></figure><h2 id="8080b15d-9333-48a2-ab27-539824c53e05" class="">3. &quot;SaaS Financial Model&quot; by Jaakko Piipponen</h2><p id="b512e3a1-73b8-434d-a90a-bd5048c5d2a5" class="">This one got updated just before publishing the article, so I have to scratch my old review and write a new one. I&#x27;ll take care of that soon enough.</p><p id="6461b85c-cf0b-41b3-bdc0-31c489e7587b" class="">In the meantime, don&#x27;t hesitate to take a look.</p><figure id="ca8399db-f6f4-44ad-9fba-37df36d4d564" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/7039281a-69ac-4253-a709-c4d47ec9dc74.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/7039281a-69ac-4253-a709-c4d47ec9dc74.png"/></a></figure><h2 id="9e6f22ef-5752-4438-a342-c1b1ae410e2b" class="">4. &quot;Standard SaaS Financial Plan for Startups and SMBs&quot; by Ben Murray</h2><p id="6cce9e1d-a6d4-4368-8202-dbe40c25908e" class="">This template published by Ben Murray, AKA the SaaS CFO, has a lot in common with Chris Janz&#x27;s model: it&#x27;s free, it&#x27;s SaaS-centric and it&#x27;s really good overall.</p><p id="d3e3af31-7a58-4aa4-b395-2632f6a6e9ed" class="">But that&#x27;s where similarities stop. Let&#x27;s look at what differentiates them:</p><ul id="465f7fa9-c2e8-4c50-a004-0bc14f5ababf" class="bulleted-list"><li>Cost modeling: Janz does a much better job as many costs are tied to activity metrics. With Murray, you have to fill it all manually. Janz 1 - 0 Murray</li></ul><ul id="feb6fe15-dd5b-40f7-956e-4b28aab452af" class="bulleted-list"><li>Commitment: Murray allows you to define which plans are annual and which are monthly. Janz does not. Janz 1 - 1 Murray</li></ul><ul id="3fb0f4d8-ffbb-4119-ae2c-80bcab71f92c" class="bulleted-list"><li>Client acquisition: Murray wants you to manually input new clients each month, where Janz includes 3 acquisition channels. Janz 2 - 1 Murray</li></ul><ul id="955763ee-f633-4300-9ba3-0e6a9ced9aab" class="bulleted-list"><li>Murray also allows you to add service revenue and offers up to 5 years of forecasts. Janz 2 - 2 Murray</li></ul><ul id="917dcedb-5d05-4469-8332-787f338f059f" class="bulleted-list"><li>Since its latest update, Murray&#x27;s model also allows you to input your actual number and compare them with your forecasts. Janz 2 - 3 Murray</li></ul><p id="52eb351c-2e8e-4d57-b5cf-5acdec27310f" class="">At the end of the day, Murray&#x27;s SaaS template is great - maybe the best amongst the free templates. It is a bit disappointing when it comes to modeling new client acquisition and costs, though.</p><p id="325c5c9f-6aef-4c05-b616-67de350fdba6" class="">To explore more powerful (and paid) templates, read on!</p><figure id="a42483d6-a7c2-43d7-8d36-65e8857c2dee" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/6138187f-932d-4fa2-af83-3fb11ad67e42.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/6138187f-932d-4fa2-af83-3fb11ad67e42.png"/></a></figure><h2 id="e456a41c-9df6-4f8b-9fe9-e2d9f97e92a6" class="">5. &quot;SaaS Startup&quot; by Pro Forma</h2><p id="f77102f6-8058-43a6-91b2-e7bce10e1718" class="">The SaaS startup kit is the first paying template we&#x27;re looking at: one-time $99.</p><p id="98c9bc44-4148-4c83-8e24-d7acbbbba8ff" class="">Because you&#x27;re paying, you obviously get a lot more in return: balance sheet, cap table, GAAP/IFRS compliance, 161 currencies to choose from, a ton of financial metrics and graphs, and advanced capabilities to model your costs and your revenue, including for hardware startups.</p><p id="f2e4e33c-67c5-4ef6-bcca-0e58344de7cc" class="">Now, because we are paying, we are a lot pickier. And I see 3 problems with this SaaS Startup Kit. First, you cannot account for upgrades and downgrades (you can model churn, though). Second, you cannot break down costs by P&amp;L categories or departments. Third, the formulas are &quot;locked &#x27; so you cannot edit them. That&#x27;s a big problem if, like me, you like looking under the hood. But maybe you don&#x27;t care?</p><figure id="09fcac36-de78-4aa1-9875-c8f1519009bf" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/4195e342-4ce2-49d1-956b-2ef48a29f097.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/4195e342-4ce2-49d1-956b-2ef48a29f097.png"/></a></figure><figure id="59e54bcd-dd53-47f6-9f48-0aa5c8d3aac5" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/79b89afd-1e0a-4966-89f8-4509e7b09e40.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/79b89afd-1e0a-4966-89f8-4509e7b09e40.png"/></a></figure><p id="e2540f69-2340-4f2d-a79c-a25aef40f298" class="">All in all, I cannot tell you not to look at the SaaS startup kit. It has a lot going for it, and at $99, it&#x27;s priced right. But if you can stretch your budget a little more, look at the next model - it may well be the right one.</p><h2 id="9305b13c-2128-403a-824c-650e6f94abb1" class="">6. &quot;SaaS Financial Model&quot; by Taylor Davidson</h2><p id="d993fd03-ddb3-4459-a9e2-851bef8dee7f" class="">Let me start right off the bat: this &quot;SaaS Financial Model&quot; by Taylor Davidson is one of the best templates out there.</p><p id="5f1bdaee-0418-4574-a9d3-ac14fc7a2883" class="">For $149, you get all the financial statements you may wish for, laid out over 5 years, and GAAP-compliant. Additional tabs are built-in for fundraising (assess needs and uses), valuation (ownership, DCF, waterfall exit, ROI), variants (simplified scenarios), and impact (for purpose-driven startups). Bonus point: the model works in Microsoft Excel and Google Sheets, supports all currencies, and is fully editable.</p><p id="8a8a95dd-45c5-4f54-a7e8-796346067d8f" class="">In terms of analysis capabilities, the template generates boatloads of financial and SaaS metrics, as well as 20+ beautiful graphs. Costs can be broken down by departments and P&amp;L categories so you can make sense of all that good stuff. SaaS experts will especially appreciate the granularity provided by monthly cohort analysis - a rarity!</p><p id="bcba42ef-859d-4d77-b59e-c682f45f2726" class="">Modeling revenue and costs is extremely versatile. Instead of pre-modeling everything for you, the template provides you with very unique features (Pricing, Pipeline, Drivers) that allow you to customize it to your needs. Here are a few examples of what you can do:</p><ul id="e6054c7a-22f0-47ca-adac-e1b787b376dd" class="bulleted-list"><li>You can build as many subscription plans as you want.</li></ul><ul id="6521f8ad-06a1-4e27-a9de-30c8496c4e57" class="bulleted-list"><li>Contract length is not limited to monthly or annual but can be anything you want.</li></ul><ul id="6ee2a2d3-1926-467f-bd4d-30456442e15b" class="bulleted-list"><li>Billings are separate from contract cycles, so can do an annual contract with quarterly billings, or 3-year contract with annual billings, or annual contract with monthly billings</li></ul><ul id="808ec8f2-1285-4a6a-917f-bd8d18c85b0d" class="bulleted-list"><li>All costs, direct and indirect, labor and non-labor, can be tied to relevant activity metrics (revenue, headcount, etc.) which is what you would expect from this kind of template.</li></ul><ul id="7ca259e5-8564-42ed-bef3-925e3f198a7d" class="bulleted-list"><li>All costs can also be tied that are *not* tied to an activity metric, say periodic costs that occur quarterly or annually, or costs that increase a % over time, or costs that are a % of salaries, or a % of revenues, for example. This is all built-in within the Drivers sheet and an absolute delight to use.</li></ul><ul id="023cdfd2-664e-4928-b7a9-f30b10ff514c" class="bulleted-list"><li>For Enterprise sales, you can model a good old Pipeline in the Pipeline sheet and attribute different numbers of seats and &quot;likelihood to close&quot; to each deal.</li></ul><p id="e9b2ab41-d7ac-4922-af34-1c85b9329965" class="">True, it takes a bit of time to wrap your head around the internal logic of that model. But once you master it, there is virtually no limit to what you can do.</p><p id="ef5cbf26-bc9f-4c36-a0a1-d6927d93cee5" class="">Thankfully, this financial model is well-documented. The website includes a long, detailed &quot;Getting Started&quot; page as well as specific articles and videos for technical points. The highlight is definitely the email support - I&#x27;ve consistently received detailed replies within 24 hours - at zero extra cost. Kudos to that.</p><p id="6cb86249-3d64-44f6-ac69-40545006d01c" class="">Long story short - if you are willing to shell out $149 for a SaaS financial model, Taylor Davidon&#x27;s template is arguably one of the absolute best you can get your hands on. The other one is the model built by Alexander Jarvis - read on to learn about it.</p><figure id="4c35e17d-6472-4ed7-b4e3-7e8e64e587c6" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/f233faa4-9993-410d-b887-b63592eac000.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/f233faa4-9993-410d-b887-b63592eac000.png"/></a></figure><h2 id="bc4e05cc-5aeb-48aa-bb1c-7ddb1d33390f" class="">7. &quot;SaaS: SME &amp; Users&quot; by Alexander Jarvis</h2><h2 id="ae6b6597-9f56-4ce8-9e4c-57511f44f603" class="">8. &quot;SaaS: Enterprise, SME &amp; Users&quot; by Alexander Jarvis</h2><p id="2c86cd7c-c389-4f33-ab6b-069904e4a572" class="">It&#x27;s hard to write a serious review about this template - everything about it is absolutely ridiculous. It is ridiculously rich, ridiculously detailed, ridiculously powerful. It&#x27;s the kind of template that you use when you want to make a statement, like impress your investors or make your CFO feel irrelevant. It&#x27;s heavy, bold, and over-the-top, in the best way possible. Brace yourselves, let&#x27;s dive in.</p><p id="e27c0bc3-52eb-4691-89c9-27241bf75ae9" class="">This template by Alexander Jarvis comes in 2 versions. The &quot;SaaS: SME &amp; Users&quot; is perfectly fine for most SaaS businesses. It sells at $319. The &quot;SaaS: Enterprise, SME &amp; Users&quot; retails at $1,299 and includes extra logic to model enterprise sales. Because of their complexity, both models only work in Microsoft Excel (no Google Sheets).</p><p id="56fe89dd-b293-48d2-a8fb-27b500f78b17" class="">In return for your money, you get the most advanced modeling capabilities - period.</p><ul id="6bbf2a4a-52bd-479e-8b38-3f81105d4759" class="bulleted-list"><li>Each acquisition channel is modeled in great details: paid, organic, blog, social, emailing, and channel partners. Each channel can be assigned its own conversion rate from visitor to user. You can also differentiate between the customers that self-onboard and those who require sales intervention.</li></ul><ul id="9b2d757e-5cf8-4c7b-b896-897d64bdbcaa" class="bulleted-list"><li>You can design composite offerings based on usage fee, monthly fee and/or a one-time service fee. The templates allow 3 paid plans - typically basic, premium, pro - as well as a free trial plan, and each of these plans can exist with a monthly or annual commitment.</li></ul><ul id="f91a6fed-0226-4bdb-b3dc-113da676c222" class="bulleted-list"><li>Customers can upgrade, downgrade or churn, and you can even schedule module releases at different points in time, so you create new revenue streams over the years.</li></ul><ul id="097a91b2-9b88-4f73-9c3f-8633e52cb6c0" class="bulleted-list"><li>All costs, direct and indirect, labor and non-labor, are modeled in a clever way i.e. they are tied to relevant activity metrics</li></ul><p id="b32b2caa-963b-46af-aff6-9e02d3af3d0b" class="">I cannot stress enough how detailed this model is. Here is an example: the &quot;email marketing&quot; tab (yes, there is such a thing) takes into account 12+ inputs including stuff like the % of recipients who will share the newsletter with their friends. I love this kind of detail because it gives actionable points when thinking about execution. It also makes it easier to defend your numbers in front of investors because you can explain the underlying assumptions. If it&#x27;s too much for you, you can always deactivate the advanced fields with the switch and focus on the core input.</p><p id="c8670cae-0fe0-414e-9ac9-243ddff2c995" class="">If you buy the $1,299 version, you get an extra slew of tabs specifically dedicated to enterprise sales in all its complexity: enterprise-specific products and offerings, geographies, sales cycles, &quot;land and expand&quot;, custom development, etc. If you are building the next Oracle or Palantir, that stuff alone is invaluable.</p><p id="2933559a-00a0-4ce2-a6fe-6a5aab958946" class="">Documentation is ok. Instructions and comments are included inside the template, but not much in terms of FAQ/articles on the website. Having said that, I particularly appreciated the tutorial videos: one 28-min overview and 20 shorter videos that each cover a specific tab.</p><p id="d4ccfc2c-12a1-45f5-811e-14704a1fa34b" class="">You want more? Time to talk about analysis capabilities. Alexander Jarvis&#x27; model is most lavish when it comes to that point. 50+ graphs are readily available - and that&#x27;s without counting the sparklines that are peppered throughout the sheet. Because modeling is so detailed, the template can provide advanced SaaS metrics such as marketing leverage or expansion % of new MRR. Of course, costs can be allocated to P&amp;L categories and departments so you really understand what&#x27;s going on in your model.</p><p id="3fb51399-be58-4035-b0ea-41d4c58ebe12" class="">When it comes to financial statements, the $319 version gives you only 3 years of forecasts, with no balance sheet and no cap table. The $1,299 version does a bit better with 5-year forecasts, but still no sign of balance sheet nor cap table. Some would argue that an early-stage startup doesn&#x27;t need formal financial statements... However, this template does include a tab to compare your forecasts to your actuals, and another tab listing down industry metrics - both are very welcome additions.</p><p id="540acf09-952a-45be-8e86-4394ff555c0f" class="">If you want the best spreadsheet ever, it boils down to comparing Taylor Davidson&#x27;s and Alexander Jarvis&#x27; templates, and picking the one that fits you the most. See the final section &quot;Conclusion&quot; for a side-by-side of both models.</p><figure id="14932b8e-8603-4692-9976-b3da4701b979" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/df6723d8-0f39-4b5e-b4e5-00c75b201bcf.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/df6723d8-0f39-4b5e-b4e5-00c75b201bcf.png"/></a></figure><figure id="00adbc9f-57aa-4e38-a8e3-6c474f808048" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c8590158-1803-425a-b689-3c04c99e2ee2.png"><img style="width:566px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c8590158-1803-425a-b689-3c04c99e2ee2.png"/></a></figure><p id="fc860062-733e-4a88-bf5b-dd81f022bb30" class="">However, some prefer using a specialized SaaS app to build their startup financial model. If that&#x27;s your case, check out the last 4 models.</p><h2 id="e99b2364-81ce-43df-abd4-4e9bf5788658" class="">9. &quot;EY Finance Navigator&quot; by Alex and Wout</h2><p id="49d95c81-4327-436d-a0b9-d671d9e5f0df" class="">The Finance Navigator was developed by Alexander Matthiessen and Wout Bobbink from EY&#x27;s Dutch office. It&#x27;s a SaaS app: you pay a monthly subscription to access an online tool. It&#x27;s a fundamentally different approach from the spreadsheet-based models we&#x27;ve explored so far.</p><p id="1e018212-374f-4fd5-9c01-b1f6654077f7" class="">The Finance Navigator costs $30 per month without commitment or $380 over an 18 month period. For that price, you get very exhaustive financial statements: income statements, cash flow statements, and balance sheets over 10 years - no cap table though. All currencies are available and you can export the statements to a clean, well-designed spreadsheet format (only numbers, no formulas).</p><p id="30c7e2ba-c03f-46ec-a3ba-1f6564b74e41" class="">Documentation is good, with in-app guidance, website posts, a Q&amp;A, and a 37 min walkthrough video. The tool was clearly thought to be user-friendly and the onboarding is best-in-class. You will have zero difficulties using EY&#x27;s Finance Navigator whatsoever.</p><p id="6399038d-9934-4727-bb9e-f95e3f69e8a5" class="">Unfortunately, simplicity is a double-edged sword. Revenue and cost modeling is super basic. For example, revenue is defined as a base number for month 1, then a monthly growth rate. No channels, no conversion rate, no pricing plans. The same goes for costs: you cannot tie costs to specific activity metrics, so you have to input them manually. Because it&#x27;s a SaaS application, you cannot customize the model by adding fields or modifying formulas. And because it&#x27;s so basic, there is only the bare minimum in terms of analysis capabilities.</p><p id="0075c067-c955-4fd3-9351-6710d43def58" class="">At the end of the day, EY&#x27;s Finance Navigator holds a lot of promises. UX is great and they have a couple of nice features like comparables and scenarios. The product has evolved over the years, adding up features and getting more usable. In my estimation, it&#x27;s not quite enough to be used by advanced SaaS entrepreneurs. The product is geared towards traditional businesses - think bakery, restaurant, consulting, who just want clean and easy financials. Not the right pick for SaaS people - yet. I&#x27;d love to revisit the tool in a year and see what progress has been made.</p><figure id="9f403206-0906-4eae-a2a0-a62304766845" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c49e2b9b-eae8-4289-b2c6-17069e46f6d0.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/c49e2b9b-eae8-4289-b2c6-17069e46f6d0.png"/></a></figure><figure id="3edf85de-0bd4-41df-9d49-db3c11095f0f" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/dc340572-b782-426b-8129-822aade1b093.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/dc340572-b782-426b-8129-822aade1b093.png"/></a></figure><h2 id="e545e97b-b2e8-459c-8551-349ebd9e297b" class="">10. &quot;Liveplan&quot; by Palo Alto Software</h2><p id="59376e18-e87b-4a03-bea3-450ba80f8e3e" class="">Liveplan sells its financial modeling SaaS app at $20 per month ($360 over 18 months), which makes it a close competitor to EY Finance Navigator.</p><p id="68d28a5b-c2d8-4e4e-9953-cbdd456ac453" class="">Starting with the strong points, Liveplan offers exhaustive statements over 5 years: income statements, cash flow statements, and balance sheets. Compared with EY&#x27;s model, you have a bit more control over revenue modeling: offerings can be defined as recurring fees, billable hours, and a one-time upfront fee can also be added. Pricing can be increased automatically over time, churn can be factored in, and you can model monthly or annual plans.</p><p id="0fb5139f-1ffa-4f71-8bd6-db8ff8990364" class="">When looking at cost modeling, you can adjust payment terms for clients and suppliers. There are also specific variables for hardware products. Documentation is just fine, with a tutorial video per section embedded directly in the app, as well as plenty of instructions. Liveplan exists in 5 languages, and integrates with Quickbooks, which allows importing your actual numbers and comparing them with your forecasts. You can also export your financials into a (numbers-only) spreadsheet to share with your investors.</p><p id="151d6d58-f15a-42b6-8da8-d78f81639669" class="">Now, although Liveplan&#x27;s software has more powerful modeling capacities than EY&#x27;s, it remains insufficient in my estimation. Here are just a few examples.</p><ul id="d7e0d343-5db1-4cbc-9049-65c99acb03ba" class="bulleted-list"><li>Direct labor costs can be set as a % of revenue, but do not update the number of employees accordingly.</li></ul><ul id="5400658f-34b4-431f-989d-776078e8319f" class="bulleted-list"><li>Indirect costs can only be set as a constant, a % of overall revenue, or a % of a specific revenue.</li></ul><ul id="7236bd4f-3bcb-4c2a-a399-babf3f329eb8" class="bulleted-list"><li>New client acquisition is just manual input - as in you manually input &quot;2&quot; clients in March and &quot;4&quot; clients in April. There is no channel modeling whatsoever.</li></ul><ul id="3b9b6f36-e3f1-4d60-89d0-534384070462" class="bulleted-list"><li>Costs cannot be broken down by P&amp;L categories nor departments.</li></ul><p id="546b6ac4-83e4-4352-b89e-3f13a3399e03" class="">When modeling is too superficial, it translates into poor analysis capabilities. In Liveplan&#x27;s case, you do have a dozen financial metrics available (net cash flow, account payable, cash on hand…) and another dozen graphs. But SaaS metrics are absent, which is a bummer for SaaS entrepreneurs.</p><p id="fcdee480-ab0e-48d0-b9f7-6213a61a76e9" class="">At the end of the day, LivePlan was built for non-tech entrepreneurs. Perfect for a bike shop owner, but not quite there for SaaS people.</p><p id="791f05f0-daba-4650-a674-b53ca079da53" class="">Don&#x27;t take my word for it: there is a 60-day trial, so give it a spin for free and make up your own mind.</p><figure id="daecee17-0913-4347-8ed4-6e5660d617b2" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/3b0e9720-06c8-47b6-b0db-830d24a78fe0.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/3b0e9720-06c8-47b6-b0db-830d24a78fe0.png"/></a></figure><figure id="e4e8f0d9-b399-498c-96cb-8e617a3aba3e" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/dd8f10f1-b0bd-44ec-988b-4754021789aa.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/dd8f10f1-b0bd-44ec-988b-4754021789aa.png"/></a></figure><h2 id="dc11991d-9103-4f03-ac3a-440c63f0a24a" class="">11. &quot;Summit&quot; by Matt Wensing</h2><p id="39bc8aad-e299-40bb-85f3-06789c4d4c16" class="">Summit is a young startup (founded 2019) that brings a fresh take on the whole financial modeling thing with a SaaS solution.</p><p id="d2fd37b7-bf1f-4069-b7a7-b5968fc5143d" class="">Let&#x27;s make it clear - Summit is not meant for fundraising. Forecasts on Summit are made for an 18-month period only. Costs cannot be allocated to P&amp;L categories and departments, nor can you differentiate between labor/non-labor or direct/indirect costs. Therefore, you won&#x27;t be able to generate any financial statements that your investors may require . Hell, you can&#x27;t even export a spreadsheet!</p><p id="3a5a35e5-0062-4746-a40d-cdb7f9247e9a" class="">So why talk about Summit? Because Summit is pretty awesome when it comes to piloting your SaaS startup with a financial model. Here is how it works. First you connect your live metrics (Stripe, Baremetrics, etc.) to your Summit account. This allows Summit to derive your future growth from the current trends. The next step consists in optimizing that future growth. To do that, you define a baseline scenario around 20+ metrics from sales, product, finance, then you play around with those variables to maximize your MRR or any other metric you like. What if we increase our close rate? What if we raise funds and funnel that money into paid ads? You instantly get clear answers. What&#x27;s more, the clean dashboards and convenient built-in comments feature makes it easy and even pleasant to run those analyses and share with your team. It&#x27;s a really fresh experience - no comparison possible with fuddy-duddy spreadsheets.</p><p id="161f5d6e-088d-4887-b4fe-f81137924a5d" class="">Summit is still a young product and there is room for improvement: currencies, tax rates, expansion and contraction of existing clients, one-off revenue. In particular, client acquisition would greatly benefit from more granularity and native integrations with social media accounts for instance.</p><p id="5fc55947-df99-4d09-9970-9f15383c5ff4" class="">At the end of the day, Summit is not meant to build financial statements, but to make decisions in a data-driven way. It&#x27;s such a refreshing approach in the space that I highly recommend trying it out. Bonus point: it&#x27;s 100% free for now, so it&#x27;s a no-brainer.</p><figure id="9e70da02-f8c7-4c07-927e-7c6c79cf1b15" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/56a70b9d-3009-4080-9843-d6633ab40d9a.png"><img style="width:512px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/56a70b9d-3009-4080-9843-d6633ab40d9a.png"/></a></figure><figure id="f2277867-f29a-470e-b009-7e6b22c2f0aa" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/24a68981-8cc0-46df-b96e-922cdeaea521.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/24a68981-8cc0-46df-b96e-922cdeaea521.png"/></a></figure><h2 id="13b70995-f4b1-4764-802b-80271b23c333" class="">12. &quot;Causal&quot; by Taimur and Lukas</h2><p id="4c1bcec9-2e6f-4994-b58f-ddecba2efe9c" class="">At first glance, Causal seemed very similar to Summit. It&#x27;s also a SaaS solution, also founded in 2019, also bringing a new approach to modeling. But that&#x27;s where the comparison stops because the philosophy behind Causal is quite unique.</p><p id="01edbeff-91dc-4283-a60f-7cb95816a395" class="">Causal is not just a financial modeling tool for SaaS startups. It&#x27;s a modeling tool that aims at replacing Excel for every modeling need you may have. This means that (a) Causal is super versatile and goes much deeper than Summit, and (b) Causal is much more complex with a steeper learning curve than Summit.</p><p id="b6b96e61-9ab9-469e-9e58-29f9199d091b" class="">Looking at revenue and cost modeling, you can model anything you want on Causal with an interface that&#x27;s 10x more modern and user-friendly than a spreadsheet. The same thing goes for analysis capabilities: you can generate dashboards, tables, and graphs for absolutely anything - including any financial statement your investors may want. You can also connect live data sources (Stripe and Google Sheets for now, more to come) to automatically update your models with real-time metrics.</p><p id="de8bfed6-e445-4dd3-b661-d28e93c34075" class="">As a SaaS entrepreneur, you don&#x27;t have time to build a model from scratch. Lucky you, Causal has built-in templates - including two SaaS models built by Taylor Davidson himself (see template #6). You are then able to augment or fine-tune those models to suit your specific needs.</p><p id="7649173f-899a-4085-8441-ea9f0192b7e5" class="">In terms of documentation, there are a few videos, a live chat as well as a walkthrough when you start a new model. That&#x27;s not much, but Causal assumes that you are a modeling &quot;nerd&quot; and that your usual work environment is massive spreadsheets. If that&#x27;s the case, you&#x27;ll be just fine. Assuming you have the time and desire to put in the hours to learn a new tool, Causal may very well be the ultimate platform for financial modeling.</p><figure id="33739c07-4d52-464b-bed7-51a21715e619" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/1b050e9d-098a-4d19-9048-cf9fce31b407.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/1b050e9d-098a-4d19-9048-cf9fce31b407.png"/></a></figure><figure id="72d6c405-dff9-4714-bdd5-52ebaca5ea17" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/37086b04-9e68-41a5-b827-d0aa58923cf9.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/37086b04-9e68-41a5-b827-d0aa58923cf9.png"/></a></figure><h2 id="36bbad61-40e8-41f0-abc1-37b5fe3166cf" class="">Conclusion: this is the best financial model for SaaS startups</h2><figure id="2e3c466b-8026-4bda-ab0a-0a77a4f58beb" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/48998594-d7f0-45fe-b226-bbabe2971f73.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/48998594-d7f0-45fe-b226-bbabe2971f73.png"/></a></figure><p id="8ac83f3d-95c3-4b78-8299-a056781098db" class="">If you want a &quot;good enough&quot; model but are not willing to pay for it, go for <a href="https://www.thesaascfo.com/saas-financial-plan/">Ben Murray&#x27;s (model #4)</a> or <a href="http://christophjanz.blogspot.com/2016/03/saas-financial-plan-20.html">Chris Janz&#x27;s (model #2)</a>. Customize them a bit to offset their weaknesses.</p><p id="9671c43b-191e-4286-b4c5-18ffed7bae7f" class="">See below a side-by-side comparison of the differences between both models.</p><figure id="1510caee-d822-413e-83d7-4550eb757617" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/5691e7cd-69b8-4382-8b48-ed1a704e067f.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/5691e7cd-69b8-4382-8b48-ed1a704e067f.png"/></a></figure><p id="53e8b7bb-767b-4b29-b0c2-a0c1de5d1766" class="">If you want the best financial model spreadsheet out there and are willing to pay for it, go for <a href="https://gumroad.com/a/1021686899">Taylor Davidson&#x27;s (model #6)</a> or <a href="https://www.alexanderjarvis.com/definitive-saas-financial-model-template-startups/#">Alexander Jarvis&#x27; (models #7/#8)</a>. They are by far the best stuff on the market today.</p><p id="7fa988cd-7859-49c2-a949-677feadde7c7" class="">See below a side-by-side comparison of the differences.</p><figure id="f3810f4c-76ea-49fb-8655-df930e8b9bf0" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/622234b4-9b9c-4ffd-ac75-90b94494091b.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/622234b4-9b9c-4ffd-ac75-90b94494091b.png"/></a></figure><p id="e973f3ba-d093-4d67-8625-5827afba919f" class="">If you want to experience the future of financial modeling, go for <a href="https://usesummit.com/">Summit (model #11)</a> or <a href="https://www.causal.app/">Causal (model #12)</a> - while keeping in mind that both are very different.</p><p id="67e9e1b9-ac3a-4626-97e4-0d159cbd2f86" class="">See below a side-by-side comparison of the differences between both models.</p><figure id="384e33e4-5585-4512-9e0f-9bb3ab97631d" class="image"><a href="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/7b58c502-917e-493b-98fc-b41c7d3d9bf3.png"><img style="width:700px" src="Startup%20financial%20models%20-%2012%20templates%20compared%20f%203f8f15dce9f046caa5672d70a67fce11/7b58c502-917e-493b-98fc-b41c7d3d9bf3.png"/></a></figure><p id="09eae65b-0d37-41ce-9b67-15cf9faa1359" class="">Thanks for reading. Don&#x27;t hesitate to leave a question in the comments, I try to reply personally to each one of them.</p></div></article></body></html>

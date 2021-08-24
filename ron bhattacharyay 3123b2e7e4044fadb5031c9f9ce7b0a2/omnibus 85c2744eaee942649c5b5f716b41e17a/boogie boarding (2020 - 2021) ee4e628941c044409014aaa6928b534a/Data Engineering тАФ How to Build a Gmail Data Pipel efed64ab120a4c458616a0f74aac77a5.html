@@ -1,0 +1,856 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Data Engineering — How to Build a Gmail Data Pipeline on Apache Airflow</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="efed64ab-120a-4c45-8616-a0f74aac77a5" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏸</span></div><h1 class="page-title">Data Engineering — How to Build a Gmail Data Pipeline on Apache Airflow</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://towardsdatascience.com/data-engineering-how-to-build-a-gmail-data-pipeline-on-apache-airflow-ce2cfd1f9282" class="url-value">https://towardsdatascience.com/data-engineering-how-to-build-a-gmail-data-pipeline-on-apache-airflow-ce2cfd1f9282</a></td></tr></tbody></table></header><div class="page-body"><figure id="75dde004-a7bd-4f0c-8b82-daf26cffbbd8" class="image"><a href="Data%20Engineering%20%E2%80%94%20How%20to%20Build%20a%20Gmail%20Data%20Pipel%20efed64ab120a4c458616a0f74aac77a5/1AmNcNZJpgXUDQ4gMC0m1sA.png"><img style="width:700px" src="Data%20Engineering%20%E2%80%94%20How%20to%20Build%20a%20Gmail%20Data%20Pipel%20efed64ab120a4c458616a0f74aac77a5/1AmNcNZJpgXUDQ4gMC0m1sA.png"/></a></figure><h2 id="a854a612-0c5c-4938-b177-ad2d41a531ea" class="">Hack your Gmail Inbox.</h2><p id="69fb7632-a63a-4d06-8bb3-7c97a8415b63" class="">Greetings my fellow readers.
+How are you doing today ? Good ? 
+I’m about to make it better by explaining to you how I made a <strong>Gmail Data Pipeline </strong>for my company.
+Gather around. You don’t wanna miss this.</p><p id="3b319e49-f94a-4ac4-8e7b-27c07b2337bd" class="">What is that ? Why should you care about this you say ?
+Well, considering the fact that Google has pretty much dominated the playing field for email service providers by integrating pretty much a world of technologies with it like Google Drive, Google Photos, Google Calendar, Google Everything, it is also rated as the top email service providers by many review sites. Here’s <a href="https://www.toptenreviews.com/best-free-email-services">one</a> example.</p><p id="b9a14ac3-c2e4-46db-941d-0555bc47d813" class="">It is also preferred by majority of companies and casual users.
+I’m not gonna dive into why Gmail is the best.
+Who uses yahoo mail here ? Exactly my point.</p><p id="4d6f2255-efdb-4c69-a3fb-19bd44c83053" class="">Not convinced yet ?
+Just take a look at the Google Trends for the comparisons between the Email Providers.</p><p id="b1c56e31-b637-4762-b067-8bb6e9151c42" class="">The results speak for itself.
+There is also huge support for Gmail related code on Github. Github has over 16k repositories and 180mil codes regarding Gmail alone. Hence, anything you can think of implementing with Gmail, someone has probably done something similar to it.</p><p id="8e36fb05-da96-4c6a-b239-8daf80d25ad4" class="">That being said. Are you onboard the Gmail Train yet ? 
+Better get on. After you’ve told your boss that you are able to extract, transform and load data from Gmail into your data warehouse automatically, he’ll probably promote you to the data science lead immediately with a huge raise. Please do donate some dough to me then, my bank account number is 
+I-M-K-I-D-D-I-N-G from the Sarcasm Bank. Let’s get into business.</p><ul id="93dba5be-8556-4acc-8281-0b5ceadda2f5" class="bulleted-list"><li>Automatically extracting, transforming and loading data from your Gmail Inbox into your preferred data warehouse on a daily basis</li></ul><ul id="107d2342-8db7-4547-99b2-8127d5acaa0a" class="bulleted-list"><li>An automation system that better organises your Gmail attachments into your db. Keep only what you need and scrap the rest</li></ul><ul id="7b5a30e0-6ed7-4a56-986a-35fae1e1d2b6" class="bulleted-list"><li>Easy to use and no hassle. Stop downloading your attachments and uploading it into your data warehouse manually</li></ul><p id="4f2e28a1-6b29-4d53-b33e-d9f69a427fc9" class="">I will be using Apache Airflow managed by Google Cloud Composer to execute the pipeline. I am also using Google Bigquery as my data warehouse here in my company. You may use any WMS and data warehouse you prefer, the Google API should be callable regardless.</p><p id="be737ea2-09bb-41f5-8c51-4930c99ec037" class="">I wrote an article on how to operate Apache Airflow from zero to hero.
+You can find it here : <a href="https://towardsdatascience.com/data-engineering-basics-of-apache-airflow-build-your-first-pipeline-eefecb7f1bb9"><em>Basics of Apache Airflow</em></a></p><h1 id="4d4e720f-28fd-426b-88e0-4f1e64ec06ec" class="">Step 1. Set up your Gmail Inbox</h1><p id="fb4f2a6d-1522-4ad9-80de-0112dad6a188" class="">The first step for the pipeline is to set up a label inbox to be extracted.
+It is possible to extract all the attachments in your inbox, but think about it.
+Some of it will be pictures, text files, videos, pdfs etc. We only want csv files because data is usually sent that way. We also want to standardise the format for each pipeline so we don’t run into any inconsistencies in the future. 
+For eg, data from James who sends you the weekly financial report is different from the data sent by Monica who sends you the weekly campaign results.
+Hence, we need to differentiate the data by adding labels to it.</p><p id="12b04fab-9067-4117-979e-92efaee99ce6" class="">Head into your gmail inbox. On the top right corner,</p><p id="beff2b03-1bba-49a0-8ef4-1ed606b38033" class=""><strong>Settings</strong> &gt; <strong>Filters and Blocked</strong> <strong>Addresses</strong> &gt; <strong>Create a New filter</strong></p><p id="c359edc3-9a2e-41ff-82f1-644a6e55b981" class="">Set up the conditions for the label. 
+For example, unknown@gmail.com sends me a weekly report on the performance of a product. 
+The subject of the email is usually ‘Weekly Report Product A’</p><p id="ba22f457-70c5-4172-8078-a78e13ed6159" class="">Hence, I will set <strong>From</strong> : unknown@gmail.com<strong>subject</strong> : Weekly Report Product A
+and check the <strong>has attachment</strong> box.</p><p id="cb4f84b1-ad62-4ff2-8ed0-81a9a7fb23a1" class="">Select <strong>Create Filter </strong>and you will be faced with a bunch of checkboxes:
+The important ones are</p><p id="076cfa91-1a0a-4318-bbf7-531ac518c654" class="">Do check both boxes and create a new label name for this specific batch of emails. I usually check ‘Skip The Inbox’ as well so that the emails get directed to the labeled inbox only. Let’s create a label inbox for the example we are using named as ‘<strong>Weekly Report Product A Inbox</strong>’ .</p><p id="53d95534-7b5b-48be-9027-780bb0a2333c" class="">You should now see all the emails, including existing ones regarding the Weekly Report of Product A that contains attachments in the <strong>Weekly Report Product A Inbox</strong>. 
+Congratulations, you have completed the easiest step in this Pipeline.</p><p id="a2120bd0-48ec-460e-a698-877522e0fa33" class="">If you are lost right now, give yourself two slaps and focus. We’re about to get into the nitty gritty, code that is. I assume you know how to create DAGs and operators in Apache Airflow, if you don’t, save yourself some time and read my <a href="https://towardsdatascience.com/data-engineering-basics-of-apache-airflow-build-your-first-pipeline-eefecb7f1bb9">article</a> on how to do so. With that out of the way, open your favourite text editor and start coding.</p><h1 id="83589b6f-46e2-4d17-9536-7084bf4c429f" class="">Imports</h1><pre id="1ce121ef-5c17-4800-8644-c03057ea3c09" class="code"><code>default_dag_args = {
+    # Setting start date as yesterday starts the DAG immediately       when it is
+    # detected in the Cloud Storage bucket.
+    # set your start_date : airflow will run previous dags if dags #since startdate has not run
+#notify email is a python function that sends notification email upon failure    
+    &#x27;start_date&#x27;: datetime(2019, 7, 1, 10),
+    &#x27;email_on_failure&#x27;: True,
+    &#x27;email_on_retry&#x27;: True,
+    &#x27;project_id&#x27; : &#x27;your_project_name&#x27;,
+    &#x27;retries&#x27;: 1,
+    &#x27;on_failure_callback&#x27;: notify_email,
+    &#x27;retry_delay&#x27;: timedelta(minutes=5),
+}with models.DAG(
+    dag_id=&#x27;your_dag_name&#x27;,
+    # Continue to run DAG once per day
+    schedule_interval = timedelta(weeks=1),
+    catchup = True,
+    default_args=default_dag_args) as dag:</code></pre><p id="1a244136-3ffd-40a1-b21d-a38d0871286f" class="">We are setting the DAG to run <strong>Weekly on Mondays 10am. </strong>This is assumed that the Weekly Report will be sent by 10am every Monday. If the email is received after 10am, there won’t be any data to load into the data warehouse. Keep that in mind as you set this up, you always want to set a time that you are <strong>certain</strong> the data will be present in the inbox. There’s also no particular reason I’ve chosen the report to be weekly. If it’s a daily report you’re dealing with, just change the schedule_interval to timedelta(days=1).</p><h1 id="e81abe2b-6b6a-4408-9289-a0ebd7cbfe8a" class="">Defining our DAG, Tasks and Operators</h1><p id="a7b85b0a-406a-4db6-a259-d7e958028cd3" class="">Let’s design our tasks to be ran in this specific DAG. 
+The way I do it is:</p><ol type="1" id="a3db20ec-cd50-4241-b284-eaf5ea241819" class="numbered-list" start="1"><li>Check if there are any attachments to be loaded</li></ol><ol type="1" id="833042be-b8ed-41d3-9170-e02b9b80578a" class="numbered-list" start="2"><li>Load all the attachments into Google Bigquery</li></ol><ol type="1" id="a6fc077e-0c33-420d-9a7b-4e46f374eb66" class="numbered-list" start="3"><li>Checking for any duplication of load in Google Bigquery</li></ol><ol type="1" id="ef68d437-2ca2-4686-a93a-f2f3bc8ccd0d" class="numbered-list" start="4"><li>Write Logs</li></ol><p id="ddea813f-af10-40dc-9b19-a531993b96f4" class="">Let’s write the code for the operators to execute these tasks.
+Don’t worry. I will run through all the important operators with you.
+Open a second window in your text editor and start <strong>coding your operators.</strong></p><pre id="03d6c2a4-a9f6-4474-9bc9-5dc3f80de317" class="code"><code># airflow related
+from airflow.models import BaseOperator
+from airflow.utils.decorators import apply_defaults# other packages
+from datetime import datetime, timedelta
+from os import environ
+import csv
+import getpass, imaplib</code></pre><pre id="44381560-b625-4bd5-9298-0f18c1659ef8" class="code"><code>class ExtractAttachment(BaseOperator):
+    &quot;&quot;&quot;
+    Extract data from Gmail into GCS
+    &quot;&quot;&quot;super(DataSourceToCsv, self).__init__(*args, **kwargs)
+        self.inbox_name = inbox_name
+        self.file_path = #filepath_to_save_CSVdef __extract_email_attachment(self, execution_date):
+        userName = &#x27;your_user_name&#x27;
+        passwd = &#x27;your_password&#x27;        imapSession = imaplib.IMAP4_SSL(&#x27;imap.gmail.com&#x27;)
+        typ, accountDetails = imapSession.login(userName, passwd)
+        if typ != &#x27;OK&#x27;:
+            print(&#x27;Not able to sign in!&#x27;)        imapSession.select(self.inbox_name)
+        typ, data = imapSession.search(None, &#x27;Unseen&#x27;)
+        if typ != &#x27;OK&#x27;:
+            print(&#x27;Error searching Inbox.&#x27;)# Iterating over all emails
+        for msgId in data[0].split():
+            typ, messageParts = imapSession.fetch(msgId, &#x27;(RFC822)&#x27;)
+            if typ != &#x27;OK&#x27;:
+                print(&#x27;Error fetching mail.&#x27;)            raw_email = messageParts[0][1]
+            raw_email_string = raw_email.decode(&#x27;utf-8&#x27;)
+            email_message =  email.message_from_string(raw_email_string)
+            for part in email_message.walk():
+                if part.get_content_maintype() == &#x27;multipart&#x27;:
+                    # print part.as_string()
+                    continue
+                if part.get(&#x27;Content-Disposition&#x27;) is None:
+                    # print part.as_string()
+                    continue
+                fileName = part.get_filename()            if bool(fileName):
+                    filePath = self.file_path + fileName
+                    print(filePath)
+                    if not os.path.isfile(filePath) :
+                        print(fileName)
+                        fp = open(filePath, &#x27;wb&#x27;)
+                        fp.write(part.get_payload(decode=True))
+                        fp.close()
+            imapSession.uid(&#x27;STORE&#x27;,msgId, &#x27;+FLAGS&#x27;, &#x27;\SEEN&#x27;)
+        imapSession.close()
+        imapSession.logout()def execute(self, context):
+execution_date = (context.get(&#x27;execution_date&#x27;)
+self.__extract_email_attachment(execution_date)</code></pre><p id="08da48e7-16b0-4c58-914a-7114d360d052" class="">In this block of code, we are:</p><ol type="1" id="baea695e-a034-4b72-bb77-132fb5cd1341" class="numbered-list" start="1"><li>Defining the Gmail inbox name where the data resides</li></ol><ol type="1" id="e668ee23-fa5e-4fb1-a7ca-36e468bab0d6" class="numbered-list" start="2"><li>Setting our Gmail Username and Password ( Yes, unfortunately it will be visible to whoever views the code )</li></ol><ol type="1" id="9ca88a54-0592-44bf-bc76-d50d28329e43" class="numbered-list" start="3"><li>Searching for the Gmail label inbox named as the <strong>inbox_name</strong> parameter</li></ol><ol type="1" id="829d036d-78d0-40ec-b9c4-724dd8fc37ee" class="numbered-list" start="4"><li>Selecting only the emails which are <strong>Unseen</strong> only, this is important as we do not want to load the same data twice</li></ol><ol type="1" id="ce5aa929-a127-4405-9ac7-952b52df8e61" class="numbered-list" start="5"><li>Extracting the attachments for these emails and saving them in the file path defined by the <strong>file_path </strong>parameter</li></ol><ol type="1" id="59fc26f2-cabb-40fb-b88d-961253aedbbb" class="numbered-list" start="6"><li>After extraction, marking the email as read so that it does not get picked up the next time</li></ol><ol type="1" id="2b0d5bf7-75e6-46ae-b9b6-11618aa1cbbd" class="numbered-list" start="7"><li>Logging out of our IMAP session</li></ol><p id="25fbebfe-8623-45f7-8f9c-78e529a44fba" class="">Remember that the Operator only takes into account emails that are <strong>Unseen/Unread </strong>only. Hence, if you somehow accidentally clicked on the email, it will be automatically marked as <strong>read</strong>, disregarding the email completely from the Pipeline. If you do not want that to happen, remember to mark it as <strong>Unseen/Unread </strong>from the Gmail UI after you had read it.</p><p id="88fd2e50-e905-4dd7-8e23-506388925394" class="">Here’s the full code for the operator itself:</p><p id="9d8b0ef9-453f-4e9a-a204-96d031a9f511" class="">Thats the first operator done. Moving on.</p><p id="97876933-b83a-4c81-96f0-817a8eb75089" class="">Since emails may be missed inevitably, the DAG will sometimes return an error since no data is loaded into BQ. For this section, we are checking if there are any files to be loaded into Google Bigquery using the ShortCircuit Operator. If there isn’t a file to be loaded, all downstream tasks of this operator are skipped, and the DAG is successfully completed. Otherwise, the DAG proceeds as usual. There is no need to write a custom operator for this, we will use the default operator provided by Airflow. When the tasks are skipped, Airflow will display pink indicators. An example is shown below.</p><pre id="1b1efc5e-9b99-47f3-a7cc-1a97922c0f2a" class="code"><code># airflow related
+from airflow.models import BaseOperator
+from airflow.utils.decorators import apply_defaults# other packages
+from datetime import datetime, timedelta
+from os import environ
+import csv
+from google.cloud import bigquery
+import pandas as pd
+import os</code></pre><pre id="3a0ae852-2f6c-4369-8e6f-bbaebc7758ad" class="code"><code>class StorageToBigQuery(BaseOperator):
+    &quot;&quot;&quot;
+    Extract data from Google Cloud Storage to Google Bigquery
+    &quot;&quot;&quot;super(StorageToBigQuery, self).__init__(*args, **kwargs)
+        self.dataset_name =  dataset_name
+        self.bigquery_table_name =  bigquery_table_name
+        self.write_mode = write_mode
+        self.local_path = &#x27;File Path of CSV&#x27;def __StorageToBigQuery(self, execution_date):
+for file in os.listdir(self.local_path):
+        filename = self.local_path + file
+        df=pd.read_csv(filename,error_bad_lines=False)
+        #Using pandas to clean data
+        df.to_csv(self.local_path + &#x27;cleaned_&#x27; + file,index=False)        file_path_to_load = self.local_path + &#x27;cleaned_&#x27; + file
+            logging.info(&quot;FILE PATH TO LOAD : %s&quot; % file_path_to_load)
+            print(&#x27;loading_file_to_BQ&#x27;)
+            client = bigquery.Client()
+            dataset_ref = client.dataset(self.dataset_name)
+            job_config = bigquery.LoadJobConfig()
+            job_config.autodetect = False
+            if(self.write_mode == &#x27;overwrite&#x27;):
+                job_config.write_disposition = &#x27;WRITE_TRUNCATE&#x27;
+            elif(self.write_mode == &#x27;empty&#x27;):
+                job_config.write_disposition = &#x27;WRITE_EMPTY&#x27;
+            else:
+                job_config.write_disposition = &#x27;WRITE_APPEND&#x27;
+            job_config.skip_leading_rows = 1
+            job_config.field_delimiter = &#x27;,&#x27;
+            job_config.quote = &#x27;&#x27;
+            job_config.allow_quoted_newlines = True
+            with open( file_path_to_load, &#x27;rb&#x27; ) as source_file:
+                load_job = client.load_table_from_file(
+                        source_file,
+                        dataset_ref.table(self.bigquery_table_name),
+                        job_config=job_config)        assert load_job.job_type == &#x27;load&#x27;
+            load_job.result()
+            assert load_job.state == &#x27;DONE&#x27;def execute(self, context):
+execution_date = (context.get(&#x27;execution_date&#x27;)
+self.__StorageToBigQuery(execution_date)</code></pre><p id="f4f36a72-ee59-4607-bfe6-e8d642636c7d" class=""><strong>Important</strong> : Since I’m using Google Cloud Composer by default, I do not have to go through any authentication while calling the Google Bigquery API. If you’re using vanilla Airflow, please find out how to call the Google Bigquery API <a href="https://cloud.google.com/bigquery/docs/reference/libraries#client-libraries-usage-python">here</a>. You will also need to create the table in Google BQ before loading the data into it.</p><p id="3d29a7a1-3dcb-42cd-bd88-db04ab77e839" class="">In this block of code, we are :</p><p id="906da94a-b2a3-4f68-bfbc-77a088b4efd5" class="">The cleaning with Pandas is to avoid any human errors. However, you may do some sort of transformation in that section and load that file instead. I also use it to add a column called <strong>Airflow Execution Date </strong>with the execution date of the DAG as the input. This is useful for removing duplicates later.
+Here’s the full code for the operator:</p><p id="334ebb0f-2e7b-4fd3-a0f1-9e40406b34ba" class="">Thats another one down, hang in there.</p><p id="baaa54fc-8c24-40d8-b235-23229aafca9b" class="">Whenever we load (append) data into BQ,
+there may be duplications in the data. 
+This may happen due to several reasons :</p><ul id="0d89cc52-ce32-4ca1-82d2-345bc0591225" class="bulleted-list"><li>Someone in the data team activated the DAG twice</li></ul><ul id="d43b31e4-7c9e-4a79-99c6-ab46db81ccff" class="bulleted-list"><li>There are duplicates in the data ( can be removed by cleaning in the previous operator )</li></ul><ul id="c2bd9f67-907d-4638-8fd1-3ba219848dbd" class="bulleted-list"><li>Someone stopped the DAG halfway and restarted it</li></ul><ul id="aa492f02-0487-4f04-8a0e-76cccfde2c95" class="bulleted-list"><li>Defect in the code</li></ul><p id="e243ef8f-289b-4db0-996c-5576a9d05544" class="">Hence, just to be sure, we always run a duplication check to ensure we only load the data once. We would not want to report a 2x Revenue just to find out it was a duplicated load now do we ?</p><pre id="b8e0a557-2f20-4916-bf83-3483b17868cd" class="code"><code># airflow related
+from airflow.models import BaseOperator
+from airflow.utils.decorators import apply_defaults# other packages
+from datetime import datetime, timedelta
+from os import environ
+import csv
+from google.cloud import bigquery
+import pandas as pd
+import os</code></pre><pre id="db9ca8a6-104c-43ba-a2b9-b37be27d10d8" class="code"><code>class CheckBQDuplication(BaseOperator):
+    &quot;&quot;&quot;
+    Check if a specific table in BigQuery contains duplicated data after the load
+    &quot;&quot;&quot;super(CheckBQDuplication, self).__init__(*args, **kwargs)
+        self.dataset_name = dataset_name
+        self.bigquery_table_name = bigquery_table_name
+        self.bigquery_table_key = bigquery_table_key
+        self.date_column =  date_column
+        self.file_path = &#x27;File Path of CSV&#x27;        check_query = &quot;&quot;&quot;
+            SELECT MAX(count) FROM (
+            SELECT $ID_COLUMN, COUNT(*) as count
+            FROM `$DATASET_NAME.$BIGQUERY_TABLE_NAME`
+            WHERE CAST($DATE_COLUMN AS DATE) = $EXECUTION_DATE
+            GROUP BY $ID_COLUMN)
+            &quot;&quot;&quot;
+        check_query = check_query \
+          .replace(&quot;$ID_COLUMN&quot;, self.bigquery_table_key)\
+          .replace(&quot;$DATASET_NAME&quot;, self.dataset_name) \
+          .replace(&quot;$BIGQUERY_TABLE_NAME&quot;,self.bigquery_table_name)\
+          .replace(&quot;$EXECUTION_DATE&quot;, \
+           &quot;&#x27;&quot; + execution_date + &quot;&#x27;&quot;) \
+          .replace(&quot;$DATE_COLUMN&quot;, self.date_column)
+        logging.info(&quot;CHECK QUERY : %s&quot; % check_query)check_query_job = bigquery.Client().query(query = check_query)
+        logging.info(&quot;job state : %s at %s&quot; % \(check_query_job.state, check_query_job.ended))check_query_result = 0
+        for row in check_query_job:
+            check_query_result = int(row[0])
+            break
+    
+        if check_query_result &gt; 1:
+            logging.error(&#x27;(ERROR): DUPLICATION EXISTS IN TABLE &#x27; + self.bigquery_table_name)
+ 
+       # Duplication exists, proceed to delete the data in Big Query            delete_query = &quot;&quot;&quot;
+                DELETE FROM `$DATASET_NAME.$BIGQUERY_TABLE_NAME`
+                WHERE CAST($DATE_COLUMN AS DATE) = $EXECUTION_DATE
+                &quot;&quot;&quot;
+            delete_query = delete_query \
+         .replace(&quot;$DATASET_NAME&quot;,self.dataset_name) \
+         .replace(&quot;$BIGQUERY_TABLE_NAME&quot;,self.bigquery_table_name)\
+         .replace(&quot;$EXECUTION_DATE&quot;, &quot;&#x27;&quot; +execution_date + &quot;&#x27;&quot;)\
+         .replace(&quot;$DATE_COLUMN&quot;, self.date_column)
+            logging.info(&quot;DELETE QUERY : %s&quot; % delete_query)delete_query_job = bigquery.Client().query(query=delete_query)
+            logging.info(&quot;job state : %s at %s&quot; % (delete_query_job.state, delete_query_job.ended))# Reload the file from Cloud Storage
+            print(&#x27;going through the folder&#x27;)
+            for file in os.listdir(self.local_path):
+                file_path_to_load = self.local_path + &#x27;cleaned_&#x27; + file            client = bigquery.Client()
+                dataset_ref = client.dataset(self.dataset_name)
+                job_config = bigquery.LoadJobConfig()
+                job_config.autodetect = False
+                job_config.write_disposition = &#x27;WRITE_APPEND&#x27;
+                job_config.skip_leading_rows = 1
+                job_config.field_delimiter = &#x27;,&#x27;
+                job_config.quote = &#x27;&#x27;
+                job_config.allow_quoted_newlines = True
+                with open( file_path_to_load, &#x27;rb&#x27; ) as source_file:
+                    load_job = client.load_table_from_file(
+                       source_file,
+                       dataset_ref.table(self.bigquery_table_name),
+                       job_config=job_config)                assert load_job.job_type == &#x27;load&#x27;
+                load_job.result()
+                assert load_job.state == &#x27;DONE&#x27;def execute(self, context):
+execution_date = (context.get(&#x27;execution_date&#x27;)
+self.__check_BQ_duplication(execution_date)</code></pre><p id="2458bb4b-49fb-47eb-b7a9-e72aed1ab04b" class="">In this block of code we are:</p><ol type="1" id="0b9dedca-7350-4e2a-a938-739b6c05a508" class="numbered-list" start="1"><li>Defining the query to check for duplications and executing it in BQ</li></ol><ol type="1" id="a0794755-5e5c-4f2f-be57-170ae39f78fc" class="numbered-list" start="2"><li>If there are duplications, delete all data from BQ where <strong>date_column</strong> = <strong>execution_date</strong></li></ol><p id="18aa34fa-ae8b-42b7-aaac-f7d8652fb1e7" class="">Considering the mechanics, we will need to have a date column in the table. If there isn’t one by default, we have to create one explicitly. This is why I created the Airflow Execution Date column in the previous operator.
+Once again, here’s the full code for the operator:</p><p id="3c5091db-9a50-4bf0-9887-b819d97559e0" class="">Save all the operators you’ve written in a folder accessible by Airflow. For me, it’s a folder named Operators in the DAG folder. The final 2 Operators are just to notify you on the status of the job as well as writing logs in BQ itself. There is also a section in the writing logs operator that deletes the files in the <strong>file_path </strong>directory. I will not go into the last 2 operators since we can already achieve what we wanted to up until this stage. I will write an article for Writing Logs and Sending Emails since it caters for all of my DAGs. This article has been going for too long anyways. Stay with me.</p><h1 id="6a846037-08eb-4e79-903e-766f94e4dc08" class="">Step 3. Finalising the DAG</h1><p id="722cd4df-c488-4d68-8946-43ec3cde43d3" class="">With all our operators done, what’s left is to call them into our DAG file.
+Let’s head back into our DAG file.</p><pre id="36e0c753-9bfd-47c5-a0c2-f85c2ea72a9f" class="code"><code># import operators from the &#x27;operators&#x27; file
+from operators import GmailToGCS
+from operators import StorageToBQ
+from operators import CheckDupBQ
+from operators import WriteLogs
+from operators import SendEmail
+from airflow.operators import ShortCircuitOperator</code></pre><pre id="5467a471-f29f-4c19-9263-f7937c1bdac9" class="code"><code>def checkforfile():
+    file_path = &#x27;File Path to Load&#x27;
+    if os.listdir(file_path):
+        return True
+    else:    
+        return Falsecheckforfile = ShortCircuitOperator(
+        task_id=&#x27;checkforfile&#x27;,
+        provide_context=False,
+        python_callable=checkforfile)</code></pre><p id="b6f8a9ca-6c82-46b3-8674-23fd4d4a38d0" class="">The ShortCircuit Operator works by passing a python function that returns a True or False output. If the output is True, the DAG proceeds as usual. Otherwise, the DAG skips all downstream tasks and proceeds to completion. Hence, we write a function to check for files in the <strong>file_path</strong> directory and return True if files exists.</p><p id="f8fbf86a-b11a-48f7-af80-acdc78b8bc39" class="">Full code for the DAG:</p><p id="dc255939-044e-462c-8aef-b3458ba020a6" class="">Note that all the parameters to be passed into the operators are defined at the top of the DAG. This is done so that the DAG can be used as a template for the other <strong>labels</strong> in your Gmail Inbox. It is also easier to be explained to your colleagues that may want to use it.</p><h1 id="e27ea8de-10a5-4688-bf66-bf7fa8d110cd" class="">Step 4. Flex on the kids</h1><p id="2c8e2e45-5c77-40fc-bd48-82a655b14657" class="">Relax. There’s no more code to read.
+Pop the DAG file into your Airflow DAG folder and you’re good.<strong>Congratulations</strong>, you have successfully built your personal 
+Gmail Data Pipeline. What to do with the data is entirely up to you now. You can automate dashboards to show reports, make a webpage showing trends or even feed data to your Machine Learning Model.</p><p id="fc0dcceb-31ab-4294-a72c-78881ac7c0be" class="">So go now my fellow data practitioners. Spread the word. Give yourself a pat in the back and.. continue working on the next project. At least thats what’s next for me.</p><p id="0657dc44-f370-4edd-b783-1bff2ca3597a" class="">To end, let me drop a quote :</p><blockquote id="72b7c3cb-6012-471a-bec0-07a4d1a6abfc" class="">You can have data without information, but you cannot have information without data. — Daniel Keys Moran</blockquote></div></article></body></html>

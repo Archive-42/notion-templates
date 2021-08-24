@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Don’t hire top talent; hire for weaknesses.</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1f848103-a52d-46de-bc3a-5a08f1699717" class="page sans"><header><h1 class="page-title">Don’t hire top talent; hire for weaknesses.</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://benjiweber.co.uk/blog/2021/04/10/dont-hire-top-talent-hire-for-weaknesses/" class="url-value">https://benjiweber.co.uk/blog/2021/04/10/dont-hire-top-talent-hire-for-weaknesses/</a></td></tr></tbody></table></header><div class="page-body"><p id="d12a302b-9384-4555-8852-75f7199ba453" class="">Instead of starting from <em>“how do we hire top talent?”</em>, start from <em>“what are our weaknesses?”</em></p><p id="0f33c43e-072a-40fe-bb94-32f03bd83b60" class=""><em>Why</em> are you hiring? Are you hiring to <em>do </em>more, or are you hiring to <em>achieve </em>more?</p><p id="e2811d0f-d118-45ff-8409-13a733dcdda9" class="">Design your hiring process to find the right people to strengthen your teams’ weaknesses, rather than trying to find the best people.</p><p id="1bc79182-95b6-496d-8240-ad6de93225be" class="">Instead of <em>“how can we find the smartest people?”</em> think about <em>“how can we find people who will make our team stronger?”</em></p><p id="acc51f86-e4ea-4024-a8aa-f8d2a5359de8" class=""><a href="https://benjiweber.co.uk/blog/2020/09/19/a-little-rant-about-talent/">People are not Talent. An organisation can amplify or stifle the brilliance of people. It can grow skills or curtail talent.</a></p><p id="2f6684ac-5e10-4e8b-9260-208c9d481033" class="">Often the language used by those hiring betrays their view of people as resources. Or, to use its current popular disguise: “talent”.</p><p id="4284e256-f708-4acb-a137-69d8bef3dd48" class=""><em>“We hire top talent”</em> <em>“the candidate didn’t meet our bar”</em>, <em>“our hiring funnel selects for the best”</em>.<em> “we hire smart people and get out of their way”</em>. We design <em>“fair tests”</em> that are an <em>“objective assessment”</em> of how closely people match our preconceptions of good.</p><p id="1555d95a-1bfc-42f3-9806-e3b08d707d4e" class="">The starting point for the talent mindset is that we want to hire the smartest people in the “talent pool”. If only we can hire all the smartest people, that will give us a competitive advantage!</p><p id="69466185-f4c1-4b16-afe7-37048a5e0aac" class="">If you focus on hiring brilliant people, and manage to find people who are slightly smarter on average than your competitors, will you win? Achievements in tech seldom stem solely from the brilliance of any one individual. Successes don’t have a single root cause any more than failures do.</p><p id="c4e66bb4-2966-4f81-8e26-66deef9faeb1" class="">We’re dealing with such complex systems; teams that can capture and combine the brilliance of several people will win.</p><p id="dceebe98-112f-410d-a249-761f7e05c418" class="">With the right conditions a team can be smarter than any individual. With the wrong conditions a team can be disastrously wrong; suffering from over confidence and groupthink, or infighting and undermining each other. Hiring the <em>right</em> people to help create the <em>right conditions</em> in the team gives us a better chance of winning than hiring the smartest people.</p><div id="0a76b9d0-cc44-452c-afd7-d4f997cdeefd" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Talent Mindset</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Weaknesses Mindset</th></tr></thead><tbody><tr id="67cce319-26b3-4f69-9df0-c66a1eb3c2a4"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Find%20top%20Talent%2067cce31926b34f699df0c66a1eb3c2a4.html">Find top Talent</a></td><td class="cell-Fr^h">Find skills that unlock our potential</td></tr><tr id="63f8fd85-4da3-49eb-a0e0-6f250ff7f3c1"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Grow%20Team%2063f8fd854da349eba0e06f250ff7f3c1.html">Grow Team</a></td><td class="cell-Fr^h">Transform Team</td></tr><tr id="42562950-1eee-4026-9afb-5a55277410d2"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Help%20teams%20do%20more%20things%20425629501eee40269afb5a55277410d2.html">Help teams do more things</a></td><td class="cell-Fr^h">Help teams achieve greater things</td></tr><tr id="b2860f6e-a378-4879-b023-6886f9ef35d4"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/People%20who%20can%20do%20what%20we%E2%80%99re%20doing%20b2860f6ea3784879b0236886f9ef35d4.html">People who can do what we’re doing</a></td><td class="cell-Fr^h">People can do things we can’t do</td></tr><tr id="f5d3df49-8a9e-4ea6-9eac-dd6a4e545d04"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Hire%20the%20best%20person%20f5d3df498a9e4ea69eacdd6a4e545d04.html">Hire the best person</a></td><td class="cell-Fr^h">Hire the person who’s best for the team</td></tr><tr id="1d979bb6-4844-42d7-938d-bf22d7c15f48"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/People%20who%20match%20our%20biased%20idea%20of%20good%201d979bb6484442d7938dbf22d7c15f48.html">People who match our biased idea of good</a></td><td class="cell-Fr^h">People who have what we’re missing</td></tr><tr id="6d2597b9-cd19-4248-8e23-fd1e186eec6e"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Fair%20tests%20&amp;%20Objective%20assessment%206d2597b9cd1942488e23fd1e186eec6e.html">Fair tests &amp; Objective assessment</a></td><td class="cell-Fr^h">Equal opportunity to demonstrate what they’d add to our team</td></tr><tr id="08a39517-44a8-4608-9c68-a4b0afa65fa8"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Consistent%20process%2008a3951744a846089c68a4b0afa65fa8.html">Consistent process</a></td><td class="cell-Fr^h">Choose your own adventure</td></tr><tr id="5769c4da-b900-4e02-8e65-00ab2409185e"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Hire%20the%20most%20experienced%20skilled%20candidate%205769c4dab9004e028e6500ab2409185e.html">Hire the most experienced/skilled candidate</a></td><td class="cell-Fr^h">Hire the person who’ll have the greatest impact on the team’s ability.</td></tr><tr id="21cb4601-b3ef-44af-871a-dbd2f9bf8bb2"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Number%20of%20candidates%20&amp;%20Conversion%20rate%2021cb4601b3ef44af871adbd2f9bf8bb2.html">Number of candidates &amp; Conversion rate</a></td><td class="cell-Fr^h">How fast can we move for the right candidate?</td></tr><tr id="2c7556d4-5faa-4b26-b666-1643a2036205"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Centralised%20Process%20&amp;%20Bureaucracy%202c7556d45faa4b26b6661643a2036205.html">Centralised Process &amp; Bureaucracy</a></td><td class="cell-Fr^h">Teams choose their own people</td></tr><tr id="55051094-221e-4af9-8556-f64cf1ce1702"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Grading%20candidates%2055051094221e4af98556f64cf1ce1702.html">Grading candidates</a></td><td class="cell-Fr^h">Collaborating with candidates</td></tr><tr id="23493d87-ffb8-4ba8-b4e2-2a2640643fec"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Prejudging%20what%20a%20good%20candidate%20looks%20like%2023493d87ffb84ba8b4e22a2640643fec.html">Prejudging what a good candidate looks like</a></td><td class="cell-Fr^h">Reflecting on our team’s weaknesses</td></tr><tr id="5db4fc4e-f417-41b6-b5fe-1c599d6dfac3"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Fungibility%205db4fc4ef41741b6b5fe1c599d6dfac3.html">Fungibility</a></td><td class="cell-Fr^h">Suitability</td></tr><tr id="3ca529fb-88ac-4c62-884e-1f91b44faa57"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Smart%20people%203ca529fb88ac4c62884e1f91b44faa57.html">Smart people</a></td><td class="cell-Fr^h">People who make the team smarter</td></tr><tr id="803cfb32-c235-4b84-8df1-136b176c9574"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Intelligence%20803cfb32c2354b848df1136b176c9574.html">Intelligence</a></td><td class="cell-Fr^h">Amplifying others</td></tr><tr id="fcf6312b-84d0-4abb-8238-e8f5e11eee1c"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Culture%20Fit%20fcf6312b84d04abb8238e8f5e11eee1c.html">Culture Fit</a></td><td class="cell-Fr^h">Missing Perspectives</td></tr><tr id="c57bf40d-b77b-4389-b17d-e570cfedc555"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/People%20who%E2%80%99ve%20accomplished%20great%20things%20c57bf40db77b4389b17de570cfedc555.html">People who’ve accomplished great things</a></td><td class="cell-Fr^h">People who’ll unblock our greatness</td></tr><tr id="2804d643-915a-4605-9a91-c3d249a103e2"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/Exceptional%20individuals%202804d643915a46059a91c3d249a103e2.html">Exceptional individuals.</a></td><td class="cell-Fr^h">People we can grow and who will grow us</td></tr><tr id="2dc9fcf5-32e9-43de-8df4-60feed93cae5"><td class="cell-title"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/Untitled%20Database%200a76b9d0cc44452cafd7d4f997cdeefd/What%20didn%E2%80%99t%20the%20candidate%20demonstrate%20against%20chec%202dc9fcf532e943de8df460feed93cae5.html">What didn’t the candidate demonstrate against checklist</a></td><td class="cell-Fr^h">What would the candidate add to our team</td></tr></tbody></table></div><h2 id="169d1c92-fc22-41b2-a88c-0a2d630d05d1" class="">Talent-oriented hiring</h2><p id="cd75c2c2-5ddf-4d3e-bcd4-58ead0153edd" class="">If we start out with the intent to find the “best people” it will shape our entire process.</p><p id="8b504f5e-e68a-4f91-ab4f-04e0e8f0cc31" class="">We write down our prejudices about what good looks like in job descriptions. We design a series of obstacles^Winterviews to filter out candidates who don’t match these preconceptions. Those who successfully run the gauntlet are rewarded with an offer, then we figure out how to best put them to use.</p><p id="57b8e0c2-5f0f-4373-807c-3910ace03549" class="">Hiring processes are centralised to maximise efficiency &amp; throughput. We look at KPIs around the number of candidates at each stage in the funnel, conversion rates.</p><p id="edeccb1c-cbde-42c3-a692-5f13f00d9cc8" class="">Interviewing gets shared out around teams like a tax that everyone pays into. Everyone is expected to interview for the wider organisation.</p><p id="1490bf12-b07b-4d40-85c0-697f0c8b354f" class="">Hiring committees are formed and processes are standardised. We try to ensure that every candidate is assessed as fairly as possible, against consistent criteria.</p><p id="37c189cc-91f4-4d88-bc6d-06c53c7b011e" class="">We pat ourselves on the back about how we only hire the top 1% of applicants to our funnel. We’re hiring “top talent” and working here is a privilege. We’re the best of the best.</p><p id="f134b8f0-7328-4a3f-95e0-ede58917b526" class="">Watch out for overemphasis on counterfactuals in interview feedback. • Didn&#x27;t use [my preferred] idioms• Should have written tests• Didn&#x27;t find [what I consider] best solution• Failed to abstract x• Didn&#x27;t know [thing *I* know]What *did* the candidate demonstrate?— Benji Weber (@benjiweber) <a href="https://twitter.com/benjiweber/status/1379063376316350467?ref_src=twsrc%5Etfw">April 5, 2021</a></p><h2 id="d957d3d7-2dbe-4f6b-bab0-a26b1c2749cc" class="">Weaknesses-oriented hiring</h2><p id="ef27cc63-87cc-4e5f-b583-6159f75247bf" class="">There’s another approach. Instead of starting from our idea of talent and the strengths we’re looking for, start from <em>our weaknesses</em>. What’s missing in our team that could help us achieve more?</p><p id="586b4068-b372-4cda-bef4-68ffc5940c87" class="">Maybe we have a team of all seniors, frequently stuck in analysis. We need some <a href="https://benjiweber.co.uk/blog/2020/09/06/reasons-to-hire-inexperienced-engineers/">fresh perspectives and bias for action</a>.</p><p id="0a15e1fe-af7d-4c7a-9ef4-8806fcc7d9b2" class="">Maybe we are suffering from groupthink and need someone with a different background and new perspectives. Someone who can help generate some healthy debate?</p><p id="f21d6730-848c-4706-8598-4d9d91723745" class="">Maybe we have all the technical skills we need but nobody is skilled at facilitating discussions. We struggle to get the best out of the team.</p><p id="a6d72fa5-7afe-4bf7-8f6d-1c5750ec4316" class="">Perhaps we’re all fearful of a scaling challenge to come. We could use someone experienced who can lend the team some courage to meet the challenge.</p><p id="1a0b10fd-d495-40ea-b86c-247425c1ec5a" class="">Maybe those in the existing team specialise in frontend tech, and we’ve realised we need to build and run a data service. We could learn to do it, but bringing someone in with existing knowledge will help us learn faster.</p><p id="e897739c-06ab-4720-a461-8b489f337780" class="">Maybe we are all software engineers, but are spending most of our time diagnosing and operating production systems. Let’s add an SRE in the team.</p><p id="e33979df-84e2-4a4e-9db9-54c6f2c4e2b5" class="">Maybe we don’t even know what our weaknesses are—until we experience collaboration with the right person who shows us how to unlock our potential.</p><figure id="982f1f0e-b408-4856-827f-766a91c94db9" class="image"><a href="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/toptalent.png"><img style="width:700px" src="Don%E2%80%99t%20hire%20top%20talent;%20hire%20for%20weaknesses%201f848103a52d46debc3a5a08f1699717/toptalent.png"/></a></figure><p id="cecb1828-082a-40b5-b17c-b7fdff0e6db3" class="">Identify your weaknesses. Use them to draft role descriptions and design your interview processes.</p><p id="7ed68c0c-264b-45f3-8348-28be1e43c536" class="">Design your interviews to assess what the candidate brings to your team. How do they reduce your weaknesses and what strengths would they add?</p><p id="0a37f978-080c-4c05-9839-8a6ed367789c" class="">Leave space in the process to discover things people could bring to your team that you weren’t aware you needed.</p><p id="9ae20a08-2d04-40b7-9f10-77d77d4ce7cb" class="">A talent-oriented process would assess how the candidate stacks up against our definition of good. A weaknesses-oriented process involves collaborating with the candidate, to see whether (and how) they might make your team stronger.</p><p id="e8bcc6e3-1ad7-44ec-a52b-802ef1221428" class="">If possible, have candidates join in with real work with the team. When this is not feasible for either side, design exercises that allow people on your team to collaborate with them.</p><p id="f66cb382-47b6-435c-87e9-03eeb0a858c9" class="">Pair together on a problem. Not what many companies call paired interviews where it’s really an assessor watching you code under pressure. Instead, <em>really</em> work together to solve something. Help the candidate. Bounce ideas off each other. Share who’s actually doing the typing, as you would if you were pairing with a colleague. Don’t judge if they solved the same problems you solved; see what you can achieve <em>together</em>.</p><p id="2b344654-2f5c-4ae8-b181-cd4f5f813646" class="">A weaknesses-oriented process might mean saying no to someone eminently qualified and highly skilled; because you have their skills well covered in the team already.</p><p id="13888206-fa55-4479-b1c4-a427a7d1c46e" class="">A weaknesses-oriented process might mean saying <a href="https://benjiweber.co.uk/blog/2020/09/06/reasons-to-hire-inexperienced-engineers/">yes to someone inexperienced</a> who’s good at asking the right questions. Someone whose feedback will help the experienced engineers in the team keep things simple and operable.</p><h2 id="ae6ebe94-3087-422d-b1bc-c26afea68503" class="">Why not both?</h2><p id="bab3136c-c08e-4298-8a43-56802c3aa035" class="">It’s often worth thinking about <a href="https://benjiweber.co.uk/blog/2020/09/12/the-benefits-of-making-code-worse/">when something good is not appropriate</a>. There are rarely <em>“best practices”</em>, only practices that have proven useful in a given context.</p><p id="5a97ecd1-9b64-4b96-9cd2-defe19680172" class="">At scale I can see the need for the talent-oriented hiring approach in addition to weaknesses-oriented.</p><p id="31083bcb-06df-4e89-b0bf-206f5ba828d1" class="">Exposing all of your teams’ variety of hiring needs to candidates may create too much confusion.</p><p id="cf56b89f-3e1c-4885-81af-877adbf3b61a" class="">You may well want a mechanism to ensure some similarity. A mechanism to select for those who share the organisational values. To find those with enough common core skills to increase the chances that they can move from team to team. Indeed, long-lived and continuously funded teams are not a given in all organisations.</p><p id="2b5b6244-706b-46f1-b531-3d1caa552d65" class="">If you’re getting thousands of applications a day you’ll probably want a mechanism to improve signal to noise ratio for teams wishing to hire. Especially if you don’t want to use education results as a filter.</p><p id="20c10156-ee14-4957-a290-251a1371070f" class="">I suspect a lot of hiring dysfunction comes from people copying the (very visible) talent-oriented top-of-funnel hiring practices that big companies use. Copy-pasting as the entire hiring mechanism for their smallish team.</p><p id="496e35cc-3081-47a6-aa0c-b52c2a5a558d" class="">Start from reflecting on your weaknesses. Whose help could you use? Some of the practices from the talent-oriented approach may be useful, but don’t make them your starting point. Start from your weaknesses if you want strong teams.</p></div></article></body></html>

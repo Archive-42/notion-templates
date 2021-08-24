@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>‘Tokenized’: Inside Black Workers’ Struggles at Coinbase</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e7deabb6-6439-444c-ac97-583dedc429a7" class="page sans"><header><h1 class="page-title">‘Tokenized’: Inside Black Workers’ Struggles at Coinbase</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.nytimes.com/2020/11/27/technology/coinbase-cryptocurrency-black-employees.html" class="url-value">https://www.nytimes.com/2020/11/27/technology/coinbase-cryptocurrency-black-employees.html</a></td></tr></tbody></table></header><div class="page-body"><figure id="59b6c42e-94f0-48c4-9578-1a47ef05d33f" class="image"><a href="%E2%80%98Tokenized%E2%80%99%20Inside%20Black%20Workers%E2%80%99%20Struggles%20at%20Coi%20e7deabb66439444cac97583dedc429a7/00coinbase1-articleLarge.jpg"><img style="width:600px" src="%E2%80%98Tokenized%E2%80%99%20Inside%20Black%20Workers%E2%80%99%20Struggles%20at%20Coi%20e7deabb66439444cac97583dedc429a7/00coinbase1-articleLarge.jpg"/></a></figure><p id="abe0f4fa-2393-457d-b572-c86af79ce334" class="">Jim Wilson/The New York Times</p><p id="dedf78b1-2308-42c2-ba19-5ec8c3fcdde3" class="">SAN FRANCISCO — One by one, they left. Some quit. Others were fired. All were Black.</p><p id="754a86f1-06e4-40d3-8991-6ff843f18597" class="">The 15 people <a href="https://www.nytimes.com/2017/12/06/technology/coinbase-bitcoin.html">worked at Coinbase</a>, the most valuable U.S. cryptocurrency start-up, where they represented roughly three-quarters of the Black employees at the 600-person company. Before leaving in late 2018 and early 2019, at least 11 of them informed the human resources department or their managers about what they said was racist or discriminatory treatment, five people with knowledge of the situation said.</p><p id="0db19cef-a9ed-4977-945b-c9710dfc02b1" class="">One of the employees was Alysa Butler, 25, who worked in recruiting. During her time at Coinbase, she said, she told her manager several times about how he and others excluded her from meetings and conversations, making her feel invisible.</p><p id="caa0b016-fac1-4e21-8326-06b4e2b684be" class="">“Most people of color working in tech know that there’s a diversity problem,” said Ms. Butler, who resigned in April 2019. “But I’ve never experienced anything like Coinbase.”</p><p id="45ce67c0-ffac-4dc8-a7a9-560d91cbe934" class="">In Silicon Valley, where entrepreneurs and investors often <a href="https://www.nytimes.com/2020/07/17/technology/airbnb-coronavirus-layoffs-.html">preach high-minded missions</a> and style themselves as management gurus, Coinbase has held itself up as a model. Since the start-up was founded in 2012, Brian Armstrong, the chief executive, has assembled <a href="https://blog.coinbase.com/bar-raisers-at-coinbase-if-youre-not-a-hell-yes-you-re-a-no-68145c6fbe60">memos</a> and <a href="https://medium.com/@barmstrong/how-to-hire-executives-e2ee8e05cad3">blog</a> <a href="https://medium.com/@barmstrong/what-ceos-do-3add9d41397d">posts</a> about how he built the $8 billion company’s culture with distinct hiring and training practices. That has won him acclaim among influential venture capitalists and executives.</p><p id="78a9664d-a76b-47e5-ab4d-714472bda775" class="">But according to 23 current and former Coinbase employees, five of whom spoke on the record, as well as internal documents and recordings of conversations, the start-up has long struggled with its management of Black employees.</p><p id="b26772b0-0c13-4010-85a1-18f4c46d1efe" class="">One Black employee said her manager suggested in front of colleagues that she was dealing drugs and carrying a gun, trading on racist stereotypes. Another said a co-worker at a recruiting meeting broadly described Black employees as less capable. Still another said managers spoke down to her and her Black colleagues, adding that they were passed over for promotions in favor of less experienced white employees. The accumulation of incidents, they said, led to the wave of departures.</p><p id="8fe27539-e45e-43da-bca7-4628f4827160" class="">“It was the first time I realized what racism felt like in the modern world,” said Layllen Sawyerr, a compliance analyst who is Black. “I felt like I was being bullied every day at work.” She said she filed a discrimination complaint with Coinbase’s legal department before quitting in 2018.</p><p id="cc6d19c5-0be5-4a1f-9eaa-4a8233cf10f8" class="">Kim Milosevich, a Coinbase spokeswoman, said the company “does not tolerate racial, gender or any other forms of discrimination.”</p><p id="ecb465c9-6fdb-48ed-8a2e-34f5714bab08" class="">She added, “All claims of discrimination are treated very seriously, investigated by both internal and third parties, and the appropriate action is taken.”</p><p id="ea7b09c5-3504-43ff-9ef1-0f8580f07312" class="">Ms. Milosevich said Coinbase had a record of only three official complaints from the 2018-19 period and none from Ms. Butler. Ms. Milosevich said the three complaints, including Ms. Sawyerr’s, were investigated and found to be unsubstantiated. Ms. Butler said she was not told how to make an official complaint; Ms. Sawyerr said she never spoke to an investigator and was not informed of the findings.</p><p id="5b605268-094c-4869-b023-a54f094770e1" class="">On Wednesday, before publication of this article, Emilie Choi, Coinbase’s chief operating officer, wrote an email to employees to preemptively question the article’s accuracy and said, <strong>“</strong>We know the story will recount episodes that will be difficult for employees to read.” The company <a href="https://blog.coinbase.com/upcoming-story-about-coinbase-2012afc25d27">posted the email to its public blog</a>.</p><p id="15271a63-00c2-4da7-bb4f-32e3c7f4aefc" class="">Tech companies have long <a href="https://www.washingtonpost.com/technology/2020/06/10/racial-gap-vc-firms/">struggled</a> to hire and support Black employees and entrepreneurs. Just 1 percent of venture-backed companies were led by Black entrepreneurs from 2013 to 2018, according to a <a href="https://ratemyinvestor.com/diversity_report">study</a> by RateMyInvestor, which analyzes tech investors. Large tech companies like Intel, Google and Facebook have publicly said that they need to do better on diversity and have <a href="https://www.nytimes.com/2015/01/07/technology/intel-budgets-300-million-for-diversity.html">committed to improvements</a>, though progress has been uneven.</p><p id="fee27633-6379-4a9a-8a84-28982d67a85c" class="">But even in this environment, Coinbase stands out, said the current and former employees, some of whom requested anonymity because they had signed confidentiality agreements or feared retaliation. Three percent of the company’s employees are Black, which is less than half the average in most of the tech industry, according to the <a href="https://www.bls.gov/cps/cpsaat18.htm">latest data</a> from the Bureau of Labor Statistics. Coinbase’s percentage has also stayed flat in recent years, while companies such as <a href="https://squareup.com/us/en/l/diversity/beyond-the-numbers">Square</a>, <a href="https://newsroom.paypal-corp.com/2020-04-27-PayPal-Releases-2019-Global-Impact-Report">PayPal</a> and <a href="https://blog.twitter.com/en_us/topics/company/2020/inclusion-and-diversity-report-blacklivesmatter-september-2020.html">Twitter</a> <a href="https://morningconsult.com/2020/06/11/silicon-valley-tech-diversity/">have modestly increased</a> their share of Black employees.</p><p id="5442981b-4421-492a-94c4-a6c454cdc127" class="">“If the numbers haven’t changed, it’s definitely because there wasn’t a real intention to do so,” Cleve Mesidor, the founder of the National Policy Network of Women of Color in Blockchain, said of Coinbase, which she has worked with to hold events in the Black engineering community. “We know now that Brian Armstrong was never committed to this.”</p><figure id="b17d64c7-648b-4cba-8d3a-43007d577f3f" class="image"><a href="%E2%80%98Tokenized%E2%80%99%20Inside%20Black%20Workers%E2%80%99%20Struggles%20at%20Coi%20e7deabb66439444cac97583dedc429a7/00coinbase3-articleLarge.jpg"><img style="width:600px" src="%E2%80%98Tokenized%E2%80%99%20Inside%20Black%20Workers%E2%80%99%20Struggles%20at%20Coi%20e7deabb66439444cac97583dedc429a7/00coinbase3-articleLarge.jpg"/></a></figure><p id="a33d6cf5-786d-4d22-aac3-9abcf8a2bdae" class="">The tensions at Coinbase came to a head in June, after the <a href="https://www.nytimes.com/2020/05/26/us/george-floyd-minneapolis-police.html">police killing of George Floyd</a>. As many tech leaders publicly voiced support for Black Lives Matter protests, Black employees at Coinbase said on the Slack messaging platform that they were hurt by the silence of Mr. Armstrong and other executives about the matter. They organized a meeting where several of them told executives, often through tears, about their difficult experiences at the company, eight people who attended said.</p><p id="8adc97b7-703b-4166-848f-028beea521c7" class="">The next day, Mr. Armstrong, 37, summarized the tone of what he had heard. “There was just this outpouring of, like, Why does the company not have my back?” he said at a staff meeting, according to a recording of the session shared with The New York Times. In a company email he sent later, which was also shared with The Times, he agreed to revamp the diversity-and-inclusion plan and increase mentoring.</p><p id="863af8b7-89df-455c-b794-10ad2c1f254d" class="">But in September, Mr. Armstrong published a <a href="https://blog.coinbase.com/coinbase-is-a-mission-focused-company-af882df8804">public blog post</a> telling employees to leave concerns for issues like racial justice at the door. He said that while the company embraced diversity, the staff needed to focus on Coinbase’s mission of profit and advancing cryptocurrencies. They should resign if they did not agree, he said.</p><p id="23e30f1f-81b7-472c-bee2-d7e78dff1d8d" class="">“We don’t engage here when issues are unrelated to our core mission,” Mr. Armstrong wrote.</p><p id="08ab95d8-61a6-47d2-87d6-3194fd72ee1e" class="">The post drew immediate blowback from employees. “Why stay and put effort into this work if it’s just tokenized into recruiting points and not actually improving the sense of belonging and psychological safety,” Lauren Lee, who was responsible for diversity and inclusion, wrote in a Slack message that was viewed by The Times.</p><p id="eb4071cd-ef18-49fb-936f-c7417199a77c" class="">Ms. Lee, who did not respond to requests for comment, resigned last month. So have at least 60 others.</p><h2 id="d6d1c42c-f839-46bd-97d3-237eade91418" class="">The ‘Right Brain’</h2><p id="5bd4666b-3630-4169-bf1d-c36a22ac0868" class="">Mr. Armstrong, a former Airbnb engineer, and Fred Ehrsam, a former Goldman Sachs trader, founded Coinbase eight years ago to provide a place to buy and sell cryptocurrencies. They built the start-up into a cryptocurrency leader, making money by taking fees on trades placed by its customers. (Mr. Ehrsam left day-to-day operations in 2017.)</p><p id="7479dcdf-ba03-45a0-b7b2-0932079730ae" class="">Today, Coinbase is riding a new wave of interest in cryptocurrencies, with the value of <a href="https://www.nytimes.com/2017/10/01/technology/what-is-bitcoin-price.html">the virtual currency Bitcoin</a> approaching a new high as investors increasingly treat it like an alternative to gold.</p><p id="d4860c81-0e2c-4755-8054-a51982fb12cc" class="">Much of Coinbase’s culture stems from the one around Bitcoin, current and former employees said. Bitcoin, which embodies a libertarian philosophy that snubs its nose at the pieties of mainstream institutions, has attracted a generation of fans known as <a href="https://www.nytimes.com/2018/02/25/business/cryptocurrency-women-blockchain-bros.html">“crypto bros.”</a> Many have propagated a brash male-dominated way of life, facing criticism for sowing <a href="https://www.washingtonpost.com/business/technology/bitcoins-boom-is-a-boon-for-extremist-groups/2017/12/26/9ca9c124-e59b-11e7-833f-155031558ff4_story.html">racism</a> and <a href="https://www.fastcompany.com/40556187/dear-blockchain-bros-i-wont-let-your-sexism-poison-our-industry">sexism</a>.</p><p id="10702c14-1b1d-411d-aa81-028eca9c96eb" class="">At Coinbase, Mr. Armstrong, who eschewed some of Bitcoin’s most renegade elements, began building what he called an “all star” culture, with mostly young white and Asian men. In <a href="https://medium.com/@barmstrong/35-ways-coinbase-hires-develops-and-retains-great-people-cbfdf93b1c5c">one 2018 post</a> on “36 Ways to Hire, Develop and Retain Great People,” he wrote about the importance of creating a “consistent culture” and the value of acting like an “all-star team” instead of a “family.”</p><p id="f32625d5-d56b-483c-9fc3-8b1c136600c8" class="">“Players who don’t contribute or work as a team get cut,” he wrote.</p><p id="5ff3d5e4-f184-43fb-8fc0-7dbb6898ae0c" class="">Ruby Bhattacharya, a recruiter at Coinbase in 2017, said the search for employees for this “consistent culture” often meant looking for people who resembled the other staff. Ms. Bhattacharya, who is gay and was born in England to Indian parents, said her colleagues made it clear she did not belong.</p><p id="9d942c54-e239-4b04-8edb-cb4ecf5872bb" class="">“I was told I don’t have the right brain for this,” she said. “It was constant condescension.”</p><p id="50bf21db-cbb5-4438-98dc-e96ebdc3b6bc" class="">As Coinbase grew, several female executives lobbied for more diversity, three former employees said. The company had brought on about a dozen Black employees by the beginning of 2018, when it had a staff of around 300.</p><p id="f12810fc-ad67-4792-886f-642c6c35a896" class="">One of those hires was Katherine Johnson, who led the compliance department. She helped recruit seven more people of color, said Ms. Sawyerr, who was among those who joined.</p><p id="b9dab6fc-dbad-4386-a713-5083a1b5662d" class="">But Ms. Sawyerr and others said they soon felt like they were being treated differently. On days when reporters or photographers came in, they said, they were told to be present so they could be in the photos to display the company’s diversity. But in meetings, they were talked down to and ignored. By mid-2018, some said they had started talking to human resources and their managers about the behavior.</p><p id="039d5ead-4c96-409d-8d3c-0079bb38ece5" class="">When Coinbase announced it would be opening an office in Portland, Ore., several Black employees in the compliance department who worked remotely were told to move there or reapply for new jobs, four former employees said. The company said it wanted the whole team in one place, but current and former employees said the one white employee in the department was allowed to continue working remotely.</p><p id="083c9eb9-0e3f-416f-8d7a-4b4fbf31a246" class="">Ms. Milosevich said the white employee lived in Philadelphia and was allowed to commute to and work from the company’s New York office. She said all of the workers were offered relocation packages and that some who declined to move received severance.</p><p id="29896d29-bd11-48e6-bb65-d3bb8d9d0c0f" class="">All of the Black workers in the compliance division ended up among the group of 15 who left. Ms. Johnson, who was described as a supportive manager, declined to comment. She left Coinbase last year.</p><p id="87ca93fb-1065-4aba-b3dc-3681dc42c5d1" class="">In mid-2018, Coinbase hired Tariq Meyers, who had worked on inclusion efforts at the ride-hailing company Lyft, to lead a diversity push. Ciceli Johnson-Porter, who worked on Coinbase’s legal team, said she had approached Mr. Meyers several times to discuss the way her managers repeatedly diminished her and favored her white colleagues. She said he tried to help but was not empowered to change anything.</p><p id="975e56a4-6309-48a7-a8c7-e06b305d9aac" class="">“He knew he was there to put a Band-Aid on a bullet wound,” she said. Mr. Meyers, who left Coinbase in June, declined to comment.</p><p id="aa087ad9-979d-4e80-b631-8ac2f609e9d5" class="">Ms. Johnson-Porter, who resigned last year, said Coinbase often turned its scrutiny on the person who complained. After she spoke up, she said, her boss started taking issue with her work. “Those of us who were vocal about the unfair treatment — they either pushed you out or created an issue that wasn’t an issue to force you out,” she said.</p><p id="9bc5df88-cf0c-42c1-921f-799d298333ce" class="">Ms. Milosevich said the company investigated Ms. Johnson-Porter’s claims and found “no evidence of unfairness or wrongdoing.”</p><p id="7f33d05e-90b9-4e4b-b077-908cfc23243f" class="">Early last year, some workers brought the exodus of Black employees to the attention of Mr. Armstrong and asked him to step in, three people briefed on the situation said. He listened and said he would think about it, but took no action, they said.</p><p id="b2335bc6-cb3b-4e6c-88b4-637ae466bb34" class="">Mr. Armstrong rarely spoke or made decisions in meetings, the current and former employees said, leaving them uncertain about his opinions. In a staff meeting this summer, he said he knew his style made many employees uncomfortable and attributed it to being “on the spectrum,” according to a recording of the event.</p><p id="d7c62676-0f3b-4095-b043-3c8320d6696d" class="">Ms. Sawyerr said she had talked with four other Black employees about bringing a discrimination lawsuit against Coinbase, but the others backed out after being offered hefty severance payments in exchange for confidentiality agreements.</p><p id="3389f844-b3ef-4ce7-8fe7-3d125358e618" class="">By the end of 2019, 31 of Coinbase’s 1,000 employees were Black. That proportion has remained unchanged.</p><h2 id="f41fd541-4beb-42b4-8280-3d9f092dc7c1" class="">‘Hasn’t Learned Anything’</h2><p id="082a4956-3268-4681-b1ae-14c4fb80b3b6" class="">When Mr. Armstrong wrote his blog post in September asking employees to leave their outside interests at the door, he was <a href="https://www.nytimes.com/2020/10/28/technology/politics-tech-start-ups-culture-war.html">celebrated and praised by several tech investors</a>.</p><p id="e7718213-a3ad-498d-885e-30c9f9ec1fca" class="">Fred Wilson, a venture capitalist at Union Square Ventures, and one of the nine members of Coinbase’s board, <a href="https://www.nytimes.com/2020/10/28/technology/politics-tech-start-ups-culture-war.html">said</a> that many tech chief executives “would like to have done what Brian did” to reduce the distractions that come from employee activism. David Sacks, a PayPal founder, <a href="https://twitter.com/davidsacks/status/1310457296288280576">said</a> Mr. Armstrong’s post was “how you build a movement and change the world.”</p><p id="7753d345-42e5-4a5d-8f8c-cb2bfe4e51a6" class="">But internally, Mr. Armstrong’s post led to another exodus. Besides Ms. Lee, another employee who left in October was John Russ, the head of marketing and the company’s highest ranking Black employee, who had been hired three months earlier.</p><p id="31347920-b57a-4174-919f-460ce1da52c7" class="">In a brief phone interview, Mr. Russ would only say that he disagreed with Mr. Armstrong’s new position and left as a result.</p><p id="0500d90b-66c2-4c0c-a883-0299c7d38f5d" class="">On Oct. 8, Mr. Armstrong wrote in a <a href="https://blog.coinbase.com/a-follow-up-to-coinbase-as-a-mission-focused-company-6e7545e9aea2">letter to employees</a> that 60 people had left Coinbase. He said he took solace in how many Black employees had chosen to stay.</p><p id="f21ae0ce-0925-412c-b27f-d3e5d620d510" class="">In response, one Black employee wrote on Slack that her continued employment should not be “reassuring.” She said that she and many other Black employees were in low-ranking support positions, and that it was hard to leave at a moment of high unemployment in the pandemic, according to a copy of the message seen by The Times. The post got a black heart emoji from 153 other employees.</p><p id="017ef0e1-ff0f-41eb-854b-2fc143b9756e" class="">Ms. Milosevich said Coinbase hired a consultant over the summer who did interviews and looked at the company’s history, and found “no evidence of structural bias.”</p><p id="726853f4-f520-42cf-b072-a538ff021852" class="">“Employees reported a strong culture, fair employee treatment, high employee satisfaction and high energy for belonging, inclusion and diversity,” she said.</p><p id="01982783-4ca8-4492-a7a6-5933c1240dbd" class="">Managers in the customer support team, where many of the Black employees work, wrote their own report last month. It concluded that Coinbase’s executive team “hasn’t learned anything from the amount of time and labor put into listening sessions or the vulnerability expressed by Black employees,” according to a copy reviewed by The Times.</p><p id="bc046ae8-8047-4538-8a02-6fafcebb40b9" class="">The report was presented to executives, two people with knowledge of the situation said. The executives, they said, have not acted on its recommendations.</p><p id="534e2c4f-f1a2-44a4-857a-d350ba71b761" class="">Sheelagh McNeill contributed research.</p></div></article></body></html>

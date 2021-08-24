@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>What I Learned from Doing 60+ Technical Interviews in 30 Days</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8d7bb652-1d6e-419e-9fe2-0738e3701c7c" class="page sans"><header><h1 class="page-title">What I Learned from Doing 60+ Technical Interviews in 30 Days</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.freecodecamp.org/news/what-i-learned-from-doing-60-technical-interviews-in-30-days/" class="url-value">https://www.freecodecamp.org/news/what-i-learned-from-doing-60-technical-interviews-in-30-days/</a></td></tr></tbody></table></header><div class="page-body"><figure id="652dfa04-16e3-412e-b52a-2c7f8a104e0c" class="image"><a href="What%20I%20Learned%20from%20Doing%2060+%20Technical%20Interviews%208d7bb6521d6e419e9fe20738e3701c7c/header-image.png"><img style="width:700px" src="What%20I%20Learned%20from%20Doing%2060+%20Technical%20Interviews%208d7bb6521d6e419e9fe20738e3701c7c/header-image.png"/></a></figure><p id="950340bf-bae9-4ce4-9b0c-87f4d4b26a07" class="">In this article, I’ll share my motivation for doing 60+ technical interviews in 30 days. More importantly, I’ll share lessons learned from my failures and my successes.</p><p id="9bd3ce02-efad-454b-b634-fc41d4df3636" class="">I’ve grouped the lessons into three categories to match the phases of a typical recruitment process.</p><p id="b467c15f-f08a-4e5d-9262-829369a915a8" class="">While most of the lessons apply directly to software engineers and technical professionals, the principles behind these lessons can be applied to all careers. I hope you find something useful that you can apply to your professional lives.</p><h2 id="1350fb14-7053-475e-a6f8-239359c8ca82" class="">How did I get started?</h2><blockquote id="c4ebeeb3-ecd2-49a3-8270-3251393ddf54" class="">“If you’re going to fail, do it fast.” — Unknown</blockquote><p id="cbcebca2-a07a-4855-98b0-98a3bb0dbb2b" class="">Like any other software engineer, I’ve had different types of technical interviews - from the dreaded whiteboard coding interview to the unreal 45-minute coding challenge on platforms like HackerRank. While some of my experiences in these interviews were great, others were bad. Really bad.</p><p id="0e1b4502-c294-4764-a96e-5cdf2b55e93f" class="">But I wanted to get really good at interviewing. I wanted to learn to overcome the interviewing phobia and exude confidence at interviews. Like a skilled surfer, I wanted to learn to ride the high pressure waves that came with interviews. I was also looking to change jobs at the time.</p><p id="b3b035db-c0f1-453f-82e3-0f2911f79e68" class="">So from January through early March 2020, I applied to and was contacted by companies based in the US and Europe. From early-stage startups like Coda to later stage startups like Crunchbase, from mid-size companies like Affirm, to bigger companies like Amazon and even remote companies like Webflow.</p><p id="78a52c5f-b6f3-49cb-b2cf-e810fb65020d" class="">109+ applications later, I landed myself more than 60 interviews. These comprised more than 60 introductory phone interviews, 50+ technical phone screen interviews, 18 take-home coding projects, 11 coding challenges and 8 on-site interviews including 3 virtual ones.</p><h2 id="b1f2c8be-8087-4827-96c9-d41977deab39" class="">What did I learn?</h2><p id="5433f538-3b86-4ea3-af5e-c5bf8dff6ed2" class="">For better appreciation, I have grouped the lessons into three categories to match the different phases of a typical recruitment process.</p><h2 id="c3d900e9-afd7-44b1-8b80-03173b39c56d" class="">Pre-Interview Phase</h2><p id="fefeb9d5-292d-44d9-bf61-21b2faa2e286" class="">This covers everything from the initial contact with a company to the point where the first interview happens.</p><h3 id="b9d3fc1e-ab4d-410f-9a98-85b0cafb5adf" class="">What I learned about applications</h3><p id="2567f4a7-96ba-48a5-aa21-f322ccf4586a" class="">When I started applying to companies, I imagined that the more applications I submitted, the higher my chances of getting an interview would be. Seems logical, huh? So I set a target of 5 applications a day, aiming for 1 interview for every 5 applications.</p><p id="303b7a59-6fec-4ade-b109-650137acc228" class="">But my strategy didn’t work as I hoped it would. The number of interview requests I got often fell short of my target. It was almost a 1:12 ratio - 1 interview for every 12 applications.</p><p id="0a9a0917-c9c9-4800-8978-7beebee84a0f" class="">I was faced with the question: do I need to increase my daily target to, say, 10 companies? Or was there something else I needed to change?</p><p id="b345fa23-99e4-4f9d-b2ed-caac1892ee23" class="">With every unsuccessful application, I saw that something needed to change.</p><p id="7d26fabd-9cd4-4ad6-9e66-728b2afa1167" class="">That change came when I took a break from meeting my daily numbers and began to think of my applications differently. I began to see each application as a sales pitch to the hiring manager or whoever was going to be reading my application, but here the product being sold was me.</p><p id="ae9bbdef-933d-48fd-a14e-7ff69a4cd9d2" class="">If a company needed to fill a talent gap and I say I had the skills, I needed to find a way to convince them that I did.</p><p id="3850a853-147a-4c59-9c47-486f239df647" class="">My new task then became to find a way to effectively pitch <strong>my unique skills, experience and personality</strong> in a way that convinced the hiring manager that I was the right fit for the job.</p><p id="92b5c807-f32f-4f51-baa9-716973c557be" class="">Here is an example of one of such <em>pitches </em>I came up with:</p><figure id="1d27852b-a98b-4c83-9de2-24768eadca2f" class="image"><a href="What%20I%20Learned%20from%20Doing%2060+%20Technical%20Interviews%208d7bb6521d6e419e9fe20738e3701c7c/body-image.png"><img style="width:700px" src="What%20I%20Learned%20from%20Doing%2060+%20Technical%20Interviews%208d7bb6521d6e419e9fe20738e3701c7c/body-image.png"/></a></figure><p id="13ff5405-05ad-4715-80b7-8ae49bffc4f6" class="">Backed with my resume, this cover letter had a 95% success rate. The one time this didn’t work, the hiring manager still replied to let me know that the position was no longer available but he would like to connect in the future.</p><p id="fc30fa10-aa68-40b4-b1d5-0f301a30b281" class="">The lesson here is, be very intentional about the application you put forward – quality over quantity. Better still do both. Know your unique competencies and experience and present them in a way that matches the company’s needs without sacrificing your personality.</p><p id="2557c98c-cc7a-47fa-b175-95622d2f1787" class="">It is also important to understand the peculiarity of the company you are applying to and its specific needs. A startup or a smaller-sized company may have different needs from a bigger company, thus requiring a different skill-set.</p><p id="4ca979f0-9f85-478b-980e-5f7c3fe4db1c" class="">Sell yourself and be sure to back your sales pitch during the interview.</p><h3 id="e4bce90d-5f9f-4ec1-a1af-0433e74274a5" class="">What I learned about recruiter in-mails</h3><p id="ecdc4478-34e5-4a63-8f84-51302d29e734" class="">During this period, I received a number of in-mails from recruiters (mostly unsolicited) for open roles, the majority of which were roles I wasn’t interested in.</p><p id="36dabbc2-0bcc-45ae-86c7-578480cbd1b5" class="">Granted, it was sometimes a lot given my busy schedule but I learned to be empathetic, understanding that these recruiters were only trying to do their jobs.</p><p id="06785a72-6e46-4996-957a-4726f975ff6d" class="">I stopped seeing these in-mails as noise in my inbox and started making the effort to reply to all recruiter in-mails, even for positions I was not interested in. By doing this, I succeeded in building a network of recruiters that have become a rich resource if I have to switch roles in the future.</p><p id="b1d3b9c9-d7ea-43b9-9235-a4e3b5cf3850" class="">Now I don’t expect you may want to start replying to every in-mail you receive. But it might interest you to know that some of the interview requests I got were from recruiters I had replied to before for roles I wasn’t interested in. It never hurts to reply.</p><h2 id="3386ea18-4825-4849-acfb-c78220d4f397" class="">The Interview Phase</h2><p id="97b7cd77-9b8c-4913-8e75-8b5610f604ba" class="">This covers everything about the interview itself, cutting across the different interview types.</p><h3 id="7cab5a22-eb57-4834-8ea8-38d84a48816d" class="">How to handle introductory phone calls</h3><p id="fc8efb05-02e7-49fa-b245-e89728816dcf" class="">Yes I get it, you’re busy and many things are competing for your time. But hey, you are also an excellent professional, and that means you never get on a phone call without knowing at least these two things:</p><ul id="305394de-f68c-4ce7-ac66-95481cf5898c" class="bulleted-list"><li>the first name of your interviewer, and</li></ul><ul id="dad22a62-502e-4d21-97bc-67ffc7368a9c" class="bulleted-list"><li>at least one tangible thing about the company — what they do, where they are located, any recent news, something, anything!</li></ul><p id="f5e4c06b-6889-45b0-9d99-d602faddb8e8" class="">I noticed that for interviews where I put in the effort to make these findings, I always came across as being genuinely interested in the company. That’s something recruiters typically look for in these kinds of interviews.</p><h3 id="b4dfb9ce-c800-4873-96ae-4af2a28ab2ae" class="">How to handle technical phone screens</h3><p id="a21a977e-bf0f-4653-99be-e994e768d153" class="">The one thing that can almost single-handedly decide how well you do in a technical phone screen interview is your ability to communicate your thoughts clearly.</p><p id="bcfef3f1-45e3-4db2-8485-fafb7223b761" class="">You may have heard stuff like this before:</p><p id="db8764a7-1ca4-4c7c-82bb-2e522152ace1" class="">“<em>The interviewers care about your thought process. Yes they can see your code but importantly, they want to know </em><em><strong>why </strong></em><em>you are doing what you’re doing</em>.”</p><p id="8aaf7bee-3e70-4432-9e46-e05e29c28266" class="">The interviewer isn’t there with you and so does not have the luxury of seeing other non-verbal cues like your hand gestures or nuances. All the interviewer has is your voice as a means of understanding your thought process.</p><p id="9b41981d-6daa-4c91-820c-7690b1a8d1ff" class="">Now you know how you should lead this conversation, the next question is how do you become good at this? Because the truth is, while expressing your thoughts may come naturally to some people, it doesn’t to others – including me.</p><p id="0d1a7f54-451d-4f15-bcc1-7845be28a33b" class="">So – Practice! Practice!! Practice!!!</p><p id="7bde4e55-5180-418e-a55b-e481c0dfabf3" class="">Practice doing a lot of mock interviews. Doing these mock interviews with friends made me better and more confident in explaining my thought process. But more interestingly, it helped me develop a new mindset about interviews.</p><p id="bc38cb50-683d-4368-bcf6-d4c707eb512a" class="">I began to see interviews as a conversation with a friend or a team member. I visualized the interviewer on the other end as one of my friends (I sometimes gave the interviewer a name in my head). So what would have been a high-pressure interview I now saw as a friendly ‘chat’ about a technical problem.</p><p id="fcdab772-c77f-4f8b-bd48-195db5943c38" class="">This new mindset, aided by the many practice interviews, helped me grow in confidence so much so that I started enjoying interviews, sorry, technical chats.</p><h3 id="1ab5d88e-2cf0-40b7-b64e-bb9a0e7130ee" class="">How to get started on a problem</h3><p id="be1131e0-f5ec-4f19-8c79-1920cc92bd45" class="">Never start solving a problem without fully understanding the problem statement. You are almost never wrong if you start by asking clarifying questions. It’s also a good sign to your interviewer when you ask those questions rather than run with your assumptions.</p><h3 id="6d8f25c0-05c5-4ca0-b5a0-17f64b99688c" class="">How to solve the problem</h3><p id="d27c4e6a-332e-4a31-824b-936394577a11" class="">Good candidates know how to solve a problem (e.g. a sorting problem), but the best candidates know multiple solutions to a problem and understand the trade-offs of one solution versus the other.</p><p id="137865fc-0ec3-4d0a-94ca-52b61741cbc3" class="">The interviews where I performed the best (Cruise comes to mind) are the ones where I didn’t just solve the algorithmic challenge – I was also able to provide alternative solutions and discuss the trade-offs.</p><p id="ecd7eba8-b98f-43be-b7a3-0f26f8d7470e" class="">Aim to provide multiple solutions to a problem, be willing to discuss the trade-offs, and be able to implement at least one of them.</p><p id="f61a1a40-2478-48d5-ac0f-50a1e3318d96" class="">For technical interviews, write clean code. Most interviewers care about your code quality as well as the correctness of your solution. Aim for modular code, separate reusable logic into utility functions, name variables and methods properly, and just be a boss!</p><h3 id="51ab59eb-7226-4c64-81b9-9c12383d3ea7" class="">What to do when you’re stuck on a problem</h3><p id="e4468109-4310-4834-9d49-1fed2a5304c1" class="">There will be times when you’re stuck. And this could be caused by a number of reasons: you don’t have the requisite knowledge, incorrect assumptions, missing details, and so on.</p><p id="320bb580-dd4d-4feb-b3d3-9b3df35300e8" class="">I used to think that at such times I was being judged by how fast I could come up with a solution. So I would be quiet, thinking, not communicating with the interviewer, just thinking.</p><p id="2e6c99ca-94a5-43a5-90fc-ff094c9179de" class="">And this is where a lot of us get it wrong. I get it, you need some alone time to think. But sorry to burst your bubble, that alone time is not when you’re being interviewed by a person.</p><p id="1c38109d-69ed-4bf5-8962-0df29da0c0c5" class="">Yes, your interviewer wants to see that you can come up with a solution, but one thing you must not forget is that they also want to see that you can <strong>collaborate with other team-mates</strong> to come up with a solution. While companies want rock-stars, they also want team-players.</p><p id="626ffa98-7145-4774-8b65-98413a2b952d" class="">Since your interviewer is a friend, a buddy, a team member who’s on your side and means well for you (Refer to 4), talk to them while you&#x27;re figuring it out.</p><p id="71c780c7-0cc3-4c58-82c2-cf78426ca45a" class="">Share your thought process up till the point you got stuck and do it confidently, not like some cry for help. By doing so you just may uncover the solution, as was the case during my interview with Coda.</p><h3 id="911df12c-67af-40d0-b6a0-125a8ec2f1ab" class="">How to handle coding challenges</h3><p id="b1a8ab81-9565-43f1-b5e5-afe90e07fce7" class="">The lessons here apply to interviews that take the form of coding challenges on platforms like Hackerrank, Codility, and so on. Typically these are timed challenges, say 45 minutes or sometimes could be more.</p><p id="2cdc53b5-654c-44f4-b4d1-26ff107ab97b" class="">Some of the lessons I shared earlier are useful here, while others like asking clarifying questions don’t apply since there’s no one to ask. So here are some steps I recommend:</p><ul id="8d6fcbf5-16f5-46b8-b201-f3af7026248a" class="bulleted-list"><li>Read through and fully understand the problem.</li></ul><ul id="1aac6ce0-cfe0-45fe-833e-8a8be71e1fb1" class="bulleted-list"><li>Write code that works first, even if it’s a<a href="https://www.freecodecamp.org/news/brute-force-algorithms-explained/"> brute-force algorithm</a>. It may not pass all the test cases but get some working code out there first, hopefully within the first 15–20 minutes.</li></ul><ul id="8c91124e-6a0b-4942-89ff-c4a8b74266aa" class="bulleted-list"><li>Test your code with different input types, as this helps you handle edge cases.</li></ul><ul id="d80266b8-83ac-474a-afbc-5a2d4c2f7303" class="bulleted-list"><li>Optimize for efficiency.</li></ul><ul id="4b32fdef-1e34-405f-8405-b81906a2f247" class="bulleted-list"><li>Repeat Steps 4 and 5, till the very last minute.</li></ul><p id="ce40067f-3895-4f74-acb0-159c1ee67c95" class="">A good grasp of computer science fundamentals is key here. I’ve added some links to helpful resources in the Resources section below.</p><h3 id="b7b9789e-004f-4474-abd0-4149b263be4f" class="">How to handle take-home projects</h3><p id="1147a066-610e-4a09-8aad-cee1cb07d96b" class="">Take home projects are an opportunity to really shine because you have more time. This also means they can be time-consuming.</p><p id="594e764e-023f-47c1-bd3a-e689e0c27960" class="">One of the companies I interviewed with provided hourly pay, about $68/hr, for the number of hours you worked on their take-home project — it’s that serious, so you should be serious about it. Be sure you really want to be a part of a company before investing your time in the take-home projects.</p><p id="cdee5caa-7086-4b8c-897e-20b6807b86b5" class="">Never compromise on code quality for take-home projects. Be very intentional about your design decisions, naming conventions, code structure and so on, and be ready to defend your choices.</p><h3 id="b74f3f2c-ddf3-40ee-84eb-73265bf6993f" class="">What tools should you use?</h3><p id="a9e1b4d6-80c6-4341-8cce-7ae57832f7df" class="">During my interview with Course Hero, I used<a href="https://en.wikipedia.org/wiki/Regular_expression"> regex</a> to solve a problem I could have solved using a simpler string parsing algorithm. It turned out to be a bad decision as I didn’t pass the interview.</p><p id="8419ae17-3d8e-4cd7-b4cb-31f49aa9d753" class="">The lesson: only use tools you’re <strong>very</strong> comfortable with and have <strong>a lot</strong> of experience with.</p><h3 id="59769b25-7931-4c8d-9743-e4afabc6a992" class="">How to approach on-site interviews</h3><p id="e3b81291-bb0f-4040-91ea-27d941f658ec" class="">Get a good night&#x27;s sleep the night before. Arrive early on the day of your interview and smile a lot (it helps portray confidence, but more importantly helps you stay relaxed and be in control).</p><p id="a2880388-5c1d-4249-b9d3-4b10e6514819" class="">Confront your fears and accept that even if this doesn’t work out it’s not going to be the end of the world – after all you’re just going to have another technical chat. Then go in and absolutely chat away.</p><p id="da5e8327-ba7a-45bb-91e8-433e20a67020" class=""><strong>How to approach virtual on-site interviews</strong></p><p id="d0e29881-2356-4a68-bfb5-1b7fdb3d163f" class="">These can be very different from on-site interviews because everybody’s eyes are on you – <strong>literally – </strong>and that can be nerve-racking.</p><p id="c8553333-d55a-45d5-a112-f8c5698a2163" class="">I had three virtual on-site interviews and I didn’t pass any of them. Sorry I’m not your guy for this one, but I’ve shared some resources that I think you may find helpful below.</p><h2 id="e200b767-073a-4356-a0f0-6073e3f948f2" class="">After the Interview</h2><h3 id="69b856cc-7c6d-4da0-bdb4-2da9a6f34782" class="">How to handle failure</h3><p id="5e795dd4-b85d-4209-a3ab-a9ab677cacff" class="">There are many reasons why you didn’t pass an interview. Some of the best engineers I know have failed interviews at some point and still do.</p><p id="46e4ab5c-c310-4548-ab97-08029f0427dd" class="">So separate failed interviews from yourself, look for the learning points from each failed interview, and use those to forge ahead. As they say – we move!</p><h3 id="3351c569-6752-4622-a90d-03297c865fe1" class="">What about success?</h3><p id="49e48485-7267-47a3-85c0-ef695e160ddd" class="">Celebrate your successes, regardless of how small you think they are. I have a few ideas for celebration.</p><h2 id="012e694b-1449-41c7-bf5a-07681584713b" class="">Am I better after doing this?</h2><p id="3aaacd1a-df41-406c-9827-78b132e20a46" class="">I’m not going to tell you that I&#x27;ve aced every interview that has come my way since I embarked on this journey. But assuredly, I can tell you I have gotten better at interviewing and my confidence levels have really grown. And yes, I also got multiple offers too 😊.</p><h2 id="c21e35e1-cf63-44ed-a444-ab9dfb315929" class="">What should you do next?</h2><ul id="5ba15f73-9d46-404e-a621-f4c477cf6a6b" class="bulleted-list"><li>Practice doing a lot of mock interviews with friends. While I don’t totally agree that practice makes perfect (because perfection sounds like a moving target to me) practice helps you <strong>quickly </strong>identify patterns in interview questions, grow in mastery and ultimately your confidence.</li></ul><ul id="8ce23397-aa87-47ee-b1f7-a07a55017763" class="bulleted-list"><li>For technical interviews, nothing beats a very good understanding of the fundamentals of data structures and algorithms. I’ve added links to resources I think you may find helpful.</li></ul><ul id="475087cc-cde2-4b78-a41e-6cb4dec74046" class="bulleted-list"><li>Start interviewing and keep interviewing. Even if you have a job, aim to interview every now and then — maybe once every other month or a quarter. Interviewing is a skill, so keep honing it.</li></ul><p id="d391f8da-66fb-4b6b-8d35-b9a937f5c24e" class="">I really hope this was helpful to you. And hopefully some of the lessons shared here will make you more confident and better at interviewing – and will ultimately help you land that job you really want.</p><p id="ca35df34-0606-41ed-8687-c9e8dce41e04" class="">If you ever need someone to do a mock interview with you, feel free to reach out to me on Twitter <a href="https://twitter.com/meekg33k"><strong>@meekg33k</strong></a>.</p><h2 id="c3716110-dc0c-4e2f-afbb-dba3116b4644" class="">Helpful Resources</h2><p id="b38d3e09-3416-4a7f-b759-d5474e7e3855" class="">Thanks to <a href="https://twitter.com/isaaczara_">Isaac Zara</a> for the header image for this article.</p><p id="1915e3b4-352d-405a-a21f-86ebf4cc8bc7" class="">If you read this far, tweet to the author to show them you care. Tweet a thanks</p><p id="73f13a74-ed5a-4bb1-99d1-29a0d6c249d8" class="">Learn to code for free. freeCodeCamp&#x27;s open source curriculum has helped more than 40,000 people get jobs as developers. <a href="https://www.freecodecamp.org/learn">Get started</a></p></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Software Engineering Within SpaceX</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="63db4f8a-a021-4deb-ba5d-60c50aa9c49d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📸</span></div><h1 class="page-title">Software Engineering Within SpaceX</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-purple">Space</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://yasoob.me/posts/software_engineering_within_spacex_launch/" class="url-value">https://yasoob.me/posts/software_engineering_within_spacex_launch/</a></td></tr></tbody></table></header><div class="page-body"><figure id="c6bfee44-e58a-437b-893a-9741494ad132" class="image"><a href="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/dragon-launch.jpg"><img style="width:640px" src="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/dragon-launch.jpg"/></a></figure><p id="b50c6eb9-9f29-4bc4-8a9e-d1a111a88bf4" class="">Hi everyone! 👋 I am sure quite a few of you must have seen the SpaceX launch this past Saturday. It was an amazing and historic event. Millions of people were watching it live on YouTube and elsewhere. With each passing day, we are getting closer to commercial space flights and I have to agree I am excited.</p><p id="6fe15e47-12ba-4f66-a975-2fba4fdd6b39" class="">In addition to fueling my excitement about space travel, this launch also made me curious about the tech which goes in these rockets. I did some research from the Computer Science perspective and wanted to share what I found. It goes without saying that most of this information is gathered from different sources I came across online. Even though I tried to make sure I don’t include any wrong information, there is no guarantee that this information is 100% accurate.</p><h2 id="0e8f47cb-5d15-41c7-9e12-e1d089e89549" class="">Teams</h2><p id="c037fd69-81dc-4025-b4dd-a0d7186a1d47" class="">There was an <a href="https://www.reddit.com/r/IAmA/comments/1853ap/we_are_spacex_software_engineers_we_launch/">AMA by the SpaceX Software Engineering</a> team 7 years ago where they shared some insights about how they work and what they work on. They have 4 separate Software teams:</p><ul id="9b34a6ea-c257-4863-af82-b941564a206c" class="bulleted-list"><li>Flight Software team</li></ul><blockquote id="268b51e9-57f0-44f4-9ceb-f4e84911da87" class="">The Flight Software team is about 35 people. We write all the code for Falcon 9, Grasshopper, and Dragon applications; and do the core platform work, also on those vehicles; we also write simulation software; test the flight code; write the communications and analysis software, deployed in our ground stations. We also work in Mission Control to support active missions.</blockquote><ul id="65a46afb-96c9-433d-b9d0-39387ec48617" class="bulleted-list"><li>Enterprise Information Systems team</li></ul><blockquote id="b5603e6b-1ae6-4dbf-b3fc-3a7d39c4bdd6" class="">The Enterprise Information Systems team builds the internal software systems that makes SpaceX run. We wear many hats, but the flagship product we develop and release is an internal web application that nearly every person in the company uses. This includes the people that are creating purchase orders and filling our part inventory, engineers creating designs and work orders with those parts, technicians on the floor clocking in and seeing what today’s work will be per those designs…and literally everything in between. There are commercially available products that do this but ours kicks major ass! SpaceX is transforming from a research and engineering company into a manufacturing one - which is critical to our success - and our team is on the forefront of making that happen. We leverage C#/MVC4/EF/SQL; Javascript/Knockout/Handlebars/LESS/etc and a super sexy REST API.</blockquote><ul id="7b40209e-44a4-4fdf-b12f-94f6707868ef" class="bulleted-list"><li>Ground Software team</li></ul><blockquote id="f0bd6656-b3fd-4bd8-94b3-55074170537d" class="">The Ground Software team is about 9 people. We primarily code in LabVIEW. We develop the GUIs used in Mission and Launch control, for engineers and operators to monitor vehicle telemetry and command the rocket, spacecraft, and pad support equipment. We are pushing high bandwidth data around a highly distributed system and implementing complex user interfaces with strict requirements to ensure operators can control and evaluate spacecraft in a timely manner.</blockquote><ul id="4093db20-1d8f-4783-8a11-90f63ec7b030" class="bulleted-list"><li>Avionics Test team</li></ul><blockquote id="4f1c542b-3208-4b5f-a04a-b044fdf0fc66" class="">The Avionics Test team works with the avionics hardware designers to write software for testing. We catch problems with the hardware early; when it’s time for integration and testing with flight software it better be a working unit. The main objective is to write very comprehensive and robust software to be able to automate finding issues with the hardware at high volume. The software usually runs during mechanical environmental tests.</blockquote><h2 id="020f5dc6-287c-45bc-91f7-f53c059dac40" class="">Hardware + Software Redundancy</h2><p id="d62b0319-dde5-4eaa-b2d0-83b378430742" class="">Someone also recounted their interaction with the SpaceX team at GDC 2015⁄2016 in an <a href="https://space.stackexchange.com/a/9446">answer on StackExchange</a>. They talk about the tripple redundancy system and how SpaceX uses the Actor-Judge system. In short there are 3 dual core ARM processors running on custom board (<a href="https://news.ycombinator.com/item?id=23369065">according to elteto</a>). For each decision a “flight string” compares the result from each core on a single processor. If the output matches the command is sent to different controllers. There are 3 processors (with dual cores) so that means each controller/sensor will get three different commands. The controllers then act as the judge and compare the three commands. If all three are in agreement, they carry out the operation. If even a single command is in disagreement, the controller carries out the command from the processor which had previously been sending the correct commands.</p><p id="d07571d3-4857-4883-ab3d-3252f86b4aad" class=""><strong>This means that at any given point there are 6 running processes of the flight software.</strong></p><h2 id="da1e12cb-469b-4d23-a117-0cee497c747f" class="">Software Certifications</h2><p id="0bf0508c-c64f-4f5a-83d1-a06202b24001" class="">Most of the important software in mission-critical infra goes through various certifications. For instance, you can’t run any random software on an airplane. Even the entertainment system code has to satisfy various certifications. One such certification is <a href="https://en.wikipedia.org/wiki/DO-178B">DO-178B</a> which stands for *<em>Software Considerations in Airborne Systems and Equipment Certification</em>.</p><p id="29e07706-eef1-4c3f-a4f5-dcb760f250d6" class="">The certification and correctness part is made easier by using software verification tools. One such tool is <a href="https://www.absint.com/astree/index.htm">Astrée</a>. It is a static code analyzer that checks for runtime errors and concurrency related bugs in C projects. This also leads us to the answer for why a lot of mission-critical code is written in C. Its because there are a lot of static analyzers and software verification tools for C.</p><p id="13aa1ad9-d42a-4982-8d58-bafb014ba1e1" class="">A fun fact which I got via <a href="https://news.ycombinator.com/item?id=23369675">Hacker News</a>:</p><blockquote id="9f5a4699-8be6-4ce9-9441-5ce837002017" class="">Automatic docking software for the ATV that delivers supply to ISS is written using C code and verified with Astree.</blockquote><p id="3a375350-7e1c-4ac3-b94f-81e472038d7c" class="">SpaceX also made use of Chromium and JavaScript for Dragon 2 flight interface. I am not sure how that passed the certification. I assume it was allowed because for every mission-critical input on the display, there was a physical button underneath the display as well. So if in case the screen malfunctioned, the astronauts could potentially make use of the physical buttons. Regarding the use of Chromium and JS, a user on <a href="https://news.ycombinator.com/item?id=23369065">Hacker News</a> had to say this as well:</p><blockquote id="fcc9f1ce-8823-41f8-8e2f-ce4189b7cf68" class="">Also, only the actual graphical display application uses Chromium/JS. The rest of the system is all C++. The display code has 100% test coverage, down to validation of graphical output (for example if you have a progress bar and you set it to X% the tests verify that it is actually drawn correctly).</blockquote><p id="4380302c-639e-4ead-b409-ed5f691d79e2" class="">You can see the buttons in the image below.</p><figure id="a0eb23f3-f013-483c-b561-d34903094f69" class="image"><a href="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/touch-input.jpg"><img style="width:700px" src="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/touch-input.jpg"/></a></figure><p id="3e7302ec-f77d-46a3-8014-f4a5f7772ff7" class="">The astronauts explain how the system works and what they do in case of UI malfunction in <a href="https://mobile.twitter.com/NASA/status/1266885097359388672">this video</a>.</p><p id="8c53d97e-d447-47b7-b56f-cab3d537eba3" class="">Mission Critical infra also uses real-time operating system. These operating systems have special assurances that might not be provided by regular operating systems. For example, faster interrupt response and better memory protection. A ROS provides real-time guarantees which are essential for such software. One such operating system is <a href="https://www.windriver.com/products/vxworks/">VxWorks</a>. It was launched in 1987, targets Embedded systems, and is owned by Wind River Systems. It is used in the Mars Rover and SpaceX Dragon (<a href="https://en.wikipedia.org/wiki/VxWorks#Aerospace_and_defense">among other systems</a>). Having so many certifications doesn’t mean that bugs can’t show up. Apparently, the 2003 Mars rovers experienced a bug in their flash memory driver but it was sorted out by sending an update from earth (<a href="https://www.computerworld.com/article/2574759/out-of-memory-problem-caused-mars-rover-s-glitch.html">source</a>).</p><h2 id="8d828399-84d0-456f-886c-6f740bf091c7" class="">Model Rockets</h2><p id="99a80e00-8c6c-4ee5-9aa4-9c718a20dcfd" class="">If you want to indulge your curiosities and explore programming for rockets, you should check out model rockets. Joe Barnard works on <a href="https://bps.space/">BPS.space</a> and has made small hobby rockets do amazing stuff. He has developed his own little flight controller called <a href="https://bps.space/signal">Signal</a>. He made a Falcon 9 replica which is stabilized using <a href="https://bps.space/tvc">Thrust Vector Control</a>. There are so many opportunities nowadays for learning about actual space rockets and working your way up from small model rockets.</p><figure id="2ade00d8-8e9a-46fe-87c4-f7b4d165dd77" class="image"><a href="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/falcon9-replica.jpeg"><img style="width:700px" src="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/falcon9-replica.jpeg"/></a></figure><p id="2059b6e2-6473-4bfa-a354-da0952e51d4a" class="">If you are interested in model rockets, you should explore the different certifications and licenses available in your country for amateur rocketeers. US has 3 levels of certifications and each level gives you more possibilities for rocket launches.</p><p id="5e8a60a0-d07b-4a8c-93f6-e593b43e0a39" class="">If you are curious about how much cool stuff you can do using model rockets, check out this landing rocket developed by Joe below.</p><figure id="ab0c8cfe-62f5-42b2-b42e-c3124fa7cfdc" class="image"><a href="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/rocket-landing.gif"><img style="width:500px" src="Software%20Engineering%20Within%20SpaceX%2063db4f8aa0214debba5d60c50aa9c49d/rocket-landing.gif"/></a></figure><p id="fef5eae2-24b1-474d-a922-8bca6d4452e6" class="">I will continue to update this article based on any new stuff I find during my research. If you feel like I misquoted something or if there is something new I should add to this article please let me know in a comment below!</p><p id="cfbdb5b1-0936-4370-acb3-1b4619c0c500" class="">Till next time, have a wonderful day, and stay safe! 👋 ❤️</p><p id="9d557bdd-6655-4c62-bf70-5fc5944d40db" class="">PS: SpaceX also <a href="https://iss-sim.spacex.com/">launched a simulator</a> where you can try your hands at docking the Falcon 9 with the ISS 🚀</p><ul id="18ba2e9c-4424-463d-af6a-f9714dbd16b1" class="bulleted-list"><li><a href="http://yasoob.me/categories/spacex/">spacex</a> </li></ul><ul id="a1e97be8-a22a-4ec5-be82-a8df5e0c51e5" class="bulleted-list"><li><a href="http://yasoob.me/categories/random/">random</a> </li></ul><ul id="c2dd4212-240c-4b45-bcb3-e9f390c9a14b" class="bulleted-list"><li><a href="http://yasoob.me/categories/programming/">programming</a> </li></ul></div></article></body></html>

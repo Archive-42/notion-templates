@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>What&#x27;s Docker, and what are containers?</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6fac6a25-0102-40dc-981d-90c1c209f28f" class="page sans"><header><h1 class="page-title">What&#x27;s Docker, and what are containers?</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://technically.substack.com/p/whats-docker-and-what-are-containers" class="url-value">https://technically.substack.com/p/whats-docker-and-what-are-containers</a></td></tr></tbody></table></header><div class="page-body"><h2 id="c125070b-79aa-4463-8801-0545274da93a" class=""><strong>The TL;DR</strong></h2><p id="fbe1a9a8-3794-4750-973f-d913f2b34e32" class="">Containers are a way to run code in isolated boxes within an operating system; they help avoid disastrous failures and add some consistency to how you set up applications.</p><ul id="c4da0be0-28be-476b-81ab-05548ec03938" class="bulleted-list"><li>Special software called a <strong>hypervisor</strong> allows multiple isolated operating systems to run on one computer, and containers do the same for operating systems (🤯)</li></ul><ul id="fe759c8f-62fd-4f7f-b594-9f10942c2acd" class="bulleted-list"><li>Containers also provide a <strong>consistent environment</strong> for deploying software, so developers don’t need to configure everything 1000 times</li></ul><ul id="7bc0c25e-febe-4ad2-895f-ded1ccf4b93a" class="bulleted-list"><li>The most popular container engine is <strong>Docker</strong>: it’s open source and <a href="https://insights.stackoverflow.com/survey/2019">used by &gt;30%</a> of all developers</li></ul><p id="2c7751f5-8578-48c6-b6ca-1135cca68b2a" class="">Containers (and Docker) have spawned an entire new ecosystem of exciting developer tools. You may have heard of Kubernetes, the *checks notes* greek god of container infrastructure. We’re not going to cover it in this post, but it, too, is Docker related. Needless to say, understanding these little container guys is a really important part of understanding modern software.</p><h2 id="d5e5b7db-fc12-4582-82eb-e44844c7ce79" class=""><strong>Social distancing, but for your bad code</strong></h2><p id="12226170-e176-4466-ab08-2b976078998d" class="">To understand Docker, you need to understand virtual machines.</p><p id="42fc7daf-5675-452f-a386-41806dde5224" class="">The first post I ever wrote for Technically was about <a href="https://technically.substack.com/p/whats-cloud">the cloud</a>, and how companies run their software on big, rented servers instead of building that infrastructure themselves. The biggest provider of that cloud, AWS, is <a href="https://www.cnbc.com/2020/04/30/aws-earnings-q1-2020.html">on track</a> to make more than $40B this year (!), and it’s all thanks to one technology: the <strong>hypervisor</strong>. The hypervisor allows AWS to run code from <em>multiple different people</em> on one server instead of giving everyone their own; it’s a transformational way of building things. But why is this important? And why is it hard to do?</p><p id="8b33f874-185f-49b8-b304-972910b01a9b" class="">The big hairy truth of software is that <strong>your code is going to fail</strong>, and it’s going to cause problems. Even those elusive 10x engineers can never quite predict <em>everything</em> (like server environments, but more on that later). And when your code fails, it can blow shit up on your operating system; if you’ve ever had to restart your computer because a malfunctioning application froze your whole OS, you can metaphorically raise your hand.</p><figure id="2feabac5-dba9-4f78-b6e4-099a4316ad1e" class="image"><a href="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcc0d952a-09de-4e09-8e72-d8b058931569_1058x1244.jpeg"><img style="width:700px" src="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcc0d952a-09de-4e09-8e72-d8b058931569_1058x1244.jpeg"/></a></figure><p id="da3dda70-695d-4a88-b47e-ab9ffe4dba99" class="">If you want to cram as many people’s code onto a server as you can (what AWS does), you need to solve this error problem; you can’t let one company’s code take down everyone else’s. Hypervisors give you the ability to split one server (one computer) into multiple self contained “boxes” with individual operating systems and infrastructure (CPUs, RAM, storage). These are called <strong>virtual machines</strong> (VMs, for short), and this is what you’re getting with <a href="https://aws.amazon.com/ec2/">AWS EC2</a>.</p><blockquote id="58faa2da-6ddd-40b2-9f32-d240e0497362" class="">⛓ Related Concepts ⛓Virtual machines are the ABCs of cloud, and most companies on a public cloud are probably using them in some form in another. But it’s not just for them: a lot of AWS’s (and GCP’s and Azure’s) more advanced products are built on top of virtual machines under the hood. Virtualization was, and is, a pretty important development.⛓ Related Concepts ⛓</blockquote><p id="2d843bbf-aee2-48a2-957a-e9b6dc906aea" class="">Now that you (hopefully) understand the concept of isolation and how virtualization (“creating virtual machines”) helps get there, containers are a simple, natural extension of that concept. The problem with hypervisors is that they all run <em>their own operating systems</em>, which take a long time to start from scratch – containers let you run multiple, isolated environments on <em>one operating system</em>. That operating system can be virtual (on a server somewhere), or it can even be on your laptop. So when you run containers on a public cloud server, you’re basically doing isolation2 - a “boxed” container on top of a “boxed” virtual machine. 🤯</p><figure id="d3dee6e1-1d0a-4574-b9fb-7989d0f3521b" class="image"><a href="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc6189176-2055-4cfe-ae33-a89453b14f44_1364x1039.jpeg"><img style="width:700px" src="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc6189176-2055-4cfe-ae33-a89453b14f44_1364x1039.jpeg"/></a></figure><p id="f62ba951-3069-43d7-a633-dba0a0372d3a" class="">Most importantly: because multiple containers can run on a single operating system, they’re <em>much</em> faster to spin up.</p><h2 id="a4334947-65a9-420e-b8f1-2d2ec01d5d0c" class=""><strong>Developer environments suck</strong></h2><p id="a3e22e37-2db5-4269-a395-6e111845ce34" class="">Isolation isn’t the only thing that containers bring to the table. A problem that <em>constantly</em> plagues developers is the <strong>environment</strong> that their code runs in. Code has a lot of dependencies:</p><ul id="a9404012-3869-4250-94ba-ffd6d4d26851" class="bulleted-list"><li>Libraries and frameworks</li></ul><ul id="cd7f8944-e4d1-4b3c-bde0-8deb9e3dceea" class="bulleted-list"><li>Environment variables</li></ul><ul id="cb524ebf-668b-41cd-b072-5ef5e3f8cf7d" class="bulleted-list"><li>Language versions</li></ul><ul id="7d156f2e-a2ac-4f09-9c6a-31968881a9cd" class="bulleted-list"><li>Access to data and plugins</li></ul><ul id="4a23bdd5-a5e8-4f73-b934-fa3ec1b558b1" class="bulleted-list"><li>Networking between services</li></ul><p id="63420509-590a-4856-96e3-99c719bad6fb" class="">All of these (and more!) make up your environment. Every time you install or upgrade a new package, switch to a language version, or allow configure a connection to a database, you’re changing your environment.</p><blockquote id="499d5c90-8107-4af0-9b88-6774784a3765" class="">😰 Don’t sweat the details 😰If you’re not sure what any of the individual bullet points mean, don’t sweat it. They’re all code or code-adjacent configurations that impact how your code runs in a given environment.😰 Don’t sweat the details 😰</blockquote><p id="dc6c8448-61b8-41c9-b79b-29c086ae67ef" class="">The typical workflow for developers is to <strong>develop locally</strong> and then <strong>deploy to server</strong>. So you’ll get code working on your laptop, and then drop it off on a server to run; but that server will almost <em>never</em> have a matching environment to your laptop. That’s why there’s constant debugging to do when you deploy your app.</p><p id="e772aef0-226a-4426-a254-150df8c79141" class="">To make this a bit more concrete, take a look at a few of these kinds of errors that I’ve personally run into:</p><ul id="b4408d97-3a40-4837-9f3d-d3e45bf5990c" class="bulleted-list"><li>App built on my laptop in Python uses Python 2, but the server has Python 3 installed</li></ul><ul id="ee29d393-6105-4b38-966f-b6f2de1e05dc" class="bulleted-list"><li>App built on my laptop requires access to my database, but the server is having trouble connecting to it</li></ul><ul id="34002dda-67fa-4fbe-bc73-4b0f02c483a3" class="bulleted-list"><li>App built on my laptop needs to write to the <code>/usr/bin/local</code> folder, but the server doesn’t have permission</li></ul><p id="8ecf7589-9e35-4c01-a603-648b426c68e8" class="">These problems are the worst, and they’re a <em>constant</em> when you’re building and deploying software. But what if you could develop <em>and </em>deploy your code in the same environment, with the same things installed with the same versions? Docker lets you do that. If you build your app in a Docker container on your computer, you can deploy <em>that container</em> – packaged together with <em>all</em> of the dependencies you need – to a server.</p><figure id="bd33b172-8136-452c-ae2a-f77053636d05" class="image"><a href="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F399f9cba-590b-483d-b2da-24139fbba27d_1486x992.jpeg"><img style="width:700px" src="What&#x27;s%20Docker,%20and%20what%20are%20containers%206fac6a25010240dc981d90c1c209f28f/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F399f9cba-590b-483d-b2da-24139fbba27d_1486x992.jpeg"/></a></figure><p id="1f31ece0-b11f-444d-817d-837578e9a603" class="">It’s like moving houses, but keeping all of your furniture. And the wallpaper.</p><h2 id="4aa87e84-c22e-400f-9ac3-2caee5ed083c" class=""><strong>Docker 101</strong></h2><p id="f3aedf7d-28d4-4ac8-b25a-b08e82878192" class="">Docker is an app like any other: you can download it from the <a href="https://www.docker.com/">Docker website</a>, and you’ll see a little icon with preferences and stuff. When you’re running Docker on a server though, it’s all through the command line. Let’s run through some of the basics:</p><ol type="1" id="21fdbb29-1a83-470e-a487-121ee65beb05" class="numbered-list" start="1"><li><strong>Docker images</strong></li></ol><p id="fe0e8e31-51c3-41b5-ae51-9bc336ffc2bd" class="">The basic starting point for a Docker container is an <strong>image</strong>. An image is like a blueprint for what you want your containers to look like: once you’ve built an image, you can create infinite containers from it that look exactly the same. A Docker image is just a static file, which makes it very sharable: Docker even has a product called <a href="https://hub.docker.com/">Docker Hub</a> where you can host and share your container images.</p><ol type="1" id="5a3d8534-8ac7-4a16-a55e-8ae2f0322f3c" class="numbered-list" start="1"><li><strong>The Dockerfile</strong></li></ol><p id="b6912f0e-7a1b-43b7-b0ac-9c00ecdbfe6c" class="">The <strong>Dockerfile</strong> (aptly named) is how you actually build a Docker image. It’s just a text file with a series of commands that tell the operating system what to do when you’re building a container: install this version of this package, run this script, open this port, etc. It’s common practice to use someone else’s publicly available Docker image as a <em>base</em> and build from there (this is usually called “pulling” an image).</p><ol type="1" id="df3dc74e-3130-4178-8bb3-5060d96fbbb5" class="numbered-list" start="1"><li><strong>Orchestrating containers for scale - 🤩 Kubernetes 🤩</strong></li></ol><p id="03fa2261-0f6a-4db5-80ce-f350f67520ae" class="">The terminology around Docker and containers is a lot like virtual machines: you spin them up and spin them down. That’s because another major benefit of a containerized architecture is easier scale. If your application is growing and needs more resources, you can spin up new Docker containers easily. Docker takes care of networking them together and other low level utilities like that; but that’s just the start. This is where Kubernetes comes in.</p><p id="27091882-6943-44fd-b60f-6151f6e5b95f" class="">Big apps (and today, for some reason, even small ones) can be made up of a bunch of Docker containers: one for the app, one for the database, one for adjacent services, and so on. Orchestrating this complex workflow and making sure the right containers are running at the right time (and that they can talk to each other) is a hard job, and that (in a nutshell) is what Kubernetes does. Docker also has <a href="https://docs.docker.com/engine/swarm/">Swarm</a>, which takes on a similar, more tightly scoped version of this. More on that in a future post.</p><h2 id="58f1f2cb-a09e-42d4-a23a-847a80c9fb41" class=""><strong>Learning more</strong></h2><p id="18f72dde-45d4-4724-83d6-6cdf8b21d529" class="">This is just a basic intro to containers. If you’re looking to learn more, here are a few areas to dive deeper into:</p><ol type="1" id="1ae67ae2-f1f5-4950-b0a2-e91990842b40" class="numbered-list" start="1"><li><strong>Managed services</strong></li></ol><p id="f0d091f9-8e32-41d6-b649-fd2c4f1d4d0d" class="">As containers have become more ingrained in the developer workflow, managed services have begun popping up. They automate parts of the infrastructure you’d need to run containers. The best example is <a href="https://aws.amazon.com/ecs/">AWS’s ECS</a> (elastic container service), which takes care of deploying containers and some orchestration tasks too. AWS also offers <a href="https://aws.amazon.com/fargate/">Fargate</a>, a serverless (think: no infrastructure management) option for deploying containers.</p><ol type="1" id="e59a44ae-b378-423d-b69d-dd4e67ef5178" class="numbered-list" start="1"><li><strong>Kubernetes and orchestration</strong></li></ol><p id="aeb7d043-816a-4fef-b44f-206c0d3879f8" class="">Kubernetes is <em>really </em>popular, and not just because of all of my jokes on Twitter about it; it’s becoming one of the (almost) default ways that modern apps are getting deployed, for better or for worse. Kubernetes, or K8s for short, is a very complicated piece of software to work with, and there are a lot of “shiny new thing” decisions being made. Your basic web app didn’t need Kubernetes 10 years ago and it probably doesn’t need it now.</p><ol type="1" id="d5b13acf-0fc0-49fc-90b7-e7ce0b4971f8" class="numbered-list" start="1"><li><strong>Networking and volumes</strong></li></ol><p id="e808adf2-f4ff-4591-bbe8-41a01c8af60c" class="">A lot of the “environment” problem comes down to connecting things together. If your data is in one container and your main app service in another, they need to correct configuration to talk to each other without letting just anyone in. Docker has an entire <a href="https://docs.docker.com/network/">networking layer</a> that takes care of this.</p><p id="4f51c50c-e3b1-4050-a880-6c514276d67f" class="">A related problem – since containers are ephemeral, systems need a way to keep important data around (if you destroyed data when you destroyed containers, we’d never remember anything). Docker’s <a href="https://docs.docker.com/storage/volumes/">Volumes</a> functionality helps persist that data so you can continue working with it.</p><ol type="1" id="434d67a0-3788-42a4-b275-e60cd8656275" class="numbered-list" start="1"><li><strong>Serverless and lightweight virtualization</strong></li></ol><p id="938af449-e990-42af-beb1-11c270e8757e" class="">Containers are all the rage, but as with literally everything in software, there’s something new-er and cool-er on the horizon. One of those things is serverless (post coming soon!) – it’s a way of deploying <em>functions</em> instead of an entire app, and avoiding having to work with any infrastructure (like VMs) at all. AWS is also working on a new lightweight virtualization tool called <a href="https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/">Firecracker</a> that has the potential to re-paint this entire picture.</p><h2 id="a04b26ae-628e-4518-938c-afee1a8fc660" class=""><strong>Terms and concepts covered</strong></h2><pre id="fc36b760-0156-4189-ab00-9bc4f6489bbb" class="code"><code>Virtual machine, virtualization</code></pre><pre id="b03ce2f2-4b79-4265-8caa-68ecf3359b2f" class="code"><code>Hypervisor</code></pre><pre id="054d44a8-371e-4fcd-add9-3f4ba360d0e3" class="code"><code>Isolation</code></pre><pre id="1f290b79-14ce-4800-9de0-c833585ccd20" class="code"><code>Environment</code></pre><pre id="87f5f372-7ce7-436b-81f5-69f21870e368" class="code"><code>Docker</code></pre><pre id="421390a3-1774-4be6-92b0-236e6fb4c291" class="code"><code>Image</code></pre><pre id="69854f7d-54c5-4838-83b2-4d11df1fbafd" class="code"><code>Dockerfile</code></pre><pre id="1c81fb5d-d70a-4a84-92f5-1f2951b545e0" class="code"><code>Orchestration</code></pre><pre id="b35ac613-e8a6-490e-8290-844acd231185" class="code"><code>Kubernetes</code></pre><pre id="71a34b00-a6eb-4669-90e2-a653ffe4dc90" class="code"><code>Networking</code></pre><pre id="33c185e7-01fb-4e45-b535-803ac822bd87" class="code"><code>Volumes</code></pre><pre id="751b80fc-b9a4-49b4-9a64-017215cf830b" class="code"><code>(phew)</code></pre></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mmmmm. Yeah. Exactly. Right right right</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6e71ae50-9187-45d3-bc8b-e31ef168db1c" class="page sans"><header><h1 class="page-title">Mmmmm. Yeah. Exactly. Right right right</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://hipcityreg.substack.com/p/mmmmm-yeah-exactly-right-right-right" class="url-value">https://hipcityreg.substack.com/p/mmmmm-yeah-exactly-right-right-right</a></td></tr></tbody></table></header><div class="page-body"><p id="b81a3008-fac6-452a-bd3c-178f28119909" class="">You have to realize that you’re in it. Right now, there you are. You can probably spot yourself below.</p><figure id="50e004fc-14db-416c-abd6-b5eca8d37c83" class="image"><a href="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F035a9d97-6db1-4363-afc2-97d029be3a57_2400x1800.jpeg"><img style="width:700px" src="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F035a9d97-6db1-4363-afc2-97d029be3a57_2400x1800.jpeg"/></a></figure><p id="59225e01-0c4f-4917-b207-1148f42555c4" class="">When I graduated from school, I apartment hopped around the Lower East Side. Between my Abuela’s couch, my friend Zein’s (interning at the Met) couch and bed, and my friend <a href="https://twitter.com/dillchen">DChen’s</a> (building Source at the time) couch and bed. Very communal, very open door… very Seinfeld the whole thing. I was the Kramer I suppose. I just walked in and made it home. Provided a joke and cheap beer to earn my keep.</p><p id="15fae922-4230-4330-919a-a6591281cc77" class="">And the story begins, I suppose a bit before graduation. Life really begins after resisting the temptation of blowing my brains out while interning in finance going into my junior year, and then the chip formed after getting denied by Bridgewater… most chips form out of a key denial I find. Probably why tech is such an insecure place, why we are so obsessed with narrative and status. Rewriting it all…</p><p id="be340342-8149-4b5d-b941-fbe0bf6277d4" class="">After that denial I knew where I wasn’t going to be, designed my own major but then skipped class to find out where I should be. Did a lot of things to find out where I should be. And very accidentally stumbled into co-founding an ed-tech startup. Being the “business half” to an engineering team. But hating the design, I commissioned a <a href="https://astronautmonastery.com/">friend</a> to help redesign the entire product with me. Not knowing anything formal about design, just trusting my taste.</p><p id="76aa8912-e8ae-4f97-b0bb-00db858ba7ba" class="">But there was a more pressing task, getting into more rooms with universities (our clients). More money. More validity to show the universities we could be trusted and useful. This led us to DreamIt’s ed-tech accelerator. Which was great because I didn’t have to drop out (the rest of the team had graduated)… even though mentally I was way out of school already.</p><p id="4b3ee4b1-0714-4ff9-9226-44b3057e6bec" class="">Not dragging this along too much, two key things happened before I would leave this ed-tech jawn. The first is I’d meet <a href="https://twitter.com/badboyboyce">Peter Boyce</a>. The second is we would get denied a check by Dorm Room Fund. This would work well together, even though at the time I was just blindingly upset.</p><p id="82814eda-39cb-4475-a81e-c2b86e180b08" class="">After deciding I hated ed-tech, didn’t vibe with my co-founder (sometimes you get into a marriage for the wrong reasons), and I (correction: my mom) wasn’t ready to actually drop out… I had to quickly find an internship for the summer.</p><p id="8e5ca3eb-ba54-479a-8578-c86d55acab4a" class="">Somehow, I get flown out to LA to interview for a weird niche internship at Snap. Get a verbal offer while at the office, then ghosted, and then the internship didn’t exist…</p><p id="a5f22a08-09e6-4e47-a24a-fe25b9026dbb" class="">So I end up interning for a small consumer joint in NYC. The founders pay me $500 a week, straight to my Venmo. And I just do whatever I can to help… which isn’t much. I still don’t really know how to work. But I was curious and too heady, and so they kept me. Maybe because they knew it was just for a summer.</p><p id="ee71dba0-8aa2-45b0-985b-8d0efcbb4f25" class="">In the back of my head, Dorm Room Fund was still annoying. And so I reached out to Peter and really started going at him about Rough Draft and why wasn’t it at Penn, and why was he letting Dorm Room Fund take all the Penn deals, and these were all the deals I could do first day as a partner. This continued for a whole summer. Either he started to believe me, or he just wanted me to stop, but we started RDV Penn that fall.</p><p id="6117a2ad-b708-4b01-9901-44a6bdee03b6" class=""><strong>Now I was identifiably — mmmmmmm yeah, I’m doing it.</strong></p><p id="23b33879-17bf-4ed7-adeb-723c6b096db2" class="">I was wearing the grey hoodie and the black tee everyday. Inhaling Marc Andreessen interviews. YC’s youtube channel replaced the classroom, other than a few product design classes… where I was generally uninspired but felt a sort of responsibility to my parents maybe…</p><p id="348e251d-f7da-4cb4-91ba-a3f6a564c77c" class="">The entirety of Senior year I spent taking the Bolt bus every other Friday up to GC NYC. Every early Friday morning, I knew I was in it.</p><p id="ec11716b-a615-4f2f-870a-9aed7b5e1f33" class="">I went to the Monkey offices at 1am. BOY WERE THEY IN IT! I watched a call counter go up by 1 million in the span of a couple hours. Ben… and that whole gang. That was a scene.</p><p id="f4551300-4425-4693-aa66-d86773fa5ec0" class="">Graduation does this funny thing. Where you feel like you don’t have to make any decisions or you have to make every decision. Plenty (at least at Penn) do that whole Southeast Asia tour thing. Which is plenty groovy, but I was set to “it’s time to build”. I already hated what social was becoming. And Peter had taken another, full of love, bet on me — RDV funding my company Sushi. Which if you never saw it, because we only had a few thousand users and I was just manically making every mistake possible, was an open group-chat app. Funny enough, imagine if instead of voice, Clubhouse was just open group chats capped at a certain amount of people. That’s what Sushi was.</p><p id="ae256ce8-c180-47d9-b00b-fb83f8f28a2a" class="">And now we are back to apartment hopping in LES. The routine was something like. DChen and I wake up around 10am. Work until 1am. Go down to Home Sweet Home and drink until 4am. Rage against the technium and what it could be. Repeat.</p><p id="6819ef6b-5697-4117-9132-faef5f539319" class="">Fall came. I got my own apartment in Red Hook. My summer squad went back to finish their last bit of school. Those from my year just moved to the city, BCG and Goldman and Facebook offers starting up. And I was utterly disconnected from all that. I didn’t even want to pretend to get close to understanding that whole ~thing~.</p><p id="981511ae-bb9b-490b-940c-70ab56ace2cf" class="">So what do you do when your company is kind of a thing but not a thing, and you want to break through, and you want to be in it again… you miss being in it again… æčïd</p><p id="89bd88bb-f280-49b4-b584-f4b98dbe3174" class="">You go to Prospect Park and watch clouds explode. And wander around Brooklyn Museum of art and allow the lines to peel off the paintings. And sit in Brooklyn Botanical gardens while Outkast “softly as if I play piano in the dark”. And yes, finally, you’re in it and the switch and the whole thing…</p><p id="560c799a-7a5c-438e-8c48-a0e8f1404a62" class="">And you wake up the next morning. And go to church.</p><figure id="c728fabf-91e9-4560-91bd-93f97ce2b5fa" class="image"><a href="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F60bc7866-ae53-401d-a388-b49a7084e247_750x359.jpeg"><img style="width:700px" src="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F60bc7866-ae53-401d-a388-b49a7084e247_750x359.jpeg"/></a></figure><p id="7fb23694-9a75-4be8-a74d-adbed98cbb2b" class="">Sushi, whether I could admit it to myself at the point, wasn’t working. Now it’s November (2017), and my heater is broken. There’s no more money to push the app along, although funny enough, people are still using it daily. But it was all done.</p><p id="f75d3aa1-9c71-49d4-b54a-3133df94e5d3" class="">I had a final coffee chat with Charles at Precursor while he was in NYC. I put it all out front. He smiled and nodded and said “It’s the next one, not this one. It’s the next one.”</p><p id="1b14d551-f58b-40a2-ad47-ac7e0d67e2ca" class="">So I freaked out.</p><p id="531d4c4b-695e-4376-8c33-1bdf15ea00b6" class="">My apartment in Red Hook at the time was all white. Like the type of renovation they do to an old building to attract exactly my kind. Even the floors were a grey fake wood paneling. The bathroom had these fake marble panels, but they didn’t bother rotating them… so you could clearly tell every panel was the same and aligned the same. Super trippy, not fun.</p><p id="fc67ed83-a442-49a7-96ba-4868fb2dfa05" class="">My roommate was gone for months. At some hacker house in Austin. So no job, broken heat, spaghetti and coffee everyday. I just read and keep reading and journaling the same entry again and again. At the time I was also on this no-wifi in the apartment kick. Partially because of money, but also because I was curious what would happen if I really put my technology in its place.</p><p id="7cc7f681-287d-458d-bc89-9c6cb1bc218b" class="">But yeah… I was freaking out in this white box. Playing with my shadow. Until New Years. When some friends and I went to a Real Estate concert to ring in 2018. Maybe it was the music, the comfort of some real friends, something… but it brought me back in it…</p><p id="92b82fd5-1e15-4740-881f-6959bd39abc2" class="">I started to create just to create something. It started with a little photography and interview series. And snowballed into me writing about ~the themes~. What we as humans iterate on in perpetuity to extend ourselves. This pushed me into new mobility and access and how we touch our cities. I dm’d Ryan (founder of JUMP Bikes) a manifesto of why I had to work there… and then I worked there.</p><p id="67d388c9-553d-492c-9810-721be1ce6466" class="">Excited about the upcoming Sequoia round, knowing I’d be REALLY in it now… a month into being at JUMP. While working in DC to helping re-launch our second city. Uber bought us. No Sequoia round. And I immediately felt incredibly… not… in it. And I so desperately wanted to be, I truly loved that bike and what it could be mean.</p><p id="90948bd0-81f8-42ca-85bb-bde97a002036" class="">I changed my desk from the strategy team I was part of, to sitting in the industrial engineering lab. I wrote up strategy team memos analyzing everything changing in the mobility space (which if you remember that spring into fall 2018, that’s all that was happening).</p><p id="6f02e55f-fca6-4812-ad2d-6cb77291bec0" class="">From helping launch our second city, I would eventually find myself working on a staffing project for European expansion. The most abstract and removed work I would ever touch again. But Uber did show me what winning looked liked. Even if I hated their version of it… scale was an undeniable force and power.</p><p id="6986796d-4182-4492-af9f-d3b051faa87e" class="">But I couldn’t stay. My manager would actively block any new work I took on. Would call me entitled about the work I wanted to do. It was almost meme like in its cadence and self-contradiction. Then as I was already gearing up to really leave, a white designer very openly said nigga while rapping along with a song… and nobody batted an eye…</p><p id="024b32bf-6882-406f-acd5-e64d66f9be41" class=""><strong>Mmmmmmm yes. Not in it… we are not in it.</strong></p><p id="f0f297f3-3442-4256-b811-6068df3bbf07" class="">I was at dinner with <a href="https://twitter.com/camitellez13">Cami</a> (founder of Parade) and she asked if I had seen <a href="https://dreams.tv/">Dreams</a>. I downloaded and opened it right there, and it was like opening Snapchat for the first time. <strong>They were in it.</strong></p><p id="3f40defe-8e56-4c4d-b292-5e7661d3cfac" class="">I emailed David Tisch and told him why I had to work there. That I’d do anything they needed as long as I could be somewhat close to product. A few meetings later, I had my start date. Took a paycut from Uber, but at least I’d be in it.</p><p id="4ec4535d-b06d-46af-8332-1036180b51ab" class="">My first day I walk in the founders sit me down: so we’re pivoting.</p><p id="5e907cb6-478b-47ac-ac4b-0776d4e8ba4a" class=""><strong>shit. they weren’t as in it as i thought</strong></p><p id="665f744e-61a3-4c15-aa61-bca030d1c093" class="">I help them pivot for a couple months. But they weren’t in it. And by consequence. Neither was I. But… I was coming back to one thing.</p><p id="8ef5c75e-0d25-4071-8541-6442441e8f81" class=""><strong>Getting high on my own supply — I was writing again.</strong></p><p id="50f15c11-8f58-4aa6-a73c-8d2c4e2b846e" class="">The week before Dreams reset the entire team. I, unknowingly presciently, wrote “Why I’m Quitting Tech”. True teen angst, Don Draper inspired, Medium post. And I was gone from Dreams…</p><p id="b3cd1abc-632e-47a4-886f-ceb31edec922" class="">Almost instinctively on that last day, I walked from the office to Greecologies in Nolita. Where I worked out of religiously when working on Sushi.</p><p id="335fd677-bb89-4b51-8627-91965dfc8fc2" class="">That post would bring new friends though. Namely <a href="https://twitter.com/yrechtman">Yoni</a> (although we had briefly met before) &amp; <a href="https://twitter.com/singareddynm">Nikita</a>.</p><p id="823c6658-f83a-4e29-9f75-778ab0dd2898" class="">I applied to work at USV and Box Group. Hell bent on never leaving NYC. Knowing there was massive potential energy that just hadn’t been properly unlocked… maybe they saw it for me… but it wasn’t going to get unlocked at a venture office. Not for me anyway.</p><p id="44d9ed30-5fed-47d8-8b53-bf196cdf771a" class=""><strong>Boy was I not in it at the time, or so I thought.</strong></p><p id="97403029-36c6-4e83-8abd-04cf77b7f517" class="">I was writing madly about avatars and identity. Looking at Miquela and Facemoji and Morphin. Something was happening.</p><p id="3321da17-d804-4bd4-91bb-70f4a0176d80" class="">Another dinner with Cami. If there was ever a person that’s in it, it’s her.</p><p id="40f2af22-a14a-4bfe-b77c-b9c04299c577" class="">“You need to meet my friend Luca. He has this avatar project. I think you two would vibe.”</p><p id="f5b680d0-c401-4287-a2ea-d8df426454d7" class="">A couple phone calls. I fly to LA. I sleep on his couch for a while. We just go. We put it all out front. For a week we would wake up and go as deep as possible until we couldn’t. At the end of the week we got hitched. A new Eternal. It became official official first week of December 2018.</p><p id="887d5e43-bf2d-4b9e-bbf2-698ebdb942b0" class="">January 2019, thinking we were in it, we went to SF to show everyone. And everyone said “No &lt;3”</p><p id="91c14347-7b45-4ea3-9415-9bb5c9b7f9b3" class="">This is already the second time we should have died.</p><p id="8e2bec94-d1f1-4180-80d0-6272ad575c2c" class="">Our angel investor Jake would pay our rent for a couple months. The Eternal bank account had a negative balance. We just had to build something.</p><p id="2e4dceec-2591-4874-8451-9a25dfd0bd97" class="">Enter Icon. A quick project to test a couple ideas I thought we could build cheaply. And get some buzz for a real thing. What was that thing… I had no idea if I’m being honest.</p><p id="ea1b4077-a6aa-4cb0-ad50-2a05fafe9098" class="">I call Charles. To tell him about Icon. And he agreed right there on the call to write $50k — he kept his word, it was the next one.</p><p id="c105bb2d-cf85-4c49-99ea-bf39550ede11" class="">We build Icon. It’s weird, but it works. I present it at Betaworks with a talk. And there’s some heat. And we have a new batch of lessons. A new batch of opinions. An entirely new new eternal.</p><p id="ed3f6153-9072-49f2-b566-cf6e521a717b" class="">So we go back out to SF (June 2019). We have half of the round committed in 2 weeks. A few potential lead firms. We present. They all say “no &lt;3”.</p><p id="d05e2bd4-9d22-4a73-8c7c-06fe150b55ef" class="">Then it’s July 4th. And every VC on the planet disappears.</p><p id="7126d4b1-1730-47bb-8776-4010f5930efc" class=""><strong>we really should have died again right here. like at this point, it’s pure religion keeping it all together. so, it’s new new new eternal time</strong></p><p id="fef76c2f-da62-4eb7-8780-7998fb46763a" class="">/// Some of y’all are thinking right now: you did all of this instead of learning how to code ///</p><p id="494ec775-7b08-4bed-ad6e-8294f482edcc" class=""><strong>but we were innnnnnn ittttttttt</strong></p><figure id="630a03b6-afd5-4d9c-a3c0-426d5bb566d8" class="image"><a href="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb1c11700-93e3-4c41-9941-32e6786133d1_750x359.jpeg"><img style="width:700px" src="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb1c11700-93e3-4c41-9941-32e6786133d1_750x359.jpeg"/></a></figure><p id="5b2e87c0-9dab-40c5-9636-12741cbf25ec" class="">It’s the end of July. We have one months rent left for both Luca and myself. And a little bit more in the bank.</p><p id="335749af-ca76-4da3-99df-9e39e589eada" class="">We pay our rents off for August and decide to prototype one last thing. A little jelly character, on a desert map you can move around and trigger animations.</p><p id="4e23909c-cc69-4992-84d9-b47b0b611efa" class="">It was so crudely simple, and so obviously the answer. But we only had one shot now. And it had to be perfect.</p><p id="054cb369-89b4-49e8-b215-c96d5fbc1462" class=""><strong>I write the new pitch deck. Putting it all out front. Luca designs: the vertical pitch deck.</strong></p><p id="ea00c600-9f52-4b1d-a59f-8113fa9a940b" class="">“We can text it. VC’s can forward and text it. It’s inherently mobile. Like flipping through TikTok. Fuck TikTok, it’s mobile like us. Like the world we are building&quot;</p><p id="38ac0c11-44a0-4fb9-94d9-396f5d378783" class="">Like product, you can tell when a round is actually going to happen. I didn’t know it, because I had never known it before that point. But our seed round had a feeling that no other attempt did. I haven’t been wrong about ~that~ feeling since.</p><p id="d230dadd-2ed9-4895-adf7-5467cf5cedc4" class="">At the end of August. Right before we would have to pay rent, with money we did not have. It was done. <a href="https://twitter.com/katepmcandrew">Kate</a> at Bolt led our seed. I was alone in SF, and it was done. Walking around, Brockhampton in my ear, and 2 years of pushing to get in it… well… I didn’t realize how in it I was about to be.</p><p id="e2756833-5518-46c9-a5df-4bbbad829712" class="">The wave of excitement that you finally have money to do the thing you’ve said you’re going to do… is immediately met with a punch in the face of having to do it.</p><p id="2946a481-a7f8-4c04-af8f-08b0c89affde" class="">Luca and I set out to do it. We hired fired, hired some more, fired some more.</p><p id="eb1c33aa-3050-4f9a-bf7d-bf51c6a321ad" class="">The grace of our founding team allowing us mistake after mistake. Scrapping the product again and again and again.</p><p id="2f515c3b-68b7-4f11-8621-e586c65b6a28" class=""><strong>we were nottttttttt in it</strong></p><p id="82a68a6a-db1d-4ce2-b5ca-54d7352e4529" class="">Yeah we had campaigns go viral. David Dobrik used our instagram filter, and that led to millions of impressions. Yeah we did these one off projects like the Eternal Hotline that added mystery.</p><p id="44307ee2-b450-4713-a823-b371b81fc485" class=""><strong>but IT — the damn THING — that did not feel like it was happening… did i even know what IT was… what the hell have I been looking for this entire time… what the hell was I ever telling people</strong></p><p id="7964b1a8-8551-4182-b6cd-2dc7a9782864" class="">We look back on old designs now and ask what we were on, it’s so far from what “new new new new new eternal” is today.</p><p id="ed3c4867-0f7d-4d08-9b72-b53944454cd5" class="">The core team just gets back from our retreat to Beacon, NY. And a couple weeks later, we are pushed to remote life. Pandemmyyyy</p><p id="3d54c499-9da1-4043-8bd4-5a8472402ae6" class="">If there was ever a time for our product it’s now. We push all doubt aside, and the team cranks. Private beta goes out, and there’s new learnings.</p><p id="748bae34-aebd-4e1e-bc2d-ee134ae27709" class="">And so we crank again. And public beta goes out. And it’s a huge undertaking. A small team pushing such an ambitious project.</p><p id="f97274ef-2b22-4991-b468-47cc7c44246e" class=""><strong>we aren’t in it… but maybe that’s the point now…</strong></p><p id="37767c73-3ea3-415a-b21e-8fda0badbbd5" class="">It feels like we are in it for about 24 hours. And we crank to fix things…</p><p id="0bfac9df-3201-4803-beec-8f674195b542" class="">You don’t bug squash your way to product market fit. It took me almost a month to learn that. I got snapped out of it when my team snapped me out of it. This has been the main learning of becoming an exceptional ceo, it’s actually a reflection of your more than exceptional team. It’s all reflective of them. A group identity.</p><p id="7ee076f5-3908-4fd7-b15b-79bba4b16b52" class=""><strong>we shut it down… we crawl back into our hole… i go to Maine to properly reset… we fight, we make up, we come out so much stronger… we crank AGAIN AGAIN AGAIN</strong></p><p id="376e145e-b323-4c0b-bfce-cfebb9ee0cb6" class="">It’s going to blow you all away. It’s insanely great.</p><figure id="74ec7653-5af7-4eba-a6f2-4fcee9125aab" class="image"><a href="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff805d8f2-7f7e-489e-a406-177f7f4131bd_750x359.jpeg"><img style="width:700px" src="Mmmmm%20Yeah%20Exactly%20Right%20right%20right%206e71ae50918745d3bc8be31ef168db1c/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff805d8f2-7f7e-489e-a406-177f7f4131bd_750x359.jpeg"/></a></figure><p id="befb79aa-7c7e-491c-9bb3-a1861397ffd6" class="">We are in it…</p><p id="c251675e-5b6a-4868-896e-66b7ce40fef2" class="">What do you want? A bullet point of lessons? A guide? How to be a great PM? How to design real good and stuff? Hiring a team? How to pick your co-founder?</p><p id="afc22010-45b9-4112-b934-5216868fe31f" class="">Mannnnnnnn…</p><p id="6bbd7597-f5b1-4191-a346-5c9fb8c90aa4" class="">This week I’ve been overwhelmed by the reality, I was always in it.</p><p id="15a21743-8626-4bdc-8c4b-d6e9dfbf406a" class="">I’m currently reading “The Dream Machine” &amp; “Electric Kool-Aid Acid Test” — and the shared truth is that it’s about being high on your own supply.</p><p id="5fdb8bf8-ba8b-46c1-8887-c5586ee1c726" class="">Most of this story, is simply me running into people. A dinner with Cami, sleeping on DChen’s couch, a bet from someone that saw I was in it before I did.The only thing that matters is actually doing something that you feel and can smash together into reality. And through divinity, everyone that runs into each other, that’s always been the only plan.</p><p id="4adfc5c7-f3d1-41dd-9c04-e8d498c876d1" class="">And you have to believe, the same way I believe that they knew, it WAS happening to them. The same way I’ve become aware it’s been happening to me all my life. That there is a there, there.</p><p id="8e150382-38a6-48cd-89bb-c8d6c88e1a66" class="">Have you been listening?</p><p id="9c01c201-9bd6-41bd-8a11-2a5feb027f7b" class="">I don’t do edits really, so excuse typos and things that don’t make sense.</p><p id="bde1666c-7e54-4d85-ad69-c0e22b977104" class="">Thanks so much for giving me your attention. I hope it was worth it, if not… unsubscribing will not hurt my feelings, and will give you back time you literally cannot have back.</p><p id="193566a8-0a97-4126-81a4-25eed4b47f8c" class="">Much love.</p></div></article></body></html>

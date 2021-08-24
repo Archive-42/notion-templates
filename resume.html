@@ -1,0 +1,653 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Leo Osa</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="02c8f8a7-ec16-43f3-9da4-7507a96bd0b5" class="page sans"><header><img class="page-cover-image" src="https://images.unsplash.com/photo-1483058712412-4245e9b90334?ixlib=rb-1.2.1&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb" style="object-position:center 35.58%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="Leo%20Osa%2002c8f8a7ec1643f39da47507a96bd0b5/18768333-418D-4706-B54C-C6E69CCA6C73.jpg"/></div><h1 class="page-title">Leo Osa</h1></header><div class="page-body"><div id="7d76b866-1498-4676-8eff-627781d71d0d" class="column-list"><div id="9994a158-b9b6-42ca-82f3-116c562d077c" style="width:62.5%" class="column"><h2 id="a76f9c0c-acdd-41d4-9521-90b0b2f78432" class="">User Experience Lead, Product Designer</h2><p id="eeaf6277-86d5-41cc-b01f-af9b795f2617" class="block-color-gray">Based in Kyiv  🛫 Travelling the World 👨‍💻 Work Globally</p><p id="f7805608-58e1-48ab-a715-7116fddbbbe5" class="">
+</p></div><div id="8edbad22-1a84-4557-b38e-2a129bf06662" style="width:37.49999999999999%" class="column"><p id="32f1693c-3925-40d7-bd25-56a1cfb82984" class="block-color-gray">updated: <time>@August 14, 2019</time></p><p id="b1f793f4-08ef-411e-9235-77964d0a4fb4" class="">
+</p></div></div><p id="4d6de40c-2b5d-4d60-8c8d-a3c9c804b5ed" class=""><strong>Key Expertise</strong></p><ul id="98a05df5-cf69-4fd4-ae19-276ab4073c50" class="bulleted-list"><li>Build Scalable Design Team And Collaborative Processes</li></ul><ul id="cd32a256-4603-452b-ba39-a1529e3f65f8" class="bulleted-list"><li>Quick User Research &amp; Testing</li></ul><ul id="8d9e79f6-92be-4ed1-a1d0-1563e077cff1" class="bulleted-list"><li>Conversion-Oriented Digital User Experiences </li></ul><ul id="06f3ed4e-63f5-44b4-be64-eee1a74fecd5" class="bulleted-list"><li>Large Design Systems, Documenting Interfaces</li></ul><ul id="ae80eb63-de5c-498d-8ff4-7d0a9141c094" class="bulleted-list"><li>Deep development understanding</li></ul><p id="071ace7f-7f7f-4abc-8962-bbd212ae3bdb" class="">
+</p><h3 id="3b832e82-1e0a-4d4f-9937-b8ec85e31d1c" class=""><strong>Tools</strong></h3><p id="6d49d589-750f-4873-b300-c285e4b168e5" class="">Figma, Sketch, Adobe CC, Notion, Git, Google Analytics, Google Tag Manager, Google Data Studio, Hotjar, </p><h1 id="240999d6-6010-4948-8bfa-cfa35278072d" class="">Summary</h1><p id="b33f8e43-f6de-4a6a-9460-61d73f65d806" class="">Human-centered design is my passion. I like to develop <strong>conversion-oriented user experiences</strong> and <strong> digital</strong> <strong>user interfaces </strong>and doing that for almost 12 years. Also i love to <strong>build effective design teams</strong> and processes. I believe that collaborative friendly work is the only way to make best product. Also I got chance to work with very <strong>ambitious startups</strong> and small/mid-sized <strong>businesses around the world</strong>. Project success is my primary goal on every project and design is great business tool to help with that. In spare time im Interesting in tech, marketing, machine Learning, AI, cycling and cooking.</p><div id="3092f42f-1037-4429-9e78-50be2804dd50" class="column-list"><div id="4c2b562b-f4de-495c-92ae-87698166eebe" style="width:50%" class="column"><p id="51fbcb8e-0265-4da2-9439-a4eead912074" class=""><strong>User Interface (UI) Design
+</strong>Apple HIG, WCAG 2.0, Material Design, Design Systems, Design Thinking, Mobile/Web, Native and Custom Apps, Collaborative Design, Version Control, Figma/Sketch/Photoshop, any prototyping software</p></div><div id="62137e00-ce4f-4385-84f0-c309a252eed3" style="width:50%" class="column"><p id="f59928fc-62f7-466e-a175-1d5e8c90ecd8" class=""><strong>User Experience (UX) Design
+</strong>User Research, User Testing, Usability Testing, CRO, SEO, Quick Interactive Prototyping (Wireframing), Project (Information) Architecture, Success Tracking</p></div></div><div id="415223cc-f4fe-4756-9708-62693cc50963" class="column-list"><div id="2e31c5fd-6ccb-443e-a6a0-62fc16650882" style="width:50%" class="column"><p id="ff8ecd80-5bf4-4e24-8a9b-34dee6c5fba4" class=""><strong>Coding (UI developer)
+</strong>Advanced HTML/CSS/SASS<strong>, </strong>Any CSS Frameworks, A little JS, Any Template Systems, GIT, SVG Animation, UI kit development</p></div><div id="af8343c2-a5e1-46d4-834e-8bd7605b3bc5" style="width:50%" class="column"><p id="3ba1b85f-f1ca-4dd7-b31c-5221c46284b8" class=""><strong>Product Management
+</strong>Leadership<strong>, </strong>Project Management, Lean Process,<strong> </strong>User Research, Competitive Research, Roadmap, Marketing, Strategy, Hiring and Build Effective Team
+</p><p id="23c9c32b-6bc4-47a6-b27c-73912493130e" class="">
+</p></div></div><h1 id="1b6af2bd-b22d-46e6-bf51-7733a74b6f40" class="">Selected Work History</h1><div id="35ac9b27-7245-4590-b9e1-2f96e3365b50" class="column-list"><div id="a42ac4be-1787-47c2-a3b7-015982034730" style="width:12.5%" class="column"><p id="94fdadfd-7e75-4b0a-a9c1-63afa3b20b97" class="">Oct 2017- Jul 2019</p><p id="7e78b631-aaad-41b0-8320-29c85d771d5b" class="">
+</p><p id="b1b6a986-a534-4593-8beb-fb82ba35dbb2" class="">
+</p></div><div id="5b163159-85a8-498e-bad0-f5339db58924" style="width:87.5%" class="column"><p id="2267cd89-a83d-4077-9b99-ea5b61a990be" class=""><strong>UX Lead</strong> @ BYM development LLC, Twin America&#x27;s Company, <em>New York</em></p><p id="0e8a35af-e8e0-45ad-a3a4-f0c45aa5d5e0" class="">Was built design team and processes behind a large american sightseeing provider which was focused on<strong> continuous UX improvements for their eCommerces, SaaS, PaaS and mobile apps</strong>. I being responsible for a<strong> leading design changes</strong> for all 10 company projects based on metrics and user research with my team. During my work we effectively pass several huge phases: hired new team members, made <strong>design systems</strong> for all types of products, systematically running user tests to <strong>improve UX and conversion on $50M eCommerces</strong> , set up collaborative process with Figma, built large PaaS for sightseeing market (b2b), and dozens of mobile and web interfaces.</p><ul id="fb09ab13-d8fc-4c11-963e-8e4b3a9fb878" class="bulleted-list"><li>Developed Longterm UX Vision And Strategy</li></ul><ul id="b44abc64-a44f-4e46-9ce4-f9c45b1b68e0" class="bulleted-list"><li>Make Regular User Tests, User Researches </li></ul><ul id="ed690740-a67f-4930-831b-7b1e3f5e5bfb" class="bulleted-list"><li>Conversion Rate Optimization (CRO) And Systematically Improve UX for $50M eCommerces</li></ul><ul id="797e0380-1303-45cf-86c2-31379491b450" class="bulleted-list"><li>Build And Maintain Design Systems for A Multiple Projects</li></ul></div></div><div id="5d6ec1fb-ad97-4866-a347-ee5fdaf37a5a" class="column-list"><div id="9548ff64-a2ed-44fd-aace-e7c90b3d1134" style="width:12.5%" class="column"><p id="eeecce96-6175-41c2-a646-4b059cb6f621" class="">2017</p><p id="4de0d30f-0b63-4a8b-8794-9e9293c901a5" class="">
+</p></div><div id="47c3b721-83b4-4e67-b1ba-0adebaa6a93e" style="width:87.5%" class="column"><p id="d1588af8-ce85-4e27-b587-cc95adb57fc3" class=""><strong>Senior UX Consultant</strong> @ <a href="https://www.offrs.com/offrs_ourteam.cfm">Offrs</a> , <em>Sarasota, FL</em></p><p id="72d9cc5d-ac07-4063-960c-7f34d663579b" class="">Helping designers and developers make<strong> real estate SaaS software</strong> for realtors (b2b).</p><p id="6eca56a9-4286-414d-9d46-9d636e456a36" class="">
+</p><p id="2cd4180e-c03c-41cb-b1bb-2356e4e7265a" class=""><strong>UX Consultant</strong> @ <a href="https://groupmobile.com">Group Mobile</a> ,<em> Chandler, AR</em></p><p id="1ec0897e-866b-4b66-a0c7-99eded5cb014" class="">Improved Conversion and general UX for a <strong>large eCommerce</strong>.</p><p id="245c0bbe-e555-4aeb-9dff-c3be90be63ba" class="">
+</p><p id="6405a69d-7e9f-4f63-9894-14887eb751f1" class=""><strong>UI/UX designer</strong> @ <a href="https://velocityrpa.com">Velocity RPA</a> , <em>Santa Monica, CA</em></p><p id="2e3fcd8c-f675-4701-bc13-c3ceb42a2a68" class="">Create engaging landing pages for a better lead generation.</p><p id="0a47648a-1908-42cb-b3b5-0233ac7eb0ad" class="">
+</p><p id="a88eec4c-b10b-4f02-bb96-745749f09e14" class=""><strong>Product Designer</strong> @ KFG International</p><p id="77626cc7-9c74-42ed-a90d-19ae04ed8947" class="">Designing web and mobile apps for multiple clients in development agency.</p><p id="9353336b-12e1-4d1c-a316-1b7a11224c74" class=""><strong>Product Designer</strong> @ KFG International, <em><strong>Development Agency</strong></em></p></div></div><div id="c45548a1-5c78-4411-aef7-8c52087f55ce" class="column-list"><div id="be5f39d8-ecf5-4015-a626-34b8a0c60b37" style="width:12.5%" class="column"><p id="e9458bb0-0b59-42ba-ae49-957e5e16be5b" class="">2015</p></div><div id="ad32ad60-edf3-4e66-bd95-46d16804679c" style="width:87.5%" class="column"><p id="6f405cd5-0b84-47c0-8169-0232f750b676" class=""><strong>Head of UX</strong> @ <a href="https://www.multitest.me">Multitest</a>,<strong><em> ISPs Marketplace</em></strong></p></div></div><div id="90170af1-7141-4aff-9b47-67729356e696" class="column-list"><div id="abb8e37c-6320-4cde-88aa-e9d3311ccad9" style="width:12.5%" class="column"><p id="5cc18f00-756f-4f0b-b0b2-c011a3b10ab6" class="">2009-2016</p></div><div id="d18bfd96-95b8-4a15-af6a-e632f4dade21" style="width:87.5%" class="column"><p id="c308c110-37c3-4936-b514-4aeb9599271d" class="">Working as remote UX/UI designer for different companies around the world</p></div></div><h1 id="b85991f0-5179-40a0-aadc-552405c90e51" class="">Education</h1><div id="d3658ad6-c440-4731-9cc8-a016d040c060" class="column-list"><div id="3430257f-5848-49aa-9f4e-3c9fd3b15ed5" style="width:12.5%" class="column"><p id="dadbd4ea-77bf-4cd6-b3c1-bc4da831d895" class="">2008-2012</p></div><div id="ba6c9236-1b18-40eb-b534-7ff0dc9c7acc" style="width:87.5%" class="column"><p id="bce437be-05c5-4bb3-b0ed-04f5a047ce8f" class=""><strong>University of Economics and Law, Kyiv</strong></p><p id="c1cef34a-7105-4441-9443-25d5eeccd219" class="">Master&#x27;s Degree</p></div></div><h1 id="c227a769-e2bc-4b7d-8cdf-9ee31b742f4c" class="">Links</h1><figure id="b941fe40-7478-4d51-9932-fbacf8e8c3d8"><a href="http://www.linkedin.com/in/leoosa" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Leo Osa - Ukraine | Professional Profile | LinkedIn</div><div class="bookmark-description">UX Lead BYM Development LLC Greater New York City Area Build design team and processes inside company. Working closely with marketing and development team. Design mobile and web experiences for more than 60M+ tourists. Improving conversion and UX for a various US eCommerces that selling tours, attractions and other tourist services.</div></div><div class="bookmark-href"><img src="https://static-exp1.licdn.com/scds/common/u/images/logos/favicons/v1/favicon.ico" class="icon bookmark-icon"/>http://www.linkedin.com/in/leoosa</div></div></a></figure><figure id="fababd41-eaea-4211-a450-0cbb784ad8aa"><a href="https://www.codementor.io/leoosa" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Leo Osa - Design Mentor - Codementor</div><div class="bookmark-description">View Leo Osa&#x27;s profile on Codementor. Codementor provides you with any coding assistance you need through 1:1 mentorship, freelance jobs, and long-term engagement</div></div><div class="bookmark-href"><img src="https://cdn.codementor.io/assets/favicon-2630907059d7e335870c8b4876b995e21b78788c1ccb60cbf6bd5b87be4f4f44.ico" class="icon bookmark-icon"/>https://www.codementor.io/leoosa</div></div><img src="https://process.filestackapi.com/cache=expiry:max/resize=width:200/9pkJASRGQlKbQNCY2D4l" class="bookmark-image"/></a></figure><figure id="cad3ddfe-c8c7-4cc0-94f6-fa798b445c8d"><a href="https://angel.co/leo-osa" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Leo Osa</div><div class="bookmark-description">View Leo Osa &#x27;s profile on AngelList, the startup and tech network - Designer - Kiev - UX / Product Designer &amp; UI Developer. ⚡️Available For New Opportunities. Mentoring 2 dev teams. Interested...</div></div><div class="bookmark-href"><img src="https://assets.angel.co/assets/icons/angellist-e1decb2fb69dc221e2dd4ad5f749797e28b3e9e92957e0f161b8e64d5a8a74c8.ico" class="icon bookmark-icon"/>https://angel.co/leo-osa</div></div><img src="https://s3.amazonaws.com/poly-screenshots.angel.co/Project/7a/382070/2fb20e4b2012576f95a9f046e52d7b5e-thumb_jpg.jpg" class="bookmark-image"/></a></figure><figure id="99001ccd-0538-4380-8e2b-7f5dfa32e5fe"><a href="https://medium.com/@leo_osa/responses" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Responses - Leo Osa - Medium</div><div class="bookmark-description">Responses published by Leo Osa on Medium. UI/UX developer/designer.</div></div><div class="bookmark-href"><img src="https://cdn-static-1.medium.com/_/fp/icons/favicon-rebrand-medium.3Y6xpZ-0FSdWDnPM3hSBIA.ico" class="icon bookmark-icon"/>https://medium.com/@leo_osa/responses</div></div><img src="https://cdn-images-1.medium.com/max/1200/1*vEQjSgFafcYKgH0a2uzYcQ.png" class="bookmark-image"/></a></figure><figure id="d33e0bf8-95b4-47a5-aa8e-7b700a818ab3"><a href="https://twitter.com/leoosa_design" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Leo Osa (@leoosa_design) | Twitter</div><div class="bookmark-description">The latest Tweets from Leo Osa (@leoosa_design). UX / Product Designer &amp; UI Developer. Ukraine, Kyiv</div></div><div class="bookmark-href"><img src="https://twitter.com/favicon.ico" class="icon bookmark-icon"/>https://twitter.com/leoosa_design</div></div><img src="https://pbs.twimg.com/profile_images/849294681481588736/2EAGGrF__400x400.jpg" class="bookmark-image"/></a></figure><h1 id="07193e79-287d-477c-9973-e2dd6f9c6c99" class="">I’m available for interesting projects. See me in action.</h1><div id="5e52e45d-0f03-4e2e-9cd8-3730d949ee52" class="column-list"><div id="9a70ba12-0ad9-496f-ac24-c3c985122743" style="width:8.695652173913043%" class="column"><figure id="68e00d26-44e6-43c7-8795-3342015c0d47" class="image"><a href="Leo%20Osa%2002c8f8a7ec1643f39da47507a96bd0b5/leoosa_logo_nda.png"><img style="width:60px" src="Leo%20Osa%2002c8f8a7ec1643f39da47507a96bd0b5/leoosa_logo_nda.png"/></a></figure></div><div id="6a5943fa-a892-456a-98d0-f21d33d73dff" style="width:39.130434782608695%" class="column"><p id="2a4857bc-4362-423b-9615-c1268089ded0" class=""><strong><a href="mailto:heyleoosa@gmail.com">heyleoosa@gmail.com</a></strong> </p></div><div id="07eec62d-451f-4d12-a21f-3feac88147d9" style="width:52.17391304347825%" class="column"><p id="e849b88a-ed14-480d-ae39-6172f4399626" class="">Skype: @<a href="https://join.skype.com/invite/K8prbPr6VKcq"><strong>ossarchouk</strong></a></p><p id="0fc8b63d-abf8-4477-bc64-9273f7092d9e" class="">
+</p></div></div><p id="a99715af-751c-4ee1-a539-2299844fbdb8" class="">Thanks for reading! 👋</p><p id="b483fc8e-f60f-4695-a20a-cd45061c1f58" class="">
+</p></div></article></body></html>

@@ -1,0 +1,648 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>lines to live by</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="06eab20a-61e4-4805-8e73-b1027ea8dbce" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌱</span></div><h1 class="page-title">lines to live by</h1></header><div class="page-body"><p id="ef62309b-060c-4159-a24b-b721492018a1" class="">These are resources I like to go back to when I feel lost, need to make a significant decision, or am centering myself. Rarely have these failed me, and focusing and applying them continue to define who I am as a person.</p><p id="3d1ac4ed-7d99-4480-bf60-d1e8faaa060b" class="">
+</p><h2 id="5a5537a9-3382-4a4a-9bb6-34f7485c946e" class="">essays</h2><hr id="3a966bf6-7d6b-4c0e-9a75-b83cf975a6f6"/><p id="2ab6faef-c23d-4d70-b933-bf55e7a391b8" class=""><a href="http://blog.samaltman.com/the-days-are-long-but-the-decades-are-short">The days are long, but the decades are short</a> <em>-</em>Sam Altman</p><p id="6cb749d5-fdbc-48fa-aa4a-e8db6dcd2e3c" class=""><a href="https://dariusforoux.com/habits-with-huge-return-on-life/">10 small habits that have a huge return on life</a> -David Foroux</p><p id="97e09542-2ac3-4ac6-9bc3-18971aca3308" class=""><a href="https://patrickcollison.com/advice">Advice</a> -Patrick Collison</p><p id="d75029e1-405b-4fe3-97f3-f1d4a3aaccd4" class=""><a href="http://www.paulgraham.com/love.html">How to Do What You Love</a> -Paul Graham</p><p id="6c0dd552-d565-4b66-81fc-8ae938eb9a14" class=""><a href="https://marginalrevolution.com/marginalrevolution/2015/04/tyler-cowens-three-laws.html">Cowen&#x27;s First Law</a> -Tyler Cowen</p><p id="84a62ae5-611b-4636-935e-e6f4ecda0028" class=""><a href="https://pmarchive.com/guide_to_personal_productivity.html">Guide to Personal Productivity</a> - Marc Andreessen</p><p id="34005ef1-b291-4c6f-b717-1382da53594d" class=""><a href="https://fs.blog/2012/04/david-foster-wallace-this-is-water/">This is Water</a> - David Foster Wallace</p><p id="44616dc2-7b16-4efe-8174-8165d03a5ecf" class=""><a href="https://www.theatlantic.com/magazine/archive/1862/06/walking/304674/">Walking</a> - Henry David Thoreau </p><p id="57fcd89e-fa8f-4e12-8c96-083c7962c29c" class=""><a href="http://paulgraham.com/hwh.html">How to Work Hard</a> - Paul Graham</p><p id="2835df3f-6a64-49cf-a5db-e3d06e6d44ce" class="">
+</p><h2 id="f658bb82-2e58-410b-ac7b-c922e0fa9a93" class="">poems</h2><hr id="12f9b442-f51b-4817-b862-30d21c44961c"/><figure id="e8d2e2e6-cfa8-43c9-8d7c-311949311ce1"><a href="https://www.poetryfoundation.org/poems/46473/if---" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">If- by Rudyard Kipling</div><div class="bookmark-description">If you can keep your head when all about you</div></div><div class="bookmark-href"><img src="https://www.poetryfoundation.org/assets/media/images/favicon-16x16.png?v=1.2.4" class="icon bookmark-icon"/>https://www.poetryfoundation.org/poems/46473/if---</div></div><img src="https://media.poetryfoundation.org/m/image/15908/rudyard-kipling-hires-cropped.jpg?w=1200&amp;h=1200&amp;fit=max" class="bookmark-image"/></a></figure><p id="6f34e33c-a7e3-47dc-afac-3e4e8059e0d7" class="">
+</p><h2 id="9f96628a-344d-432c-b305-bccd2602f48f" class="">lines</h2><hr id="1617f11c-d1b9-4ce2-8b7c-19a08986b725"/><p id="d7ace380-1eea-4f29-8b26-c68a49939e3c" class="">The reasonable man adapts himself to the world; the unreasonable one persists in trying to adapt the world to himself. Therefore, all progress depends on the unreasonable man. </p><p id="29510f94-4325-47d8-a54e-f5399ee1f89b" class="">—  George Bernard Shaw</p><p id="dc273e32-8b87-479a-8ae8-f03a9e788de2" class="">
+</p><p id="1b29618e-a38e-441f-b8c7-d005b470ded0" class="">The abstract thinking of the understanding is so far from being something firm and ultimate that it proves itself, on the contrary, to be a constant…overturning into its opposite, whereas the rational as such is rational precisely because it contains both of the opposites as ideal moments within itself. </p><p id="ae4645b8-aa37-499e-b510-6ef0ce2ad960" class="">— WG Hegel</p><p id="85d77be8-af45-4cd9-9aba-c150e46c5460" class="">
+</p><p id="cf4c6a6a-7ea5-497a-9c5d-e428626f9734" class="">Never trust a thought that occurs to you indoors.</p><p id="872ab389-30f7-449e-a0ce-1ae206d399a9" class="">— Friedrich Nietzsche</p><p id="e5929a62-0e06-4aa5-8142-65ae577cda87" class="">
+</p><p id="388fd337-a3a1-4c66-855c-c4c7a1c7f372" class="">Two things fill the mind with ever increasing wonder and awe: the starry heavens above me and the moral law within me.</p><p id="9b6a786c-81de-44cd-adc0-9095c429a37e" class="">— Immanuel Kant</p><p id="0879cde1-43fa-4bc1-be90-bb70fddabd9a" class="">
+</p><p id="88cdaa79-c177-4297-997e-b308cbdfb526" class="">He who has a why to live can bear almost any how.</p><p id="ecfad162-17c5-4388-8857-403b57c23f14" class="">— Friedrich Nietzsche</p><p id="17ef92dc-c785-4d71-a80d-67f6c43b0487" class="">
+</p><h2 id="33cecb8c-8bc7-4432-bebb-0565e4a83a77" class="">podcasts</h2><hr id="8cd7d91e-7c6c-4d09-b579-08753fd74027"/><figure id="50969122-b13e-4a1c-a511-b7e8f352e0c6"><a href="https://castbox.fm/episode/What-Daniel-Gross-Thinks-About-Basically-Everything-id1098842-id109801975" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">What Daniel Gross Thinks About Basically Everything</div><div class="bookmark-description">On this episode of Venture Stories, Erik is joined by Daniel Gross, founder of Pioneer, &quot;an online tournament for productivity.&quot; Prior to starting Pioneer, he founded Cue, a machine learning company that was acquired by Apple.</div></div><div class="bookmark-href"><img src="https://s3.castbox.fm/app/castbox/static/images/logo_120.png" class="icon bookmark-icon"/>https://castbox.fm/episode/What-Daniel-Gross-Thinks-About-Basically-Everything-id1098842-id109801975</div></div><img src="http://d1bm3dmew779uf.cloudfront.net/rss/show/2737820/e7b18e8beeebf1cb0da40c0f8642bdd5.png" class="bookmark-image"/></a></figure><figure id="6b212856-2638-4908-bf3f-7d3cdfe510dc"><a href="https://castbox.fm/vd/106862227" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Winning at the Great Game (Part 1)</div><div class="bookmark-description">Author, educator, and hedge fund advisor, Adam Robinson shares powerful lessons on winning the game of life. He teaches us how to learn, how to fail, and his three secrets of happiness and success. --- For comprehensive show notes on this episode, including a full edited transcript, go to https://fs.blog/podcast/ Is your brain hungry for more?</div></div><div class="bookmark-href"><img src="https://s3.castbox.fm/app/castbox/static/images/logo_120.png" class="icon bookmark-icon"/>https://castbox.fm/vd/106862227</div></div><img src="http://static.libsyn.com/p/assets/9/5/b/b/95bb34540c153a79/KP-logo-red-1400px.png" class="bookmark-image"/></a></figure><figure id="72c1a57e-ceb3-4da1-b25f-245533ca22c9"><a href="https://nav.al/the-truth-about-hard-work" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The truth about hard work</div><div class="bookmark-description">Subscribe to Naval Subscribe Subscribe Cancel More</div></div><div class="bookmark-href"><img src="https://149396263.v2.pressablecdn.com/wp-content/themes/naval/images/favicon/favicon.png" class="icon bookmark-icon"/>https://nav.al/the-truth-about-hard-work</div></div><img src="https://i1.wp.com/nav.al/wp-content/uploads/2019/12/Image_from_iOS-1.jpg?fit=1200%2C720&amp;ssl=1" class="bookmark-image"/></a></figure><p id="23e4d86f-49a1-4c13-b971-52b45f8202f6" class="">
+</p><h2 id="56da4b0c-f213-42ba-8535-adf2656889d1" class="">music</h2><hr id="05aa0dc9-25a8-4545-ad8b-69df498154e9"/><figure id="9b315a71-a7a5-42d6-a598-936b10900366"><a href="https://open.spotify.com/track/6e6Kxot9nHyZ4I8GgmGKII?si=h0QU-4kmRhqhtjI9_vrpZQ" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Nothing Can Change This Love</div><div class="bookmark-description">We and our partners use cookies to personalize your experience, to show you ads based on your interests, and for measurement and analytics purposes. By using our website and our services, you agree to our use of cookies as described in our Cookie Policy.</div></div><div class="bookmark-href"><img src="https://open.scdn.co/cdn/images/favicon.0c211e2e.png" class="icon bookmark-icon"/>https://open.spotify.com/track/6e6Kxot9nHyZ4I8GgmGKII?si=h0QU-4kmRhqhtjI9_vrpZQ</div></div><img src="https://i.scdn.co/image/ab67616d00001e0222e15ee8ec89ec7df5b6220a" class="bookmark-image"/></a></figure><figure id="c5592705-8de5-4977-8565-b15618601d04"><a href="https://open.spotify.com/track/6xRWoYwfwIKnT8bQGzKbxR?si=m_BaTpmtTuyheZ09oemkLg" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">God Is</div><div class="bookmark-description">We and our partners use cookies to personalize your experience, to show you ads based on your interests, and for measurement and analytics purposes. By using our website and our services, you agree to our use of cookies as described in our Cookie Policy.</div></div><div class="bookmark-href"><img src="https://open.scdn.co/cdn/images/favicon.0c211e2e.png" class="icon bookmark-icon"/>https://open.spotify.com/track/6xRWoYwfwIKnT8bQGzKbxR?si=m_BaTpmtTuyheZ09oemkLg</div></div><img src="https://i.scdn.co/image/ab67616d00001e021bb797bbfe2480650b6c2964" class="bookmark-image"/></a></figure><figure id="c5233a11-df4c-4a3e-9f3c-5b90f42b09d7"><a href="https://open.spotify.com/track/3YbuFCaCk9tWt9X67C2Pm1?si=JRiOli4aTmuE9ZNYgnlsdw" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">I Must Be In A Good Place Now - Live at Spacebomb Studios</div><div class="bookmark-description">We and our partners use cookies to personalize your experience, to show you ads based on your interests, and for measurement and analytics purposes. By using our website and our services, you agree to our use of cookies as described in our Cookie Policy.</div></div><div class="bookmark-href"><img src="https://open.scdn.co/cdn/images/favicon.0c211e2e.png" class="icon bookmark-icon"/>https://open.spotify.com/track/3YbuFCaCk9tWt9X67C2Pm1?si=JRiOli4aTmuE9ZNYgnlsdw</div></div><img src="https://i.scdn.co/image/ab67616d00001e0259e80e22dddd0cf93d65ba49" class="bookmark-image"/></a></figure><figure id="eaebf914-74bc-4daa-aad5-1a728f6df7b5"><a href="https://open.spotify.com/track/2Yv2mHzr5AQavVdwQjEokV?si=3JxiBG_DSPqCp-cCS4-aQA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Hand Me Downs</div><div class="bookmark-description">Listen to Hand Me Downs on Spotify. Mac Miller · Song · 2020.</div></div><div class="bookmark-href"><img src="https://open.scdn.co/cdn/images/favicon.5cb2bd30.ico" class="icon bookmark-icon"/>https://open.spotify.com/track/2Yv2mHzr5AQavVdwQjEokV?si=3JxiBG_DSPqCp-cCS4-aQA</div></div><img src="https://i.scdn.co/image/ab67616d00001e0226b7dd89810cc1a40ada642c" class="bookmark-image"/></a></figure><p id="c01a6cb8-a389-42fb-93e9-4c323f707eab" class="">
+</p><h2 id="f92134aa-9020-40b3-b896-20d72cf3634c" class="">video</h2><hr id="33e7e1b1-cc25-4304-ba22-6b54daaccc55"/><figure id="d92a2780-e700-4949-a33b-d999840798b2"><a href="https://youtu.be/9mbp0DugfCA" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">How To Lose Weight in 4 Easy Steps!</div><div class="bookmark-description">For more videos like this check out the Jash channel on go90! http://apple.co/1TmhDq5 Losing weight and getting fit has never been easier! Shed those unwanted pounds with these simple tricks your gym doesn&#x27;t want you to know about. You won&#x27;t believe what happens next!</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://youtu.be/9mbp0DugfCA</div></div><img src="https://i.ytimg.com/vi/9mbp0DugfCA/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="33839063-73a5-4923-b84f-495c0de50d56"><a href="https://www.youtube.com/watch?v=TyimCGEkiUc&amp;t=233s" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Maggie Rogers - folk / Alaska (Pharrell&#x27;s feedback)</div><div class="bookmark-description">brilliant response from Pharrell Williams</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/5b526b6f/img/favicon.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=TyimCGEkiUc&amp;t=233s</div></div><img src="https://i.ytimg.com/vi/TyimCGEkiUc/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="c570d600-6b8c-420d-aebd-dcf4e3d664b4"><a href="https://www.youtube.com/watch?v=wQWmRIHavC8" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">LeBron James - 1 hour workout (uncut)</div><div class="bookmark-description">Hey guys, you can get awesome NBA/NFL IPhone cases here! :D - https://sportzcases.com?aff=149 Promo Code for 10% off: NBA77 Awesome Basketball T-Shirts, Hoodies and more - http://maxfunke.spreadshirt.com BoingVert&#x27;s vertical jump program for only $7! - http://boingvert.com/max Full LeBron James workout - 1 hour, uncut!</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=wQWmRIHavC8</div></div><img src="https://i.ytimg.com/vi/wQWmRIHavC8/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="044293a1-fd38-4863-a072-7fb420972cf2"><a href="https://youtu.be/W608u6sBFpo" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Blitzscaling 18: Brian Chesky on Launching Airbnb and the Challenges of Scale</div><div class="bookmark-description">This is session 18 of Technology-enabled Blitzscaling, a Stanford University class taught by Reid Hoffman, John Lilly, Allen Blue, and Chris Yeh. This class features Reed Hoffman interviewing **Brian Chesky**, the Co-Founder and CEO of Airbnb.</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://youtu.be/W608u6sBFpo</div></div><img src="https://i.ytimg.com/vi/W608u6sBFpo/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="07d6019c-e854-487f-b00a-124c94c4e686"><a href="https://www.youtube.com/watch?v=wQTbkEeCTeM" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Louie - Misery Is Wasted On The Miserable</div><div class="bookmark-description">Louie S04E10 (Pamela Part 1) - Misery Is Wasted On The Miserable I really like this scene, so I uploaded it for the rest of the world. Thank you Louis C.K., ...</div></div><div class="bookmark-href"><img src="https://s.ytimg.com/yts/img/favicon-vfl8qSV2F.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=wQTbkEeCTeM</div></div><img src="https://i.ytimg.com/vi/wQTbkEeCTeM/hqdefault.jpg" class="bookmark-image"/></a></figure><figure id="28aa73f2-18b1-4269-993d-0df2c765ca4c"><a href="https://www.youtube.com/watch?v=de2grEPn7rg" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">The Search For Meaning | Rick and Morty | Adult Swim</div><div class="bookmark-description">Rick and Morty Full Episodes: http://asw.im/4OTknSDan Harmon muses the philosophy guiding Rick and Morty&#x27;s multiverse.SUBSCRIBE: http://bit.ly/AdultSwimSubsc...</div></div><div class="bookmark-href"><img src="https://www.youtube.com/s/desktop/4fc9328c/img/favicon.ico" class="icon bookmark-icon"/>https://www.youtube.com/watch?v=de2grEPn7rg</div></div><img src="https://i.ytimg.com/vi/de2grEPn7rg/hqdefault.jpg" class="bookmark-image"/></a></figure><p id="b14ffca7-6d69-432f-b72e-c0dbaf531da5" class="">
+</p><h2 id="c2c3074e-01a5-4442-9f8e-f0f0998378fe" class="">tweets</h2><hr id="e3e88404-5300-48e6-b991-88a6848cf33c"/><figure id="17b88995-867a-4df6-a515-0ead5a250de3"><div class="source"><a href="https://twitter.com/cory/status/1072654925237239809">https://twitter.com/cory/status/1072654925237239809</a></div></figure><figure id="aafcd2c5-5b62-4e1b-ae43-d3742e11b9d1"><div class="source"><a href="https://twitter.com/Kpaxs/status/1070636469176291328">https://twitter.com/Kpaxs/status/1070636469176291328</a></div></figure><figure id="e1b34d89-835f-40b5-a059-9d3d8a7e648e"><div class="source"><a href="https://twitter.com/aranibatta/status/1197728943006052352?s=20">https://twitter.com/aranibatta/status/1197728943006052352?s=20</a></div></figure><figure id="e966ed5b-1b62-4a4a-bf26-76494b8c6af9"><div class="source"><a href="https://twitter.com/kpaxs/status/1075623988825636865?s=21">https://twitter.com/kpaxs/status/1075623988825636865?s=21</a></div></figure><figure id="499c0189-109f-45e3-8bf9-21a9c376200f"><div class="source"><a href="https://twitter.com/naval/status/1225975200321171461?s=20">https://twitter.com/naval/status/1225975200321171461?s=20</a></div></figure><p id="080c7233-b0df-43b6-ac96-a92b4c861d56" class="">
+</p></div></article></body></html>

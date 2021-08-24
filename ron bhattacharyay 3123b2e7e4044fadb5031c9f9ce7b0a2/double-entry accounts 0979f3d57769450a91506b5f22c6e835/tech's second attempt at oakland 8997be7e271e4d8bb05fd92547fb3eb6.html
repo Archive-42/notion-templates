@@ -1,0 +1,643 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>tech&#x27;s second attempt at oakland</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8997be7e-271e-4d8b-b05f-d92547fb3eb6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🌗</span></div><h1 class="page-title">tech&#x27;s second attempt at oakland</h1></header><div class="page-body"><p id="248bf2c4-df4a-408c-8cc6-1dd668020ce4" class=""><time>@December 7, 2016</time></p><p id="85e822a1-f885-4cd9-9d3d-7bce2fc8b0b1" class="">
+</p><p id="0686e1f3-4069-4dfb-9e48-667a921c1f3b" class="">It seems today that no discussion of Oakland is complete without a gander of the seemingly viral dispersion of tech companies and gentrification that often comes with their spread. Given the seemingly endless spike in real estate within San Francisco and Oakland’s vicinity to one of the world’s best engineering schools, it would be deemed inevitable that Oakland would succumb to the same trends that San Francisco did. Yet, this isn’t the first time Oakland has faced mass gentrification at the influence of big tech. During the original dot com years, then mayor Jerry Brown made a huge push for “redevelopment” of the downtown area as well as construction of housing projects in the hopes of incentivizing ten thousand tech individuals and more of the same liking. Even though the dot com crash of 2003 would severely halt the progress of gentrification in Oakland, much of the same signatures that defined the beginning of the 21st century have been identified today. Clearly, much like it did in 1999, locals are having trouble maintaining their homes as well as the culture that drove the diverse nature of Oakland. Yet, while both time periods in Oakland have shown similar signs of urban displacement, severe partitioning of communities, disparity in access to resources, and income inequality, the city of Oakland as a whole has shown a more amenable but cautious attitude to the expansion of tech companies in recent years, an attitude that should encourage a harmonious relationship with the tech sector in tandem with maintaining and incorporating with tech.</p><p id="1e129138-33c1-4205-a9ac-0554bd317440" class="">
+</p><p id="b63924d6-4cad-4a76-aac5-1fc19e172348" class="">Interestingly enough, much of what might end up diverging the paths of the two eras can be defined by the leadership of the city’s government, and more specifically the different outlooks of the different mayors. Jerry Brown took office in 1999 with the intent of providing the city with an influx of more well to do citizens. His “10k” plan intended to revitalize the downtown area and Jack London square, while creating housing projects in anticipation of dislocating current residents. The root of Brown’s thinking can be really derived from, “When Mayor Brown was asked whether his plan to gentrify downtown would threaten diversity, he replied (“tartly,” according to his supporter George Will),</p><blockquote id="4df0dcb1-3ed9-49eb-b27f-0fc08e1c8762" class="">“There is no diversity there now. You have a concentrated, homogenous population—the elderly, parolees, people in rehab, from mental hospitals, transients. This is not the vibrant civic culture some might have in mind.” Obviously, this is not the Brown who worked alongside Mother Teresa.” (Reed 23)</blockquote><p id="b3e7ed93-27de-4980-acac-bb759d2a4f65" class="">In not recognizing and valuing the variety of the people who inhabited Oakland, it was clear that the governing body would take no regulatory measures in controlling overwhelming gentrification. On the other hand, Libby Schaaf, has to deal individual residents moving over to Oakland as well as whole corporations are moving headquarters or major engineering offices inside the city itself. In response to Uber’s purchase of the Sears building in downtown Oakland, she let the company know that,</p><blockquote id="8b1156f0-f502-47b4-8333-47fc77cec07d" class="">“I look forward to working with you to identify ways that your unique contributions to Oakland’s economy can make this a more vibrant and equitable city where we all thrive” (Schaaf 2015).</blockquote><p id="af5f1bea-a304-4204-860d-f6f4042af5b0" class="">Libby Schaaf has actively taken the stance to promote tech growth only if the companies involved opt to hire locally and choose to be actively involved with Oakland’s culture as is. As much as she may choose to stress those tenets, she’s limited by the fact that many of these purchases are completely private transactions and tech companies are no longer taking public money to develop their offices. The precedent that Uber and Schaaf set in what is slated to be the largest tech office transplant into Oakland will define new tech companies moving in and their relationship with Oakland in the future.</p><p id="b8f3646f-7fec-40a4-8963-d538a93bae58" class="">
+</p><p id="2897ed6e-576b-4b7b-b91b-31f11a9bf277" class="">The cautious outlook of Libby Schaaf does draw warrant, especially considering the fact that unlike in 1999, the real estate competition extends to businesses as well and individuals. During Jerry Brown’s term, most of the tech employees that resided in Oakland or more generally in the East Bay usually worked in San Francisco or some other region in the South Bay, and the large incentive for moving to Oakland was cheaper housing with potential for urban development. Given the diversity and already brewing tension set in from previous movements of gentrification, there’s the sentiment that,</p><blockquote id="44a68608-dddf-4390-a5a5-f3a92f7cf69b" class="">“San Francisco had a very long ramp of displacement and gentrification, that by the time things exploded, the vast majority of the poor people and the people of color were long gone. That’s not true in Oakland. It will happen much more rapidly and it will be a much grittier experience.” (Wharnet 2014)</blockquote><p id="d29a49d2-147e-4905-b308-1d60de0fd082" class="">Yet, with businesses moving over to Oakland, the entire dynamic has changed. It places the city of Oakland right in the epicenter, and rather than being a collective of priced out individuals, companies are actively using the culture and affordable environment as perks. In contrast to Brown’s “10k” plan,</p><blockquote id="760ff4f9-ee2e-4c3b-821c-7f9cd9b100bf" class="">“At the time of the plan’s inception, Oakland was experiencing what Leslie calls “leakage.” People were working in the city, but they weren’t living there.” (Zillman 2014).</blockquote><p id="53c987a1-0f9e-4cc9-ae9b-2a2ac24cbe2a" class="">Since people are now completely priced out of the city as well, people are opting to live and become a part of the Oakland community.</p><p id="19b3b155-430b-4490-9a4c-cd30d582a44b" class="">The risk that runs concurrently with this spurt of technology is that it might start to consume the city much like it did San Francisco. In 1999, even with individuals of color and lesser means were being priced out and being forced to move out to Sacramento Valley,</p><blockquote id="2217534c-c1ae-42a5-9429-df2ddf034c79" class="">“Oakland, however, hadn’t become New Hampshire yet. And so, even with the black drain that is occurring under Brown, Oakland still hosts one of the most ethnically diverse populations in the country, a callaloo of cultures.” (Reed 26).</blockquote><p id="a170c500-6653-4d79-ae48-c4efbe76ff91" class="">This was possible in Reed and Brown’s time because the individuals who were brought into Oakland by Brown’s initiatives were mainly uninvolved with the cultural heart of the city. Yet, as more and more individuals are shying away from San Francisco, a large contingent of techies is following the starving artist into Oakland. With enough of that contingent calling Oakland home, embellished with the even stronger push of real tech jobs within Oakland itself, the same types of people who helped reshape San Francisco into the tech-over-all environment are planting roots. Signs of such progression can be found when taking a close look at the historic Telegraph Ave, one bustling with diverse and locally owned businesses, now teeming with groups of,</p><blockquote id="58d0de45-0895-4c05-8a2d-4c5086754c61" class="">“well-dressed and soon-to-be well-groomed men sat patiently in the sun outside Temescal Alley Barbershop waiting for $25 haircuts and $30 straight-razor shaves. Some idly pecked at their phones, while others wandered into Standard &amp; Strange, a men’s clothing store that stocks rugged-looking American-made apparel.” (Haber 2014)</blockquote><p id="e1254f9d-90ec-4669-b665-109f19796795" class="">More simply put, Oakland is seeing much of the cultural impregnation that Brooklyn witnessed over the last decade. Events like First Friday in Oakland are no longer frequented by a people of different races and socioeconomic backgrounds coming together to celebrate their differences, but rather by a more homogenous party enjoying fourteen dollar drinks and an assortment of food trucks.</p><p id="58d77df7-0fcf-40d6-8e83-a87c8cbdc4bb" class="">
+</p><p id="8e434137-2360-49b9-baf1-0d17f5126a89" class="">To imply that the influx of technology in Oakland can be completely likened to the kind of “cleansing” that Brooklyn has experienced this last decade would be out of place. The new level of involvement that individuals from the software world are brining to Oakland has shown some positive signs within the community. One of the biggest criticisms of the tech community is its lack of gender and racial diversity. This is extremely apparent from the recent findings of the Chamber of Commerce. Oakland has 5% more females working at tech firms compared to San Jose and San Francisco, as well as 7 times more black and multi-racial employees than anywhere else in the Bay (Oakland City Chamber of Commerce 2015). This drastic differentiating factor amongst local companies (albeit still in need of far more change) suggests that many of the cultural keystones of Oakland are starting to show within the companies themselves. When Pandora was asked why they chose Oakland, they cited the culture. For a music company they felt it was critical to their mission that they be able to incorporate as many viewpoints as possible, finding that,</p><blockquote id="d6f39c56-b3cc-4533-b81a-cd2f783de20d" class="">“We [Pandora] found a model where employees are actually involved in determining how to spend their budget because when they own it, they’re a part of it. If you’re not a part of something it’s easy to complain, but if you’re part of something you feel an ownership and accountability, and you’re more engaged. So everything we do around employee experience we try to make employee owned.” (Pandora 2014).</blockquote><p id="b32dcde3-56c3-47f8-8ba5-b9a8eba70377" class="">With local companies being much more interested in incorporating themselves into what Oakland as a city culturally represents as opposed to reincorporating something else into the city, the companies stand a far better chance of involving the citizens of Oakland in shaping the company and helping Oakland as a city grow using tech rather than falling to its side. At the beginning of the century, the key difference was that the companies people worked at weren’t based in Oakland. Given a new sense of embodiment, there’s hope that the new wave of immigrants to Oakland might just buy into what the traditional, blue collar spirit that has driven the city to be what it is today.</p><p id="4509e7a8-1a29-4c92-ad01-e58a457970e8" class="">
+</p><p id="50c38725-01d5-4e51-8138-4a6de5a5a029" class="">More interestingly, the tech community has made an active attempt in incorporating the habitants of Oakland into tech. Haber notes that transplants from the city kin to Mitchel Kapor feel like,</p><blockquote id="b8ac11cd-1523-4a0c-9fd8-3c9f7b6bac73" class="">“There’s a sense that everything is possible,” continued Mr. Kapor, whose Kapor Center for Social Impact funds various groups in the Bay Area committed to diversifying the face of technology, like Black Girls Code and Hidden Genius Project. “We’re going to see an explosion of tech in Oakland. It’s the next big area.” (Haber 2014).</blockquote><p id="a8104615-0a70-4e1b-be8f-a8c188f8bc4f" class="">Rather than seeing Oakland as an area to displace workers and wiping out the current embodiment of the city, a lot of resources are being dumped into tech education and hiring local. The state has pushed millions into Berkeley, Albany, and Oakland HS to develop technical skills. Likewise, over the last three years, tech can easily be attributed to a rise in local salaries rising 17% as well 4% growth of employment in tech amongst individuals residing in the city three years or longer, (Oakland Chamber of Commerce 2015). If tech is willing grow alongside the city rather than displace it, there’s a lot to be said for the benefits of its involvement.</p><p id="365f37aa-005d-4ac3-bf7d-30fc1eac36a1" class="">
+</p><p id="41349e97-6f79-45a8-b4ad-ce41472b40ac" class="">With all of this, how does Oakland move forward? Given that the city has very little it can do to actively impede companies from moving over to the East Bay, it needs to anticipate the migration in the next ten years, especially with rumors of giants like Google and Amazon shopping for Oakland real estate, and Uber moving in 2017. Yet, maintaining the cultural spirit and diversity is key, a resource that is much harder to come by in recent years. Oakland has the opportunity to be an example of how to incorporate previously disenfranchised groups in an industry famous for excluding those who just “don’t fit in.” The hope is that Oakland can move forward by avoiding much of the issues cities like New York and Sn Francisco have seen with the industry, while avoiding the lines of its failures in 1999. If anything, Oakland’s biggest asset is just how different it is from the rest of the tech incorporated bay, and if it can move forward into embedding tech companies into the city without comprising its values, then we all have a lot to gain from its growth. Otherwise, we’re destined to see a repeat of the failure that we’ve seen in Brooklyn, Palo Alto, San Francisco, and the most concerning, a previous version of Oakland.</p><p id="ccd4bfc7-ac6f-4880-82b7-225c4d2cd91c" class="">
+</p></div></article></body></html>

@@ -1,0 +1,661 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Go generics draft design: building a hashtable</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8b7d77f8-937e-4296-9b2e-0212b031fceb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎸</span></div><h1 class="page-title">Go generics draft design: building a hashtable</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://mdlayher.com/blog/go-generics-draft-design-building-a-hashtable/" class="url-value">https://mdlayher.com/blog/go-generics-draft-design-building-a-hashtable/</a></td></tr></tbody></table></header><div class="page-body"><p id="ea7c944d-6146-45ff-a965-d4d23f0a7420" class="">In 2018, I <a href="https://github.com/mdlayher/misc/blob/master/go/algorithms/hashtable/hashtable.go">implemented a toy hashtable in Go</a> as a quick refresher on how data types such as Go’s map work under the hood. This implementation works exclusively with string keys mapped to string values.</p><p id="ad2b5c55-f1b8-4a7c-af99-27b96d730659" class="">Two years later, in June 2020, the Go team released a blog post entitled <a href="https://blog.golang.org/generics-next-step">The Next Step for Generics</a> which provides an updated generics draft design based on extending Go’s existing interfaces, rather than adding new concepts such as “contracts”. If you haven’t yet I <a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md">highly recommend at least browsing the new design draft document</a>. I am not an expert and can only speak from my limited experience and time with the design.</p><p id="d2c18e46-1812-417c-8497-30acbc497983" class="">This blog will describe the lessons I learned <a href="https://go2goplay.golang.org/p/2pcBZTQdh3u">porting my toy hashtable to the new generics draft design</a>. If you’d like to skip the introduction and check out the generic code, <a href="https://mdlayher.com/blog/go-generics-draft-design-building-a-hashtable/">feel free to jump to “A generic hashtable”</a>.</p><h2 id="7249c163-7a10-4f6e-bc9d-7442b5e66457" class="">A non-generic hashtable</h2><p id="1d9cc508-2897-4ea9-88b9-eb2413824474" class="">My initial design from 2018 can only work string keys and string values.</p><p id="0ae7eead-24fc-481d-8a2e-0ccaf1a92d97" class="">The <code>Table</code> type is the basis of the package. It stores key/value string pairs using a slice internally, where the number of hashtable buckets within the slice is determined by an integer <code>m</code>:</p><ul id="eee803d4-4ae5-4ee9-b5d0-2729e850b169" class="bulleted-list"><li>A <strong>smaller</strong> <code>m</code> means less buckets will be created, but each key stored in the <code>Table</code> has a higher likelihood of having to share a bucket with other keys, thus <strong>slowing down lookups</strong></li></ul><ul id="6fb2fc43-b21e-4feb-ad98-c5540bc686e9" class="bulleted-list"><li>A <strong>larger</strong> <code>m</code> means more buckets will be created, so each key stored in the <code>Table</code> has a lower likelihood of having to share a bucket with other keys, thus <strong>speeding up lookups</strong></li></ul><p id="c7e47356-7c84-442c-afe6-4c8170cfe895" class="">The <code>kv</code> type is a small helper to concisely store a key/value string pair.</p><pre id="fea3c76e-42b6-4af3-8a8b-87b22b25a812" class="code"><code>// Package hashtable implements a basic hashtable for string key/value pairs.
+package hashtable
+
+// A Table is a basic hashtable.
+type Table struct {
+	m     int
+	table [][]kv
+}
+
+// A kv stores key/value data in a Table.
+type kv struct {
+	Key, Value string
+}
+
+// New creates a Table with m internal buckets.
+func New(m int) *Table {
+	return &amp;Table{
+		m:     m,
+		table: make([][]kv, m),
+	}
+}</code></pre><p id="62cbf083-a925-45c3-99aa-9a29549f12ec" class="">This hashtable supports two operations:</p><ul id="cbdd8fdc-c3dc-4fe4-b36f-61f73a8bfe2e" class="bulleted-list"><li><code>Get</code>: determines if a key is present in the hashtable, returning the value (if found) and a boolean which indicates if the value exists</li></ul><ul id="59633716-ce1a-447f-a7c7-8bee682f2504" class="bulleted-list"><li><code>Insert</code>: inserts a new key/value pair into the hashtable, overwriting any previous value for the same key</li></ul><p id="13d646b9-3c40-4fce-bcd3-9943dabefd1f" class="">Both of these operations require a hashing function which can take an input string and return an integer indicating the bucket where a key’s value may live.</p><pre id="7d1076c2-11d6-4552-bffb-0a0f234520a6" class="code"><code>// hash picks a hashtable index to use to store a string with key s.
+func (t *Table) hash(s string) int {
+	h := fnv.New32()
+	h.Write([]byte(s))
+	return int(h.Sum32()) % t.m
+}</code></pre><p id="0d1a0ac2-39aa-4949-9248-cd40e5e2e8b4" class="">I chose <code>hash/fnv32</code> as a simple, non-cryptographic hash function which returns an integer. By then computing the modulus operation <code>hash % t.m</code>, we can ensure the resulting integer returns the index of one of our hashtable buckets.</p><p id="d19b996a-807e-4fdf-8120-4ac4b34b1499" class="">First, here’s the code for <code>Get</code>:</p><p id="165bac22-f13d-4727-8a9c-e77a0559340c" class="">The implementation of <code>Table.Get</code> hashes the input key to determine which bucket is used to store the key’s values. Once the bucket is determined, it iterates through all of the key/value pairs in that bucket:</p><ul id="a234a896-b927-4a45-b4be-488f9eefa4b8" class="bulleted-list"><li>if the input key matches a key in that bucket, return the bucket’s value and boolean true</li></ul><ul id="c7a5a161-8a52-43d6-974a-a075f51d62e8" class="bulleted-list"><li>if no match, return an empty string and boolean false</li></ul><p id="6b7b2315-c2f5-45f7-9031-c9afd6f3fc53" class="">Next, let’s examine <code>Insert</code>:</p><p id="30b492b9-2435-4708-8297-10eb6c064c3e" class=""><code>Table.Insert</code> must also hash the input key to determine which bucket should be used to insert the key/value pair. When iterating through the key/value pairs in a bucket, we may discover a matching key already exists:</p><ul id="66f03890-73d0-417d-94e7-198e68cfb06e" class="bulleted-list"><li>if the input key matches a key in that bucket, overwrite the key’s value with the input value</li></ul><ul id="efd044cb-8606-4e18-8a2a-b80e46053854" class="bulleted-list"><li>if no match, append a new entry to the bucket’s key/value pair slice.</li></ul><p id="7cfb8303-cb66-44b9-ba87-adadd92d0aac" class="">That’s it! We’ve created a very basic hashtable which can be used to handle key/value string pairs.</p><p id="51abaa84-2090-4f95-b91b-f51bce777d94" class="">Let’s port this existing code to the new Go generics draft design!</p><h2 id="384cc435-2d61-4f23-9eaf-dc6647e9e779" class="">A generic hashtable</h2><p id="cb6606cd-e640-4dbe-b9df-cb1fdde75ee0" class="">Our goal is to take the existing hashtable code and make it work with arbitrary key/value pair types. But we do have one constraint: the keys in our hashtable must match the <a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md#comparable-types-in-constraints">predeclared type constraint </a><a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md#comparable-types-in-constraints"><code>comparable</code></a>, so we can check for equality.</p><p id="df324ee8-3192-4980-ab5c-7375e4b4a678" class="">For my design, I decided to enforce that both key and value types are comparable, so I could build a simple demo using two hashtables as an index and reverse index with flipped key/value types.</p><p id="1b39f842-5965-4d7d-a4a4-cf0a0e66a72d" class="">The new type parameter lists are required wherever generic types are needed, thus each of these top-level types and functions must have the type parameter list for <code>K</code> and <code>V</code>, both of which must also be <code>comparable</code>.</p><p id="c3bef87f-cf80-41d6-869d-f06782b1e7c0" class="">There were a couple of tricky things I learned while writing this code:</p><ul id="13ad9170-03f4-490b-ac5e-46d516da3ce2" class="bulleted-list"><li>Note that a hash function <code>func(K, int) int</code> is now a second parameter passed to <code>New</code>. This is necessary because we have to know how to hash any given generic type. I could have created a new interface with a <code>Hash() int</code> constraint or similar, but I wanted my hashtable to work with builtin Go types such as <code>string</code> and <code>int</code>, which you cannot define methods on.</li></ul><ul id="75d2b6e9-db3b-4569-bbc6-aec61d9c2b2e" class="bulleted-list"><li>It took me a little bit of time to figure out the proper parentheses usage for the <code>make()</code> call when creating <code>Table.table</code>. My initial attempt used <code>make([][]kv(K, V))</code> which won’t work with the added type parameters.</li></ul><p id="2f58927a-26ec-4fc1-b362-c99d234f2ba6" class="">It’s time to implement <code>Get</code>:</p><p id="d8bcd94c-ffcd-4da2-a29e-b4e079ef7016" class="">A method defined on a generic type must also have associated generic type parameters declared in its receiver. <code>Get</code> can now accept any type <code>K</code> and return any type <code>V</code> along with <code>bool</code> to indicate whether or not the value was found.</p><p id="888790d3-0463-473b-9b78-721db44326d2" class="">Aside from the modified method receiver and a few <code>K</code> and <code>V</code> types, this looks pretty much like typical Go code, which is great!</p><p id="8bcc2d63-9ec1-45b8-a513-e4f7eee130cf" class="">The one slightly tricky issue here is dealing with <a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md#the-zero-value">the zero value of a generic type</a>. The linked issue suggests doing as we’ve done here by declaring <code>var zero V</code>, but perhaps in the future there could be an easier option for doing this. I personally would love to see <code>return _, false</code> or similar as an option for both generic and non-generic Go.</p><p id="fcc9761a-7cfc-4bb9-9650-3c843ced0d84" class="">Let’s move on to <code>Insert</code>:</p><p id="5e855b33-1d78-4e0c-b6c5-6ad14892d2f3" class="">Very few modifications are necessary to make this code generic:</p><ul id="bae71eef-9944-48b4-8a64-91cce93e4493" class="bulleted-list"><li>the method receiver is now type <code>*Table(K, V)</code> instead of <code>*Table</code></li></ul><ul id="33560f4c-ed00-47a2-8552-5465487595ba" class="bulleted-list"><li>the input parameters are now <code>(key K, value V)</code> instead of <code>(key, value string)</code></li></ul><ul id="fcb1a94c-62c4-421d-b737-bfb324c89c60" class="bulleted-list"><li>the <code>kv{}</code> struct literal must now be declared as <code>kv(K, V){}</code></li></ul><p id="15370805-1bfd-4707-85b4-1efca0c2be1f" class="">That’s all it takes! We now have a generic hashtable type which can accept any keys and values which implement the <code>comparable</code> type constraint.</p><h2 id="08e594ed-7a1a-44d0-9a77-8dd59ec9af4c" class="">Generic hashtable usage</h2><p id="ebf65fb2-4aad-4780-ae2a-e70f71661973" class="">To test this code, I decided to create two parallel hashtables which act as an index and a reverse index between string and integer types:</p><p id="60784352-7e28-4580-87f2-9035dba774f1" class="">When calling the generic constructor <code>New</code>, we specify the type parameters for generic types <code>K</code> and <code>V</code>. For example, <code>t1</code> is a <code>Table(string, int)</code> meaning that <code>K = string</code> and <code>V = int</code>. <code>t2</code> is the reverse: <code>Table(int, string)</code>. Because both <code>int</code> and <code>string</code> match the type constraint <code>comparable</code>, this works just fine.</p><p id="b0be2e7b-8ed2-485c-b20d-c6fe2521c5f2" class="">In order to hash our generic types, we have to provide a hashing function which can operate on <code>K</code> and <code>t.m</code> to produce an <code>int</code> output. For <code>t1</code>, we reuse the <code>hash/fnv</code> hash from the original example. For <code>t2</code>, a modulus operation seems sufficient for our demo.</p><p id="d5fb198d-3665-45b7-9e99-677f028a6c88" class="">I understand that in the majority of cases, the Go compiler should be able to infer the proper types for generic types such as <code>K</code> and <code>V</code> at call sites like <code>hashtable.New</code>, but I’ll probably continue to write them in an explicit way for a while to get used to the design.</p><p id="ebe09dd1-5117-411a-a066-65029ce785c0" class="">Now that we have our index and reverse index hashtables created, let’s populate them:</p><p id="efb1bb8d-22f6-46de-b21f-c5ba8baa91b5" class="">Every key/value pair in <code>t1</code> will be mirrored as value/key in <code>t2</code>. Finally, we can iterate the known strings and indices (along with an additional value which will never be found) to show our generic code in action:</p><p id="f24e1379-6360-4c4a-80cb-09b9f77e67ed" class="">The output of <a href="https://go2goplay.golang.org/p/2pcBZTQdh3u">our demo program</a> is as follows:</p><p id="a7eb8a11-5ec4-4bf0-a7df-ee35d188609d" class="">Success! We’ve implemented a generic hashtable in Go!</p><p id="412a0e19-16f3-45ef-a3ef-e2519ed04e05" class="">I have quite a few more experiments I’d like to do in order to better understand the new generics draft design. If you enjoyed this blog and would like to learn more, check out <a href="https://blog.golang.org/generics-next-step">the Go blog</a> and the <a href="https://go.googlesource.com/proposal/+/refs/heads/master/design/go2draft-type-parameters.md">new generics design draft document</a>.</p><p id="857a4148-c2fd-4ccb-adca-db70080d6123" class="">If you have questions or comments, feel free to <a href="https://twitter.com/mdlayher">reach out on Twitter</a> or <a href="https://invite.slack.golangbridge.org/">@mdlayher on Gophers Slack</a>. I’ll likely be <a href="https://twitch.tv/mdlayher">live-streaming some Go generics content on Twitch</a> in the near future as well!</p><h2 id="76ca25b4-6176-4ad2-95b7-f7c16ebbe568" class="">Bonus: a “generic” hash function</h2><p id="93eedde0-b5df-417d-a33d-1e40b5fb339d" class="">While implementing my generic hashtable, I had a discussion with some folks in #performance on Gophers Slack about what it would take to get access to the runtime’s “generic” hashing functionality used by built-in Go maps.</p><p id="f6e84660-ea4c-4cd4-9249-f084170b47cf" class="">@zeebo on Gophers Slack came up with this <a href="https://go2goplay.golang.org/p/SI2H_tYshFP">amusing, terrifying, and brilliant solution</a>:</p><p id="755d51f4-978d-465d-bfbf-f5671a4d596d" class="">This code abuses the fact that a Go interface is actually a tuple of runtime type data and a pointer to a type. By accessing that pointer and using <code>unsafe</code> to cast it into the runtime’s representation of a map (which has a hashing function field), we can create a generic hashing function for use in our own code!</p><p id="c5481bd4-5e5f-450b-bcc3-89a502f96e2f" class="">Cool stuff, eh?</p></div></article></body></html>

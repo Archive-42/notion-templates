@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Avant-Garde and Kitsch</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c929a6c5-588b-47e2-b2da-e8960c721798" class="page sans"><header><h1 class="page-title">Avant-Garde and Kitsch</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="http://www.sharecom.ca/greenberg/kitsch.html" class="url-value">http://www.sharecom.ca/greenberg/kitsch.html</a></td></tr></tbody></table></header><div class="page-body"><blockquote id="9a7013fd-2e17-4713-92d0-39616d2a4846" class="">This is Greenberg&#x27;s breakthrough essay from 1939, written for the Partisan Review when he was twenty-nine years of age and at the time more involved with literature than with painting. He came, later, to reject much of the essay -- notably the definition of kitsch which he later believed to be ill thought out (as, indeed, it is.) Later he came to identify the threat to high art as coming from middlebrow taste, which in any event aligns much more closely with the academic than kitsch ever did or could. The essay has an air and assurance of &#x27;30s Marxism, with peculiar assumptions such as that only under socialism could the taste of the masses be raised. But for all that, the essay stakes out new territory. Although the avant-garde was an accepted fact in the &#x27;30s. Greenberg was the first to define its social and historical context and cultural import. The essay also carried within it the seeds of his notion of modernism. Despite its faults and sometimes heady prose, it stands as one of the important theoretical documents of 20th century culture.  -- TF</blockquote><p id="0eff7895-0b01-4543-af46-8dd6d91ef1f8" class="">ONE AND THE SAME civilization produces simultaneously two such different things s a poem by T. S. Eliot and a Tin Pan Alley song, or a painting by Braque and a Saturday Evening Post cover. All four are on the order of culture, and ostensibly, parts of the same culture and products of the same society. Here, however, their connection seems to end. A poem by Eliot and a poem by Eddie Guest -- what perspective of culture is large enough to enable us to situate them in an enlightening relation to each other? Does the fact that a disparity such as this within the frame of a single cultural tradition, which is and has been taken for granted -- does this fact indicate that the disparity is a part of the natural order of things? Or is it something entirely new, and particular to our age?</p><p id="5ea03507-7c37-4b9a-bb47-897349289fbd" class="">The answer involves more than an investigation in aesthetics. It appears to me that it is necessary to examine more closely and with more originality than hitherto the relationship between aesthetic experience as met by the specific -- not the generalized -- individual, and the social and historical contexts in which that experience takes place. What is brought to light will answer, in addition to the question posed above, other and perhaps more important questions.</p><p id="ec2c0ae9-d349-4a49-8dbf-78c1b5e6d9a4" class="">A society, as it becomes less and less able, in the course of its development, to justify the inevitability of its particular forms, breaks up the accepted notions upon which artists and writers must depend in large part for communication with their audiences. It becomes difficult to assume anything. All the verities involved by religion, authority, tradition, style, are thrown into question, and the writer or artist is no longer able to estimate the response of his audience to the symbols and references with which he works. In the past such a state of affairs has usually resolved itself into a motionless Alexandrianism, an academicism in which the really important issues are left untouched because they involve controversy, and in which creative activity dwindles to virtuosity in the small details of form, all larger questions being decided by the precedent of the old masters. The same themes are mechanically varied in a hundred different works, and yet nothing new is produced: Statius, mandarin verse, Roman sculpture, Beaux-Arts painting, neo-republican architecture.</p><p id="2490b1d5-e552-4991-ada6-aca478a498d5" class="">It is among the hopeful signs in the midst of the decay of our present society that we -- some of us -- have been unwilling to accept this last phase for our own culture. In seeking to go beyond Alexandrianism, a part of Western bourgeois society has produced something unheard of heretofore: -- avant-garde culture. A superior consciousness of history -- more precisely, the appearance of a new kind of criticism of society, an historical criticism -- made this possible. This criticism has not confronted our present society with timeless utopias, but has soberly examined in the terms of history and of cause and effect the antecedents, justifications and functions of the forms that lie at the heart of every society. Thus our present bourgeois social order was shown to be, not an eternal, &quot;natural&quot; condition of life, but simply the latest term in a succession of social orders. New perspectives of this kind, becoming a part of the advanced intellectual conscience of the fifth and sixth decades of the nineteenth century, soon were absorbed by artists and poets, even if unconsciously for the most part. It was no accident, therefore, that the birth of the avant-garde coincided chronologically -- and geographically, too -- with the first bold development of scientific revolutionary thought in Europe.</p><p id="4b8960a5-142a-48ba-8dac-5d10c62213d8" class="">True, the first settlers of bohemia -- which was then identical with the avant-garde -- turned out soon to be demonstratively uninterested in politics. Nevertheless, without the circulation of revolutionary ideas in the air about them, they would never have been able to isolate their concept of the &quot;bourgeois&quot; in order to define what they were not. Nor, without the moral aid of revolutionary political attitudes would they have had the courage to assert themselves as aggressively as they did against the prevailing standards of society. Courage indeed was needed for this, because the avant-garde&#x27;s emigration from bourgeois society to bohemia meant also an emigration from the markets of capitalism, upon which artists and writers had been thrown by the falling away of aristocratic patronage. (Ostensibly, at least, it meant this -- meant starving in a garret -- although, as we will be shown later, the avant-garde remained attached to bourgeois society precisely because it needed its money.)</p><p id="70324f3f-92b2-44e5-9984-8e6baf5cfb18" class="">Yet it is true that once the avant-garde had succeeded in &quot;detaching&quot; itself from society, it proceeded to turn around and repudiate revolutionary as well as bourgeois politics. The revolution was left inside society, a part of that welter of ideological struggle which art and poetry find so unpropitious as soon as it begins to involve those &quot;precious&quot; axiomatic beliefs upon which culture thus far has had to rest. Hence it developed that the true and most important function of the avant-garde was not to &quot;experiment,&quot; but to find a path along which it would be possible to keep culture moving in the midst of ideological confusion and violence. Retiring from public altogether, the avant-garde poet or artist sought to maintain the high level of his art by both narrowing and raising it to the expression of an absolute in which all relativities and contradictions would be either resolved or beside the point. &quot;Art for art&#x27;s sake&quot; and &quot;pure poetry&quot; appear, and subject matter or content becomes something to be avoided like a plague.</p><p id="8a79d222-4a0c-40a9-8540-d044b8696996" class="">It has been in search of the absolute that the avant-garde has arrived at &quot;abstract&quot; or &quot;nonobjective&quot; art -- and poetry, too. The avant-garde poet or artist tries in effect to imitate God by creating something valid solely on its own terms, in the way nature itself is valid, in the way a landscape -- not its picture -- is aesthetically valid; something given, increate, independent of meanings, similars or originals. Content is to be dissolved so completely into form that the work of art or literature cannot be reduced in whole or in part to anything not itself.</p><p id="7f15e486-2d74-4118-9c41-b7401c2ce02d" class="">But the absolute is absolute, and the poet or artist, being what he is, cherishes certain relative values more than others. The very values in the name of which he invokes the absolute are relative values, the values of aesthetics. And so he turns out to be imitating, not God -- and here I use &quot;imitate&quot; in its Aristotelian sense -- but the disciplines and processes of art and literature themselves. This is the genesis of the &quot;abstract.&quot;<a href="http://www.sharecom.ca/greenberg/kitsch.html">(1)</a> In turning his attention away from subject matter of common experience, the poet or artist turns it in upon the medium of his own craft. The nonrepresentational or &quot;abstract,&quot; if it is to have aesthetic validity, cannot be arbitrary and accidental, but must stem from obedience to some worthy constraint or original. This constraint, once the world of common, extroverted experience has been renounced, can only be found in the very processes or disciplines by which art and literature have already imitated the former. These themselves become the subject matter of art and literature. If, to continue with Aristotle, all art and literature are imitation, then what we have here is the imitation of imitating. To quote Yeats:</p><blockquote id="da709b88-9d2a-4ef9-b8f9-bb8a856863de" class="">Nor is there singing school but studying Monuments of its own magnificence.</blockquote><p id="d362dc7a-efaf-4fc5-9b9c-d5d68bc8852d" class="">Picasso, Braque, Mondrian, Miro, Kandinsky, Brancusi, even Klee, Matisse and Cézanne derive their chief inspiration from the medium they work in.<a href="http://www.sharecom.ca/greenberg/kitsch.html">(2)</a> The excitement of their art seems to lie most of all in its pure preoccupation with the invention and arrangement of spaces, surfaces, shapes, colors, etc., to the exclusion of whatever is not necessarily implicated in these factors. The attention of poets like Rimbaud, Mallarmé, Valéry, Éluard, Pound, Hart Crane, Stevens, even Rilke and Yeats, appears to be centered on the effort to create poetry and on the &quot;moments&quot; themselves of poetic conversion, rather than on experience to be converted into poetry. Of course, this cannot exclude other preoccupations in their work, for poetry must deal with words, and words must communicate. Certain poets, such as Mallarmé and Valéry <a href="http://www.sharecom.ca/greenberg/kitsch.html">(3)</a> are more radical in this respect than others -- leaving aside those poets who have tried to compose poetry in pure sound alone. However, if it were easier to define poetry, modern poetry would be much more &quot;pure&quot; and &quot;abstract.&quot; As for the other fields of literature -- the definition of avant-garde aesthetics advanced here is no Procrustean bed. But aside from the fact that most of our best contemporary novelists have gone to school with the avant-garde, it is significant that Gide&#x27;s most ambitious book is a novel about the writing of a novel, and that Joyce&#x27;s Ulysses and Finnegans Wake seem to be, above all, as one French critic says, the reduction of experience to expression for the sake of expression, the expression mattering more than what is being expressed.</p><p id="f4621944-331f-4276-bbf5-2fb8234f27ee" class="">That avant-garde culture is the imitation of imitating -- the fact itself -- calls for neither approval nor disapproval. It is true that this culture contains within itself some of the very Alexandrianism it seeks to overcome. The lines quoted from Yeats referred to Byzantium, which is very close to Alexandria; and in a sense this imitation of imitating is a superior sort of Alexandrianism. But there is one most important difference: the avant-garde moves, while Alexandrianism stands still. And this, precisely, is what justifies the avant-garde&#x27;s methods and makes them necessary. The necessity lies in the fact that by no other means is it possible today to create art and literature of a high order. To quarrel with necessity by throwing about terms like &quot;formalism,&quot; &quot;purism,&quot; &quot;ivory tower&quot; and so forth is either dull or dishonest. This is not to say, however, that it is to the social advantage of the avant-garde that it is what it is. Quite the opposite.</p><p id="b8db4d82-4192-4a62-b43f-47109bce8ad4" class="">The avant-garde&#x27;s specialization of itself, the fact that its best artists are artists&#x27; artists, its best poets, poets&#x27; poets, has estranged a great many of those who were capable formerly of enjoying and appreciating ambitious art and literature, but who are now unwilling or unable to acquire an initiation into their craft secrets. The masses have always remained more or less indifferent to culture in the process of development. But today such culture is being abandoned by those to whom it actually belongs -- our ruling class. For it is to the latter that the avant-garde belongs. No culture can develop without a social basis, without a source of stable income. And in the case of the avant-garde, this was provided by an elite among the ruling class of that society from which it assumed itself to be cut off, but to which it has always remained attached by an umbilical cord of gold. The paradox is real. And now this elite is rapidly shrinking. Since the avant-garde forms the only living culture we now have, the survival in the near future of culture in general is thus threatened.</p><p id="12061221-428a-435a-8844-0b49ab4e52a9" class="">We must not be deceived by superficial phenomena and local successes. Picasso&#x27;s shows still draw crowds, and T. S. Eliot is taught in the universities; the dealers in modernist art are still in business, and the publishers still publish some &quot;difficult&quot; poetry. But the avant-garde itself, already sensing the danger, is becoming more and more timid every day that passes. Academicism and commercialism are appearing in the strangest places. This can mean only one thing: that the avant-garde is becoming unsure of the audience it depends on -- the rich and the cultivated.</p><p id="6a75bcef-0ac9-40f6-9e84-cc1aa500b8bc" class="">Is it the nature itself of avant-garde culture that is alone responsible for the danger it finds itself in? Or is that only a dangerous liability? Are there other, and perhaps more important, factors involved?</p><p id="94a95a04-1424-435c-9520-27cc810451af" class="">Where there is an avant-garde, generally we also find a rear-guard. True enough -- simultaneously with the entrance of the avant-garde, a second new cultural phenomenon appeared in the industrial West: that thing to which the Germans give the wonderful name of Kitsch: popular, commercial art and literature with their chromeotypes, magazine covers, illustrations, ads, slick and pulp fiction, comics, Tin Pan Alley music, tap dancing, Hollywood movies, etc., etc. For some reason this gigantic apparition has always been taken for granted. It is time we looked into its whys and wherefores.</p><p id="308b296f-b281-48da-9f12-4738857d0392" class="">Kitsch is a product of the industrial revolution which urbanized the masses of Western Europe and America and established what is called universal literacy.</p><p id="07e014c9-689f-4a9f-a63b-65918bf43c0b" class="">Prior to this the only market for formal culture, as distinguished from folk culture, had been among those who, in addition to being able to read and write, could command the leisure and comfort that always goes hand in hand with cultivation of some sort. This until then had been inextricably associated with literacy. But with the introduction of universal literacy, the ability to read and write became almost a minor skill like driving a car, and it no longer served to distinguish an individual&#x27;s cultural inclinations, since it was no longer the exclusive concomitant of refined tastes.</p><p id="25a8f94b-07f5-4a23-b8d7-1e8f7ff4f57c" class="">The peasants who settled in the cities as proletariat and petty bourgeois learned to read and write for the sake of efficiency, but they did not win the leisure and comfort necessary for the enjoyment of the city&#x27;s traditional culture. Losing, nevertheless, their taste for the folk culture whose background was the countryside, and discovering a new capacity for boredom at the same time, the new urban masses set up a pressure on society to provide them with a kind of culture fit for their own consumption. To fill the demand of the new market, a new commodity was devised: ersatz culture, kitsch, destined for those who, insensible to the values of genuine culture, are hungry nevertheless for the diversion that only culture of some sort can provide.</p><p id="c2e8777c-4e55-4f41-ba57-3d353a3813d6" class="">Kitsch, using for raw material the debased and academicized simulacra of genuine culture, welcomes and cultivates this insensibility. It is the source of its profits. Kitsch is mechanical and operates by formulas. Kitsch is vicarious experience and faked sensations. Kitsch changes according to style, but remains always the same. Kitsch is the epitome of all that is spurious in the life of our times. Kitsch pretends to demand nothing of its customers except their money -- not even their time.</p><p id="bbc5714d-6d03-415f-afee-acb18de43f6f" class="">The precondition for kitsch, a condition without which kitsch would be impossible, is the availability close at hand of a fully matured cultural tradition, whose discoveries, acquisitions, and perfected self-consciousness kitsch can take advantage of for its own ends. It borrows from it devices, tricks, stratagems, rules of thumb, themes, converts them into a system, and discards the rest. It draws its life blood, so to speak, from this reservoir of accumulated experience. This is what is really meant when it is said that the popular art and literature of today were once the daring, esoteric art and literature of yesterday. Of course, no such thing is true. What is meant is that when enough time has elapsed the new is looted for new &quot;twists,&quot; which are then watered down and served up as kitsch. Self-evidently, all kitsch is academic; and conversely, all that&#x27;s academic is kitsch. For what is called the academic as such no longer has an independent existence, but has become the stuffed-shirt &quot;front&quot; for kitsch. The methods of industrialism displace the handicrafts.</p><p id="b6ab2f60-3b59-4490-aa27-d2fadbdbd929" class="">Because it can be turned out mechanically, kitsch has become an integral part of our productive system in a way in which true culture could never be, except accidentally. It has been capitalized at a tremendous investment which must show commensurate returns; it is compelled to extend as well as to keep its markets. While it is essentially its own salesman, a great sales apparatus has nevertheless been created for it, which brings pressure to bear on every member of society. Traps are laid even in those areas, so to speak, that are the preserves of genuine culture. It is not enough today, in a country like ours, to have an inclination towards the latter; one must have a true passion for it that will give him the power to resist the faked article that surrounds and presses in on him from the moment he is old enough to look at the funny papers. Kitsch is deceptive. It has many different levels, and some of them are high enough to be dangerous to the naive seeker of true light. A magazine like the New Yorker, which is fundamentally high-class kitsch for the luxury trade, converts and waters down a great deal of avant-garde material for its own uses. Nor is every single item of kitsch altogether worthless. Now and then it produces something of merit, something that has an authentic folk flavor; and these accidental and isolated instances have fooled people who should know better.</p><p id="88845a09-4199-4e2f-b3c3-238d5ba8a6b1" class="">Kitsch&#x27;s enormous profits are a source of temptation to the avant-garde itself, and its members have not always resisted this temptation. Ambitious writers and artists will modify their work under the pressure of kitsch, if they do not succumb to it entirely. And then those puzzling borderline cases appear, such as the popular novelist, Simenon, in France, and Steinbeck in this country. The net result is always to the detriment of true culture in any case.</p><p id="b83a17d9-6f29-4ef6-97d0-41e739b8b575" class="">Kitsch has not been confined to the cities in which it was born, but has flowed out over the countryside, wiping out folk culture. Nor has it shown any regard for geographical and national cultural boundaries. Another mass product of Western industrialism, it has gone on a triumphal tour of the world, crowding out and defacing native cultures in one colonial country after another, so that it is now by way of becoming a universal culture, the first universal culture ever beheld. Today the native of China, no less than the South American Indian, the Hindu, no less than the Polynesian, have come to prefer to the products of their native art, magazine covers, rotogravure sections and calendar girls. How is this virulence of kitsch, this irresistible attractiveness, to be explained? Naturally, machine-made kitsch can undersell the native handmade article, and the prestige of the West also helps; but why is kitsch a so much more profitable export article than Rembrandt? One, after all, can be reproduced as cheaply as the other.</p><p id="44e60b69-ae21-412a-8df4-c513f140e7e9" class="">In his last article on the Soviet cinema in the Partisan Review, Dwight Macdonald points out that kitsch has in the last ten years become the dominant culture in Soviet Russia. For this he blames the political regime -- not only for the fact that kitsch is the official culture, but also that it is actually the dominant, most popular culture, and he quotes the following from Kurt London&#x27;s The Seven Soviet Arts: &quot;. . . the attitude of the masses both to the old and new art styles probably remains essentially dependent on the nature of the education afforded them by their respective states.&quot; Macdonald goes on to say: &quot;Why after all should ignorant peasants prefer Repin (a leading exponent of Russian academic kitsch in painting) to Picasso, whose abstract technique is at least as relevant to their own primitive folk art as is the former&#x27;s realistic style? No, if the masses crowd into the Tretyakov (Moscow&#x27;s museum of contemporary Russian art: kitsch), it is largely because they have been conditioned to shun &#x27;formalism&#x27; and to admire &#x27;socialist realism.&#x27;&quot;</p><p id="1b57d2c4-fa21-4823-aeeb-d1ac77a502f1" class="">In the first place it is not a question of a choice between merely the old and merely the new, as London seems to think -- but of a choice between the bad, up-to-date old and the genuinely new. The alternative to Picasso is not Michelangelo, but kitsch. In the second place, neither in backward Russia nor in the advanced West do the masses prefer kitsch simply because their governments condition them toward it. Where state educational systems take the trouble to mention art, we are told to respect the old masters, not kitsch; and yet we go and hang Maxfield Parrish or his equivalent on our walls, instead of Rembrandt and Michelangelo. Moreover, as Macdonald himself points out, around 1925 when the Soviet regime was encouraging avant-garde cinema, the Russian masses continued to prefer Hollywood movies. No, &quot;conditioning&quot; does not explain the potency of kitsch.</p><p id="04fdc586-f273-4827-b411-d821afc4f65c" class="">All values are human values, relative values, in art as well as elsewhere. Yet there does seem to have been more or less of a general agreement among the cultivated of mankind over the ages as to what is good art and what bad. Taste has varied, but not beyond certain limits; contemporary connoisseurs agree with the eighteenth-century Japanese that Hokusai was one of the greatest artists of his time; we even agree with the ancient Egyptians that Third and Fourth Dynasty art was the most worthy of being selected as their paragon by those who came after. We may have come to prefer Giotto to Raphael, but we still do not deny that Raphael was one of the best painters of his time. There has been an agreement then, and this agreement rests, I believe, on a fairly constant distinction made between those values only to be found in art and the values which can be found elsewhere. Kitsch, by virtue of a rationalized technique that draws on science and industry, has erased this distinction in practice.</p><p id="8654f37b-2210-4eef-bff1-9665e7c6797e" class="">Let us see, for example, what happens when an ignorant Russian peasant such as Macdonald mentions stands with hypothetical freedom of choice before two paintings, one by Picasso, the other by Repin. In the first he sees, let us say, a play of lines, colors and spaces that represent a woman. The abstract technique -- to accept Macdonald&#x27;s supposition, which I am inclined to doubt -- reminds him somewhat of the icons he has left behind him in the village, and he feels the attraction of the familiar. We will even suppose that he faintly surmises some of the great art values the cultivated find in Picasso. He turns next to Repin&#x27;s picture and sees a battle scene. The technique is not so familiar -- as technique. But that weighs very little with the peasant, for he suddenly discovers values in Repin&#x27;s picture that seem far superior to the values he has been accustomed to find in icon art; and the unfamiliar itself is one of the sources of those values: the values of the vividly recognizable, the miraculous and the sympathetic. In Repin&#x27;s picture the peasant recognizes and sees things in the way in which he recognizes and sees things outside of pictures -- there is no discontinuity between art and life, no need to accept a convention and say to oneself, that icon represents Jesus because it intends to represent Jesus, even if it does not remind me very much of a man. That Repin can paint so realistically that identifications are self-evident immediately and without any effort on the part of the spectator -- that is miraculous. The peasant is also pleased by the wealth of self-evident meanings which he finds in the picture: &quot;it tells a story. &quot; Picasso and the icons are so austere and barren in comparison. What is more, Repin heightens reality and makes it dramatic: sunset, exploding shells, running and falling men. There is no longer any question of Picasso or icons. Repin is what the peasant wants, and nothing else but Repin. It is lucky, however, for Repin that the peasant is protected from the products of American capitalism, for he would not stand a chance next to a Saturday Evening Post cover by Norman Rockwell.</p><p id="81a8fac6-6340-4388-ac25-8d12033e9bd9" class="">Ultimately, it can be said that the cultivated spectator derives the same values from Picasso that the peasant gets from Repin, since what the latter enjoys in Repin is somehow art too, on however low a scale, and he is sent to look at pictures by the same instincts that send the cultivated spectator. But the ultimate values which the cultivated spectator derives from Picasso are derived at a second remove, as the result of reflection upon the immediate impression left by the plastic values. It is only then that the recognizable, the miraculous and the sympathetic enter. They are not immediately or externally present in Picasso&#x27;s painting, but must be projected into it by the spectator sensitive enough to react sufficiently to plastic qualities. They belong to the &quot;reflected&quot; effect. In Repin, on the other hand, the &quot;reflected&quot; effect has already been included in the picture, ready for the spectator&#x27;s unreflective enjoyment.<a href="http://www.sharecom.ca/greenberg/kitsch.html">(4)</a> Where Picasso paints cause, Repin paints effect. Repin predigests art for the spectator and spares him effort, provides him with a shore cut to the pleasure of art that detours what is necessarily difficult in genuine art. Repin, or kitsch, is synthetic art.</p><p id="8e4a50a9-777f-4d73-a97b-43e9f86c4a10" class="">The same point can be made with respect to kitsch literature: it provides vicarious experience for the insensitive with far greater immediacy than serious fiction can hope to do. And Eddie Guest and the Indian Love Lyrics are more poetic than T. S. Eliot and Shakespeare.</p><p id="90f8056d-104c-457e-acea-11581aa075e5" class="">If the avant-garde imitates the processes of art, kitsch, we now see, imitates its effects. The neatness of this antithesis is more than contrived; it corresponds to and defines the tremendous interval that separates from each other two such simultaneous cultural phenomena as the avant-garde and kitsch. This interval, too great to be closed by all the infinite gradations of popularized &quot;modernism&quot; and &quot;modernistic&quot; kitsch, corresponds in turn to a social interval, a social interval that has always existed in formal culture, as elsewhere in civilized society, and whose two termini converge and diverge in fixed relation to the increasing or decreasing stability of the given society. There has always been on one side the minority of the powerful -- and therefore the cultivated -- and on the other the great mass of the exploited and poor -- and therefore the ignorant. Formal culture has always belonged to the first, while the last have had to content themselves with folk or rudimentary culture, or kitsch.</p><p id="b11ed4fb-d3f2-487e-bfb1-744a3dc5df16" class="">In a stable society that functions well enough to hold in solution the contradictions between its classes, the cultural dichotomy becomes somewhat blurred. The axioms of the few are shared by the many; the latter believe superstitiously what the former believe soberly. And at such moments in history the masses are able to feel wonder and admiration for the culture, on no matter how high a plane, of its masters. This applies at least to plastic culture, which is accessible to all.</p><p id="6549bbe9-ab43-4764-82d7-4bac33009c11" class="">In the Middle Ages the plastic artist paid lip service at least to the lowest common denominators of experience. This even remained true to some extent until the seventeenth century. There was available for imitation a universally valid conceptual reality, whose order the artist could not tamper with. The subject matter of art was prescribed by those who commissioned works of art, which were not created, as in bourgeois society, on speculation. Precisely because his content was determined in advance, the artist was free to concentrate on his medium. He needed not to be philosopher, or visionary, but simply artificer. As long as there was general agreement as to what were the worthiest subjects for art, the artist was relieved of the necessity to be original and inventive in his &quot;matter&quot; and could devote all his energy to formal problems. For him the medium became, privately, professionally, the content of his art, even as his medium is today the public content of the abstract painter&#x27;s art -- with that difference, however, that the medieval artist had to suppress his professional preoccupation in public -- had always to suppress and subordinate the personal and professional in the finished, official work of art. If, as an ordinary member of the Christian community, he felt some personal emotion about his subject matter, this only contributed to the enrichment of the work&#x27;s public meaning. Only with the Renaissance do the inflections of the personal become legitimate, still to be kept, however, within the limits of the simply and universally recognizable. And only with Rembrandt do &quot;lonely&quot; artists begin to appear, lonely in their art.</p><p id="d623e2a5-2ed2-4c1a-80fc-168c27ef364e" class="">But even during the Renaissance, and as long as Western art was endeavoring to perfect its technique, victories in this realm could only be signalized by success in realistic imitation, since there was no other objective criterion at hand. Thus the masses could still find in the art of their masters objects of admiration and wonder. Even the bird that pecked at the fruit in Zeuxis&#x27; picture could applaud.</p><p id="d27bd4dc-f892-4420-b89d-8dae44ba37b3" class="">It is a platitude that art becomes caviar to the general when the reality it imitates no longer corresponds even roughly to the reality recognized by the general. Even then, however, the resentment the common man may feel is silenced by the awe in which he stands of the patrons of this art. Only when he becomes dissatisfied with the social order they administer does he begin to criticize their culture. Then the plebian finds courage for the first time to voice his opinions openly. Every man, from the Tammany alderman to the Austrian house-painter, finds that he is entitled to his opinion. Most often this resentment toward culture is to be found where the dissatisfaction with society is a reactionary dissatisfaction which expresses itself in revivalism and puritanism, and latest of all, in fascism. Here revolvers and torches begin to be mentioned in the same breath as culture. In the name of godliness or the blood&#x27;s health, in the name of simple ways and solid virtues, the statue-smashing commences.</p><p id="d31471fd-7243-40e8-bcf6-91cd68050995" class="">Returning to our Russian peasant for the moment, let us suppose that after he has chosen Repin in preference to Picasso, the state&#x27;s educational apparatus comes along and tells him that he is wrong, that he should have chosen Picasso -- and shows him why. It is quite possible for the Soviet state to do this. But things being as they are in Russia -- and everywhere else -- the peasant soon finds the necessity of working hard all day for his living and the rude, uncomfortable circumstances in which he lives do not allow him enough leisure, energy and comfort to train for the enjoyment of Picasso. This needs, after all, a considerable amount of &quot;conditioning.&quot; Superior culture is one of the most artificial of all human creations, and the peasant finds no &quot;natural&quot; urgency within himself that will drive him toward Picasso in spite of all difficulties. In the end the peasant will go back to kitsch when he feels like looking at pictures, for he can enjoy kitsch without effort. The state is helpless in this matter and remains so as long as the problems of production have not been solved in a socialist sense. The same holds true, of course, for capitalist countries and makes all talk of art for the masses there nothing but demagogy.<a href="http://www.sharecom.ca/greenberg/kitsch.html">(5)</a></p><p id="89bcbaf6-b593-4175-aa0d-decce430c844" class="">Where today a political regime establishes an official cultural policy, it is for the sake of demagogy. If kitsch is the official tendency of culture in Germany, Italy and Russia, it is not because their respective governments are controlled by philistines, but because kitsch is the culture of the masses in these countries, as it is everywhere else. The encouragement of kitsch is merely another of the inexpensive ways in which totalitarian regimes seek to ingratiate themselves with their subjects. Since these regimes cannot raise the cultural level of the masses -- even if they wanted to -- by anything short of a surrender to international socialism, they will flatter the masses by bringing all culture down to their level. It is for this reason that the avant-garde is outlawed, and not so much because a superior culture is inherently a more critical culture. (Whether or not the avant-garde could possibly flourish under a totalitarian regime is not pertinent to the question at this point.) As a matter of fact, the main trouble with avant-garde art and literature, from the point of view of fascists and Stalinists, is not that they are too critical, but that they are too &quot;innocent,&quot; that it is too difficult to inject effective propaganda into them, that kitsch is more pliable to this end. Kitsch keeps a dictator in closer contact with the &quot;soul&quot; of the people. Should the official culture be one superior to the general mass-level, there would be a danger of isolation.</p><p id="abe4ea44-5289-4676-a809-52bd15051452" class="">Nevertheless, if the masses were conceivably to ask for avant-garde art and literature, Hitler, Mussolini and Stalin would not hesitate long in attempting to satisfy such a demand. Hitler is a bitter enemy of the avant-garde, both on doctrinal and personal grounds, yet this did not prevent Goebbels in 1932-1933 from strenuously courting avant-garde artists and writers. When Gottfried Benn, an Expressionist poet, came over to the Nazis he was welcomed with a great fanfare, although at that very moment Hitler was denouncing Expressionism as Kulturbolschewismus. This was at a time when the Nazis felt that the prestige which the avant-garde enjoyed among the cultivated German public could be of advantage to them, and practical considerations of this nature, the Nazis being skillful politicians, have always taken precedence over Hitler&#x27;s personal inclinations. Later the Nazis realized that it was more practical to accede to the wishes of the masses in matters of culture than to those of their paymasters; the latter, when it came to a question of preserving power, were as willing to sacrifice their culture as they were their moral principles; while the former, precisely because power was being withheld from them, had to be cozened in every other way possible. It was necessary to promote on a much more grandiose style than in the democracies the illusion that the masses actually rule. The literature and art they enjoy and understand were to be proclaimed the only true art and literature and any other kind was to be suppressed. Under these circumstances people like Gottfried Benn, no matter how ardently they support Hitler, become a liability; and we hear no more of them in Nazi Germany.</p><p id="b39e0013-e6f3-4a77-94f0-b64241ac708e" class="">We can see then that although from one point of view the personal philistinism of Hitler and Stalin is not accidental to the roles they play, from another point of view it is only an incidentally contributory factor in determining the cultural policies of their respective regimes. Their personal philistinism simply adds brutality and double-darkness to policies they would be forced to support anyhow by the pressure of all their other policies -- even were they, personally, devotees of avant-garde culture. What the acceptance of the isolation of the Russian Revolution forces Stalin to do, Hitler is compelled to do by his acceptance of the contradictions of capitalism and his efforts to freeze them. As for Mussolini -- his case is a perfect example of the disponsibilité of a realist in these matters. For years he bent a benevolent eye on the Futurists and built modernistic railroad stations and government-owned apartment houses. One can still see in the suburbs of Rome more modernistic apartments than almost anywhere else in the world. Perhaps Fascism wanted to show its up-to-dateness, to conceal the fact that it was a retrogression; perhaps it wanted to conform to the tastes of the wealthy elite it served. At any rate Mussolini seems to have realized lately that it would be more useful to him to please the cultural tastes of the Italian masses than those of their masters. The masses must be provided with objects of admiration and wonder; the latter can dispense with them. And so we find Mussolini announcing a &quot;new Imperial style.&quot; Marinetti, Chirico, et al., are sent into the outer darkness, and the new railroad station in Rome will not be modernistic. That Mussolini was late in coming to this only illustrates again the relative hesitance with which Italian Fascism has drawn the necessary implications of its role.</p><p id="cab2e3ff-665e-4254-8c43-c7bd7e5fd803" class="">Capitalism in decline finds that whatever of quality it is still capable of producing becomes almost invariably a threat to its own existence. Advances in culture, no less than advances in science and industry, corrode the very society under whose aegis they are made possible. Here, as in every other question today, it becomes necessary to quote Marx word for word. Today we no longer look toward socialism for a new culture -- as inevitably as one will appear, once we do have socialism. Today we look to socialism simply for the preservation of whatever living culture we have right now.</p><p id="4aa4087d-54d9-4cfd-8957-0ace3934144e" class="">1. The example of music, which has long been an abstract art, and which avant-garde poetry has tried so much to emulate, is interesting. Music, Aristotle said curiously enough, is the most imitative and vivid of all arts because it imitates its original -- the state of the soul -- with the greatest immediacy. Today this strikes us as the exact opposite of the truth, because no art seems to us to have less reference to something outside itself than music. However, aside from the fact that in a sense Aristotle may still be right, it must be explained that ancient Greek music was closely associated with poetry, and depended upon its character as an accessory to verse to make its imitative meaning clear. Plato, speaking of music, says: &quot;For when there are no words, it is very difficult o recognize the meaning of the harmony and rhythm, or to see that any worthy object is imitated by them.&quot; As far as we know, all music originally served such an accessory function. Once, however, it was abandoned, music was forced to withdraw into itself to find a constraint or original. This is found in the various means of its own composition and performance. <a href="http://www.sharecom.ca/greenberg/kitsch.html">&lt;Return to text&gt;</a></p><p id="1d31220c-2d9e-4be5-be43-9d622b423f83" class="">2. I owe this formulation to a remark made by Hans Hofmann, the art teacher, in one of his lectures. From the point of view of this formulation, Surrealism in plastic art is a reactionary tendency which is attempting to restore &quot;outside&quot; subject matter. The chief concern of a painter like Dali is to represent the processes and concepts of his consciousness, not the processes of his medium. <a href="http://www.sharecom.ca/greenberg/kitsch.html">&lt;Return to text&gt;</a></p><p id="5c8b119c-a215-472a-8bb2-21187f3fef81" class="">3. See Valéry&#x27;s remarks about his own poetry. <a href="http://www.sharecom.ca/greenberg/kitsch.html">&lt;Return to text&gt;</a></p><p id="c1fd9fe5-4ee6-4f86-bfa8-e992072189fd" class="">4. T. S. Eliot said something to the same effect in accounting for the shortcomings of English Romantic poetry. Indeed the Romantics can be considered the original sinners whose guilt kitsch inherited. They showed kitsch how. What does Keats write about mainly, if not the effect of poetry upon himself? <a href="http://www.sharecom.ca/greenberg/kitsch.html">&lt;Return to text&gt;</a></p><p id="56b68d21-0657-4529-9ea7-7d6c34e66294" class="">5. It will be objected that such art for the masses as folk art was developed under rudimentary conditions of production -- and that a good deal of folk art is on a high level. Yes it is -- but folk art is not Athene, and it&#x27;s Athene whom we want: formal culture with its infinity of aspects, its luxuriance, its large comprehension. Besides, we are now told that most of what we consider good in folk culture is the static survival of dead formal, aristocratic, cultures. Our old English ballads, for instance, were not created by the &quot;folk,&quot; but by the post-feudal squirearchy of the English countryside, to survive in the mouths of the folk long after those for whom the ballads were composed had gone on to other forms of literature. Unfortunately, until the machine age, culture was the exclusive prerogative of a society that lived by the labor of serfs or slaves. They were the real symbols of culture. For one man to spend time and energy creating or listening to poetry meant that another man had to produce enough to keep himself alive and the former in comfort. In Africa today we find that the culture of slave-owning tribes is generally much superior to that of the tribes that possess no slaves. <a href="http://www.sharecom.ca/greenberg/kitsch.html">&lt;Return to text&gt;</a></p></div></article></body></html>

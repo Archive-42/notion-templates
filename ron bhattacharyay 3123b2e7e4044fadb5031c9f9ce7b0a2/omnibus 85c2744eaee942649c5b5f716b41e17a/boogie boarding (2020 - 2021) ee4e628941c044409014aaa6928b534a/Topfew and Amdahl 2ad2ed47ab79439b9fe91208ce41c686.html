@@ -1,0 +1,639 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Topfew and Amdahl</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2ad2ed47-ab79-439b-9fe9-1208ce41c686" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎲</span></div><h1 class="page-title">Topfew and Amdahl</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl" class="url-value">https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl</a></td></tr></tbody></table></header><div class="page-body"><p id="5a41a347-dcc5-46b3-916b-028007570309" class="">On and off this past year, I’ve been fooling around with a program called <a href="https://github.com/timbray/topfew">Topfew</a> (GitHub link), blogging about it in <a href="https://www.tbray.org/ongoing/When/202x/2020/05/18/TopFew">Topfew fun</a> and <a href="https://www.tbray.org/ongoing/When/202x/2020/07/01/More-Topfew-Fun">More Topfew Fun</a>. I’ve just finished adding a few nifty features and making it much faster; I’m here today first to say what’s new, and then to think out loud about concurrent data processing, Go vs Rust, and <a href="https://en.wikipedia.org/wiki/Amdahl%27s_law">Amdahl’s Law</a>, of which I have a really nice graphical representation. Apologies because this is kind of long, but I suspect that most people who are interested in either are interested in both.</p><p id="c826a548-ec66-4507-9446-15a706680b5e" class="">Reminder · What Topfew does is replace the <code>sort | uniq -c | sort -rn | head</code> pipeline that you use to do things like find the most popular API call or API caller by ploughing through a logfile.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-3"> ¶</a></p><p id="9659bc8e-9f2e-4fc0-9079-5838716544dc" class="">When last we spoke… · I had a Topfew implementation in the Go language running fine, then <a href="http://dirkjan.ochtman.nl/">Dirkjan Ochtman</a> implemented it in Rust, and his code ran several times faster than mine, which annoyed me. So I did a bunch more optimizations and claimed to have caught up, but I was wrong, for which I apologize to Dirkjan — I hadn’t pulled the most recent version of his code.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-2"> ¶</a></p><p id="de171380-86d3-4c7f-85c8-bc34849c15d0" class="">One of the big reasons Dirkjan’s version was faster was that he read the input file in parallel in segments, which is a good way to get data processed faster on modern multi-core processors. Assuming, of course, that your I/O path has good concurrency support, which it might or might not.</p><p id="1ba7bae8-b84c-4c4b-869d-fb8cf93d2c02" class="">So I finally got around to implementing that and sure enough, runtimes are way down. But on reasonable benchmarks, the Rust version is still faster. How much? Well, that depends. In any case both are pleasingly fast. I’ll get into the benchmarking details later, and the interesting question of why the Rust runs faster, and whether the difference is practically meaningful. But first…</p><p id="a3e38518-955e-44e3-bee9-6c8022bcfe25" class="">Is parallel I/O any use? · Processing the file in parallel gets the job done really a lot faster. But I wasn’t convinced that it was even useful. Because on the many occasions when I’ve slogged away trying to extract useful truth from big honkin’ log files, I almost always have to start with a pipeline full of grep and sed calls to zero in on the records I care about before I can start computing the high occurrence counts.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-4"> ¶</a></p><p id="182fc6e1-c9cd-4676-a469-d656239714d9" class="">So, suppose I want to look in my Apache logfile to find out which files are being fetched most often by the popular robots, I’d use something like this:</p><pre id="4b3308ab-fc88-4618-98c2-e6111ac2ee12" class="code code-wrap"><code>egrep &#x27;googlebot|bingbot|Twitterbot&#x27; access_log | \
+    awk &#x27; {print $7}&#x27; | sort | uniq -c | sort -rn | head</code></pre><p id="2b8dc6b6-ce0b-4bf4-a2fa-17e92659439c" class="">Or, now that I have Topfew:</p><pre id="593866e9-2530-49d7-9b2e-cd42e2a3289a" class="code code-wrap"><code>egrep &#x27;googlebot|bingbot|Twitterbot&#x27; access_log | tf -f 7</code></pre><p id="c5cc812e-0182-4592-8eb1-358afac7ca56" class="">Which is faster than the sort chain but there’s no chance to parallelize processing standard input. Then the lightbulb went on…</p><p id="07bbded4-09de-4608-ba02-0c767131503d" class="">If <code>-f 1</code> stands in for <code>awk &#x27; { print $1}&#x27;</code> and distributes that work out for parallel processing, why shouldn’t I have <code>-g</code> for <code>grep</code> and <code>-v</code> for <code>grep -v</code> and <code>-s</code> for <code>sed</code>?</p><p id="8e4cac07-106d-4bcd-a68a-6bac6702bcee" class="">Topfew by example · To find the IP address that most commonly hits your web site, given an Apache logfile named <code>access_log</code>:<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-6"> ¶</a></p><pre id="ca752d3e-6027-4b13-8a6c-4084d8418da3" class="code code-wrap"><code>tf -f 1 access_log</code></pre><p id="b54cb477-b5d5-4b04-b26b-a8ada6eba60e" class="">Do the same, but exclude high-traffic bots. The <code>-v</code> option has the effect of <code>grep -v</code>.</p><pre id="8ccd6d10-81b2-4aee-b2ba-fde2f98b7dc6" class="code code-wrap"><code>tf -f 1 -v googlebot -v bingbot (omittingaccess_log)</code></pre><p id="b0ed5824-d913-4be0-bfc7-722b6b460109" class="">The opposite; what files are the bots fetching? As you have probably guessed, <code>-g</code> is like <code>grep</code>.</p><pre id="4e2a3b37-ef0a-4632-84b2-b176652a1aa3" class="code code-wrap"><code>tf -f 7 -g &#x27;googlebot|bingbot|Twitterbot&#x27;</code></pre><p id="c2c322f1-a542-4eff-a5e5-1b4ff2254849" class="">Most popular IP addresses from May 2020.</p><pre id="42dd5a73-eb04-445f-bf1a-5e214c24a366" class="code code-wrap"><code>tf -f 1 -g &#x27;\[../May/2020&#x27;</code></pre><p id="f0408141-d3ed-4653-9bc3-d14912921679" class="">Let’s rank the hours of the day by how much request traffic they get.</p><pre id="4d605efd-0aae-438e-8ee3-f1a5f64325a4" class="code code-wrap"><code>tf -f 4 -s &quot;\\[[^:]*:&quot; &quot;&quot; -s &#x27;:.*$&#x27; &#x27;&#x27; -n 24</code></pre><p id="90c5c37a-b541-4441-bc32-44af4ada1d72" class="">So Topfew distributes all that filtering and stream-editing out and runs it in parallel, since it’s all independent, and then pumps it over (mutexed, heavily bufffered) to the (necessarily) single thread that does the top-few counting. All of the above run dramatically faster than their shell-pipeline equivalents. And they weren’t exactly rocket science to build; Go has a perfectly decent regexp library that even has a <code>regexp.ReplaceAll</code> call that does the <code>sed</code> stuff for you.</p><p id="344140a0-978c-4493-ab4f-7a58fe05318f" class="">I found that getting the regular expressions right was tricky, so Topfew also has a <code>--sample</code> option that prints out what amounts to a debug stream showing which records it’s accepting and rejecting, and how the keys are being stream-edited.</p><p id="81210036-050f-45b9-b591-86b8e633f41e" class="">Almost ready for prime time · This is now a useful tool, for me anyhow. It’s replaced the shell pipeline that I use to see what’s popular in the blog this week. The version on github right now is pretty well-tested and seems to work fine; if you spend much time doing what at AWS we used to call log-diving, you might want to grab it off GitHub.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-10"> ¶</a></p><p id="77379e0f-06f4-45a4-9036-85188e01fca0" class="">In the near future I’m going to use <a href="https://goreleaser.com/intro/">GoReleaser</a> so it’ll be easier to pick up from whatever your usual tool depot is. And until then, I reserve the right to change option names and so on.</p><p id="133518f0-6a23-4410-b431-8e89fb920048" class="">On the other hand, Dirkjan may be motivated to expand his Rust version, which would probably be faster. But, as I’m about to argue, the speedup may not be meaningful in production.</p><p id="499093b6-b4f6-471a-9fc6-b955092915ca" class="">Open questions · There are plenty.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-11"> ¶</a></p><ol type="1" id="fa3e710d-4284-45e7-bb8a-5fc8e9e38584" class="numbered-list" start="1"><li>Why is Rust faster than Go?</li></ol><ol type="1" id="22e2741c-f0fb-429e-b25c-2aa0c62659dc" class="numbered-list" start="2"><li>How do you measure performance, anyhow…</li></ol><ol type="1" id="8c14e7c4-c274-4f48-a5c6-cceabeb548de" class="numbered-list" start="3"><li>… and how do you profile Go?</li></ol><ol type="1" id="d737d474-4274-497b-ad3d-3614d94b734b" class="numbered-list" start="4"><li>Shouldn’t you use mmap?</li></ol><ol type="1" id="c98cb2e7-75a4-4fbf-b2f5-9bfa6011f327" class="numbered-list" start="5"><li>What does Gene Amdahl think about concurrency, and does Topfew agree?</li></ol><ol type="1" id="8ec9125e-f921-4472-854e-f16f2b5c0e4a" class="numbered-list" start="6"><li>Didn’t you do all this work a dozen years ago?</li></ol><p id="11bfc758-d099-4413-bbaf-44e57fe48631" class="">Which I’ll take out of order.</p><p id="83743843-6dbf-4e11-ae61-a0ee2a6a2dd8" class="">How to measure performance? · I’m using a 3.1GB file containing 13.3 million lines of Apache logfile, half from 2007 and half from 2020. The 2020 content is interesting because it includes the logs from around my <a href="https://www.tbray.org/ongoing/When/202x/2020/04/29/Leaving-Amazon">Amazon rage-quit</a> post, which was fetched more than everything else put together for several weeks in a row; so the data is usefully non-uniform.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-7"> ¶</a></p><p id="0182b6ab-0e51-4e28-a734-1e6b9260577b" class="">The thing that makes benchmarking difficult is that this kind of thing is obviously I/O-limited. And after you’ve run the benchmark a few times, the data’s migrated into memory via filesystem caching. My Mac has 32G of RAM so this happens pretty quick.</p><p id="42f9948b-f41d-49b6-871e-4cf79deea358" class="">So what I did was just embrace this by doing a few setup runs before I started measuring anything, until the runtimes stabilized and presumably little to no disk I/O is involved. This means that my results will <em>not</em> replicate your experience when you point Topfew at your own huge logfile which it actually has to read off disk. But the technique does allow me to focus in on, and optimize, the actual compute.</p><p id="00d46962-fe08-4a1c-af8d-53118074f547" class="">How do you profile Go? · Go comes with a built-in profiler called “pprof”. You may have noticed that the previous sentence does not contain a link, because the current state of pprof documentation is miserable. The overwhelming googlejuice favorite is <a href="https://blog.golang.org/pprof">Profiling Go Programs</a> from the Golang blog in 2011. It tells you lots of useful things, but the first thing you notice is that the pprof output you see in 2021 looks nothing like what that blog describes.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-1"> ¶</a></p><p id="c0216f12-6d2f-41ee-a50d-cf575f2f9de0" class="">You have to instrument your code to write profile data, which is easy and seems to cause shockingly little runtime slowdown. Then you can get it to provide a call graph either as a PDF file or in-browser via its own built-in HTTP server. I actually prefer the PDF because the Web presentation has hair-trigger pan/zoom response to the point that I have trouble navigating to the part of the graph I want to look at.</p><p id="bc33eb27-d937-46c9-8aa0-d6ec1f7dc0b2" class="">While I’m having trouble figuring out what some of the numbers mean, I think the output is saying something that’s useful; you can be the judge a little further in.</p><p id="255316a9-f9e0-4b9b-aeea-770d378ff595" class="">Why is Rust faster? · Let’s start by looking at the simplest possible case, scanning the whole log to figure out which URL was retrieved the most. The required argument is the same on both sides: <code>-f 7</code>. Here is output from typical runs of the current Topfew and Dirkjan’s Rust code.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-13"> ¶</a></p><pre id="2387a5eb-79fd-478c-be31-0396014912d3" class="code code-wrap"><code>  Go: 11.01s user 2.18s system  668% cpu 1.973 total
+Rust: 10.85s user 1.42s system 1143% cpu 1.073 total</code></pre><p id="476f1bba-11bd-4675-88f0-9e4e2a3daa7f" class="">The two things that stick out is that Rust is getting better concurrency and using less <em>system</em> time. This Mac has eight two-thread cores, so neither implementation is maxing it out. Let’s use pprof to see what’s happening inside the Go code. BTW if someone wants to look at my pprof output and explain how I’m woefully misusing it, ping me and I’ll send it over.</p><p id="74c3b053-d812-43e4-abce-802c742eb865" class="">The profiling run’s numbers: <code> 11.97s user 2.76s system 634% cpu 2.324 total</code>; like I said, profiling Go seems to be pretty cheap. Anyhow, that’s 14.73 seconds of compute between user and system. The PDF of the code graph is too huge to put inline, but <a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/tf7.pdf">here it is</a> if you want a look. I’ll excerpt screenshots. First, here’s one from near the top:</p><p id="8bfcd6e9-33be-4600-a272-5dcae8e96aed" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/f7-top.jpg.html">Top of the Go profile output</a></p><figure id="ca5930d6-9414-4115-81c6-34eb44c2c340" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-top.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-top.png"/></a></figure><p id="93238171-5cb0-41da-a8db-d97cf1fa7945" class="">So, over half the time is in <code>ReadBytes</code> (Go’s equivalent of <code>ReadLine</code>); if you follow that call-chain down, at the bottom is <code>syscall</code>, which consumes 55.36%. I’m not sure if these numbers are elapsed time or compute time and I’m having trouble finding help in the docs.</p><p id="a9abbd4a-d7f3-4276-b7e0-0b15097c0cbe" class="">Moving down to the middle of the call graph:</p><p id="bffe326b-63d2-4116-925b-c5d82be88c42" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/f7-middle.jpg.html">Near the middle of the Go profile output</a></p><figure id="e97657fa-ae9d-4dd1-96ec-4440aa97d1da" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-middle.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-middle.png"/></a></figure><p id="57467fc2-ffa4-4e93-817c-3bff2c29f6f8" class="">It’s complicated, but I think the message is that Go is putting quite a bit of work into memory management and garbage collection. Which isn’t surprising, since this task is a garbage fountain, reading millions of records and keeping hardly any of that data around.</p><p id="e3e1c394-57cd-40c9-a7bf-5bfc0eece55b" class="">The amount of actual garbage-collection time isn’t that big, but I also wonder how single-threaded it is, because as we’ll see below, that matters a lot.</p><p id="471cedd9-361e-43ac-8aa3-eb6cdceaa936" class="">Finally, down near the bottom of the graph:</p><p id="b24ffd1a-b265-457b-a70c-3f9246e882d8" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/f7-bottom.jpg.html">Near the bottom of the Go profile output</a></p><figure id="362dc627-19f5-4d5a-8dcd-113b5a3ea6fb" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-bottom.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/f7-bottom.png"/></a></figure><p id="4bf91ad5-162c-4327-a04d-302a918938b2" class="">The meaning of this is not obvious to me, but the file-reading threads use the <code>Lock()</code> and <code>Unlock()</code> calls from Go’s <code>sync.Mutex</code> to mediate access to the occurrence-counting thread. So what are those 2.02s and 1.32sec numbers down at the bottom of a “cpu” graph? Is the implementation spending three and a half seconds implementing mutex?</p><p id="8061e4aa-24bc-4c0f-aab5-921268985a20" class="">You may notice that I haven’t mentioned application code. That code, for pulling out the seventh field and tracking the top-occurring keys, seems to contribute less than 2% of the total time reported.</p><p id="d9006667-8f1c-4344-8cef-41554816adf5" class="">My guesses · Clearly, I need to do more work on making better use of pprof. But based on my initial research, I am left with the suspicions that Rust buffers I/O better (less system time), enjoys the benefits of forcing memory management onto the user, and (maybe) has a more efficient wait/signal primitive. No smoking pistols here.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-18"> ¶</a></p><p id="5d77d4f1-7895-4449-8de9-afc39066431e" class="">I’m reminded of an internal argument at AWS involving a bunch of Principal Engineers about which language to use for something, and a Really Smart Person who I respect a lot said “Eh, if you can afford GC latency use Go, and if you can’t, use Rust.”</p><p id="0873e264-2f59-469e-8f89-5a7355ddb005" class="">Shouldn’t you use mmap? · Don’t think so. I tried it on a few different systems and mmap was not noticeably faster than just reading the file. Given the dictum that “disk is the new tape”, I bet modern filesystems are really super-optimized at sweeping sequentially through files, which is what Topfew by definition has to do.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-14"> ¶</a></p><p id="cfe8bb52-7825-42b4-ace2-6ed08c4b4d79" class="">What does Gene Amdahl think about concurrency, and does Topfew agree? · Amdahl’s Law says that for every computing task, some parts can be parallelized and some can’t. So the amount of speedup you can get by cranking the concurrency is limited by that. Suppose that 50% of your job has to be single-threaded: Then even with infinite concurrency, you can never even double the overall speed.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-15"> ¶</a></p><p id="73fbb6d0-b587-4479-af96-23e0b2814b5e" class="">For Topfew, my measurements suggest that the single-threaded part — finding top occurrence counts — is fairly small compared to the task of reading and filtering the data. Here’s a graph of a simple Topfew run with a bunch of different concurrency fan-outs.</p><p id="f678acce-ed83-422a-bc52-10e31dacd896" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/sc-graph.png.html">Graph of Topfew performance vs core count</a></p><figure id="0be5b333-7dc1-49b5-8471-9a3168bb58ca" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/sc-graph.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/sc-graph.png"/></a></figure><p id="c67a996c-c959-4254-a6e8-c49363aaf42c" class="">Which says: Concurrency helps, but only up to a point. The graph stops at eight because that’s where the runtime stopped decreasing.</p><p id="7e4ed6d2-6270-4c23-a9f2-ded449e27a10" class="">Let’s really dig into Amdahl’s Law. We need to increase the compute load. We’ll run that query that focuses on the popular bots. First of all I did it the old-fashioned way:</p><pre id="3059a375-2a25-4e5d-b39d-3ca500c10347" class="code code-wrap"><code>egrep &#x27;googlebot|bingbot|Twitterbot&#x27; test/data/big | bin/tf -f 7
+    90.82s user 1.16s system 99% cpu 1:32.48 total</code></pre><p id="7bbc673c-bf46-487f-adca-e08dde1579c6" class="">Interestingly, that regexp turns out to be pretty hard work. There was 1:32:48 elapsed, and the <code>egrep</code> user CPU time was 1:31. So the Topfew time vanished in the static. Note that we only used 99% of one CPU. Now let’s parallelize, step by step.</p><p id="2181233c-366e-45c5-9d4a-e933e70cb50e" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/amdahl-1.png.html">Reported CPU usage vs. number of cores</a></p><figure id="d933a571-b2b6-4ccc-bcb5-9af443210c4a" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/amdahl-1.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/amdahl-1.png"/></a></figure><p id="ca9bc9ff-6642-4429-bd23-2dab1f4b6e46" class="">Look at that! As I increase the number of file segments to be scanned in parallel, the reported CPU usage goes up linearly until you get to about eight (reported: 774%CPU) then starts to fall off gently until it maxes out at about 13½ effective CPUs. Two questions: Why does it start to fall off, and what does the total elapsed time for the job look like?</p><p id="c24c89d7-a84f-482d-b81f-01a22fdd0c78" class=""><a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/-big/amdahl-2.png.html">Elapsed time as a function of number of cores</a></p><figure id="71cf9262-a6ba-4614-a344-66fc66ed2fa8" class="image"><a href="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/amdahl-2.png"><img style="width:700px" src="Topfew%20and%20Amdahl%202ad2ed47ab79439b9fe91208ce41c686/amdahl-2.png"/></a></figure><p id="7e9c34d8-60ac-4b4f-b4a1-8530c96ed316" class="">Paging Dr. Amdahl, please! This is crystal-clear. You can tie up most of the CPUs the box you’re running on has, but eventually your runtime is hard-limited by the part of the problem that’s single-threaded. The reason this example works so well is that the grep-for-bots throws away about 98.5% of the lines in the file, so the top-occurrences counter is doing almost no meaningful work, compared to the heavy lifting by the regexp appliers.</p><p id="68f028ea-07bf-41e3-bf89-b069a61f7eaa" class="">That also explains why the effective-CPU-usage never gets up much past 13; the threads can regexp through the file segments in parallel, but eventually there’ll be more and more waiting for the single-threaded part of the system to catch up.</p><p id="ee6035ec-4344-4c84-b120-3e09cc54c8d7" class="">And exactly what is the single-threaded part of the system? Well, my own payload code that counts occurrences. But Go brings along a pretty considerable runtime that helps most notably with garbage collection but also with I/O and other stuff. Inevitably, some proportion of it is going to have to be single-threaded. I wonder how much of the single-threaded part is application code and how much is Go runtime?</p><p id="a2cde0bf-f257-4a78-b306-48cd1a3f5b8c" class="">I fantasize a runtime dashboard that has pie charts for each of the 16 CPUs showing how much of their time is going into regexp bashing, how much into occurrence counting, how much into Go runtime, and how much into operating-system support. One can dream.</p><p id="056a89e4-3ec4-487d-b506-79890b35fe3e" class="">How many cores <em>should</em> you use? · It turns out that in Go there’s this API called <code>runtime.NumCPU()</code> that returns how many processors Go thinks it’s running on; it returns 16 on my Mac. So by default, Topfew divides the file into that many segments. Which, if you look at the bottom graph above, is suboptimal. It doesn’t worsen the elapsed time, but it does burn a bunch of extra CPU to no useful effect. Topfew has a <code>-w</code> (or <code>--width</code>) option to let you specify how many file segments to process concurrently; maybe you can do better?<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-16"> ¶</a></p><p id="867122e9-ff0e-4c8b-9620-be7beb766b18" class="">I think the best answer is going to depend, not just on how many CPUs you have, but on what kind of CPUs they are, and (maybe more important) what kind of storage you’re reading, how many paths it has into memory, how well its controller interleaves requests, and so on. Not to mention RAM caching strategy and other things I’m not smart enough to know about.</p><p id="c5eb4c04-20bf-4ab1-8a50-1d77ea107c9f" class="">Didn’t you do all this work a dozen years ago? · Well, kind of. Back in the day when I was working for Sun and we were trying to sell the T-series SPARC computers which weren’t that fast but had good memory controllers and loads of of CPU threads, I did a whole bunch of research and blogging on concurrent data processing; see <a href="https://www.tbray.org/ongoing/When/200x/2009/09/27/Concur-dot-next">Concur.next</a> and <a href="https://www.tbray.org/ongoing/When/200x/2007/09/20/Wide-Finder">The Wide Finder Project</a>. Just now I glanced back at those (wow, that was a <em>lot</em> of work!) and to some extent this article revisits that territory. Which is OK by me.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-1"> ¶</a></p><p id="48f830da-8c62-40df-8731-80ac94463c61" class="">Next? · Well, there are a few obvious features you could add to Topfew, for example custom field separators. But at this point I’m more interested in concurrency and Amdahl’s law and so on. I’ve almost inevitably missed a few important things in this fragment and I’m fairly confident the community will correct me.<a href="https://www.tbray.org/ongoing/When/202x/2021/03/27/Topfew-and-Amdahl#p-17"> ¶</a></p><p id="8e47c885-1226-4b41-9965-e82f4c91d2c6" class="">Looking forward to that.</p></div></article></body></html>

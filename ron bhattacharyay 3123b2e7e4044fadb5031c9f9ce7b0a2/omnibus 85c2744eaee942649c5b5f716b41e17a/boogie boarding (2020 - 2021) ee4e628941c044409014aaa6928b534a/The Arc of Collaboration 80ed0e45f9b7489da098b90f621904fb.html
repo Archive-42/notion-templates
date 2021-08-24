@@ -1,0 +1,730 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Arc of Collaboration</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="80ed0e45-f9b7-489d-a098-b90f621904fb" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎎</span></div><h1 class="page-title">The Arc of Collaboration</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-brown">Tech Strategy</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://kwokchain.com/2019/08/16/the-arc-of-collaboration/" class="url-value">https://kwokchain.com/2019/08/16/the-arc-of-collaboration/</a></td></tr></tbody></table></header><div class="page-body"><figure id="189fe9bb-4e54-4502-b334-78eb75db059d" class="image"><a href="The%20Arc%20of%20Collaboration%2080ed0e45f9b7489da098b90f621904fb/5-functional-meta.png"><img style="width:700px" src="The%20Arc%20of%20Collaboration%2080ed0e45f9b7489da098b90f621904fb/5-functional-meta.png"/></a></figure><p id="ba5540dd-fe01-46cc-ab85-ece5e363d72e" class=""><em>The arc of collaboration is long and it bends in the direction of functional workflows.</em></p><p id="8589ef39-b0ee-454b-91be-9fb113927925" class="">
+</p><p id="c08c1e0a-cf24-4287-8188-40f65817a0d9" class=""><em>Why Slack is an Else Statement, there is no distinction between productivity and collaboration, and why the Slack of Gaming may be Discord but the Discord for Enterprise is not Slack.</em></p><p id="68174b04-5aa6-480f-9950-3dd5cb80efef" class="">
+</p><p id="95a69686-45be-405d-99ba-3601a8f8db0e" class=""><em>Disclaimer: I currently use every product mentioned in this post, and love all of them.* I also used to work at Greylock and helped with the investments in Discord and Figma. There’s lots of opinions I have on both of them as well as their general spaces. But really you should talk to Dylan Field and Jason Citron. And John Lilly and Josh Elman, who led the investments in both. Because all four have shaped my thinking on productivity and collaboration significantly. And compared to the world they are still living decades in the future on how both are merging and where they are going.</em></p><p id="556ba506-1751-4069-8cce-16dc4bf15324" class="">
+</p><p id="2b8ffae5-7d22-4253-bfc8-238b7b77c7fd" class=""><em>*Except Salesforce, because I am not successful enough to need a Salesforce instance for my personal life.</em></p><p id="cafeacdf-3e40-487e-a4a3-268ce2562a6e" class="">
+</p><p id="d41df33c-cc86-4ac1-b0f6-5d881fa3d291" class="">When Slack first started growing, there were many debates over which company would own collaboration, Slack or Dropbox. Dropbox proponents argued that Dropbox already managed all the actual records of a company, and so would be the center of gravity. Slack partisans argued that Dropbox was a transitory product, and eventually companies would stop caring about individual files, and messaging would be the more important live heartbeat of a company.</p><p id="c4f43e6c-c7ac-4298-bcb0-09cef5e5ecf3" class="">
+</p><p id="14d77393-9828-4b6c-80d3-b18ee8fe16eb" class="">Messaging, it turned out, appears to be a better center of gravity than documents. And while Dropbox (barring significant traction in its new products) seems to be fading in its centrality, what’s striking is that Slack’s victory seems hollow as well. If anything we’ve seen even *more* new companies building towards owning parts of these workflows and getting traction.</p><p id="884af802-a431-46dd-aaa5-3c6b760059eb" class="">
+</p><p id="a43535e9-87f0-445a-86d1-9b91ff4fc8a2" class="">That’s not a statement on its prospects as a company, or its accomplishments. Slack, even with recent dips in its stock, is a $15B company with very impressive underlying metrics. But there’s this feeling that’s hard to shake.</p><p id="7ffccd58-54d1-4e15-a302-b90489721cb6" class="">
+</p><p id="4e9f4fdc-33ea-436a-a7a2-cb98a2687a86" class="">If Slack won the war, and owns collaboration, why doesn’t it feel like the war is over?</p><p id="af65b2a6-7e28-45a6-960e-7897e042e2bd" class="">
+</p><p id="2bda90f3-d38f-4158-a71e-3ef9c97aeec3" class="">Slack was supposed to be the app that became the OS, the end of the cycle on productivity. But that hasn’t happened. How should we understand what’s happening.</p><p id="1a5b365a-26c2-425b-980d-552b5292d721" class="">
+</p><p id="43084e25-37a3-4134-b3f6-e53713b514eb" class="">Slack is ubiquitous at most companies in tech (and in many other industries as well), but it doesn’t feel like it is becoming the central nervous system undergirding all the apps and workflows of its customers.</p><p id="c3096fc8-5e00-4d0d-8889-51819e0cd2e0" class="">
+</p><p id="381bdb1f-df5b-47a1-81de-28c2d6f21c84" class="">A new generation of functional apps have risen, with messaging and collaboration built directly into them as first parties. And with them it becomes increasingly clear that Slack isn’t air traffic control for every app, it’s 911 for when they fail.</p><p id="acbc0c3a-d954-4ae2-8741-ed3901cdac20" class="">
+</p><p id="58b864f5-9913-494d-9fc6-d58602bbd0c4" class="">Slack is the 911 for whatever isn’t possible natively in a company’s productivity apps. And though it’s improving, there are still many structural cracks. Slack is current best solution for filling these cracks. But it doesn’t fix the cracks themselves, improved processes and productivity apps are needed for that.</p><p id="24ca0ab8-128b-4a09-ad46-e36e87d23698" class="">
+</p><p id="51894a55-5ee4-491b-9845-09401df2b075" class="">As the ecosystem of specialized SaaS apps and workflows continues to mature, messaging becomes a place of last resort. When things are running smoothly, work happens in the apps built to produce them. And collaboration happens within them. Going to slack is increasingly a channel of last resort, for when there’s no established workflow of what to do. And as these functional apps evolve, there are fewer and fewer exceptions that need Slack. In fact, a sign of a maturing company is one that progressively removes the need to use Slack for more and more situations.</p><p id="19bd093b-743b-4cfc-b4d8-04e43324d8c4" class="">
+</p><p id="e02e3f21-40a2-48f5-ba4a-f44db140013b" class="">What drives these changes in collaboration? And is there room for one app to focus entirely on collaboration–and if so, what should it look like?</p><p id="fb326211-ddab-4274-b9f3-48181d53dc8a" class="">
+</p><p id="8cf2dd5c-2a0b-46ee-b227-1882eebb142e" class="">To understand this is to understand that there is no distinction between productivity and collaboration. But we’re only now fully appreciating it.</p><p id="0376dc68-3768-4964-96a5-e48c0381d381" class="">
+</p><h2 id="90b573d3-a017-4e1b-9d54-11489a4d795c" class="">Separated at Birth: Productivity and Collaboration</h2><p id="b547a477-21f2-4b6b-a4ac-9e1102b73af5" class="">
+</p><p id="cd55c1cc-c22d-41da-af50-a2ecab7029a5" class="">Productivity and Collaboration are two sides of the same coin for any team with more than one person. Work is just the iterated output of individuals creating and coordinating together.</p><p id="a89e483a-362a-4336-b8c3-3959260121d1" class="">
+</p><p id="e18f3cfc-e095-4287-a761-8d19d80f0ea6" class="">But the two have been distinct and isolated segments historically, due to how long the feedback loops of both were.</p><p id="6af23247-25a5-4048-bf54-437ccd217510" class="">
+</p><h3 id="2d0952c2-5ad9-465c-a995-faf5bf256738" class="">Post-software and Pre-cloud. Collaboration is external to productivity</h3><p id="77acf8e8-6bde-4a28-a8d1-687100cd5060" class="">
+</p><p id="e3f49ac8-6bb5-4d02-a04e-3b2afd77086a" class="">What really began our modern era of how to think about collaboration began with the shift to software. Digital work has significantly faster feedback loops for productivity. Software, quite simply, can produce and iterate new things at a daily if not hourly or minute basis.</p><p id="71216660-a0bd-4f80-b928-87fd3702e4b4" class="">
+</p><p id="9f83e414-96f7-4f46-a267-783c1fe66330" class="">Suddenly, the constraint on work became much more about the speed and lossiness of collaboration. Which remained remarkably analog. The friction of getting people your document, much less keeping correct versioning was non-trivial.</p><p id="6e601496-03cb-432b-b090-294ae283b4d6" class="">
+</p><p id="1976dcc2-ea73-4237-abe8-46cd17a8894c" class="">Even with the introduction of email, people could send each other files—but still had huge coordination costs around versioning.</p><p id="91aa4a6a-8a3b-4bce-9167-a44c508aaa51" class="">
+</p><p id="75f56ac9-2a6a-4e9c-b0bf-c18d92334bd3" class="">We might as well have been using carrier pigeons</p><p id="2f062e22-18d0-4e78-b1e8-7bcc5ed24d3d" class="">
+</p><h3 id="a3fd709f-e7af-42e7-9f53-96110fe95af7" class="">Cloud – Dropbox and Box</h3><p id="8e9e9059-0a4b-46f9-b035-9d391f25e8b9" class="">
+</p><p id="69a5c0e6-700b-4813-b60b-5b284c88175f" class="">As the industry began to transition to cloud, companies like Dropbox and Box rose. Instead of everyone keeping their own local copies of documents, what if everyone had them pooled in the cloud. Then parts of collaboration like versioning and permissioning could be done across the entire team.</p><p id="1ee091a7-68c2-4c1b-8812-5be00591413c" class="">
+</p><p id="45c4c4d8-a718-48cf-87bc-60a63eb8b975" class="">Employees could make changes directly in document, and trust it would propagate to their co-workers. In practice, there were still versioning issues to handle. But it was a significant improvement.</p><p id="05239c36-33bc-4805-845b-39786fb11876" class="">
+</p><p id="2ad1277d-bbe1-4608-80a3-68188c848e4f" class="">syncing files for designers was hilarious chaos</p><p id="f766f1a0-14b2-4a1b-8469-003d056adbbc" class="">
+</p><p id="5b6bae1b-7920-43a3-a20f-95d460ad8a06" class="">However, this model looks transitory in retrospect. In a pure cloud world, this atomic unit of documents seems increasingly archaic. Documents are more a constraint of a pre-cloud world. And once you assume storing them online is table stakes, the question becomes where is actual collaboration happening that then leads people to wherever they need to do work.</p><p id="c2dec3bc-c103-459d-aaae-89951c81211f" class="">
+</p><p id="663a0c57-fbff-4194-a25a-f33d997e593a" class="">And core Dropbox is not a solution to this. People store their documents in it. But they had to use email and other messaging apps to tell their co-workers which document to check out and what they needed help with.</p><p id="82049fdc-916c-4c95-8598-c1f84799c14d" class="">
+</p><p id="d0dc0e52-6db1-4bde-ad8b-b2c142fedf41" class="">Dropbox understands this concern. It’s what’s driven their numerous forays into owning the workflows and communication channels themselves. With Carousel, Mailbox, and their new desktop apps all working to own that. However, there are constraints to owning the workflow when your fundamental atomic unit is documents. And they never quite owned the communication channels.</p><p id="cdfac83d-0971-4339-9dc0-37062c9407d7" class="">
+</p><h2 id="92d09f63-55f0-4d94-963a-46950ea3ad7f" class="">Slack</h2><p id="37326405-fabf-439a-b960-89c1f8f67fe9" class="">
+</p><p id="97e41292-c9e0-43d9-a05e-9bcdfc98e4e7" class="">Slack became the place you messaged your coworkers and sent them links to the work you wanted them to check out. They began to displace Dropbox as the center of gravity for companies.</p><p id="d9e20062-5b17-418d-a4c2-bb36e901ac03" class="">
+</p><p id="6240aae2-733f-49af-ab37-10cd521d37fd" class="">#corgi_meme should be a default channel when you create a new corporate slack</p><p id="4626ccc7-24e3-4f62-aca5-cc36fb7648ec" class="">
+</p><p id="69e2c560-1ba6-4eb6-98da-776f23df96ca" class="">The dream of Slack is that they become the central nervous system for all of a company’s employees and apps. This is the view of a clean *separation* of productivity and collaboration. Have all your apps for productivity and then have a single app for coordinating everyone, with your apps also feeding notifications into this system.</p><p id="f3547472-a201-470b-b564-863070cfec56" class="">
+</p><p id="fc054ccb-2de2-4088-bfc1-223542e4deba" class="">In this way, Slack would become a star. With every app revolving around it. Employees would work out of Slack, periodically moving to whichever app they were needed in, before returning to Slack.</p><p id="c4022b34-5ce3-4c7e-a111-21e929a9d3d3" class="">
+</p><p id="083d1f86-7035-4afc-ac08-f40bec7c836f" class="">But productivity *isn’t* separate from collaboration. They are the two parts of the same loop of producing work. And if anything collaboration is in *service* of team productivity.</p><p id="3f58f64a-7b43-4bd8-85e6-5c921720c798" class="">
+</p><h3 id="7dfc0fcf-7e3f-4dd1-9b5a-8c5058e0c12c" class="">What is Slack, really?</h3><p id="f3528419-4f43-427b-a640-9e6450517e1b" class="">
+</p><p id="9c905995-4581-4f2f-8541-3d6fe1b183d4" class="">There has been much pushback to Slack in recent years. Often centered around this feeling that Slack is distracting and not productive. As with any successful app, much of it is the gripes that come with any app that is successful enough to become a significant part of your working life. But there’s an underlying current to these critiques that I think is real but people struggle to pin down precisely.</p><p id="d4c38ff3-bc12-4c64-aa70-74f577493028" class="">
+</p><p id="a39503bd-050a-418b-81c1-c5b29b11aab5" class="">It’s not that Slack is too distracting and killing individual productivity. It’s that your company’s processes are so dysfunctional you need Slack to be distracting and killing individual productivity.</p><p id="ea515a5d-80b2-44da-b5e5-10caf1869f69" class="">
+</p><p id="9b01e1d8-d060-400c-967a-0ea5e21dd199" class=""><strong>Slack is not air traffic control that coordinates everything. It’s 911 for when everything falls apart.</strong></p><p id="09398f58-1aee-48fb-bc7b-446102e9367c" class="">
+</p><p id="2aecdb96-4613-4682-b226-b8891d4fa66c" class="">Every slack message about a new document your feedback is wanted on or coordinating about what a design should look like is a failing of process or tools. Slack is exception handling. When there’s no other way to make sure someone sees and update, or knows context, Slack is the 911 that can be used.</p><p id="cd64f988-fac7-4f62-9457-6b5e6a965ca9" class="">
+</p><p id="2da66b58-b9df-4dae-94d8-48318596c18d" class="">Slack serves three functions:</p><ul id="02f28c67-eac1-46bc-ba11-3a9c69c59439" class="bulleted-list"><li><strong>Else statement.</strong> Slack is the exception handler, when specific productivity apps don’t have a way to handle something. This should decrease in usefulness, as the apps build in handling of these use cases, and the companies build up internal processes.</li></ul><ul id="47ab57f7-eb5f-4379-adcb-76c03acb0ec5" class="bulleted-list"><li><strong>Watercooler.</strong> Slack is a social hub for co-workers. This is very important, and full of gifs.</li></ul><ul id="e84a0732-2d0a-4165-bf39-8a73b5ed5fe0" class="bulleted-list"><li><strong>Meta-coordination.</strong> Slack is the best place for meta-levels of strategy and coordination that don’t have specific productivity apps. This is really a type of ‘else statement’, but one that could persist for a while in unstructured format.</li></ul><p id="bf043ad7-79cc-4e9f-8335-0a117c75ecf1" class="">
+</p><p id="1952f2e2-ccd4-4618-8ccb-035cdd992a30" class="">There is an entire separate essay to be written about meta-coordination. Which I think can have very different outcomes from functional workflows. We may be very far from formalization of meta-coordination and less concrete strategy planning. Which means unstructured text, meetings, and video calls could be the best current functional workflows for them for a while. But for our purposes of this essay will put that as out of scope.</p><p id="8096bc42-3048-4e0f-aa71-c56e8470f1c0" class="">
+</p><p id="b87c265b-3baf-4c6b-acda-e9da4fad1e48" class="">As a company’s processes mature and the apps they use get more sophisticated, we expect to see the need to go to Slack for exception handling *decrease* over time. (Though of course, the complexity of the overall company may increase at a faster pace than this maturation, leading to a net increase in slack messages).</p><p id="1577d4c6-b09a-470c-86e2-0f025698436b" class="">
+</p><p id="87651049-a8cf-4950-a5ab-f660ed06bc9d" class="">These three functions are incredibly important. From the perspective of owning the process of doing work, they point at interesting relationship.</p><p id="76dedc48-2930-42ac-ab15-5d9cee3dbdb8" class="">
+</p><p id="809a9c1d-1f11-4079-af7f-c310f6179719" class=""><strong>Slack’s importance is inversely tethered to the rate at which functional workflows within companies become legible and systematized.</strong> Both at an operational level, and long term at the meta-strategic level.</p><p id="25af9da7-40d0-4aef-90f1-57be7933dd40" class="">
+</p><p id="d86a44af-5bd4-4261-89bc-69a34883e304" class="">And this makes sense. The platonic flow of productivity should minimize time spent not productive, with collaboration as aligned and unblocking with that flow as possible. By definition, any app that requires you to switch out of your productivity app to collaborate is blocking and cannot be maximally aligned. It’s fine to leave your productivity app for exceptions and breaks. But not ideal when working (and not having issue).</p><p id="3076756c-e2ce-4160-ba73-6562d5c5594a" class="">
+</p><h2 id="f9f40d1f-6b47-4918-a81a-3ffaa891f3c2" class="">Functional workflows rule everything around me</h2><p id="5f779429-e8d6-4853-a4b6-188d03c27cf8" class="">Slack ironically is more similar to Dropbox than expected. The more time goes by the more it looks like exception handling being needed ubiquitously is a transitory product as we switch off of documents. After all, like Dropbox, Slack makes the most sense as a global communication channel when the workflows themselves don’t have communication and collaboration baked in natively. For documents this is true, but increasingly for modern apps this is false.</p><p id="e53a0b32-504e-41e2-83d0-a9b0d29b8d87" class="">
+</p><p id="daed3b01-8d64-4cf5-a592-2b814f228ae7" class="">As it becomes more clear what are specific functional jobs to be done, we see more specialized apps closely aligned with solving for that specific loop. And increasingly collaboration is built in natively to them. In fact, for many reasons collaboration being natively built into them may be one of the main driving forces behind the venture interest and success in these spaces.</p><p id="758d85d2-73ef-492f-9fa1-f1177b3654b1" class="">
+</p><p id="22f080f9-72e9-4cc7-bb81-0a0b1adfafd8" class="">As these apps proliferate, there is less and less need to turn to Slack. And Slack becomes more and more about the edge cases that aren’t yet built in.</p><p id="afda3af0-81ee-4088-ad6e-dceef56df1d4" class="">
+</p><p id="d0be7031-37b6-4cb1-b59f-0ac4c7de4f8f" class="">Github is a great example of this for the engineering side. Salesforce for Sales. Out of scope of this essay, but there’s lots to write about this and I’d generalize Shopify as being part of this as well.</p><p id="ad008338-9f2c-4427-8032-6037ee3433bd" class="">
+</p><p id="19818499-b8e5-436d-a3c2-0daf104a6f12" class="">But for our purposes, let’s use an example, Figma.</p><p id="023fa251-9c4c-436d-9ee2-710c017b432a" class="">
+</p><p id="21f0d740-1cd7-489e-922d-b45dcd47a339" class="">yo dawg, I heard you like chat. So I put chat in every app.</p><p id="70081391-458f-458b-a80b-eac9a71bdb2c" class="">
+</p><h3 id="d0571107-4dc8-4a08-b860-ad7060c8ffbb" class="">Figma</h3><p id="0336557b-ead8-4b29-9e89-1eb8faac65c7" class="">
+</p><p id="c2a0704b-089e-44eb-8423-f20136ded2e5" class="">Figma is a collaborative design tool. Unlike Sketch or Photoshop, Figma has collaboration built in natively as a first party. This means the ability to comment on designs. But it means much more too. It means the ability to design together at the same time. To be able to send a live demo to someone frictionlessly and then be able to make live changes as you talk to them. It means being able to build design systems that are reusable and plugins that are shareable.</p><p id="de496433-b8d9-4a44-9b6d-611b29aca0a2" class="">
+</p><p id="3b1ff946-eacd-458e-933f-249707d6d4a0" class="">Figma shows what collaboration means when you understand that collaboration is *intimately* part of productivity. And always has been.</p><p id="cc4e7c1d-c95c-4d73-b372-f601a00ceeb0" class="">
+</p><p id="44316eb5-c57d-4cfc-b81f-cccb4a239434" class="">If you are working on a design Figma handles all communication. There’s no more need to send an updated file on Slack. Or type in feedback on Slack. Or make a change and let someone know on Slack. And as Figma increases the scope of their app and adds more team and enterprise features. Even for sharing with non-designers on the team, the need for external communication falls.</p><p id="b02c78c4-769f-403c-bf53-b82190475536" class="">
+</p><p id="7af7f43e-1f73-4b3f-b289-fa4ffc66f1dd" class="">And as Figma expands into plugins, the ecosystem will continue to solve for more and more of the needs and exceptions.</p><p id="e511513d-743a-4870-9b0b-eb1f09bc54ab" class="">
+</p><p id="cae43432-67ca-4d0b-8b97-246b17363ccb" class="">Over time, our workflows align with our functional flows. And collaboration is no exception.</p><p id="aca3c004-55ef-497a-86c6-5d212c6dae92" class="">
+</p><p id="8a7377ec-3c4f-4492-9f41-d59332b3c2ae" class="">And Figma is not alone. More and more apps in all categories understand that collaboration should and must be built in as a first party if they want to best serve their customers. Notion, Airtable, etc all understand this. <strong>The feedback loops of collaboration get so short that they become part of the productivity loop.</strong></p><p id="141c695b-367d-4414-90e3-52fbbccf693f" class="">
+</p><p id="62534d45-cd88-4c54-9e45-3f5acdc27088" class="">The future increasingly looks like one where companies use very specific apps to solve their jobs to be done. And collaboration is right where we work. And that makes sense, of course. Collaboration *should* be where you work.</p><p id="87859cfe-6751-4508-aab8-26ace3ac7651" class="">
+</p><h3 id="317dbaa7-d233-4adb-91e8-d209308da036" class="">Meta-coordination</h3><p id="82989955-3b36-4776-9d89-4749aa8bfa2c" class="">
+</p><p id="aec226d2-7363-4754-bc76-142d6f724c0d" class="">It should be noted, that meta-coordination adds nuance to this. Just as we increasingly productize the functional workflows. It allows us to start to be better at the meta-coordination at longer timeframes. Which could have standalone functional apps that specialize in these slower cadence coordination problems. Slack and Zoom are both possible answers in this regard. As are apps working in todos, project management, etc.</p><p id="03e9ed77-0661-4703-8a57-7f6587530bc0" class="">
+</p><p id="f5e346a1-b366-464e-8e39-67c9a8280eaa" class="">The efficient frontier of meta-coordination is fascinating. Over time we see productivity apps eat up the stack. Google docs is a good example of the abstraction layers of coordination.</p><p id="235a7518-5ff5-4a58-a077-c3a1a746121e" class="">
+</p><p id="1d688d75-c66c-4a15-b30d-d60657957c3b" class="">Google docs is good at line level commenting. So for this low level of coordination it excels. Which when sending word documents was the current state of the art, felt advanced. But increasingly, feels limited for higher abstraction levels of collaboration. As apps like Figma build in deeper collaboration.</p><p id="552ddc69-c72f-45c8-9b4a-a0b1c90e5d0d" class="">
+</p><h2 id="0959da9b-b5ed-4efe-9eff-e9fe9afb4994" class="">Can there be a meta-layer?</h2><p id="67a11a3f-0d7b-4d34-aaee-541fc12bfee0" class="">
+</p><p id="7f57b762-b842-4a2f-a3f2-a4d73ed05534" class="">This isn’t to say that there cannot be a horizontal collaboration app that is core to the productivity workflows. But it likely cannot be blocking to productivity. It can’t be a peer level app that is standalone. Instead it must work across and within each productivity app.</p><p id="3e284f07-9880-4d02-bb44-dbb879d49855" class="">
+</p><p id="1ecb3432-9ab6-48e9-8f5f-6fec5ac7a983" class="">Standalone messaging is not what ties all apps together. It is a peer level product that’s used where the others fall through.</p><p id="9156b08e-a5d4-4334-8260-69eac89563c8" class="">
+</p><p id="83e2161d-3e44-4ffe-adb5-9ee96099e2b7" class="">However, there is a need for a layer across all the applications. A layer for things that should be shared across the apps as well collaborative functionality across them.</p><p id="3228d59a-d184-4c1b-9471-efecd133df3e" class="">
+</p><p id="21c6173d-9ee8-4a8e-933c-c2c21df896ec" class="">Slack in its current form cannot be this. If you have to switch out of a product to use Slack, then it is not the layer tying them altogether. Instead, the layer needs to exist a layer above. If everything was in browser it’d be a browser extension. But since most apps are not, it needs to be at the OS layer.</p><p id="fc3cf696-c9c4-4f84-a0ca-8e715fea1a26" class="">
+</p><p id="d0c1183d-20fe-498d-ae4d-e052d9b9b83f" class="">There is some mix of presence, collaboration, coordination, and identity that should be ubiquitous across whatever apps are being used. A layer more attached to the people doing work and what they’re trying to accomplish—than which specific app they’re in.</p><p id="3985b6d3-5ce6-4374-937d-51a325715644" class="">
+</p><p id="7e90517a-df5a-4568-bed4-b2bf41c625f8" class="">Perhaps one of the closest to this we’ve seen was Screenhero. After all, the idea of screen sharing is inherently about collaboration while working within productivity apps.</p><p id="31391519-d857-428e-ae54-293207d4ffd1" class="">
+</p><p id="8590939d-9446-40bf-beb3-595f5ec4e707" class="">But it made the decision to be downstream of Slack, not upstream. It assumed Slack would be the central nervous system for people at work, and people would switch over to Screenhero from Slack. It traded scope for distribution. And got neither.</p><p id="b162d814-b7fa-4b73-8a19-54d2ddcc0825" class="">
+</p><p id="c47653df-1e2a-4704-85ce-77f816f45870" class=""><em>KK note: It was acquired by Slack in an all equity acquisition. So to be clear it was hugely successful</em></p><p id="eb6facba-25c0-4c22-8cee-54389b452aff" class="">
+</p><p id="c1bf246c-83be-4a85-866f-51648fa8b424" class="">But there *is* a non-enterprise example of what this layer might look like.</p><p id="50e1bd8b-0272-433e-9062-6aac26f3af8e" class="">
+</p><p id="b900c11c-706d-44af-95f0-a444adf825b0" class="">That company is Discord.</p><p id="6ad3c74e-08f8-4a70-908b-48b10cab5164" class="">
+</p><h3 id="d2be7d63-de9d-4fa6-81f8-9ada5c1f0c42" class="">Discord</h3><p id="bce229c1-6e33-4b84-b8ab-6e2a843ea213" class="">Discord is the best analog for what should exist. For a while Slack and Discord were compared to each other as competitors. As Discord has focused squarely in gaming, and Slack in companies this comparison has been used less and less.</p><p id="6cea9a90-63bd-4b69-b2e9-3953aae85528" class="">
+</p><p id="2c2b12cd-d2d1-45db-93de-ad1c95c0f98e" class="">But this misses the main distinction between Slack and Discord.</p><p id="f745049e-fe12-4920-9062-28175700a064" class="">
+</p><p id="96057b99-cde3-42a7-a557-2c37da0603b0" class="">Discord is actually two products bundled into one. It *is* a messaging app that looks akin to Slack. But it is *also* a meta-layer that runs across all games.</p><p id="bd7e2344-6b6d-4844-8cd6-b3711590f9ad" class="">
+</p><p id="3260a4da-35fa-4da6-8a5e-1002481fb6c6" class="">This is the Slack for Gaming for Enterprise. The new startup meme should be X for Y for X</p><p id="53a60daf-4369-47d2-abb6-3d2c184f2842" class="">
+</p><p id="a0744ef5-d691-4449-a85c-2b35984f0241" class="">Beyond its Slack-like functionality, Discord has functionality like a social graph, seeing what games your friends are playing, voice chat, etc. These have been misunderstood by the market. They aren’t random small features. They are the backbone of a central nervous system.</p><p id="290f9497-3bb1-4884-bf38-7b7e9d132960" class="">
+</p><p id="55e5cebf-2b11-4d42-9e19-2d29da870033" class="">Active users of Discord have it on all the time, even when they are not playing games. It’s a passive way to have presence with your friends. And when your friends start playing games it makes it easy to with one click go join them in the game. Bringing your actual social graph across all games. Finally, voice chat makes it possible to talk with your friends across all games, even when you are playing the game. Like when working in a google doc, having to switch out of your game to message is a negative experience. Instead Discord adds functionality to your games even while you are focused solely on them.</p><p id="d718e3ca-8269-48ac-a893-9a39c9670b3b" class="">
+</p><p id="621c8c54-f7df-4aa9-a337-aae2123ffb7d" class="">We will see more companies understand and begin to work on this area.</p><h2 id="d5f10c75-ef31-4630-b056-f2203ae90365" class="">Final Thoughts</h2><p id="a648c9d7-ed1d-4a8e-bd32-d8f30e30913f" class="">Abstracting out of productivity and collaboration apps into the processes themselves, there’s something beautiful at how much we’ve improved and continue to improve at the process of working together with other humans.</p><p id="50f45822-b279-43e6-b727-99ab3f57ed73" class="">
+</p><p id="0809ab80-7754-487b-8906-48b410a5ba0d" class="">In <a href="https://kwokchain.com/2019/04/09/making-uncommon-knowledge-common/">Making Uncommon Knowledge Common</a> I said “One way the tech industry can be viewed, is a process by which we collectively push forward our understanding of industries and new business models.”</p><p id="4cbdcf5c-05cb-41b4-a21f-d2fda8c09160" class="">
+</p><p id="a773cb95-a935-4f36-ba2e-99c751f1e10b" class="">And perhaps a company is just a process that hopefully compounds and improves in its ability to serve its customers.</p><p id="32759641-8503-425d-8ee4-1453449cb6d8" class="">
+</p><p id="d462d863-23e2-461f-9f4e-1bb678e3f84f" class="">But underlying both of these is the most beautiful loop of them all. Progress is a process by which humans compound and improve on our ability to work together better for the things we care about.</p><p id="8016e17b-502e-4a8b-af05-2c634a36869a" class="">
+</p><p id="a7eb6927-f623-4140-9656-57ab98bcc8f0" class="">Like distributed computing, it has turned out that for most of human history coordinating among humans has been a slow, intractable, sisyphean effort. In the last few decades we have seen tremendous technical breakthroughs in the latencies and tooling possible to remove these constraints. Across the world, whether in productivity apps or in national governance, there will be a transition period as our norms and processes adapt to this tightening of the collaboration feedback loop. But perhaps I remain incredibly bullish on what it means for our alignment and output as we increasingly systematize and make sense of these.</p><p id="fed329f6-5373-421c-8c99-06287bd764df" class="">
+</p><p id="07713a99-71d6-4f58-a524-5710abd600ba" class="">Our ability to compound together at compounding together is our most beautiful trait.</p><h2 id="7759af7f-682c-4e28-8017-1427c4d55c11" class="">Appendix</h2><h3 id="16319ca9-110d-4c9c-bf58-c8d8bf62acca" class="">Appendix: Distribution</h3><p id="b7f8e9db-e405-4f71-a006-8f25afbe2274" class="">Of course, an approach like Discord for enterprise will need novel acquisition loops. This type of collaboration has strong intra-company network effects at scale. But lacks trivially obvious inter-company network effects or pre-liquidity loops.</p><p id="bd377df0-0e69-4573-99a4-af651516124f" class="">
+</p><p id="bdb88886-3395-4a4b-a967-9ef6237383cf" class="">Out of scope for this essay. And don’t quite want to get into the tactics I think would be effective here. That said will note a general framework here.</p><p id="6f31d13c-3465-4d97-a6d5-efbb0dc2d9ca" class="">
+</p><p id="97f562c0-0db5-44f2-ac44-f77f22fff736" class="">If you look at most collaboration companies’ loops there are a few dimensions to categorize most of the tactics and loop sequences by:</p><ul id="dd099fda-0263-476e-afd4-8ebcbd2aeaa8" class="bulleted-list"><li>Single player vs multiplayer</li></ul><ul id="8bd5f548-c8c0-48eb-9e3e-f541de60f9a4" class="bulleted-list"><li>Intra-company vs Inter-company</li></ul><ul id="cd60b359-fe7d-4207-9010-ab4b1d7d1baa" class="bulleted-list"><li>App required vs no app required</li></ul><ul id="10591d1e-c1fb-4665-89ca-fcc1559e8f36" class="bulleted-list"><li>Synchronous vs Asynchronous</li></ul><ul id="1152d9cb-b9c7-4c58-a6ab-14997a622737" class="bulleted-list"><li>Personal capital vs Social capital driven</li></ul><p id="28999570-2e3d-4dd7-acc9-c77b038e8cd4" class="">A company working in this space has significant surface area for novel growth loops at each combinatorial set of these.</p><p id="bedefcf1-8bc6-4f9f-a70e-fcdd8df41a63" class="">
+</p><h3 id="d62b1bf0-caaa-49fb-86f2-17b80e42f972" class="">Appendix: Fortnite and Epic</h3><p id="e3cc356d-4ed3-488b-b0ae-c814951efd83" class="">Discord is also useful for understanding what comes after this stage as well. If you look at Discord. One potential TAM constraint is if gaming becomes 1) power law with low ecosystem churn and 2) not monetized via purchase.</p><p id="ebe978f4-6cf6-4df3-a8e2-eef8d292dbc4" class="">
+</p><p id="52641b0e-ca9c-4444-a10b-2c558704567b" class="">Fortnite and Epic is the best example of this potential. And Epic’s playbook in launching their app store vs Steam is a case study in how a dominant enough app can move up the stack if it has enough sway over end consumer attention.</p><p id="6102140b-43b0-46da-884e-1de51954816e" class="">
+</p><p id="9081179e-139c-4cad-a990-5d2dad9ed91a" class="">There are similar lessons for companies selling to other companies. And we’ve already seen examples of these in specific industries. So always, something to watch for.</p><h2 id="664ae9fa-3eaf-4fa4-bdb1-c1920b61a38b" class="">Credits</h2><p id="a90cc1ad-0e70-4fbd-a1bd-7eeaffa986ac" class="">Many thanks to <a href="https://twitter.com/keilafong">Keila Fong</a>, <a href="https://twitter.com/saammotamedi">Saam Motamedi</a>, <a href="https://twitter.com/typesfaster">Dave Petersen</a>, and <a href="https://twitter.com/eugenewei">Eugene Wei</a> for the many discussions about this topic, their help with this post, and their unceasing pressure to publish it.</p><p id="3fbdfacc-9f2e-4809-8289-24ab9f0bb360" class="">
+</p><p id="b3a1edd1-a5fc-4c47-bcca-cbc8a85e6942" class="">Furthermore, even more thanks to Keila without whom these super professional quality stick figure drawings would not have been possible.</p><p id="d5694d61-5afc-45aa-b770-3b7968d23735" class="">
+</p><p id="c7cbb69f-7093-49b7-9457-ced650661093" class="">Though they didn’t pre-read this post, also want in particular to thank <a href="https://twitter.com/johnolilly/">John Lilly</a>, <a href="https://twitter.com/joshelman/">Josh Elman</a>, <a href="https://twitter.com/zoink">Dylan Field</a>, and <a href="https://twitter.com/jasoncitron">Jason Citron</a>. All of whom have heavily influenced my thoughts on productivity and collaboration. And compared to the world they are still living decades in the future on how both are merging and where they are going.</p></div></article></body></html>

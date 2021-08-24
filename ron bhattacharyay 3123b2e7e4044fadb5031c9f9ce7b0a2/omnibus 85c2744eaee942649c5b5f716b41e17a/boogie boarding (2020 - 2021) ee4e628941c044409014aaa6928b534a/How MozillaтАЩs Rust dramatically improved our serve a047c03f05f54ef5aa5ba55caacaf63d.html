@@ -1,0 +1,664 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How Mozilla’s Rust dramatically improved our server-side performance</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a047c03f-05f5-4ef5-aa5b-a55caacaf63d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎾</span></div><h1 class="page-title">How Mozilla’s Rust dramatically improved our server-side performance</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/rust-in-production-at-figma/" class="url-value">https://www.figma.com/blog/rust-in-production-at-figma/</a></td></tr></tbody></table></header><div class="page-body"><p id="a537780d-a736-4a5b-95d5-c6f2a488fc83" class=""><em>Like building state-of-the-art web apps? </em><a href="https://www.figma.com/careers/"><em>Come work at Figma!</em></a></p><p id="3b7dbc67-f2e0-4253-9e79-ea03ce3c644b" class="">
+</p><p id="ff507992-d4b3-4095-9960-b3d07925b1e6" class="">At <a href="https://www.figma.com/">Figma</a>, performance is one of our most important features. We strive to enable teams to work at the speed of thought, and our multiplayer syncing engine is a critical part of this vision. Everyone should see each change made to a Figma document in real time.</p><p id="3b9c93cc-8559-4817-b601-34473081bd6f" class="">
+</p><p id="14e0efd7-d8da-4128-853c-d407481a5a11" class="">The multiplayer server we <a href="https://blog.figma.com/multiplayer-editing-in-figma-8f8076c6c3a6">launched with two years ago</a> is written in TypeScript and has served us surprisingly well, but Figma is rapidly growing more popular and that server isn’t going to be able to keep up. We decided to fix this by rewriting it in Rust.</p><p id="a642bc80-7e92-40ac-85fa-1bc2112245bf" class="">
+</p><p id="5caab726-cd94-4f0c-b3a4-327f4603c7a2" class=""><a href="https://www.rust-lang.org/en-US/">Rust</a> is a new programming language from Mozilla, the company that makes Firefox. They’re using it to build a next-generation browser prototype called <a href="https://research.mozilla.org/servo-engines/">Servo</a> which demonstrates that browsers can be way faster than they are today. Rust is similar to C++ in performance and low-level ability but has a type system which <a href="https://polyfloyd.net/post/how-rust-helps-you-prevent-bugs/">automatically prevents whole classes of nasty bugs</a> that are common in C++ programs.</p><p id="d1f2c277-1b83-42ac-aef6-c544c3c5da45" class="">
+</p><p id="2c762ec6-88bc-4194-aca1-8e45c7713252" class="">We chose Rust for this rewrite because it combines best-in-class speed with low resource usage while still offering the safety of standard server languages. Low resource usage was particularly important to us because some of the performance issues with the old server were caused by the garbage collector.</p><p id="af76c16c-86f9-4407-8cc8-559bc84d849c" class="">
+</p><p id="1b64b01c-5933-4fa4-bd0a-426b0fc7bb8d" class="">We think this is an interesting case study of using Rust in production and want to share the issues we encountered and the benefits we achieved in the hope that it will be useful to others considering a similar rewrite.</p><p id="cb57a9c3-bad8-4463-9708-e85174550e71" class="">
+</p><p id="7b698ccc-2fae-4776-bba5-32ebced8834f" class="">Our multiplayer service is run on a fixed number of machines, each with a fixed number of workers, and each document lives exclusively on one specific worker. That means each worker is responsible for some fraction of currently open Figma documents. It looks something like this:</p><figure id="db98284d-6991-4638-9e4a-29d20c6c969b" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_one.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_one.png"/></a></figure><p id="db9a7d02-e9d6-406e-8d45-248e2ed83a3a" class="">The main problem with the old server was the unpredictable latency spikes during syncing. The server was written in TypeScript and, being single-threaded, couldn’t process operations in parallel. That meant a single slow operation would lock up the entire worker until it was complete. A common operation is to encode the document and Figma documents can get very large, so operations would take an arbitrarily-long amount of time. Users connected to that worker would be unable to sync their changes in the meantime.</p><p id="7eb0a6ba-11d7-4066-b8a7-455f258b1431" class="">
+</p><p id="23d7fe3a-9094-4fc5-bdd9-dcce14d6fbd8" class="">Throwing more hardware at the problem wouldn’t have solved this issue because a single slow operation would still lock up the worker for all files associated with that worker. And we couldn’t just create a separate node.js process for every document because the memory overhead of the JavaScript VM would have been too high. Really only a handful of documents were ever big enough to cause problems, but they were affecting the quality of service for everyone. Our temporary solution was to isolate the crazy documents to a completely separate pool of “heavy” workers:</p><p id="72dc8458-8178-409f-8199-5f8b147c3785" class="">
+</p><figure id="cd03110a-ab3a-4644-b337-1d2cdb9e6d9b" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_two.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_two.png"/></a></figure><p id="1397e942-89a2-4170-a57d-8b48b7353462" class="">This kept the service up but meant we had to continually look out for crazy documents and move them over to the heavy worker pool by hand. It bought us enough time to solve these problems for real, which we did by moving the performance-sensitive parts of the multiplayer server into a separate child process. That child process is written in Rust and communicates with its host process using stdin and stdout. It uses so little memory compared to the old system that we can afford to fully parallelize all documents by just using a separate child process per document. And serialization time is now over 10x faster so the service is now acceptably fast even in the worst case. The new architecture looks like this:</p><figure id="bfcd8bc2-568f-4866-bf65-58e8a22b957f" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_three.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/rust_image_three.png"/></a></figure><p id="61393a47-e29c-4bd6-8ea7-0b3a718118a5" class="">The performance improvements are incredible. The following graphs show various metrics for the week before, during, and after the progressive rollout. The huge drop in the middle is where the progressive rollout hit 100%. Keep in mind that these improvements are in server-side performance, not client-side performance, so they mainly just mean that the service will continue to run smoothly for everyone without any hiccups.</p><figure id="af513c8d-7d1e-411a-aa6b-edcde701350a" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/network_traffic.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/network_traffic.png"/></a></figure><figure id="b9dbf2b0-c296-44e4-8edb-4ec87c047458" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/mem_usage.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/mem_usage.png"/></a></figure><figure id="9573bf04-036d-48d8-bf05-0247630f4a48" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/cpu_usage.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/cpu_usage.png"/></a></figure><figure id="66368c55-612e-4382-b435-2a36b755584d" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/avg_time.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/avg_time.png"/></a></figure><figure id="a935b0ee-1634-4add-9c66-10049937fd5b" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/worst_case.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/worst_case.png"/></a></figure><p id="4006c66f-1742-47c7-9eb2-886a6fa053dc" class="">Here are the numeric changes in peak metrics as compared to the old server:</p><figure id="25a700a0-109f-4054-b0b4-55249f332c84" class="image"><a href="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/metrics.png"><img style="width:700px" src="How%20Mozilla%E2%80%99s%20Rust%20dramatically%20improved%20our%20serve%20a047c03f05f54ef5aa5ba55caacaf63d/metrics.png"/></a></figure><p id="0a288b7c-b5c8-4c3a-8ba1-9e6ddd78c52a" class="">While Rust helped us write a high performance server, it turns out the language wasn’t as ready as we thought. It’s much newer than standard server-side languages and still has a lot of rough edges (described below).</p><p id="904d1aac-2921-432a-be37-1af9f447fee5" class="">
+</p><p id="89ac7056-9a79-40e6-b8f8-e42d48a0444f" class="">As a result, we dropped our initial plan to rewrite our whole server in Rust and chose to focus solely on the performance-sensitive part instead. Here are the pros and cons we encountered in that rewrite:</p><ul id="782114f7-a943-4dbd-ac78-ff53ec3b3503" class="bulleted-list"><li>Low memory usage</li></ul><p id="9603119f-4728-4ff3-bbca-a772f50f139e" class="">
+</p><p id="26f348e1-8346-42ef-bd0a-3e32c4a6f3aa" class="">Rust combines fine-grained control over memory layout with the lack of a GC and has a very minimal standard library. It used so little memory that it was actually practical to just start a separate Rust process for every document.</p><ul id="4c7f9cf3-8c06-4f8d-8977-d01fc3771bf7" class="bulleted-list"><li>Awesome performance</li></ul><p id="e2ab9d83-08ec-44d0-afed-a6591ec2f45f" class="">
+</p><p id="a22fbfbb-32eb-4803-aef4-2509dcc0aca9" class="">Rust definitely delivered on its promise of optimal performance, both because it can take advantage of all of LLVM’s optimizations and because the language itself is designed with performance in mind. Rust’s <a href="https://doc.rust-lang.org/1.22.0/std/slice/">slices</a> make passing raw pointers around easy, ergonomic, and safe, and we used that a lot to avoid copying data during parsing. The <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html">HashMap API</a> is implemented with <a href="https://en.wikipedia.org/wiki/Linear_probing">linear probing</a> and <a href="https://en.wikipedia.org/wiki/Hash_table#Robin_Hood_hashing">Robin Hood hashing</a>, so unlike C++’s <a href="https://en.cppreference.com/w/cpp/container/unordered_map">unordered_map API</a> the contents can be stored inline in a single allocation and are much more cache-efficient.</p><p id="2f22c583-b172-4015-a479-9bafcce37362" class="">
+</p><p id="f3e65ae9-717f-46f1-b667-abb92b0d4152" class="">Rust comes with <a href="https://doc.rust-lang.org/cargo/index.html">cargo</a> built-in, which is a build tool, package manager, test runner, and documentation generator. This is a standard addition for most modern languages but is a very welcome improvement coming from the outdated world of C++, the other language we had considered using for the rewrite. Cargo was well-documented and easy to use, and it had helpful defaults.</p><ul id="6c5c17cf-3582-4769-8d95-1f22a2302d4e" class="bulleted-list"><li>Friendly error messages</li></ul><p id="6225a7f4-776f-4355-8813-3a75336bae2e" class="">
+</p><p id="7fa93dc7-f6e1-45b2-8834-bcfa9ea9ff94" class="">Rust is more complex than other languages because it has an additional piece, the borrow checker, with its own unique rules that need to be learned. People have put a lot of effort into making the error messages readable and it really shows. They make learning Rust much nicer.</p><ul id="ee07c344-f37d-4597-8ed0-8cca540af337" class="bulleted-list"><li>Lifetimes are confusing</li></ul><p id="893bf408-450d-44bd-b8d9-a49b801c1273" class="">
+</p><p id="7ae57a50-3f76-4c07-90db-ccb97cf7fcf0" class="">In Rust, storing a pointer in a variable can prevent you from mutating the thing it points to as long as that variable is in scope. This guarantees safety but is overly restrictive since the variable may not be needed anymore by the time the mutation happens. Even as someone who has been following Rust from the start, who writes compilers for fun, and who knows how to think like the borrow checker, it’s still frustrating to have to pause your work to solve the little unnecessary borrow checker puzzles that can come up regularly as you work. There are good examples of the problems this creates in <a href="https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/">this blog post</a>.</p><p id="76147d8a-a1e9-4a3d-8e12-146b6f59c19e" class="">
+</p><p id="ea8a0572-787f-4973-887e-95d5a64cd7f9" class=""><em>What we did about it:</em> We simplified our program to a single event loop that reads data from stdin and writes data to stdout (stderr is used for logging). Data either lives forever or only lives for the duration of the event loop. This eliminated pretty much all borrow checker complexities.</p><p id="ad44a68e-74f5-4fe4-a889-c86c3df58e82" class="">
+</p><p id="0fcf57c3-6883-4fb5-8e22-794852955d52" class=""><em>How this is being fixed:</em> The Rust community is planning to address this with <a href="https://github.com/rust-lang/rfcs/blob/master/text/2094-nll.md">non-lexical lifetimes</a>. This feature shrinks the lifetime of a variable such that it stops after the last time it’s used. Then a pointer will no longer prevent the mutation of the thing it points to for the rest of the scope, which will eliminate many borrow checker false-positives.</p><ul id="e92f5aeb-4798-48c4-8faa-1decf85ea37d" class="bulleted-list"><li>Errors are hard to debug</li></ul><p id="2cdfff3f-5487-4de5-9f34-ba006389ff1a" class="">
+</p><p id="13afc1ec-e1da-4dcb-b8f8-a53b060c4235" class="">Error-handling in Rust is intended to be done by returning a value called “Result” that can represent either success or failure. Unlike with exceptions, creating an error value in Rust does not capture a stack trace so any stack traces you get are for the code that reported the error instead of the code that caused the error.</p><p id="8e125c13-e8ed-49a2-a60e-0d755b26d11c" class="">
+</p><p id="731e8790-9c62-45e2-80b0-1f11dd1088a7" class=""><em>What we did about it:</em> We ended up converting all errors to strings immediately and then using a macro that includes the line and column of the failure in the string. This was verbose but got the job done.</p><p id="f07fd465-ab0c-40bd-8ce7-1901ce9a084c" class="">
+</p><p id="f8c6c052-f150-4607-a1d3-c33f9a2f7297" class=""><em>How this is being fixed:</em> The Rust community has apparently come up with several workarounds for this issue. One of them is called <a href="https://docs.rs/error-chain/*/error_chain/">error-chain</a> and another one is called <a href="https://boats.gitlab.io/failure/">failure</a>. We didn’t realize these existed and we aren’t sure if there’s a standard approach.</p><ul id="ed105975-6b3f-4ce3-a388-89bdbbc2d6b9" class="bulleted-list"><li>Many libraries are still early</li></ul><p id="61c85546-9ec0-4f6a-a268-d625a86b4e40" class="">
+</p><p id="4e6d00f5-e443-452c-a3c7-0511d3076ab3" class="">Figma’s document format is compressed so our server needed to be able to handle compressed data. We tried using two separate Rust compression libraries that were both used by Servo, Mozilla’s next-generation browser prototype, but both had subtle correctness issues that would have resulted in data loss.</p><p id="6470ed6a-ac7c-4188-9fa8-ee11be38af67" class="">
+</p><p id="d37210a4-f7af-45e2-8e9e-6c87b063905c" class=""><em>What we did about it:</em> We ended up just using a tried-and-true C library instead. Rust is built on LLVM so it’s pretty trivial to call C code from Rust. Everything is just LLVM bitcode in the end!</p><p id="f4ad5ec3-29e3-40e7-9ef6-4d6ba4698288" class="">
+</p><p id="7c2eac2a-50a9-497d-a5fe-484666aef884" class=""><em>How this is being fixed:</em> The bugs in the affected libraries were reported and have since been fixed.</p><ul id="99add577-bf00-4c5d-9b37-13955ac9a14a" class="bulleted-list"><li>Asynchronous Rust is difficult</li></ul><p id="81ecf0f5-ee24-4e28-9358-12f510890fab" class="">
+</p><p id="e5bf32a9-4220-435a-a166-bfe5ed94d362" class="">Our multiplayer server talks over WebSockets and makes HTTP requests every so often. We tried writing these request handlers in Rust but hit some concerning ergonomic issues around the futures API (Rust’s answer for asynchronous programming). The <a href="https://docs.rs/futures/0.1.25/futures/">futures API</a> is very efficient but somewhat complex as a result.</p><p id="9882a1ea-d507-45c4-afb2-0af1fa84c6bc" class="">
+</p><p id="acb1be5d-c35d-4492-b03d-a8902cf3736d" class="">For example, chaining operations together is done by constructing a giant nested type that represents the whole operation chain. This means everything for that chain can be allocated in a single allocation, but it means that error messages generate long unreadable errors reminiscent of template errors in C++ (an example is <a href="https://www.notion.so/06a672db1897482eadfbbf37ebf9b9ec">here</a>). That combined with other issues such as needing to adapt between different error types and having to solve complex lifetime issues made us decide to abandon this approach.</p><p id="89cf90bb-5024-452a-b73a-486c129a04c6" class="">
+</p><p id="7d444b7f-ea54-4755-b7c7-bc5684acc4fb" class=""><em>What we did about it:</em> Instead of going all-in on Rust, we decided to keep the network handling in node.js for now. The node.js process creates a separate Rust child process per document and communicates with it using a message-based protocol over stdin and stdout. All network traffic is passed between processes using these messages.</p><p id="7b0081a9-c8ed-49d9-ae64-31b6d676a4a8" class="">
+</p><p id="f11a7541-1816-4bc7-bf0c-93f239a44a8a" class=""><em>How this is being fixed:</em> The Rust team is hard at work on <a href="https://github.com/rust-lang/rfcs/blob/master/text/2033-experimental-coroutines.md">adding async/await to Rust</a>, which should solve many of these issues by hiding the complexity of futures underneath the language itself. This will allow the “?” error-handling operator that currently only works with synchronous code to also work with asynchronous code, which will cut down on boilerplate.</p><p id="8a531c96-1030-4d10-b117-fff23dd3e3a4" class="">
+</p><p id="f6f59f72-3257-4c95-9eb4-f98760a48010" class="">While we hit some speed bumps, I want to emphasize that our experience with Rust was very positive overall. It’s an incredibly promising project with a solid core and a healthy community. I’m confident these issues will end up being solved over time.</p><p id="7218fc9b-f3cc-4107-a076-f56c3077db37" class="">
+</p><p id="b7d87f04-be25-44ee-9c9f-89cabf1afddf" class="">Our multiplayer server is a small amount of performance-critical code with minimal dependencies, so rewriting it in Rust even with the issues that came up was a good tradeoff for us. It enabled us to improve server-side multiplayer editing performance by an order of magnitude and set Figma’s multiplayer server up to scale long into the future.</p></div></article></body></html>

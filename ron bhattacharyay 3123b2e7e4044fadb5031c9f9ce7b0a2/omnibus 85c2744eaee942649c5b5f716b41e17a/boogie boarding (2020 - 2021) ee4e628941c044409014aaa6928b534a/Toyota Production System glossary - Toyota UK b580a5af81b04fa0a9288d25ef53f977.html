@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Toyota Production System glossary - Toyota UK</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b580a5af-81b0-4fa0-a928-8d25ef53f977" class="page sans"><header><h1 class="page-title">Toyota Production System glossary - Toyota UK</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blog.toyota.co.uk/toyota-production-system-glossary" class="url-value">https://blog.toyota.co.uk/toyota-production-system-glossary</a></td></tr></tbody></table></header><div class="page-body"><figure id="9a7f21fa-c27f-4a68-ad00-f7b49e87550b" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Heijunka-gallery.jpg"><img style="width:590px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Heijunka-gallery.jpg"/></a></figure><figure id="72df8b0e-110c-497a-bcec-89caccb4d8ab" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Kaizen-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Kaizen-gallery-325x237.jpg"/></a></figure><figure id="a538ae98-6168-48b3-ad35-6d3e7534c111" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Nemawashi-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Nemawashi-gallery-325x237.jpg"/></a></figure><figure id="a7b4641e-0866-4f6f-863e-395a35bb57d9" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/JIT-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/JIT-gallery-325x237.jpg"/></a></figure><figure id="6942abb1-0b9a-412c-b03d-86def35c67dc" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Jidoka-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Jidoka-gallery-325x237.jpg"/></a></figure><figure id="08553926-a166-4b19-b0ee-615742c5a66b" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Genba-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Genba-gallery-325x237.jpg"/></a></figure><figure id="a5dfdd3a-6e14-4223-afdf-7b749585c069" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Hansei-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Hansei-gallery-325x237.jpg"/></a></figure><figure id="7e94c7c8-0994-46cd-93d4-e1e2e8759cb8" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Muri-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Muri-gallery-325x237.jpg"/></a></figure><figure id="432d571c-3bd3-4769-b343-9fb829735554" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Manu-supermarket-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Manu-supermarket-gallery-325x237.jpg"/></a></figure><figure id="7f49255d-8a74-40ef-b5aa-96147ca74a15" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Kanban-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Kanban-gallery-325x237.jpg"/></a></figure><figure id="7b5a6226-0a49-46d3-91e1-c8fe1afac703" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Genchi-Genbutsu-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Genchi-Genbutsu-gallery-325x237.jpg"/></a></figure><figure id="226591df-41ef-48a9-81d5-891505e90d09" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Poka-Yoke-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Poka-Yoke-gallery-325x237.jpg"/></a></figure><figure id="ac19e0d8-7c41-4393-8891-c70012d3475f" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Andon-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Andon-gallery-325x237.jpg"/></a></figure><figure id="502f0e57-f913-41d3-98ce-b7aabd2f79fc" class="image"><a href="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Heijunka-gallery-325x237.jpg"><img style="width:325px" src="Toyota%20Production%20System%20glossary%20-%20Toyota%20UK%20b580a5af81b04fa0a9288d25ef53f977/Heijunka-gallery-325x237.jpg"/></a></figure><p id="92e6aadd-8c56-410c-987d-58de9b455825" class="">We all speak foreign languages… That’s because it’s common for words from different parts of the world to be adopted as part of everyday conversation.</p><p id="72a40605-0f5f-4ea8-bfbf-a4f0081f7db7" class="">It can help people quickly and efficiently explain things that might otherwise be alien to them.</p><p id="56978968-f644-4b1c-8c13-ae3d8d1d71aa" class="">Numerous Japanese words have crossed over into the English language, so most people will instantly know what familiar words such as <em>bonsai</em>, <em>karaoke</em>, <em>origami</em>, <em>tycoon</em>, <em>karate</em> and <em>futon</em> mean – but there’s more.</p><p id="603997f2-22fe-49f5-88c3-a6f4d0fd61dd" class="">Japanese car manufacturing, the modern methods of which were pioneered by Toyota, has its own specific words and terms to describe various processes, methods and philosophies. These have all been adopted into the vocabulary of the Toyota workforce at Burnaston, but they are not necessarily familiar to the outside world.</p><p id="e42232d6-7ca2-468c-b0f9-88c13b9cbd50" class="">In this glossary we aim to list and describe some of these words and phrases, in order that we can all have a better understanding of the efficient Toyota Production System, which has subsequently been adopted by all major car manufacturers since its inception.</p><p id="cf1571f5-e200-424a-b74d-03bef593d683" class=""><a href="https://blog.toyota.co.uk/andon-toyota-production-system"><em><strong>Andon</strong></em></a><em> </em>(English: ‘Sign’ or ‘Signal’): A visual aid which highlights where action is required (eg the flashing light in manufacturing plants that indicate the line has been stopped by one of the operators due to some irregularity). <em>Andon</em> is a typical tool to apply the <em>Jidoka</em> principle (also referred to as ‘autonomation’), which means the highlighting of a problem, as it occurs, in order to immediately introduce countermeasures to prevent re-occurrence.</p><p id="7d23c329-d1dc-4ba0-8492-f21bc6d51fd7" class="">Originating from the word for a paper lantern, it is a term that refers to an illuminated signal notifying others of a problem within the quality-control or production streams. Activation of the alert — usually by a pull-chord or button — automatically halts production so that a solution can be found. The warning lights are incorporated into an easily visible, overhead signboard, which also identifies the area or specific workstation that has the problem. The frequency and nature of these occasional issues are analysed as part of Toyota’s programme of continual improvement.</p><p id="99efde6d-5221-4c79-a382-e0337af97884" class=""><a href="https://blog.toyota.co.uk/genba-toyota-production-system"><em><strong>Gemba (Genba)</strong></em></a><em> </em>(English: The actual place, the place where the real work is done): Now adapted in management terminology to mean the ‘workplace’ or the place where value is added. In manufacturing, it usually refers to the shop floor.</p><p id="87a30149-8440-4fcf-9ddd-b08d1b3497a5" class="">Gemba, or genba, as it is also spelt refers to the factory floor or manufacturing floor; often an open-plan environment where each individual’s work and actions are visible to others. This visibility is exploited in order for third-parties — usually management or section leaders — to conduct regular <em>Gemba Walks</em> in order to identify areas where potential improvements might be made, and to better understand the workload of each associate. Walks around the frontline environment of the <em>Genba</em> also ensure that the production system is correctly adhered to.</p><p id="8786f8bb-9458-4020-8f31-460a1cfb39a8" class=""><a href="https://blog.toyota.co.uk/genchi-genbutsu"><em><strong>Genchi Genbutsu</strong></em></a> (English: Go and see for yourself): The best practice is to go and see the location or process where the problem exists in order to solve the problem quickly and efficiently. To grasp problems, confirm the facts and analyse root causes.</p><p id="a7cf32eb-9288-46f5-a99e-7d047f060513" class="">Closely related to the need to walk the <em>Genba</em>, this key principle suggests that to truly understand a situation you need to visit in person. The Toyota Production System requires a high level of management presence on the factory floor, so that if a problem exists in this area it should be first of all correctly understood before being solved. The nature of the phrase is less about the physical act of visiting a site but more to do with a personal understanding of the full implications of any action within an environment as a whole.</p><p id="6753d12d-5a7c-4460-b717-f5dc8d6b8b99" class=""><a href="https://blog.toyota.co.uk/hansei-toyota-production-system"><em><strong>Hansei</strong></em></a> (English: Self-reflection): To recognise mistakes and take appropriate action to avoid re-occurrence.</p><p id="f6e01207-fa78-4dff-8feb-ec464a879448" class="">Even if a task is completed successfully, Toyota recognises the need for a hansei-kai, or reflection meeting; a process that helps to identify failures experienced along the way and create clear plans for future efforts. An inability to identify issues is usually seen as an indication that you did not stretch to meet or exceed expectations, that you were not sufficiently critical or objective in your analysis, or that you lack modesty and humility. Within the Hanseiprocess, no problem is itself a problem.</p><p id="3ae6234a-80c0-4fbd-82ae-5c16fe5594fc" class=""><a href="https://blog.toyota.co.uk/heijunka-toyota-production-system"><em><strong>Heijunka</strong></em></a> (English: Production smoothing): A leveling technique to facilitate Just-In-Time (JIT) production and to smooth out production in all departments, as well as that of suppliers over a period of time.</p><p id="a22c61d3-a7b1-4a24-b2c9-0467b5502c5d" class="">A vital technique for reducing waste and improving production efficiency by leveling fluctuations in performance within the assembly line. Fluctuation normally occurs through either customer demand or within production itself. The Toyota Production System uses Heijunka to solve the former by assembling a mix of models within each batch, and ensuring that there is an inventory of product proportional to the variability in demand. Furthermore, the disruption of production flow is minimised by making sure that components are sequenced to be available in the right quantity and at the right time, while changeover periods for vital processes such as die changes within the steel presses are as short as possible; often in as little as three minutes.</p><p id="9bd775a5-d72a-448b-88e1-e1e7b475b9d2" class=""><a href="https://blog.toyota.co.uk/jidoka-toyota-production-system"><em><strong>Jidoka</strong></em></a> (English: Autonomation — automation with human intelligence): One of the main principles of the Toyota Production System, it is the principle of designing equipment to stop automatically and to detect and call attention to problems immediately, whenever they occur (mechanical <em>jidoka</em>). In the Toyota Production System, operators are equipped with the means of stopping production flow whenever they note anything suspicious (human <em>jidoka</em>). <em>Jidoka</em> prevents waste that would result from producing a series of defective items. It also liberates operators from controlling machines, leaving them free to concentrate on tasks that enable them to exercise skill and judgement, instead of over watching each machine continuously.</p><p id="474a3446-d998-42f2-af67-cfc73aacd5c9" class="">A cost-effective quality control process that combines automation with a human’s ability to quickly detect abnormalities, interrupt production, and then correct them before resuming. Employing Jidoka principles throughout the production process is a vital element of the Toyota Production System, forcing imperfections to be immediately addressed by self-inspecting workers and thereby reducing the amount of work added to a defective product. Some autonomated machines can also function in the detection process, allowing human operatives to only be engaged when alerted to a problem. Full application of Jidoka means that the process which created any issue is subsequently evaluated to remove the possibility of re-occurrence.</p><p id="b0394b2f-9bfb-447d-ba6c-7cb906a0bfa6" class=""><a href="https://blog.toyota.co.uk/just-in-time"><em><strong>Just-In-Time</strong></em></a> (JIT): The Toyota Production System is dictated by the needs of the customer, as we don’t produce anything until there is a need for it. Just-In-Time production means only making what is needed, when it is needed and in the amount needed. TPS operates a ‘pull’ system. When each vehicle is made to order, a signal is sent for parts to be replaced, thus maintaining the parts and materials inventory at a balanced level. Production and transport take place simultaneously throughout the production sequence.</p><p id="af8adf42-ce57-49ae-a65f-75ce87fba4fb" class="">JIT is a method that minimises the generation, purchasing or holding of component parts as stock items prior to full assembly line production. The primary objectives are to save warehouse space and unnecessary cost-carrying and to improve efficiency, which means organising the delivery of component parts to individual work stations just before they are physically required. To apply this flow efficiently means relying on ordering signals from <em>Kanban</em> boards or by forecasting parts usage ahead of time, though this latter method requires production numbers to remain stable. Use of JIT within the Toyota Production System means that individual cars can be built to order and that every component has to fit perfectly first time because there are no alternatives available. It is therefore impossible to hide pre-existing manufacturing issues; they have to be addressed immediately.</p><p id="72e993a6-aa10-4d9f-b6f5-137e31022d1e" class=""><a href="https://blog.toyota.co.uk/kaizen-toyota-production-system"><em><strong>Kaizen</strong></em></a> (English: Continuous improvement): A process that helps to ensure maximum quality, the elimination of waste, and improvements in efficiency. <em>Kaizen</em> improvements in standardised work help maximise productivity at every worksite. Standardised work involves following procedures consistently and, therefore, employees can identify problems promptly. <em>Kaizen</em> activities include measures for improving equipment, as well as improving work procedures.</p><p id="91e000d6-67c5-4fdd-bbde-5f12489ac39f" class="">Literally ‘good change’, the word now refers to the culture and philosophy of continuously improving any department or functional process, thereby increasing productivity, quality and efficiency. Within the Toyota Production System, <em>Kaizen </em>humanises the workplace, empowering individual members to identify areas for improvement and suggest practical solutions. The focused activity surrounding this solution is often referred to as a <em>kaizen blitz</em>, while it is the responsibility of each member to adopt the improved standardised procedure and eliminate waste from within the local environment.</p><p id="fc1abbfa-4980-4641-990d-49fc376c5f91" class=""><a href="https://blog.toyota.co.uk/kanban-toyota-production-system"><em><strong>Kanban</strong></em></a> (English: Signboard): A tool used in the Toyota Production System to operate the ‘pull’ type production system. It is a system that provides for the conveying of information between processes and automatically orders parts as they are used. Every item or box of items that flows through the production process carries its own <em>kanban</em>. <em>Kanbans</em> are removed from items as they are used or transported and go back to the preceding processes as orders for additional items.</p><p id="d7a032c9-a9d4-48bc-abcf-d4e157cedcfe" class="">Though literally translated as ‘signboard’, the Toyota-developed method has become known as a clear, sign-based scheduling system triggering the logistical chain of production and maintaining it at an optimal level. <em>Kanban </em>is the quick-response system through which Just-In-Time production is achieved, harmonising inventory levels with actual consumption. Toyota has six rules for the effective application of <em>Kanban</em>: 1) Never pass on defective products; 2) Take only what is needed; 3) Produce the exact quantity required; 4) Level the production; 5) Fine-tune production; and 6) Stabilise and rationalise the process.</p><p id="b506e8c9-a4f1-4b8e-bd32-1e2fb431b0ca" class=""><em><strong>Manufacturing Supermarket</strong></em></p><p id="a918fbb4-d12d-4c1c-b614-2c4b4318d9f6" class="">A replenishment process which ensures that all manufacturing components ordered from outside suppliers are available to be loaded and delivered in one consignment. Derived from the system used by retail supermarkets, it levels the occasional spikes in demand experienced in individual factories by requiring suppliers to smoothly and systematically gather unusually large orders to a separate holding area, or ‘virtual truck’, ahead of the regular loading schedule. This process avoids any disruption to the tempo of deliveries and last-minute rushing around to complete an order.</p><p id="c2b47d0a-048f-434d-b4ca-c2c5daffbc70" class=""><a href="https://blog.toyota.co.uk/muda-muri-mura-toyota-production-system"><em><strong>Muda</strong></em></a> (English: Waste): In management terms, refers to a wide range of non-value-adding activities. For example, anything an operator has to do within a process which does not add value but does add cost. Eliminating waste is one of the main principles of the Just-In-Time system. Waste incurs unnecessary finance costs and storage costs.</p><p id="ea3bebe9-5931-4699-91fa-77fe1c5157a6" class="">The first of three types of waste mentioned within the Toyota Production System (the others being <em>Mura </em>and <em>Muri</em>), the identification and reduction of which will reduce the unnecessary consumption of resources and increase profitability. Toyota divides <em>Muda</em> into seven resources that are frequently wasted: 1) Transportation — a cost that adds no value to the product but increases the risk of a product being damaged, lost or delayed; 2) Inventory — a capital outlay that if not processed immediately produces no income; 3) Motion — any damage inflicted through the production process, such as normal wear and tear in equipment, repetitive stress injuries, or by unforeseen accidents; 4) Waiting — products that are not in transport or being processed; 5) Over-processing — when more work is done than necessary, or when tools are more complex, precise or expensive than necessary; 6) Over-production — larger batches or more products being made than is required; and 7) Defects — the loss involved in rectifying faulty parts or products.</p><p id="2695fc66-a0d2-4c4a-8ff1-bff14fce012d" class=""><a href="https://blog.toyota.co.uk/muda-muri-mura-toyota-production-system"><em><strong>Mura</strong></em></a> (English: Unevenness or irregularity): Eliminating unevenness or irregularities in the production process is one of the main principles of the Just-In-Time system, the main pillar of the Toyota Production System.</p><p id="7c48e8ec-e03e-4bde-9b87-0e1643a3af8c" class="">The second of three types of waste mentioned within the Toyota Production System, notably identified and leveled through the application of <em>Heijunka </em>principles and <em>Kanban </em>devices. Workflow is also smoothed by requiring members to operate multiple machines — also known as ‘multi-process handling’ — within any particular process, and by predicting and preparing for times of high demand.</p><p id="13f571e9-a66d-40bf-9010-30c2c41e8319" class=""><a href="https://blog.toyota.co.uk/muda-muri-mura-toyota-production-system"><em><strong>Muri</strong></em></a><em><strong> </strong></em>(English: Overburden): Eliminating overburden of equipment and people is one of the main principles of the Just-In-Time system, the main pillar of the Toyota Production System. To avoid overburden, production is evenly distributed in assembly processes.</p><p id="f8f75b4f-b91e-427b-ad26-ca5305bfee7a" class="">The third of three types of waste highlighted within the Toyota Production System, requiring the balancing of manufacturing pace to allow members sufficient time to achieve the correct standard of work. A reduced time frame will be too burdensome to achieve the objective, while the allowing of too much time is a waste of resource. (Related: <em><strong>Takt Time</strong></em> [derived from German word <em>Taktzeit</em>, or ‘cycle time’] — matching the pace of production with customer demand and the available work time).</p><p id="d3504e8d-1987-475c-ab1d-f55e68f77e1c" class=""><a href="https://blog.toyota.co.uk/nemawashi-toyota-production-system"><em><strong>Nemawashi</strong></em></a> (English: Laying the groundwork or foundation; building consensus): The first step in the decision making process. It is the sharing of information about decisions that will be made, in order to involve all employees in the process. During <em>Nemawashi</em>, the company seeks the opinion of employees about the decision.</p><p id="7e1b9060-748c-4980-b234-8cc507ae10fe" class="">Literally translated as ‘going around the roots’, particularly in the sense of digging around the roots of a tree to prepare it for transplant. Within the Toyota Production System — and Japanese culture itself — the word has come to mean an informal process of laying the foundation and building a consensus of opinion before making formal changes to any particular process or project. Successful application of <em>Nemawashi</em> allows changes to be carried out with the consent of all parties.</p><p id="e24a23c3-3b15-42b2-bfdb-21fcfe3c0f0b" class=""><a href="https://blog.toyota.co.uk/poka-yoke"><em><strong>Poka-Yoke</strong></em></a> (English: Mistake-proofing): Failsafe devices in the production process (sensors, templates etc) that automatically stop the line when an abnormality occurs.</p><p id="472b84fb-f024-4d71-9400-d0f94fab9864" class="">A <em>Poka-Yoke</em> is any part of a manufacturing process that helps a Toyota member avoid (yokeru) mistakes (poka). Its purpose is to eliminate defects by preventing, correcting, or highlighting errors as they occur – for example, a jig that holds parts for processing might be modified to only allow them to be held in the correct arrangement. In a wider sense, the term can refer to any behaviour-shaping constraint designed into a process to prevent incorrect operation by the user.</p></div></article></body></html>

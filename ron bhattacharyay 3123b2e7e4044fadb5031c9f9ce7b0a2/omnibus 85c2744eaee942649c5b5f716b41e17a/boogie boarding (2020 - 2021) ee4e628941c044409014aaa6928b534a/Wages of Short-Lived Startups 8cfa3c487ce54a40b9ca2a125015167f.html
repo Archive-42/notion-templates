@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wages of Short-Lived Startups</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8cfa3c48-7ce5-4a40-b9ca-2a125015167f" class="page sans"><header><h1 class="page-title">Wages of Short-Lived Startups</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://news.techworkerscoalition.org/2020/09/04/issue-10/" class="url-value">https://news.techworkerscoalition.org/2020/09/04/issue-10/</a></td></tr></tbody></table></header><div class="page-body"><p id="f14c4088-4692-4be6-9d95-93d58dae12ee" class="">After eight grueling years stitching together a design career, <a href="https://twitter.com/atav1k/">Vikram Rojo</a> shares how bonds with friends and family, plus ad-hoc tweets, helped him break into and break free from a string of startups and their bureaucratic traps. He considers himself lucky, and demands the real question: how might we as tech workers demand more than pay, but dignity? How can we all get a decent job, a home, and a chance to get by?</p><p id="80eb0891-976d-4724-917e-cbb74fd8da57" class="">Meanwhile, in the news, landlords are using data to enable evictions, but workers are showing how innovation and demands go together. And in history, some lesser-known and politically powerful pages of Black Panther comics.</p><p id="501064aa-979f-4434-9da4-4e45eb00158d" class=""><a href="https://commons.wikimedia.org/wiki/File:David_Graeber_speaks_at_Maagdenhuis_Amsterdam,_2015-03-07_(16740978331).jpg"> </a>Rest in Power David Graeber (1961-2020), who constantly asked us to challenge the stories we tell ourselves about human nature. / Source</p><figure id="aa587314-ba11-48f4-b3b2-5457b34cdcac" class="image"><a href="Wages%20of%20Short-Lived%20Startups%208cfa3c487ce54a40b9ca2a125015167f/vol-2-issue-10-header.jpg"><img style="width:700px" src="Wages%20of%20Short-Lived%20Startups%208cfa3c487ce54a40b9ca2a125015167f/vol-2-issue-10-header.jpg"/></a></figure><h2 id="e8d26b50-bd20-4b0c-a403-f9525cee6a2e" class="">The Workers’ Perspective</h2><p id="088244b5-11bd-4f38-a3fc-3b40338df464" class=""><strong>By Vikram Rojo</strong></p><p id="19e9b82e-55b1-4a55-9a2f-e785e400039d" class="">After years of being undocumented plus stints of minimum-wage service jobs and underpaid agency work, my first tech job in San Francisco felt miraculous. I’d flown from Michigan to San Francisco with just a backpack to attend a conference. During the first talk, I spotted a familiar face in the crowd. We hugged with a fondness reserved for internet friends and by lunch they’d introduced me to another friend. And so, within 24 hours of landing in San Francisco, I had an offer for double my Midwestern salary as a web developer. Not long after returning to Michigan, I loaded all of my belongings aboard Amtrak Express.</p><p id="cfe58f7f-4257-40a4-a65a-7a4a1512fa39" class="">The job would only last 10 months, an arc from a high point of a celebrated funding round and office expansion to an almost predictable downsizing in a new office that was already half empty. That set the pace for my next eight years, as my career meandered through mostly failed or dying startups. But given where I started, I’ve been content to observe the bureaucratic life of tech as a bystander. For years I felt guilt for earning what I did relative to friends and partners, and grudgingly satisfied with whatever was handed out. I never negotiated an offer, fought for a promotion or challenged the terms of a layoff. Especially in this moment of universal suffering, I feel content to just have a job.</p><p id="3bc69f26-d1d2-409c-b2a3-ba3db6224a3f" class="">If there’s a monolithic tech worker, I haven’t met many. I can count on one hand the number of folks that have netted over a quarter million dollars from shares. Many of them felt cheated out of greater ownership. And yet, we subscribe to the image of a white or Asian male tech worker who makes upwards of $200k, has had successful unicorn exits, benefits from an influential network, and is simply waiting to start their own company with oversubscribed investors. So with each new job, I tell myself that these promissory shares will afford me my dreams. But I’ve yet to exercise a single share from any of the startups I’ve worked at. My reasons for not purchasing shares varied: I didn’t hit the one-year cliff; I saw decline in value coming; or I simply couldn’t afford it, between the strike price and tax hit. I’ve seen friends regret buying paper money with real savings, and I’ve seen others lose out on vesting because their family couldn’t afford the lack of liquidity. You just can’t beat the market, and worse, the startup market is volatile.</p><p id="d56fc2cc-6b07-499d-b36a-7952a673e168" class="">At almost 40, I realize that majority of us tech workers look nothing like what we aspire to: holding shares in a steadily growing company with a path to exit and a home. But, I feel like I’ve finally reached that: for the first time in my life, I was insured for a whole year. A few years ago, I reckoned that I’d have been better off if I had gone to work for a public company. A job with a few thousand shares of stock in a monoloith like Microsoft go a lot further on the NYSE than in the cap table of a Series A startup.</p><p id="10d88241-a876-49bc-9d36-15d5057583bb" class="">Now, coming up on my eighth year working for startups, what do I have to show for my pockmarked resume at a string of startups that have faded into obscurity? Beyond cynicism for the tech worker social contract and a network of equally cynical peers, I finally landed a six-figure salary. My current company is doing well; it’s even possible that we’ll cross the valley of hypergrowth to an IPO. Still, repeated experiences of watching leadership teams commit to unachievable goals and failing dismally has me looking over my shoulder.</p><p id="e5c2d73e-b349-4624-a502-a8117375154f" class="">I don’t think it’s asking too much that I earn a decent salary, have job stability, keep reasonable hours, have autonomy in my work, and feel that I can shape the direction and values of my company. Startup employees are often lured in with the promise that they’ll own stock in the company, but owning 0.05% of a company when the CEO owns 30% is far from co-ownership. In practice, startups are rarely the egalitarian dream their founders present them to be. Many tech workers, myself included, would rather be baking bread.</p><p id="4e5e18dd-c6c8-4ca0-a27a-d00f4524134b" class="">I love to ridicule corporate life, but I’ve come to see it as one of the few social institutions that remains intact. Gone are churches, bingo halls, multigenerational families and lodges. This vacuum of cohesion leaves belonging almost entirely to brands, corporations and media. But only one can feed and shelter you. In a fragmented society, startups have sometimes given me a sense of belonging, but at other times, a profound alienation. After all, even in the most seemingly stable companies, things get messy: despite massive stock gains, there have been massive job cuts in this sector. It makes me question the fragility of corporate institutions and whether this is the community I want to belong to. I’ve seen coworkers agitate for transparency and accountability, but it’s challenging. Leadership and business outlook can quickly change, it’s hard to speak out alone, and organizing sometimes just feels like extra work.</p><p id="cf84b71b-0f0e-413c-81b8-3d76f1181631" class="">A while back, a coworker of mine got laid off. They didn’t get along with their manager, which is usually a job-killer. It was a months-long ordeal, particularly because the manager had already been reported as abusive. Yet they were laid off a month shy of their vesting cliff. That was the beginning of their ordeal. They were suffering multiple crises and the promise of normality at work kept them going. Now they were on the ledge of a rooftop. We spoke for hours that night and many nights following. There was little I could do; bureaucracies are built to be blameless.</p><p id="464ff5df-edfb-40dd-a907-71fbc7bb286f" class="">Retaliation is hard to challenge. I know this because my mother was wrongfully terminated eight months before her retirement after a dozen years of service. Women of color and disabled workers are easy targets for bad managers. My mother went to court and settled for a pittance. There’s <a href="https://twitter.com/michalrozworski/status/1189590491559419904">a chart flying around Twitter</a> about wage theft taking more than $35 billion from employees, but what happened to my mother and my friend also robbed them of their dignity and belonging.</p><p id="c0d3cf7a-9c02-4f69-9dd0-1b32e06b0e04" class="">The pandemic is changing the nature of work, in ways that are better for some of us but deadly for others. Corporations are reevaluating the worth of workers, and the most common outcomes include layoffs, withholding hazard pay, and providing substandard protective equipment. For a lucky few, there’s a silver lining: it’s the perfect time to move away and go remote. Others have no choice but to stay and suffer. I’m grateful that I was able to move to Colorado a year ago while keeping my job; today, many are contemplating similar moves, and I’ve found myself counseling others on how to negotiate the request. There are conversations happening now that were unwelcome years ago, in spaces that are far less hostile to worker concerns.</p><p id="1298ce2d-2669-4cab-a85d-93adc214dba6" class="">It’s far from certain that the future of tech labor will be comfortable. Design history suggests the opposite: after all, there was a time when operating a printing press was a professional job. I’ve watched out for dead-ends in my career, but I can’t say what no-code or machine learning will bring. I’d prefer instead that we agitate for greater access to the industry, for more collective ownership over what we produce, for more control over how our labor is used, and for a stronger security net than two weeks’ severance.</p><h2 id="05cd6008-58c5-4f3c-891a-37c2402193f8" class="">In The News</h2><p id="484eefce-497b-4947-b39b-958282b9facd" class="">First, some news from us: <a href="https://news.techworkerscoalition.org/call-for-submissions/"><strong>we’re announcing an open call for submissions</strong></a>.</p><p id="dfd2f8a8-a665-4bc9-bc7d-fad836dc41c5" class="">As tech workers organize and build power in the industry, we invite you to share your workers’ perspectives — even if it’s just an idea. We also welcome suggestions for tech labor news, historical events to highlight, song recommendations, and other contributions. Read more <a href="https://news.techworkerscoalition.org/call-for-submissions/">here</a>!</p><p id="e9daf89f-e44f-4548-a50f-404ebb956a80" class="">Now, news from tech and labor.</p><p id="e646d63c-4388-434b-a346-082d8b437aa5" class="">After police in Kenosha, Wisconsin brutally and wrongly shot Jacob Blake, a Black man, <a href="https://slate.com/culture/2020/08/wnba-activism-nba-strike-influence-jacob-blake.html">the WNBA inspired a wildcat strike</a> with dozens of sports teams withholding their labor. Sports livestreaming is a massive source of ad revenue, and social media is amplifying pro athletes ‘now more than ever’ under COVID-19. What made a difference was, players settled on a demand, albeit less than what justice requires: use stadiums as polling stations in the November general election. <strong>And, </strong><a href="https://www.nytimes.com/2020/08/28/sports/basketball/nba-playoffs-resume.html"><strong>they won</strong></a><strong>.</strong></p><p id="1a0a6b01-ed27-4067-8fbc-cc76ae05e14c" class="">A 17 year-old white supremacist murdered two people who were protesting the shooting of Jacob Blake in Kenosha. He was enabled and encouraged in part by militias organizing on Facebook. In response to CEO Mark Zuckerberg’s fumbling in the face of calls to stop the hate speech and violence, <a href="https://www.buzzfeednews.com/article/ryanmac/facebook-employees-slam-zuckerberg-kenosha-militia-shooting">Facebook employees spoke up</a> — as they have time and again. And despite Zuckerberg’s statements that his company took down a Facebook event where people discussed gathering in Kenosha to shoot and kill protesters, <a href="https://www.buzzfeednews.com/article/ryanmac/facebook-failed-kenosha">the company never removed it</a>.</p><p id="b1a6ce5c-3f79-4eff-981e-fee6c2d7ec28" class="">As nationalism and Islamophobia deepen in India, Facebook employees are also upset with how <a href="https://www.reuters.com/article/us-facebook-india-exclusive/exclusive-facebook-employees-internally-question-policy-after-india-content-controversy-sources-memos-idUSKCN25F1VW">the company refuses to take down anti-Muslim bigotry</a>. One Facebook moderator told us that with 35,000 moderators and millions of decisions made each day, it’s a thicket of wicked problems:</p><blockquote id="bda27df7-0fcf-41a6-9705-cb2dd1223108" class="">“You need to write rules for them to follow, guidelines, whatever you call them, so that everyone treats the same content in the same way… One of the problems at FB is that they require moderators to maintain 98% accuracy, which is not realistic and creates a culture of management by numbers. Moderators are dehumanized and stressed by it.”</blockquote><p id="3552628d-1c8b-4413-b2d8-e965e44ee40f" class="">Tech policy analyst Divij Joshi clarified Facebook’s legal status in India in <a href="https://twitter.com/divijualsuspect/status/1301124430098120709">a thread</a>, adding “TL;DR — The updated FB ToS does not change the legal reality (vacuum rather) under which content moderation exists in India (and to my knowledge, in the rest of the world).” But, while employees are asking Zuckerberg tough questions at company all-hands meetings, it hasn’t worked — yet.</p><p id="0f0861be-5832-4cff-b3af-ce40c0af8c87" class="">For many of us, the flip side of work is paying rent. Abigail Higgins and Olúfẹ́mi O. Táíwò wrote about how <a href="https://www.thenation.com/article/society/police-eviction-housing/">police and landlords collaborate to evict tenants</a> — with help from private surveillance. Specifically, authorities buy their data to conduct <a href="https://www.nytimes.com/2020/05/28/business/renters-background-checks.html">“automated background checks”</a> on tenants, move eviction court proceedings without an in-person hearing, and trap people in <a href="https://journals.sagepub.com/doi/abs/10.1177/0896920514524606?casa_token=5y_oVZaoajAAAAAA%3AmnMuD2GL3qhJJilWSpDkuZgNC47Emep0hosPAqA6P1ds3R1ZH2ONGgsJY2owTs11Hm3yfhISwgvQ&amp;journalCode=crsb">a “circle of dispossession”</a>. <a href="https://dev.latenantsunion.org/en/"><strong>The LA Tenants Union built rapid-response phone and SMS tool</strong></a> to create “a base of empowered tenants who can educate and support each other in times of need,” but we need more proactive organizing and tech. Even in the midst of a global crisis, <a href="https://twitter.com/joshscampbell/status/1301324061373538304"><strong>landlords aren’t hesitating to evict our friends and neighbors</strong></a>, and joining a tenants union is a crucial step in building the power to resist.</p><p id="3395ff1e-0794-4a42-aff8-99e8be5bb3ee" class="">We believe worker demands and innovation go well together:</p><ul id="b55a8750-73c5-460a-bf5a-71337922630f" class="bulleted-list"><li>In solidarity with the Muslim Justice League’s demand to <a href="https://docs.google.com/document/d/e/2PACX-1vQmqkqcZIKP-pRte53Y6j8p26ldLrCoLY-WQ8sYvYDaZuVv1_UHCKu1IePWJGn5bfPdJsa_GPWHEFp6/pub">get the BRIC Fusion Center out of Boston</a>, the Boston Tech Worker Organizing Group and <a href="https://boston.techworkerscoalition.org/">TWC Boston</a> started a pledge you can sign: <a href="https://www.jotform.com/form/201663794809062"><strong>#NoCodeforCops</strong></a>.</li></ul><ul id="10dd9435-3845-4396-84b6-733c2fc2b6df" class="bulleted-list"><li>As a critical alternative to police, the <a href="https://www.antipoliceterrorproject.org/">Anti Police-Terror Project</a> launched <a href="https://www.antipoliceterrorproject.org/mh-first-oakland"><strong>MH First</strong></a><strong>, a phone line for mental health first-responders</strong>.</li></ul><ul id="daade362-d368-4fec-83e4-8c7994933f22" class="bulleted-list"><li><a href="https://twitter.com/ArminSamii/status/1295857106080456706">Armin Samii</a>, a programmer turned Uber Eats delivery driver based in Pittsburgh, created <a href="https://www.salon.com/2020/08/20/programmers-say-uber-eats-is-systematically-underpaying-their-workers/"><strong>a browser extension that shows when Uber underpays by distance</strong></a>.</li></ul><ul id="5a260934-7a0e-4c1a-ac53-9d998b467f40" class="bulleted-list"><li>While California wildfires create <a href="https://www.sacbee.com/news/california/article242169741.html">the worst air quality in the world</a>, the <a href="https://techcrunch.com/2020/08/25/instacart-workers-demand-disaster-relief/"><strong>Gig Workers Collective is demanding Instacart cease operations and provide disaster relief</strong></a>.</li></ul><ul id="78d8f51c-f007-4dfe-85df-b16baa71ce48" class="bulleted-list"><li>Amazon protestors demanding higher wages <a href="https://www.businessinsider.com/bezos-mansion-protesters-set-up-guillotine-demand-higher-wages-2020-8"><strong>built one of the most innovative devices in history</strong></a> — a guillotine — right in front of Jeff Bezos’ mansion. Elsewhere, in front of the San Leandro Amazon distribution center, <a href="https://www.instagram.com/p/CEIBaPHAVAB/">a car caravan formed a blockade while playing The Coup’s song “5 Million Ways To Kill A CEO.”</a></li></ul><ul id="ac834e5b-75f5-4300-ae80-48b6705d1b59" class="bulleted-list"><li>Outside of distribution centers near Chicago, <a href="https://www.bloomberg.com/news/articles/2020-09-01/amazon-drivers-are-hanging-smartphones-in-trees-to-get-more-work">Amazon workers hang cell phones from trees</a> to get a millisecond advantage over peers trying to claim jobs. Amazon probably knew that before most, with their <a href="https://www.vice.com/en_us/article/3azegw/amazon-is-spying-on-its-workers-in-closed-facebook-groups-internal-reports-show">sophisticated spy program surveilling workers in private Facebook groups</a>. And as <a href="https://twitter.com/LaurenKGurley/status/1301186458187960320">the company claimed to suspend it</a> in a call to the reporter who broke the story about their spying, <a href="https://www.vice.com/en_us/article/qj4aqw/amazon-hiring-intelligence-analyst-to-track-labor-organizing-threats">Amazon is hiring analysts with explicit union-busting duties</a>.</li></ul><ul id="7873ef3e-1d5c-4cac-929a-7009d9641d04" class="bulleted-list"><li>Finally, our demands need to be about life, not work. <a href="https://twitter.com/beccalew/status/1301247519825985538">As one tech subculture scholar tweeted</a>, “the tech industry ruined being passionate about things… if you tell me you are passionate about something there’s a 90% you work in tech and the thing you’re passionate about is a salesforce customization.” <strong>Don’t be that person.</strong></li></ul><h2 id="b1241881-2d33-43da-a630-0f0d44200b5b" class="">In History</h2><p id="d2a3972b-781e-44f3-b443-975c6c39f949" class="">The true beauty of Black Panther isn’t utopian technology, but political vision – and a huge, little-known volume of that never made it from comic book pages to screen.</p><p id="f68b2c6d-d723-482d-88d4-b5172ca678c2" class="">Like all media empires, comic books have a way of leaving ideas out as they turn into films. Chadwick Boseman, the actor who played King T’Challa in the Disney film, <a href="https://www.bbc.com/news/world-us-canada-53955912">passed away</a>. He will be appreciated for a life of achievements, from his days at Howard University where <a href="https://twitter.com/blkwomenradical/status/1299715873389899782">he and other organizers confronted the president</a> to stop arts education cuts, to 2018 <a href="https://twitter.com/heywadeking/status/959511356385976321">when students spontaneously celebrated going to see Black Panther in theaters</a>. But, despite what he stood for and how he lived, Boseman’s portrayal of T’Challa was filtered through a Disney lens. Black Panther director Ryan Coogler, whose first film Fruitvale Station told the story of police murdering Oscar Grant in cold blood, met with a range of former Black Panther writers in the brainstorming phase — including with Reggie Hudlin and Ta-Nehisi Coates creating other characters.</p><p id="dcb474ef-0a7a-41ff-8851-8d687121f40b" class=""><a href="https://africana.sfsu.edu/people/faculty/duane-deterville">Duane Deterville</a>, a visual culture scholar in the Africana Studies Department at San Francisco State University who teaches “<a href="http://userwww.sfsu.edu/def/cyb.html">Black On-Line: Cyberspace, Culture, and Community</a>,” highlights just how important these other storylines were. He points us to <a href="http://hudlinentertainment.com/black-panther-annual-1-review/">one Hudlin comic</a> where T’Challa, a grey-haired elder and world leader, tells his granddaughter the cautionary tale of American empire:</p><blockquote id="2f018498-122e-46a7-a3f4-788f091f7153" class="">“…we thought that level of ambition would damage the morality of our culture. Imperialism becomes a self-serving goal that undermines what you’re fighting for. Look what happened to Christianity once they went from being an oppressed religion to persecuting ‘non-believers’ themselves.”</blockquote><p id="9a4fd2cf-6efb-4bbf-b198-486bf3b5033d" class=""><a href="http://hudlinentertainment.com/black-panther-annual-1-review/"> </a>A page from Reggie Hudlin&#x27;s Black Panther, all rights reserved. / Source</p><figure id="2c594d96-fb57-4002-b18e-f4d9136b8fa3" class="image"><a href="Wages%20of%20Short-Lived%20Startups%208cfa3c487ce54a40b9ca2a125015167f/vol-2-issue-10-img-1.jpg"><img style="width:691px" src="Wages%20of%20Short-Lived%20Startups%208cfa3c487ce54a40b9ca2a125015167f/vol-2-issue-10-img-1.jpg"/></a></figure><p id="304d54a3-f0bf-4897-9136-4e10f577453c" class="">Comic books are far from perfect, as we learned from <a href="https://davidgraeber.industries/">David Graeber</a>, anthropologist, anarchist, and writer on debt, jobs, and bureaucracy, also <a href="https://www.theguardian.com/books/2020/sep/03/david-graeber-anthropologist-and-author-of-bullshit-jobs-dies-aged-59">passed away recently</a>. We’re grateful for his essay <a href="https://thenewinquiry.com/super-position/">Super Position</a>, in which Graeber discusses how superheroes live in and maintain an “inherently fascist space” of counter-revolutionary violence:</p><blockquote id="daa9f84f-de57-4a14-a6b3-76b989fff248" class="">The supervillains and evil masterminds, when they are not merely indulging in random acts of terror, are always scheming of imposing a New World Order of some kind or another. Surely, if Red Skull, Kang the Conqueror, or Doctor Doom ever did succeed in taking over the planet, there would be lots of new laws created very quickly, although their creator would doubtless not himself feel bound by them. Superheroes resist this logic. They do not wish to conquer the world—if only because they are not monomaniacal or insane. As a result, they remain parasitical off the villains in the same way that police remain parasitical off criminals: without them, they’d have no reason to exist. They remain defenders of a legal and political system which itself seems to have come out of nowhere, and which, however faulty or degraded, must be defended, because the only alternative is so much worse.</blockquote><p id="aa7842de-76d3-410e-b134-f8522117b27e" class="">This perspective matters because, in lesser-known comics left out of the Disney universe, the Black Panther breaks the mold; he fights fascism as a system. <a href="https://www.polygon.com/2018/1/26/16898048/marvel-black-panther-movie-comics-avengers-chadwick-boseman">An essay in Polygon</a> says the Black Panther “predates the October 1966 founding of the Black Panther Party, the socialist and anti-fascist group that organized to unite African-Americans against police brutality and racial supremacy in American society and politics,” but it is easy to believe otherwise; in another page from Hudlin, the narrator says, “Cap [Captain America] didn’t know the Wakandans had already beheaded the Nazis days ago.” Cap then tries to fight Black Panther in hand-to-hand combat, and loses, before eventually trying to help. But as T’Challa tells his granddaughter: “Americans don’t know how to kill someone and keep them dead.” That someone is a reference to Dr Doom, a villain <a href="https://twitter.com/SeanHarry/status/896507933558804480/photo/1">of Romani descent</a> and therefore an enemy of Red Skull, another villain who built mechanized suits and other weapons for the Nazi regime. Black Panther fought them all – and their empires. Black Panther had vision, one we must keep alive for the future.</p><h2 id="803f9c68-424c-42ed-9dcf-cae9cbd22424" class="">In Song</h2><p id="11097116-6f0e-4189-b4da-9e9abe6ba70c" class=""><a href="https://www.youtube.com/watch?v=TuLYvNYvGp0"><strong>Fight Like Ida B &amp; Marsha P, by Ric Wilson</strong></a></p><blockquote id="e273d57e-270e-4e5c-b495-6e2007447ffe" class="">I got bodily autonomy  And its policy is people over property  Treat us like pieces of monopoly  One day you’ll be nothing but the rich to eat  Uh, Defund the police  Abolish the prisons, or don’t speak a word to me  Stop ICE and let ‘em all free</blockquote></div></article></body></html>

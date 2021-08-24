@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Minitel: The Online World France Built Before the Web</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="aa49c2c7-edc9-4a18-bf35-6e3743e27d23" class="page sans"><header><h1 class="page-title">Minitel: The Online World France Built Before the Web</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://spectrum.ieee.org/tech-history/cyberspace/minitel-the-online-world-france-built-before-the-web" class="url-value">https://spectrum.ieee.org/tech-history/cyberspace/minitel-the-online-world-france-built-before-the-web</a></td></tr></tbody></table></header><div class="page-body"><h2 id="98c8d3fe-fcef-4044-84c9-b0e2f3194fb5" class="">A decade before the Internet went mainstream, French citizens were interacting via Minitel, a computer network open to anyone with a telephone</h2><figure id="2cf56f38-2214-41fd-a768-9ea53ecb3ba7" class="image"><a href="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMjk1MA.jpeg"><img style="width:620px" src="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMjk1MA.jpeg"/></a></figure><p id="f2a50510-c417-426f-9fb8-8d3c98db8eb0" class="">Photo: SSPL/Getty Images</p><p id="1105de46-371e-4203-bfb9-dbef447d3f29" class=""><strong>It was the late 1970s. </strong>Former French presidents Charles de Gaulle and George Pompidou had recently died. The Arab oil embargo caused energy prices to quadruple for a time. Marseille remained gripped by drug lords. And France had to face the fact that its telephone network was one of the worst in the industrialized world. Fewer than 7 million telephone lines served 47 million French citizens, and the country’s elite felt that the domination of U.S. firms in telephone equipment, computers, databases, and information networks threatened their national sovereignty. Or at least it damaged their cultural pride.</p><p id="91c26f88-0257-496d-b697-038e44e0ff33" class="">In an influential 1978 report to President Valery Giscard d’Estaing, titled <em>The Computerization of Society</em>, government researchers Simon Nora and Alain Minc argued that the solution to France’s telecom woes lay in “telematics”—a combination of <em>telecommunications and informatics</em>. They outlined a plan for digitizing the telephone network, adding a layer of interactive <a href="https://motherboard.vice.com/en_us/article/time-teletext-pre-internet-digital-media?utm_source=mbtwitter">teletext video technology</a>, and providing entrepreneurs with an open platform for innovation.</p><p id="21a2b221-0e34-4ed5-9981-3e721d5db78f" class="">Taken with Nora and Minc’s vision, the nation’s leadership began to lay the groundwork for France’s computerized future. In 1983, on orders from the president, computer engineers within the Post, Telegraph &amp; Telephone (PTT) ministry began to roll out throughout France a telematics system that came to be known as Minitel. It allowed ordinary people to obtain and share information online, launching the country into the digital age and leapfrogging the United States by more than a decade.</p><p id="a4c2f2b1-533b-45e4-8eb3-6eab89dfbb47" class="">The story of how Minitel came to be is a fascinating but largely forgotten one. To the extent that it’s remembered today, Minitel is portrayed as a closed, centralized system encumbered by government bureaucracy that failed to change with the times. But back in 1983 it was like nothing anyone had seen before, eventually growing to have more than 20,000 online services before the World Wide Web even got off the ground.</p><p id="5348dd0d-16b1-4dce-be27-772e832f2be9" class=""><strong>In Silicon Valley today,</strong> those who lived through the Minitel era tend to view it as the epitome of how not to build and operate an online system: They believe that letting the government design and run it just invited disaster. In truth, Minitel was never fully controlled by the state. It was a hybrid system—a public platform for private innovation. And it worked pretty well.</p><p id="d5c44689-c367-46e8-a366-5fd38e992c72" class="">To initiate a connection, a user manually dialed a local gateway using a telephone handset. The call, carried over the public switched telephone network, was answered by software running on the switch—typically a CIT- Alcatel E-10—which played an audible carrier signal back over the line. Hearing this tone, the user would place the handset back on its cradle and begin using the Minitel terminal, which would be carrying out a special handshake protocol with the switch.</p><p id="821611b2-b404-4fd1-ac3d-a0cf1392720d" class="">Rail travelers bought tickets from 3615 SNCF, news junkies gathered at 3615 LEMONDE, and dudes ( <em>mecs</em> in French) browsed the personal ads at 3615 MEC</p><p id="4cb2a367-1c5c-40c3-8309-68e0e706ddf0" class="">The gateways, known as <em>points d’accès videotex</em>, or PAVIs, provided an interface to a directory of known Minitel services, identified by short mnemonic codes. For example, rail travelers bought tickets from 3615 SNCF (SNCF being an acronym for Société Nationale des Chemins de Fer, the French railroad), news junkies gathered at 3615 LEMONDE (<em>Le Monde</em> being a leading Parisian newspaper), and dudes (<em>mecs</em> in French) browsed the personal ads at 3615 MEC. Like URLs today, these codes were printed in magazines, shown in television commercials, and plastered on the sides of buses.</p><p id="38a544bd-e6da-4d19-8a78-ef98d3c0bec8" class="">Once the user typed in the desired destination, the switch created a virtual circuit over a public data network known as <a href="http://ieeexplore.ieee.org/document/5621965/?reload=true">Transpac,</a> and data could begin to flow from the client’s terminal to the host server and back. These virtual circuits used the X.25 network protocol, the paradigmatic packet-switching technique developed largely by researchers at the French Centre Commun d’Études de Télévision et Télécommunications.</p><p id="83978bc5-0505-4abc-8c6f-6e4fab5e2164" class="">At the start, though, Minitel advocates faced a chicken-and-egg problem. Why would anyone adopt the system unless there were interesting things to do with it? And yet how could they convince entrepreneurs to create services unless the platform already had users? Somehow, Minitel needed to attract both users and service providers at the same time.</p><p id="35963649-3421-4e27-b39c-732186b95e9c" class="">To kick-start the process, the PTT ordered millions of Minitel terminals (built by French manufacturers such as Telic-Alcatel and Matra) and made them available at no cost to everyone in the country who had a telephone line. Anyone curious about the new system being promoted on TV could simply go to the post office and return home with a shiny new Minitel box.</p><p id="a9d3c3ef-741b-4055-90c0-44b79409b278" class="">Minitel designers made the system fully plug and play: All you had to do was plug the terminal into the wall, dial the local gateway, <em>et voilà</em>, you were transported into cyberspace. Meanwhile, would-be cybernauts in the United States who wanted to get online had to buy expensive computer equipment, install confusing software, pay hefty long-distance phone bills, and prepay a separate subscription to each service provider they wanted to use.</p><p id="dae49a6f-b3c8-4cd5-ba8f-8fb04711002b" class="">The first service available on Minitel was an electronic phone book, or <em>annuaire électronique</em>. Equipped with a natural-language interface for search, this oft-used resource was an easy way to explore Minitel for free. Later, the government began to require that people use Minitel for certain administrative tasks such as university registration. These modest public services stimulated adoption of Minitel on France’s fast-expanding telephone network. Whether from home, work, or at a public terminal on the street, by the end of the 1980s, every adult living in France had access to the network.</p><figure id="74b7f99c-dda7-416e-8de3-17114123aff9" class="image"><a href="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAwNg.jpeg"><img style="width:620px" src="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAwNg.jpeg"/></a></figure><p id="f1aaaeaf-4520-4590-ba0e-973f641040c1" class="">Photo: Owen Franken/Corbis/Getty Images</p><p id="2223a732-45dc-4b7a-8b3e-2f72ac661048" class=""><strong>Prompted by the growth</strong> of Minitel’s user population, entrepreneurs jumped at the opportunity to create new services. These startups benefited from a novel payment system built into the Minitel platform that lowered the barrier to entry. Named after the newsstands that line the boulevards of Paris, the PTT’s Kiosk system handled the accounting, collecting money from users at one end, cutting checks for service providers at the other, and keeping a tidy slice for itself. Small service providers could thus design lean information systems that generated profit without having also to manage customer relationships, take credit cards, or chase down past-due bills. Indeed, the app- store model employed by <a href="https://www.apple.com/">Apple</a>, <a href="http://store.steampowered.com/">Steam</a>, and others now is little more than a privatized version of the Minitel Kiosk.</p><p id="43d931ae-c7cc-4c04-96c6-5e9f6de25efd" class="">Providers were allowed to use any hardware or software they liked so long as its output conformed to guidelines published by the phone company. As demand for Minitel grew, the market for server hardware became fiercely competitive. Providers built their systems on any machine capable of running a multiuser operating system, from proprietary mainframes and Unix-friendly minicomputers to Commodore Amigas and IBM PCs.</p><p id="9c1b4d8e-b3be-419a-803f-26dbf70ed6ae" class="">Beyond the iconic terminal equipment, France hoped to jump-start domestic production of server hardware as well. This part of the telematics project did not go as planned: Hacker-entrepreneurs demanded more Unix support, but French manufacturers such as <a href="https://en.wikipedia.org/wiki/Groupe_Bull">Groupe Bull</a> failed to provide it. As a result, Minitel services were often hosted on machines built by U.S. corporations such as <a href="https://www.att.com/">AT&amp;T</a>, <a href="http://www.hp.com/country/us/en/welcome.html">Hewlett-Packard</a>, and <a href="http://www.ti.com/">Texas Instruments</a>, and so, ironically, Minitel broadened rather than curtailed the U.S. presence in French telecom.</p><p id="daacad75-43d5-41e9-8a64-9c6a85787d7a" class="">Those administering the system encouraged service providers by offering high-quality documentation for free. Over the course of two decades, France Telecom published dozens of brochures on user-interface standards, terminals, PAVIs, protocols, and so on. A quarterly newsletter, <em>La Lettre de Télétel</em>, informed industry participants of the latest technical improvements and business experiments.</p><figure id="e2d191b1-814e-4b27-b55f-4d5854b35b73" class="image"><a href="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAwNw.jpeg"><img style="width:300px" src="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAwNw.jpeg"/></a></figure><p id="dd8ae5d5-0e1f-418f-9d0c-a3f27c315741" class="">Photo: Michel Gaillard/REA/Redux</p><p id="ec1bdaf0-9ca2-4872-ad18-3ae86c98ef09" class=""><strong>Elle Avait Son Sourire:</strong> Eventually some Minitel terminals were outfitted with credit card readers, making it possible for people to pay bills electronically and providing a great convenience.</p><p id="eb7851c9-37fc-4a29-baa5-32bb99ea3793" class="">French companies extended the Minitel platform with new kinds of terminals and peripherals. Terminals with built-in memory functions, chip-card readers, and high-resolution color displays began appearing on the market. Most Minitel terminals featured a serial port and multiple display modes, enabling users to connect the terminal to a printer, credit card reader, or PC. For small business owners, this flexibility transformed the Minitel terminal into a low-cost point-of-sale system. And long before the Internet of Things, Minitel was incorporated into a variety of home-automation schemes, allowing remote control of heaters, VHS recorders, security alarms, and sprinklers.</p><p id="b6c4b948-8566-4dee-b243-2e574f3b80c2" class="">With this open platform for innovation, telematics electrified the country, making France of the 1980s a place of tremendous digital experimentation and excitement. And, unlike ventures during the speculative boom and bust of the dot-com years in Silicon Valley, the Kiosk system provided a reliable business model for Minitel entrepreneurs, enriching a relatively large number of service providers in the process. The technical infrastructure of the Minitel ecosystem enabled the French to benefit from a wealth of online services at a time when the online landscape in the United States was limited to local <a href="https://spectrum.ieee.org/computing/networks/social-medias-dialup-ancestor-the-bulletin-board-system">BBSs</a> and fledging walled gardens like <a href="https://en.wikipedia.org/wiki/CompuServe">CompuServe.</a></p><p id="a8b1af18-d1df-423a-a996-5113eebcdb90" class=""><strong>Although it wasn’t the only network</strong> to use X.25 or videotex technology during the 1980s, Minitel was unique in allowing the many service providers to operate their own machines. France Telecom oversaw only the network, whereas in most other countries, a single organization had centralized control of both the network and servers for the videotex system.</p><p id="45e3e74a-260c-48e3-bd28-752dd2874885" class="">In the United Kingdom, for example, all content on the <a href="https://en.wikipedia.org/wiki/Prestel">Prestel</a> videotex system was hosted on an IBM mainframe housed at the General Post Office. Germany’s <a href="https://en.wikipedia.org/wiki/Bildschirmtext">BTX</a> system was similarly arranged. In the United States, all of the content from <a href="https://en.wikipedia.org/wiki/The_Source_(online_service)">The Source</a>, an early private provider of online information, was served up from a single computer center in McLean, Va. Even 101 Online, a Minitel spin-off that operated briefly in the San Francisco Bay Area, stored its data in an office on California Street. That degree of centralization ultimately hindered innovation by excluding the kinds of garage and college-dorm startups that made the Internet what it is today.</p><p id="f03b8a52-9c80-4b95-8147-62830144aa2c" class="">Minitel gave service providers considerable freedom over their systems, a feature that would become a staple of the Internet. Minitel’s administrators also abided by an early form of net neutrality. The network did not favor one service over any other or otherwise discriminate. Occasionally, a service would be barred for breaking the law (by serving as a marketplace for prostitution, for example), but any such exclusion was subject to due process, and the system’s administration could be sued if it acted arbitrarily. These guarantees of fairness stood in stark contrast to the situation in the United States, where private network operators could exclude content on a whim to serve their business interests.</p><p id="ce3a4014-5a63-48d8-808a-510960ff37ba" class="">Of course, the advantages of the Minitel design came at a cost. The network used a nonstandard implementation of the X.25 protocol that prevented privately run servers from connecting directly to one another. Instead, all connections were routed through the public data network, effectively centralizing communications between hosts. This constraint was necessary for implementing the Kiosk system, but it also required each host to be individually approved by the state.</p><p id="2a5ef163-88c6-45ab-831f-775335ee3d8e" class="">Routing all traffic through the central network also enabled the state to attempt to implement a censorship policy on Minitel. Because of intense lobbying by existing print industries, only incumbent publishers got access to the Kiosk. In short order, however, would-be service providers began to route around this bureaucratic obstacle by printing fake newspapers, known collectively as the “ghost press,” which qualified them for recognition by the state. Others bought and sold their access on a secondary market. In most cases, the Minitel administration was happy to connect these entrepreneurial mavericks, capturing one-third of their revenue in the process.</p><p id="d127d844-78bd-4b4c-a62f-b3c6fe2a1860" class="">Minitel was thus hardly the rigid, static system imagined by many Internet advocates of the 1990s. The hybrid architecture—bridging public and private, open and closed—provided a rich platform for innovation and entrepreneurship at a time when online services elsewhere in the world were floundering.</p><p id="98c00e56-8322-4c8a-a68d-dc3277d8c2be" class=""><strong>For a generation of French citizens, </strong>Minitel wasn’t about hardware, switches, or software. It was about the people they chatted with, the services they used, the games they played, and the advertisements for these services they saw in newspapers and on billboards. Many of the services that we associate with the Web had predecessors in Minitel. Before there was Peapod, there was 3615 TMK (Tele-Market), a service that enabled Parisians to order groceries for same-day delivery. Before there was Cortana or Siri, there were Claire and Sophie, services that provided personalized information using natural-language interfaces. Before there was Ticketmaster, there was Billetel. And before there was telebanking, there was Minitel banking.</p><p id="75f87c3e-fe9f-4f46-945a-ce971b7c0de6" class="">The services that most stand out in the popular memory of Minitel, though, were undoubtedly the <em>messageries roses</em>. These “pink chat rooms” were sites of flirtatious exploration that ranged from rather conventional online dating to discussions that were downright lascivious and crude. Pink Minitel services were not only popular, they were also most lucrative. The profitability of these adult-oriented services led to an advertising war among pink providers in print media, on television, and over billboards, so the phenomenon was hard to escape, even if you never used Minitel. Telematics advocates were by turns thrilled by this enthusiastic embrace of the new technology and concerned by its rosy hue. One PTT minister lamented, “[I do] not want telematics to have its image tarnished by the exclusive use of fornicatory fellowship!”</p><figure id="048831bb-9256-458f-8e9e-ccd276d34832" class="image"><a href="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAxMw.jpeg"><img style="width:620px" src="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAxMw.jpeg"/></a></figure><p id="59df5ba5-85fe-43be-8aa7-58ada0a10127" class="">La Vie en Rose: 3615 ULLA was one of Minitel’s many sex chat rooms—“messageries roses.”</p><p id="5551156a-7377-4aff-8737-e45ede10c0d2" class="">The emergence of pink Minitel was the result of both low- and high-tech innovation. On the low end were the <em>animatrices</em>, a new type of information worker whose job was, in the words of one popular song of the period, to “digitally undress” users. Animatrices were often young men posing as women. Their task was to keep unsuspecting customers online for as long as possible. While many animatrices were paid, others were self-described Minitel addicts who bartered their services for free connection time.</p><p id="96d5f35e-bdbc-42ef-b3fe-af46053419e7" class="">The entrepreneurs behind these pink chat rooms, some of whom would later dominate France’s telematics industry, also developed more sophisticated tools to maximize their revenue. PCs rigged up with software allowed animatrices to handle multiple conversations at once. Another practice—frowned on by many in the community but nonetheless widespread—was to use bots to engage in online solicitation. Minitel tycoon <a href="http://www.nytimes.com/2013/05/06/business/global/xavier-niel-billionaire-who-breaks-the-mold.html">Xavier Niel</a> deployed such automated animatrices, inviting users to “come hang out with me in another chat room.”</p><p id="753afda3-e35e-42cf-a246-adcadcdd1458" class="">The runaway popularity of adult-oriented services depended on certain privacy protections built into the network itself. Starting at the local gateway, all Minitel connections were anonymized. No usernames or credit card numbers were required, so the chat-room providers never knew the real identities of their customers, nor did they need that information to make money. Because billing was handled by the PTT, service providers received one lump sum per billing cycle, rather than dealing with thousands of individual accounts. This payment system, which effortlessly charged the user, is also the reason why Minitel was relatively free of advertising.</p><p id="c6cb8a69-8ffd-45df-ba3b-f9ce67f5e087" class="">Privacy and anonymity extended to the user side as well. Consumers’ telephone bills did not reveal which sites they had visited. Instead, the telephone company aggregated all activity for the billing period into a single charge. So it was easy for an employee assigned work-related Minitel tasks to sneak into a chat room, pink or otherwise. To some, the messagerie became the new water cooler (to the dismay of many business owners).</p><p id="4d80dd0c-e79b-48ef-b270-38a7bad93d6d" class="">Minitel enthusiasts cherished the network’s privacy and anonymity. In late 1984, Minitel engineers added a feature to the terminal that saved the last page visited and made it easier for the user to pick up an interrupted session—as a browser cookie does today. The public outcry was swift and brutal. Editorials in newspapers, which (rightly) saw Minitel as a competitor, warned that Big Brother had arrived. Some 3,000 terminals were returned in protest. The PTT soon dropped this feature.</p><p id="e1cfd90d-bb02-46f2-8ec5-1dca2f80f544" class=""><strong>Minitel use peaked in 1993,</strong> when users logged more than 90 million hours at their terminals enjoying various Kiosk services. In the years to follow, usage declined as home computing and dial-up Internet access spread. Dedicated users could continue to access Minitel using terminal-emulation software, but many others simply moved on. The easy-to-use Minitel terminal and its straightforward videotex interface, once so groundbreaking but now proving inflexible, stymied further development.</p><figure id="88e8ab92-8c53-4769-bce2-119bde93e666" class="image"><a href="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAxNQ.jpeg"><img style="width:300px" src="Minitel%20The%20Online%20World%20France%20Built%20Before%20the%20W%20aa49c2c7edc94a18bf356e3743e27d23/MjkxMzAxNQ.jpeg"/></a></figure><p id="bc1a6a80-de3c-410a-83d4-0d8512d9f301" class="">Salle d’attente: Junked terminals await disassembly for recycling.</p><p id="b9fbcea3-f320-4472-8245-5a0bb2977ac0" class="">Although hundreds of thousands of users continued to access the system each month through the 1990s and beyond, Minitel no longer seemed a shining symbol of France’s telematics future. Rather, it was an unremarkable part of everyday life, no more dazzling than the radio or telephone. In 2012, after nearly 30 years of continuous operation, the PAVIs were shut down, and the Minitel era came to a close.</p><p id="2f57b989-7cef-40e9-aaf7-70e362b3f5e6" class="">But it would be wrong to view Minitel as a failure. Indeed, it offers an intriguing model for fostering innovation without sacrificing the public’s interests in fairness and privacy. The millions of curious <em>minitélistes</em> and risk-taking entrepreneurs who flocked to the platform during the 1980s were among the first people to confront the problems of trust, intimacy, privacy, and civility that characterize life online today. That grand telematics experiment is over, but it still has lessons to teach the many engineers and computer scientists struggling to make the Web a better place.</p><p id="0c4e0d08-387c-4b82-88e4-befc98c7df41" class=""><em>This article appears in the July 2017 print issue as “The French Connection Machine.”</em></p><h2 id="052716fb-5b63-4b6c-a4de-5f9437b4ae83" class="">About the Authors</h2><p id="511dc69e-b373-4105-b226-74f0ce8b64a9" class="">Julien Mailland is at the <a href="http://mediaschool.indiana.edu/profile/?p=mailland">Indiana University Media School</a>, while his coauthor Kevin Driscoll is at the <a href="http://mediastudies.virginia.edu/people/ked5d">Department of Media Studies at the University of Virginia</a>. They recently published a book on this topic, <em>Minitel: Welcome to the Internet</em> (MIT Press).</p><p id="274dbf48-e7c6-4019-8e7c-19bebdd395df" class=""><a href="http://jobs.ieee.org/jobs/search/results">More Jobs &gt;&gt;</a></p></div></article></body></html>

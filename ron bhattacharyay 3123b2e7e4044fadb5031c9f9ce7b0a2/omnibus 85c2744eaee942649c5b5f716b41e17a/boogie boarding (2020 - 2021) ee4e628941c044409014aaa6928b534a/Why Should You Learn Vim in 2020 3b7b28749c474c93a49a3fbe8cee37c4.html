@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why Should You Learn Vim in 2020</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3b7b2874-9c47-4c93-a49a-3fbe8cee37c4" class="page sans"><header><h1 class="page-title">Why Should You Learn Vim in 2020</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://pragmaticpineapple.com/why-should-you-learn-vim-in-2020/" class="url-value">https://pragmaticpineapple.com/why-should-you-learn-vim-in-2020/</a></td></tr></tbody></table></header><div class="page-body"><figure id="e1d4c01f-93ea-4660-b60b-b99ef24d6454" class="image"><a href="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/cover.jpg"><img style="width:700px" src="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/cover.jpg"/></a></figure><p id="dbf78b17-aa6a-49b9-9077-1004839d51be" class="">Photo by Aleks Dahlberg on Unsplash</p><p id="9fd9a079-eae0-4c6c-8ea2-4a21630f879c" class="">Ah, yes, Vim, the powerful text-editor that is everywhere and a place where even the wisest can’t quit. You had to hear about it at least once. Or you might have considered learning or trying it. But why do it now? It’s 2020, doesn’t everyone use VSCode already? Let’s dive in and figure why someone would still learn Vim.</p><p id="936f0a28-5960-4879-8db6-213d8ad237aa" class="">What Vim is excellent at is navigating, making some changes, and repeating the process. The process most call editing (not to be confused with writing). Most developers tend to overlook this fact, but this is one of the strong selling points of Vim. Developers are more prone to reading code, jumping from file to file, making small incisions in the code, and writing code all the time.</p><p id="331bc3a7-d262-4bbd-aae6-04396418e843" class="">Most of the editors work in one mode. You don’t explicitly switch from one to another. For example, you might jump to a file, then select some lines, edit or copy some of them while being in the “same” mode. Vim is different, and it strongly differentiates modes. Maybe this is why most <a href="https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor">people get stuck in it from time to time</a></p><p id="eebc4d2b-261b-460b-9337-1d6f7aedbe65" class="">Vim achieves all of this because it supports different modes:</p><ul id="51c97aae-0088-422a-adeb-8d19f19ab0dd" class="bulleted-list"><li>  <p id="0d9bc12c-636e-4dbb-be77-1c677177d198" class=""><strong>NORMAL</strong> mode</p><ul id="a442fff2-150f-49a6-9477-e30c0c826fa9" class="bulleted-list"><li><em>How to get there?</em> Press <code>Esc</code> key in any mode.</li></ul><ul id="88fe8033-c3d1-4499-9f1d-d05f1fbb2920" class="bulleted-list"><li><em>What is it about?</em> Swiftly navigate through code and enter any of the modes below.</li></ul></li></ul><ul id="cf6efd2a-afda-44a5-b8c5-75e9553347c7" class="bulleted-list"><li>  <p id="e5590033-e7a5-4e79-9395-c9a5d0561bba" class=""><strong>INSERT</strong> mode</p><ul id="8e6fd0be-2100-4b61-a477-1506b2acfbc3" class="bulleted-list"><li><em>How to get there?</em> Press <code>i</code> (insert), <code>a</code> (append), or other keys from the Normal mode.</li></ul><ul id="43906096-2026-4295-9c8a-debead8e9f61" class="bulleted-list"><li><em>What is it about?</em> Change and insert characters, similar to most editors nowadays.</li></ul></li></ul><ul id="d8a0c210-8e0c-49de-a426-ddc83a52c853" class="bulleted-list"><li>  <p id="99f5442c-ae20-49bd-af29-4240e2fa63b0" class=""><strong>VISUAL</strong> mode -</p><ul id="4e8609f4-7912-42b7-970c-3b71b5586588" class="bulleted-list"><li><em>How to get there?</em> Press <code>v</code>, <code>V</code>, or <code>&lt;Ctrl-V&gt;</code> or other keys from the Normal mode.</li></ul><ul id="4e32bfea-6ab1-486c-b211-bb302db42827" class="bulleted-list"><li><em>What is it about?</em> Highlight areas of text, indent large pieces of code,</li></ul></li></ul><ul id="ef927ea6-ad03-4f65-ba2f-a1d3af321937" class="bulleted-list"><li>  <p id="6c356ab5-aee4-427d-9603-4ed58a55536b" class="">Command-line mode</p><ul id="1f0903d2-c486-4345-8694-9ca1dd296cd0" class="bulleted-list"><li><em>How to get there?</em> Starts by typing <code>:</code> in Normal or Visual mode</li></ul><ul id="d2074e76-76a8-4d13-ae90-764aeb37aec2" class="bulleted-list"><li><em>What is it about?</em> A door to a Vim and outside world</li></ul></li></ul><p id="72138d39-262d-4a46-969d-4eb13c8c91e8" class="">There are <a href="https://en.wikipedia.org/wiki/Vim_(text_editor)#Modes">other modes</a>, a total of 12 of them. Six of them are a variation of other 6, but I won’t get into details about them here. You can <a href="http://vimdoc.sourceforge.net/htmldoc/intro.html#vim-modes-intro">read them here</a>.</p><p id="a989b94b-89aa-4b43-aa31-723105ad7430" class="">I’d say you shouldn’t care about all six modes and their variants, the essential thing as someone who is figuring out whether to use Vim in 2020 is the NORMAL and INSERT mode. As your needs grow stronger, you will explore other possibilities.</p><p id="895e43c0-cfd2-41b9-869f-bd514dde6618" class="">For example, one of my life-saver features is the ability to edit columns of text like this:</p><figure id="651a7eac-d908-44d2-86f5-729e79462ac1" class="image"><a href="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/editing-columns.gif"><img style="width:700px" src="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/editing-columns.gif"/></a></figure><p id="fea751ec-a9c2-43a3-b60d-b3e19f900950" class="">Notice how quickly you can select characters along a column. Please let me know if there is a way to do this as quickly and painlessly in other editors. To do this in Vim, press <code>CTRL+v</code> - now you can select columns. The following command is <code>8j</code>, letting Vim know that I want to go eight lines down. Then, I press <code>s</code> to substitute a character, and I type in the character <code>t</code>, which I want to put there. Finally, I press <code>Esc</code> twice, and the whole column is changed. You can see that I then press <code>u</code> to undo my changes.</p><p id="2f8cdad5-a848-48b0-a2bb-303fcc155574" class="">I didn’t know this initially, nor did I learn it in the first two years. I learned it when I needed it. So don’t get bothered if you feel overwhelmed by this vast world of Vim, everything will come with time. And that is another great thing with Vim, the constant learning - you can always uncover more great ways to do things.</p><p id="9604a714-0382-4516-9e84-d512faeac301" class="">No, this isn’t about the popular racing game series, it is still about editing files in Vim - which is super fast. But don’t let <strong>me</strong> fool you, editing is super fast when you get the hang of it, which can also happen pretty quick. It is not a mere coincidence that most popular websites (Facebook, Twitter, Gmail, Tumblr) allow you to move around with <code>h</code>, <code>j</code>, <code>k</code>, and <code>l</code> around the feed. Try navigating through tweets on Twitter by pressing <code>j</code> and <code>k</code> next time.</p><p id="cfd30ede-cd1e-4a0f-bbb3-3f87d7a877ff" class="">Instead of having to use your mouse, you can use a combination of key presses that let you jump around the file with ease. For example:</p><ul id="8cab68ab-64a8-4e5e-82f7-6826b702b2d1" class="bulleted-list"><li><code>gg</code> - jump at the top of the file</li></ul><ul id="12471518-1a9c-4d28-8b69-3e9a9b9cf84f" class="bulleted-list"><li><code>G</code> - jump at the bottom of the file</li></ul><ul id="639b84f0-d805-4f46-b412-689f0eaed5ce" class="bulleted-list"><li><code>{</code> - move up between empty space or code blocks in your file</li></ul><ul id="d48ae80b-30d4-4768-8c1e-a68f0cd74393" class="bulleted-list"><li><code>}</code> - move down between empty space or code blocks in your file</li></ul><ul id="e211a7e6-36bc-4bbb-a17b-eb0d81f16841" class="bulleted-list"><li><code>(</code> - move back onto the previous sentence</li></ul><ul id="dac58f2f-6c26-45c2-8c0e-e24c0da5a7c3" class="bulleted-list"><li><code>)</code> - move forward onto the next sentence</li></ul><figure id="9209cbe5-6de9-4fc1-b7ea-091e6d467058" class="image"><a href="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/moving-around.gif"><img style="width:700px" src="Why%20Should%20You%20Learn%20Vim%20in%202020%203b7b28749c474c93a49a3fbe8cee37c4/moving-around.gif"/></a></figure><p id="82b4241c-a33f-49e6-9765-dce390acddf2" class="">These are just the basic movement tips you can try out in your next Vim session. I will not go into details on how to move around, and how you should disable arrow keys on the start (you probably should), there are many resources for that on the internet. I will just leave you with these couple of navigation shortcuts for you to try out.</p><p id="abda4b13-7fc8-4491-890b-47febdb08109" class="">Also, you can compose commands as you go. In the previous section, I used <code>8j</code> to move eight lines down. Navigating like that is a typical example, but combining commands is where Vim shines when you get the hang of it. Combining is a great addition to already speedy commands you can use. But, of course, there is a more pragmatic reason to learn it. Read on to find out.</p><h2 id="550337dd-3d69-4ed9-91ee-d6e539ffc0ec" class="">Getting Closer to the Metal</h2><p id="13538386-a07d-49c8-bb25-80b82760e70c" class="">Learning Vim also means learning about what is in your Terminal and your machine. To better paint the picture of what I mean, I’ll approach it from the other side and give you an example of what you usually do with an IDE. When you use an IDE-like experience, you don’t need to tinker and configure stuff much. You get a theme or a plugin manager, you search for a plugin there, click install and voilà, you just got yourself full support for TypeScript.</p><p id="9e7af18d-29f7-4fec-9ffe-1b8c91427e78" class="">But, <a href="https://pragmaticpineapple.com/ultimate-vim-typescript-setup">setting up full TypeScript support</a> is a bit different in Vim. Yes, you have a sea of plugins and a vast community of folks contributing to it. But you can get deep into configuration and figuring out how everything works by customizing your Vim experience. Some plugin has some pros and works well with others. Some are so good with fitting into your current configuration, but you have to do a lot of manual configuration yourself. By tuning Vim, you are learning more about what you have in your development environment and how it works.</p><p id="930b3a49-72f0-4082-96b0-539777876136" class="">For example, to search for text occurrences, I used <a href="http://manpages.ubuntu.com/manpages/trusty/man1/ack-grep.1p.html">ack-grep</a>. Later on, I found that there is a faster approach using <a href="https://github.com/ggreer/the_silver_searcher">ag</a>. Then, there is an even faster alternative called <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>. Of course, I stopped at the <code>ag</code>, but my point is that you are encouraged to learn more about what you have on your machine, and thus have more confidence and knowledge about what is happening. Learning all of this getting you closer to the metal (machine) as possible, instead of mindlessly installing plugins from the IDE’s marketplace.</p><p id="bad64ea3-a3b0-4504-a2d0-4c969cdebe1b" class="">If you want to get a glance an what it takes to have <a href="https://pragmaticpineapple.com/ultimate-vim-typescript-setup">Vim and TypeScript together, check out this blog post</a>.</p><h2 id="64e8a409-ee8e-4dbc-80dd-e4b46d69cbde" class="">Some Cons to All of This</h2><p id="ca88b2b9-cbf4-475f-8e97-d7f9bee1d8b0" class="">One of the biggest con is the learning curve, I’d say. Many people get put off by it, and it seems it is not easy to handle. Instead of switching to Vim entirely, try doing it bit by bit. A great way to do this is to install Vim mode in your favorite editor and start with simple commands as I showed you in <a href="https://pragmaticpineapple.com/why-should-you-learn-vim-in-2020/">the navigation part</a>.</p><p id="59d6d8a6-7f79-4016-a91d-b1d7b49c04f0" class="">Keeping your favorite editor close to you is an excellent way to overcome Vim’s learning curve slowly. Imagine it as swimming lessons where you swim close to the edge of the pool. Anytime you panic or don’t know how to do something, you can grab the edge - or in your case, your editor of choice.</p><p id="cc615767-f63b-4f24-9fb4-ad4fef95f802" class="">A con can be that Vim is not an IDE. It can’t do all the fancy stuff your IDE can do out of the box. You can try to configure Vim to behave like that, but that’s not Vim anymore. There’s no debugger, no plugin marketplace, no auto-complete. If you want some of the things, you are encouraged to search for a plugin or write your own.</p><p id="a7e31640-6b08-40a7-b676-3207c609a128" class="">Having such freedom of what to add to Vim is a pro for me, but I understand that most folks see this as a con. I just find it fun to play around and configure the primary tool I use every day.</p><p id="800073a0-1393-4e06-b33e-25d59cd0812f" class="">Thanks for reading this far, I appreciate it. If you are still wondering whether to start learning Vim or not, I’d say give it a try. You never know when you might need it, or you even fully switch to using Vim.</p><p id="20286889-6ef2-4447-a0bf-2eaf3989bb98" class="">At the end of the day, it’s the matter of finding the proper editor (tool) that makes you do what you do even better.</p><p id="efb33076-15c6-44c2-ae90-045f436d002a" class="">If you like the blog post, you can share it with your friends and coworkers below:</p><blockquote id="e12e98a2-980d-4338-a5e4-1d09a6f47440" class="">I published a new blog post about Vim 🎉Check out why should you still learn Vim below 👇https://t.co/p6OhsB5AeZ— Nikola Đuza (@nikolalsvk) August 5, 2020</blockquote><p id="3178090f-5883-4328-8f31-4fe57ce38a13" class="">Consider subscribing to my <a href="https://pragmaticpineapple.com/newsletter">newsletter</a>, where you will get similar blog posts like this one when they get out, for free.</p><p id="3fa5e4fa-096d-4bec-9fae-97b4b77249f5" class="">If you are interested in my Vim configuration, check out <a href="https://github.com/nikolalsvk/dotfiles">my dotfiles</a>.</p><p id="9295ef8b-5c14-4ff1-b01e-33a70c1a852b" class="">Catch you in the next one, cheers 🍻</p></div></article></body></html>

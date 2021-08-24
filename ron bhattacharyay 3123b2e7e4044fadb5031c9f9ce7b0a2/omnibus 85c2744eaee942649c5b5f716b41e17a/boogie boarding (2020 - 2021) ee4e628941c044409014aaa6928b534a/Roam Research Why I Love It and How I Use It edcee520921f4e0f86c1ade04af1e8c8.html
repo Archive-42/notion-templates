@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Roam Research: Why I Love It and How I Use It</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="edcee520-921f-4e0f-86c1-ade04af1e8c8" class="page sans"><header><h1 class="page-title">Roam Research: Why I Love It and How I Use It</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.nateliason.com/blog/roam" class="url-value">https://www.nateliason.com/blog/roam</a></td></tr></tbody></table></header><div class="page-body"><p id="aaf68340-8135-4419-a841-681af13d2a74" class="">I’ve been deeply interested in personal knowledge management for almost 10 years now.</p><p id="87e0ffca-5d32-4a81-a859-443f19edad3a" class="">V1 of my interest was a private wiki I created in college to help organize the notes I started taking from non-fiction books I was reading.</p><p id="0ad78599-edd4-4f86-bb35-76306d408b2a" class="">V2 was a sort of hacky combination of Evernote and Google Docs. It worked fine, but there was no structure, and it just got me out of the very janky wiki setup.</p><p id="2626c777-cdd6-4538-9b19-dcee358f451e" class="">V3 happened when I discovered <a href="https://www.fortelabs.co/">Tiago Forte</a>, and implemented his <a href="https://www.buildingasecondbrain.com/">Second Brain</a> ideas into my Evernote setup.</p><p id="d08c4225-4f0d-4856-ad7e-defe4b3c791b" class="">V3 was special. It was the first time a digital architecture changed how I consumed information. When I look back on my kindle highlights pre-BASB, they’re dramatically different from my book highlights now. I now read with a mind towards synthesis and distillation, where the idea of reading something <em>without</em> taking notes from it seems absurd.</p><p id="4af6443f-7283-4063-83f9-300642344f78" class="">But there were still some frustrations with V3. Then <a href="https://www.adamkeesling.com/">Adam Keesling</a> turned me on to <a href="https://roamresearch.com/">Roam</a>. Roam is V4.</p><figure id="ae648490-6635-4729-a2e1-e75288419007" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd833a72068f688ce51_VN1Tc_PFVw1Pe1uE57SJ6h2hQGQo77CAquQ9WvqyyaEdo576PFaX3G1ELAS1YdhULEel2BUa8e9HJDYGv-w0jqG7_6OJZuunzs5pHp3jCGaPR20Gk6yfMpY5GuXqDp06IRZ8IYlI.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd833a72068f688ce51_VN1Tc_PFVw1Pe1uE57SJ6h2hQGQo77CAquQ9WvqyyaEdo576PFaX3G1ELAS1YdhULEel2BUa8e9HJDYGv-w0jqG7_6OJZuunzs5pHp3jCGaPR20Gk6yfMpY5GuXqDp06IRZ8IYlI.png"/></a></figure><p id="34c184f9-8039-45bc-8cb5-d7b56ce10d67" class="">I don’t work for Roam, I’m not paid by Roam, and I get nothing for writing this 3,000 word post about it. I just really like it and want more people to use it so they make money and keep growing.</p><p id="a5cb2807-2be0-4b96-9a57-dff5cda188be" class="">Here’s the TOC:</p><ol type="1" id="662aa91d-5fc9-4f3c-91a2-2daac7d2c720" class="numbered-list" start="1"><li><a href="https://www.nateliason.com/blog/roam">How I’m Using Roam as a Second Brain</a></li></ol><ol type="1" id="6bea6e40-38c0-44cc-a41e-cfaa8998f644" class="numbered-list" start="2"><li><a href="https://www.nateliason.com/blog/roam">How I’m Using Roam for Productivity</a></li></ol><ol type="1" id="d59b129e-79fd-4c0d-87bf-8b08bd431616" class="numbered-list" start="3"><li><a href="https://www.nateliason.com/blog/roam">How I&#x27;m Using Roam as a CRM</a></li></ol><p id="ea7198bf-6338-41e7-abff-1ae4f50e612a" class="">Or if you prefer a video overview, you might enjoy my intro on &quot;What&#x27;s So Great About Roam?&quot;</p><p id="32984261-282a-4c3d-b943-1af88d08ba83" class="">Also, if you want more examples of how powerful Roam is and some of the really cool use cases, <a href="https://www.nateliason.com/power-of-roam">check out my The Power of Roam lesson series</a>.</p><p id="0672d2f8-b8bb-49e4-9c01-ac0e852a1768" class="">Discover how Roam can help you learn more, do more, create more, and build your digital web of networked thoughts.</p><p id="69424ec3-45be-4389-9cfa-e87a52bdebbf" class="">Roam retains the core benefits of many other note taking tools, strips away their bloat, streamlines many inefficiencies, and adds a few unexpected additional benefits.</p><p id="f60d6fce-fea8-4650-bc03-70ef16c260ff" class="">There are three big differences between Roam and other note-taking tools. Let’s start with siloed vs. fluid information structure.</p><h3 id="7d5c73b7-c626-4d7e-937a-f46377d5051f" class="">Siloed vs. Fluid Information Structure</h3><p id="ecc919c1-c989-48d8-a3b8-e9a2b8944c35" class="">In Evernote, Notion, and most note taking tools, your information lives in a hierarchy.</p><p id="6abe732b-90d4-4c67-b07b-a55a42e69509" class="">Evernote’s is based on three levels: Stacks, Notebooks, and notes. Each note lives in one notebook, which lives in one stack.</p><p id="037cf149-e335-4366-90d5-34a15730c6e4" class="">Notion, Workflowy, and a few others allow infinite nesting. A note lives in a note lives in a note and so on.</p><p id="1e934ded-9214-4dd1-93bc-45238616c2d6" class="">In Roam, notes live nowhere and everywhere. Here’s the Graph View of my Roam database right now:</p><figure id="7d998e15-711e-4459-a0e4-37f79093e4a5" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd933a72029ab88ce53_5gAuih7KROf-VFobNDLQGU8nkjXpTgrNMyq6QIvz2VYeLeKcOWneXfWjelu0d2SZrp7zX-l7voH7QHRe1_bO5W9XuI4bkNG_NxpW8YK6KXcvobDM03vPSEbzSfuhaBzEon19Ccnf.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd933a72029ab88ce53_5gAuih7KROf-VFobNDLQGU8nkjXpTgrNMyq6QIvz2VYeLeKcOWneXfWjelu0d2SZrp7zX-l7voH7QHRe1_bO5W9XuI4bkNG_NxpW8YK6KXcvobDM03vPSEbzSfuhaBzEon19Ccnf.png"/></a></figure><p id="cea32aca-8824-4e04-9522-71414142eb3c" class="">Each note has relationships to other notes, but no note lives *inside* another note or notebook. All of the information is fluid in the sense that you flow between notes based on their relationships, not because they’re all in the same folder or hierarchy.</p><p id="d7d45b2d-d7fa-4b43-b30f-ada09dfd479b" class="">That doesn’t mean you can’t create hierarchies, though. For example I have a page on “Prepping.”:</p><figure id="375f6935-76c9-4d3d-bfb8-1d0cd1ee4dc6" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd878f3a30159188985_AwU-Z-h5OpADd8yVS569Zj9eSEAOkM0_Xdrkdy54-49hPFMkjvnpzSU6eM_2zBMIB7Fyc23jI0wtNJaOij6ABfRhEouO1eMqh83hOhw5laVBUlCLOwf4wQ9PsUlfs3N9GBNu5x9H.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd878f3a30159188985_AwU-Z-h5OpADd8yVS569Zj9eSEAOkM0_Xdrkdy54-49hPFMkjvnpzSU6eM_2zBMIB7Fyc23jI0wtNJaOij6ABfRhEouO1eMqh83hOhw5laVBUlCLOwf4wQ9PsUlfs3N9GBNu5x9H.png"/></a></figure><p id="9fcbb6d8-f1c8-484e-bd71-4cc3bf975003" class="">Within prepping, one of the pages I link to is “Bugging Out,”</p><figure id="1c03bba2-8d23-4ed3-9d39-8f874d7be8df" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb274eec3a69bde9f3_0GQzMJMo6Y-N3gIBeemUv4rtL5GmO6bp-voB3-rXVxf_42UVCuIqo2zKvbHXrUQe1-bf0EdAGvLoeA9waCzzTZ4a7_zGIpM0mfhDoFcV_mtLUQMCB-mi1pkc0VLhYNv3rmkdk6fT.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb274eec3a69bde9f3_0GQzMJMo6Y-N3gIBeemUv4rtL5GmO6bp-voB3-rXVxf_42UVCuIqo2zKvbHXrUQe1-bf0EdAGvLoeA9waCzzTZ4a7_zGIpM0mfhDoFcV_mtLUQMCB-mi1pkc0VLhYNv3rmkdk6fT.png"/></a></figure><p id="6bb34d50-bb5f-4dce-8142-ec32ba7d03e9" class="">But that doesn’t mean the “bugging out” page belongs to “prepping.” I can also get to the “bugging out” page via any of the other pages that links to it, like this summary of Taylor Pearson’s <a href="https://taylorpearson.me/bug-out-bag">bug out bag article</a>:</p><figure id="0d05fe63-3765-44dd-aa4d-0f21220de878" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd89ba5cbfc6246da33_2AHkvy9XDr3OwEYhRTykZVGaNmQKuGShfqCOpOj-FVTAU-7nU57K5k-VXT2B2nvl_us3K8n3E4_EGpPRknsrDcFBxLVzl6u_wJeemvZpFpYyTME49xf-ziRTawWlPzNCUVN_4hsX.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd89ba5cbfc6246da33_2AHkvy9XDr3OwEYhRTykZVGaNmQKuGShfqCOpOj-FVTAU-7nU57K5k-VXT2B2nvl_us3K8n3E4_EGpPRknsrDcFBxLVzl6u_wJeemvZpFpYyTME49xf-ziRTawWlPzNCUVN_4hsX.png"/></a></figure><p id="34fa083c-0c94-47f5-b4a2-f78be00611ce" class="">This also highlights a big difference between Roam and other note taking tools: tags are both everything and nothing. Every page is a tag, and every tag is a page. Whether you do a [[Page Link]] or a #Hashtag Link is purely a stylistic choice. I use [[Page Links]] when it’s inline, and #Hashtag Links when they’re out of context, but you can use them however you want.</p><p id="e1a02171-f4ee-4ec4-badc-45f9b4aee2c9" class="">By structuring information in this way, Roam makes it super easy to move laterally across your information, while retaining vertical references. The book Emergency by Neil Strauss can live in my Book Notes page, my Prepping page, and my Neil Strauss page, without having to <em>be moved</em>.</p><p id="ae37f795-9a64-46b9-81d0-b9a8b1083127" class="">This removes all the decision making about where to put things that you frequently run into with Evernote, Notion, etc. When everything can be everywhere, you don’t have to worry about the filing structure. You just keep adding links.</p><p id="23f49280-94d7-41b3-aefb-67412fbd6811" class="">Which brings us to big benefit number 2: how easy it is to add links and spin up new pages.</p><h3 id="a2aab739-ba98-4b98-b965-371d7a4cf35c" class="">Easy Links &amp; Page Creation</h3><p id="2f9d38c3-5bd4-4222-9586-4eaf98086a91" class="">In most note taking apps, you need a reason to make a page. In Roam you don’t. You can make new pages constantly, and since you don’t need to file or do anything with them there’s nothing stopping you from making pages as placeholders to tie information together.</p><p id="5ed91255-b07f-4210-8c06-87ff962fd066" class="">For example, I have a page on “Modern Religion.” It’s a topic I’m very interested in and might write about sometime but I don’t have any condensed thoughts on it yet.</p><p id="cbe3df67-73b1-4bf7-8c08-78491a9df2a5" class="">So right now, it functions as a sort of tag where I can quickly link other pages or topics that are relevant to it:</p><figure id="65c353cd-0da3-44f8-bc88-c265e618004c" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd917a0cf3124dc8b8d_ti8rRnkwFapbhlG9LV2uPXRF5uejiIWf3IdFKjM2qb7S43c3ynRV7mLFTHdP8CXOizxyX_VW_hc2QYSc5EXqYdxP4TlYCEA0BBTb30dr5ZTXKAtIsuBu_aJiAMYW13fb_lE-0jv5.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd917a0cf3124dc8b8d_ti8rRnkwFapbhlG9LV2uPXRF5uejiIWf3IdFKjM2qb7S43c3ynRV7mLFTHdP8CXOizxyX_VW_hc2QYSc5EXqYdxP4TlYCEA0BBTb30dr5ZTXKAtIsuBu_aJiAMYW13fb_lE-0jv5.png"/></a></figure><p id="2dc017cf-80dd-4d6b-9a25-bf65b404d2df" class="">It takes two seconds to type #Modern Religion and add new data to it, and doesn’t require updating the actual page at all. And if I do want to go in and start coordinating my thoughts on it, I’ll already have a great and widely referenced place to do so.</p><p id="8d57a43e-4804-4107-adce-ee49a3a94fd9" class="">The best part about this is you don’t have to go create this page, it just gets created the first time you reference it with a Page or Hashtag link. And if you never use it again, it doesn’t matter. It’s not cluttering anything up, it’s just floating in space.</p><p id="61b9521c-64dc-4322-8eb8-4549fae5138f" class="">This is another area where Roam really stands out from Evernote and Notion. Have you tried to link to another page in either of them? It’s a nightmare of right clicks or slash commands, it takes way too long. In Roam it’s so seamless that you can do it without interrupting your typing flow.</p><p id="21a6385c-4d2a-420e-9bc0-25eda9a87d4e" class="">Which takes us to the third big benefit, and where Roam really shines: the automatic bidirectional reference you get when you create one of these links.</p><h3 id="8c2b2c09-3982-42e7-bea3-d4bbbfc0ab2d" class="">Bidirectional Linking</h3><p id="a9741c8b-1ffc-4cea-9065-f931a0a62c1c" class="">Let’s say I’m looking at my page on the book “<a href="https://www.nateliason.com/notes/waking-sam-harris">Waking Up</a>” by Sam Harris:</p><figure id="2c112072-63bf-450b-b95f-2f9e8dd8dc73" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd933a720ad0888ce52_FwB9bS2rE0SLCv94HvQPzHo7DaBofr9kpVActZuDw1nwix5psR8kQxk504YtsJ0m7XoOpwXGvcgYFs0nksYCe4h9qGCyHSoiawmpUgyBkWEVtGB1dxRM_s8QYjxjUyOMqR65Wt7g.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd933a720ad0888ce52_FwB9bS2rE0SLCv94HvQPzHo7DaBofr9kpVActZuDw1nwix5psR8kQxk504YtsJ0m7XoOpwXGvcgYFs0nksYCe4h9qGCyHSoiawmpUgyBkWEVtGB1dxRM_s8QYjxjUyOMqR65Wt7g.png"/></a></figure><p id="97d6d74f-18cb-4d22-9b84-327b207507bf" class="">One of the tags I have linked for it is “Mindfulness.” If I click through to the Mindfulness page, I can see every other page that has referenced Mindfulness:</p><figure id="1b68a09b-39ac-430b-a72a-318b40c979dd" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd90711e655fedadc22_kZoirEtJ_gesOTorOtX7Vgi2BbjE_8BZBwOrpTTP1XOWxT3euuTFDdcEdLxYp1JTVD-cpHkXhD4DQ83FHry047oOPf5P_-OIsYRt4ciw_j86ZSv2serrUcPxhz0qb43JlJFAt4fR.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd90711e655fedadc22_kZoirEtJ_gesOTorOtX7Vgi2BbjE_8BZBwOrpTTP1XOWxT3euuTFDdcEdLxYp1JTVD-cpHkXhD4DQ83FHry047oOPf5P_-OIsYRt4ciw_j86ZSv2serrUcPxhz0qb43JlJFAt4fR.png"/></a></figure><p id="52e41b4e-dcad-495f-8161-0c6b520e1ac3" class="">Then I could click through into any of those and check out those book notes, which would be great if I wanted to do a post about mindfulness.</p><p id="354591f6-8087-4cf7-a628-897dd642a32e" class="">But it gets better: Roam also shows me all the UNlinked references to Mindfulness. Everytime the word “mindfulness” shows up on any other page, but isn’t linked to this page:</p><figure id="44e7b089-bda9-4501-aefc-6c5b5b495380" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd917a0cf3fb6dc8b8e_SB4R4_E6K-sz0-o3AlfjdDwsQBq0JFr06-eYDsWYraqf47i_wJj2aUmxodXzwErp3eIIwo6RCzL-oWU5YGk0jL9CPzonnx4IoJ7aZgPSQ78flYiAubV9oK4riSSauz9uwfqNUm65.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbd917a0cf3fb6dc8b8e_SB4R4_E6K-sz0-o3AlfjdDwsQBq0JFr06-eYDsWYraqf47i_wJj2aUmxodXzwErp3eIIwo6RCzL-oWU5YGk0jL9CPzonnx4IoJ7aZgPSQ78flYiAubV9oK4riSSauz9uwfqNUm65.png"/></a></figure><p id="d867d056-1d2d-4938-bba8-bb972e1bf5e4" class="">Then if I click the “Link” button on the right next to any of them, it updates the other page with a link to the mindfulness page. Here’s what the Buddhism Scholars article notes now looks like once I clicked those three “Link” buttons on the bottom right in the last screenshot.</p><figure id="2293e17c-9185-4e30-ac98-3daa772fece7" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cba3d546da34_m-EqUChnRhzoQJXJ6KmKgsvYcuSc8zY5Gq3K1kr1SmWUK_UhUQMiKT_a4IxDOVX2vJnxaa9MRX9xVUVv3ov5zsBzGsc4eRXpWSBwKM1sMIeTdD_TD63alTJ_4NDCOeYBij4YMuuO.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cba3d546da34_m-EqUChnRhzoQJXJ6KmKgsvYcuSc8zY5Gq3K1kr1SmWUK_UhUQMiKT_a4IxDOVX2vJnxaa9MRX9xVUVv3ov5zsBzGsc4eRXpWSBwKM1sMIeTdD_TD63alTJ_4NDCOeYBij4YMuuO.png"/></a></figure><p id="05a16359-e5cb-4350-82e5-7c92cf8af313" class="">This is the best feature I’ve found for discovering new relationships between information. It makes it so easy to tie pages together, and to help you get better organized.</p><p id="f433886c-d903-40aa-baec-1acfbe6ab822" class="">The references also have a really robust filtering tool. For example, I could filter all the references to Mindfulness to only include pages that also reference Books:</p><figure id="1491e0cb-918e-4e9f-9817-c167eb413bea" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda17a0cf893adc8b8f_pW3gfoKIN0GyMS0pnndAwe9tlm2smfry1sHfEAqK-_NeuOcBV0fd8x6_QBpwqbmP0QnnM-xXSUaYuJ6oA81fVoB2b4W9jbBbeWZLA3Oym3doZ3_jQaacC9-H7fv57avsIi21BL-9.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda17a0cf893adc8b8f_pW3gfoKIN0GyMS0pnndAwe9tlm2smfry1sHfEAqK-_NeuOcBV0fd8x6_QBpwqbmP0QnnM-xXSUaYuJ6oA81fVoB2b4W9jbBbeWZLA3Oym3doZ3_jQaacC9-H7fv57avsIi21BL-9.png"/></a></figure><p id="a3e10e4c-7afa-43ca-a987-4ba21c9e8f8c" class="">Or if I’m on my Books page (all my book notes), I could filter it to just show the ones that reference Management:</p><figure id="279062d0-1b38-4626-a51d-d527534522e9" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbde274eec6452bde9ff_U1xq54g9dpFq2wFbHDYzIoomwUbs847aSOErH7NwNsnx0VFsYNicmXLsdw9fbmzkvrRBN5g0BZ7RRXUOAX_lskSh_yWQ0FmAgjbXUzJNGwLBWZFMUfbJoP8jtTAnuLMI1rQvzxve.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbde274eec6452bde9ff_U1xq54g9dpFq2wFbHDYzIoomwUbs847aSOErH7NwNsnx0VFsYNicmXLsdw9fbmzkvrRBN5g0BZ7RRXUOAX_lskSh_yWQ0FmAgjbXUzJNGwLBWZFMUfbJoP8jtTAnuLMI1rQvzxve.png"/></a></figure><p id="1611d553-15c8-479a-9236-3295da58937d" class="">This may seem a bit unintuitive, but that brings us to the last big thing I love about Roam. It will completely change how you interact with information.</p><h3 id="fab59ae4-fbaa-4fb3-9b3c-62faaa958248" class="">How Roam Changes Your Interaction with Information</h3><p id="f84aa263-f6d2-4565-9982-6814e6e2be3d" class="">V1, the wiki, was a paradigm shift for me. It was the first time I had deliberately structured an external resource to retain information I cared about.</p><p id="559d501e-b4cb-47c6-bc08-f43146446793" class="">V3 was a huge advancement because Tiago’s tactics around getting notes from Instapaper and Kindle, as well as progressive summarization, dramatically improved the quality and quantity of the deliberate structures I was creating around information I wanted to retain.</p><p id="3e5f6f8b-7361-49e8-a032-9c68f4c89cf4" class="">Roam has kicked the ball even further by removing almost all the barriers to creating new relationships between the information you’re collecting. Even as I’m writing this, I feel compelled to add Page Links as I’m typing, and I’m writing this in Google Docs!</p><p id="1527e10b-2ad3-44fa-9923-236e40b44916" class="">An example will probably be more helpful. Here are my daily notes from January 2nd:</p><figure id="16a0f2fd-eadb-4e9d-8db2-e2c1d8c3aa5b" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdafa5548d67a03f211_Wmk65HAG_cuxu_uK7qSLSLmtK4A1hoH0nVxrBUunR81P6EtwpirZbouyVo3bU6lhGt2hYG3Vt3uIlWcTzQdeQpZe6CCr7LWWfVVVhdDoYtqujAQbVQlW1L1b2DuOO5s9Lelkm0SQ.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdafa5548d67a03f211_Wmk65HAG_cuxu_uK7qSLSLmtK4A1hoH0nVxrBUunR81P6EtwpirZbouyVo3bU6lhGt2hYG3Vt3uIlWcTzQdeQpZe6CCr7LWWfVVVhdDoYtqujAQbVQlW1L1b2DuOO5s9Lelkm0SQ.png"/></a></figure><p id="974d3892-ad34-4516-9530-1ee2b59b5ea4" class="">There’s a lot going on here. I reference 12 other pages, three other dates, and one other person. I assign to-dos to myself for January 6th, which will resurface as Linked References when I get to that day. By putting so much data into the second bullet, I create relationships between Running Shoes, Knee Pain, my different shoes, and my hometown.</p><p id="67c91134-2103-4f07-8ecc-f350b9129261" class="">Almost everything you type naturally lends itself to be linked to other topics in your database, and you constantly discover new opportunities to interlink your information. You don’t even need a reason to do it, you just add more links and if it’s useful later, great, if not, it doesn’t matter since it took no effort to add it.</p><p id="5d2ee699-17cf-402e-8b79-cb306fd0db35" class="">The more I do this, the more I want to find connections between everything in my life. I link articles to people, people to places, places to ideas, it keeps growing, and it keeps spitting out new relationships I hadn’t thought of or had forgotten about.</p><p id="d2877345-ff64-4169-9a3b-bf662331d092" class="">And that’s been the biggest benefit. Roam has made me the most excited about information capture and synthesis out of any of my past iterations on knowledge management. Maybe I’ll find something better or a better system in the future, but for now, this is pretty damn exciting.</p><p id="e006429f-5854-4f82-8d7a-47e275c45891" class="">Okay, those are the big things. Here are some other little things I love.</p><p id="62d81417-b03d-4f98-bf73-f765f8e0368f" class="">In no particular order, here’s everything else I love about Roam.</p><h3 id="8352d1b1-2cb1-4fc9-a861-d27bc7d9c81f" class="">The Sidebar!!!</h3><p id="c3027ba6-626a-45d2-a1b5-4752e9017088" class="">This barely missed the cut for the big things, it’s so darn cool. Roam lets you work on one main note and then open another note in the sidebar just by shift-clicking a link. For example, if I want to clean up the Blog Articles I have in progress, I can open them up in the sidebar from the Blog Articles page:</p><figure id="177bc9ba-6102-4630-aabc-256582053c45" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdafa554814b103f212_Vq5-_rPc55MoDfFRI6WVlgtiWBUMwPtG9ZeyB6O4c8o8HoJEsScHOG1N1fYXyOJkC4CI7eaTQ-mTfwZj_im-Ne0sUoJuL_ocMBgh-RLx329Wde-tI4ITSnnhSmFfOKgbU0Q8JHe3.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdafa554814b103f212_Vq5-_rPc55MoDfFRI6WVlgtiWBUMwPtG9ZeyB6O4c8o8HoJEsScHOG1N1fYXyOJkC4CI7eaTQ-mTfwZj_im-Ne0sUoJuL_ocMBgh-RLx329Wde-tI4ITSnnhSmFfOKgbU0Q8JHe3.png"/></a></figure><p id="7fe2b651-660d-499f-9ddc-e79b578d973a" class="">Or if I’m working on my Meat article, I can open up the other pages I’m referencing to pull out notes from them:</p><figure id="924d73d6-2fd8-49f6-8813-9995f46b503f" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda33a72042b088ce57_EQ06tPiUSv8Vmy7QK3BGW6OgdENzhEuvm0BEPYbukJDAIHjF79x66vFuPkCnhwMEfciX24K9z4MT125ovs6kcKkzl9m5jPBZJU8_ZF-AtxOse3ru_DK_GnaQqqSCmeb_HA3DhdTp.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda33a72042b088ce57_EQ06tPiUSv8Vmy7QK3BGW6OgdENzhEuvm0BEPYbukJDAIHjF79x66vFuPkCnhwMEfciX24K9z4MT125ovs6kcKkzl9m5jPBZJU8_ZF-AtxOse3ru_DK_GnaQqqSCmeb_HA3DhdTp.png"/></a></figure><p id="94597ee5-9482-4d96-a40f-c0584fe4e39a" class="">And then if I want to open that “Meat and Climate Change” note as well, they can both be in the sidebar and I can scroll between them:</p><figure id="11768aca-c0dc-46d2-a1cc-2b2e806c116b" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb33a7204a6288ce58_OAs_VE6M7XyOB9txJ5zWjL7HzMd5LRm-Qni61Z9wrfZtifQxo0yCivo6J5Iuw2_jeGPYgKpenQ7WlJtLafytTXlOw2vxZPWuj9KzwX3rhHy54IVRNDfYEQtvcSBzJZGV-JZxTpej.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb33a7204a6288ce58_OAs_VE6M7XyOB9txJ5zWjL7HzMd5LRm-Qni61Z9wrfZtifQxo0yCivo6J5Iuw2_jeGPYgKpenQ7WlJtLafytTXlOw2vxZPWuj9KzwX3rhHy54IVRNDfYEQtvcSBzJZGV-JZxTpej.png"/></a></figure><p id="f3b057a2-c87a-424f-9ab6-57c22919490c" class="">This is incredibly useful for jumping around between different notes without having to open tons of tabs or go back and forth constantly. That problem is particularly bad in Notion, and this is one of the many reasons I like Roam so much better.</p><h3 id="1ecf99d5-a6d6-400a-87d2-2f6e56ef9dac" class="">Cleanly fix accidental duplicates</h3><p id="f6cd1768-f3a8-41eb-9d33-c0d73d349233" class="">The worst thing about Tags in most systems is that you have to memorize the exact syntax, including capitalization, and if you mess it up you break your tag structure.</p><p id="df00b7a3-fed5-4795-8ac5-5abeabd75b4e" class="">In Roam, say you create an “Apple Watch” and an “apple watch” page on accident. Well if you go to the “apple watch” page and change the title to “Apple Watch,” Roam will automatically merge the data on the pages and update any links to “apple watch” to go to “Apple Watch.” No more accidental duplicate issues.</p><h3 id="5600dccd-12dd-4b84-9de0-5862f9a2d264" class="">Easy journaling</h3><p id="e09cba64-fea1-4af0-b0e6-7ac414185f52" class="">I’ve never been able to stick with keeping a journal. But with Roam’s setup encouraging you to start your day in the Daily Note, you end up naturally creating a journal just by adding information and recording things that are going on.</p><figure id="eb10ffc5-de73-442b-91be-3feae2d1dd31" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cbc7d946da35_I2aXSQVcRxwadG02nf2vcxO0tYGQDMr-ZFYFc3k0YULU8Q6mNnqDzHNyGxJTaL53Yi5vt0oITsH9Uov1-MCPXATKrIgDcrRDrmwi1N0SwbxcX13baoCGWzXlVOLFRiEPbtcwqsyI.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cbc7d946da35_I2aXSQVcRxwadG02nf2vcxO0tYGQDMr-ZFYFc3k0YULU8Q6mNnqDzHNyGxJTaL53Yi5vt0oITsH9Uov1-MCPXATKrIgDcrRDrmwi1N0SwbxcX13baoCGWzXlVOLFRiEPbtcwqsyI.png"/></a></figure><p id="d457a0a9-805b-4fe0-8a8a-2e29f74da437" class="">This also encourages creating pages for everyone you interact with in your life, so you can see when you last saw them and what you did, things like that. Related to that:</p><h3 id="23630415-48cd-4ede-8ceb-585015d2a63b" class="">Dates are Pages</h3><p id="93f49e89-a147-4fbe-9acd-d134339b81e3" class="">Since you start in the Daily Notes, every day becomes its own page and you can “pre-create” those pages with the Date Picker. So when I have a thought about something on a future day, or want to assign a to-do for myself for the future, I can just tag that date.</p><figure id="4da0235e-c9d4-4a7b-836a-13cecd6d3280" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cb7d7946da36_DIGKZ5m35PqRbmAqdlk90JQclzc_R9MszCrOSR8NH2vx-RCZcWc75jCu0O4gOWotOxyQ4LER4bMzSvCuXCtxivsLQD5_2z_VuUEay8w2W_HXWSq7CTS1-0_yav9Nobhyg4iJsj1i.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbda9ba5cb7d7946da36_DIGKZ5m35PqRbmAqdlk90JQclzc_R9MszCrOSR8NH2vx-RCZcWc75jCu0O4gOWotOxyQ4LER4bMzSvCuXCtxivsLQD5_2z_VuUEay8w2W_HXWSq7CTS1-0_yav9Nobhyg4iJsj1i.png"/></a></figure><p id="f3379dce-db47-466b-b9e9-d65747e279b5" class="">Then it pops up as a linked reference for that day along with anything else relevant.</p><figure id="3a50b977-028f-4a64-ad53-96c3382b5e6f" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb0711e67ff1dadc32_LS3Y31LYp2lLS-b-sGCdxoZkifNBe10G4eWRKsr1Gj1GNOse5_mL2HF4-Dpkl5bbxlQJvrxis8IgyUlD10_TcCBT4sGGtpnF_P4RYBwwoveCnVrzakTRhZ5EdRv3I36ArrJY5evN.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb0711e67ff1dadc32_LS3Y31LYp2lLS-b-sGCdxoZkifNBe10G4eWRKsr1Gj1GNOse5_mL2HF4-Dpkl5bbxlQJvrxis8IgyUlD10_TcCBT4sGGtpnF_P4RYBwwoveCnVrzakTRhZ5EdRv3I36ArrJY5evN.png"/></a></figure><h3 id="d0dc682f-ebe0-4b62-b1c1-9d3e3d770d24" class="">The Visual Overview</h3><p id="09ea054c-5037-4a95-aa56-6a92ab77c4a7" class="">Roam also has this “graph overview” you can use to get a visual sense of how all your pages are interlinked. The massive one I showed earlier isn’t that helpful, but the zoomed in versions are pretty cool.</p><figure id="55d9c94c-96be-422b-8f8b-f6766c90e4f3" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb0711e6ff56dadc31_Nr_g2npjMbz3cMxgLzBp_m_ki4amwIs0ZHcnKMRUDvV7cXJXgicrfPE4iWmN6iZ6SjFvlHl_2cDC-Q-auCQGvTAXQW5kqxZOs9PQOSb0wfR9GnDNHS21c05gtFTNKTqtAwz5HfUr.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdb0711e6ff56dadc31_Nr_g2npjMbz3cMxgLzBp_m_ki4amwIs0ZHcnKMRUDvV7cXJXgicrfPE4iWmN6iZ6SjFvlHl_2cDC-Q-auCQGvTAXQW5kqxZOs9PQOSb0wfR9GnDNHS21c05gtFTNKTqtAwz5HfUr.png"/></a></figure><p id="e03e5c6b-ccfd-4f2d-a108-ae7bd99e1b36" class="">I don’t really have a good use for this yet, but it’s fun to look at.</p><p id="2507365f-c3e1-4dde-a4a4-8991485052f1" class="">Tiago Forte’s “<a href="https://praxis.fortelabs.co/basboverview/">Building a Second Brain</a>” model of interacting with information is still my favorite I’ve found, and I’ve been working on adapting it from Evernote into Roam. It’s a great way to get the most out of everything you’re reading and recording, and in my opinion Roam does a better job than Evernote of lending itself to the philosophy.</p><p id="2739833a-b223-4716-bd2e-1b7fdae8b708" class="">I’ll focus on the big three pillars of BASB: Capturing, Connecting, and Creating.</p><h3 id="24dcbfd9-2732-49ee-91cf-c51d0b6dc2ff" class="">Capture</h3><p id="622d1b63-36d3-4562-8e36-649eef26378f" class="">Most of my capture in Roam goes straight into the Daily Note. It’s an easy jumping off point, kind of like an Inbox, where I can associate bits of information with existing notes, or create new notes from them.</p><p id="f29a6cad-42a5-4ca7-aa5b-c4bfeb86f4b3" class="">For example, as I work on this section I saved the article in my Daily Note, tagging BASB and Tiago:</p><figure id="c0cf0abe-1466-47ad-bb24-f5443d10ffe3" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbe0fa5548db0b03f221_eA5zTpZCWyDU0xythbWGs3Za93nV0S1fI891Qsuw6NlJ0J0ElfSwcURefiYcs6gUhx3bGgt7ZczVTaQ2-kuTRV8IlbA-WPcjpfiPrOxWVsiwF4x5HGU2iTTwepQ0JzmhTqp61X4p.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbe0fa5548db0b03f221_eA5zTpZCWyDU0xythbWGs3Za93nV0S1fI891Qsuw6NlJ0J0ElfSwcURefiYcs6gUhx3bGgt7ZczVTaQ2-kuTRV8IlbA-WPcjpfiPrOxWVsiwF4x5HGU2iTTwepQ0JzmhTqp61X4p.png"/></a></figure><p id="746fee5c-eae4-4568-9b50-37347c476edd" class="">Now it’s associated with all of those pages, and if I ever go take more detailed notes from the article I can make it its own page and link that to all the same pages.</p><p id="d11b163c-3071-4d72-8bb9-628e36368bad" class="">Alternatively, if I’m capturing more extensive notes from something I’ll just create a page for it.</p><p id="0411563f-7e8a-48d5-a2fd-307a40e1fbe7" class="">I recently read this article, “<a href="https://pzakin.substack.com/p/the-metagame">The Metagame</a>,” and made some highlights in Instapaper. The Instapaper highlights go to my Evernote inbox, then I copy them from Evernote into Roam (annoying, I know, hopefully the Roam API will be set up soon!)</p><figure id="1bda1952-89f8-4239-9be2-b3cf8e6467dc" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdbf2bd41e45381a174_kTNIHTBtvkw5ij-dKakMeozlr3Fy20VW7U81MITt4SyWCA-X350auoDve_56fEMPhBRaijjES5a7Tu6EwhKsS1zUIr9haeZfnS-XoNG-fYhT1-m3Z3y6b9QZe1dNA_bgQfd5o7Bf.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdbf2bd41e45381a174_kTNIHTBtvkw5ij-dKakMeozlr3Fy20VW7U81MITt4SyWCA-X350auoDve_56fEMPhBRaijjES5a7Tu6EwhKsS1zUIr9haeZfnS-XoNG-fYhT1-m3Z3y6b9QZe1dNA_bgQfd5o7Bf.png"/></a></figure><p id="b4b96ec9-1bff-4b0d-a7e4-bc8902157efb" class="">On mobile, since they don’t have a mobile app yet, I’m using the app <a href="https://getdrafts.com/">Drafts</a> to record ideas on the go and then copy them from the Desktop app into Roam later.</p><p id="c5a8aa71-efd9-483d-bcbc-2e990f434185" class="">Then as I add information, and stumble on old information, I can start connecting it.</p><h3 id="67bcfc0f-6eaa-41c9-9633-71fc39386e13" class="">Connect</h3><p id="238dcad1-057e-465a-b1f4-a417872228d5" class="">As I capture information in Roam, I’ll slowly work on cleaning it up and connecting it to other pages in Roam.</p><p id="b6d4f8b0-2af2-425e-b5c7-420f6781afa9" class="">As one example, once I took that earlier screenshot I updated the page on Godel Escher Bach to fit my new cleaner book layout with defined metadata:</p><figure id="5377406c-c57c-4c7f-b39b-2da1e29ab1d8" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdc0711e6b31ddadc38_E8HyVjDIr7SyItqTIkF4vwJXZeSbW9RbVQb5dzlEnqaiavaE3U9RqTKSkllFnr0_Q85DseiYQcrWB0DWjK3JPdr3rX5EGTLXmqqh-ptvwS_Oq-mKZ_IqHK1q8tPWcc9d6kzgZ113.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdc0711e6b31ddadc38_E8HyVjDIr7SyItqTIkF4vwJXZeSbW9RbVQb5dzlEnqaiavaE3U9RqTKSkllFnr0_Q85DseiYQcrWB0DWjK3JPdr3rX5EGTLXmqqh-ptvwS_Oq-mKZ_IqHK1q8tPWcc9d6kzgZ113.png"/></a></figure><p id="bd79dc0e-fec0-4e95-9e25-731e4e880307" class="">Having defined Metadata is a great way to make sure common important info gets tagged on a note, but I’ll also take time to go through the body of the note and see where there should be contextual page links and tags.</p><p id="a13ddbdf-9523-49f0-a225-a11398962b7c" class="">For example, on that The Metagame article, spending more time on it makes it look like this:</p><figure id="a103031e-90d9-4868-be41-86235b9207f6" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdc0711e631d1dadc39_XNHeqKISas8tVYWH_HjDSY7E1ZcZ0G66-qnMrYvoneVM2P_RWhlv4ietRmUWAzoQryh69vDw7oyIBoTeaMlXTkJIg3rfCMHAQGb20IBy2H3S6teifhspYq7jN6jvGxZkdS1QdgRl.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdc0711e631d1dadc39_XNHeqKISas8tVYWH_HjDSY7E1ZcZ0G66-qnMrYvoneVM2P_RWhlv4ietRmUWAzoQryh69vDw7oyIBoTeaMlXTkJIg3rfCMHAQGb20IBy2H3S6teifhspYq7jN6jvGxZkdS1QdgRl.png"/></a></figure><p id="d49871fb-c683-47c2-b012-d49183a5f847" class="">I added a couple layers of progressive summarization, linked it to 6 new pages, and tagged next week’s <a href="http://nateliason.com/join">Medley</a> to make sure it gets included.</p><h3 id="1a152a35-b23a-462b-8207-cc30b7cbc0af" class="">Create</h3><p id="7796f685-22d4-4fff-a3e2-6273869d6b49" class="">Roam has turned into my “staging ground” for new things I create. A few examples will probably help best.</p><p id="ad8babf1-5ded-4b1c-918c-8597f151367f" class="">For the Monday Medley, I tag ideas and articles with next week’s Medley as I add them to my Roam throughout the week:</p><figure id="587016de-75e7-4610-920b-b17f7f44d71d" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdf274eecfa77bdea01_NvBnkex1eMkw8p5q2YMVkgcFLvdaJ6xuAka4XZlYP3bmln2pILw8xxXc-VwGYLj0zKXMYegtYCNWM-G0I8Ab-ncrS50atOZrhw3t75iplCxqBU7i456WSxvBCUbRm2jxaChEt5w6.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdf274eecfa77bdea01_NvBnkex1eMkw8p5q2YMVkgcFLvdaJ6xuAka4XZlYP3bmln2pILw8xxXc-VwGYLj0zKXMYegtYCNWM-G0I8Ab-ncrS50atOZrhw3t75iplCxqBU7i456WSxvBCUbRm2jxaChEt5w6.png"/></a></figure><p id="1590f0bb-2657-46da-9844-3c6dea623e1d" class="">Then when I want to pull out the best ideas from those articles to include, I can open them in the sidebar and start drafting out the Medley right in Roam. Here’s what last week’s looked like as I was going:</p><figure id="e8c56fe1-f500-4ad2-a327-640c07a1ad4b" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdd9972962369603b51_WAqPnXIBZv_6vh4j5sz94ZNw1GUpPOG_ICmZ344zx_8fVNGTk_q_MCMcWOt-ZqXpWYSLo4DCjcoY-Z8Js31I1w32P1Ebjml9PJZYpUVclYhaNiujxrWIttGdX7f6EEDObax69Svj.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdd9972962369603b51_WAqPnXIBZv_6vh4j5sz94ZNw1GUpPOG_ICmZ344zx_8fVNGTk_q_MCMcWOt-ZqXpWYSLo4DCjcoY-Z8Js31I1w32P1Ebjml9PJZYpUVclYhaNiujxrWIttGdX7f6EEDObax69Svj.png"/></a></figure><p id="05803e17-6881-49e4-b8f2-af0efa64a3e9" class="">But the productivity setup is pretty different. I wasn’t sure at first that I’d be able to use it as a tool for personal productivity, but now that I’ve adapted to it I really love it. I suspect <a href="https://www.nateliason.com/blog/procrustean-bed-productivity">the structure will change</a>, and I love how easy Roam makes it to change things, but this is a good start.</p><h3 id="c2eb472b-19a1-4740-aecd-ceae6e7a541e" class="">Projects, Areas, Goals</h3><p id="a7008b46-8095-4cf8-a332-cffefc4dee89" class="">I’ve adapted Tiago’s <a href="https://praxis.fortelabs.co/the-p-a-r-a-method-a-universal-system-for-organizing-digital-information-75a9da8bfb37/">PARA system</a> to Roam by removing the Resources and Archive sections (you really don’t need them in Roam), and adding a section for Short and Long Term goals.</p><p id="ab2ff86a-de57-4d92-af05-e87f2484a1f6" class="">I’ll start with Areas, those are still in line with Tiago’s definition of “Areas of Focus,” sections of your life that you don’t “complete,” but rather continue to devote mental energy to:</p><figure id="5bcc84e6-d6d1-414b-946c-ed88f6ea7fa7" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbddfa5548bf0603f217_EkmlKKKQjdZpT5-9_1Sn1A5JbmcLG7BMG4mZ0WxfDGMrBO3qLeEoFDWrYXAQA3NptHjiy-K6GHw_096QJxpxu7UPpHYnkOZbX2FaHEimyMfhQZoy_ECr_yn03-AmsUsGhRudLX4l.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbddfa5548bf0603f217_EkmlKKKQjdZpT5-9_1Sn1A5JbmcLG7BMG4mZ0WxfDGMrBO3qLeEoFDWrYXAQA3NptHjiy-K6GHw_096QJxpxu7UPpHYnkOZbX2FaHEimyMfhQZoy_ECr_yn03-AmsUsGhRudLX4l.png"/></a></figure><p id="50ce1a84-7b67-48c5-97c8-c981f89a5d5e" class="">The Areas are great as reference sources and for collecting information and dates. For example all of my notes on Pepper I can quickly tag her on, or anything related to my house can tag the “The House” page.</p><p id="0185d016-8711-4f09-b5fe-ff9f3e825067" class="">Areas also help to organize my Short Term Goals (anything roughly less than a year), Long Term Goals (more than a year), and Projects (discrete completable things that feed into my goals).</p><figure id="39862662-95b9-476c-a02a-6d5494470617" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdd0711e6266edadc3e_Wp0W8ZyVcp218u70VyQ5kXEYuPoQtCfuBh_aD8CIxv5eoyyjfmon_9AxeihnGFxb60go3QrYx1rjRrWk1Ts8FyFkB-OQ6lJAxqtQtayy5mSiKp8YUh5RjYx-woGBa0F2v7ucbP8w.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbdd0711e6266edadc3e_Wp0W8ZyVcp218u70VyQ5kXEYuPoQtCfuBh_aD8CIxv5eoyyjfmon_9AxeihnGFxb60go3QrYx1rjRrWk1Ts8FyFkB-OQ6lJAxqtQtayy5mSiKp8YUh5RjYx-woGBa0F2v7ucbP8w.png"/></a></figure><p id="5b191069-8213-4ff7-b599-53410444af7f" class="">Then for each week, I create a “weekly plan” with some goals for the week, with specific goals for each day broken out:</p><figure id="881c0a34-9670-4638-8897-5bb259c1696e" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbddf2bd41ff1a81a178_BOMQaO7qwipcrQQheGccSEWNhKPOjiQZjKLDNHC98NfR36Az9KOSG1GGKVkAsa_r_yT46Vs2s5y2TWf_vl_UUj_x2jdJTxwRI7auD92LLCwt2iVjo0f8W06pdvaNdHz5c-rNHGNy.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e15fbddf2bd41ff1a81a178_BOMQaO7qwipcrQQheGccSEWNhKPOjiQZjKLDNHC98NfR36Az9KOSG1GGKVkAsa_r_yT46Vs2s5y2TWf_vl_UUj_x2jdJTxwRI7auD92LLCwt2iVjo0f8W06pdvaNdHz5c-rNHGNy.png"/></a></figure><p id="925c38b0-3496-41da-9951-843ea5a054ca" class="">Each day I know the top few things I need to do in-line with my Projects and Goals, and if I don’t finish any “other tasks” on a given day I can easily move them to a future day.</p><p id="3aa415fc-31d4-4ace-9420-7f15fb68e448" class="">I was keeping all the day-to-day productivity in my Daily Notes, but it was too easy to lose things.</p><p id="7e74d848-1f8a-4590-8895-5033325c8e88" class="">And again, I’m trying to keep things very light in the spirit of <a href="https://www.nateliason.com/blog/procrustean-bed-productivity">my last article</a>. But this has made it really easy to track my most important things I need to get done each week relative to my projects and goals, and then each day see what I need to do while taking Daily Notes that don’t interfere with the productivity setup.</p><p id="77040878-11f3-495e-9fbb-9e5576a98c5d" class="">Roam turns out to be phenomenal as a CRM, possibly the best solution I&#x27;ve found.</p><p id="e1ca0655-2ca4-4db9-9a20-2e98663055d2" class="">First, every time you interact with someone you can tag them with a page link.</p><figure id="90b3e825-ec9c-4071-972b-6fbc481f11de" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e2392a9992bfa1c2e27c1c2_imgs252Fapp252Fnateliason252F0dj1c-OC04.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e2392a9992bfa1c2e27c1c2_imgs252Fapp252Fnateliason252F0dj1c-OC04.png"/></a></figure><p id="48fda47c-b8ba-4f62-89e3-44b25e154707" class="">Then on their page, create a standard Metadata format for People. Mine currently has:</p><ul id="0c77ec2c-f16b-4024-ad68-81467459cc9a" class="bulleted-list"><li>Phone Number::</li></ul><ul id="49e1bf40-e2fe-4b95-91f9-90824696cb48" class="bulleted-list"><li>Email::</li></ul><ul id="4e1c2114-5326-46c4-a61c-bfec00326b81" class="bulleted-list"><li>Company::</li></ul><ul id="71333a76-799d-4624-acfd-af088b6c0c73" class="bulleted-list"><li>Role::</li></ul><ul id="1402e178-6fd2-4909-bc4a-a9a0c36c403f" class="bulleted-list"><li>Location::</li></ul><ul id="e5e915f4-bf57-4876-98f5-47a1ed30258d" class="bulleted-list"><li>How We Met::</li></ul><ul id="93ec783e-4b29-4ccd-a029-56684aadfc8b" class="bulleted-list"><li>Birthday::</li></ul><ul id="0e29119b-0c08-404e-b400-eac511073778" class="bulleted-list"><li>Interests::</li></ul><ul id="6b6a7804-f90f-48fa-9358-2263fb19e4a8" class="bulleted-list"><li>Tags:: #People</li></ul><p id="09d3e478-f8e3-437a-93ef-8199887007e6" class="">Everytime you interact with someone, or talk to someone in some meaningful way, you can tag them in your Daily Note for the day, and update their page in your CRM.</p><p id="9007a250-898f-418d-8908-06776826b6e2" class="">On top of that, you can tag them in other pages whenever it&#x27;s relevant. When I add new book notes or article notes, I&#x27;ll mention who recommended them to me if I can remember it.</p><p id="ee8786dc-17c2-42ee-a726-f4a178e3c737" class="">For example, if I open up my page on <a href="https://taylorpearson.me/">Taylor Pearson</a>, I can see my notes on him if I need them. But I can also see all of the other interactions with him, including articles of his I&#x27;ve read, books he&#x27;s recommended to me, and any time I&#x27;ve met up with him since I started using Roam.</p><figure id="bdd453ab-178a-48d0-9fdd-1f2ee1181dbd" class="image"><a href="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e23917f17bf310f15849dd0_imgs252Fapp252Fnateliason252FaMAA2ebG3k.png"><img style="width:700px" src="Roam%20Research%20Why%20I%20Love%20It%20and%20How%20I%20Use%20It%20edcee520921f4e0f86c1ade04af1e8c8/5e23917f17bf310f15849dd0_imgs252Fapp252Fnateliason252FaMAA2ebG3k.png"/></a></figure><p id="a4c799d6-94c2-4a61-abd6-7605d1cb87cc" class="">This whole system is much, much better than having to manually update some CRM <a href="https://www.nateliason.com/blog/personal-crm">like in Airtable</a>. Since you&#x27;re naturally tagging people as you interact with them, you can create an easy record of your relationship with them and compile any useful notes on them as you go.</p><p id="c0aa8d0e-d093-4f0e-bfe5-07a9255b9f67" class="">Roam isn’t perfect, and there are a few things it still needs to really take over. I’m still using it despite these seemingly large limitations, though, which should tell you how much I like it. I’ve also been told by Conor, the founder, that all of these are being worked on right now so I suspect I’ll be able to delete this section in the future.</p><h3 id="902bd891-252b-4859-8939-e2c814f5d971" class="">No Mobile App</h3><p id="11631d84-df24-4220-a413-6a2edb031b4a" class="">Roam has quick capture that works pretty well for grabbing ideas on the go, but navigating your database on the go is still pretty clunky. Hopefully this comes quickly once they make a desktop app.</p><h3 id="b67bcc0f-c2da-43d3-bf22-719f2aef7e10" class="">No API</h3><p id="4b4fb095-cc1e-4d54-b452-be0e44a8ee8e" class="">One of my favorite parts of my Evernote setup was automatically having my Instapaper highlights show up as a new note, and being able to export Kindle highlights through Readwise.</p><p id="0b24650c-2a72-4abf-a6ac-d19f36ccdd9e" class="">Roam doesn’t have an API to enable this yet, but I know one is coming. For now, I just export things to my Evernote inbox, copy them into Roam, then move them into a “Roamed” folder in Evernote.</p><h3 id="b9963c11-0eb2-47d8-a3c3-c9fc55c8c003" class="">No Aliases</h3><p id="76156714-8bab-49c5-8ec7-fb03c42dcbda" class="">Now I’m getting very nitpicky, but there’s no good way to have multiple ways of referencing the same page.</p><p id="2c4d3be3-18d0-4b5e-870a-b08e0cbede70" class="">For example, I’d like YC and Y Combinator to go to the same page. Or have Thoreau, Henry Thoreau, and Henry David Thoreau all go to the same place. You can merge the duplicate pages by renaming them and have all the links update, but it might be nice to just be able to use multiple aliases for the same page.</p><p id="0beae3b7-d4ca-4968-9adc-d225a6c24e5e" class="">Roam is unintuitive if you’re coming from any other note taking app, so it takes a bit to get used to it.</p><p id="8e5bf543-c58b-4274-9eea-ef389a0ca752" class="">But now having used Evernote, Notion, and Roam, I can pretty confidently say Roam is the best way to record your ideas and things you’ve read, and use that knowledge to form new connections and creative output.</p><p id="f97835ec-8929-4446-acc6-d8728832d75e" class="">Spend a few hours in it implementing some of the structure laid out in this article, and try some of the things I didn’t mention. There are other features I don’t even use yet like Block Embeds, and <a href="https://roamresearch.com/#/v8/help/page/1308">the help database</a> has a ton of good examples of how to get the most out of it.</p><p id="70ec57c3-6730-4f9a-870b-f83357f9558c" class="">‍<a href="http://www.roamresearch.com/">Give it a try</a>, and let me (<a href="http://twitter.com/nateliason">@nateliason</a>) and the founder (<a href="https://twitter.com/Conaw">@conaw</a>) know what you think about it on Twitter!</p><p id="2e36088c-a3ca-461d-a9cd-ddc44c35ffbf" class="">Also, if you want more examples of how powerful Roam is and some of the really cool use cases, <a href="https://www.nateliason.com/power-of-roam">check out my The Power of Roam lesson series</a>.</p><p id="5350d775-0d5d-4606-8a4a-16fc6f478b4d" class="">Discover how Roam can help you learn more, do more, create more, and build your digital web of networked thoughts.</p><h2 id="f1cc3c22-8382-4e57-b4da-ad7f0e1913f2" class="">You Might Also Like...</h2></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Tools &amp; Craft - Ted Nelson</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b7d968e1-fb71-4700-b37b-0e956f621cfc" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📖</span></div><h1 class="page-title">Tools &amp; Craft - Ted Nelson</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-blue">Tech History</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.notion.so/tools-and-craft/03-ted-nelson" class="url-value">https://www.notion.so/tools-and-craft/03-ted-nelson</a></td></tr></tbody></table></header><div class="page-body"><figure id="50d00c44-2ddb-4b0b-bcc2-8aa8af7e6da8" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/ted-illustration.png"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/ted-illustration.png"/></a></figure><p id="10352b2d-54bc-4290-b8ed-51770734786e" class="">Creator of Project Xanadu</p><p id="890f92fa-23b4-4dfe-8645-0318af2a77a8" class="">Ted Nelson is the founding designer of Xanadu, the world&#x27;s first hypertext project. Xanadu&#x27;s influence on the Internet as we know it today is unmistakable. Ted coined the word &quot;hypertext&quot; to describe non-sequential writing — but clickable links are only the start of his expansive vision for digital technology. His ideas have influenced projects ranging from Objective-C to the original WWW to entire political philosophies about the role computing tools should play in our lives.</p><p id="bb478e22-8a20-4d2d-bc79-348aae2f9f31" class="">I&#x27;m thrilled to talk to Ted, who I see as a poet among engineers. He brought a vision full of elegance and purpose to the digital frontier, and his work will continue to shape the web and all of our tools for years to come. It was apt for us to meet at the</p><p id="74a30cd1-3a5c-4fc5-8875-591543b043e8" class=""><a href="https://archive.org/">Internet Archive</a></p><p id="a2e6bcdd-3788-418d-a7ff-0677c64b5ff0" class="">, the non-profit digital library that preserves versions of the web for free access by the public. It&#x27;s a setting that dovetails perfectly with Ted&#x27;s vision for a free and open Internet.</p><p id="20a1f10b-b0f7-420a-b8e5-2c45754058d4" class="">“Remember that things keep changing. The environment in which you become successful will be different from the environment in which you&#x27;re starting.”</p><p id="bfd1ca18-0ff7-4710-917b-7e0b59241e9c" class=""><strong>DEVON:</strong> My name is Devon Zuegel, and I&#x27;m a software engineer and writer based out of San Francisco. Today, I&#x27;m talking to</p><p id="e065f019-d7c9-4355-9258-3326717900b1" class=""><a href="https://en.wikipedia.org/wiki/Ted_Nelson">Ted Nelson</a></p><p id="f2b94f3e-5661-4ccc-9f5d-27d40efb14df" class="">at the Internet Archive. We&#x27;re going to talk about the development of personal knowledge bases and the design of his system, <a href="https://en.wikipedia.org/wiki/Project_Xanadu">Xanadu</a>.</p><p id="57c99058-bb1a-45ac-9c84-ebe96b20b8e2" class="">So Ted, can you introduce yourself?</p><p id="6d8bbce9-c2e4-4ee5-8ed1-9a0f2f5ce332" class=""><strong>TED:</strong> I&#x27;m a controversial figure. Some call me an Internet pioneer. I have accomplished much less than I intended to in my lifetime. I&#x27;ve written a lot that has influenced people. I’ve given a lot of speeches that have influenced people, and my principal work is still unfinished. So at the age of 81, I&#x27;m still working hard.</p><p id="7fb32674-5294-4c55-b3c2-6d00d1f3fab0" class=""><strong>DEVON:</strong> Can you tell us a little bit about how you got involved in computing and the path that you took to get there?</p><p id="20ddf387-3843-44c0-8991-dfb9e4387ddb" class=""><strong>TED:</strong> I believe it was 1952 when Time magazine had a picture of the Mark II computer on its cover, and I read the article. I was 13 or something, and I had no comprehension what it was about, but it was important.</p><p id="e9c1094d-a906-4af7-aa6d-43add26aa564" class="">I was interested in computers from that point on. But I was from a literary family, so I was very interested in evolution. My great-grandparents and grandparents would take me to the planetarium frequently or the museums. And I was fascinated by everything.</p><p id="93d2f6b5-ed5f-4b98-b3df-d04212987faa" class="">My problem has always been that I had too many interests. I found everything interesting as I grew up. I became interested in the future. I thought it was going to be a wonderful future, all chromium and Art Deco with rocket ships. And when I was 13 or 14 in the so-called “golden age of science fiction,” I was avidly reading about how wonderful it was going to be when we had space satellites. My favorite author — amazingly — was L. Ron Hubbard when I was 13, before he invented Dianetics and Scientology.</p><p id="ef5a61af-f14a-4676-b92f-7e1cb4eb46d5" class="">A key moment was when</p><p id="5878bd32-16f0-49a0-9143-ee4d232e4714" class=""><a href="https://www.theatlantic.com/magazine/archive/1945/07/as-we-may-think/303881/">Vannevar Bush&#x27;s article</a></p><p id="7cba1169-8740-4777-9287-f14c3ce12956" class="">appeared in 1945. Now, it appeared first in the Atlantic Monthly, and I believe we read it around the dinner table, and then again it appeared that December in Life Magazine, and I read it again.</p><figure id="b7efb81b-5238-4286-a251-4413cfecdef8" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/Vannevar_Bush.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/Vannevar_Bush.jpg"/></a></figure><p id="859557ea-0cac-4c5d-bf04-0c7e0c137714" class=""><strong>TED:</strong> So Bush, who had been President Roosevelt&#x27;s science advisor, was talking about a future world in which scientists would be able to annotate microfilm. So he imagined something he called a Memex, which would have all the world&#x27;s writings on microfilm, and you&#x27;d be able to call up any frame and annotate it and create what he called “trails.&quot;</p><p id="864828d1-c19f-4947-a0a0-1d464e7d0221" class="">This fundamental article by Vannevar Bush influenced me strongly, and simultaneously influenced</p><p id="7e19f506-b34a-405b-90c9-7e7f81027acf" class=""><a href="https://en.wikipedia.org/wiki/Douglas_Engelbart">Douglas Engelbart</a></p><p id="08ae09f3-a90f-4866-94b4-95795a47d179" class="">who is, like me, one of the grandfathers of the web.</p><p id="b5ea1f26-fd4b-4cd8-9e33-afad1fc3641b" class="">I&#x27;m dithering a bit. So, I had literary interests, theatrical interests. My father put me on television when I was 12. I went to college and had no idea what I wanted to major in, and I finally ended up majoring in philosophy because it was easiest.</p><p id="bea513aa-11b7-423d-b7f3-6ea5009a287e" class="">“I was interested in all subjects. I suddenly hated this business of majoring because it meant restricting and narrowing down. Instead, I wanted to take everything.”</p><figure id="08f54f48-b120-422d-a392-f2cb37b14b68" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-2.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-2.jpg"/></a></figure><p id="bda1c0bf-8b49-4694-ace0-387d438fba18" class=""><strong>TED:</strong> So my sophomore year, for example, I took extra courses at the University of Pennsylvania. I took a Linguistics course, which was thrilling. It was with the teacher of</p><p id="db8983dd-eaa6-4560-ada3-dcf8d8875b7d" class=""><a href="https://en.wikipedia.org/wiki/Noam_Chomsky">Noam Chomsky</a></p><p id="d947be1b-a80f-4046-a115-53838a299556" class="">, and I was so happy. As with many subjects before they became popular in college, you realize, hey, I shouldn&#x27;t be worrying about the academic stuff. I can manage my own education, and here&#x27;s an opportunity to do new projects of all kinds.</p><p id="90bf4b71-bc2b-45a7-97df-0d0100ab1215" class="">So I was in theater. I directed a play and got a prize for that. I was an actor. I had my own magazine. Here&#x27;s the third issue of my magazine called Nothing. I&#x27;m terribly proud. So it was kite-shaped and you had to unfold it gradually in peculiar ways. And the illustration, by the way, was by a wonderful guy named Russ Ryan, but I designed the whole thing.</p><p id="2f5ae89a-bf21-4324-9469-4debfb6dfa3f" class="">I laid it out. The printer had no idea what we were doing. I showed him the mock-up, and I thought he understood. But we actually had to staple together the first copy. He had no idea what to do. And now I look at it, and I say, &quot;How in the hell did I plan on that?&quot; I have no idea, but I&#x27;m terribly proud of it still. It&#x27;s elegant, and I was on the student council, and I campaigned for sexual freedom.</p><p id="a4fe7e38-e789-4a97-8c23-fef1d2c35c05" class="">Now, this was a time when women had to sign back into their dorms every night. The college administration knew where they were, and they had to be in at a certain time.</p><p id="f76e4bfd-6f2d-4fcd-aafc-f23f35a6e388" class="">“Control the women and you’ve got the whole thing settled. Of course the upperclass people, you know, they got around these rules.”</p><p id="f9ae9de3-82c5-42f2-acdb-30a4326cff93" class=""><strong>TED:</strong> We really did have sex, but it was furtive and stupid. I was arguing with the Dean of Students about this on the Student Affairs Committee in my senior year. So then she called up the head of the biology department, and she said, &quot;We&#x27;re going to get Ted Nelson. We&#x27;re going to expel him.&quot;</p><p id="3cc7583b-3d56-4f6b-84a8-fcb5d7c396f9" class="">This was the second semester of my senior year. And Dr. Enders, the head of the biology department said, &quot;No, you&#x27;re not. The faculty will stand behind him.&quot; They were always my audience, because they were very sticky.</p><p id="93b09817-854f-4197-b9f4-753237dfe85b" class="">So the climax of all this was my senior year when I wanted to see if I could make movies. So, my roommate and I got a $700 grant from the student council to make a movie. $700 in those days would buy you one hour of black and white film stock development and a work print. That&#x27;s it. No sound and 16 millimeter, of course. And so I said, okay, I&#x27;ll shoot it silent and then we&#x27;ll put the sound on later. That was called &#x27;wild sound&#x27; in those days. So it was all planned.</p><p id="b53f0fbb-2067-481c-8bb1-5259a4f51971" class="">Tony was going to write it, and I was going to film. And then Tony died. So I said, oh that&#x27;s the end of that. But at the end of that second semester, I thought, &quot;No, wait a minute. Tony would have wanted me to go on.&quot; I made the movie, and I made it up as I went along. So it&#x27;s a half hour comedy about loneliness in college.</p><p id="c3d510cb-5fbe-44a4-b6fb-e8235a533149" class="">I&#x27;m terribly proud of it. I consider myself a good filmmaker. But most people don&#x27;t get it because A) it&#x27;s badly synchronized, B) it&#x27;s in black and white, and C) it&#x27;s a melancholy satire that&#x27;s slow-moving. So it&#x27;s humorous, but it&#x27;s a slow-moving satire, and that doesn&#x27;t fit people&#x27;s notions — so people don&#x27;t get it.</p><p id="f07b8f1e-08ae-48ce-86de-7e261215cae5" class="">In any case, I consider myself a filmmaker. That was that — that was what I was going to do. However, I made the mistake of going to graduate school. And in graduate school, I took a computer course.</p><p id="0a50e7ee-7cb5-4121-8c35-ed4296035443" class=""><strong>And holy smoke, they lied! It&#x27;s not a mathematical machine. It&#x27;s not an engineering machine. It&#x27;s an all-purpose machine, and you can put screens on it and the screens can interact.</strong></p><p id="f2fd0214-c9c4-4026-9f51-24afcfd82a91" class="">Screens! I&#x27;m a movie maker! I know what to do. So it&#x27;s my job to design the documents of the future, because if I don&#x27;t do it, the techies will screw it up and that&#x27;s exactly what has happened as far as I&#x27;m concerned.</p><p id="609110a9-9bcb-4e7f-807b-4f87373bdd3a" class="">“So since then, my life has been a campaign to create a different kind of document on interactive computer screens.”</p><p id="b0f28b6b-8577-48ff-9d6e-c4c5dbed4b43" class=""><strong>TED:</strong> For the first 20 years, I would tell people — I would say, <strong>&quot;Look, soon we&#x27;ll have interactive screens, and we&#x27;ll be able to have documents on those screens, and they&#x27;ll be able to jump from one to the other. And we&#x27;ll show visible bands of connection between them, and you&#x27;ll have automatic royalty and automatic backup, and it&#x27;ll all be available online.&quot;</strong></p><figure id="aaa8c6e1-226e-45e1-a321-67fe06687cf6" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/Xanadu_Schematic.png"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/Xanadu_Schematic.png"/></a></figure><p id="074927c3-cf07-4d6e-be38-26e93970a020" class=""><strong>TED:</strong> The term “online” wasn&#x27;t popular then. And people would look at me with a glazed expression. For the first 15 years, almost always they would say, &quot;Is it like a tape?&quot; And I was stymied. I should have just said, &quot;Yeah, it&#x27;s like a tape.&quot; But I found three people who actually heard and understood me in those days — three out of the hundreds I talked to.</p><p id="7b9ad25c-7ce2-41a9-9091-b9e185bc4c0e" class="">Then came personal computing in the &#x27;70s, and I had a computer store. But the problem is that, you know, things got standardized. <strong>I wanted to start the personal computer industry, but no that was already done by a guy named Steve Jobs, and he did it his way but not my way.</strong></p><p id="fc435284-b5b2-4393-8731-873d201361e5" class="">The Macintosh paved the way for today&#x27;s &quot;modern GUI&quot; — the way we manipulate things. That&#x27;s how Steve interpreted what Xerox Parc had done. And once again, that&#x27;s not what I would have done.</p><p id="7bf2c6c0-1496-443b-b8f8-47596efd8e0d" class="">“So what we have now are documents which imitate paper — which to me, is stupid. You know, it’s like putting an imitation horse on a car.”</p><p id="3e6b1f4d-e3c3-461b-a575-7cf1ab13c911" class=""><strong>TED:</strong> Because you&#x27;ve got something different. So to me, hypertext — by which I mean not just the World Wide Web with one-way jump links, but with visible connections between pages — this was going to be the document system of the future for all mankind as I hoped. And every standard makes it impossible to do that: Microsoft Word, text files, the World Wide Web, PDFs.</p><p id="b62ac75d-7f07-423f-aceb-bbdbaeb80706" class="">All have basically only one column, and I say, &quot;Why?&quot; Well, because originally there was something called Project Bravo, which became Microsoft Word, and everybody was so hypnotized by fonts — which are fun — that they didn&#x27;t realize that connection is much more important. Now, I love fonts. I designed a font in college. But to me, connection is more important than fonts.</p><p id="cceba904-7e87-42e9-aec4-75c5f6b4510f" class="">I learned to write on a typewriter, okay? That&#x27;s how you should learn to write, so that you can&#x27;t put things into screwy italics and funny arrangements. Because then you learn to write as distinct from arrange visibly. This concept became the Xanadu Project, which became an ongoing project for years and years and years.</p><p id="080db4e0-802a-40fc-aef0-b7348aead1ff" class=""><strong>TED:</strong> I called it Xanadu first in 1966 when I was assistant to the president of Harcourt Brace and Company, and I thought they were going to fund a project where I would have a computer with an actual interactive computer screen that we could experiment with. This was after we&#x27;d seen Engelbart — I&#x27;ll talk about Engelbart in a minute. I didn&#x27;t realize that in any big corporation, your enemy is the other department. There was already a department of computers that had IBM computers. So guess what? No way are they going to allow a non-IBM computer to be put into another department in that company, at least in the 1960s.</p><p id="b1882366-26b8-4b79-b976-9b71a0c43040" class="">Perhaps this is a good time to talk about Douglas Engelbart. So, I proceeded with my designs for computer documents from 1960 to my first publications in 1965. And after that — after my first my big presentation at the ACM (</p><p id="f76dae4a-a9db-4cff-8748-6d319254f9e4" class=""><a href="https://en.wikipedia.org/wiki/Association_for_Computing_Machinery">Association for Computing Machinery</a></p><p id="74ab13a0-5473-417b-b17d-1eacaa2a06b0" class="">) — a guy with a crew haircut came up to me and asked if I&#x27;d heard of Douglas Engelbart. The guy with the crewcut was Bob Taylor, who was Doug Engelbart&#x27;s sponsor, giving him money from Washington.</p><p id="e3947687-3559-4a04-8d2c-3c1f69098b9a" class="">“Doug Engelbart was an almost mystical visionary — the warmest and sweetest and kindest man I’ve ever known, but also an engineer, also able to do work with deeply technical stuff and powered by an enormous ambition to fix the world.”</p><p id="723fbfa8-446a-4fe2-b059-c72e216a9156" class=""><strong>TED:</strong> As he put it, we have more and more problems that are getting more and more tangled. We&#x27;ve got to be able to solve them at scale. Douglas Engelbart essentially single-handedly and single-mindedly carried out his vision at Stanford Research Institute — which was not part of Stanford University. For a number of years, his laboratory pioneered word processing, outline processing, multiple windows on a screen.</p><p id="76dabbd5-811f-4601-8b9f-1f28982cb5db" class="">It was a group that did so many things we take for granted today — all of which were radical, and which were not necessarily respected by the other departments. One thing someone had said: &quot;You don&#x27;t think what they&#x27;re doing in there is science, do you?&quot; But Doug was an incredible visionary, and he built this system, and the climax of it was in December &#x27;68 with the</p><p id="9be77141-32a4-49db-9920-658c666927da" class=""><a href="http://www.dougengelbart.org/content/view/209/448//">Great Demo</a></p><p id="d6ba7c3d-03c6-4e35-bdcc-cb5ebc4dc510" class="">.</p><p id="d64d6514-0692-43c0-8350-b2d662d3c878" class="">Doug&#x27;s Great Demo was in December in 1968, so the 50th anniversary is coming up this year. Everything worked. They were running it on a small computer by today&#x27;s standards — less computer than you have in your wrist watch. And yet, time sharing I think — I was told the maximum number that they could do was seven maybe four users at a time. But they showed all these things on the screen, and Doug was on his microphone from San Francisco directing the whole affair, which was being transmitted via truck up on the highway that could see both Stanford and San Francisco. And the projector they used at the Demo was an Eidophor projector — one of these insane things that had a metal surface covered with oil and an electron beam wrote the picture on this oil, which was then reflected by a bright light through the projector. Then a windshield wiper would restore the oil for the next frame. That was just how the audience saw it. So this incredible chain of implausible structures worked perfectly on that day.</p><p id="b5c6b645-fef1-424b-8fe8-c228e83723e7" class="">And that was the height of Doug Engelbart&#x27;s career. Because after that, he lost his funding, he lost his laboratory, and for the next 40 years, he was in the wilderness writing specs — and trying to get back again. His backer Bob Taylor betrayed him and hired away his best people for Xerox Parc. So Doug felt betrayed by the people who left him, and an AI guy named</p><p id="69f48fa6-3149-478d-8c17-59a1adb2bd1b" class=""><a href="https://en.wikipedia.org/wiki/Bertram_Raphael">Bertram Rafael</a></p><p id="aede4b93-09ea-4746-98ff-01edf9dfbfe3" class="">convinced Doug&#x27;s boss that he deserved Doug&#x27;s office instead.</p><p id="1de2117d-b81a-4356-9dd8-45090a1485db" class="">So Doug lost his office, and eventually they sold the project to</p><p id="b3df3c89-e49f-4ecc-a979-ce6109889476" class=""><a href="https://en.wikipedia.org/wiki/McDonnell_Douglas">McDonnell Douglas</a></p><p id="d73b3266-57c6-4393-945b-1d9d7f50cac0" class="">, an aircraft company that didn&#x27;t know what to do with it. What it needed was much more product development to make it something real, and nobody had the vision to go ahead with it except Doug — and he was essentially left in the dirt.</p><p id="27b030cd-413b-4d5a-b2a4-80cb368723f5" class="">In &#x27;65, when I gave my big ACM talk, Taylor comes up to me asking if I&#x27;ve heard of Doug — and I hadn&#x27;t. But in &#x27;66, when I was working for the publishing company, Harcourt Brace, I went out there with the president of Harcourt, Billy Jovanovich, and we visited Doug&#x27;s laboratory. This was two years before his Great Demo, and we saw the mouse and word processor and all this wonderful stuff he&#x27;d done. And it was great, and Doug was obviously a wonderful man, and we were very friendly. He kind of half offered me a programming job, but I wanted to do it my way. Doug&#x27;s system was hierarchical, and I&#x27;m anti-hierarchical. But I loved him as a person.</p><p id="ed31ad5e-5094-4166-897b-af3496d4d6cc" class="">And so I flew back with Jovanovich thinking on this, and Jovanovich was budgeting my system — then to be called Xanadu — at $50,000 for the first year, which would have bought the equivalent of a tiny PC today. And as I said, that was killed by a rival department. So that was essentially the first part of it.</p><p id="69a8ce07-f9d4-465f-b1a4-b0cfe8b17996" class="">My friendship with Doug Engelbart resumed much later. We became very close in his later days, and he actually carried out the marriage ceremony when I married Marlene.</p><figure id="65a63d02-f1c2-4d24-abad-1c67bd5caf02" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-24.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-24.jpg"/></a></figure><figure id="d1c3debc-fc61-42d8-816c-760446bcb0d0" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-26.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-26.jpg"/></a></figure><p id="29bbe922-4bdf-4c03-b572-c0bac29fd6af" class=""><strong>DEVON:</strong> So earlier, you talked about how Vannevar Bush&#x27;s piece inspired you about connections between writing. Can you expand on that a little bit and describe how it influenced your later work?</p><p id="aa8b43f7-f460-4282-aa78-d47efa66933f" class=""><strong>TED:</strong> No idea. All I know is that there was this article about how researchers of the future — now, this came out in &#x27;45 when I was eight years old — about how researchers of the future could make connections between pieces of writing like frames of microfilm. And Bush talked about trails. And a trail — he never defined it — but it was a series of connected pieces. And he also talked about side trails. Again, we can only speculate as to what he meant.</p><p id="8013f353-992c-486e-9efa-bacfd80f6959" class="">This has inspired many people. It inspired Doug Engelbart, who was on a Pacific island reading it in a library in the Philippines. It probably inspired me, though many things have inspired me. But I do remember reading it — I think — I was eight.</p><p id="f454d1b1-bbfb-46ef-bc22-4906154c0341" class="">So hey. I&#x27;ve been fascinated by the number of different ways people have interpreted Bush&#x27;s piece. Several people have shown me things saying, &quot;Here, this is a memex.&quot; &quot;No, this is a memex.&quot; And it&#x27;s always different.</p><p id="97f963d1-c5c2-4f41-96eb-1ae44d1960c2" class="">“Wherever there are ideas, there are variations. And then there’s the true idea of the founder. Once the founder is dead, who knows what it is.”</p><p id="3d1f671f-1e04-4947-a79b-f87bf5a0d909" class=""><strong>TED:</strong> But someone&#x27;s always going to say, &quot;I&#x27;m carrying on the true idea of the founder. My own system is additive.&quot; My own system, Xanadu, has more interpretations than stars in the sky. People keep saying, &quot;I know how to implement your Xanadu system now with blockchain, with anonymity, with physical location.&quot;</p><p id="ef49dece-c1b9-4b9e-9d26-dc159d672940" class="">I get these strange emails. I have them answered by an assistant so I don&#x27;t get irritated. But there are all these different interpretations.</p><p id="fc2e0291-d066-4a95-9fe3-04ecdd03db14" class=""><strong>So how should writings be connected? My idea — my simplification of it — is parallel pages with visible connections.</strong></p><p id="24610f19-53e2-4e80-9640-107254370f6c" class="">There are many other ways you could connect ideas, many other forms of writing. I&#x27;ve chosen this particular simplification because I think it&#x27;s elegant. It&#x27;s simple. It&#x27;s instantly understandable, and it&#x27;s extensible. Someday, I hope that the elegance of the design will be recognized because elegance in design is one of the things I believe in. But I&#x27;m just pounding on trying to make people understand it, and trying very hard still to get it implemented in a deployable form.</p><figure id="fadf2a28-71be-4f4d-af99-e30778ce145a" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-9.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-9.jpg"/></a></figure><p id="c6ad0a9e-2492-4ed8-af99-63fd6855e2e9" class=""><strong>DEVON:</strong> Earlier, you used the word hypertext, which is a term that you coined. How does hypertext tie into Xanadu, the system that you&#x27;ve thought up, and how is it different than the way people usually conceive of the word today?</p><p id="0b3508d5-7718-4913-8ae1-51907be1fe3a" class=""><strong>TED:</strong> Well, I came up with the word hypertext in &#x27;63, I think. It would be on a dated file card, and someone someday will find out. But I published it in &#x27;65 in several papers. In the summer of &#x27;65, I published three or five papers. Hypertext was in those papers.</p><p id="148e372b-8c81-47d4-b3e2-4e78facc7e7b" class="">“My definition [of hypertext] at that time was: non-sequential text with free user movements.”</p><p id="3bd73079-c219-4e45-8d95-74341ecb60b6" class=""><strong>TED:</strong> Now what that meant was — right at that time — there was something called computer-assisted instruction, and a lot of people were hot on the trail of computer-assisted instruction. This was going to be what would rescue education because now the computer would tell you something, then it would test you, then it would tell you something else, then test you again. And it would give you this talent test, but you would have no free movement.</p><p id="e2341eb2-d45b-4b96-b632-922793b9eb05" class="">So in my definition of hypertext, I defined it as having free movement because I was really annoyed by the computer-assisted instruction concept. Not that there was something wrong with it. I used it myself profitably on one occasion when I had to cram statistics for my master&#x27;s degree — or what would have been my PhD. I used the teaching machine, which was talent-test-talent-test. For someone with math anxiety like me, that was great. But for reading writing on the screen, I wanted something much more free. <strong>So that was why freedom was in the definition</strong>. However, in my original drawings, you&#x27;ll see the picture where I show visible connections on the screen. That could have been as late as &#x27;71. But in any case, that was part of my fundamental idea I think from the beginning.</p><p id="9e8e46a5-1a27-4029-92e0-01519da2e250" class=""><strong>DEVON:</strong> One of the really interesting implications that I&#x27;ve noticed about your work is what it means for ownership of ideas — intellectual property, copyright, and so on. What are your thoughts around that? And how does your version of hypertext solve that problem?</p><p id="35d3ffa5-89bf-4bd7-8170-c6f3527e03e5" class=""><strong>TED:</strong> My version had a complete copyright system, which is being universally ignored. People think of Creative Commons, like oh, that&#x27;s the solution because now we give permission for everybody to use things. <strong>Creative Commons is just a way that people can give up the hope of being paid in a polite and elegant form.</strong></p><p id="d71c0b60-506d-426f-bad7-64f76850846e" class="">“I wanted to create a system of commerce that would create viable ways for people to be paid with a sensible and completely fair method.”</p><p id="71e630c8-d141-4446-ba5c-4f9c52b84ac1" class=""><strong>TED:</strong> So in a Xanadu document, you don&#x27;t deliver a packaged lump — you deliver a list of portions to bring in and how to put them together.</p><p id="be75f345-ed65-4676-ad8c-cd8b1a1c5c8d" class="">Creative Commons says, &quot;I hereby give permission to use my stuff in somebody else&#x27;s package lump.&quot; But we&#x27;re not talking about packaged lumps. We&#x27;re talking about someone creating a document using a piece from here, using a piece from there, using a piece from there — and that piece can have a pay wall.</p><p id="3d2695d0-496c-49d7-91ac-71709e5511c5" class="">So the micro pay walls we plan, it would say, &quot;Here&#x27;s a list of pieces to bring in. Now bring in this piece, which happens to be a paid piece.&quot; Because the person who&#x27;s compiling this document doesn&#x27;t have to pay. He or she has already seen it, but we&#x27;re now including it in the list.</p><p id="438113e8-8c6c-4e76-8c74-2c1b6f119d3b" class="">The user, upon fulfilling these portions, has the choice of paying for that piece or not getting it. So that piece is bought by that character. This seems to be extremely fair. Anyone is free to include anything from anywhere without negotiation. Anyone is free to buy it or not buy it if it&#x27;s on the</p><p id="2d91d13a-93c1-4cd0-bb97-e86c45caf854" class=""><a href="http://xanadu.com/xuEDL.html">edit decision list</a></p><p id="138f80c5-12f6-4894-8ce8-5754c54808c8" class="">which brings in the document. And so the permission doctrine for this is called trans copyright, meaning: &quot;I hereby give permission for this content to be used in any new context provided its bought from my server&quot; — which could imply the micro-pay wall.</p><figure id="f61b9fce-c322-4a55-8a98-43c7f3697d80" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-14.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-14.jpg"/></a></figure><p id="ecc90b4b-c43b-4ba4-9f84-f5fb69bc29c3" class=""><a href="https://en.wikipedia.org/wiki/Wayback_Machine">Wayback Machine</a></p><p id="33e4a9a8-fed1-4fd9-8720-fc2bf2c7c18e" class=""><strong>DEVON:</strong> Right. So there&#x27;s this idea of one canonical version of that — of the idea, of the work, of the text, of the image — whatever.</p><p id="e46fed62-0c21-4c67-95a3-f2fdf3d75320" class=""><strong>TED:</strong> There&#x27;s no canonical version of an idea.</p><p id="5be02c6f-a3cf-49e4-8059-acaa3aa3fab1" class=""><strong>DEVON:</strong> — of the manifestation of an idea.</p><p id="00b19727-7873-445b-a04a-3ca57dd57712" class=""><strong>TED:</strong> I say document.</p><p id="3f1abb43-0345-4d1e-8fea-ff0e654f4aa1" class=""><strong>DEVON:</strong> Whereas these days, we make copies of everything. Some of the things you did to implement these systems — how did they handle that type of thing?</p><p id="884ad413-6d53-48b9-8607-fc5981da0a9b" class=""><strong>TED:</strong> I had a very clear idea of approximately what I wanted, and I got together a group of extremely brilliant guys in the summer of 1979 — and they came up with the system we now call Xanadu Classic, which is available open source. It&#x27;s not quite finished. There are a few things that have to be fixed. But it works.</p><p id="870bbcf1-1878-4343-8df8-657a2a76991d" class="">It&#x27;s a combination of a document management system and an operating system — meaning that it manages a federation of similar discs containing source content and links. We have no embedded markup. All markup is done by what we call links. So, a document is delivered as a list of pointers to the content and pointers to the links — all of which are assembled in the use of the machine.</p><p id="d819f06c-84ab-451e-8153-fb703ff05b2e" class="">That server software is available and has worked.</p><p id="0097e4fb-61e3-46e4-adad-583b38eb04aa" class=""><a href="https://archive.org/details/ClassicXanaduWithPYXI">You can download that instantiation at the Internet Archive</a></p><p id="9b9788b8-6897-431f-8f42-ba18f2396ec8" class="">, which you can play with. It&#x27;s called Xanadu Classic or Xanadu Green. In the presentation that&#x27;s on the archive, we see visible connections between the first and last draft of the Declaration of Independence as written by Thomas Jefferson.</p><p id="3b9ced4c-c3c6-4191-a45c-d2d7d2cfb0a6" class="">Jefferson&#x27;s last draft, which was signed as the Declaration of Independence, was different from his first draft, and those differences are shown by the Xanadu document method.</p><figure id="4d09e3cc-bf3d-4f5e-96f9-e6be14bbb009" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/declaration.gif"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/declaration.gif"/></a></figure><p id="2e312905-a9e6-436a-bef6-4666325e1e13" class=""><strong>DEVON:</strong> What were some of the differences?</p><p id="160fcd25-a346-4dc4-a98c-8281fbfc2cfb" class=""><strong>TED:</strong> He took out some phrases and put some in. I think &#x27;pursuit of happiness&#x27; was in the final draft but not in the previous. And his long list of grievances was I think varied and, well, I don&#x27;t remember. But it&#x27;s interesting because in the in the presentation, you can see gray on the left for the parts that were omitted and gray on the right for the parts that were new.</p><p id="9f2ee695-0f9d-4c64-89b2-9b7940ec4950" class=""><strong>DEVON:</strong> One of the terms that you came up with was <strong>transclusion</strong> — and you touched on this a little bit before — where you could include links from other documents —</p><p id="30aa6c0b-792e-4f55-b2cc-25f9d4acd07c" class=""><strong>TED:</strong> — parts of other documents.</p><p id="cfb2340e-ffe4-4761-906e-100d37c1e0bd" class=""><strong>DEVON:</strong> Can you expand on that a bit?</p><p id="d608c3a7-a902-4e5f-a08d-cb6681b791e1" class=""><strong>TED:</strong> Sure. Well, the term has become common, but it means something a little different to me.</p><p id="d09a0e7d-7ca2-4248-8e3b-8ae52c375b0e" class="">“Transclusion means that part of one thing is included in another and brought from the original.”</p><p id="194f04cf-1310-4f10-ade3-856a3fa516dc" class=""><strong>TED:</strong> Something like iframes for example is transclusion. Video from YouTube is embedded in another document — that&#x27;s transclusion. But in the Xanadu method, the transcluded portion has a path back to the original, which you can follow so you can see its original context. That was always part of the Xanadu idea, and is still part of the instantiation I&#x27;m working on now.</p><figure id="a03cb119-3f1a-40e4-97af-c10ae0bba00d" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-22.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-22.jpg"/></a></figure><figure id="a333f99d-8fec-45ec-ab2f-409b497956ad" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-20.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-20.jpg"/></a></figure><p id="1eda9261-f17f-4624-9674-36c2dc502945" class=""><strong>DEVON:</strong> So the bilateral link is the critical difference between what we have at the moment and —</p><p id="e53fc75c-abe0-49d6-a6d2-05a0babcdb52" class=""><strong>TED:</strong> There are links and there are transclusions — it&#x27;s a different method. A link is a specific object separate from the content. A transclusion is simply following the path from a part to its original context.</p><p id="803ad8bc-0d8a-4d10-9e6a-e5056efcb4cf" class=""><strong>DEVON:</strong> Got it.</p><p id="31e375c0-957a-4ce9-a8c8-c8fff169d7f2" class=""><strong>TED:</strong> So it doesn&#x27;t require a link. It&#x27;s just: &quot;Here&#x27;s the transcluded part, and the edit decision list says where it comes from.&quot; The edit decision list can show you where it is on the original.</p><p id="c8fa9731-79a4-4f11-94ad-b19cb064659c" class=""><strong>DEVON:</strong> That&#x27;s a useful distinction. If we had had these bilateral transclusions and links that would let people go back and forth and see the common source — and see where something is pointing to — how would the web today be different?</p><p id="fa1999fb-a751-4b84-9c53-1ecfa3a97b89" class=""><strong>TED:</strong> I don&#x27;t want to talk about the web today. I hate it. I mean the point is, if we&#x27;d had this in place before the web — and we should have had it a year before — the web would of had some success, but we would have had a position for deeper scholarship.</p><p id="ddc00009-8a04-4d2d-a87f-55e62689895b" class=""><strong>DEVON:</strong> What has your process been for communicating the ideas of Xanadu to the world?</p><p id="cbb976c9-df8b-4790-af4f-25b55529d95d" class=""><strong>TED:</strong> Talk and talk and talk and talk. And you know, I&#x27;ve written — I don&#x27;t know how many papers I&#x27;ve published. I don&#x27;t know how many talks I&#x27;ve given. But what people hear is much less than you say. And I&#x27;ve found out later how little people hear.</p><p id="8a945280-54b4-4802-a92b-34b215022553" class="">Now, Doug had this problem. Doug Engelbart had this problem but even worse because he would begin talking and then he would introduce a new term, and then he would start using it, and so by the fourth paragraph, he was combining terms that were new to you in ways you can&#x27;t imagine.</p><p id="93f3f7d1-ca1c-4dcb-b6bf-790aafa39e4b" class="">Whereas I was trying to explain what — to me — were very simple concepts. But they were so unfamiliar that nobody got them. Even</p><p id="24cfb6d9-0255-4d26-a950-df0f4e891656" class=""><a href="https://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a></p><p id="d348e8ff-5d11-4b52-a3f8-ebd746c2523c" class="">didn&#x27;t understand it.</p><p id="ff019cc8-57f7-43dd-9201-fcb9824109a1" class=""><strong>DEVON:</strong> What part of it did he miss?</p><p id="bedd230d-1704-4f0a-9a5f-a099ecfa71d9" class=""><strong>TED:</strong> Visible connection. We argued as recently as 1997 about micropayment.</p><p id="7e505084-964b-4d52-a0ba-7c83e12254d0" class="">I was saying micropayment was necessary, and he would say, &quot;No, no, no.&quot; Now he&#x27;s come around, but no, he just did a different system. But see, the hypertext concept was last simplified in a project of Brown University, which I refer to as the Dark Brown Project. A person I thought was my friend was a professor at Brown and he invited me — no pay — to come up to Brown University and help work on it.</p><p id="dca1f4ea-1165-402d-8932-77f181a2e0fc" class="">So, at great personal cost both in time and money, I went and helped, and it got so dumbed down, we lost transclusion and lost two-way links. But I was not a quitter, and I should have quit at the very beginning when he started insulting me. That&#x27;s a black mark in my memory, and the concept of hypertext got reduced to one-way links and embedded markup.</p><p id="db28ff7d-f56a-4dda-ae47-4ba66e24f93b" class="">That&#x27;s essentially where it all went wrong. And Tim Berners-Lee&#x27;s system, which was like the sixth hypertext system on the Internet — people think it was the first — simply glorified that. By the way, he didn&#x27;t need to do HTML. He didn&#x27;t need to do HTTP.</p><p id="af8749cf-f33f-4f8a-982e-7af5a10ebf23" class="">The best thing that Tim did was to create the URL, because before he started, every drive from every operating system had a different way of addressing. So, if you wanted to get a file from the Internet, you had to know its address and know the operating system it was under and the addressing system it was under in order to reach that file. So the URL changed all that, giving every operating system an overlay addressing scheme so that a space became %20. That was how Tim worked out to unify the address space of the Net. That to me is his greatest achievement, and the rest would have followed if he&#x27;d done that. I mentioned this to him just last week, and he said, &quot;On yeah, you get it.&quot;</p><figure id="765f7fc1-440b-435f-b742-9622b2f19cc8" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-12.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-12.jpg"/></a></figure><p id="ef0ae6a0-3789-4c3f-8bf2-5cba32ec92d4" class=""><strong>DEVON:</strong> But of course we still have broken links these days, too — in part because of the lack of the bi-directional link.</p><p id="e1c78952-5595-4bf5-9413-d6530ad323aa" class=""><strong>TED:</strong> Well, also I&#x27;ve been told here at the Internet Archive that the average lifetime of a web page is 100 days before it changes or disappears.</p><p id="74a81cc6-9bc6-42b5-9671-bf567c0b5678" class=""><strong>DEVON:</strong> How do they measure that?</p><p id="1b2aa223-bc33-49da-8295-10e9bb24cb7a" class=""><strong>TED:</strong> They crawl the web constantly looking for changes. And they have billions of web pages stored.</p><p id="578b67b4-cde5-47b4-b214-9f2ec87ebe32" class=""><strong>DEVON:</strong> In the Xanadu system, how would these changes be different?</p><p id="754db05c-00f0-40e4-bff9-d4cb01fdecdd" class=""><strong>TED:</strong> Well, look, I&#x27;m not trying to promote Xanadu as an alternative to the web anymore. I&#x27;m trying to promote it as a literary system.</p><p id="197ecbbf-e16f-40e5-bf3c-31e2e3504a8d" class="">I&#x27;m trying to build it as a literary system that people can use for making parallel pages with visible connections, and we have to unfortunately use parts of web technology for that. That way, people don&#x27;t have to install an application, but I don&#x27;t want to talk about this relation to the web. I want to just talk about parallel pages with visible connection. And that&#x27;s what the system is about.</p><p id="87ca2d48-0cd8-4301-a72a-e8c0cbd6ecd5" class=""><strong>DEVON:</strong> Sure. How would you like to see it be adopted?</p><p id="1fe93267-812d-4dfc-b1b5-e3edfb543ea2" class=""><strong>TED:</strong> By the smartest people first.</p><p id="b5a9e01d-bb96-4602-b19f-77a987522246" class=""><strong>DEVON:</strong> How are you going about finding those folks?</p><p id="5a33951a-e2cd-41f4-ad33-948acf468e9d" class=""><strong>TED:</strong> I&#x27;m not looking for them. I&#x27;m trying to get a minimal viable product.</p><p id="d4752a2e-9113-487c-b976-716f28d5fa2f" class=""><strong>DEVON:</strong> What&#x27;s your process for building this minimum viable product?</p><p id="3feb0330-f4fd-4f09-bbc5-2aa5e7197705" class=""><strong>TED:</strong> Well, it&#x27;s first thinking about what people can use with the least difficulty — that is the least difficult to program. So then I talk to my programmers and we work out the exact specs. There&#x27;s a ladder of specs: first this, and first that, etc.</p><p id="868a59b8-ac63-40dd-afb3-89f6c0aec0c7" class="">So, the first one I&#x27;m trying to build will just be a comment, but with two pages visibly connected. And the second bit will be several pages visibly connected. A nice example is Vladimir Nabokov&#x27;s novel Pale Fire, which is a long poem by the fictitious author John Shade, connected to a large number of idiotic footnotes by the fictitious academic Charles Kinbote.</p><p id="742b0c83-3333-4036-bba7-01d6ffc13356" class="">Ironically, back in the days of the Dark Brown Project, I actually got permission from the publishers of Pale Fire to demonstrate it on the Brown system. So now I hope to demonstrate it on the new Xanadu.</p><p id="50f20208-e139-48f9-9df0-ba9e35d55063" class=""><strong>DEVON:</strong> What do you see as the future of micropayments?</p><p id="1ddd7812-e879-474f-9fd6-82ee012bc73b" class=""><strong>TED:</strong> I have no idea, but now there are so many competing systems and so many enthusiastic projects that are incompatible. So there will be many, many things. And as usual, the big guys will win. So Google or Microsoft or somebody will have a micro payment system for who knows what — probably for individual pages as distinct from the portionality of the transcluded and quoted material that we were hoping for.</p><p id="61c7af54-ac32-4b3b-85ec-222cef50edcf" class="">“I&#x27;m very unhappy about the web but now we’re stuck with it.”</p><figure id="62fd68bd-4292-4f90-846a-da503c54d245" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-15.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-15.jpg"/></a></figure><p id="212eb1b7-e4a7-4731-a0c1-398735e3666b" class=""><strong>DEVON:</strong> Is it something you plan to incorporate into the Xanadu system that you&#x27;re building right now?</p><p id="51537d2b-9f94-4319-9754-9356f3e9eb81" class=""><strong>TED:</strong> I can&#x27;t even think that far ahead.</p><p id="911c0e08-b257-4378-9cbc-dc125d1ff6af" class=""><strong>DEVON:</strong> Your ideas around Xanadu have gone through a lot of different paradigms, and you&#x27;ve communicated in many different ways and different media. How have you thought about that process? And is there anything that you would have done differently in communicating it?</p><p id="0e23960b-3f57-4a46-bf4b-19d01fc8ea52" class=""><strong>TED:</strong> Oh my, yes. Oh, I have so many things I would have done differently. Yes. I was offered backing by Victor General around 1971, and I thought I&#x27;m not ready. What a stupid idea that was.</p><p id="40e79584-bbb1-49a5-9df5-2ec5b27de7f4" class="">Unfortunately, I came out of college with a combative attitude. I was ready for any debate on any subject. And only recently have I become acquainted with a book I should have read long ago called How to Win Friends and Influence People, which essentially tells you that people need to make an idea their own to adopt it.</p><p id="127b2991-bcce-4138-943e-68c3a1db5425" class="">And if you emphasize that it&#x27;s your idea and that there&#x27;s already going to be a pay wall — so many things about how I presented it were unsatisfactory.</p><p id="a1d079dd-8858-4711-88f0-081619fc02d0" class="">“The only reason the idea is still alive is by the strange fact that I’m still alive. It would be long dead otherwise, but you know, I have to do it.”</p><p id="673859b7-1411-4227-ad5f-47700aa065d8" class=""><strong>DEVON:</strong> I noticed in reading a lot of your writing in preparation for this that there&#x27;s a lot of emphasis on copyright and the fact that these ideas were something that you wanted to commercialize. What role did your own intellectual property play in your development of these ideas?</p><p id="292554bf-2871-4291-a616-11493cfd75e7" class=""><strong>TED:</strong> Let&#x27;s sort this out. First of all, a number of techies at the beginning thought that copyright would end once computers made it easy to copy things. It was absolutely clear to me that it would not, and that copyright had to be a fundamental of any electronic publishing system that had to respect the author&#x27;s rights. So that was always part of the Xanadu project. Now, in trying to commercialize, yes, I was trying to make money as many people were, and that&#x27;s always been legitimate, and trademark was emphasized.</p><p id="886b2a9e-deb8-4d87-87bb-2fa6614bc006" class="">I had a good friend who emphasized that hey, trademark is almost free and is a good way of distinguishing your stuff. So those are two entirely separate topics here. I supported copyright because it was necessary and part of the publishing world. And I trademark things and tried to go commercial because that was how things were done.</p><p id="20c5fbce-949d-4c2b-86b1-6ec1a2ad4070" class=""><strong>DEVON:</strong> So for people who are coming up with visionary new ways to rethink knowledge, to rethink the way we use technology, what advice would you give people as they develop those ideas?</p><p id="2a925e95-eb7a-492e-a93d-4103a2243cef" class=""><strong>TED:</strong> <strong>Hang in. And don&#x27;t become locked to some specific method too soon.</strong> And remember that things keep changing. So, if you&#x27;re successful, the environment in which you become successful will be different from the environment you&#x27;re starting in.</p><figure id="338bd7c0-1991-42d2-8404-fa8888b02469" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-16.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-16.jpg"/></a></figure><p id="781def7e-1a5d-4e66-8fb3-33f42fb51e26" class=""><strong>DEVON:</strong> Can you give some examples from your own experience?</p><p id="da55af15-25f2-425a-957c-7481a52939ff" class=""><strong>TED:</strong> Well, when I first met Bill Gates in 1972, I guess it was, he was working for</p><p id="b73cfc53-d871-4ea4-afa2-afa4d92ae8fc" class=""><a href="https://en.wikipedia.org/wiki/Micro_Instrumentation_and_Telemetry_Systems">Micro Instrumentation and Telemetry Systems</a></p><p id="7e6be40f-1a36-4aa4-bc61-f6f5664aab99" class="">in Albuquerque, New Mexico. But he had managed to put in the contract that he was keeping the copyright to his version of BASIC that they were selling. And so he gradually snowballed this. He was a visionary in the following sense: He knew personal computing was coming, and he built BASIC at Harvard.</p><p id="451c19d4-0a19-4dbc-bf9a-0efd619fb721" class="">He and his pal copied the digital equipment version of BASIC on stolen time at Harvard for six months or something, so they would have a version of BASIC when personal computing arrived — and that was very visionary of them. And then how he was able to maneuver around all the things that happened was quite something.</p><p id="88d074bd-1503-424d-a739-dceb3172f33d" class="">So, the question I think you asked was: How do you sustain and maintain something through a changing environment? Watching Microsoft climb out of Micro Instrumentation and Telemetry Systems into the behemoth that it became is an interesting example.</p><p id="7bbb82ef-ea0e-4b6e-9b7d-19da7ed1b739" class=""><strong>DEVON:</strong> What did it feel like to think of and see these ideas coming up before they existed? Because there&#x27;s so much that we take for granted today about how the web, how computers, and how all of this technology works. So what was it like to be there?</p><p id="41d69c57-4c86-4682-9698-522ee03688d2" class=""><strong>TED:</strong> Well, first of all, I was on my own for five years. But I joined the ACM. I read computer journals. I read computer magazines. So I was deep in the thinking of those people to whom computers were corporate devices that lived in their department. And I was looking at all the methods developed by various researchers.</p><p id="4d20dce0-1239-4949-8ece-02bde667f696" class="">For example, one researcher I admired very much was</p><p id="d9fcc126-7590-44ef-93ac-3c7ef8635e9a" class=""><a href="https://en.wikipedia.org/wiki/Ken_Knowlton">Ken Knowlton</a></p><p id="46d927ff-c624-4b36-a522-6e4981dca1e9" class="">. He and I became very good friends. He was at Bell Labs. He worked out a graph. He was the first person to fill the screen with pixels, and that screen was on the <a href="https://en.wikipedia.org/wiki/Stromberg-Carlson">Stromberg Carlson 4020</a>, which had 16mm film and was able to put a dot in each position.</p><p id="301247c7-41e9-4933-8bff-f40b564822dc" class="">But to put a dot in each position would have taken too long, so Ken made pictures that would have different levels of brightness, with which he would make a bigger picture. So from a distance, you would see the bigger picture rather than seeing that it was made of little tanks and airplanes. I think there&#x27;s a famous nude that is made of little tanks and airplanes that was somehow pulled off that system.</p><p id="2fb58f16-1fc9-431f-98fc-6d77064f521b" class="">“I was aware of many things that were going on, but I was sure there would be personal computing — that we would all have interactive screens — and I didn’t know anyone else who thought that.”</p><p id="a4d98aa9-29c0-437c-9462-92a4b70eac18" class=""><strong>TED:</strong> The company that made the first little computers,</p><p id="4b56655b-33c8-42b8-99f2-a40c22c4c442" class=""><a href="https://en.wikipedia.org/wiki/Digital_Equipment_Corporation">Digital Equipment Corporation</a></p><p id="51ee5d7d-d4c3-430b-b778-630cb12284da" class="">, was headed by a visionary, Ken Olsen, who built little computers for scientific companies. And when personal computing came along, he didn&#x27;t get it. He put out a personal computer that was wonderful for $12,000 when everybody else was under $1,000.</p><p id="3c01b0b4-2637-4a39-a2de-177b4ce61095" class="">He thought, &quot;Oh, the engineers want the best!&quot; and if it&#x27;s only for engineers — he didn&#x27;t get it. So, the Digital Equipment Corporation went under, and they had been the pioneers in computer graphics and in small machines. Dancing through this world, and seeing how these other people thought, and trying to push forward my visualization of electronic documents was a complicated parallel process of giving speeches, of writing things.</p><p id="bbf54f87-51c9-4c4c-829c-28b8b2f428dc" class="">I never got paid for this, you see, so I was constantly in fringe jobs, and I had no backing. My one big chance was Harcourt, and the IBM department killed me. And so after that it was one job after another — one fringe job after another. I taught sociology at Vassar for two years because no one would pay me for what I had to do. I had to do it. It was my manifest destiny — it was my obligation. And the fact that I didn&#x27;t succeed, well?</p><p id="dca0a553-0aaa-42dc-b9d3-a3c506594767" class=""><strong>DEVON:</strong> Around this time, what were some of the books or articles or movies that you read or watched that influenced you the most?</p><p id="986f09d1-9746-4fd5-9507-f03dea6ade32" class=""><strong>TED:</strong> No. There was one guy named Ivan Sutherland who built a system called</p><p id="ddc7dd7c-a2bf-489d-acac-f234b974f4d9" class=""><a href="https://en.wikipedia.org/wiki/Sketchpad">Sketchpad</a></p><p id="56b17742-29e8-479e-ba7a-63a39b55a4f9" class="">. Well, as I mentioned with Ken Knowlton, I admire the elegance of his stuff and Sketchpad — which was a highly efficient system for drawing and sketching on screens. That was done at MIT in &#x27;65 or &#x27;64. I visited MIT, and so I got a chance to use these things. I got a chance to use a system at <a href="https://en.wikipedia.org/wiki/Mitre_Corporation">MITRE Corporation</a> called — I don&#x27;t remember — but a fellow named Don Walker showed it to me.</p><p id="f11e6c6a-3b32-4536-b059-7f02ed37c02d" class="">“It was the first time I’d actually used a light pen. And I wept, but only out of the eye he couldn’t see. Because it was exactly how I knew it was going to be.”</p><figure id="99963aa8-2993-44e9-9cf4-223b74886cbf" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-13.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-13.jpg"/></a></figure><p id="6938f5f6-c89c-442a-8e7e-178332b441cb" class=""><strong>TED:</strong> Then there was the stage of trying to make money starting a computer score store in Chicago, which was briefly successful but my partners were idiots, and nobody was minding the store, and computer stores went under.</p><p id="6565fa05-25c3-40c2-9ddd-e181bd02e4b9" class="">And so it&#x27;s been — you know — dancing on rainbows.</p><p id="9e051a81-f542-4a2b-8691-7bd81719bed9" class=""><strong>DEVON:</strong> How did you develop these ideas on your own?</p><p id="8d54ab1a-b0d8-494c-9bc0-5b750b7f1bb5" class=""><strong>TED:</strong> I think in writing and making notes and making sketches. It&#x27;s been very lonely. But I&#x27;ve been absolutely sure of what I&#x27;ve been doing all the time.</p><p id="479c7f8f-cbca-4e44-86a3-4c934c1c5822" class="">If one of the main definitions of paranoia is believing what nobody else believes, one cure is for the patient to change his mind and believe what the rest of the world believes. That is the low road. The other — by which I hope to cure myself — is to persuade everybody else.</p><figure id="26f487c0-e17a-437f-922d-dcd83bbfb734" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IV-1.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IV-1.jpg"/></a></figure><p id="3f44f6d4-b277-46fa-afbc-49555decd145" class=""><a href="https://computerlibbook.com/">here</a></p><p id="0b380c75-ca97-4ffe-8c91-ff6986f96683" class="">“And then I will no longer be paranoid, but rather recognized as having been right all along.”</p><figure id="28062256-fdc1-479f-b5e7-9ff34358a020" class="image"><a href="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-6.jpg"><img style="width:700px" src="Tools%20&amp;%20Craft%20-%20Ted%20Nelson%20b7d968e1fb714700b37b0e956f621cfc/TED_IA-6.jpg"/></a></figure></div></article></body></html>

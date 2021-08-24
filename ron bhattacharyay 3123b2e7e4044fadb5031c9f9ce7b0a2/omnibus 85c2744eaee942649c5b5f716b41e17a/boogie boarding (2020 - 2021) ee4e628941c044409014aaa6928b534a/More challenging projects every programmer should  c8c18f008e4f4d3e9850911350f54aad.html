@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>More challenging projects every programmer should try</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c8c18f00-8e4f-4d3e-9850-911350f54aad" class="page sans"><header><h1 class="page-title">More challenging projects every programmer should try</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://web.eecs.utk.edu/~azh/blog/morechallengingprojects.html" class="url-value">https://web.eecs.utk.edu/~azh/blog/morechallengingprojects.html</a></td></tr></tbody></table></header><div class="page-body"><p id="17aef6c5-df2b-4bc9-a1b2-160f5af794df" class="">One year ago, I posted <a href="https://web.eecs.utk.edu/~azh/blog/challengingprojects.html">Challenging projects every programmer should try</a>. It included a text editor, Space Invaders, a BASIC compiler, a small operating system, a spreadsheet, and a video game console emulator. It blew up across the internet, amassing over 100,000 views in a month (read more about it <a href="https://web.eecs.utk.edu/~azh/blog/goingviral.html">going viral</a>).</p><p id="6afffac1-7459-4092-adf6-7cd797bec87c" class="">I&#x27;m now expanding the list with more &quot;modern&quot; projects:</p><ul id="23797720-e16d-418f-8a27-51e5aef9d0a1" class="bulleted-list"><li>Ray tracer</li></ul><ul id="42c0bf66-92bd-40cd-8cef-6f209c7ad89e" class="bulleted-list"><li>Key-value store web API</li></ul><ul id="f153e1c6-ee41-416e-868b-d955d15e9149" class="bulleted-list"><li>Web browser</li></ul><ul id="d53b729b-3414-407e-aa52-fd2ba3652fb1" class="bulleted-list"><li>Stock trading bot</li></ul><h3 id="72533fd4-b13f-43f1-a75b-aa5b21700259" class="">Ray tracer</h3><p id="3b768e2b-b3f6-4bc2-a167-e6b1a4fc4357" class="">Yes, 3D graphics! After the original list of challenging projects, I got a lot of comments suggesting a ray tracer. I agree with them. In fact, it was one of the first things I tried making while learning C# back in 2009. Don&#x27;t worry if you don&#x27;t understand all the math or jargon right away, just keep trying to make progress. There are a lot of resources about ray tracers, and you&#x27;ll have motivating visuals to reward you along the way.</p><figure id="5ab4e584-888e-4d52-bd9b-eddb2a90da60" class="image"><a href="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/raytracer.png"><img style="width:700px" src="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/raytracer.png"/></a></figure><p id="cc5737b2-6e90-4647-8ec2-0511e42a4335" class="">Ray tracers can produce some truly beautiful images, even with 300 lines of code! First, you might go down the rabbit hole of supporting all sorts of reflections, lights, and materials. Or you&#x27;ll realize that a single image can take several minutes to render so you&#x27;ll begin optimizing. For example, you might parallelize the ray tracer with threads, reduce the number of intersection candidates, or use a profiler to track how many objects are being allocated and find the bottlenecks (I had some bad code initially...).</p><p id="161b8fec-7b79-4a40-bc7e-b550f380f929" class=""><strong>Be creative!</strong> I didn&#x27;t want to go the route of making yet another half-optimized ray tracer nor did I want to pursue hyper-realistic refractions. Instead, I purposely lowered the resolution so that I could make real-time animations. A gif of a spinning torus with falling particles can get you quite a few likes on Twitter. I think there is a lot of opportunity for indie games to go this route and have a unique, artsy style. Look out for my 8-bit retro-looking video game in the future!</p><p id="da35c4c6-212d-48a3-8706-6735358dab74" class="">Further reading:</p><ul id="96d9390c-75f2-49ed-a793-6988df0afc90" class="bulleted-list"><li>Ray Tracing in One Weekend (<a href="https://raytracing.github.io/">web</a>)</li></ul><ul id="cb535d0b-94c4-4d51-9929-e26c7ddba120" class="bulleted-list"><li>Very Gentle Introduction to Computer Graphics Programming (<a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/get-started">web</a>)</li></ul><ul id="3bc36021-b18c-48c0-8e9f-a28a1696c5d2" class="bulleted-list"><li>Computer Graphics from Scratch (<a href="https://www.gabrielgambetta.com/computer-graphics-from-scratch/introduction.html">web</a>)</li></ul><ul id="550307ef-4a8f-4483-99ff-8332e107fbaf" class="bulleted-list"><li>Ray Tracing from Scratch in Python (<a href="https://medium.com/swlh/ray-tracing-from-scratch-in-python-41670e6a96f9">web</a>)</li></ul><ul id="f59cffff-f257-4378-908f-f6b51b61ffb5" class="bulleted-list"><li>Optimizing a Simple Ray-Tracer Written in Go (<a href="https://dzone.com/articles/optimizing-a-simple-ray-tracer-written-in-go-part">web</a>)</li></ul><ul id="d445ff1b-8d58-48e5-8169-6c441ac0c3a0" class="bulleted-list"><li>Real-Time Ray Tracing in JavaScript (<a href="https://johanneshoff.com/raytrace-mirror/">web</a>)</li></ul><ul id="be75244d-2a00-498d-8602-095f97759f9a" class="bulleted-list"><li>Bounding volume hierarchy (<a href="https://en.wikipedia.org/wiki/Bounding_volume_hierarchy">Wikipedia</a>)</li></ul><ul id="b0504ba1-b09c-483b-806d-bb542110b3a0" class="bulleted-list"><li>Ray Tracing Gems (<a href="https://amzn.to/374vhM4">Amazon</a>)</li></ul><ul id="5d8e7f31-4e3a-48c4-bae4-ef5c8f3b341f" class="bulleted-list"><li>The Ray Tracer Challenge (<a href="https://amzn.to/2VZCirf">Amazon</a>)</li></ul><ul id="d6f663d9-b2ad-4804-97ae-0f6bd4c98529" class="bulleted-list"><li>Real-Time Rendering (<a href="https://amzn.to/3mbkILo">Amazon</a>)</li></ul><h3 id="1687bb81-ac92-4ec2-929b-0a5927b34098" class="">Key-value store web API</h3><p id="fa1fd86a-d171-4a11-bb71-0e7199f4722c" class="">A key-value store is really just a dictionary. Give it a key, get back a value. You can add new keys, remove keys, or update values. Viola, you have created a NoSQL database! But you can take it a step further and offer it as a web API, so that all your future web apps can utilize your database service.</p><p id="b513e9a6-f6c8-4e2e-94ce-a0115cf8b8bf" class="">I really like this project because it is really simple to create the basic &quot;database&quot;. You can start by using the dictionary data structure that comes with whatever programming language you&#x27;re using and slap a web API on top of it. But like all these ideas, there is a lot more that can be added: optimizations for high performance, security and multiple users, atomic transactions, data types, batch operations, persistance, failure recovery, and the ability to run it across multiple servers. Soon enough you&#x27;ll have a billion dollar product like <a href="https://en.wikipedia.org/wiki/Redis">Redis</a> or <a href="https://en.wikipedia.org/wiki/Amazon_DynamoDB">Amazon DynamoDB</a>.</p><p id="d4bc9133-7612-423c-8a38-7239cb18af14" class="">Seriously, fire up your code editor and use your favorite language to try this one. I did it with both Go and Racket to get a feel of the differences. It was quite enlightening. The performance was good enough with my Go version on small tests right out of the box.</p><p id="ac4f8d25-e7de-4da4-bfd2-c4c7167035a2" class="">Further reading:</p><ul id="80412949-a185-47c2-ab33-3e70c5b1e169" class="bulleted-list"><li>Key-value database (<a href="https://en.wikipedia.org/wiki/Key%E2%80%93value_database">Wikipedia</a>)</li></ul><ul id="f5ea6769-2f1c-4419-a667-1e973dd61626" class="bulleted-list"><li>B-tree data structure (<a href="https://en.wikipedia.org/wiki/B-tree">Wikipedia</a>)</li></ul><ul id="dbce270e-bfc0-4e04-af9d-eb78b588dff8" class="bulleted-list"><li>Atomicity (<a href="https://en.wikipedia.org/wiki/Atomicity_(database_systems)">Wikipedia</a>)</li></ul><ul id="e16e4781-1973-49c9-a269-e78c92a1cf45" class="bulleted-list"><li>How I built a key value store in Go (<a href="https://medium.com/@naqvi.jafar91/how-i-built-a-key-value-store-in-go-bd89f68062a8">web</a>)</li></ul><ul id="f9e13098-eaa5-47b5-9caa-ffa3aaee6419" class="bulleted-list"><li>Badger: Fast key-value DB in Go (<a href="https://github.com/dgraph-io/badger">GitHub</a>)</li></ul><ul id="0db651fd-d8c3-4529-9605-4e1ebb5b4e99" class="bulleted-list"><li>If you want to dive deeper with databases: Database Design for Mere Mortals (<a href="https://amzn.to/3m8r5is">Amazon</a>)</li></ul><h3 id="c78d06a3-3300-46b0-8e43-22dad396c2c1" class="">Web browser</h3><p id="5f630a3a-4c45-4f5a-bbc9-afab7fe06bb7" class="">My first ever interview for a software development position opened with, &quot;What happens when you type Yelp.com into your web browser and press enter?&quot; I didn&#x27;t do well and was rejected. Thus began my journey to really know how everything works. The part I found most interesting was how a browser turns HTML and CSS into a rendered web page. (Side note: this is a popular interview question that I was just too ignorant to know about, and there is a phenomenal resource that goes into way too much detail to answer <a href="https://github.com/alex/what-happens-when">what-happens-when</a>.)</p><p id="1dcf765e-fdca-41e4-86d1-7dbcae2d1490" class="">Don&#x27;t get your hopes up yet about designing some killer user interface that will squash Safari or Brave. Oh, no. You have much to do before you get to that point! Let&#x27;s scope it down by saying that you are given an HTTP library and an HTML parser, but you have to implement your own renderer. You can&#x27;t use a WebBrowser widget or anything like WebKit. What do you do???</p><figure id="9d4bb069-6ab3-454a-afd0-2477fb4adbf0" class="image"><a href="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/cliwebbrowser.png"><img style="width:700px" src="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/cliwebbrowser.png"/></a></figure><p id="9fe2e3bc-189b-481e-a73f-2c40d51f0279" class="">My suggestion is to start by making a <a href="https://en.wikipedia.org/wiki/Text-based_web_browser">text-based web browser</a>. In fact, you might as well ignore virtually all formatting. Ignore all JavaScript and CSS. The steps would be to perform an HTTP GET with a given URL, parse the HTML to find text that should be displayed, and put it on the screen. That is it.</p><p id="17cf1a17-81ba-42b4-a45e-6db4403c0316" class="">Once you get just plain text, there is no short of features that you can pile on. You can add tabs, history, back and forward buttons, etc. But at some point you might want more than text... and I wish you luck. Rendering the visual elements of web pages beyond text is something I will probably never try :) but perhaps one day, when I find infinite time. Take it a step at a time, focusing on a single HTML tag and attribute. Let me know how it goes if you attempt this!</p><p id="3c91767a-94f7-48fd-b510-1555437b1205" class="">Further reading:</p><ul id="0d9e71ea-a3aa-4ff1-a0e0-4e1436a54c83" class="bulleted-list"><li>Browsh: A text-based browser (<a href="https://github.com/browsh-org/browsh">GitHub</a>)</li></ul><ul id="5c0c3bc8-772a-40d6-8ef9-520b4021d4cb" class="bulleted-list"><li>What-happens-when (<a href="https://github.com/alex/what-happens-when">GitHub</a>)</li></ul><ul id="3ed73bdb-fb7b-464f-9204-0a34f00bb639" class="bulleted-list"><li>HTML standard (<a href="https://html.spec.whatwg.org/">web</a>)</li></ul><ul id="72b493bf-1570-443a-a4db-966f8ef27a5e" class="bulleted-list"><li>Mozilla documentation for HTTP (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP">web</a>)</li></ul><ul id="04dae8d1-6705-4c43-aae7-18cba785c278" class="bulleted-list"><li>Let&#x27;s build a browser engine! (<a href="https://limpet.net/mbrubeck/2014/08/08/toy-layout-engine-1.html">web</a>)</li></ul><h3 id="b9bd063d-f886-4bee-9497-65849591f079" class="">Stock trading bot</h3><p id="32595b7e-889c-4a06-a1a9-bbba235f1084" class="">Alright, here is your opportunity to build something that theoretically could make you rich: a stock trading bot! Like all my projects ideas, it is quite simple to build a basic trading bot, but then there are endless features and improvements you can add. You don&#x27;t even need to know anything about investments to get started. Along the way you will at least learn how to utilize different web APIs, process data, and apply an existing or create your own trading strategy. You can test it out on heaps of historical data or just let it play with monopoly money.</p><p id="7011eb75-d951-490e-a9b0-a3f3ad2fa45a" class="">Not enough? Apply machine learning or setup a Twitch <a href="https://socialblade.com/blog/twitch-stockstream-bot/">stream</a> that lets strangers take control of your money.</p><figure id="64f32c99-4b3e-4db3-8493-db34290e71c5" class="image"><a href="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/stockbot.png"><img style="width:700px" src="More%20challenging%20projects%20every%20programmer%20should%20%20c8c18f008e4f4d3e9850911350f54aad/stockbot.png"/></a></figure><p id="0d71b45c-a58d-4da5-9eda-bb5d6f59bbad" class="">Here is the route for a basic trading bot. First, identify a few big companies that interest you for your bot to trade (e.g., Apple, Tesla, and Target). Second, decide on a condition for when to buy and when to sell. For example, if the current price reaches a 52-week low, then buy. If it reaches a 52-week high, then sell. (Do <strong>not</strong> use this strategy with real money! It is dumb.) Third, figure out how to use a free API to get stock data. There are some nice libraries out there that make it easy. Fourth, setup a testing environment with monopoly money (and without a stock broker). Let it run!</p><p id="fc88925c-b472-45f6-959e-94b5aaf0e64e" class="">Now for the endless fun... automate testing on historical data over long periods of time, implement dozens of trading algorithms and compare them, add visualizations, connect to a real stock broker using their API, try out some machine learning or evolutionary algorithms, and spam Twitter with all your successes.</p><p id="1c9f98f7-f038-45e6-8678-fe883fc48c69" class="">Further reading:</p><ul id="7bbb71f3-23dc-4827-9957-7d3a88afe09d" class="bulleted-list"><li>Trade signal (<a href="https://www.investopedia.com/terms/t/trade-signal.asp">web</a>)</li></ul><ul id="b09e0d04-5eba-4ee2-bf3c-86b32b3bcfa7" class="bulleted-list"><li>trump2cash: A trading bot (<a href="https://github.com/maxbbraun/trump2cash">GitHub</a>)</li></ul><ul id="ff854ae3-1595-457c-972d-49c1b7a361c8" class="bulleted-list"><li>Q learning (<a href="https://en.wikipedia.org/wiki/Q-learning">Wikipedia</a>)</li></ul><ul id="04d1aa61-5a35-41eb-87b7-71cee891d044" class="bulleted-list"><li>How to Build a Stock Trading Bot from Scratch (<a href="https://towardsdatascience.com/how-to-get-started-building-a-stock-cryptocurrency-forex-trading-program-2abbf0a4729f">web</a>)</li></ul><ul id="2ca72b1a-ad9e-466e-9e2e-44a33aa50b98" class="bulleted-list"><li>Build an AI Stock Trading Bot for Free (<a href="https://medium.com/swlh/build-an-ai-stock-trading-bot-for-free-4a46bec2a18">web</a>)</li></ul><ul id="7df18aaa-6326-4acf-9633-88c054ffa784" class="bulleted-list"><li>How to Build an Algorithmic Trading Bot with Python (<a href="https://www.activestate.com/blog/how-to-build-an-algorithmic-trading-bot/">web</a>)</li></ul><ul id="23dbbc01-643f-4d35-a009-d03dddba592d" class="bulleted-list"><li>Robinhood API guide (<a href="https://algotrading101.com/learn/robinhood-api-guide/">web</a>)</li></ul><p id="3d29c660-bfa4-4519-b622-db7a9a29739d" class="">Please share your progress as you implement these projects, and let me know of any other ideas you have!</p><p id="eabc70da-d4b6-4f86-ab33-69f013d6d60d" class="">There are Amazon affiliate links on this page.</p></div></article></body></html>

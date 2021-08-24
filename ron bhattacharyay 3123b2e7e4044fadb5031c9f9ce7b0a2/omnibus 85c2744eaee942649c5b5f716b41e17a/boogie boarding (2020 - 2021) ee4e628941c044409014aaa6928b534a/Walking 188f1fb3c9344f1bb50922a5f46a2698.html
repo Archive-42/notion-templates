@@ -1,0 +1,730 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Walking</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="188f1fb3-c934-4f1b-b509-22a5f46a2698" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚶🏼‍♀️</span></div><h1 class="page-title">Walking</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-gray">Classic</span><span class="selected-value select-value-color-yellow">Life</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.theatlantic.com/magazine/archive/1862/06/walking/304674/" class="url-value">https://www.theatlantic.com/magazine/archive/1862/06/walking/304674/</a></td></tr></tbody></table></header><div class="page-body"><p id="2e40d345-595f-41d7-83d1-2dd7d4f4e03b" class="">Henry David Thoreau, the naturalist, philosopher, and author of such classics as Walden and &quot;Civil Disobedience,&quot; contributed a number of writings to <em>The Atlantic</em> in its early years. The month after his death from tuberculosis, in May 1862, the magazine published &quot;Walking,&quot; one of his most famous essays, which extolled the virtues of immersing oneself in nature and lamented the inevitable encroachment of private ownership upon the wilderness.</p><p id="e8442ca4-2533-4129-9f53-138a250fe47e" class="">
+</p><p id="3fcdf8d3-63a6-4e7b-b968-2a29fda4bbc5" class="">Lisel Ashlock</p><p id="ffe9a13a-c967-4c1b-9126-22873e40d739" class="">
+</p><figure id="c7ccc33b-4977-46b5-a6f2-a5875bb3bd87" class="image"><a href="Walking%20188f1fb3c9344f1bb50922a5f46a2698/original.jpg"><img style="width:700px" src="Walking%20188f1fb3c9344f1bb50922a5f46a2698/original.jpg"/></a></figure><p id="f7e5cbcd-31a9-4e74-94ca-1770b57282f1" class="">I wish to speak a word for Nature, for absolute freedom and wildness, as contrasted with a freedom and culture merely civil—to regard man as an inhabitant, or a part and parcel of Nature, rather than a member of society. I wish to make an extreme statement, if so I may make an emphatic one, for there are enough champions of civilization: the minister and the school committee and every one of you will take care of that.</p><p id="75aabd84-587e-4db6-afd4-e6305cf6b2ce" class="">
+</p><p id="05a83725-7d40-4137-95f2-1ab0f72025ad" class="">I have met with but one or two persons in the course of my life who understood the art of Walking, that is, of taking walks—who had a genius, so to speak, for sauntering, which word is beautifully derived “from idle people who roved about the country, in the Middle Ages, and asked charity, under pretense of going a la SainteTerre,” to the Holy Land, till the children exclaimed, “There goes aSainte-Terrer,” a Saunterer, a Holy-Lander. They who never go to the Holy Land in their walks, as they pretend, are indeed mere idlers and vagabonds; but they who do go there are saunterers in the good sense, such as I mean. Some, however, would derive the word from sans terre without land or a home, which, therefore, in the good sense, will mean, having no particular home, but equally at home everywhere. For this is the secret of successful sauntering. He who sits still in a house all the time may be the greatest vagrant of all; but the saunterer, in the good sense, is no more vagrant than the meandering river, which is all the while sedulously seeking the shortest course to the sea. But I prefer the first, which, indeed, is the most probable derivation. For every walk is a sort of crusade, preached by some Peter the Hermit in us, to go forth and reconquer this Holy Land from the hands of the Infidels.</p><p id="4cda0d2c-6d45-429b-8c38-e795b7d6e1e5" class="">
+</p><p id="db3a2de9-bc8e-4879-bd84-88fdb2dae1a3" class="">It is true, we are but faint-hearted crusaders, even the walkers, nowadays, who undertake no persevering, never-ending enterprises. Our expeditions are but tours, and come round again at evening to the old hearthside from which we set out. Half the walk is but retracing our steps. We should go forth on the shortest walk, perchance, in the spirit of undying adventure, never to return, prepared to send back our embalmed hearts only as relics to our desolate kingdoms. If you are ready to leave father and mother, and brother and sister, and wife and child and friends, and never see them again—if you have paid your debts, and made your will, and settled all your affairs, and are a free man—then you are ready for a walk.</p><p id="00133e51-2b75-4801-a257-f42532349e33" class="">
+</p><p id="876c7686-c3a5-47cb-955b-577e8d8769df" class="">To come down to my own experience, my companion and I, for I sometimes have a companion, take pleasure in fancying ourselves knights of a new, or rather an old, order—not Equestrians or Chevaliers, not Ritters or Riders, but Walkers, a still more ancient and honorable class, I trust. The Chivalric and heroic spirit which once belonged to the Rider seems now to reside in, or perchance to have subsided into, the Walker—not the Knight, but Walker, Errant. He is a sort of fourth estate, outside of Church and State and People.</p><p id="2e55d35e-e95d-40a7-bcdf-af34351c2a3c" class="">
+</p><p id="01b31fd2-1506-4e6d-a54c-0ad7be473b00" class="">We have felt that we almost alone hereabouts practiced this noble art; though, to tell the truth, at least if their own assertions are to be received, most of my townsmen would fain walk sometimes, as I do, but they cannot. No wealth can buy the requisite leisure, freedom, and independence which are the capital in this profession. It comes only by the grace of God. It requires a direct dispensation from Heaven to become a walker. You must be born into the family of the Walkers. Ambulator nascitur, non fit. Some of my townsmen, it is true, can remember and have described to me some walks which they took ten years ago, in which they were so blessed as to lose themselves for half an hour in the woods; but I know very well that they have confined themselves to the highway ever since, whatever pretensions they may make to belong to this select class. No doubt they were elevated for a moment as by the reminiscence of a previous state of existence, when even they were foresters and outlaws.</p><p id="b5564650-02cf-4883-a8d4-a35f0bc9dc13" class="">
+</p><blockquote id="ff823cf4-8fc2-4967-b8d9-763739b07d9d" class="">“When he came to grene wode, In a mery mornynge, There he herde the notes small Of byrdes mery syngynge. “It is ferre gone, sayd Robyn, That I was last here; Me Lyste a lytell for to shote At the donne dere.”</blockquote><p id="6b3e6213-4c4f-4a7b-afe6-a4dd4fe00876" class="">
+</p><p id="abb07944-cf32-4f40-8e53-fdb0571d59d1" class="">I think that I cannot preserve my health and spirits, unless I spend four hours a day at least—and it is commonly more than that—sauntering through the woods and over the hills and fields, absolutely free from all worldly engagements. You may safely say, A penny for your thoughts, or a thousand pounds. When sometimes I am reminded that the mechanics and shopkeepers stay in their shops not only all the forenoon, but all the afternoon too, sitting with crossed legs, so many of them—as if the legs were made to sit upon, and not to stand or walk upon—I think that they deserve some credit for not having all committed suicide long ago. I, who cannot stay in my chamber for a single day without acquiring some rust, and when sometimes I have stolen forth for a walk at the eleventh hour, or four o&#x27;clock in the afternoon, too late to redeem the day, when the shades of night were already beginning to be mingled with the daylight, have felt as if I had committed some sin to be atoned for—I confess that I am astonished at the power of endurance, to say nothing of the moral insensibility, of my neighbors who confine themselves to shops and offices the whole day for weeks and months, aye, and years almost together. I know not what manner of stuff they are of, sitting there now at three o&#x27;clock in the afternoon, as if it were three o&#x27;clock in the morning. Bonaparte may talk of the three-o&#x27;clock-in-the-morning courage, but it is nothing to the courage which can sit down cheerfully at this hour in the afternoon over against one&#x27;s self whom you have known all the morning, to starve out a garrison to whom you are bound by such strong ties of sympathy. I wonder that about this time, or say between four and five o&#x27;clock in the afternoon, too late for the morning papers and too early for the evening ones, there is not a general explosion heard up and down the street, scattering a legion of antiquated and house-bred notions and whims to the four winds for an airing—and so the evil cure itself.</p><p id="259a0c9e-99a9-47aa-911e-d05c8575ba8e" class="">
+</p><p id="29f3b75b-95f6-4b93-bdac-02c23b11193f" class="">How womankind, who are confined to the house still more than men, stand it I do not know; but I have ground to suspect that most of them do not stand it at all. When, early in a summer afternoon, we have been shaking the dust of the village from the skirts of our garments, making haste past those houses with purely Doric or Gothic fronts, which have such an air of repose about them, my companion whispers that probably about these times their occupants are all gone to bed. Then it is that I appreciate the beauty and the glory of architecture, which itself never turns in, but forever stands out and erect, keeping watch over the slumberers.</p><p id="127436f5-a8e9-4ab2-87cf-2f8c95536d54" class="">
+</p><p id="1f4c0e0b-273b-480d-a90c-b88cc6b6f66d" class="">No doubt temperament, and, above all, age, have a good deal to do with it. As a man grows older, his ability to sit still and follow indoor occupations increases. He grows vespertinal in his habits as the evening of life approaches, till at last he comes forth only just before sundown, and gets all the walk that he requires in half an hour.</p><p id="3ec1ba81-59bd-4ce2-b50d-bc70420cf5e8" class="">
+</p><p id="8f48f04d-6d37-4704-9002-efd24543eb79" class="">But the walking of which I speak has nothing in it akin to taking exercise, as it is called, as the sick take medicine at stated hours—as the Swinging of dumb- bells or chairs; but is itself the enterprise and adventure of the day. If you would get exercise, go in search of the springs of life. Think of a man&#x27;s swinging dumbbells for his health, when those springs are bubbling up in far-off pastures unsought by him!</p><p id="939c1c42-e8a3-44f4-a9f7-3e8fe6727fbd" class="">
+</p><p id="b811aea1-30a1-4be8-b029-28cf9a0a5022" class="">Moreover, you must walk like a camel, which is said to be the only beast which ruminates when walking. When a traveler asked Wordsworth&#x27;s servant to show him her master&#x27;s study, she answered, “Here is his library, but his study is out of doors.”</p><p id="11859eb8-ed9b-4aef-9947-9db2d56f0563" class="">
+</p><p id="d2d19c28-cd21-45b5-9e07-6144d3393381" class="">Living much out of doors, in the sun and wind, will no doubt produce a certain roughness of character—will cause a thicker cuticle to grow over some of the finer qualities of our nature, as on the face and hands, or as severe manual labor robs the hands of some of their delicacy of touch. So staying in the house, on the other hand, may produce a softness and smoothness, not to say thinness of skin, accompanied by an increased sensibility to certain impressions. Perhaps we should be more susceptible to some influences important to our intellectual and moral growth, if the sun had shone and the wind blown on us a little less; and no doubt it is a nice matter to proportion rightly the thick and thin skin. But methinks that is a scurf that will fall off fast enough—that the natural remedy is to be found in the proportion which the night bears to the day, the winter to the summer, thought to experience. There will be so much the more air and sunshine in our thoughts. The callous palms of the laborer are conversant with finer tissues of self-respect and heroism, whose touch thrills the heart, than the languid fingers of idleness. That is mere sentimentality that lies abed by day and thinks itself white, far from the tan and callus of experience.</p><p id="b7cba0e2-7a4f-49a4-9127-0ce1693d9e16" class="">
+</p><p id="5c9be42b-d0c1-4d8a-9eb3-a2581c9134e6" class="">When we walk, we naturally go to the fields and woods: what would become of us, if we walked only in a garden or a mall? Even some sects of philosophers have felt the necessity of importing the woods to themselves, since they did not go to the woods. “They planted groves and walks of Platanes,” where they took subdiales ambulationes in porticos open to the air. Of course it is of no use to direct our steps to the woods, if they do not carry us thither. I am alarmed when it happens that I have walked a mile into the woods bodily, without getting there in spirit. In my afternoon walk I would fain forget all my morning occupations and my obligations to Society. But it sometimes happens that I cannot easily shake off the village. The thought of some work will run in my head and I am not where my body is—I am out of my senses. In my walks I would fain return to my senses. What business have I in the woods, if I am thinking of something out of the woods? I suspect myself, and cannot help a shudder when I find myself so implicated even in what are called good works—for this may sometimes happen.</p><p id="fa78ed6f-fc15-4a5b-a553-645351b7de79" class="">
+</p><p id="155063f3-8dce-4f65-bfc5-5beba072b106" class="">My vicinity affords many good walks; and though for so many years I have walked almost every day, and sometimes for several days together, I have not yet exhausted them. An absolutely new prospect is a great happiness, and I can still get this any afternoon. Two or three hours&#x27; walking will carry me to as strange a country as I expect ever to see. A single farmhouse which I had not seen before is sometimes as good as the dominions of the King of Dahomey. There is in fact a sort of harmony discoverable between the capabilities of the landscape within a circle of ten miles&#x27; radius, or the limits of an afternoon walk, and the threescore years and ten of human life. It will never become quite familiar to you.</p><p id="2d42971d-d2f6-4da3-82dc-287ce2724fbb" class=""> </p><p id="dc210064-3862-48ad-9c8d-d65ba22226c6" class="">Nowadays almost all man&#x27;s improvements, so called, as the building of houses and the cutting down of the forest and of all large trees, simply deform the landscape, and make it more and more tame and cheap. A people who would begin by burning the fences and let the forest stand! I saw the fences half consumed, their ends lost in the middle of the prairie, and some worldly miser with a surveyor looking after his bounds, while heaven had taken place around him, and he did not see the angels going to and fro, but was looking for an old post-hole in the midst of paradise. I looked again, and saw him standing in the middle of a boggy Stygian fen, surrounded by devils, and he had found his bounds without a doubt, three little stones, where a stake had been driven, and looking nearer, I saw that the Prince of Darkness was his surveyor.</p><p id="da42895a-0f19-42f6-b8ed-6519327ec51a" class="">
+</p><p id="f02ba699-98a3-465d-b1a6-dca3be69cb8a" class="">I can easily walk ten, fifteen, twenty, any number of miles, commencing at my own door, without going by any house, without crossing a road except where the fox and the mink do: first along by the river, and then the brook, and then the meadow and the woodside. There are square miles in my vicinity which have no inhabitant. From many a hill I can see civilization and the abodes of man afar. The farmers and their works are scarcely more obvious than woodchucks and their burrows. Man and his affairs, church and state and school, trade and commerce, and manufactures and agriculture even politics, the most alarming of them all—I am pleased to see how little space they occupy in the landscape. Politics is but a narrow field, and that still narrower highway yonder leads to it. I sometimes direct the traveler thither. If you would go to the political world, follow the great road, follow that market-man, keep his dust in your eyes, and it will lead you straight to it; for it, too, has its place merely, and does not occupy all space. I pass from it as from a bean field into the forest, and it is forgotten. In one half-hour I can walk off to some portion of the earth&#x27;s surface where a man does not stand from one year&#x27;s end to another, and there, consequently, politics are not, for they are but as the cigar-smoke of a man.</p><p id="2bbfbd54-2a5c-456e-860c-828048af326c" class="">
+</p><p id="0d18eeb5-54bb-446b-b98a-d4e65a730820" class="">The village is the place to which the roads tend, a sort of expansion of the highway, as a lake of a river. It is the body of which roads are the arms and legs—a trivial or quadrivial place, the thoroughfare and ordinary of travelers. The word is from the Latin villa which together with via, a way, or more anciently ved andvella, Varro derives from veho, to carry, because the villa is the place to and from which things are carried. They who got their living by teaming were said vellaturam facere. Hence, too, the Latin word vilis and our vile, also villain. This suggests what kind of degeneracy villagers are liable to. They are wayworn by the travel that goes by and over them, without traveling themselves.</p><p id="e1969cfb-96ed-4181-803b-6878c72bd20b" class="">
+</p><p id="6855c2b0-0f83-426a-bb1f-e9fce89989a9" class="">Some do not walk at all; others walk in the highways; a few walk across lots. Roads are made for horses and men of business. I do not travel in them much, comparatively, because I am not in a hurry to get to any tavern or grocery or livery-stable or depot to which they lead. I am a good horse to travel, but not from choice a roadster. The landscape-painter uses the figures of men to mark a road. He would not make that use of my figure. I walk out into a nature such as the old prophets and poets, Menu, Moses, Homer, Chaucer, walked in. You may name it America, but it is not America; neither Americus Vespueius, nor Columbus, nor the rest were the discoverers of it. There is a truer amount of it in mythology than in any history of America, so called, that I have seen.</p><p id="e44b5d3a-cd70-496e-adc8-9cdbbad8a582" class="">
+</p><p id="87c04b2f-9138-4a6a-aea6-e8326ac64792" class="">However, there are a few old roads that may be trodden with profit, as if they led somewhere now that they are nearly discontinued. There is the Old Marlborough Road, which does not go to Marlborough now, me-thinks, unless that is Marlborough where it carries me. I am the bolder to speak of it here, because I presume that there are one or two such roads in every town.</p><p id="bacf8631-c7e5-4b93-9311-210b3ec080a8" class="">
+</p><blockquote id="ccfa14a1-14f9-4acb-b427-805ca8882c68" class="">The Old Marlborough Road Where they once dug for money, But never found any; Where sometimes Martial Miles Singly files, And Elijah Wood, I fear for no good: No other man, Save Elisha Dugan— O man of wild habits, Partridges and rabbits Who hast no cares Only to set snares, Who liv&#x27;st all alone, Close to the bone And where life is sweetest Constantly eatest. When the spring stirs my blood With the instinct to travel, I can get enough gravel On the Old Marlborough Road. Nobody repairs it, For nobody wears it; It is a living way, As the Christians say. Not many there be Who enter therein, Only the guests of the Irishman Quin. What is it, what is it But a direction out there, And the bare possibility Of going somewhere? Great guide-boards of stone, But travelers none; Cenotaphs of the towns Named on their crowns. It is worth going to see Where you might be. What king Did the thing, I am still wondering; Set up how or when, By what selectmen, Gourgas or Lee, Clark or Darby? They&#x27;re a great endeavor To be something forever; Blank tablets of stone, Where a traveler might groan, And in one sentence Grave all that is known Which another might read, In his extreme need. I know one or two Lines that would do, Literature that might stand All over the land Which a man could remember Till next December, And read again in the spring, After the thawing. If with fancy unfurled You leave your abode You may go round the world By the Old Marlborough Road.</blockquote><p id="e77821f9-6210-453a-b3bc-a322f74b040f" class="">
+</p><p id="d90adf2a-8624-4df3-9ee8-62b205ab3764" class="">At present, in this vicinity, the best part of the land is not private property; the landscape is not owned, and the walker enjoys comparative freedom. But possibly the day will come when it will be partitioned off into so-called pleasure-grounds, in which a few will take a narrow and exclusive pleasure only—when fences shall be multiplied, and man-traps and other engines invented to confine men to the public road, and walking over the surface of God&#x27;s earth shall be construed to mean trespassing on some gentleman&#x27;s grounds. To enjoy a thing exclusively is commonly to exclude yourself from the true enjoyment of it. Let us improve our opportunities, then, before the evil days come.</p><p id="ccb8298f-de7f-4461-a88d-e4cd6dcd64a9" class="">
+</p><p id="3140a8cf-a32b-4f31-95c6-9e602be0a05f" class="">What is it that makes it so hard sometimes to determine whither we will walk? I believe that there is a subtle magnetism in Nature, which, if we unconsciously yield to it, will direct us aright. It is not indifferent to us which way we walk. There is a right way; but we are very liable from heedlessness and stupidity to take the wrong one. We would fain take that walk, never yet taken by us through this actual world, which is perfectly symbolical of the path which we love to travel in the interior and ideal world; and sometimes, no doubt, we find it difficult to choose our direction, because it does not yet exist distinctly in our idea.</p><p id="86a8dc4d-42a5-4fe0-a8ad-0e5a9070de0f" class="">
+</p><p id="cc77965b-9a72-468f-969c-da6c3e1a2373" class="">When I go out of the house for a walk, uncertain as yet whither I will bend my steps, and submit myself to my instinct to decide for me, I find, strange and whimsical as it may seem, that I finally and inevitably settle southwest, toward some particular wood or meadow or deserted pasture or hill in that direction. My needle is slow to settle, varies a few degrees, and does not always point due southwest, it is true, and it has good authority for this variation, but it always settles between west and south-southwest. The future lies that way to me, and the earth seems more unexhausted and richer on that side. The outline which would bound my walks would be, not a circle, but a parabola, or rather like one of those cometary orbits which have been thought to be non-returning curves, in this case opening westward, in which my house occupies the place of the sun. I turn round and round irresolute sometimes for a quarter of an hour, until I decide, for a thousandth time, that I will walk into the southwest or west. Eastward I go only by force; but westward I go free. Thither no business leads me. It is hard for me to believe that I shall find fair landscapes or sufficient wildness and freedom behind the eastern horizon. I am not excited by the prospect of a walk thither; but I believe that the forest which I see in the western horizon stretches uninterruptedly toward the setting sun, and there are no towns nor cities in it of enough consequence to disturb me. Let me live where I will, on this side is the city, on that the wilderness, and ever I am leaving the city more and more, and withdrawing into the wilderness. I should not lay so much stress on this fact, if I did not believe that something like this is the prevailing tendency of my countrymen. I must walk toward Oregon, and not toward Europe. And that way the nation is moving, and I may say that mankind progress from east to west. Within a few years we have witnessed the phenomenon of a southeastward migration, in the settlement of Australia; but this affects us as a retrograde movement, and, judging from the moral and physical character of the first generation of Australians, has not yet proved a successful experiment. The eastern Tartars think that there is nothing west beyond Thibet. &quot;The world ends there,&quot; say they; &quot;beyond there is nothing but a shoreless sea.&quot; It is unmitigated East where they live.</p><p id="a94918e6-ce2f-4e79-85ff-f5aa2f226dd7" class="">
+</p><p id="4ae28f36-bf9c-4f42-a343-a9bc71337518" class="">We go eastward to realize historyand study the works of art and literature, retracing the steps of the race; we go westward as into the future, with a spirit of enterprise and adventure. The Atlantic is a Lethean stream, in our passage over which we have had an opportunity to forget the Old World and its institutions. If we do not succeed this time, there is perhaps one more chance for the race left before it arrives on the banks of the Styx; and that is in the Lethe of the Pacific, which is three times as wide.</p><p id="6eabb940-fe4f-47c8-b88d-3fa721dc21b9" class="">
+</p><p id="6d981c59-66f1-43fd-98b8-2b14ed8625d9" class="">I know not how significant it is, or how far it is an evidence of singularity, that an individual should thus consent in his pettiest walk with the general movement of the race; but I know that something akin to the migratory instinct in birds and quadrupeds—which, in some instances, is known to have affected the squirrel tribe, impelling them to a general and mysterious movement, in which they were seen, say some, crossing the broadest rivers, each on its particular chip, with its tail raised for a sail, and bridging narrower streams with their dead—that something like the furor which affects the domestic cattle in the spring, and which is referred to a worm in their tails, affects both nations and individuals, either perennially or from time to time. Not a flock of wild geese cackles over our town, but it to some extent unsettles the value of real estate here, and, if I were a broker, I should probably take that disturbance into account.</p><p id="abbdde10-46b0-4a18-916d-ee751bbc4346" class="">
+</p><blockquote id="47c0806b-47c7-42bb-a845-4b478a2ac545" class="">“Than longen folk to gon on pilgrimages, And palmeres for to seken strange strondes.”</blockquote><p id="c9eb52ab-a89e-4700-88e7-dfb8b0364ece" class="">
+</p><p id="f50fa0f9-190e-4023-a365-59bd98246306" class="">Every sunset which I witness inspires me with the desire to go to a West as distant and as fair as that into which the sun goes down. He appears to migrate westward daily, and tempt us to follow him. He is the Great Western Pioneer whom the nations follow. We dream all night of those mountain-ridges in the horizon, though they may be of vapor only, which were last gilded by his rays. The island of Atlantis, and the islands and gardens of the Hesperides, a sort of terrestrial paradise, appear to have been the Great West of the ancients, enveloped in mystery and poetry. Who has not seen in imagination, when looking into the sunset sky, the gardens of the Hesperides, and the foundation of all those fables?</p><p id="d18e6fa8-b51e-4626-b6a8-64d4ab58d3bb" class="">
+</p><p id="7aa07c5e-285f-4c76-b1da-736493947c43" class="">Columbus felt the westward tendency more strongly than any before. He obeyed it, and found a New World for Castile and Leon. The herd of men in those days scented fresh pastures from afar,</p><p id="1904c54b-6687-4f84-a4d8-45a093d3a282" class="">
+</p><blockquote id="27aadafb-c81b-4b96-a627-50fd6a12e908" class="">“And now the sun had stretched out all the hills, And now was dropped into the western bay; At last he rose, and twitched his mantle blue; Tomorrow to fresh woods and pastures new.”</blockquote><p id="741522a8-5515-4482-ae91-d0d7ab0d9026" class="">
+</p><p id="552f3d86-a252-44c8-8c64-4a5415f2573f" class="">Where on the globe can there be found an area of equal extent with that occupied by the bulk of our States, so fertile and so rich and varied in its productions, and at the same time so habitable by the European, as this is? Michaux, who knew but part of them, says that “the species of large trees are much more numerous in North America than in Europe; in the United States there are more than one hundred and forty species that exceed thirty feet in height; in France there are but thirty that attain this size.” Later botanists more than confirm his observations. Humboldt came to America to realize his youthful dreams of a tropical vegetation, and he beheld it in its greatest perfection in the primitive forests of the Amazon, the most gigantic wilderness on the earth, which he has so eloquently described. The geographer Guyot, himself a European, goes farther—farther than I am ready to follow him; yet not when he says: “As the plant is made for the animal, as the vegetable world is made for the animal world, America is made for the man of the Old World.... The man of the Old World sets out upon his way. Leaving the highlands of Asia, he descends from station to station towards Europe. Each of his steps is marked by a new civilization superior to the preceding, by a greater power of development. Arrived at the Atlantic, he pauses on the shore of this unknown ocean, the bounds of which he knows not, and turns upon his footprints for an instant.” When he has exhausted the rich soil of Europe, and reinvigorated himself, “then recommences his adventurous career westward as in the earliest ages.” So far Guyot.</p><p id="73e1723f-ef84-486c-bf4a-b5d25db81b4b" class="">
+</p><p id="f6ba81be-c9d2-4175-a616-9f1c3487e670" class="">From this western impulse coming in contact with the barrier of the Atlantic sprang the commerce and enterprise of modern times. The younger Michaux, in his Travels West of the Alleghanies in 1802, says that the common inquiry in the newly settled West was, “‘From what part of the world have you come?’ As if these vast and fertile regions would naturally be the place of meeting and common country of all the inhabitants of the globe.”</p><p id="12f6dd3f-1e4e-4f62-aefd-dc5f48b87bc1" class="">
+</p><p id="293cc592-eaf8-4e03-9b57-f1b81b7a0bc7" class="">To use an obsolete Latin word, I might say, Ex Oriente lux; ex Occidente FRUX. From the East light; from the West fruit.</p><p id="8a86ffae-3c42-4aaa-9394-e3938ad5f153" class="">
+</p><p id="52d0d1c0-72a2-4e8e-b33f-a6b1f2d12ab2" class="">Sir Franeis Head, an English traveler and a Governor- General of Canada, tells us that “in both the northern and southern hemispheres of the New World, Nature has not only outlined her works on a larger scale, but has painted the whole picture with brighter and more costly colors than she used in delineating and in beautifying the Old World.... The heavens of America appear infinitely higher, the sky is bluer, the air is fresher, the cold is intenser, the moon looks larger, the stars are brighter the thunder is louder, the lightning is vivider, the wind is stronger, the rain is heavier, the mountains are higher, the rivers longer, the forests bigger, the plains broader.” This statement will do at least to set against Buffon&#x27;s account of this part of the world and its productions.</p><p id="267c9837-88fd-45fc-b412-b31c06982112" class="">
+</p><p id="16f3d072-1e63-412f-8e1a-b729671acc52" class="">Linnaeus said long ago, “Nescio quae facies laeta, glabra plantis Americanis” (I know not what there is of joyous and smooth in the aspect of American plants); and I think that in this country there are no, or at most very few, Africanae bestiae, African beasts, as the Romans called them, and that in this respect also it is peculiarly fitted for the habitation of man. We are told that within three miles of the center of the East-Indian city of Singapore, some of the inhabitants are annually carried off by tigers; but the traveler can lie down in the woods at night almost anywhere in North America without fear of wild beasts.</p><p id="2351f4f5-aae5-4ec4-95d0-78b4d5e21df2" class="">
+</p><p id="442a3376-25f0-477c-bc70-4de3eb1cf2ad" class="">These are encouraging testimonies. If the moon looks larger here than in Europe, probably the sun looks larger also. If the heavens of America appear infinitely higher, and the stars brighter, I trust that these facts are symbolical of the height to which the philosophy and poetry and religion of her inhabitants may one day soar. At length, perchance, the immaterial heaven will appear as much higher to the American mind, and the intimations that star it as much brighter. For I believe that climate does thus react on man—as there is something in the mountain air that feeds the spirit and inspires. Will not man grow to greater perfection intellectually as well as physically under these influences? Or is it unimportant how many foggy days there are in his life? I trust that we shall be more imaginative, that our thoughts will be clearer, fresher, and more ethereal, as our sky—our understanding more comprehensive and broader, like our plains—our intellect generally on a grander seale, like our thunder and lightning, our rivers and mountains and forests—and our hearts shall even correspond in breadth and depth and grandeur to our inland seas. Perchance there will appear to the traveler something, he knows not what, of laeta and glabra, of joyous and serene, in our very faces. Else to what end does the world go on, and why was America discovered?</p><p id="eea091ad-18d2-4bdd-a795-a219dcba7424" class="">
+</p><blockquote id="1ed71a02-3867-495c-95db-6104ff98c6bc" class="">To Americans I hardly need to say, “Westward the star of empire takes its way.”</blockquote><p id="9e188371-ccce-43ed-aeb4-955ec3335058" class="">
+</p><p id="31bc8dc6-e4bd-43f8-af2a-538fba47c5dc" class="">As a true patriot, I should be ashamed to think that Adam in paradise was more favorably situated on the whole than the backwoodsman in this country.</p><p id="6212a425-e51d-446d-a2cf-c8d4d1068956" class="">
+</p><p id="37fbf9b9-e30f-4c99-811d-c0c14b45c816" class="">Our sympathies in Massachusetts are not confined to New England; though we may be estranged from the South, we sympathize with the West. There is the home of the younger sons, as among the Scandinavians they took to the sea for their inheritance. It is too late to be studying Hebrew; it is more important to understand even the slang of today.</p><p id="275f6d92-3836-45ca-be1b-e888cd985ae0" class="">
+</p><p id="4e8cb874-195f-4490-818e-22ba8b129ff5" class="">Some months ago I went to see a panorama of the Rhine. It was like a dream of the Middle Ages. I floated down its historic stream in something more than imagination, under bridges built by the Romans, and repaired by later heroes, past cities and castles whose very names were music to my ears, and each of which was the subject of a legend. There were Ehrenbreitstein and Rolandseck and Coblentz, which I knew only in history. They were ruins that interested me chiefly. There seemed to come up from its waters and its vine-clad hills and valleys a hushed music as of Crusaders departing for the Holy Land. I floated along under the spell of enchantment, as if I had been transported to an heroic age, and breathed an atmosphere of chivalry.</p><p id="d9096e7d-5edf-4cb1-ae52-5ce2ac44f17f" class="">
+</p><p id="927eebc2-ac4a-40db-9d7c-4038e3199dec" class="">Soon after, I went to see a panorama of the Mississippi, and as I worked my way up the river in the light of today, and saw the steamboats wooding up, counted the rising cities, gazed on the fresh ruins of Nauvoo, beheld the Indians moving west across the stream, and, as before I had looked up the Moselle, now looked up the Ohio and the Missouri and heard the legends of Dubuque and of Wenona&#x27;s Cliff—still thinking more of the future than of the past or present—I saw that this was a Rhine stream of a different kind; that the foundations of castles were yet to be laid, and the famous bridges were yet to be thrown over the river; and I felt that this was the heroic age itself, though we know it not, for the hero is commonly the simplest and obscurest of men.</p><p id="c27ce431-55c7-4100-bf61-dc61c1b1101e" class="">
+</p><p id="cffab147-1a99-4955-84fc-98910238e585" class="">The West of which I speak is but another name for the Wild; and what I have been preparing to say is, that in Wildness is the preservation of the World. Every tree sends its fibers forth in search of the Wild. The cities import it at any price. Men plow and sail for it. From the forest and wilderness come the tonics and barks which brace mankind. Our ancestors were savages. The story of Romulus and Remus being suckled by a wolf is not a meaningless fable. The founders of every state which has risen to eminence have drawn their nourishment and vigor from a similar wild source. It was because the children of the Empire were not suckled by the wolf that they were conquered and displaced by the children of the northern forests who were.</p><p id="646f0603-8ee2-4dad-8261-13fa91b11b1d" class="">
+</p><p id="cdef47fb-17dd-4a44-82ac-c29fbdaf0c49" class="">I believe in the forest, and in the meadow, and in the night in which the corn grows. We require an infusion of hemlock, spruce or arbor vitae in our tea. There is a difference between eating and drinking for strength and from mere gluttony. The Hottentots eagerly devour the marrow of the koodoo and other antelopes raw, as a matter of course. Some of our northern Indians eat raw the marrow of the Arctic reindeer, as well as various other parts, including the summits of the antlers, as long as they are soft. And herein, perchance, they have stolen a march on the cooks of Paris. They get what usually goes to feed the fire. This is probably better than stall-fed beef and slaughterhouse pork to make a man of. Give me a wildness whose glance no civilization can endure—as if we lived on the marrow of koodoos devoured raw.</p><p id="0995d163-6148-45fe-852a-c4493f892c94" class="">
+</p><p id="f91c3d2e-9643-40c3-bd74-558d662cde67" class="">There are some intervals which border the strain of the wood thrush, to which I would migrate—wild lands where no settler has squatted; to which, methinks, I am already acclimated.</p><p id="67a9ef06-4607-428e-8e96-40ec4cb081df" class="">
+</p><p id="eab0f44a-98f1-45a7-8255-408d8afcbcfd" class="">The African hunter Cumming tells us that the skin of the eland, as well as that of most other antelopes just killed, emits the most delicious perfume of trees and grass. I would have every man so much like a wild antelope, so much a part and parcel of nature, that his very person should thus sweetly advertise our senses of his presence, and remind us of those parts of nature which he most haunts. I feel no disposition to be satirical, when the trapper&#x27;s coat emits the odor of musquash even; it is a sweeter scent to me than that which commonly exhales from the merchant&#x27;s or the scholar&#x27;s garments. When I go into their wardrobes and handle their vestments, I am reminded of no grassy plains and flowery meads which they have frequented, but of dusty merchants&#x27; exchanges and libraries rather.</p><p id="171ab127-bee8-49cd-9243-242759d6398a" class="">
+</p><p id="a52d7b0f-307f-4a11-b3ef-47f92381ace0" class="">A tanned skin is something more than respectable, and perhaps olive is a fitter color than white for a man—a denizen of the woods. “The pale white man!” I do not wonder that the African pitied him. Darwin the naturalist says, “A white man bathing by the side of a Tahitian was like a plant bleached by the gardener&#x27;s art, compared with a fine, dark green one, growing vigorously in the open fields.”</p><p id="2cfdc7aa-81b3-4926-a808-8607877ccc41" class="">
+</p><blockquote id="9a673da0-44cf-4e48-a108-82b50218bd11" class="">Ben Jonson exclaims, “How near to good is what is fair!” So I would say, “How near to good is what is wild!”</blockquote><p id="5a417e23-e23d-4123-b191-b77d89294932" class="">
+</p><p id="87f73f69-d298-4f54-ae46-2d9913c8ae9d" class="">Life consists with wildness. The most alive is the wildest. Not yet subdued to man, its presence refreshes him. One who pressed forward incessantly and never rested from his labors, who grew fast and made infinite demands on life, would always find himself in a new country or wilderness, and surrounded by the raw material of life. He would be climbing over the prostrate stems of primitive forest-trees.</p><p id="a4ad0eb3-edfd-4660-92d8-a7fb77579a00" class="">
+</p><p id="5648a4da-c4c7-4135-a5fd-32c464a4f077" class="">Hope and the future for me are not in lawns and cultivated fields, not in towns and cities, but in the impervious and quaking swamps. When, formerly, I have analyzed my partiality for some farm which I had contemplated purchasing, I have frequently found that I was attracted solely by a few square rods of impermeable and unfathomable bog—a natural sink in one corner of it. That was the jewel which dazzled me. I derive more of my subsistence from the swamps which surround my native town than from the cultivated gardens in the village. There are no richer parterres to my eyes than the dense beds of dwarf andromeda (Cassandra calyculata) which cover these tender places on the earth&#x27;s surface. Botany cannot go farther than tell me the names of the shrubs which grow there—the high blueberry, panicled andromeda, lambkill, azalea, and rhodora—all standing in the quaking sphagnum. I often think that I should like to have my house front on this mass of dull red bushes, omitting other flower plots and borders, transplanted spruce and trim box, even graveled walks—to have this fertile spot under my windows, not a few imported barrowfuls of soil only to cover the sand which was thrown out in digging the cellar. Why not put my house, my parlor, behind this plot, instead of behind that meager assemblage of curiosities, that poor apology for a Nature and Art, which I call my front yard? It is an effort to clear up and make a decent appearance when the carpenter and mason have departed, though done as much for the passer-by as the dweller within. The most tasteful front-yard fence was never an agreeable object of study to me; the most elaborate ornaments, acorn tops, or what not, soon wearied and disgusted me. Bring your sills up to the very edge of the swamp, then (though it may not be the best place for a dry cellar), so that there be no access on that side to citizens. Front yards are not made to walk in, but, at most, through, and you could go in the back way.</p><p id="31e61864-b8a9-4ef5-b500-dfe67dc19328" class="">
+</p><p id="642322c3-5772-4270-b81a-d38727172323" class="">
+</p><p id="4760da90-bd40-4218-9e2f-3da15596e57e" class="">Yes, though you may think me perverse, if it were proposed to me to dwell in the neighborhood of the most beautiful garden that ever human art contrived, or else of a Dismal Swamp, I should certainly decide for the swamp. How vain, then, have been all your labors, citizens, for me!</p><p id="8b120a14-249e-4dbd-89f1-6594382cb5c3" class="">
+</p><p id="2bfc1b1e-b731-4669-bd66-5af86d63e233" class="">My spirits infallibly rise in proportion to the outward dreariness. Give me the ocean, the desert, or the wilderness! In the desert, pure air and solitude compensate for want of moisture and fertility. The traveler Burton says of it: “Your morale improves; you become frank and cordial, hospitable and single-minded.... In the desert, spirituous liquors excite only disgust. There is a keen enjoyment in a mere animal existence.” They who have been traveling long on the steppes of Tartary say, “On re-entering cultivated lands, the agitation, perplexity, and turmoil of civilization oppressed and suffocated us; the air seemed to fail us, and we felt every moment as if about to die of asphyxia.” When I would recreate myself, I seek the darkest woods the thickest and most interminable and, to the citizen, most dismal, swamp. I enter a swamp as a sacred place, a sanctum sanctorum. There is the strength, the marrow, of Nature. The wildwood covers the virgin mould, and the same soil is good for men and for trees. A man&#x27;s health requires as many acres of meadow to his prospect as his farm does loads of muck. There are the strong meats on which he feeds. A town is saved, not more by the righteous men in it than by the woods and swamps that surround it. A township where one primitive forest waves above while another primitive forest rots below—such a town is fitted to raise not only corn and potatoes, but poets and philosophers for the coming ages. In such a soil grew Homer and Confucius and the rest, and out of such a wilderness comes the Reformer eating locusts and wild honey.</p><p id="f4fc1f9b-d899-404d-8ce5-03abf95a1f38" class="">
+</p><p id="5f18d20d-2388-4361-b203-89b5910ebe3f" class="">To preserve wild animals implies generally the creation of a forest for them to dwell in or resort to. So it is with man. A hundred years ago they sold bark in our streets peeled from our own woods. In the very aspect of those primitive and rugged trees there was, methinks, a tanning principle which hardened and consolidated the fibers of men&#x27;s thoughts. Ah! already I shudder for these comparatively degenerate days of my native village, when you cannot collect a load of bark of good thickness, and we no longer produce tar and turpentine.</p><p id="1b3bb4df-b9fe-4e67-863e-7bd1bf5f0957" class="">
+</p><p id="1338a12a-397e-478c-a726-dc6bb7abf6a1" class="">The civilized nations—Greece, Rome, England—have been sustained by the primitive forests which anciently rotted where they stand. They survive as long as the soil is not exhausted. Alas for human culture! little is to be expected of a nation, when the vegetable mould is exhausted, and it is compelled to make manure of the bones of its fathers. There the poet sustains himself merely by his own superfluous fat, and the philosopher comes down on his marrow-bones.</p><p id="2d23af39-eae3-43ce-bc4c-254d172accd3" class="">
+</p><p id="4977cb9d-b640-43e7-b97d-b21c704f764e" class="">It is said to be the task of the American “to work the virgin soil,” and that “agriculture here already assumes proportions unknown everywhere else.” I think that the farmer displaces the Indian even because he redeems the meadow, and so makes himself stronger and in some respects more natural. I was surveying for a man the other day a single straight line one hundred and thirty- two rods long, through a swamp at whose entrance might have been written the words which Dante read over the entrance to the infernal regions, “Leave all hope, ye that enter”—that is, of ever getting out again; where at one time I saw my employer actually up to his neck and swimming for his life in his property, though it was still winter. He had another similar swamp which I could not survey at all, because it was completely under water, and nevertheless, with regard to a third swamp, which I did survey from a distance, he remarked to me, true to his instincts, that he would not part with it for any consideration, on account of the mud which it contained. And that man intends to put a girdling ditch round the whole in the course of forty months, and so redeem it by the magic of his spade. I refer to him only as the type of a class.</p><p id="69bc4357-1272-4135-8ad1-a84d736ba076" class="">
+</p><p id="8c825180-006a-423e-a4bd-10e55010fc6e" class="">The weapons with which we have gained our most important victories, which should be handed down as heirlooms from father to son, are not the sword and the lance, but the bushwhack, the turf-cutter, the spade, and the bog hoe, rusted with the blood of many a meadow, and begrimed with the dust of many a hard- fought field. The very winds blew the Indian&#x27;s cornfield into the meadow, and pointed out the way which he had not the skill to follow. He had no better implement with which to intrench himself in the land than a clam- shell. But the farmer is armed with plow and spade.</p><p id="421e2d51-e764-491a-bd6a-c9706883edc1" class="">
+</p><p id="c6cf9293-49c3-470f-ab35-1f459526ba3d" class="">In literature it is only the wild that attracts us. Dullness is but another name for tameness. It is the uncivilized free and wild thinking in Hamlet and the Iliad, in all the scriptures and mythologies, not learned in the schools, that delights us. As the wild duck is more swift and beautiful than the tame, so is the wild—the mallard—thought, which &#x27;mid falling dews wings its way above the fens. A truly good book is something as natural, and as unexpectedly and unaccountably fair and perfect, as a wild-flower discovered on the prairies of the West or in the jungles of the East. Genius is a light which makes the darkness visible, like the lightning&#x27;s flash, which perchance shatters the temple of knowledge itself—and not a taper lighted at the hearthstone of the race, which pales before the light of common day.</p><p id="f8d3e5e2-2451-454e-8c93-5731de680008" class="">
+</p><p id="80b02770-ae99-4f03-907f-85f49603d165" class="">English literature, from the days of the minstrels to the Lake PoetsVhaueer and Spenser and Milton, and even Shakespeare, included—breathes no quite fresh and, in this sense, wild strain. It is an essentially tame and civilized literature, reflecting Greece and Rome. Her wilderness is a greenwood, her wild man a Robin Hood. There is plenty of genial love of Nature, but not so much of Nature herself. Her Chronicles inform us when her wild animals, but not when the wild man in her, became extinct.</p><p id="bbb165f4-2d30-493f-af28-1b7c57ff982e" class="">
+</p><p id="3106c821-8c49-40cd-8aab-618d1295d002" class="">The science of Humboldt is one thing, poetry is another thing. The poet today, notwithstanding all the discoveries of science, and the accumulated learning of mankind, enjoys no advantage over Homer.</p><p id="58a06400-0873-4476-a5fa-f34576e4560b" class="">
+</p><p id="82a6ff68-1cb3-4759-be39-707ffbae2ce5" class="">Where is the literature which gives expression to Nature? He would be a poet who could impress the winds and streams into his service, to speak for him; who nailed words to their primitive senses, as farmers drive down stakes in the spring, which the frost has heaved; who derived his words as often as he used them—transplanted them to his page with earth adhering to their roots; whose words were so true and fresh and natural that they would appear to expand like the buds at the approach of spring, though they lay half smothered between two musty leaves in a library—aye, to bloom and bear fruit there, after their kind, annually, for the faithful reader, in sympathy with surrounding Nature.</p><p id="3fe7b13b-b8b5-4cf9-b36a-581dfbafc4b1" class="">
+</p><p id="e638c4c6-365d-4b3f-9d05-45591939acae" class="">I do not know of any poetry to quote which adequately expresses this yearning for the Wild. Approached from this side, the best poetry is tame. I do not know where to find in any literature, ancient or modern, any account which contents me of that Nature with which even I am acquainted. You will perceive that I demand something which no Augustan nor Elizabethan age, which no culture, in short, can give. Mythology comes nearer to it than anything. How much more fertile a Nature, at least, has Grecian mythology its root in than English literature! Mythology is the crop which the Old World bore before its soil was exhausted, before the fancy and imagination were affected with blight; and which it still bears, wherever its pristine vigor is unabated. All other literatures endure only as the elms which overshadow our houses; but this is like the great dragon-tree of the Western Isles, as old as mankind, and, whether that does or not, will endure as long; for the decay of other literatures makes the soil in which it thrives.</p><p id="17bf5230-19d0-4ff0-a7f6-8b8813970967" class="">
+</p><p id="126778b9-e06e-41eb-8131-190927ee8bbc" class="">The West is preparing to add its fables to those of the East. The valleys of the Ganges, the Nile, and the Shine having yielded their crop, it remains to be seen what the valleys of the Amazon, the Plate, the Orinoco, the St. Lawrence, and the Mississippi will produce. Perchance, when, in the course of ages, American liberty has become a fiction of the past—as it is to some extent a fiction of the present—the poets of the world will be inspired by American mythology.</p><p id="995b9dd7-200d-4550-b9c3-a6da152ded9f" class="">
+</p><p id="4031d862-8d02-47d6-8b58-54ed51a851f6" class="">The wildest dreams of wild men, even, are not the less true, though they may not recommend themselves to the sense which is most common among Englishmen and Americans today. It is not every truth that recommends itself to the Common sense. Nature has a place for the wild Clematis as well as for the Cabbage. Some expressions of truth are reminiscent, others merely sensible, as the phrase is, others prophetic. Some forms of disease, even, may prophesy forms of health. The geologist has discovered that the figures of serpents, griffins, flying dragons, and other fanciful embellishments of heraldry, have their prototypes in the forms of fossil species which were extinct before man was created, and hence “indicate a faint and shadowy knowledge of a previous state of organic existence.” The Hindus dreamed that the earth rested on an elephant, and the elephant on a tortoise, and the tortoise on a serpent; and though it may be an unimportant coincidence, it will not be out of place here to state, that a fossil tortoise has lately been discovered in Asia large enough to support an elephant. I confess that I am partial to these wild fancies, which transcend the order of time and development. They are the sublimest recreation of the intellect. The partridge loves peas, but not those that go with her into the pot.</p><p id="4ca68e11-5153-480c-9d6b-5ef40380e972" class="">
+</p><p id="ca28f34e-f7bf-4d1d-a5c5-c89d5d274573" class="">In short, all good things are wild and free. There is something in a strain of music, whether produced by an instrument or by the human voice—take the sound of a bugle in a summer night, for instance-which by its wildness, to speak without satire, reminds me of the cries emitted by wild beasts in their native forests. It is so much of their wildness as I can understand. Give me for my friends and neighbors wild men, not tame ones. The wildness of the savage is but a faint symbol of the awful ferity with which good men and lovers meet.</p><p id="acd48419-e357-49f1-8c60-e17335069f3d" class="">
+</p><p id="2a62e31a-8957-47a3-afe3-8015e409cc6c" class="">I love even to see the domestic animals reassert their native rights—any evidence that they have not wholly lost their original wild habits and vigor; as when my neighbor&#x27;s cow breaks out of her pasture early in the spring and boldly swims the river, a cold, gray tide, twenty-five or thirty rods wide, swollen by the melted snow. It is the buffalo crossing the Mississippi. This exploit confers some dignity on the herd in my eyes—already dignified. The seeds of instinct are preserved under the thick hides of cattle and horses, like seeds in the bowels of the earth, an indefinite period.</p><p id="8a5343ee-669d-452a-b046-a6335863a725" class="">
+</p><p id="82348136-e166-4373-b6be-687f49cb4fbc" class="">Any sportiveness in cattle is unexpected. I saw one day a herd of a dozen bullocks and cows running about and frisking in unwieldy sport, like huge rats, even like kittens. They shook their heads, raised their tails, and rushed up and down a hill, and I perceived by their horns, as well as by their activity, their relation to the deer tribe. But, alas! a sudden loud Whoa! would have damped their ardor at once, reduced them from venison to beef, and stiffened their sides and sinews like the locomotive. Who but the Evil One has cried “Whoa!” to mankind? Indeed, the life of cattle, like that of many men, is but a sort of locomotiveness; they move a side at a time, and man, by his machinery, is meeting the horse and the ox halfway. Whatever part the whip has touched is thenceforth palsied. Who would ever think of a side of any of the supple cat tribe, as we speak of a side of beef?</p><p id="c3f9a8e2-523f-4b1d-85a1-33ebd25c5188" class="">
+</p><p id="1b92ae47-552b-44fa-8484-4ff34a2cfe4a" class="">I rejoice that horses and steers have to be broken before they can be made the slaves of men, and that men themselves have some wild oats still left to sow before they become submissive members of society. Undoubtedly, all men are not equally fit subjects for civilization; and because the majority, like dogs and sheep, are tame by inherited disposition, this is no reason why the others should have their natures broken that they may be reduced to the same level. Men are in the main alike, but they were made several in order that they might be various. If a low use is to be served, one man will do nearly or quite as well as another; if a high one, individual excellence is to be regarded. Any man can stop a hole to keep the wind away, but no other man could serve so rare a use as the author of this illustration did. Confucius says, “The skins of the tiger and the leopard, when they are tanned, are as the skins of the dog and the sheep tanned.” But it is not the part of a true culture to tame tigers, any more than it is to make sheep ferocious; and tanning their skins for shoes is not the best use to which they can be put.</p><p id="88974531-0b4e-4e66-9934-c803330153a4" class="">
+</p><p id="d8bdcda8-e7ba-4877-9510-1c342b3a506f" class="">When looking over a list of men&#x27;s names in a foreign language, as of military officers, or of authors who have written on a particular subject, I am reminded once more that there is nothing in a name. The name Menschikoff, for instance, has nothing in it to my ears more human than a whisker, and it may belong to a rat. As the names of the Poles and Russians are to us, so are ours to them. It is as if they had been named by the child&#x27;s rigmarole, Iery fiery ichery van, tittle-tol-tan. I see in my mind a herd of wild creatures swarming over the earth, and to each the herdsman has affixed some barbarous sound in his own dialect. The names of men are, of course, as cheap and meaningless as Bose and Tray, the names of dogs.</p><p id="fadd3b06-6c01-4aae-a9a3-284b61bc5a96" class="">
+</p><p id="7eac5ec5-a17b-4eb3-a560-3227a383488f" class="">Methinks it would be some advantage to philosophy if men were named merely in the gross, as they are known. It would be necessary only to know the genus and perhaps the race or variety, to know the individual. We are not prepared to believe that every private soldier in a Roman army had a name of his own—because we have not supposed that he had a character of his own.</p><p id="53d97f69-eee1-4865-b104-0dc686028465" class="">
+</p><p id="f2e1a3f0-9564-4659-b677-48459deab7cb" class="">At present our only true names are nicknames. I knew a boy who, from his peculiar energy, was called “Buster” by his playmates, and this rightly supplanted his Christian name. Some travelers tell us that an Indian had no name given him at first, but earned it, and his name was his fame; and among some tribes he acquired a new name with every new exploit. It is pitiful when a man bears a name for convenience merely, who has earned neither name nor fame.</p><p id="b5061662-9584-4511-a24c-9b42b553b409" class="">
+</p><p id="779ab22c-88ef-4658-894b-e714c0bca588" class="">I will not allow mere names to make distinctions for me, but still see men in herds for all them. A familiar name cannot make a man less strange to me. It may be given to a savage who retains in secret his own wild title earned in the woods. We have a wild savage in us, and a savage name is perchance somewhere recorded as ours. I see that my neighbor, who bears the familiar epithet William or Edwin, takes it off with his jacket. It does not adhere to him when asleep or in anger, or aroused by any passion or inspiration. I seem to hear pronounced by some of his kin at such a time his original wild name in some jaw-breaking or else melodious tongue.</p><p id="10115241-954b-405d-8ea3-9573acbb6f0e" class="">
+</p><p id="65096c14-5944-454f-8834-7d8f813cf3bc" class="">Here is this vast, savage, hovering mother of ours, Nature, lying all around, with such beauty, and such affection for her children, as the leopard; and yet we are so early weaned from her breast to society, to that culture which is exclusively an interaction of man on man—a sort of breeding in and in, which produces at most a merely English nobility, a civilization destined to have a speedy limit.</p><p id="7d5c2a65-4ebf-48db-822d-7c495b0a1e27" class="">
+</p><p id="ecac92f0-e82f-4ff5-8b8e-04c4dbfe9f4a" class="">In society, in the best institutions of men, it is easy to detect a certain precocity. When we should still be growing children, we are already little men. Give me a culture which imports much muck from the meadows, and deepens the soil—not that which trusts to heating manures, and improved implements and modes of culture only!</p><p id="94bf89ae-251b-47da-8c65-cdd1b608df3a" class="">
+</p><p id="887be6a6-e643-495c-b309-86ad7f4a3836" class="">Many a poor sore-eyed student that I have heard of would grow faster, both intellectually and physically, if, instead of sitting up so very late, he honestly slumbered a fool&#x27;s allowance.</p><p id="786c034c-f243-4fba-98da-a8d08953afea" class="">
+</p><p id="99e681a9-3a5c-49c3-ac84-e83a5139a123" class="">There may be an excess even of informing light. Niepce, a Frenchman, discovered “actinism,” that power in the sun&#x27;s rays which produces a chemical effect; that granite rocks, and stone structures, and statues of metal “are all alike destructively acted upon during the hours of sunshine, and, but for provisions of Nature no less wonderful, would soon perish under the delicate touch of the most subtle of the agencies of the universe.” But he observed that “those bodies which underwent this change during the daylight possessed the power of restoring themselves to their original conditions during the hours of night, when this excitement was no longer influencing them.” Hence it has been inferred that “the hours of darkness are as necessary to the inorganic creation as we know night and sleep are to the organic kingdom.” Not even does the moon shine every night, but gives place to darkness.</p><p id="916eca97-16da-45cb-b7c8-e01e791a64a3" class="">
+</p><p id="da1d5a62-8696-495e-9f60-e2694a396bfa" class="">I would not have every man nor every part of a man cultivated, any more than I would have every acre of earth cultivated: part will be tillage, but the greater part will be meadow and forest, not only serving an immediate use, but preparing a mould against a distant future, by the annual decay of the vegetation which it supports.</p><p id="173e33f1-d084-4314-8c53-b63176d58d6a" class="">
+</p><p id="847c2084-1d99-40ce-9a1f-5e6992a97825" class="">There are other letters for the child to learn than those which Cadmus invented. The Spaniards have a good term to express this wild and dusky knowledge, Gramatica parda, tawny grammar, a kind of mother-wit derived from that same leopard to which I have referred.</p><p id="1e02d2ab-a051-4d3b-88f8-43dc6ae76b9e" class="">
+</p><p id="c8a4eac8-bd38-463b-b4a5-6c8df42257a2" class="">We have heard of a Society for the Diffusion of Useful Knowledge. It is said that knowledge is power, and the like. Methinks there is equal need of a Society for the Diffusion of Useful Ignorance, what we will call Beautiful Knowledge, a knowledge useful in a higher sense: for what is most of our boasted so-called knowledge but a conceit that we know something, which robs us of the advantage of our actual ignorance? What we call knowledge is often our positive ignorance; ignorance our negative knowledge. By long years of patient industry and reading of the newspapers—for what are the libraries of science but files of newspapers—a man accumulates a myriad facts, lays them up in his memory, and then when in some spring of his life he saunters abroad into the Great Fields of thought, he, as it were, goes to grass like a horse and leaves all his harness behind in the stable. I would say to the Society for the Diffusion of Useful Knowledge, sometimes, Go to grass. You have eaten hay long enough. The spring has come with its green crop. The very cows are driven to their country pastures before the end of May; though I have heard of one unnatural farmer who kept his cow in the barn and fed her on hay all the year round. So, frequently, the Society for the Diffusion of Useful Knowledge treats its cattle.</p><p id="7ddcb9b2-7279-4c6f-91be-c5d46bac556c" class="">
+</p><p id="bf0bb140-d2b0-4e04-813e-3bfe5a4264e8" class="">A man&#x27;s ignorance sometimes is not only useful, but beautiful—while his knowledge, so called, is oftentimes worse than useless, besides being ugly. Which is the best man to deal with—he who knows nothing about a subject, and, what is extremely rare, knows that he knows nothing, or he who really knows something about it, but thinks that he knows all?</p><p id="789745fd-4d24-4b91-bc3a-1ee34e7c1458" class="">
+</p><p id="b65bd36f-e538-479f-bb21-0a1ff0a6f4ae" class="">My desire for knowledge is intermittent, but my desire to bathe my head in atmospheres unknown to my feet is perennial and constant. The highest that we can attain to is not Knowledge, but Sympathy with Intelligence. I do not know that this higher knowledge amounts to anything more definite than a novel and grand surprise on a sudden revelation of the insufficiency of all that we called Knowledge before—a discovery that there are more things in heaven and earth than are dreamed of in our philosophy. It is the lighting up of the mist by the sun. Man cannot know in any higher sense than this, any more than he can look serenely and with impunity in the face of the sun: “You will not perceive that, as perceiving a particular thing,” say the Chaldean Oracles.</p><p id="1a3990b8-cc01-43dc-9a9a-2958e21157b7" class="">
+</p><p id="98863753-a0af-4806-9bdd-35f1b17cfc67" class="">There is something servile in the habit of seeking after a law which we may obey. We may study the laws of matter at and for our convenience, but a successful life knows no law. It is an unfortunate discovery certainly, that of a law which binds us where we did not know before that we were bound. Live free, child of the mist—and with respect to knowledge we are all children of the mist. The man who takes the liberty to live is superior to all the laws, by virtue of his relation to the lawmaker. “That is active duty,” says the Vishnu Purana, “which is not for our bondage; that is knowledge which is for our liberation: all other duty is good only unto weariness; all other knowledge is only the Cleverness of an artist.”</p><p id="2bd9621c-dcaa-46f2-9d7e-187abf28902c" class="">
+</p><p id="db4fea07-bcd4-4bd2-9628-757a2899a720" class="">It is remarkable how few events or crises there are in our histories, how little exercised we have been in our minds, how few experiences we have had. I would fain be assured that I am growing apace and rankly, though my very growth disturb this dull equanimity—though it be with struggle through long, dark, muggy nights or seasons of gloom. It would be well if all our lives were a divine tragedy even, instead of this trivial comedy or farce. Dante, Bunyan, and others appear to have been exercised in their minds more than we: they were subjected to a kind of culture such as our district schools and colleges do not contemplate. Even Mahomet, though many may scream at his name, had a good deal more to to live for, aye, and to die for, than they have commonly.</p><p id="448117f5-f558-488c-b561-34aa6924e612" class="">
+</p><p id="625c68cf-1d9a-4a69-bbee-876299c87a94" class="">When, at rare intervals, some thought visits one, as perchance he is walking on a railroad, then, indeed, the cars go by without his hearing them. But soon, by some inexorable law, our life goes by and the cars return.</p><p id="3b1a7e0b-3929-45d5-9e30-e391dd4fd1b9" class="">
+</p><blockquote id="d0ef2ac0-16a8-4bc4-83f3-50d5056c6e1b" class="">“Gentle breeze, that wanderestunseen, And bendest the thistlesround Loira of storms, Traveler of the windyglens, Why hast thou leftmy ear so soon?”</blockquote><p id="49471bd9-d03d-4318-885d-7bb001bb9ca9" class="">
+</p><p id="ba66a88a-7c23-4add-80ba-738153dca32e" class="">While almost all men feel an attraction drawing them to society, few are attracted strongly to Nature. In their reaction to Nature men appear to me for the most part, notwithstanding their arts, lower than the animals. It is not often a beautiful relation, as in the case of the animals. How little appreciation of the beauty of the land- scape there is among us! We have to be told that the Greeks called the world Kόσμος, Beauty, or Order, but we do not see clearly why they did so, and we esteem it at best only a curious philological fact.</p><p id="e8e77695-4b20-448d-afc9-c73cd5bb8757" class="">
+</p><p id="8abcebaf-a6e7-45d9-ac0c-2f72f7431a78" class="">For my part, I feel that with regard to Nature I live a sort of border life, on the confines of a world into which I make occasional and transient forays only, and my patriotism and allegiance to the state into whose territories I seem to retreat are those of a moss-trooper. Unto a life which I call natural I would gladly follow even a will-o&#x27;-the-wisp through bogs and sloughs unimaginable, but no moon nor firefly has shown me the causeway to it. Nature is a personality so vast and universal that we have never seen one of her features. The walker in the familiar fields which stretch around my native town sometimes finds himself in another land than is described in their owners&#x27; deeds, as it were in some faraway field on the confines of the actual Concord, where her jurisdiction ceases, and the idea which the word Concord suggests ceases to be suggested. These farms which I have myself surveyed, these bounds which I have set up, appear dimly still as through a mist; but they have no chemistry to fix them; they fade from the surface of the glass, and the picture which the painter painted stands out dimly from beneath. The world with which we are commonly acquainted leaves no trace, and it will have no anniversary.</p><p id="291b2b89-6a20-4a97-847e-95794086c0ac" class="">
+</p><p id="e7727f4e-16c1-4e14-be74-6880d72a51bc" class="">I took a walk on Spaulding&#x27;s Farm the other afternoon. I saw the setting sun lighting up the opposite side of a stately pine wood. Its golden rays straggled into the aisles of the wood as into some noble hall. I was impressed as if some ancient and altogether admirable and shining family had settled there in that part of the land called Concord, unknown to me—to whom the sun was servant—who had not gone into society in the village—who had not been called on. I saw their park, their pleasure-ground, beyond through the wood, in Spaulding&#x27;s cranberry-meadow. The pines furnished them with gables as they grew. Their house was not obvious to vision; the trees grew through it. I do not know whether I heard the sounds of a suppressed hilarity or not. They seemed to recline on the sunbeams. They have sons and daughters. They are quite well. The farmer&#x27;s cart-path, which leads directly through their hall, does not in the least put them out, as the muddy bottom of a pool is sometimes seen through the reflected skies. They never heard of Spaulding, and do not know that he is their neighbor—notwithstanding I heard him whistle as he drove his team through the house. Nothing can equal the serenity of their lives. Their coat-of-arms is simply a lichen. I saw it painted on the pines and oaks. Their attics were in the tops of the trees. They are of no politics. There was no noise of labor. I did not perceive that they were weaving or spinning. Yet I did detect, when the wind lulled and hearing was done away, the finest imaginable sweet musical hum—as of a distant hive in May—which perchance was the sound of their thinking. They had no idle thoughts, and no one without could see their work, for their industry was not as in knots and excrescences embayed.</p><p id="eb214420-51fb-42a1-a8bc-92ee97115bd6" class="">
+</p><p id="9a0ac5cb-34de-4375-9645-e579ffb94429" class="">But I find it difficult to remember them. They fade irrevocably out of my mind even now while I speak, and endeavor to recall them and recollect myself. It is only after a long and serious effort to recollect my best thoughts that I become again aware of their cohabitancy. If it were not for such families as this, I think I should move out of Concord.</p><p id="3620064f-01df-4976-a2f5-749d80e131a0" class="">
+</p><p id="51425021-4fb6-4947-9362-c41b469a8d7b" class="">We are accustomed to say in New England that few and fewer pigeons visit us every year. Our forests furnish no mast for them. So, it would seem, few and fewer thoughts visit each growing man from year to year, for the grove in our minds is laid waste—sold to feed unnecessary fires of ambition, or sent to mill—and there is scarcely a twig left for them to perch on. They no longer build nor breed with us. In some more genial season, perchance, a faint shadow flits across the landscape of the mind, cast by the wings of some thought in its vernal or autumnal migration, but, looking up, we are unable to detect the substance of the thought itself. Our winged thoughts are turned to poultry. They no longer soar, and they attain only to a Shanghai and Cochin- China grandeur. Those gra-a-ate thoughts, those gra-a-ate men you hear of!</p><p id="e4c85c1b-3f4c-473b-b3c6-41501848cdb9" class="">
+</p><p id="cb7981d7-122e-47fc-9d33-f14701a9860d" class="">We hug the earth—how rarely we mount! Methinks we might elevate ourselves a little more. We might climb a tree, at least. I found my account in climbing a tree once. It was a tall white pine, on the top of a hill; and though I got well pitched, I was well paid for it, for I discovered new mountains in the horizon which I had never seen before—so much more of the earth and the heavens. I might have walked about the foot of the tree for threescore years and ten, and yet I certainly should never have seen them. But, above all, I discovered around me—it was near the end of June—on the ends of the topmost branches only, a few minute and delicate red conelike blossoms, the fertile flower of the white pine looking heavenward. I carried straightway to the village the topmost spire, and showed it to stranger jury- men who walked the streets—for it was court week—and to farmers and lumber-dealers and woodchoppers and hunters, and not one had ever seen the like before, but they wondered as at a star dropped down. Tell of ancient architects finishing their works on the tops of columns as perfectly as on the lower and more visible parts! Nature has from the first expanded the minute blossoms of the forest only toward the heavens, above men&#x27;s heads and unobserved by them. We see only the flowers that are under our feet in the meadows. The pines have developed their delicate blossoms on the highest twigs of the wood every summer for ages, as well over the heads of Nature&#x27;s red children as of her white ones; yet scarcely a farmer or hunter in the land has ever seen them.</p><p id="f89beb5d-6499-4ced-80ff-aa845d836eeb" class="">
+</p><p id="309a4c7b-5b44-4442-8f30-af6fce3e460a" class="">Above all, we cannot afford not to live in the present. He is blessed over all mortals who loses no moment of the passing life in remembering the past. Unless our philosophy hears the cock crow in every barnyard within our horizon, it is belated. That sound commonly reminds us that we are growing rusty and antique in our employments and habits of thoughts. His philosophy comes down to a more recent time than ours. There is something suggested by it that is a newer testament—the gospel according to this moment. He has not fallen astern; he has got up early and kept up early, and to be where he is is to be in season, in the foremost rank of time. It is an expression of the health and soundness of Nature, a brag for all the world—healthiness as of a spring burst forth, a new fountain of the Muses, to celebrate this last instant of time. Where he lives no fugitive slave laws are passed. Who has not betrayed his master many times since last he heard that note?</p><p id="60c859db-49f7-4e70-9f81-ecfb902a64b9" class="">
+</p><p id="8a5928ef-9caa-49d8-8651-b13a7cf8f25b" class="">The merit of this bird&#x27;s strain is in its freedom from all plaintiveness. The singer can easily move us to tears or to laughter, but where is he who can excite in us a pure morning joy? When, in doleful dumps, breaking the awful stillness of our wooden sidewalk on a Sunday, or, perchance, a watcher in the house of mourning, I hear a cockerel crow far or near, I think to myself, “There is one of us well, at any rate,” and with a sudden gush return to my senses.</p><p id="b4e81c40-fb14-4b2c-afb7-ec1fed4af909" class="">
+</p><p id="4241d29a-ba33-4567-b374-5bb770bdb39b" class="">We had a remarkable sunset one day last November. I was walking in a meadow, the source of a small brook, when the sun at last, just before setting, after a cold, gray day, reached a clear stratum in the horizon, and the softest, brightest morning sunlight fell on the dry grass and on the stems of the trees in the opposite horizon and on the leaves of the shrub oaks on the hillside, while our shadows stretched long over the meadow east- ward, as if we were the only motes in its beams. It was such a light as we could not have imagined a moment before, and the air also was so warm and serene that nothing was wanting to make a paradise of that meadow. When we reflected that this was not a solitary phenomenon, never to happen again, but that it would happen forever and ever, an infinite number of evenings, and cheer and reassure the latest child that walked there, it was more glorious still.</p><p id="5c60a74d-784e-46a1-8f1a-749cc580edcf" class="">
+</p><p id="2de6b584-502b-4fba-912e-c942078e0742" class="">The sun sets on some retired meadow, where no house is visible, with all the glory and splendor that it lavishes on cities, and perchance as it has never set before—where there is but a solitary marsh hawk to have his wings gilded by it, or only a musquash looks out from his cabin, and there is some little black-veined brook in the midst of the marsh, just beginning to meander, winding slowly round a decaying stump. We walked in so pure and bright a light, gilding the withered grass and leaves, so softly and serenely bright, I thought I had never bathed in such a golden flood, without a ripple or a murmur to it. The west side of every wood and rising ground gleamed like the boundary of Elysium, and the sun on our backs seemed like a gentle herdsman driving us home at evening.</p><p id="fe1ad642-f63f-40f3-bcd8-c792b9ffffba" class="">
+</p><p id="6d4c4716-408d-4f84-a545-5931c0d4b441" class="">So we saunter toward the Holy Land, till one day the sun shall shine more brightly than ever he has done, shall perchance shine into our minds and hearts, and light up our whole lives with a great awakening light, as warm and serene and golden as on a bankside in autumn.</p></div></article></body></html>

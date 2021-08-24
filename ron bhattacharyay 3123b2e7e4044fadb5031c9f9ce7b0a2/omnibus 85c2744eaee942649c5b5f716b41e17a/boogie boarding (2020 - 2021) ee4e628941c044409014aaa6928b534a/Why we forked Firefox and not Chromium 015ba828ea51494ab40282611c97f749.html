@@ -1,0 +1,648 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why we forked Firefox and not Chromium</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="015ba828-ea51-494a-b402-82611c97f749" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎃</span></div><h1 class="page-title">Why we forked Firefox and not Chromium</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html" class="url-value">https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html</a></td></tr></tbody></table></header><div class="page-body"><p id="6b112f6e-e062-441f-91f3-9f6d5647b5a7" class="">In 2015 Cliqz released its own desktop web browser, forked from Firefox. Up to that point, we had distributed our search and privacy products as a single Firefox addon. In this article we cover why we thought it necessary to create our own browser, why we chose Firefox, and why we think it was the right choice.</p><p id="0184d224-19a3-4bdb-96a4-5d1f3aef5a9c" class="">
+</p><h2 id="ca67ea13-fd36-4f80-bce9-152acba13520" class="">Why a browser?</h2><p id="212100f5-6a89-44bc-a82d-a914d55f4016" class="">
+</p><p id="2ddb4579-4f19-4606-b877-ed51f37b8db0" class="">Search is an integral part of the web browsing experience—almost every browsing session starts with a search. All modern browser UIs have search directly integrated into their address bars. Thus, browsers are the primary means of distributing search, something Google realised in the 00’s when they created Chrome to push their search. We realised the same, and therefore wanted to have a browser which we could use to distribute our search, and as a showcase of <a href="https://0x65.dev/blog/2019-12-11/the-pivot-that-excited-mozilla-and-google.html">our vision</a>.</p><p id="6a479d6a-0393-4f0e-adcb-ad6394a3bd7a" class="">
+</p><p id="6f8c6dca-76b1-4aef-a2e7-523095bbbc2c" class="">Furthermore, owning the platform is important to keep control over the user experience. This has proved critical in retrospect: At the time our browser extension in Firefox was using the old legacy extension APIs, which gave us significant power to tinker with the browser UI, something we exploited to build our search dropdown. In 2017 these APIs were deprecated, and we could no longer ship this feature to Firefox. Luckily, we had our own browser by this time.</p><p id="f00b1dbd-6457-4c81-81f8-5f778f4e6475" class="">
+</p><p id="095486d0-09f2-4cf5-a890-fcdafd3e2432" class="">Secondly, distributing a browser gave us the power to control much more of the user experience than an extension could have. Back then the mainstream browsers were paying limited attention to user privacy. From our experience building a web search, we saw the kind of data that was being collected about users and being sold on the “free market” by other actors. We wanted to protect users from this kind of exploitation, and apply privacy-by-design to the browser from the ground up.</p><p id="58455c02-7683-4c0b-8f33-0fdbf4c33596" class="">
+</p><p id="f503b4d7-6064-41a3-9d46-6c04ff0aefbf" class="">At Cliqz we believe browsers are <em>user agents</em>, “a user agent is software (a software agent) that is acting on behalf of a user”<a href="https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html">[1]</a>. The browser represents a user on the Internet and so is responsible for protecting their privacy. We had already implemented anti-tracking and anti-phishing technologies for our Firefox extension and could integrate them right in our browser.</p><p id="4e9067e5-4535-4668-a064-3f426c5d85b2" class="">
+</p><h2 id="68df1b94-4497-4e80-b0da-cc7185a9e4e3" class="">Why fork a browser?</h2><p id="6c29ee2b-156b-456b-8924-af659251b2ce" class="">For these reasons it became clear we wanted to build and distribute our own browser. It was also obvious that there was no need to try to change what existing browsers were already doing well—there would be little value trying to match the already exceptional rendering performance and security of the established browser engines. Instead, we wanted to build features on top. This meant we would have to fork one of the existing engines. Our thinking was to consider the browser as a platform for our features.</p><p id="50fae58f-800d-422b-9418-138fc6e6345c" class="">
+</p><p id="8de89470-723a-4d02-97fb-d57e6df52633" class="">This decision would make our life easier in the long run. Browsers are extremely high-velocity projects, and must be kept up-to-date for important security patches. Maintaining a fork in these conditions is challenging, and we have learnt that the only sustainable way to do this is to diverge as little as possible from the upstream project.</p><p id="721d6a01-d154-40ed-a3ec-3d4f35feee77" class="">
+</p><p id="8108b215-f197-45a1-b59b-ecc52ef180de" class="">We chose to base our work on Firefox as a majority of our code was already a Firefox extension, and to keep as much of our code as possible encapsulated in our extension to make it easier to keep up with Firefox’s upstream changes.</p><p id="9df2b2ec-5105-4b31-8e49-199911ee04d8" class="">
+</p><h2 id="f2611cab-3f59-496e-bc63-c6d3d4b8c18b" class="">Why not Chromium?</h2><p id="acabc343-af3c-44c3-ba12-838f2e275fe6" class="">
+</p><p id="97b82fe3-b5bb-4fc9-b7f3-43fc3e032c94" class="">Nowadays it is a <em>de facto</em> standard to use Chromium as a browser base. Numerous companies like Opera, Yandex, Brave, and recently Microsoft decided to go in that direction. From our perspective that choice is not so clear for a variety of reasons:</p><ul id="04277d03-2540-41de-8ce7-44606a870fd4" class="bulleted-list"><li>We are much more in line with Mozilla’s <em>raison d’être</em> than with Google’s. We share most of our values with Mozilla, and we consider them allies. When forking a project like this, one is taking the risk that the upstream maintainer kills or modifies features you rely on. We can trust Mozilla much more than Google to not do this.</li></ul><ul id="7a985d4d-e9e0-45f4-9d73-68255751267d" class="bulleted-list"><li>Monopoly-wise, it makes more sense to support Firefox’s code-base. The Blink/Gecko (webrender) market share is not a trivial matter. If all browsers end up using Blink (Google), the Web will suffer as developers will only optimize and test for the Blink rendering engine. The recent loss of the Web’s third independent engine (EdgeHTML), further exacerbates this issue.</li></ul><p id="74fca352-91bd-42b0-bf34-7d7de2e93354" class="">
+</p><p id="39ad8467-184f-4398-acf3-aecf055a4111" class="">But the reasons are also technical:</p><ul id="c2073c3e-1e44-4670-83c4-9762310448c3" class="bulleted-list"><li>Firefox has open APIs for everything the browser does—a majority of Firefox “application” code is written in JavaScript. Chromium on the other hand does not expose certain areas that are sensitive to Google’s business. The most notable example is the address bar (where Cliqz search lives). Google has no interest in making it easy for others to take control of the address bar; the flow to the default search engine (Google) is protected. Of course one could create new APIs, but that would imply creating them on top of the source-code. This is not a big issue, we have already created a prototype, but then there is the problem of maintaining it.</li></ul><ul id="ff758700-19ed-447e-b1d1-09ce8bdb4c9b" class="bulleted-list"><li>Maintaining any fork is a nightmare because the owners of the projects—mostly Googlers in the case of Chromium—can be aggressive and pervasive in their changes, sometimes to the point of breaking integrations and forcing people to catch-up.</li></ul><ul id="c3dfeaa0-5fc1-4d17-bd0d-367402db11b1" class="bulleted-list"><li>It is not “stable”. The introduction of API changes, and support for old APIs, is neither consistent nor coherent. Take for instance Manifest v3, which on the false grounds of security, <a href="https://whotracks.me/blog/manifest_v3_privacy.html">privacy</a>, and <a href="https://whotracks.me/blog/adblockers_performance_study.html">performance</a> will deprecate some of the most powerful and useful APIs that privacy enhancing extensions rely upon, virtually affecting all of them. They backtracked on some of the inital reasons for the changes, but they still intend to push it through, causing havoc on anyone relying on said APIs.</li></ul><ul id="bf4e4e00-66d0-4ca1-aaec-165b19fb5c1b" class="bulleted-list"><li>Chromium comes with a number of Google services which are not easy to remove. Both Microsoft and <a href="https://github.com/brave/brave-browser/wiki/Deviations-from-Chromium-(features-we-disable-or-remove)#what-chromium-features-are-removed-for-privacysecurity-reasons">Brave</a> invested significant resources just to strip these out. Other APIs, such as screen reader integration, are closed source.</li></ul><p id="391c0852-2824-4194-8ac6-55946234f65c" class="">
+</p><p id="ffafafbc-dee4-4aad-a7a9-e21edfc553c6" class="">Chromium is a great browser with a fast rendering engine, however it requires significant resources to maintain a fork of it, something we did not have, and were not willing to commit to. The decision to go with Firefox has been vindicated, as it has become even easier over time to integrate our features, while at the same time Chromium is stripping away APIs we consider fundamental to our project.</p><h2 id="594ff132-6929-4b0f-99b9-73a653626d52" class="">Cliqz features</h2><p id="4f32a3a1-18c3-40bd-90b0-5af9c7266849" class="">Cliqz ships with some home-engineered features which help users to have a safe and private Web experience. Here are some of the most important ones:</p><ul id="72fd3052-99f3-48d7-a142-19136d522c75" class="bulleted-list"><li><em>Cliqz dropdown</em>—is where the Cliqz search lives, right in the address bar. The search results are displayed in the dropdown as the user types, eliminating the need for a search result page and saving time. The results displayed are served from our independent and <a href="https://0x65.dev/blog/2019-12-05/a-new-search-engine.html">private search backend</a>.</li></ul><ul id="e4547307-2dc9-41bf-9080-89c312e895b3" class="bulleted-list"><li><em>Anti-tracking</em>—implements an algorithmic approach to identify and block trackers as well as fingerprinting attempts, and is continuously updated <a href="https://whotracks.me/blog/how_cliqz_antitracking_protects_users.html">based on data</a>.</li></ul><ul id="fadff541-513e-4c04-ada8-b0a92498459d" class="bulleted-list"><li><em>Adblocker</em>—allows users to enjoy a fast, ad- and clutter-free Web experience, thanks to an extremely efficient content blocking engine: <a href="https://whotracks.me/blog/adblockers_performance_study.html">Read more</a>.</li></ul><ul id="5281838d-e1d3-41af-a443-1e4942cc2b51" class="bulleted-list"><li><em>Cookie popup blocker</em>—helps the user to cope with <em>forced</em> consent popups on websites, dealing with obscure UX patterns automatically by opting you out from data collection rather then just hiding popups!</li></ul><ul id="e1c5cd76-f064-4930-b0e5-3ee5a949f54e" class="bulleted-list"><li><em>Auto Forget Window</em>—automatically opens sensitive or explicit links in a new <em>forget window</em>, even if it was initiated from a normal window; users can also blacklist URLs to always open them in a <em>forget window</em>.</li></ul><ul id="e2bdaa4e-fc4a-40af-90a0-5b906db8d087" class="bulleted-list"><li><em>Antiphishing</em>—prevents users from falling for phishing pages and keep them safe at all times.</li></ul><ul id="2e5e9888-7433-49c6-9aa6-48f2c4ebc3e8" class="bulleted-list"><li><em>CliqzTab</em>—is the user dashboard, which shows privacy stats like how many ads were blocked, and how many private data points were removed. It additionally serves <a href="https://0x65.dev/blog/2019-12-16/your-news-is-not-our-business.html">curated news</a> and includes few utility widgets like most visited sites and bookmarks.</li></ul><h2 id="57ee91f3-2e16-4f70-88e2-01e55d31c0d5" class="">Firefox is a great platform</h2><p id="efa24eb9-b8ba-45ab-8684-ae8d5c6dd5de" class="">We have been shipping our Firefox fork for over four years and have come to realise that Firefox is a great host for forks. Some of its fork-friendly properties are:</p><ul id="3051ab26-32a5-4c77-8c72-1512f7311b9f" class="bulleted-list"><li>The browser UI can be themed with CSS, this makes UI and design tweaks very easy for web developers.</li></ul><ul id="3b7cbd1f-d942-4d16-b6b7-7eb6ac57075e" class="bulleted-list"><li>It is modular and the <code>pref</code>-based architecture makes it quite configurable.</li></ul><ul id="b613f15e-768f-4451-8fd3-7df51aa2d837" class="bulleted-list"><li>It is built on Web technologies. This makes it much easier for developers to get up-to-speed and productive with it. You can also debug the whole browser with devtools.</li></ul><ul id="98cf5838-0427-4d5e-81c5-463c0ce52cb8" class="bulleted-list"><li>It has first class support for repackaged distributions, making it easy to rebrand the browser.<p id="d0334053-4bab-451a-b6f5-90b8fa73c2b8" class=""><a href="https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html">[2]</a></p></li></ul><ul id="8a0319ac-f225-4799-a106-9ae3a89e600a" class="bulleted-list"><li>It supports extremely powerful extensions, particularly in privileged contexts, which can touch almost all browser internals.</li></ul><ul id="3aafffcf-7af0-47cf-8f82-b7ee05907961" class="bulleted-list"><li>It allows for powerful configuration scripts for deep customizations.<p id="0cf32d77-2394-42e8-8e5d-e972beaa031b" class=""><a href="https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html">[3]</a></p></li></ul><h2 id="03c4b156-1926-4513-a71d-0ecba94617da" class="">Universal codebase</h2><p id="7eee7ff8-2433-4842-9204-c6bd30e13509" class="">We started out with a Firefox Bootstrapped<a href="https://0x65.dev/blog/2019-12-17/why-we-forked-firefox-and-not-chromium.html">[4]</a> extension using the raw, low-level browser APIs. However, once we started building the browser we wanted to also ship features to our mobile browsers on Android and iOS. Later, we wanted to run this code on top of the new webextension APIs that came in Firefox 57. With a small team it would be a challenge to keep the business logic consistent across environments and codebases.</p><p id="f2a2b860-9386-46ec-82ef-b844b9d22acb" class="">To handle this we made the architectural decision of running JavaScript everywhere. The business logic would be written in isomorphic/universal JavaScript and then we would add platform-specific implementations underneath to handle the specifics of each runtime. Our <a href="https://github.com/cliqz-oss/browser-core">browser-core</a> monorepo contains code for products across all platforms:</p><ul id="5bcc7605-2e6c-4857-8253-a408c79b8518" class="bulleted-list"><li>Webextensions, compatible with Chrome, Firefox, and Edge.</li></ul><ul id="01f574ca-0484-4291-943b-de81a1de075b" class="bulleted-list"><li>Android and iOS using React-native.</li></ul><ul id="2dded79c-4b0d-40b9-94a3-5317c4949cf6" class="bulleted-list"><li>NodeJS, for testing and headless mode.</li></ul><p id="a11630f3-2c8a-41e3-a692-688c327ff6e5" class="">To give an example, we have a search module that provides results for a given query (using RxJS as described in <a href="https://0x65.dev/blog/2019-12-12/implementing-search-as-you-type-in-the-browser-using-rxjs.html">our previous post</a>). This is implemented as a module in <a href="https://github.com/cliqz-oss/browser-core">browser-core</a>. As we mentioned previously, one source for results is the browser’s history. This is platform-specific, so we have different history databases on desktop and mobile. At build time, the appropriate JavaScript implementation is bundled, so the search module can query the platform’s database. The search UIs are also different: on desktop results are rendered in an iframe below the URL bar, while on mobile the UI is implemented with React-Native. In both cases they push queries to, and get results from the same search implementation.</p><h2 id="3a8c9c0b-8835-4fd8-89d7-82d5eee99fb0" class="">Android</h2><p id="6cca235d-fd56-47a1-a05c-ddf4851c296d" class="">The situation on Android is a little different than on desktop. The OS is controlled by Google, and the majority of the users end up using either the built-in browser or Chrome (shipped with the Android distribution). Fortunately, users still have a choice. You can change your default browser and the OS will respect that choice whenever you click a link. We have built multiple Android browsers, with different approaches each time:</p><p id="e2cc2fea-fd5e-4291-8cbe-86c06f914ce8" class=""><strong>Cliqz for Android</strong>—Like many Android browsers, Cliqz for Android is a stock Android WebView based application. What is uncommon about it is the fact that it runs our shared JavaScript codebase in a React-Native runtime. Our privacy protection features like the adblocker and anti-tracking run in the React-Native thread and are still able to intercept network requests that are happening in the system WebView. This unique approach allowed us to provide those features without having to fork the complete browser engine.</p><p id="e7cad965-29d0-4a9f-99b4-b894cc68dd81" class=""><strong>Ghostery for Android</strong>—After Ghostery joined Cliqz, we decided to upgrade the Ghostery Android Browser. The goal was to provide the full Ghostery experience on mobile phones and to do so we decided to build a new version on top of Firefox for Android (aka Fennec). The move allowed us to fully utilize the potential of WebExtension that Firefox for Android provides. This was basically mimicking our desktop approach.</p><p id="cb9a340d-2bf5-4b34-8a30-23986456d4b8" class="">Fennec is an impressive feat of engineering, that basically is a real Firefox, but on mobile. It has the Gecko rendering engine and SpiderMonkey JavaScript engine. It’s a real deal. And on top, it has a native Android UI for the familiar look and feel.</p><p id="8bd97a9c-8fe6-451f-b9eb-42a02cbc8e8c" class="">Unfortunately Fennec development is a very complicated process. Developers constantly have to jump between different layers and technologies to implement new features or fix bugs. Not many developers are able to effecively jump between C++, JavaScript, and Java.</p><p id="4c4bac21-4727-4c09-b8db-dddd94167f11" class="">The limitation of Fennec’s architecture are well understood by Mozillians and in 2019 Fennec was retired.</p><p id="7809a1a8-2fd0-41fa-b0ec-b46c3d604a13" class=""><strong>Next Gen of Cliqz Browser</strong>—Based on the lessons from Fennec, Mozillians have created a completely new architecture to create Android browser. It is, at the core, a GeckoView; a nicely encapsulated browser engine with very well crafted Java APIs. With GeckoView, any developer can create a Gecko-backed browser without having to ever touch JavaScript or C++. GeckoView is just “a library” similar to WebView being shipped with Android.</p><p id="c920dd2d-0fd5-461d-b782-3400248a5245" class="">But GeckoView is able to run WebExtensions and thanks to that it is a perfect fit for the Cliqz cause. On top of GeckoView, we can build beautiful browser UIs and ship our shared JavaScript codebase in the form of WebExtensions. So that with our blazing fast adblocker we can finally compete with Chromium in terms of speed and exceed it in every aspect of privacy protection.</p><h2 id="6424faf8-91b4-4479-9220-6c673a9d27a7" class="">iOS</h2><p id="94d8b7d8-bafe-4069-a7d0-13390f7414b7" class="">Apple’s iOS platform is also very different. Users cannot choose a default browser and browser vendors cannot ship their own rendering or JavaScript engines. All developers have to use stock iOS WebView (WKWebView). This limitation is imposed on all browser vendors: Mozilla’s and even Google’s browsers are “just” iOS applications.</p><p id="df115970-8c92-4fa9-b2df-b2b0f72b388c" class="">The Cliqz browser is no different when it comes to the basics. We have forked Firefox for iOS to get a stable base to create our <em>user agent</em>. Why Firefox? It is an open source and really solid, battle tested project. But it is not the only option: DuckDuckGo would have been a good choice too.</p><p id="dfc9ee61-8c24-4e1c-bf94-c1709f8e797b" class="">As the iOS WebView does not come with the capability to run extensions, we had to invent one ourself. Again, React Native came as a solution: We have created a hybrid/brownfield application that ships the browser-core running in React Native in our heavily modified Firefox codebase.</p><p id="cc38bc77-427b-44ca-b612-2de647fbb7f3" class="">It might be important to mention that we have forked Firefox for iOS <em>three times already</em>. Trying out different strategies for running a fork:</p><ol type="1" id="caadaec2-c040-4170-b17f-04b15cdbe917" class="numbered-list" start="1"><li>Soft fork with rare syncs with upstream—it proved to be complicated to maintain our substantial changes mostly around the WebView. We chose to modify Firefox code to use the older but more powerful UIWebView in order to provide privacy features.</li></ol><ol type="1" id="ebd4465a-6122-4348-8ec6-1dd170bc4a14" class="numbered-list" start="2"><li>Soft fork with regular syncs—was a failure as it limited our capability to shape the browser to our liking.</li></ol><ol type="1" id="40e030b1-d1ca-4ad4-a6d4-0c557608d16e" class="numbered-list" start="3"><li>Hard fork with cherry-picks (current generation)—so far developers’ favorite as it gives the freedom to make changes without having to worry about conflicts with upstream.</li></ol><p id="69171c19-5a2c-4e11-9f6e-2fb084a50c57" class="">Note that Firefox for iOS is not a very high velocity project. This means that manual cherry-picking for security fixes is still feasible.</p><h2 id="d14ff70c-3647-46aa-8a6b-2210eb9d1b99" class="">More than a browser</h2><p id="4aeee522-6e31-49d8-b0dc-a53ba1bf3ba3" class="">With an embedded search engine, anti-tracking and adblocker, Cliqz leads the new wave of browsers that take privacy seriously. The browser wars are real and are about to change the Internet again…</p></div></article></body></html>

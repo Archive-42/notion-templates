@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>India, Jio, and the Four Internets</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fa92e575-e1c7-4a0b-a784-d3fa4dc70113" class="page sans"><header><h1 class="page-title">India, Jio, and the Four Internets</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://stratechery.com/2020/india-jio-and-the-four-internets/" class="url-value">https://stratechery.com/2020/india-jio-and-the-four-internets/</a></td></tr></tbody></table></header><div class="page-body"><p id="3009c7e3-af56-4a24-bf7c-8d36cf7e9a6a" class="">One of the more pernicious mistruths surrounding <a href="https://stratechery.com/2020/the-tiktok-war/">the debate about TikTok</a> is that this will potentially lead to the splintering of the Internet; this completely erases the history of China’s Great Firewall, started 23 years ago, which effectively cut China off from most Western services. That the U.S. may finally respond in kind is a reflection of reality, not the creation of a new one.</p><p id="dffb1566-7691-4996-b0f2-23046792c2de" class="">What is new is the increased splintering in the non-China Internet: the U.S. model is still the default for most of the world, but the European Union and India are increasingly pursuing their own paths.</p><h3 id="b5432318-34ba-468a-9f23-a674b18a57c7" class="">The U.S. Model</h3><p id="7ba4809b-89c3-48c7-b539-2e14d68e17a0" class="">The U.S. Internet model is a laissez-faire one, and it is hard to argue against its effectiveness. Not only is the technology sector the biggest driver of U.S. economic growth for many years now, but U.S. Internet companies have come to dominate most of the world, conveying U.S. soft power like McDonald’s and Hollywood on steroids. There are obvious downsides to this approach: the Internet’s <a href="https://stratechery.com/2013/friction/">lack of friction</a> both leads to <a href="https://stratechery.com/2015/aggregation-theory/">Aggregators</a> dominating markets and creates communities <a href="https://stratechery.com/2019/a-framework-for-moderation/">both good and bad</a>.</p><p id="90f19e7f-a66c-405a-8cbd-0874c26ccdb6" class="">This article, though, is primarily focused on economics and politics, and in that regard the winners and losers of the U.S.’s approach are as follows:</p><p id="415a714d-3f98-4a81-83a3-6e50c5e4e097" class=""><strong>Winners:</strong></p><ul id="c445cbca-731f-4416-97d5-c20a1959b334" class="bulleted-list"><li>Large U.S. tech companies operate freely in the U.S., giving them a large and profitable user base to fund expansion abroad.</li></ul><ul id="e6a83d37-0a25-41ef-9698-4b40838e51b5" class="bulleted-list"><li>New U.S. tech companies face relatively few barriers to entry, particularly in terms of regulation of content or data collection.</li></ul><ul id="7c9100bc-2c0c-43d7-97f6-b02ebeb50203" class="bulleted-list"><li>The U.S. government collects the vast majority of taxes from these U.S. companies, including from revenue generated abroad, and also sees the overall U.S. view of the world exported via U.S. tech companies, while also having access to the data of non-U.S. citizens.</li></ul><ul id="2fe6a00d-9519-4e25-89cf-808a4f53962e" class="bulleted-list"><li>U.S. citizens operate with a high degree of freedom online, although there are minimal restrictions on the collection of the data generated from doing so by private companies.</li></ul><ul id="c34b801b-684a-46ee-8c26-b627f9130dbc" class="bulleted-list"><li>Non-U.S. citizens operate with a high degree of freedom online, although there are minimal restrictions on the collection of the data generated from doing so by private companies or the U.S. government.</li></ul><ul id="6df58243-4fe1-496e-b7d7-51568d3ba9a5" class="bulleted-list"><li>Non-U.S. companies are free to operate in the United States without restriction, and in other countries that follow the U.S.’s approach.</li></ul><p id="02ab0b26-684f-4a7a-9d4e-116ef1520517" class=""><strong>Losers:</strong></p><ul id="be10d397-4433-4cda-9cd6-47467b515b88" class="bulleted-list"><li>Non-U.S. governments have limited control over U.S. tech companies, limited access to their revenues, and limited control over the spread of information.</li></ul><p id="234f4e3c-a44d-4261-8303-30d2f461bc9f" class="">My biases should be obvious: I definitely believe that the U.S. approach is the best one. Certainly many will quibble with the effect on new companies, given how Aggregators tend to dominate their markets, while others are focused on the collection of data; I am concerned that <a href="https://stratechery.com/2020/first-do-no-harm/">proposed solutions</a> are worse <a href="https://stratechery.com/2019/privacy-fundamentalism/">than the harms</a>, particularly given the consumer benefit of <a href="https://stratechery.com/2018/data-factories/">data factories</a>. Still, <a href="https://stratechery.com/2020/apple-wins-e-u-tax-case-privacy-shield-struck-down-bans-censorship-and-the-first-amendment/">as I noted yesterday</a>, I believe the European Union Court of Justice makes a compelling case that the ability of the U.S. government to collect data from non-U.S. citizens is a serious privacy issue.</p><p id="44bfa189-e952-4d25-881e-5232bcc10167" class="">Those quibbles, though, serve to highlight a point we can all agree on: non-U.S. governments have a lot of legitimate complaints about the hegemony of U.S. tech companies.</p><h3 id="52bdfdbf-a970-4b33-ac40-71de6163fa7f" class="">The China Model</h3><p id="55fa3f56-1482-4632-bba9-dc6991570046" class="">The driving impetus of the China model is, first and foremost, control over information. This is evidenced by the fact that not only does China control access to Western services at the network level, but also employs huge numbers of censors for the Internet within China, and expects Chinese Internet companies like Tencent or ByteDance to have thousands of censors of their own.</p><p id="3bfaab71-1197-4bae-bd5d-00a32bca8947" class="">At the same time, the economic benefit of China’s approach <em>for China</em> can not be denied. China is the only country to rival the U.S. for the sheer size and breadth of its Internet companies, thanks to the combination of a massive market and the lack of competition. Moreover, this led to all sorts of innovation, as China’s leapfrog to mobile avoided the baggage of PC-assumptions that still limits many U.S. companies.</p><p id="34db9015-ea68-406f-b131-1c780437598c" class="">That noted, it is fair to wonder just how replicable the China model is. Smaller countries like Iran have instituted similar controls on U.S. tech companies, but without a market like China it is far more difficult to capture the economic upside of the Great Firewall. And, it should be noted, there are a lot of losers with the China model, including Chinese citizens.</p><h3 id="fb6e0d44-f3a8-444d-8a83-e199d7825ed6" class="">The European Model</h3><p id="7d91437c-8f34-4b66-8a05-66381be7e68e" class="">Europe, through regulations like GDPR and the Copyright Directive, along with last week’s court decision striking down the Privacy Shield framework negotiated by the European Commission and the U.S. International Trade Administration (and a previous decision striking down the Safe Harbor Privacy Principles framework), is splintering off into an Internet of its own.</p><p id="ce3bd748-18f3-4924-9cae-d6c438613d10" class="">This Internet, though, feels like the worst of all possible outcomes. On one hand, large U.S. tech companies are winners, at least relative to everyone else: yes, all of the regulatory red tape increases costs (and, for targeted advertising, may reduce revenue), but the impact is far greater on would-be competitors. To put it in allegorical terms, the E.U. is restricting the size of the castle even as it dramatically increases the moat.</p><p id="34ec1aaf-c99b-48a7-b7dc-255a83956667" class="">E.U. citizens, meanwhile, are likely to see their data increasingly protected from the U.S. government, which is a win; other protections, meanwhile, seem unlikely to be particularly effective or outweigh the general annoyance and loss of relevance that comes from endless permission dialogs and non-targeted content. Moreover, per the previous point, the number of alternatives to established incumbents are likely to decrease, particularly relative to the U.S.</p><p id="19f834b9-bb0c-4d12-92fd-384635b5368d" class="">It also seems unlikely that European competitors will fill in the gap. Any company that wishes to achieve scale needs to do so in its home market first, before going abroad, but it seems far more likely that Europe will make the most sense as a secondary market for companies that have done the messy work of iterating on data and achieving product-market fit in markets that are more open to experimentation and impose less of a regulatory burden. Higher costs mean you need a greater expectation of success, which means a proven model, not a speculative one.</p><p id="7773d70a-0677-4e3a-9d9c-3c3ca01afc35" class="">Worst of all, at least from the E.U.’s perspective, is that this approach doesn’t really have any upside for European governments. That’s the thing with rule by regulation: without a focus on growth it is harder to create win-win situations.</p><h3 id="46b76dbf-3624-44c4-9b3f-ff11f137a291" class="">The Indian Model</h3><p id="8823d6cf-1fd0-4217-a597-dd4949ad625e" class="">The India market has always been a bit unique: while foreign companies have usually been unencumbered when it comes to digital goods, leading to a huge number of users for U.S. companies like Google and Facebook, and Chinese companies like TikTok, India has kept a much tighter leash when it comes to the physical layer of tech. This ranges from strong tariffs on electronics to a ban on foreign direct investment in things like e-commerce. Moreover, India has always been one of the most challenging markets in terms of Internet access and logistics.</p><p id="13cd6cc6-ddd5-4ce4-9f67-ed1e829421ec" class="">At the same time, the Indian market is the most enticing in the world for both U.S. and Chinese tech companies, which have largely saturated their home markets. This has led to a regular number of collisions between foreign tech companies and India regulators, whether it be <a href="https://stratechery.com/2016/twitters-earnings-twitter-retrenches-facebook-andreessen-and-india/">Facebook’s attempts to introduce Free Basics</a> or WhatsApp payments, <a href="https://stratechery.com/2017/microsoft-ebay-and-tencent-invest-in-flipkart-the-indian-e-commerce-market-lyft-raises-500-million/">increasing restrictions on Amazon and Flipkart’s e-commerce operations</a>, or most recently, <a href="https://stratechery.com/2020/india-bans-chinese-apps-the-app-store-firewall-reddit-and-the-donald/">the outright banning of TikTok</a> on national security concerns.</p><p id="3de8f2cb-4c21-4a98-a4f0-af535553ae12" class="">Over the last few months, though, a way to square this circle has become apparent to U.S. tech companies in particular, and it portends a fourth Internet: invest in Jio Platforms.</p><h3 id="45e6273b-0244-4061-9d39-7da1793149af" class="">The Jio Bet</h3><p id="83ecbdd3-3b82-4f2f-a18a-0f66952af89e" class="">Jio, the dominant telecoms network in India, is one of the all-time greatest examples of the power of building, and the outsized returns that come from betting on technology-enabled disruption. I described the economics of the bet by Mukesh Ambani, India’s richest man, in an <a href="https://stratechery.com/2020/facebook-invests-in-jio-platforms-the-building-of-jio-understanding-the-deal/">April Daily Update</a>:</p><blockquote id="05046b76-4e85-4835-8fa8-8ab94c09cd34" class="">The key to understanding Ambani’s bet is that while all of the incumbent mobile operators in India were, like mobile operators around the world, companies built on voice calls that layered on data, Jio was built to be a data network — specifically 4G — from the beginning.  4G, unlike 2G and 3G, does not support traditional circuit-switched telephony services; voice calls are instead handled the same as any other data. Because everything is data, 4G networks can be built with commodity hardware in a way that 2G and 3G networks cannot. Because Jio was offering a data network, voice calls, which are relatively low bandwidth, were the cheapest services to offer, and capacity was effectively infinite.   To put it another way, Jio was a bet on zero marginal costs — or, at a minimum, drastically lower marginal costs than its competitors. This meant that the optimal strategy was — you know what is coming! — to spend a massive amount of money up front and then seek to serve the greatest number of consumers in order to get maximum leverage on that up-front investment.  That is exactly what Jio did: it spent that $32 billion building a network that covered all of India, launched with an offer for three months of free data and free voice, and once that was up, kept the free voice offering permanently while charging only a couple of bucks for data by the gigabyte. It was the classic Silicon Valley bet: spend money up front, then make it up on volume because of a superior cost structure enabled by the zero-marginal nature of technology.</blockquote><p id="2e94bf41-f275-4c43-8c2c-b112d5513ddb" class="">What makes this story so compelling is the contrast to Facebook’s argument for Free Basics:</p><blockquote id="686e5fee-91e0-4199-b772-92b91ba0ee91" class="">The end result is what Zuckerberg said must be done: hundreds of millions of Indians, a huge portion of them from the country’s poorest regions, were connected to the Internet. Unlike Free Basics, though, it was all of the Internet.  That actually undersells just how much better Jio is for Indians than Free Basics would have ever been: Zuckerberg had no plan for upending India’s old mobile order, where operators focused most of their investment on India’s largest cities and competed for the richest parts of society, charging so much that Andreessen could declare, with a straight face, that to not offer Free Basics was “morally wrong.” In that world, India’s poor may have had access to Facebook, but little more, since there would have been no reason for non-Free Basics companies to invest. Instead they not only have the whole Internet but companies from India to China to the United States competing to serve them.</blockquote><p id="915fe2d1-16fb-41c4-bc3f-626d18355315" class="">I wrote that Daily Update on the occasion of Facebook investing $5.7 billion for a 10% stake into Jio Platforms; it turned out that was the first of many investments into Jio:</p><ul id="fed919c4-afa5-47c7-9e7e-86afd55ad2db" class="bulleted-list"><li>In May, Silver Lake Partners invested $790 million for a 1.15% stake, General Atlantic invested $930 million for a 1.34% stake, and KKR invested $1.6 billion for a 2.32% stake.</li></ul><ul id="3712c8e7-1873-44b0-a56b-7026eed3f16e" class="bulleted-list"><li>In June, the Mubadala and Adia UAE sovereign funds and Saudi Arabia sovereign fund invested $1.3 billion for a 1.85% stake, $800 million for a 1.16% stake, and $1.6 billion for a 2.32% stake, respectively; Silver Lake Partners invested an additional $640 million to up its stake to 2.08%, TPG invested $640 million for a 0.93% stake, and Catterton invested $270 million for a 0.39% stake. In addition, Intel invested $26 million for a 0.39% stake (note the preferential terms).</li></ul><ul id="10955d84-d013-400e-8e33-f7706968b9e9" class="bulleted-list"><li>In July, Qualcomm invested $10 million for a 0.15% stake, and Google invested $4.7 billion for a 7.7% stake.</li></ul><p id="10f32275-54cf-43de-a6b1-de2f9ef5ce79" class="">With that flurry of fundraising Reliance completely paid off the billions of dollars it had borrowed to build out Jio. What is increasingly clear, though, is that the company’s ambitions extend far beyond being a mere telecoms provider.</p><h3 id="9e2818a0-dfa5-465e-ae47-fee6cce5e833" class="">Jio’s Vision</h3><p id="8dd5da41-c9e3-460b-8b50-27e6e4d3ce15" class="">Last Wednesday, after announcing Google’s investment in Jio Platforms at Reliance Industries’ <a href="https://www.youtube.com/watch?v=k0b0miKViYg">Annual General Meeting</a>, Ambani said:</p><blockquote id="ed7cbbc8-b5ad-4ee4-b943-0fcf1f7b9940" class="">I would like to first share with you the philosophy that animates Jio’s current and future initiatives. The digital revolution marks the greatest disruptive transformation in the history of mankind, comparable only to the appearance of human beings with intelligence capability on our planet about 50,000 years ago. It is comparable because man is now beginning to infuse almost limitless intelligence into the world around him.  We are today at the initial stages of the evolution of an intelligent planet. Unlike in the past this evolution will proceed with a revolutionary speed. Our world will change more unrecognizably in just eight remaining decades of the 21st century, then today’s world has changed from what it was 20 centuries ago. For the first time in history mankind has an opportunity to solve big problems inherited from the past. This will create a world of prosperity, beauty, and happiness for all. India must lead this change to create a better world. For this all our people and all our enterprises have to be enabled and empowered with the necessary technology infrastructure and capabilities. This is Jio’s purpose. This is Jio’s ambition.   Friends, Jio is now the undisputed leader in India with the largest customer base, the largest share of data and voice traffic, and a world-class next-generation broadband network that covers the length and the breadth of our country…Jio’s vision stands on two solid pillars. One is digital connectivity and the other is digital platforms.</blockquote><figure id="d5346197-e6d5-4563-b139-7df1812d833e" class="image"><a href="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-6.png"><img style="width:700px" src="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-6.png"/></a></figure><p id="2c581a36-3229-4d20-a2f2-14794ffc35f5" class="">In short, Jio is determined to achieve the dream that has long eluded telecom providers in other countries: moving up the stack from fixed-cost infrastructure to high-margin services. Ambani’s vision is comprehensive:</p><figure id="9927808e-f706-4522-bfe7-410278ef8234" class="image"><a href="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-8.png"><img style="width:700px" src="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-8.png"/></a></figure><p id="23c23dcd-9bd0-4d4e-81e5-122790175942" class="">What gives Jio a chance are three important differences from telecom efforts in other markets:</p><ul id="35177249-8370-4f52-900e-d9bba2010aa8" class="bulleted-list"><li>First, Jio has created a huge portion of its addressable market; whereas a Verizon in the U.S., or a NTT DoCoMo in Japan was seeking to offer services on top of a competitive telecom market, Jio is the only option for a huge number of Indians (and for those that have options, Jio is so much cheaper because of its IP-based network that it can afford the extra costs).</li></ul><ul id="7ba1a9a4-8b43-422a-a03a-86ba93d13a6f" class="bulleted-list"><li>Second, instead of seeking to usurp companies like Facebook or Google that already have major marketshare in India, Jio is partnering with them.</li></ul><ul id="1f48a44d-9bf4-49ab-b75c-42997b57188e" class="bulleted-list"><li>Third, Jio is positioning itself as an Indian champion, and the lynchpin of the Indian model.</li></ul><p id="b1b81ff6-7971-4504-9740-058e00658dde" class="">Notice how Ambani introduced Jio’s 5G plans:</p><blockquote id="132dc244-577f-440c-a9e7-23cc7ceb9c33" class="">Jio’s global scale 4G and fiber network is powered by several core software technologies and components that have been developed by the young Jio engineers right here in India. This capability and know-how that Jio has developed positions Jio on the cutting edge of another exciting frontier: 5G.  Today friends, I have great pride in announcing that Jio has designed and developed a complete 5G solution from scratch. This will enable us to launch a world-class 5G service in India using 100% homegrown technology and solution. This made in India 5G solution will be ready for trials as soon as 5G spectrum is available, and can be ready for field deployment next year. And because of Jio’s converged all-IP network architecture we can easily upgrade our 4G network to 5G.  Once Jio’s 5G solution is proven at India-scale, Jio platforms would be well-positioned to be an exporter of 5G solutions to other telecom operators globally as a complete managed service. I dedicate Jio’s 5G solution to our Prime Minister Shri Narendra Modi’s highly motivating vision of ‘Atmanirhbhar Bharat’.   Friends, Jio Platform is conceived with this vision of developing original captive intellectual property using which we can demonstrate the transformative power of technology across multiple industry ecosystems, first in India, and then confidently offering these Made-in-India solutions to the rest of the world.</blockquote><figure id="c5eb6416-6544-483a-a349-eda728aa6461" class="image"><a href="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-5.png"><img style="width:700px" src="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-5.png"/></a></figure><p id="b2f6f7a9-59ad-43c5-9d7a-7c10bad7a65e" class="">Make no mistake: Jio’s network and its work on 5G, which takes years, was by definition not motivated by a phrase Prime Minister Modi first deployed <a href="https://en.wikipedia.org/wiki/Atmanirbhar_Bharat">two months ago</a>. Rather, Ambani’s dedication hinted at the role Jio investors like Facebook and Google are anticipating Jio will play:</p><ul id="dbde9bd7-c777-4102-8c06-fe90aeaaa120" class="bulleted-list"><li>Jio leverages its investment to become the monopoly provider of telecom services in India.</li></ul><ul id="345e9649-31a0-4b4c-b656-d6a80887f48c" class="bulleted-list"><li>Jio is now a single point of leverage for the government to both exert control over the Internet, and to collect its share of revenue.</li></ul><ul id="3989ea61-04f5-4fad-adf7-1d9a9c124a79" class="bulleted-list"><li>Jio becomes a reliable interface for foreign companies to invest in the Indian market; yes, they will have to share revenue with Jio, but Jio will smooth over the regulatory and infrastructure hurdles that have stymied so many</li></ul><p id="1bf33b35-79f1-47cd-8645-df7d6d8609bf" class="">What is fascinating about this approach is that the list of winners and losers gets pretty muddled pretty quickly. On one hand, Jio brought the Internet to hundreds of millions of Indians that would never have had access, and the benefits of that investment are only going to increase as Jio’s services and partnerships come on line. On the other hand, locking in a monopolistic player, particularly in the context of a government that has shown a desire for more control over the flow of information is a real downside.</p><p id="0b74b169-8987-4e6b-834d-a01b0be993b8" class="">The economic outcomes are just as muddled. Monopolies always have deadweight loss; then again, if an efficient market means that all of the profits flow to Silicon Valley, why should India particularly care about efficiency? In a Jio-mediated market it is U.S. tech companies that make less than they would have, and not only does India collect more taxes along the way, Jio’s vision of being a national champion abroad could be a huge win for India in the long run.</p><h3 id="8dca1a59-c37c-4317-9777-75fcb77a1ab5" class="">The Indian Counterweight</h3><p id="183ccdba-066c-40f7-a161-db404051e555" class="">It is increasingly impossible — or at least irresponsible — to evaluate the tech industry, at least the largest players, without considering the geopolitical concerns at stake. With that in mind, I welcome Jio’s ambition. Not only is it unreasonable and disrespectful for the U.S. to expect India to be some sort of vassal state technologically speaking, it is actually a good thing to not only have a counterweight to China geographically, but also a counterweight amongst developing countries specifically. Jio is considering problem-spaces that U.S. tech companies are all too often ignorant of, which matters not simply for India but also for much of the rest of the world.</p><p id="25ca1b51-8c33-44dc-b579-ef9533fdefe4" class="">Still, Facebook, Google, Intel, Qualcomm, et al should proceed with their eyes wide-open: they are very much a means to an end for a company and a country that is on its own path. That is not to say these investments are not a good idea — I think they are, but India’s path is perhaps a more populist and nationalistic one than many Americans would prefer. Still, it is less antagonistic to Western liberalism than the Chinese Communist Party, and again, an important counterweight.</p><p id="e63dfbb5-25d5-48a7-815f-d028feff3256" class="">The only question left, then, is whither Europe, and frankly, the picture is not pretty:</p><figure id="8d21af7f-1cbd-4a81-a660-f0b58cd29d69" class="image"><a href="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-7.png"><img style="width:700px" src="India,%20Jio,%20and%20the%20Four%20Internets%20fa92e575e1c74a0ba784d3fa4dc70113/jio-7.png"/></a></figure><p id="50e94e0b-9f69-4217-ab7d-77ea718962df" class="">What differs Europe’s Internet from the U.S., Chinese, or Indian visions is, well, the lack of vision. Doing nothing more than continually saying “no” leads to a pale imitation of the status quo, where money matters more than innovation.</p></div></article></body></html>

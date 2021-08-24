@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Origins of Venmo</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="669dae4d-bd19-4c51-af27-f7891853a964" class="page sans"><header><h1 class="page-title">Origins of Venmo</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://kortina.nyc/essays/origins-of-venmo/" class="url-value">https://kortina.nyc/essays/origins-of-venmo/</a></td></tr></tbody></table></header><div class="page-body"><p id="8f0bf263-d924-4001-b3ba-4ba696d9c203" class="">I often speak about the origins of Venmo in person and finally wrote down the story here to share with our latest intern class that started this week. (You can also watch an excellent video of Iqram speaking about even more of the history of Venmo <a href="https://www.youtube.com/watch?v=aX7JCCCmLJw">here</a>. It’s a good place to pickup the story where this post leaves off.)</p><p id="d89b159a-5d7f-4650-92b5-385cf991c658" class="">My friend Iqram and I started Venmo to solve a very simple problem for ourselves and for our friends: we noticed that we were still using cash and checks to pay each other back and thought this was silly. Everyone should be using PayPal to pay each other back, but no one we knew was. We thought something must be not quite right about the PayPal experience for casual use, and we decided to design something that felt “right,” something that felt consistent with all of the other mobile tools we used to interact with our friends, like SMS, Gmail, Facebook, etc. This is the story of how we got to Venmo.</p><h2 id="8eb4d7db-71e5-4df4-a3a4-86cc4d9d0035" class="">Penn</h2><p id="93e9c64a-d0b0-4aeb-9bf9-e3a081b747dd" class="">Iqram and I met as randomly paired freshman year roommates at the University of Pennsylvania in 2001. We’ve been great friends ever since.</p><figure id="4b00ff5e-7297-4d20-8085-a7a15fd545e9" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/iqram-kortina-college.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/iqram-kortina-college.png"/></a></figure><p id="9365033c-eb0a-4b7d-8804-a978b44fb571" class="">Oldest pic I could find of me and Iqram.</p><p id="86a5dc4c-f89b-4c71-bbd2-fcbb428c9de7" class="">Iqram studied computer science at Penn. I started in computer science, but found that much of the learning I was doing happened while I was doing homework exercises, and I was getting no additional value out of the University. I couldn’t justify tuition costs when I was only learning by spending time doing programming exercises, and I developed a hypothesis that I would maximize the value of tuition costs by studying the least practical subjects possible, the things I would not get to do after graduation / outside of University, like reading and discussing great books with a group of incredibly smart students and professors (this backfired, btw–liberal arts is very practical stuff!). I eschewed big lectures and things like On Campus Recruiting, and tried to spend as much time possible in seminars and writing workshops. I ended up with majors in Philosophy and Creative Writing and minors in Computer Science and Logic.</p><p id="b9ea2391-1c35-43a2-9b03-a1a587e0e26c" class="">I remained interested in building things during this time, however, and always took the opportunity to build websites for various clubs I was in or for friends with bands, etc.</p><p id="4a1ab06b-02aa-40d9-9bcd-f6054d4275ea" class="">During our senior year, Iqram and I built our first real project together, a college classifieds site called My Campus Post. It was our first taste of all night coding sessions to get a product to market, and we learned a bunch about grassroots marketing and retention challenges that arise from products with seasonal usage.</p><figure id="ba0e4701-5d9b-4612-b3b2-045651a4ea57" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/mycampuspost.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/mycampuspost.png"/></a></figure><p id="4bd100e2-847d-44bf-9e19-50fedcdd2200" class="">My Campus Post marketing paraphernalia.</p><p id="203c00f7-5f82-4d77-9657-077e405accb6" class="">I loved spending all of my time reading philosophy, working on fun side projects, and actively ignoring practical things like interviewing for jobs, but I clearly remember the day when my Mom was in town for graduation and she asked, “What are you doing after you graduate?” I was sitting on the floor of my dorm room, and I remember being very scared about the question, thinking, “I have no idea what I want to do with my life,” but also feeling OK about the short term, eventually answering, “I don’t have to move out of my dorm until 2 weeks after graduation. I’ll figure something out.”</p><h2 id="f1925ff8-c0dc-402a-86d3-ab37db61a729" class="">Post Grad Door to Door Sales</h2><p id="3cf73205-ba36-4c17-9aa4-f4cc38374207" class="">Iqram ended up finding a cheap sublet in West Philly, and we spent the summer building websites for restaurants, salons, bars, etc. We went door to door selling, “Hey, you need a website. We’ll build it for $500…. $100? OK, deal.” We learned a lot as we tried to abstract the sites we were building into something modular, and we got a lot of experience pitching and hearing “no.” One “no” that I still regret more than most of the others I have subsequently heard (for much bigger deals) was for this amazing Pakistani restaurant, Kabobeesh, that served a chicken kabob sandwich on fresh naan bread for $3.50: we tried to sell them a site for 100 chicken rolls, but failed to close them.</p><figure id="c3883075-2c5b-46c9-abc1-e0574f0072f7" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/kabobeesh.png"><img style="width:500px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/kabobeesh.png"/></a></figure><p id="30c24b75-bec1-4c96-9136-1cc09176c752" class="">Kabobeesh: I recommend the chicken rolls and chicken karahi.</p><p id="341ce0bc-f667-4f94-828a-3c30eddbb085" class="">Once, we were chatting at a bar about how we might pad our sporadic income with some part time jobs. We noticed the bar was hiring, got two applications, and started filling them out. We spent a few minutes getting through all the basic background stuff, education, personal info, and got to the references section. We didn’t really have past employers to list at the time, so I put Iqram as a reference, and he put me. We were still rooming together at the time, so we had the same street address. We did not get a call back.</p><h2 id="259b0d6f-d6c0-4345-9550-ca7d4c322638" class="">Swooge and Philafunk</h2><p id="11d134b5-70c2-4fc9-84e7-8448d27845bd" class="">During this period, we were always also working on startup-y things, like a realtime website analytics tool called Swooge (which now reminds me of Chartbeat + Google Analytics) and a web based music selling platform, Philafunk (it was like iTunes + MySpace).</p><figure id="706f53b1-e44f-4efb-bd2e-d61a0ac4c4f2" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/philafunk.jpg"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/philafunk.jpg"/></a></figure><p id="848c4b19-70b5-45c6-82ac-965b287a70fd" class="">Philafunk site and flyer.</p><p id="2ffe5306-dfea-4dab-b87f-7d753642c5eb" class="">After working on a few of these, we realized we had a lot to learn about building a successful startup, so we decided to go find one and work there. Many of these projects we worked on were still in my opinion great ideas and solid evidence that execution matters much more than the idea.</p><h2 id="3681f544-06b5-4b2c-b401-77eaa165d3d2" class="">iminlikewithyou</h2><p id="7eb585bb-031c-46b5-a8bd-8857cb8086dc" class="">So we found this NYC company, iminlikewithyou.com, that was just getting started out of Y Combinator, and we joined as 2 of the first 3 employees, all engineers starting together the day we moved to NYC. We had a talented team, built a really innovative, immersive web experience, and learned a bunch about doing startups for real. Eventually, the company pivoted from the original flirting-site idea into a casual games company (OMGPOP), and we both left because we weren’t interested in building games.</p><figure id="eaa2fedb-dcb0-41bd-a171-6d0a0f5c1f20" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/iminlikewithyou.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/iminlikewithyou.png"/></a></figure><p id="87f71def-bd67-4ed4-a1fc-ddde607df172" class="">iminlikewithyou site.</p><h2 id="a95de3fd-2141-4a44-be97-f91f11d4dbad" class="">Ticketleap and Bit.ly</h2><p id="02984974-6796-4417-a05f-75669e67b4ba" class="">Iqram worked at Ticketleap as the VP of Engineering for a few years, and I bounced around and ended up spending a bunch of time working at Betaworks, on Bit.ly.</p><p id="4fe899c6-5cf4-4eb5-9b84-fda2ba36c27d" class="">We both learned a lot during this period, but I looked forward to the time when we would work on a new project together, with more knowledge and experience this time. Over the years, I often brought up this idea, but the timing was never quite right.</p><h2 id="a4fa15c8-9b5d-4258-940d-ad00c55ec876" class="">Exploring New Product Ideas</h2><p id="0bdb2655-23d5-40c9-adb0-1933667294b9" class="">In early 2009, Iqram chatted me mentioning that he was feeling ready to move on from Ticketleap, and I remember thinking, “Great let’s do this.” We began getting together on weekends (he was in Philly and I was in NYC) to hack on different ideas.</p><h2 id="2d78c974-eb1f-489f-bff3-202a2fd1c52e" class="">Yogorino</h2><p id="624bfd1e-62f1-496a-a3ae-d9cd7f715c21" class="">We had a friend in Philadelphia who was opening a yogurt shop, and while helping her get up and running technically, we realized how horrible traditional point of sales software was. We prototyped a web based point of sales software that would turn any laptop into a cash register with a $50 USB magtek swiper. As we thought about it more, it seemed like this would present a really challenging distribution problem (we remembered our days of door to door restaurant sales…). Plus, although this was designed to solve a problem for one of our friends, it wasn’t software that we would be using ourselves daily.</p><figure id="344ff774-7a9d-4e1f-9cf7-7360fd2a192c" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/cardswiper.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/cardswiper.png"/></a></figure><p id="5d536aff-99e1-4701-b119-36a8cf0fbcd6" class="">Web POS prototype.</p><h2 id="f8d93f04-3204-45a2-9956-fd7f877eaf05" class="">Back to Music</h2><p id="8c9ec068-f331-4c3b-b80f-777b6e676515" class="">Another idea we explored came to us at a local jazz show: we thought, “It would be awesome to be able to download this show by sending a text message to this band right now, and then have an mp3 show up in our email.” This was getting closer to the Venmo concept we ultimately arrived at, and the detailed wireframes we constructed for this definitely informed a lot of the original Venmo service.</p><figure id="6b2da3e3-d30a-4774-959b-020d8ac021f9" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/rootsbuy.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/rootsbuy.png"/></a></figure><p id="8d6b4f62-6aad-4622-a681-c4427fc0f2f7" class="">Wireframe for selling music downloads via SMS.</p><p id="8b29ae5e-54ad-46c8-a1ae-0f140060fc9e" class="">This concept even bore the Venmo name. Lots of people ask about the origin of the name. The brainstorming process was one of many we tried and was not important as the requirements. We were exploring the Latin root vendere “sell” and mo for mobile, but purely as a means to get to a name that (1) was short, 5-6 letters, (2) could be a verb, (3) didn’t have a unintuitive spelling, and (4) was cheap. Venmo was available on GoDaddy and met the important criteria, so we grabbed it.</p><figure id="13c77635-fac6-4062-a037-6479bd1ada68" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/visionslide.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/visionslide.png"/></a></figure><p id="8c33571d-6401-4c9d-a5c7-57d1224647d6" class="">A slide from our deck for an SMS music service.</p><h2 id="3c9cda5a-696e-428c-be6c-89d276051369" class="">Discovering Venmo</h2><p id="8b7f4fc3-94cf-4647-be17-07f118a347b3" class="">One of the weekends we were getting together to work on this idea, Iqram was visiting me in NYC and left his wallet in Philly. I covered him for the whole weekend, and he ended up writing me a check to pay me back. It was annoying for him to have to find a checkbook to do this, and annoying for me to have to go to the bank if I wanted to cash it (I never did). We thought, “Why are we still doing this? We do everything else with our phones. We should definitely be using PayPal to pay each other back. But we don’t, and none of our friends do.”</p><p id="1ec894e8-77f2-4eb0-935c-6055ff001937" class="">So we decided, let’s just try to solve this problem, and build a way to pay each other back that feels consistent with all of the other experiences we have in apps we use with our friends.</p><p id="e0e67ff5-dbdd-4dc8-b794-2caa032e377a" class="">We got pretty excited about this idea, and thought, “Surely someone else must be doing this.” We found a laptop and started googling, and soon came across Obopay: a way to send money to anyone directly from your cell phone. They had recently raised $70M from Nokia, and we thought, “Uh-oh.” But then we poked around the website and the product and found that there was no feel and it seemed a little clunky and not like something anyone we knew would ever use.</p><h2 id="65d55bf8-8011-46c3-be7c-460f83f99332" class="">Evolution of the Note</h2><p id="39a22c74-82b5-404f-92bd-7e915d719ca8" class="">We got a prototype working pretty quickly. It worked over SMS, and was dead simple. To send iqram $20, text “iqram 20” to our number (a hacked Google Voice account, because the alternative, Textmarks, required that you prefix every text message with a keyword–this was back in the days before Twilio…). The recipient saw “kortina paid you $20.”</p><figure id="d544c4fc-788c-4e44-b28b-56b6563382dd" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/gvhack.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/gvhack.png"/></a></figure><p id="225b1cc5-0550-467c-94dd-27cffa5649a3" class="">Google Voice SMS hack.</p><p id="d025e203-47ae-4b95-971c-8a05bbb9380d" class="">Right after we got this working we decided we needed to have a note with each payment so we could keep track of what all of these random amounts were for: “iqram 20 for thai lunch at Nooch.”</p><p id="f0dbd0f2-9fa2-4d47-89fc-f0ef94549ec9" class="">The interface was SMS, so we immediately thought, of course it would only be natural for the person on the other end to see the message, so we updated the recipient message: “kortina paid you $20 for thai lunch at Nooch.”</p><figure id="04c78037-c348-46a2-993a-19a77deba2a6" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/venmosms.png"><img style="width:700px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/venmosms.png"/></a></figure><p id="8c45c4b2-f707-4447-b798-b315a7f20499" class="">Venmo SMS. What phone is this? Running Windows?</p><p id="e995e1c8-f8f9-45a0-b1af-855e57b42be4" class="">Pretty soon, our SMS inbox was full of Venmo messages, and this started to look like a news feed of all the restaurants, bars, and shows we were going to, as well as emergent behavior like “$3 to pick me up a cup of coffee on your way in.” The stories contained rich information about how and where we were spending our time (and whom with, as we got a few more friends on the beta).</p><p id="cf93c05e-8a8c-4337-83f9-bf57585fb193" class="">We decided, you should be able to share this stuff, because it’s interesting, and added the #p option: “$10 for drinks at Ranstead Room #p” would show up in your friends’ feeds on venmo.com as “kortina paid iqram for drinks at Ranstead Room” (we never showed the amounts, because this was not as interesting as the social context and the story itself).</p><h2 id="1e4c324c-61e2-469e-afc6-641a4aab11ae" class="">Some Fundraising Stories</h2><p id="fde7d350-9d49-4851-8f1e-82547b09fecb" class="">Once we had a working prototype, we started meeting with investors to see if we could raise some money–at the time, we respectively still worked part time at Bit.ly and Ticketleap, and didn’t intend to leave our jobs until we raised money.</p><p id="d668c4b9-57b0-4502-8593-78d5a3d508b7" class="">We learned a lot from these early meetings; viz, it’s pretty hard to raise money on just a prototype with no significant user traction. But there are a few priceless moments I often think back on fondly. I remember one meeting where I circumlocuted the inner workings of our SMS backend (hacked on top of Google Voice) for about ten minutes and another where the investor said he was only interested in “billion dollar, home run opportunities” and Iqram responded, “This will be a trillion dollar company.” And, of course, this snippet from our executive summary:</p><blockquote id="c314e55f-f404-4fb7-bd33-48f8606aa7c9" class="">Venmo Executive Summary, Oct 2009 Venmo enables anyone with a mobile device to send and receive payments via text message, creating a dialogue between buyers and sellers. The shift to mobile payments requires a service that captures the subtle gestures involved in everyday cash exchanges. Venmo transactions are personal, with SMS notes that make payments feel like conversations. Venmo&#x27;s medium for maintaining these social nuances along with the ability to make payments, allows Venmo to take the stress out of exchanging money. The ubiquity of cellphones plus Venmo&#x27;s magic will create an impenetrable network effect, making Venmo the preferred way to pay for everything.</blockquote><p id="9f84ae04-d1bc-4da5-97da-eadc982f8910" class="">Although we didn’t have much luck on the fundraising circuit, we were fortunate to have recognized even before we started that there was much to learn about building a company, so when we first started prototyping various ideas we enlisted the help of two friends as company advisors–Sam Lessin, a friend from NYC who was running a startup called drop.io, and Chris Stanchak, CEO of Ticketleap, where Iqram worked before Venmo.</p><figure id="183309e1-c57e-4b03-a15e-c640cfd237f9" class="image"><a href="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/moneylike.png"><img style="width:602px" src="Origins%20of%20Venmo%20669dae4dbd194c51af27f7891853a964/moneylike.png"/></a></figure><p id="62b10836-b9c8-445f-bc38-31bb84f8a90b" class="">An early Venmo payment from Sam to Iqram.</p><p id="aa021fcc-8def-43b9-a311-d099415ee322" class="">Having as advisors two entrepreneurs who were operating companies themselves proved incredibly valuable. They served as a sounding board for interpreting investor reactions, made tons of introductions, gave product feedback, and provided general operational advice. Another vital but unexpected consequence of having Sam and Chris involved in the company early was our first investment: in Dec 2009 Sam and his father, Bob, ended up leading our first angel round of financing.</p><p id="65970543-9772-44ca-9d9d-7c9160c1a6e5" class="">In Jan 2010, with an amazing set of angel investors and advisors, Iqram and I finally left our other jobs to work full time on Venmo, and we spent the next several years evolving the product from a barebones SMS prototype into the service it is today. Sometime soon, I hope to record other stories from the years after the initial founding, like SXSW 2010, our first banking audit, Trust Graph, the Fav emoticon, Series A fundraising, Alan’s diner pitch, Ted’s Venmo design principles, the water pressure in the shower in the Philly office, teal Venmo tees, Iqram and will.i.am, the mythical Kevin Ryan, hiring Mike, money transmitter licensing, “money comes back to you,” moving to our NYC office (and cleaning it), encountering MDH on the streets, gingersnap iced coffee, Danny’s birthday, Peter’s sauna, Mike’s filibusters, Chinese Yellow Pages, Azalia, Amex in the magic room, late night bank transfers, Harold’s graduation, playing ball with Keith, jamming in the music room, the Lucas campaign, shopping for African masks and drums, Willy on fire, and many others. But this is a good place to end the first chapter.</p></div></article></body></html>

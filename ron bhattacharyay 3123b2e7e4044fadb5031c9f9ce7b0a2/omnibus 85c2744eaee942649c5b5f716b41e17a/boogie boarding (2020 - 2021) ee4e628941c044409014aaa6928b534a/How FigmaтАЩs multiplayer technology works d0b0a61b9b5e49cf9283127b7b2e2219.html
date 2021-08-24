@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How Figma’s multiplayer technology works</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d0b0a61b-9b5e-49cf-9283-127b7b2e2219" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👡</span></div><h1 class="page-title">How Figma’s multiplayer technology works</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/how-figmas-multiplayer-technology-works/" class="url-value">https://www.figma.com/blog/how-figmas-multiplayer-technology-works/</a></td></tr></tbody></table></header><div class="page-body"><p id="1d64318d-8548-46e9-9e1c-fdd7162993a0" class=""><em>If you want to know more about where we’re headed next, check out </em><a href="https://www.figma.com/blog/introducing-figma-community/"><em>&quot;Beyond multiplayer: Building community together in Figma&quot;</em></a><em>, where we share some exciting product announcements.</em></p><p id="5d3bb97b-f531-4b6e-918c-7385ed3c7f2c" class="">
+</p><p id="e50ec88b-8f4a-4f81-9d5e-4d55e2eeba9a" class="">When we first started <a href="https://www.figma.com/blog/multiplayer-editing-in-figma/">building multiplayer functionality</a> in <a href="https://www.figma.com/">Figma</a> four years ago, we decided to develop our own solution. No other design tool offered this feature, and we didn’t want to use operational transforms (a.k.a. OTs), the standard multiplayer algorithm popularized by apps like Google Docs. As a startup we value the ability to ship features quickly, and OTs were unnecessarily complex for our problem space. So we built a custom multiplayer system that&#x27;s simpler and easier to implement.</p><p id="bef354bc-82c8-4476-b797-a51b495199a4" class="">
+</p><p id="0a4f753a-b65b-467d-81fd-b18a19a952fb" class="">At the time, we weren’t sure building this feature was the right product decision. No one was clamoring for a multiplayer design tool — if anything, people hated the idea. Designers worried that live collaborative editing would result in “hovering art directors” and “design by committee” catastrophes.</p><p id="af50e743-494f-44cd-ad4d-a6abce30643a" class="">
+</p><p id="7a8d68e8-e786-48f5-9705-5a2f81aefe6f" class="">But ultimately, we had to do it because it just felt wrong not to offer multiplayer as a tool on the web. It eliminates the need to export, sync, or email copies of files and allows more people to take part in the design process (like copy-writers and developers). Just by having the right link, everyone can view the current status of a design project without interrupting the person doing the work.</p><p id="04acfd0b-5173-47cd-8485-4ebbd1b2d915" class="">
+</p><p id="c00253f0-1b82-413c-84be-379bfe667f51" class="">Our bet paid off, and these days it’s obvious that multiplayer is the way all productivity tools on the web should work, not just design. But while we use products with live collaborative editing every day, there aren’t that many public case studies on these production systems.</p><p id="8c6620d1-4c47-4ead-82b4-149a9dbdf7bc" class="">
+</p><p id="8a761826-c992-4911-83f6-0493837dc833" class="">We decided it was time to share a peek into how we did it at Figma, in the hopes of helping others. It should be a fun read for those who like seeing how computer science theory is applied in practice. We’ll cover a lot but each section builds upon the previous ones. By the end, you should hopefully have an understanding of the entire system.</p><p id="640a1552-e3fc-4937-aa40-2a4a6c7c0c6b" class="">
+</p><p id="e1e66939-c84a-43a2-8449-f76d3c67623f" class="">Before talking about our multiplayer protocol, it&#x27;s useful to have some context about how our multiplayer system is set up. We use a client/server architecture where Figma clients are web pages that talk with a cluster of servers over WebSockets. Our servers currently spin up a separate process for each multiplayer document which everyone editing that document connects to. If you’re interested in learning more, <a href="https://www.figma.com/blog/rust-in-production-at-figma/">this article</a> talks about how we scale our production multiplayer servers.</p><p id="70018d58-5968-429e-8864-cb8d1ae14c71" class="">
+</p><p id="9fdeff3e-4101-45ce-a6d3-41c82a4a6905" class="">When a document is opened, the client starts by downloading a copy of the file. From that point on, updates to that document in both directions are synced over the WebSocket connection. Figma lets you go offline for an arbitrary amount of time and continue editing. When you come back online, the client downloads a fresh copy of the document, reapplies any offline edits on top of this latest state, and then continues syncing updates over a new WebSocket connection. This means that connecting and reconnecting are very simple and all of the complexity with multiplayer (which is what this blog post is about) is in dealing with updates to already connected documents.</p><p id="e0238447-12a8-4925-a4c7-325a70885c94" class="">
+</p><p id="a668052f-9ddf-40da-87cd-286374f03a2b" class="">It’s worth noting that we only use multiplayer for syncing changes to Figma documents. We also sync changes to a lot of other data (comments, users, teams, projects, etc.) but that is stored in Postgres, not our multiplayer system, and is synced with clients using a completely separate system that won’t be discussed in this article. Although these two systems are similar, they have separate implementations because of different tradeoffs around certain properties such as performance, offline availability, and security.</p><p id="7aa1fdfa-7931-4c33-8025-695a834089ad" class="">
+</p><p id="f0a27ad8-aa6e-4a4b-9e2b-69f8ad968ed0" class="">We didn&#x27;t start with this setup though. When making a change this fundamental, it&#x27;s important to be able to iterate quickly and experiment before committing to an approach. That&#x27;s why we first created a prototype environment to test our ideas instead of working in the real codebase. This playground was a web page that simulated three clients connecting to a server and visualized the whole state of the system. It let us easily set up different scenarios around offline clients and bandwidth limited connections.</p><p id="374cd6c0-629d-40d8-9484-2e9836d6252f" class="">
+</p><p id="1a0ef4d4-3b5a-42c4-a3a2-66bd3b19ad9e" class="">Once we figured out how we wanted to build our multiplayer system, it was straightforward to graft the ideas from our prototype onto our existing codebase. We used this prototype to quickly research and evaluate different collaborative algorithms and data structures.</p><p id="fddde06c-d96c-480d-ad76-1e997568cb1b" class="">
+</p><figure id="7f03b9b2-3742-4476-9bf3-5cddba34560e" class="image"><a href="How%20Figma%E2%80%99s%20multiplayer%20technology%20works%20d0b0a61b9b5e49cf9283127b7b2e2219/multiplayer_prototype.png"><img style="width:700px" src="How%20Figma%E2%80%99s%20multiplayer%20technology%20works%20d0b0a61b9b5e49cf9283127b7b2e2219/multiplayer_prototype.png"/></a></figure><p id="cad5f08e-a7b1-4d1d-bcbf-a71a51168667" class="">A screenshot of our internal prototype</p><h3 id="7f9db749-09fb-443c-98fa-0798ae94ade1" class="">How OTs and CRDTs informed our multiplayer approach</h3><p id="4a958c19-eb22-45f3-9e9d-8abe65a99fd6" class="">Multiplayer technology has a rich history and has arguably been around at least since <a href="https://en.wikipedia.org/wiki/The_Mother_of_All_Demos">Douglas Engelbart&#x27;s demo in 1968</a>. Before we dive in too deep into how our own multiplayer system works, it’s worth a quick overview on the traditional approaches that informed ours — OTs and CRDTs.</p><p id="9d945127-12ab-4a83-965d-4e70f1171ffa" class="">
+</p><p id="925d3764-9601-4361-a477-0f7536e16648" class="">As mentioned earlier, OTs power most collaborative text-based apps such as Google Docs. They’re the most well-known technique but in researching them, we quickly realized they were overkill for what we wanted to achieve. They’re a great way of editing long text documents with low memory and performance overhead, but they are very complicated and hard to implement correctly. They result in a combinatorial explosion of possible states which is <a href="https://en.wikipedia.org/wiki/Operational_transformation#Critique_of_OT">very difficult to reason about</a>.</p><p id="7f9e4cba-0a8c-4425-91ad-8492896bfa50" class="">
+</p><p id="1ad4b8b5-8da5-49c9-9ed0-20e5944a9b8c" class="">Our primary goal when designing our multiplayer system was for it to be no more complex than necessary to get the job done. A simpler system is easier to reason about which then makes it easier to implement, debug, test, and maintain. Since Figma isn&#x27;t a text editor, we didn&#x27;t need the power of OTs and could get away with something less complicated.</p><p id="678d8267-59e1-41b0-a6fa-b0a677cb07b1" class="">
+</p><p id="3b20ef47-2fae-4fe7-bd26-9806814b9ae3" class="">Figma&#x27;s tech is instead inspired by something called CRDTs, which stands for <a href="https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type">Conflict-free Replicated Data Types</a>. CRDTs refer to a collection of different data structures commonly used in distributed systems. All CRDTs satisfy certain mathematical properties which guarantee eventual consistency. If no more updates are made, eventually everyone accessing the data structure will see the same thing. This constraint is required for correctness; we cannot allow two clients editing the same Figma document to diverge and never converge again.</p><p id="33a5db5a-14ef-476b-a1b7-50db68db89e8" class="">
+</p><p id="457ef639-ff08-435e-88dd-b555c7c89092" class="">There are many types of CRDTs. See <a href="https://github.com/pfrazee/crdt_notes/tree/68c5fe81ade109446a9f4c24e03290ec5493031f#portfolio-of-basic-crdts">this list</a> for a good overview. Some examples:</p><ul id="e19d1e34-0e88-4c23-b854-1aa684eba1ae" class="bulleted-list"><li><strong>Grow-only set:</strong> This is a set of elements. The only type of update is to add something to the set. Adding something twice is a no-op, so you can determine the contents of the set by just applying all of the updates in any order.</li></ul><ul id="7992b05e-8cbd-4fd1-b900-23f893adf6ff" class="bulleted-list"><li><strong>Last-writer-wins register:</strong> This is a container for a single value. Updates can be implemented as a new value, a timestamp, and a peer ID. You can determine the value of the register by just taking the value of the latest update (using the peer ID to break a tie).</li></ul><p id="20efc6e4-b7e5-492b-a7fd-7ac63916723f" class="">Figma isn&#x27;t using true CRDTs though. CRDTs are designed for decentralized systems where there is no single central authority to decide what the final state should be. There is some unavoidable performance and memory overhead with doing this. Since Figma is centralized (our server is the central authority), we can simplify our system by removing this extra overhead and benefit from a faster and leaner implementation.</p><p id="5d484b81-5766-45d4-9f8b-47edf6ef0872" class="">
+</p><p id="24280da5-204c-4ff3-b38d-bc874427d4c8" class="">It’s also worth noting that Figma&#x27;s data structure isn&#x27;t a single CRDT. Instead it&#x27;s inspired by multiple separate CRDTs and uses them in combination to create the final data structure that represents a Figma document (described below).</p><p id="a7843851-9ebb-44ad-982c-26aec5fa58de" class="">
+</p><p id="e9b42ac1-ca8d-4865-80f7-0416089222d5" class="">Even if you have a client-server setup, CRDTs are still worth researching because they provide a well-studied, solid foundation to start with. Understanding them helps build intuition on how to create a correct system. From that point, it&#x27;s possible to relax some of the requirements of CRDTs based on the needs of the application as we have done.</p><p id="14531028-4e2b-46e8-ae97-4beb3fb187d1" class="">
+</p><h3 id="9de42284-2e96-461e-abc9-bd2ec0ddb553" class="">How a Figma document is structured</h3><p id="34e3867e-2838-48c6-bc33-ca36bed4fbca" class="">Ok, so we want to sync updates to Figma documents using CRDTs. What does the structure of a Figma document even look like?</p><p id="ca3d2acf-8066-4ac3-81ec-2772e26debe2" class="">
+</p><p id="65183a10-47f2-407b-b11e-b07e8aa90488" class="">Every Figma document is a tree of objects, similar to the HTML DOM. There is a single root object that represents the entire document. Underneath the root object are page objects, and underneath each page object is a hierarchy of objects representing the contents of the page. This tree is is presented in the layers panel on the left-hand side of the Figma editor.</p><p id="6fda732a-cf70-4e29-b8da-25985dce6874" class="">
+</p><p id="b85cf149-63f4-4c11-93ab-4addab9981ba" class="">Each object has an ID and a collection of properties with values. One way to think about this is by picturing the document as a two-level map: <code>Map&lt;ObjectID, Map&lt;Property, Value&gt;&gt;</code>. Another way to think about this is a database with rows that store <code>(ObjectID, Property, Value)</code> tuples. This means that adding new features to Figma usually just means adding new properties to objects.</p><p id="04a0c6a7-3dee-42de-bbca-b33defdded06" class="">
+</p><p id="240f8b8d-1207-4647-9076-8b598ec365dd" class="">For the rest of this post, we will talk about the details of Figma&#x27;s multiplayer algorithm and how we solved some of the edge cases we encountered.</p><p id="be424969-d043-4689-a7a3-0e61eecc6218" class="">
+</p><p id="b6f5b63c-6942-4961-b09d-3ecdf3558761" class="">Figma’s multiplayer servers keep track of the latest value that any client has sent for a given property on a given object. This means that two clients changing unrelated properties on the same object won’t conflict, and two clients changing the same property on unrelated objects also won’t conflict. A conflict happens when two clients change the same property on the same object, in which case the document will just end up with the last value that was sent to the server. This approach is similar to a last-writer-wins register in CRDT literature except we don’t need a timestamp because the server can define the order of events.</p><p id="f79750bc-8497-4081-8f05-34097509e20e" class="">
+</p><p id="bcc13535-5329-4811-84c8-a2ddcff03752" class="">An animation showing two clients sending updates without any conflicts</p><p id="9f401b79-71ea-4a2d-8a04-3adf7e9b477b" class="">
+</p><p id="811f35f2-d667-44df-a913-ffcd89b7cde3" class="">An important consequence of this is that changes are atomic at the property value boundary. The eventually consistent value for a given property is always a value sent by one of the clients. This is why simultaneous editing of the same text value doesn’t work in Figma. If the text value is B and someone changes it to AB at the same time as someone else changes it to BC, the end result will be either AB or BC but never ABC. That’s ok with us because Figma is a design tool, not a text editor, and this use case isn’t one we’re optimizing for.</p><p id="94c46c3a-75fc-4436-8ff0-e5ea9f4a53b8" class="">
+</p><p id="009560b2-945b-4c49-9817-0f0c9845d296" class="">The most complicated part of this is how to handle conflicts on the client when there’s a conflicting change. Property changes on the client are always applied immediately instead of waiting for acknowledgement from the server since we want Figma to feel as responsive as possible. However, if we do this and we also apply every change from the server as it comes in, conflicting changes will sometimes &quot;flicker&quot; when older acknowledged values temporarily overwrite newer unacknowledged ones. We want to avoid this flickering behavior.</p><p id="3293a399-e702-44f6-b11d-04784b992de2" class="">
+</p><p id="4a911bd7-a203-4193-b2eb-2dd4600b50a1" class="">Intuitively, we want to show the user our best prediction of what the eventually-consistent value will be. Since our change we just sent hasn’t yet been acknowledged by the server but all changes coming from the server have been, our change is our best prediction because it’s the most recent change we know about in last-to-the-server order. So we want to discard incoming changes from the server that conflict with unacknowledged property changes.</p><p id="0f0bbf87-aa24-4fd6-8a8c-4391cf9333da" class="">
+</p><p id="2858a38a-3aef-4268-8f19-8399fe550107" class="">An animation showing how to avoid “flickering” during a conflict between two clients</p><h3 id="cad76a56-9cbe-4f8d-8970-93b390756cb9" class="">Syncing object creation and removal</h3><p id="654f3655-191b-4d0f-abb7-136437d65abf" class="">Creating a new object and removing an existing object are both explicit actions in our protocol. Objects cannot automatically be brought into existence by writing a property to an unassigned object ID. Removing an object deletes all data about it from the server including all of its properties.</p><p id="0b989159-3101-4e7d-a30a-0301951d8de0" class="">
+</p><p id="02f4a1e7-78ec-40db-9f11-3559c97774ac" class="">Object creation in Figma is most similar to a last-writer-wins set in CRDT literature, where whether an object is in the set or not is just another last-writer-wins boolean property on that object. A big difference from this model is that Figma doesn’t store any properties of deleted objects on the server. That data is instead stored in the undo buffer of the client that performed the delete. If that client wants to undo the delete, then it’s also responsible for restoring all properties of the deleted objects. This helps keep long-lived documents from continuing to grow in size as they are edited.</p><p id="ebd04f5d-d073-4c84-837d-8babfd9d6f54" class="">
+</p><p id="42e0f07b-2012-49f4-9325-07b3177718ad" class="">This system relies on clients being able to generate new object IDs that are guaranteed to be unique. This can be easily accomplished by assigning every client a unique client ID and including that client ID as part of newly-created object IDs. That way no two clients will ever generate the same object ID. Note that we can’t solve this by having the server assign IDs to newly-created objects because object creation needs to be able to work offline.</p><p id="90b8c3e4-2815-4598-9be2-a6eda2d38f32" class="">
+</p><h3 id="007dba81-0e5d-451d-91bc-024488b2c8af" class="">Syncing trees of objects</h3><p id="45c06b96-4b23-4d8d-9138-a21fc8369314" class="">Arranging objects in an eventually-consistent tree structure is the most complicated part of our multiplayer system. The complexity comes from what to do about reparenting operations (moving an object from one parent to another). When designing the tree structure, we had two main goals in mind:</p><ul id="b3a745d3-6064-4ad1-9e92-d19120e7e29e" class="bulleted-list"><li>Reparenting an object shouldn’t conflict with changes to unrelated properties on those objects. If someone is changing the object’s color while someone else is reparenting the object, those two operations should both succeed.</li></ul><ul id="2194b954-c0d8-4220-9e71-e2b81b05a5b5" class="bulleted-list"><li>Two concurrent reparenting operations for the same object shouldn’t ever result in two copies of that object in separate places in the tree.</li></ul><p id="81f21c67-9d97-4130-9655-abb46d798536" class="">
+</p><p id="c7a2c4df-554b-433f-bcf3-1e0c1a56c3d0" class="">Many approaches represent reparenting as deleting the object and recreating it somewhere else with a new ID, but that doesn&#x27;t work for us because concurrent edits would be dropped when the object&#x27;s identity changes. The approach we settled on was to represent the parent-child relationship by storing a link to the parent as a property on the child. That way object identity is preserved. We also don’t need to deal with the situation where an object somehow ends up with multiple parents that we might have if, say, we instead had each parent store links to its children.</p><p id="1a2de129-36cb-4d76-9cf3-996a966b5fcd" class="">
+</p><p id="fb101c65-0580-4545-90f9-d623ca545807" class="">However, we now have a new problem. Without any other restrictions, these parent links are just directed edges on a graph. There’s nothing to ensure that they have no cycles and form a valid tree. An example of this is a concurrent edit where one client makes A a child of B while another client makes B a child of A. Then A and B are both each other’s parent, which forms a cycle.</p><p id="91edd243-bbc0-4fc5-9457-bdb17977ef39" class="">
+</p><p id="3cea021b-ab43-4839-abb7-9d60635670f5" class="">Figma’s multiplayer servers reject parent property updates that would cause a cycle, so this issue can’t happen on the server. But it can still happen on the client. Clients can’t reject changes from the server because the server is the ultimate authority on what the document looks like. So a client could end up in a state where it has both sent the server an unacknowledged change to parent A under B and also received a change from the server that parents B under A. The client’s change will be rejected in the future by the server because it will form a cycle, but the client doesn’t know it yet.</p><p id="c4b3fdc6-0dab-400c-8f99-60a1551498d0" class="">
+</p><p id="0098705d-7a5c-41a1-90fe-2cb813ce0027" class="">An animation of a reparenting conflict</p><p id="454a2c23-a068-465b-b6f1-a16a053b9b82" class="">
+</p><p id="2483cce5-39b0-4057-8186-25a0cd10a071" class="">Figma’s solution is to temporarily parent these objects to each other and remove them from the tree until the server rejects the client’s change and the object is reparented where it belongs. This solution isn’t great because the object temporarily disappears, but it’s a simple solution to a very rare temporary problem so we didn’t feel the need to try something more complicated here such as breaking these temporary cycles on the client.</p><p id="f324a049-f195-41e3-87fe-321a0126d97f" class="">
+</p><p id="34706d72-1443-4eb1-85a3-92c9c985c92a" class="">To construct a tree we also need a way of determining the order of the children for a given parent. Figma uses a technique called “fractional indexing” to do this. At a high level, an object’s position in its parent’s array of children is represented as a fraction between 0 and 1 exclusive. The order of an object’s children is determined by sorting them by their positions. You can insert an object between two other objects by setting its position to the average of the positions of the two other objects.</p><p id="bb8fdc45-93a8-4109-afa8-8d01961257db" class="">
+</p><p id="e8af5cdb-da9f-477e-bbc9-cde2d38a6b75" class="">An animation of reordering using fractional indexing</p><p id="72e1d371-e457-4a56-a267-4be6d6e9d6b9" class="">
+</p><p id="041c963d-c186-4e44-a9e1-c2dcce91cbf7" class="">We’ve already written <a href="https://www.figma.com/blog/realtime-editing-of-ordered-sequences/">another article</a> that describes this technique in detail. The important part to mention here is that the parent link and this position must both be stored as a single property so they update atomically. It doesn’t make sense to continue to use the position from one parent when the parent is updated to point somewhere else.</p><p id="fc045ae5-a29c-4fda-bcee-3a560e76fe1e" class="">
+</p><p id="7605d28e-de6a-4f62-9a27-6f5886ecd71a" class="">Undo history has a natural definition for single-player mode, but undo in a multiplayer environment is inherently confusing. If other people have edited the same objects that you edited and then undo, what should happen? Should your earlier edits be applied over their later edits? What about redo?</p><p id="d1f8602e-51b7-4d8c-90dd-85e4c395856e" class="">
+</p><p id="2bc2a62b-1fbb-41bb-8cd5-2ca19bd35114" class="">We had a lot of trouble until we settled on a principle to help guide us: if you undo a lot, copy something, and redo back to the present (a common operation), the document should not change. This may seem obvious but the single-player implementation of redo means “put back what I did” which may end up overwriting what other people did next if you’re not careful. This is why in Figma an undo operation modifies redo history at the time of the undo, and likewise a redo operation modifies undo history at the time of the redo.</p><p id="b9327e4a-4d35-42ed-b046-7704d80adedd" class="">
+</p><p id="8af84f95-8366-44a7-9aa7-c4be475e689f" class="">An animation showing undo and redo history modification</p><p id="0c5fbac1-d8de-4878-9f45-cabfa0f29c33" class="">
+</p><p id="288f19fd-18f9-4158-9152-2499e968525e" class="">We&#x27;ve covered a lot! This is the post we wished we could have read when we were first starting our research. It&#x27;s one thing to learn about CRDTs in the abstract, but it&#x27;s a different thing to find out how those ideas work in practice in a real production system.</p><p id="9b435c90-8a3e-48c8-bd75-e330990c9986" class="">Some of our main takeaways:</p><ul id="cc508fb5-7a17-4430-b647-49a1f5898af0" class="bulleted-list"><li>CRDT literature can be relevant even if you&#x27;re not creating a decentralized system</li></ul><ul id="027e5796-b72f-4181-8529-48b136619ff1" class="bulleted-list"><li>Multiplayer for a visual editor like ours wasn&#x27;t as intimidating as we thought</li></ul><ul id="063a287b-7c26-41d1-beeb-2463fe7fff9e" class="bulleted-list"><li>Taking time to research and prototype in the beginning really paid off</li></ul><p id="ee1d4c2a-1b7c-46ee-9fff-66bdabc291b2" class="">If you made it this far, you should now have enough information to make your own collaborative tree data structure. And even if your problem space isn&#x27;t exactly like ours, I hope this post shows how CRDT research can be a great source of inspiration.</p><p id="227ec582-c472-4eb0-af4f-23d62f320c61" class="">
+</p><p id="e4ae06d5-76df-4265-8b90-c7a030ce19f0" class="">Do you love thinking about collaborative editing, distributed systems, or building scalable services? <a href="https://www.figma.com/careers/">We’re hiring</a>!</p><p id="a6a424cb-2a2f-427f-bae3-f1a147e84916" class="">
+</p></div></article></body></html>

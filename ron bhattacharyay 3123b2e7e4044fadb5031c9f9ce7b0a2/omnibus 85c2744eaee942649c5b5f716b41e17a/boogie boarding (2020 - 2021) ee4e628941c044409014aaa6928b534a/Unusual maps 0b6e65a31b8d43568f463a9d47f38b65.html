@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unusual maps</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0b6e65a3-1b8d-4356-8f46-3a9d47f38b65" class="page sans"><header><h1 class="page-title">Unusual maps</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0002yI" class="url-value">https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0002yI</a></td></tr></tbody></table></header><div class="page-body"><p id="c6684b16-5f13-48ad-8015-36ab45f0e63e" class="">From <a href="https://www.edwardtufte.com/tufte/books_ei">Envisioning Information</a>, p. 102:</p><figure id="1d1d9698-8ba8-44ab-9785-d78b8c0b0b70" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/EI20p.20102.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/EI20p.20102.png"/></a></figure><p id="f78ca4cc-ea0e-48bd-b12b-65c548f5c297" class="">Another collection of maps/visualizations: Manuel Lima&#x27;s site</p><p id="a7b563c9-6cd5-403b-bd5f-5e55a0c1ff51" class=""><a href="http://www.visualcomplexity.com/vc/">Visual Complexity</a></p><p id="017fdd7d-f54b-41a3-936d-3dea6d7e3912" class="">An interesting transit map:</p><figure id="63a7b6cb-9450-450c-8ac9-e1fe960c12da" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_NA_subways.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_NA_subways.jpg"/></a></figure><p id="10e9facc-1660-4fc0-8d4c-f029cac68507" class=""><a href="http://www.radicalcartography.net/?subways">North American subways</a> Bill Rankin, 2005, 2006</p><ul id="9468de86-7539-4a1e-b43d-cd732e7c08cd" class="bulleted-list"><li>- Fraser Moffatt (<a href="https://www.edwardtufte.com/tufte/email?msg_id=000308">email</a>)</li></ul><p id="a5915912-097e-40ff-a118-0f89c86bb6f9" class="">Map of Electronic Shadows</p><p id="57274e7d-f1af-4cda-8b4e-e06b1e165673" class="">Here is a graphic that I propose be posted to the Ask ET forum. I came across it in the June 2000 issue of National Geographic. It displays the heights of buildings in a city (New York) by color coded scaled replicas of each building. Red is used for the tallest, then orange, yellow, etc. thru the spectrum, with only green (used to represent ground level) being out of sequence. I like this graphic as the logical use of colors on the three dimensional map is easy to comprehend and intuitiviely communicates a lot of information to the eye. Beyond that, however, once created, this graphic (in the computer) becomes a usable engineering tool to define line of site positions for wireless communications antennaes, as explained in the text that accompanies it.</p><p id="2e77df45-50d4-41b2-8d79-d0ad2c7f53c6" class="">Once again, the graphic artist is not identified--only the firm.</p><ul id="ce494a1d-f317-47dc-8b7e-373ea94b7a83" class="bulleted-list"><li>- Jim Heimer (<a href="https://www.edwardtufte.com/tufte/email?msg_id=000090">email</a>)</li></ul><p id="d55dd4a8-0b2e-4e45-897e-80f7247af198" class="">Response to Map of Electronic Shadows</p><p id="214b27ef-b89b-4336-910a-3c0cd101a6c3" class="">This is very interesting. It would be helpful to see the original version used by engineers in the field.</p><p id="c2ef3d57-5f75-4490-8a9f-b02f68a4e3c5" class="">By the way, that is sometimes a good strategy for information design: see what the insiders do to display their data, and then surface and revise the insider-design for outsiders. The content understanding of the insiders informs the design for users. So see how the insiders understand their information.</p><p id="7a7acd8b-c5e9-45a2-b03a-6b978feaf4f9" class="">For many years, railroads planned schedules internally by means of graphical timetables. I tried to surface these designs for New Jersey train and bus lines (see Envisioning Information, pages 45, 107-110). About 15 years ago, I made an elaborate and extremely complex graphical timetable for the Morris &amp; Essex train lines combined with aerial photographs of the route (so every rider could see where they lived); the printed version sometimes turns up in shows of my work.</p><ul id="a45fb870-46fc-4e9e-a8a1-aebee53419f1" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="0a81a206-7632-48fe-85cc-014c06d3ca8e" class="">The German site <a href="http://www.radweit.de/">radweit.de</a> has a collection of cut-and-paste bike routes throughout Germany:</p><figure id="2e2fd5b7-2a77-471c-b17d-ae23008025f4" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_Paderborn_bike.gif"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_Paderborn_bike.gif"/></a></figure><figure id="d97c41f9-c883-4d36-ad75-5fed458962b4" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_Lorsch_bike.gif"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_Lorsch_bike.gif"/></a></figure><p id="8a1cc4a3-6b21-4dc3-a580-50c7bfee67b7" class="">They bear a striking similarity to &quot;A New Plan of the Road from London to Dover,  and from Calais to Paris&quot; as depicted on the spread on pages 112-113 of Envisioning Information:</p><div id="8db60753-fe25-446b-90c8-323f40c3b44c" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="72e65823-d0b4-4bd6-bc20-2b90133175c8"><td class="cell-title"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/Untitled%20Database%208db60753fe25446b90c8323f40c3b44c/(click%20to%20see%20larger)%2072e65823d0b44bd6bc202b90133175c8.html">(click to see larger)</a></td></tr></tbody></table></div><ul id="a7841ae2-974f-4b59-b29a-9c3877472d70" class="bulleted-list"><li>- Andreas Scherer (<a href="https://www.edwardtufte.com/tufte/email?msg_id=00031R">email</a>)</li></ul><p id="6c2df360-92c5-4ccb-93e3-5abbd5503e80" class="">I suspect that ET readers will be interested in reading about the Tabula Peutingeriana, a 13th-century copy of a late Roman roadmap of Europe. It is not on display due to its fragility and light sensitivity, however, yesterday it was <a href="http://news.bbc.co.uk/1/hi/world/europe/7113810.stm">displayed for one day</a> as part of Unesco&#x27;s Memory of the World Register. The map is almost a linear East-West mapping of important roads and destinations across Europe and Asia.</p><p id="3928cbe1-e231-48dd-a83f-f706d65d8523" class="">Here, note the city of Rome at the center of the map:</p><figure id="33ec8135-8cf6-4565-92bc-860e39d5b992" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_TabulaPeutingeriana_detail.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_TabulaPeutingeriana_detail.jpg"/></a></figure><p id="bc565eca-9e1c-4a61-b4ba-4d8e91d9c18f" class="">Wikipedia has a good entry on the Tabula Peutingeriana <a href="https://en.wikipedia.org/wiki/Tabula_Peutingeriana">here</a>.</p><ul id="821fc3e7-bc38-447d-8408-13e1ad9e1fde" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=00033P">email</a>)</li></ul><p id="6691fcd6-968a-495a-8a9e-702d84095647" class="">I really like this visual display of the world&#x27;s rivers and mountains. Does anyone know more about it?</p><figure id="62510327-9810-44f5-bfd9-664f0ad7ea45" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_rivers.jpg"><img style="width:692px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_rivers.jpg"/></a></figure><ul id="f33a1f73-02d4-4cd9-acae-0afa7e1eed7d" class="bulleted-list"><li>- Mark Neigh (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003A6">email</a>)</li></ul><p id="299866c1-a934-4f91-88d5-8c60a13ba21e" class="">The map you show is from an American atlas in the mid-19th century; similar maps were found a few decades earlier in British and French atlases. According to the historical maps site <a href="http://www.davidrumsey.com/blog/2009/9/5/heights-of-mountains-lengths-of-rivers">davidrumsey.com</a>,</p><blockquote id="0ebc20e9-14a7-4c44-a1ab-38a3d68f6625" class="">For over 100 years, atlas and map publishers in the United States and Europe published a style of map that was a visualization of the heights and lengths of the world&#x27;s mountains and rivers. Some of the earliest examples appeared in Europe towards the end of the 18th century. In the United States, the form was popular throughout the 19th century and the early part of the 20th. These maps appeared in atlases, as wall maps, and as pocket maps. One of the most elegant examples was engraved originally on copper by map publisher Henry Tanner in Philadelphia in 1836 and then continued by S. Augustus Mitchell, also of Philadelphia, in lithographic versions into the 1850&#x27;s. This example was published by Mitchell in 1846.</blockquote><ul id="5ebd3249-35c6-48d9-a699-b2566c09272f" class="bulleted-list"><li>- Ron Hekier (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003AE">email</a>)</li></ul><p id="30249d31-c328-42f6-bbc6-41f758630654" class="">Here is an <a href="http://www.planetary.org/blogs/emily-lakdawalla/2008/1348.html?referrer=https://www.google.co.uk/">article</a> at the website of The Planetary Society describing a map I made with the unusual property of folding up to make a model of an asteroid:</p><figure id="f87b36f9-78d5-4567-801b-a60d0cacf381" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_asteroid.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_asteroid.jpg"/></a></figure><ul id="d1860785-24b5-4505-ad83-e9dfb7b0d98c" class="bulleted-list"><li>- Chuck Clark (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003CF">email</a>)</li></ul><p id="f685e69f-3de1-4c14-a829-616a7c7ca5e8" class="">The BBC aired a new TV series called &quot;<a href="http://www.bbc.co.uk/programmes/b00d23yx">Britain from Above</a>&quot; on August 10th, 2008. This <a href="http://news.bbc.co.uk/1/hi/technology/7539529.stm">video clip teaser</a> on the BBC website shows some beautiful maps of Britain displaying travel and communications data. Further clips:</p><ul id="0abc3360-276d-4205-911a-6f1bbb0b187a" class="bulleted-list"><li>- Katherine Davoli (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003GS">email</a>)</li></ul><p id="6e4ae6f1-b90d-4517-8168-0e8809cfea19" class="">Winnie-the-Pooh map</p><ul id="efbbf496-d7c5-4965-970e-16f61945f9d9" class="bulleted-list"><li>- Edward Tufte</li></ul><ul id="5da52ed6-c00f-4bed-8003-158f76422bc4" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="e9f12ff7-db3d-4116-ad95-bb6c5dc0a87d" class="">This sort of &quot;aerial photo as a map&quot; is now commonplace with the advent of web-based mapping services, and the technique of using aerial photography as the basis for maps is well established. I work with oil and gas pipeline maps that were historically hand drawn annotations on top of a printed aerial photo strips. These days they are computer generated from databases of imagery and vector map data.</p><p id="27968ec8-714c-4de0-a577-39ccb1c8585d" class="">The issue of the level of abstraction occurred to me when I saw the references to this as a map. A photo on its own is a literal picture of the terrain, albeit with changes in appearance due to the atmosphere (when present!), the camera, surface elevation and so on. A map would have other properties; often scale, location and some sense of abstraction to identify features of interest. So this photo seems to be a real map as it shows scale, a coordinate system and the flight path. The information content is very high, in that the area is described in great detail, but the level of abstraction is very low—it is a photo of the lunar surface with a flight path marked. A far cry from the work of a Swiss cartographer&#x27;s pen!</p><p id="828947e7-a956-41bc-88ca-2b71372f9685" class="">I&#x27;m interested as to whether the general population still draws a distinction between traditional &quot;drawn&quot; maps and the aerial photos they see online. Google Maps offers users a map view and satellite view, maybe reinforcing this distinction. I wonder if readers, perhaps more familiar with a higher level of abstraction on their maps, consider this a map or not.</p><ul id="80c5c5b0-439e-4797-89d9-cfcd4435be2e" class="bulleted-list"><li>- Nick Park (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Ke">email</a>)</li></ul><p id="4fc034f0-5ce8-44d8-8960-113de35718fc" class="">The Apollo map above, which visited the moon, is a fine example of a mapped image (see Beautiful  Evidence, chapter 1), nicely combining moon photographs with overlaid cartographic coordinates,  flight trajectories, and scales of measurement. It appears from this sheet that the map is constructed from  a mosaic of photographs taken at different times (note the varying tones and shadows at lower left and lower  right).</p><p id="13deeac9-ba2a-45bf-bacc-976a7061f7fe" class="">The Apollo map is printed as a somewhat coarse black-and-white halftone, with a finer dot than a newspaper  photograph but coarser dot than a coated-paper newsmagazine.</p><p id="609ce532-14d8-491f-b928-e146c9c036b7" class="">Shown above is one of the 24 sheets. Perhaps the 1 meter long, but folded, cyclogram  (Visual Explanations, pp. 92-95), is a better method of map management.</p><div id="c77b3536-9657-4110-8830-4c53e3a9b411" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="e97a8725-dffd-4fa3-a3dd-f16dda8e0cff"><td class="cell-title"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/Untitled%20Database%20c77b35369657411088304c53e3a9b411/(click%20to%20see%20larger)%20e97a8725dffd4fa3a3ddf16dda8e0cff.html">(click to see larger)</a></td></tr></tbody></table></div><div id="f3fd5c38-5149-49b1-bdee-13c8f9256e8f" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="edbb23e7-14cc-46f0-be1a-65e7493ea566"><td class="cell-title"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/Untitled%20Database%20f3fd5c38514949b1bdee13c8f9256e8f/(click%20to%20see%20larger)%20edbb23e714cc46f0be1a65e7493ea566.html">(click to see larger)</a></td></tr></tbody></table></div><p id="e24aab29-7fd4-4624-8f5c-009e06ac7d02" class="">I have only slightly mixed feelings about astronauts and cosmonauts selling off  government property at auctions (a few astronauts run rather aggressive souvenir  shops) because I so like to see information displays in action. The cyclogram, for example,  is an extraordinary piece of work and so I was happy to enrich, via Sotheby&#x27;s, cosmonaut  Georgi Grechko, who later provided the extraordinary annotation used on the cyclogram  poster and for the versions in Visual Explanations.</p><ul id="7fb50b03-49d5-4c98-b83d-f0ea5dda3926" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="4f280057-e8b5-4853-ab66-7ac0c053a227" class="">The apparently wind-blown moon flag is always enchanting since there is no atmosphere  and thus no wind on the moon.</p><p id="62e3c15e-e878-4684-9108-055df4c9d385" class="">The lack of a light-scattering atmosphere produces intensely dark moon shadows that  caused problems for the first astronauts operating equipment on the moon because it was  so dark in the parts of the equipment falling in the pitch-black shadows. There is a sequence  of moon-shadow pictures in Beautiful Evidence, p. 99, in the discussion of Galileo&#x27;s  report and drawings of moon craters.</p><figure id="aa7b36dd-a363-4903-a990-40c4985ea589" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_moon_shadows.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_moon_shadows.png"/></a></figure><p id="e36c2dc0-636a-437f-a29e-4c3760c967ad" class="">What does the moon look like to astronauts through the orbiting Apollo&#x27;s windows  compared to the gray images on the map, and at what time of moon day? This is starting  to sound like our thread on runway incursions.</p><ul id="28400d48-a688-423e-af14-f032d77581e8" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="5934d0c1-b22a-4ef7-8f68-158259779239" class="">The Apollo map/photo hybrid is, as ET states, a fine example of a mapped image. Unfortunately, the items that accompany the map and serve to provide evidence of authenticity, show, at least to me, a distasteful overabundance of marketing spin and pitch.</p><p id="28688b0b-8d64-45b1-831b-6e8800710afd" class="">The photo/map, with Duke&#x27;s annotations, is grand in that it is nearly all content. The other items, although likely genuine, seem less impressive because of someone&#x27;s attempt to make them look more impressive.</p><p id="8eba6333-06e0-4451-9c61-a8fefbbf99b4" class="">To me, the first sign that a pitchman is involved is the punctuation on the hand-written note. Quotation marks surround Orion. An exclamation point terminates the first sentence. &quot;on&quot; is underlined in the second sentence to reinforce the fact that a map that went to the moon really was on the moon. Without the exclamation point and underlining, am I to be less convinced?</p><p id="41f4cd6f-6ebf-4e9d-a9ee-622f03cf3653" class="">And Duke, throughout the additional pieces of evidence, changes from being &quot;MODULE PILOT&quot; in the hand-written note, to &quot;Astonaut&quot; in the letter-head, to &quot;Moonwalker&quot; (in a slanted font no less!) beneath his signature. If you are not convinced now, wait! There&#x27;s more!</p><p id="a11f503d-ca8a-49d1-9d21-8693448326fd" class="">Exclamation points also invade the other text: &quot;... shown here on the Moon!&quot;, &quot;... our historic lunar landing!&quot;, &quot;... from the surface of the Moon!&quot;</p><p id="4ef70c81-6c83-4bee-9c71-9b6ce7acf067" class="">The letterhead does include the Apollo 16 insignia, but no mention of NASA (copyright issues??).</p><p id="3b5ff5fc-dee1-4440-babe-ae5aaf439f08" class="">I&#x27;d love to have the map, and my supposition is that it is real. I suppose the market demands that things such as this need authentication and back up documentation. I&#x27;m just disappointed in the swarmy marketing approach to the evidence.</p><ul id="04de04c0-7979-483c-8a96-7f23658abf92" class="bulleted-list"><li>- rafe donahue (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Kh">email</a>)</li></ul><p id="d0330ddb-f067-490d-b638-dfd31986d6b6" class="">The Lincoln Museum in Springfield, IL produced a video entitled &quot;The Civil War in Four Minutes.&quot; It is the map of the eastern United States with a moving boundary of the North/South line and a running tabulator of the North and South casualties in the lower right hand corner. Key battles pop up chronologically and Lincoln&#x27;s terms are identified. I think the music is from Ken Burns&#x27; documentary. The map details are fuzzy, but you get the idea.</p><ul id="99c0b7c9-765c-4ca8-a466-fa6b05702000" class="bulleted-list"><li>- S. Ira Grossman (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003L8">email</a>)</li></ul><p id="18a81060-8385-4a48-9b40-fab4fc5604f5" class="">I came across this interesting map of 20th century architecture created by architectural historian Charles Jenks, reposted to Flickr:</p><figure id="22cf0ff1-f949-4922-883c-1a5e0b9f9ba3" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_evolutionary_tree.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_evolutionary_tree.jpg"/></a></figure><p id="497ef190-8910-419f-bfd6-c89bbe3c43e3" class="">Jenks calls it an evolutionary tree, but it reminds me of the idea maps that were shown and discussed in Beautiful Evidence.</p><ul id="e5bacc54-297b-4e0c-9ac9-a2b8c0f3a657" class="bulleted-list"><li>- Greg La Vardera (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003MK">email</a>)</li></ul><p id="d40c5506-0c70-46b4-8dd6-bc012c0cf66f" class="">From one of my favorite magazines, <a href="https://www.theatlantic.com/images/issues/200901/bush-map.gif"> a heinous graphic </a> that is technically a map, but is more accurately described as an effective summation of most of the attributes of bad design described in VDQI and later Tufte works. I&#x27;m sure others will add their own observations, but below are a few that quickly jumped out at me.</p><figure id="0edf6228-5e31-4b98-a98c-c618bdfe4182" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/bush-map.gif"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/bush-map.gif"/></a></figure><ol type="1" id="428d4b5a-4f75-4b54-9e10-a81067bc5762" class="numbered-list" start="1"><li>The various statistic are located on a stylized map of the United States, but the location of the data is not related to its map location. The map seems to be entirely gratuitous, a waste of two dimensions of information--the x-y location of the data. It is also confused me as I struggled to determine if there is a reason &quot;the number of major conflicts&quot; is in California and the &quot;Gross federal debt&quot; in New England.</li></ol><ol type="1" id="9f79271b-8703-4567-97b4-f5d43bae5b56" class="numbered-list" start="2"><li>Chartjunk abounds. Tiny paper cut-outs for troops, little power cords, half-open cell phones. Enough said.</li></ol><ol type="1" id="f11f985e-eaa7-4d9f-9bcd-318e4a4beab6" class="numbered-list" start="3"><li>Volumes represent single numbers, a classic (bad) example from VDQI. My favorites are the hearts in Texas, the gold bars in Washington, the wireless video game controllers in Oregon, and the Monopoly man in the Mid-West. I don&#x27;t need a cartoon to compare two numbers.</li></ol><ol type="1" id="d43e7937-740c-4549-bc10-e3196d8243c1" class="numbered-list" start="4"><li>Over quantitization of results. The percentage of wireless-only household is rounded from the 2- or 3-significant digits of data to a whole cell phone icon, reducing the fidelity of the data from 4.2% and 16.4% to 1 or 4 phones.</li></ol><ol type="1" id="5d89b06f-1908-4b9c-9e7e-f63348372947" class="numbered-list" start="5"><li>Oil consumption shown on different time scales. Consumption in 2000 of 19.7 million barrels per day versus 19.5 million barrels per day in 2008 (through September). I am forced to assume this is simply total 2008 consumption divided by the number of days through September, but I&#x27;m not sure. Even worse, oil consumption varies by season, so excluding the last (Winter) quarter of the year skews the data, but we&#x27;re not sure by how much.</li></ol><ol type="1" id="378f077e-c4a0-4d47-95c1-adb259cde67f" class="numbered-list" start="6"><li>The icon for Lockheed Martin&#x27;s sales is shown as a commercial aircraft. Presumably their sales are included because they are the nation&#x27;s largest defense contractor, but Lockheed Martin has not built commercial aircraft for some time. Perhaps something defense related that they actually build would have made more sense. Or data for Boeing or Airbus could have been plotted instead.</li></ol><ol type="1" id="8ea70433-1343-4985-b0ad-39b313b298cf" class="numbered-list" start="7"><li>The use of a widening fat man to plot obesity statistics is disturbing, but did anyone else need to be told that there are 50 states in the union...twice?</li></ol><p id="2cd79ea9-4a4a-49a2-8180-f3610aa03749" class="">There&#x27;s more but I don&#x27;t have the energy. I&#x27;m curious what others think.</p><ul id="f91a023a-776c-4c98-9f47-71b7aa39225c" class="bulleted-list"><li>- Adam Wuerl (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003N1">email</a>)</li></ul><p id="6c400e72-8816-4011-b527-e73100a28703" class="">Maps of the vertical (for TOM SACHS)</p><p id="0ff1788f-d9c9-417e-86f9-b01ef1bf7448" class="">Rock climbing is full of strange &amp; unusual maps of the vertical, with standardized notation that tells us the difficulty of each pitch of the route, type of climbing, fixed gear/bolts, gear to bring, descent route, and identifying features that help locate the route (which can be quite difficult).</p><p id="cd1fe745-0369-482d-a31a-125d60c8f9ce" class="">Beyond their obvious utility, the topos serve as a visual history of the sport, when comparing one guidebook edition to the next - somewhat like comparing political maps of the world through time. New routes are added, features fall off, bolts are placed, former &quot;aid&quot; routes are free-climbed - acts which reflect changing standards about new routes and increasing skill levels among first ascentionists.</p><p id="72d48725-0661-4855-9502-c5ee66b556df" class="">Here&#x27;s a sample page from the regular guidebook showing (E) &quot;West Crack&quot; in Tuolumne Meadows; the page has a nice mix of notation and features. Lines represent cracks, X&#x27;s represent bolts, and hash marks show roofs, ledges, corners and aretes. Last time on it a few years ago we were followed by a group including TM Herbert, one of the pioneers of Yosemite climbing, who is still going strong in his 70&#x27;s. I look at the topo and remember him acting out the reach &amp; twist to grab a key hold in the &quot;5.8 buckets&quot; noted at the end of pitch 1, useful information that no flatland guidebook could convey in quite the same way.</p><figure id="acf51c68-7607-4646-9a8d-aeb10e4c9114" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003NT-8834.gif"><img style="width:641px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003NT-8834.gif"/></a></figure><ul id="a2207f6d-de01-4b30-b7d0-27b0b619d4bd" class="bulleted-list"><li>- Tad Borek (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003NT">email</a>)</li></ul><p id="d1d00e94-bf09-4688-8f5b-4755e19a946c" class="">The beautiful charts of Clarence Larkin</p><p id="39686753-4584-4556-ac6f-b220d5e62ce3" class="">I searched for an appropriate thread to add these to, and this is the best I could find.</p><p id="cbde27c8-8d82-4c56-b330-af65de73b023" class="">Clarence Larkin (1850-1924) published the seminal book on &quot;Dispensational Theology&quot;, a branch of theology dealing with the nature of time and prophecy in relation to the Bible. In his book, Dispensational Truth (1920), he created a number of truly gorgeous charts. I hasten to add that it is <strong>not</strong> necessary to be a theologian, or even a Christian, to see what a wonderful set of charts these are. In fact one of their major strengths is that, like all good charts, they make perfectly clear what they intend to represent without requiring prior knowledge of their subject.</p><p id="bc23f597-8265-49ca-94ba-6b3ffd075191" class="">My favorite chart, &quot;The Mountain Peaks of Prophecy&quot; is a marvelous example of displaying 4D information in a 2D format (source: www.blueletterbible.org):</p><p id="3d36f9a2-6580-413c-88ad-b3b70222afd3" class="">Here&#x27;s another (same source):</p><p id="cd53cb65-9777-42c7-a7b4-7f9422ad9eb6" class="">More of Mr. Larkin&#x27;s images (in fact, the entire book) may be found <a href="https://www.blueletterbible.org/study/larkin/dt/00toc.cfm#charts">here</a>.</p><ul id="360df7d3-1390-47b6-ad8f-b6bc21667ee4" class="bulleted-list"><li>- Steve Roach (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Pm">email</a>)</li></ul><p id="6698b0c8-e669-4981-a5ee-6eadaa33c6d5" class="">The realistic chart of John Rapkin</p><p id="87c7eca5-73fe-4477-92c6-5e66079eb387" class="">The following chart presents a realistic comparison of the heights of various waterfalls:</p><figure id="9f5d9ef4-3db1-43a3-aa42-d2a30670afc1" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_waterfalls.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_waterfalls.jpg"/></a></figure><p id="87733229-9ea4-49f3-a6d7-435f885be9af" class="">It is a subset of an illustration titled &quot;A Comparative View Of The Principal Waterfalls, Islands, Lakes, Rivers and Mountains, In The Western Hemisphere,&quot; published in The Illustrated Atlas, And Modern History Of The World Geographical, Political, Commercial &amp; Statistical, edited By R. Montgomery Martin in 1851. The electronic version is available in the David Rumsey Collection <a href="http://www.davidrumsey.com/luna/servlet/detail/RUMSEY~8~1~779~60084:A-Comparative-View-Of-The-Principal?qvq=q:rapkin;lc:RUMSEY~8~1&amp;mi=1&amp;trs=85">here</a>.</p><p id="134077b8-862b-40e1-82d6-1fefa37dffbe" class="">I found this example of chart leading to the incapacity to compare the heights. On my point of view, the realistic aspect of the representation coupled to a perspective drawing of each element (waterfall) toward the center and an organization of the elements with the smallest in the middle induce the interpretation of a cirque of waterfalls. Linked to this perception effect comes a sense of homogeneity in heights.</p><p id="2a40c4f7-ff7d-452f-8c26-28176aa3cd07" class="">The low visibility of the scales on both sides of the illustration and the indirect link between the name of the waterfall and its illustration put the reading at a stronger disadvantage.</p><ul id="3071e6dc-1ed4-4c8c-a0aa-b2ce90a11a40" class="bulleted-list"><li>- Abram Pointet (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Pn">email</a>)</li></ul><p id="83250de1-12a2-4275-b0c2-a3a7352b760f" class="">The <a href="http://bigthink.com/strange-maps/384-does-my-metro-area-look-big-in-this-ring-road">strange map</a> of today about ring roads (No. 384, 25 May 2009) is a good example of how poor design can result in a virtually undecipherable mess. Frank Jacobs writes that &quot;As ring roads go, London&#x27;s is one of the longer ones - which can with some difficulty be gleaned from this map.&quot; This was too polite: I would be more inclined to say that it can be gleaned with a great deal of difficulty if you think it worth the effort. The person who designed the map seems to have been more interested in producing a gaudy result, looking something like a flower, than in conveying any information.</p><figure id="4616ba00-40ca-46dd-a3bf-8bf6c820f78e" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_ring_roads.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_ring_roads.jpg"/></a></figure><p id="a527edb6-d1c8-494f-942d-3baa12a7c2cf" class="">Ring Roads of the World  designed for Rice School of Architecture CPY, Houston, 2009</p><p id="14e941c6-f12f-4c5f-a352-a5b397332474" class="">As one of the things I learned (or at least became conscious of) from reading The Visual Display of Quantitative Information was that producing bad graphics can be a form of lying it is interesting to note from some of the comments that the principal claim of the map, that Houston has the Longest Ring Road in the World, is not in fact true.</p><ul id="ed3932fe-df48-4add-a8d0-a13a598f8fc6" class="bulleted-list"><li>- Athel Cornish-Bowden (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Rg">email</a>)</li></ul><p id="9ddc1967-2073-4f3d-9a10-ca8c61d82b31" class="">This <a href="http://www.nytimes.com/2009/07/04/arts/design/04manhatta.htmll"> NYT article</a> gives a slideshow about a Natural history of Manhattan over the past 400 years. The new map-based exhibit opened at the Museum of the City of New York. It is called, &quot;Mannahatta/Manhattan: A Natural History of New York City.&quot; The exhibit consists of historical accounts, maps and computer models that explore the ecology of Manhattan from the time before it became a city.</p><figure id="b01a500c-2a40-4c6a-8d70-060a2c25f141" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_manhattan_5.jpg"><img style="width:430px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_manhattan_5.jpg"/></a></figure><figure id="cc101632-3db4-4543-adea-f47c805c7ed1" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_manhattan_4.jpg"><img style="width:333px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_manhattan_4.jpg"/></a></figure><p id="5cacb2db-a7ef-4a33-8536-cebafc7df8b3" class="">The project has also its own <a href="https://welikia.org/">website</a> and a book. This is a pretty good multi-media site that gives layers of meaning to those who now live in Manhattan.</p><ul id="dcaecfea-4bc9-48d2-a027-92daf987670a" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Ts">email</a>)</li></ul><p id="c0e14b9f-3c07-4d55-a172-09024b7e6912" class=""><strong>Cartographic treasures show little change in city life</strong></p><p id="d31d89a9-0ba7-4be7-b40d-16b5dbc41f9e" class=""><strong>A unique collection of rare Manchester maps reveals how worries about congestion and binge drinking were just as prevalent 100 years ago as they are today.</strong></p><p id="d2d65f9a-5a2f-4e7b-946d-7c8d520677e6" class="">The drawings, part of an exhibition of 80 maps unseen in public for up to 200 years, can be seen at The University of Manchester&#x27;s John Rylands Library opening on 25 June.</p><p id="75868cb1-1af7-47e2-bcf1-cde344e2997d" class="">It includes an excerpt of the first large scale survey of the city published by William Green in 1794.</p><p id="7b7f32fd-5181-473a-b143-136a7864e561" class="">And a 1945 map shows how the city centre was slated for transformation into a modernist utopia along the lines of inner city Birmingham. Thankfully the plans never went ahead.</p><p id="028cf740-9d5c-4855-8cca-b92e58f48e3d" class="">An &quot;isochron&quot; map shows how long it took to commute to the city centre in 1914 and was produced by Manchester Council to convince the movers and shakers of the time that tramways and traffic policemen were needed - echoing the rejected Transport Innovation Fund congestion charge proposals of last year.</p><p id="abcf3995-f0dd-4f13-9858-4bdf12615fb1" class="">&quot;The congestion of 1914 shown in the map bears a strong similarity to the traffic hotspots of today,&quot; said Chris Perkins, geography lecturer from The University of Manchester and one of the exhibition&#x27;s curators.</p><p id="9a15a6c0-9c51-4b5b-9ffe-cb0b158b0d34" class="">&quot;It&#x27;s amazing that it took up to 50 minutes to get to places as far out as Stockport and Timperley - a similar figure to now.&quot;</p><p id="79b0632b-a0ff-489a-80d6-ef5bc036554a" class="">On display at &#x27;Mapping Manchester&#x27; is material held by The University of Manchester and other institutions in the city, including generous loans of materials from the Manchester City Library and Archives, Chetham&#x27;s Library and the Manchester Geographical Society.</p><p id="005ed761-76d1-4d71-a22e-65ff69cef211" class="">An 1889 map of licensed alcohol sellers produced by the United Kingdom Alliance - one of the period&#x27;s temperance societies - also has an eerily resemblance to the binge drinking hotspots of today, says fellow curator and geography lecturer Dr Martin Dodge also from The University of Manchester.</p><p id="c5058e90-772c-4371-aa58-63c94eb00373" class="">&quot;This fascinating map published in the Manchester Guardian was purposefully designed to show that the biggest drinkers lived in Manchester&#x27;s poorest areas - just like today.&quot;</p><p id="7ecb0665-73ac-415a-a4b2-5c7dd0c694dc" class="">&quot;It certainly provoked a strong response from correspondents to the Guardian who were outraged by the &#x27;low morals&#x27; of working people,&quot; he said.</p><p id="d3561a35-bbe7-4a37-bab1-0caaf015bfd8" class="">The exhibition shows Manchester&#x27;s first ever planning maps, hand-printed 220 years ago for wealthy citizens who displayed them in their homes and offices as a status symbol.</p><p id="ef4b5158-49ac-463e-a532-94551ab767fd" class="">The maps capture the start of the massive growth of the city at the beginning of the industrial revolution.</p><p id="fc7180af-0cee-4bb5-b8e1-b0c0e5ad51a6" class="">Mr Perkins said: &quot;In 1945 the Council planned a modernist utopia of straight roads, wide boulevards, roundabouts, and other civic buildings.&quot;</p><p id="02d07b9b-de45-4567-aec9-50562a1d7419" class="">&quot;It was part of a 200-page vision for universal education, healthcare and low congestion.&quot;</p><p id="40252530-d2b5-4b64-baf9-2f97bcf85647" class="">He added: &quot;If they had got their way, they would have covered over parts of the river Irwell, bulldozed Victoria station, and built a wide boulevard between the Town Hall and Deansgate.&quot;</p><p id="685ba536-6b66-4cdc-bd2c-c17354b0a353" class="">&quot;Manchester would have probably looked more like inner city Birmingham than the winding medieval streets we know today.&quot;</p><p id="6fd1aacf-d90b-47ac-bca1-ab3a3f9ef53f" class="">&quot;Thankfully as cash was so tight in the post-war years, the plans were never implemented.&quot;</p><p id="18901ae8-e85a-4281-9b78-60c38e723c86" class="">Also shown in the exhibition is an insert given out free to Manchester Guardian readers in 1926 to celebrate the city&#x27;s Civic Week.</p><p id="b582fc6c-dbed-49b5-97eb-c54afe4f1e38" class="">Dr. Dodge said: &quot;The map was a navigational device but also an elegant attempt to depict Manchester as a city of parks, education and good transport.&quot;</p><p id="60202671-a49b-4d19-a7cb-2062bae10629" class="">&quot;There was of course no depiction of the city&#x27;s less attractive areas - such as its slums!&quot;</p><p id="22067e6e-9db5-46a8-acc7-33b4b3af7bbb" class="">Click <a href="http://www.manchester.ac.uk/aboutus/news/display/?id=4815">here</a> to view the article.</p><ul id="3326dfaa-17b6-4258-8055-c0e8c05e6ac4" class="bulleted-list"><li>- Marek Karliner (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Vl">email</a>)</li></ul><p id="59c51e44-5639-4a1f-88f6-53a5c4a843a7" class="">Scents of the City</p><p id="99560c3d-3f2f-4356-8aa2-1c599616ca3a" class="">&quot;Scents and the City,&quot; by illustrator and author Jason Logan, as featured in the NYTimes:</p><figure id="6e6ef5f8-a3e2-40a6-b084-17f685aab3ca" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_scents_nyc.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_scents_nyc.png"/></a></figure><p id="fb5314e0-df9b-4b74-bd60-07976a73b755" class="">(click to read in full)</p><ul id="32a0367c-df31-4a79-b3ab-0b870a5ff857" class="bulleted-list"><li>- R.C. JONES (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Vs">email</a>)</li></ul><p id="36ac6094-a543-438b-85da-d6e299e6fd29" class="">Source: Swann, Autographs, auction catalog, October 29, 2009.</p><ul id="c67ce0d8-b235-448d-9e96-375f693db4de" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="be24c16e-c038-46d3-b459-5907c1e5e931" class="">Mapping character interactions in movies</p><p id="390c55d5-e7af-4fe0-bf33-1ed339105fd2" class="">Three carefully crafted, ingenious charts followed by two delightful zingers (from <a href="http://xkcd.com/657/">xkcd</a>)....</p><figure id="5b96223d-da3d-4afe-bf9c-52dc6c0611f6" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_xkcd_movies.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_xkcd_movies.png"/></a></figure><p id="2972e1a2-c131-423b-9d99-08c5f4290cd5" class="">(click for large view)</p><ul id="264b451a-dcbf-4c42-9638-658a80bfe106" class="bulleted-list"><li>- Bob Danielson (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Xg">email</a>)</li></ul><p id="5ec179fd-3d44-4447-b2f8-4baebd7cd0ab" class="">A Tom Gauld map of his holiday home, complete with extensive key.</p><figure id="727796c3-d2a8-4fdb-8992-fb4a28ea23ff" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_holiday_home_large.jpg"><img style="width:620px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_holiday_home_large.jpg"/></a></figure><ul id="f29273f0-6fb3-4de6-9a47-2b4dea999aa5" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003Zk">email</a>)</li></ul><p id="292896ad-3ac7-4cc9-94cc-a657b1ddb3b8" class="">Winnie-the-Pooh map</p><div id="345a5dab-ebaf-4c22-accd-675ae27e0c1d" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Column 1</th></tr></thead><tbody><tr id="625f9f1e-559d-4e7d-9e2a-200b9263fa92"><td class="cell-title"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/Untitled%20Database%20345a5dabebaf4c22accd675ae27e0c1d/(click%20to%20see%20larger)%20625f9f1e559d4e7d9e2a200b9263fa92.html">(click to see larger)</a></td></tr></tbody></table></div><p id="9bc657c7-a785-4c17-ba46-84a7096b08aa" class="">Source: Sotheby&#x27;s catalogue, English Literature, History, Children&#x27;s Books &amp; Illustrations, London, 17 December 2009, p. 92.</p><ul id="ff8cd9da-79d8-43e6-8585-d58d678dd310" class="bulleted-list"><li>- Edward Tufte</li></ul><p id="5f231113-50b0-43de-a442-dae99d9fea9d" class="">How to plan your way around the solar system while watching your fuel gauge. Another well-executed graphic from <a href="http://www.xkcd.com/681/">xkcd.com</a>.</p><figure id="e667ed2d-d4a7-42c3-9890-2d8851162eb1" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_xkcd_gravity.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_xkcd_gravity.png"/></a></figure><p id="e019c0e6-84ff-4667-89e3-6edf674d15d4" class="">(click through for large view)</p><ul id="a7f5bf81-c48c-4870-9c67-3056f9bc4b46" class="bulleted-list"><li>- Aaron Symanski (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003bG">email</a>)</li></ul><p id="55008762-1b1a-48fc-ae1e-33622e3af0a1" class="">Astonishingly beautiful 15-sheet maps series of ancient courses of lower Mississippi from Harold N. Fisk&#x27;s 1944 Geological Investigation of the Alluvial Valley of the Lower Mississippi River.</p><p id="a3258a74-428f-4d57-9e33-533b86c5a472" class="">Mid-res pictures available at <a href="http://www.radicalcartography.net/?fisk">Radical Cartography</a>. Full-res originals can be downloaded at <a href="http://lmvmapping.erdc.usace.army.mil/index.htm">US Army corps</a>.</p><figure id="9bc75071-ab6e-47e3-8b1d-81941e50c898" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_composite.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_composite.png"/></a></figure><figure id="6bd191bc-84f4-4903-aa64-e4df868d72ed" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_1.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_1.jpg"/></a></figure><figure id="95550601-9936-44ac-b119-57e29ae3b11d" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_2.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_mississippi_2.jpg"/></a></figure><p id="227f2cf3-d822-460d-81d3-c4a02565ac30" class="">(click to view larger)</p><ul id="5d976e27-d62d-4103-9f35-62f85e7c15ce" class="bulleted-list"><li>- Ivan Poukhkal (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003bn">email</a>)</li></ul><p id="6046c493-10da-4df9-83f6-85e21454edc8" class="">Some beautiful maps of 12 favourite art galleries in Tokyo from the book <a href="http://artspacetokyo.com/artmaps/">ArtSpace Tokyo</a>:</p><figure id="9f2d3314-f297-421d-b54d-a26182e75db7" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003dw-9400.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003dw-9400.jpg"/></a></figure><ul id="ce9b5690-5a05-42eb-bb18-723872db88ea" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003dw">email</a>)</li></ul><p id="cf7e73f7-df9e-4fb4-a519-6d5fc17660be" class="">An extract from a book about maps—an Ojibwe map from ca 1820 in <a href="http://www.amazon.com/Making-Maps-Second-Edition-Visual/dp/1609181662">Making Maps: A Visual Guide to Map Design for GIS</a>, by John Krygier and Denis Wood.</p><figure id="0a3dd3f1-a78c-41f4-867a-f59d17b77d1d" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_instructions.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_instructions.jpg"/></a></figure><ul id="0fbcd57d-838a-44ec-b863-e90b5ec303a3" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003h5">email</a>)</li></ul><p id="931fd8a5-1f7c-4a6a-a5fc-f81c0746778c" class="">Flickr member Eric Fischer has created two very interesting sets of data maps.</p><figure id="faf58599-55d0-48e2-821a-0fb15333e9a2" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_1_nyc.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_1_nyc.jpg"/></a></figure><figure id="69a831cb-f51d-437c-b480-b88254ec5ed4" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_9_chicago.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_9_chicago.jpg"/></a></figure><figure id="5b3172a9-4d8c-44d7-9499-e99c05e961c4" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_2_london.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_2_london.jpg"/></a></figure><figure id="8665c05a-a9eb-4849-beef-1f9afc41b9c5" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_10_paris.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_10_paris.jpg"/></a></figure><p id="d4d55468-1825-4cb6-872a-b4fda3f2c935" class="">When photographs are taken of a particular place, and then uploaded to a public forum, and tagged with the location that the photograph captured, this is called geotagging. Using scripts to mine the Flickr and Picasa public photograph collections, Fischer created the <a href="https://www.flickr.com/photos/walkingsf/sets/72157623971287575/">Geotaggers World Atlas</a> of location-centric photographs, which he subsequently <a href="https://www.flickr.com/photos/walkingsf/sets/72157624209158632/">color coded</a> based on who likely snapped the shot—locals vs. tourists. In the introductory text, he says:</p><p id="ae5cb3ac-0efe-43ee-8fa3-456585481b57" class="">&quot;Some people interpreted the Geotaggers&#x27; World Atlas maps to be maps of tourism. This set is an attempt to figure out if that is really true. Some cities (for example Las Vegas and Venice) do seem to be photographed almost entirely by tourists. Others seem to have many pictures taken in places that tourists don&#x27;t visit.&quot;</p><figure id="cbd3f81e-0147-4276-90a1-92dc6a5ee058" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_3_nyc.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_3_nyc.jpg"/></a></figure><figure id="1a157d18-a1a1-4b77-85f0-31825eb52936" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_5_chicago.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_5_chicago.jpg"/></a></figure><figure id="538525e4-10bb-43fb-a594-074dd3bb29c7" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_4_london.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_4_london.jpg"/></a></figure><figure id="27ef1aaa-c828-4f87-9acb-f203d1f07e7d" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_1_paris.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_1_paris.jpg"/></a></figure><p id="311cac79-3355-4a53-b916-221e34b22071" class="">I live in Pittsburgh, whose color coded map is shown below, and I&#x27;m very curious about some of these apparent hot spots—what&#x27;s so interesting over there? I&#x27;ll be finding out soon. And I will definitely check his atlases the next time I travel for hot spots to add to my itinerary.</p><figure id="8790e781-4a32-4655-b779-8a4ebf425b9c" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_pittsburgh.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_geotagging_tourist_pittsburgh.jpg"/></a></figure><ul id="a87d3a40-72ed-440e-a5ab-e4c5b964172c" class="bulleted-list"><li>- Katherine Davoli (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003hV">email</a>)</li></ul><p id="3d5c91d8-834f-44e0-ae70-4f9715ab654a" class="">Here is a great <a href="http://isoipse.tumblr.com/post/76898901/end-paper-maps">collection</a> of book endpapers that are all in the form of maps. This one is from Portrait of a Village, by Joan Hassall &amp; Frances Brett Young. Heinemann London 1937.</p><blockquote id="01930a72-c707-4e03-a606-f13f3f0b3e52" class="">&quot;I take this opportunity of declaring that no village like [Monk&#x27;s Norton] has ever existed outside my imagination...&quot; — Frances Brett Young</blockquote><figure id="411558a1-9996-4b99-87f5-999ea13465a2" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_endpaper.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_endpaper.jpg"/></a></figure><ul id="3b52936d-490e-4454-a29a-59710a570613" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003iQ">email</a>)</li></ul><p id="026403df-89fa-4c1a-b195-1199924d3586" class="">Here is a children&#x27;s geography book: The Map That Came to Life by Ronald Lampitt, published in the UK in the 1948. The book uses a mix of maps and scenes, segments of Ordance Survey type mapping in one-to-one correspondence with the 3D scene they represent.</p><p id="6b1bbc68-75ab-4e39-a80a-34006daa1e19" class="">The complete book is <a href="http://www.fulltable.com/VTS/aoi/l/lampitt/map.htm">here</a>.</p><figure id="8a65438e-ca16-47aa-a9ca-ade7654d03c5" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_childrens_book.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_childrens_book.jpg"/></a></figure><figure id="e21ca41a-1286-4054-b6b8-48134fd8564a" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_childrens_book_2.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_childrens_book_2.jpg"/></a></figure><ul id="a66937d9-4207-49d4-8c44-c3f1dd0aa9e9" class="bulleted-list"><li>- matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003iU">email</a>)</li></ul><p id="6661173b-ada2-428c-8046-e59e8810fb6e" class="">The cultural norm of the tube map strikes again!</p><p id="42d3a006-9f3e-49a5-bba4-553e923159b1" class="">The <a href="http://www.carmagazine.co.uk/Community/Car-Magazines-Blogs/Ben-Oliver-Blog2/Who-owns-who-in-the-car-industry/">automotive industry</a> by way of the London Underground map:</p><figure id="0a362311-c55b-4e3d-ace5-f27c1bdf89f1" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_auto_2005.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_auto_2005.jpg"/></a></figure><ul id="bd94b440-30c6-45c0-a649-549c9f5eb5d0" class="bulleted-list"><li>- Andrea (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003iy">email</a>)</li></ul><p id="5b4d4ba2-b897-4c89-bbc3-fb04baf37934" class="">Here is a Civil War-era map showing the distribution of the slave population of the United States as of the eighth census (1860):</p><figure id="d77d61e4-76ec-4664-803e-d7c9444d911e" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_slave_pop.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_slave_pop.jpg"/></a></figure><p id="0de5f72a-316c-4ed3-9984-548ded97bf7d" class="">The map is part of a collection from the National Oceanic and Atmospheric Administration. The NOAA story about the distribution of slavery map and other materials held by NOAA are available for download or purchase may be found <a href="http://www.noaanews.noaa.gov/stories2011/20110210_civilwarmap.html">here</a>.</p><ul id="c01f865a-ace6-4680-a594-dde4fe4ef762" class="bulleted-list"><li>- Ann C. Davidson (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003ll">email</a>)</li></ul><p id="c992a2a6-f3ac-4b7a-8662-45ddaf9f31b7" class=""><a href="http://www.nearfield.org/2011/02/wifi-light-painting">This project</a> seeks to create maps of electromagnetic fields, such as those used by WiFi, using a light painting long-exposure technique:</p><p id="4bb53700-6a19-4b3b-b4f4-22754ea8281d" class="">The results are impressive from both a visual and analytic perspective. By overlaying this information on a real-world scene the connection of the datapoints to a particular spacial area is made concrete.</p><figure id="a062dcbe-0fdf-4365-b96d-080d7f7ea721" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_inmaterials.jpg"><img style="width:500px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_inmaterials.jpg"/></a></figure><p id="64f08104-521b-45fe-8fad-1f6da8d1650b" class="">Improvements in this technique could be had by choosing a different method of representing the signal strength variable, such as light brightness. This particular technique unnecessarily links signal strength with height, perhaps leading to confusion when the data is mapped over uneven topography.</p><ul id="a3c4690f-07e9-4cdb-b1da-811da734b694" class="bulleted-list"><li>- John Taylor (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003m7">email</a>)</li></ul><p id="7d818545-9711-4bc6-91d9-da924d2d74a9" class="">A map of a Shaker village in Canterbury New Hampshire, from the <a href="http://www.loc.gov/exhibits/treasures/">American treasures archive</a> at the Library of Congress:</p><figure id="9682885a-ae04-4f3a-841a-3116defc8cf4" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003pW-10739.jpg"><img style="width:616px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003pW-10739.jpg"/></a></figure><ul id="33d52343-fae3-4ff6-8a3f-6381dc46d91b" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003pW">email</a>)</li></ul><p id="cbad4803-dd07-41d4-91a9-7d90f8db1f08" class="">Here is a <a href="http://www.geog.port.ac.uk/webmap/dummer/dum1menu.htm">fantastic set</a> of very beautifully drawn maps of English South Coast Harbours from 1698, by Edmund Dummer and Thomas Wiltshaw.</p><p id="04b9b5d8-78ce-4ae2-9659-8fa77ac241dd" class="">The image below is a low-resolution version of Falmouth and surrounding harbours;</p><blockquote id="b6695afc-dd4a-439b-9095-21b43d319a12" class="">&quot;Of Dartmouth Fowey Falmouth &amp; Helford how &amp; what circumstances they differ from all ye rest and our opinion of them. Dartmouth, Fowey, Falmouth &amp; Helford are places of resort upon some occasions, And there are some particulars at Dartmouth improveable for the Services of the Navy, But in other Circumstances all these seem much more Subject to Hazards for the intercourse of Shipping than those Places do that are already in Use upon this Coast of England to which our Order Confines us, ...&quot;</blockquote><figure id="b66d2c2d-f968-4ce8-b44c-5a9c70653103" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003q3-10919.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/0003q3-10919.jpg"/></a></figure><ul id="e1e3b707-18c1-48f0-882e-0d98b9cd1dea" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003q3">email</a>)</li></ul><p id="fa8a9cf8-c7cd-41e5-89b6-268d7fd65d1b" class="">A beautiful <a href="http://hint.fm/wind/">animated map</a> depicting winds across the continental United States.</p><figure id="3566ad43-e399-45c9-ac98-a3129f6d96ea" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_wind.png"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_wind.png"/></a></figure><ul id="bd79fb3c-4367-4e52-8eda-c0a81dfc983c" class="bulleted-list"><li>- Adam Wuerl (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003sU">email</a>)</li></ul><p id="92f26c9e-0809-4a6e-891f-76cc17fb3664" class=""><a href="http://www.mappingthenation.com/">Here</a> is an excellent website companion to the book Mapping the Nation by Prof Susan Schulten of the Department of History at the University of Denver, with many images and commentary.</p><figure id="c6936a86-a30a-4ff3-a1e5-cad406c65fea" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_virginia_slave_pop.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_virginia_slave_pop.jpg"/></a></figure><ul id="ca2b99b2-f62d-4e61-bd3b-21a02dc11cb7" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003tB">email</a>)</li></ul><p id="f8bcc7a9-57c7-4802-a25f-bb6a80cc2152" class="">Last week, <a href="http://www.radiolab.org/people/robert-krulwich/">Robert Krulwich</a> (RadioLab co-host) wondered on his NPR blog about <a href="http://www.npr.org/blogs/krulwich/2012/09/12/160996525/odd-things-happen-when-you-chop-up-cities-and-stack-them-sideways">what happens when you chop up cities and stack them sideways</a>? The pictorial answers, from French artist <a href="http://www.armellecaron.fr/">Armelle Caron</a>, comprise a set of strange and unusual maps.</p><p id="358ea168-7a20-4560-b9f5-297bc2771a1e" class="">For example: here&#x27;s Paris:</p><figure id="e9fc8998-3a79-445a-8045-c460f0fb4783" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/paris-from-above_custom-d07ebae90daa45a402db29ec158c75c916949ee4-s3.png"><img style="width:462px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/paris-from-above_custom-d07ebae90daa45a402db29ec158c75c916949ee4-s3.png"/></a></figure><p id="37bdc234-9e99-46ec-a93b-4d94209a9025" class="">and here&#x27;s Paris with its city blocks dissected and arranged linearly based on shape and size:</p><figure id="2bacfa44-0c0e-457f-a0a4-89424dbdacce" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/paris-dissected_custom-aa9ef5dce9071adc69d4948eb0b7ebcc10ccd129-s3.png"><img style="width:462px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/paris-dissected_custom-aa9ef5dce9071adc69d4948eb0b7ebcc10ccd129-s3.png"/></a></figure><p id="11a09b7f-4f15-4d0f-b840-fbfb5f96b542" class="">Different cities have different block layouts, and so stack up differently. New York&#x27;s blocks, in contrast, are much more regular. From above:</p><p id="fa569823-bd9e-4c5d-b339-a0e9950eed58" class="">and with blocks arranged linearly based on shape and size:</p><figure id="c941533e-40ba-4c18-ba0a-ecc741c4b55b" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/nyc-from-above_custom-3083cfda2cd7ac8563ac8b50aa5ea11a1a518e3f-s3.png"><img style="width:462px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/nyc-from-above_custom-3083cfda2cd7ac8563ac8b50aa5ea11a1a518e3f-s3.png"/></a></figure><figure id="8c4ef758-36b9-4bd2-b3fb-ee53bd56344d" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/nyc-dissected_custom-9c50f7607432816da35e313448cb13431f4df0a3-s3.png"><img style="width:462px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/nyc-dissected_custom-9c50f7607432816da35e313448cb13431f4df0a3-s3.png"/></a></figure><p id="69462d43-8071-428a-bc6f-b7341124ea08" class="">I expect geographical features inform how one&#x27;s city&#x27;s blocks are shaped, but I wonder if there&#x27;s other patterns one can eke out from maps like these?</p><ul id="790c0f06-6407-4dca-97cd-b24022c93445" class="bulleted-list"><li>- Katherine Davoli (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003td">email</a>)</li></ul><p id="78746251-67d6-4bb9-85a2-7a069d881f65" class="">Alfred Russell Wallace (1823-1913) was a British naturalist who independently arrived at the theory of natural selection when he was recovering from malaria on a remote Indonesian island. He wrote a paper describing his idea and famously sent it to Charles Darwin for his views. By rights Darwin should have sent the paper on to a suitable journal with a recommendation that it be published, thereby giving Wallace scientific priority for a radically new, and essentially correct, way of understanding nature.</p><p id="46caecb3-7794-4f0d-87bf-e597f441a9d0" class="">But that isn&#x27;t what happened. Darwin talked it over with a few influential chums (Hooker &amp; Lyell) and they cooked up a way of presenting Wallace&#x27;s paper and a hastily written paper by Darwin at the same meeting of the Linnean Society in London in July 1858.</p><p id="4b1a7815-f36a-4247-aa7e-7b02aa97438e" class="">It is a hundred years since Wallace died and the Natural History Museum in London will begin a celebration of 100 years since Wallace&#x27;s death this week.</p><p id="64517e1c-daa9-4b80-a652-aeca05bc5eb3" class="">Wallace was a great Victorian travel writer and perhaps his best known volume is The Malay Archipelago. The Internet Archive has a <a href="http://archive.org/stream/malayarchipelago00wall#page/n9/mode/2up">full copy online</a> of the 1869 edition.</p><p id="6597f1a8-243a-4719-b246-6abed4f14f62" class="">Below is a map taken from the book that shows the island of Borneo (now split between three countries Brunei, Indonesia and Malaysia) on the same scale as the British Isles (now split between two countries Eire and the UK). This is a clever way to show pictorially to the British readers of Wallace&#x27;s book how big the island of Borneo is. I didn&#x27;t realise how similar in area Borneo and the British Isles were—Borneo is the third biggest island in the world but is only about 2.5 larger in area than the British Isles (Wikipedia lists the area of Borneo as 743,330 km2 and the British Isles as 315,134 km2).</p><p id="68a29c88-a729-4ea4-b24a-5ebdb59a7c46" class="">More at <a href="http://www.datadeluge.com/">datadeluge.com</a>.</p><figure id="21d22df2-bf33-4e6a-bcea-6fbc21e1d0f2" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_borneo.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_borneo.jpg"/></a></figure><ul id="8e38e6c4-4c49-4521-a1ce-7b7f54e81914" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003ug">email</a>)</li></ul><p id="12054992-bc03-4474-ad74-ba1adb9ffc7e" class="">Basketball maps</p><p id="0e99910e-1a17-4de1-b57a-9ad73cc02fba" class=""><a href="http://grantland.com/features/kevin-durant-having-one-greatest-offensive-seasons-nba-history/">This article</a> on several years of hoopster Kevin Durant&#x27;s shots has several interesting and convincing graphical maps/arguments.</p><figure id="9e78a837-c4b4-42b4-bd5c-822eb18f2087" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant.jpg"/></a></figure><figure id="3536916b-0cea-4e00-8c84-d36c97c03aad" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_1.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_1.jpg"/></a></figure><figure id="c14cca42-6ad7-4d3c-97d0-625c941e4a27" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_2.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_2.jpg"/></a></figure><figure id="62c44d37-5785-4fc9-b5b0-66032f65c881" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_3.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_3.jpg"/></a></figure><figure id="84b0e068-70d9-46fc-98ed-faa104161ba6" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_4.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_durant_4.jpg"/></a></figure><ul id="33e5277c-d1c6-4bd6-86aa-9ac5649a3604" class="bulleted-list"><li>- R.C. Jones (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003v2">email</a>)</li></ul><p id="16fe5cbd-bdea-4d8e-8069-9c7bc9378e5e" class="">NASA has an incredible depth and breadth of image data that they allow people to use pretty freely in various ways. For example, I had been reading up on the <a href="https://en.wikipedia.org/wiki/Libration">libration</a> of the moon (the observed &#x27;wobble&#x27; it undergoes as part of its normal orbit. This means more than 50% of the moons face is seen from Earth—in fact about 60%) and wanted to create a day-by-day sequence of images that showed what you would observe of the moons surface from Earth as both phase and libration changed. It so happens that NASA have a nice web interface that allows you to create hour-by-hour visualizations of the phase and libration of the moon based on their detailed moon surface topographic data. They also have nice video visualizations of these images.</p><p id="93d88841-d549-4e5e-a498-854ba3a44e17" class="">I created a series of these images from 9th May 2011 to 17th May 2011. Each image is at 0 hours UT. I have arranged the images in <a href="https://en.wikipedia.org/wiki/Boustrophedon">boustrophedon</a> order beginning top left. I found that this was the best way of arranging the images so that each step in the image sequence is immediately &#x27;adjacent&#x27; to the previous step and also adjacent to the next one. After one look you get accustomed to what seems a &#x27;counter-intuitive&#x27; way of reading sequences of symbols or images.</p><p id="8341a4c7-5268-4beb-b2c5-3fc5a846397f" class="">A higher resolution version of this confection is <a href="http://www.datadeluge.com/2013/12/libration-phases-of-moon.html">here</a>.</p><p id="4003c0d9-fc97-4107-ae4d-fdf2a5822e85" class="">Note that these are not images captured from a ground based telescope, they are visualisations of data collected from a diverse set of experimental data—such as LOLA the Lunar Orbiter Laser Altimeter measurements of moon topography.</p><figure id="3657448c-8f8d-4b28-9331-15b682e1242f" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_libration.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_libration.jpg"/></a></figure><ul id="74a447e7-9e12-4beb-a302-869b1434fc73" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003xU">email</a>)</li></ul><p id="e07390ab-1209-469d-8062-c50f509b3cd1" class="">One of my favourite artefacts is the set of pop-out maps made by <a href="http://popoutproducts.co.uk/">PopOut products</a>. They have cleverly identified both a need—high resolution spatial data in a pocket friendly format without the need for connectivity or power (i.e. a map) with a way of packaging it into a pocket sized unit.</p><p id="37b80544-7912-410f-95b3-b3dd5dbc1cb0" class="">According to the company history,</p><blockquote id="eefd1feb-47fb-4d53-a8b4-68173c9c492a" class="">1992: Having spotted a need to cure what he calls &#x27;Map Stress Syndrome&#x27; after watching numerous tourists around the City of Bath, England, battling with oversized maps, founder Derek Dacey recalls the invaluable miniature charts he used during his days as a commercial pilot. Aiming to bring this level of usability to the city map market, a small team of designers is recruited to realise what would soon become the PopOut.</blockquote><p id="a9937ee4-bbef-40bd-b672-77e549f7b7a3" class="">Here is an example of the PopOut map of London UK showing the cunning folding mechanism that allows the centre of London to be packed into the pocket sized format. Good old fashioned ingenuity, high quality printing, paper and card put to great use.</p><figure id="5eac0a01-420a-4de6-b1b3-850fdbe78f2b" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_popout.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_popout.jpg"/></a></figure><ul id="3543ca4c-223e-45ac-9ede-d30c6a303859" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003xV">email</a>)</li></ul><p id="d33f86bc-ab59-4f86-ba12-95fc113f769b" class="">In 1855 the American oceanographer Mathew Maury described the Gulf Stream in the following lyrical terms:</p><blockquote id="d4a67876-f195-4bfe-a222-a0aec2e29231" class="">There is a river in the ocean. In the severest droughts it never fails, and in the mightiest floods it never overflows. Its banks and its bottoms are of cold water, while its currents are warm. The Gulf of Mexico is its fountain and its mouth is in the Arctic Seas. It is the Gulf Stream. There is in the world no other such majestic flow of waters. Its current is more rapid than the Mississippi or the Amazon.</blockquote><p id="869461a4-9724-4ff0-b719-fa3bb85fcb68" class="">Below is a map of the Gulf Stream presented in Light science for leisure hours, a series of familiar essays on scientific subjects, natural phenomena, etc., (1871) by Richard Proctor, available <a href="http://www.biodiversitylibrary.org/item/58817#page/9/mode/1up">online</a> via the Biodiversity Heritage Library.</p><figure id="ca274edb-27ae-48e3-8c4b-afd8c764763f" class="image"><a href="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_gulf_stream.jpg"><img style="width:700px" src="Unusual%20maps%200b6e65a31b8d43568f463a9d47f38b65/strange_maps_gulf_stream.jpg"/></a></figure><ul id="23c06734-3416-43d8-825f-3bf64eb386e5" class="bulleted-list"><li>- Matt R (<a href="https://www.edwardtufte.com/tufte/email?msg_id=0003xm">email</a>)</li></ul><p id="8b172ed6-fb61-415b-9c62-454ff463796b" class="">You might find these maps interesting.</p><p id="09f75009-c0d3-4cf2-a98e-4e9ee9843650" class="">The world without Facebook:</p><figure id="ba74bd8d-227c-4bb2-9104-088b047f1ff9" class="image"><a href="http://ianwojtowicz.com/UnFacebook%20World/False-Color-Facebook-NASA-Mashup.png"><img src="http://ianwojtowicz.com/UnFacebook%20World/False-Color-Facebook-NASA-Mashup.png"/></a></figure><blockquote id="2d3b6481-3fc1-463c-a23a-e9e4eb29912e" class="">Over the last few hundred years, maps have divided territory into political administrative units (countries, states, etc.). Newer spatial realities, however, are driven by the flow or inhibition of information. One&#x27;s physical location is just a single variable in the multitude of virtual projections possible in the networked world. Country borders may be highly controlled, but thoughts and ideas follow more fluid paths. The UnFacebook World Map is a remix of two popular images: NASA&#x27;s Earth at Night, and Facebook&#x27;s Friendship Map. By subtracting the Facebook map from the NASA one, we end up with a new kind of tension between two zones: the ancient technologies of situated human settlement (rendered visible by electric light) and the newer technologies of disembodied electronic communication.</blockquote><p id="0f3a793d-475d-4fcb-af45-56e5075c3071" class="">Further description <a href="http://ianwojtowicz.com/unfacebook_world">here</a>.</p><p id="e80d07ea-4ec1-4e53-9808-738a780517a9" class="">And new and disappearing cities:</p><blockquote id="587d4201-c9d3-4e20-aa1f-55301b325695" class="">This map was made by overlaying two publicly-available NASA maps showing light from cities at night. One map was recorded in 1992, the other in 2010. By overlaying and tinting them red and blue, respectively, we get a resulting map that reveals where urbanization has increased and declined over the last two decades. I chose the colors for this map in reference to astronomical light shifting -- a phenomenon that scientists use to study distant stars and galaxies. Light shifting is like how the sound of cars change from high to low pitch as they drive past you....Using light shifting as a metaphor, I created the map at the top of this page. Instead of depicting the night sky, though, I am show the Earth&#x27;s surface. My aim is to turn the awe and mystery of astronomy towards spaces closer to us. By producing new maps I hope to reimagine how we inhabit our planet and relate to others.</blockquote><p id="a6175f27-60b2-46d5-90b2-5ec3e52b63fb" class="">Further description <a href="http://ianwojtowicz.com/red_shift">here</a>.</p><ul id="52150a70-9f84-42a7-8260-69a80f05d797" class="bulleted-list"><li>- Ian Wojtowicz (<a href="https://www.edwardtufte.com/tufte/email?msg_id=00040c">email</a>)</li></ul></div></article></body></html>

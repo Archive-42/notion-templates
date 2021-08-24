@@ -1,0 +1,675 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Weekly Planning Template</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="34e3da7c-ccde-4803-919d-a812e2c9740b" class="page sans"><header><h1 class="page-title">Weekly Planning Template</h1></header><div class="page-body"><p id="9dc65215-350e-4dc6-b01e-4e77402b3f2f" class="">Created by <a href="http://www.preciousm.co">Precious M.</a></p><hr id="44db78a9-9811-4fcc-abf4-cab1b1eff8d6"/><h1 id="68a314fd-766a-46e5-a1da-4e40784dec21" class="block-color-blue">Weekly Agenda</h1><hr id="7ffdfa5f-d212-4eb4-b5c2-f83b41a21efe"/><div id="af661711-799e-41fe-a4fe-9a3168aecfdb" class="column-list"><div id="67630592-9193-4f51-b83d-a98d74cff597" style="width:25.000000000000007%" class="column"><h2 id="0ed0aee7-14ed-4635-a2c9-b6c7de3ca301" class="">Goals →</h2><p id="481d4139-b040-47e1-9bb7-1b3acf92e574" class="">
+</p></div><div id="cd378979-fe98-4aa5-9734-359e43f63637" style="width:25%" class="column"><p id="9e26821e-5055-42d1-8978-3d58235e36ba" class="">
+</p></div><div id="618c8560-7d8e-4815-9337-93064fd2d413" style="width:25%" class="column"><h2 id="a768209d-3d5c-40e7-9d21-ef3f2eb72825" class="">Get it done!</h2><p id="56068e92-d798-4db7-a583-b80b6945052a" class="block-color-gray">Things that needs to be done this week</p><ul id="57fb5822-bd89-412f-b261-4cab4e8539ce" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="5c545d7a-3797-48f8-a799-bbeb65957720" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="05d8e54a-13c0-472f-a966-4726c00b38fa" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></div><div id="efaeaf0e-643f-4639-b75c-53cd47ac70df" style="width:25%" class="column"><h2 id="312d420a-c194-43ab-8ad9-46542358da39" class="">Burner</h2><p id="4eb0b45d-2a95-47de-bb3b-b6374e2a13d4" class="block-color-gray">Things I might do if I have time.</p><ul id="27a5961f-8542-4367-8cbf-3e1c2f5c85ef" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="865c825e-a088-4120-927a-01a48d1c726f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="b4790de2-5c2a-42fa-a9ff-3e5c7ced6834" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></div></div><hr id="15208809-d453-44c6-812d-2962d5e7ff8a"/><div id="23e7d353-c3fd-425c-9444-33aeb89d7ba3" class="column-list"><div id="d4744f6c-4697-4747-84df-fb69ff6e9156" style="width:20%" class="column"><h2 id="3933be51-63b6-4e7e-a4f3-7dac9d5390ab" class="block-color-blue_background">MONDAY</h2><hr id="605a8cb1-7ac5-4dc6-9130-7a2691654c73"/><p id="22043e85-25c2-44df-820e-3f411afa6e92" class="">Most important tasks</p><ul id="f020ef78-515b-41a3-b1bd-3d181fc673b1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="bb6434ea-3f57-4f0b-a57a-9569be4e0dfc" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="5f111772-2e60-4b0f-8c0f-6a6937d6d9b8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="cc80ec7e-e9b2-47f2-a405-d07423022fa1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked"></span></li></ul><pre id="c68eadc2-9797-4b52-85e2-b0d4ceb987bc" class="code"><code></code></pre><ul id="09d84955-c49c-4963-8f7a-9e08bcd91c0f" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="f5b7812c-431b-4685-b3c4-df7471830201" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="f8a40948-1d8a-4717-807b-3d3fcbd97126" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="7d4c1b19-4afb-47ca-ab6b-a6bced32a255" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="acac66fe-d619-4f69-b391-df22005d3d17" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="8afc0399-34ee-453e-9ce9-bac26e3a8e59" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="aaf7f6fa-4a2e-462b-accc-e4f7ad9e5981" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="56862647-14f6-415a-abe6-bc673d0aa9f8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="ef95473c-761b-4509-89ad-07fc9911df4d" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary><p id="66635864-b338-450c-833b-8980f5888f42" class="">
+</p></details></li></ul><p id="be637149-34c3-418d-b017-3a637dac825e" class="">
+</p><h2 id="8d0703eb-ab83-45eb-96bb-3a61d9133126" class="block-color-orange_background">SATURDAY</h2><hr id="9db2ec0a-c62e-44fe-844e-6a46a8470c19"/><p id="faa37d89-0ffb-435e-bcb4-70b7242fe2c9" class="">Most important tasks</p><ul id="d42605ab-1c9a-4366-b0a9-ae5387f78a1a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="2ab06daf-b7ad-4801-b2c0-80ad6e303101" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="482689a6-7820-4faf-bedb-0524303adbd0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="8defeb5b-b87b-4cb8-8343-8f77bcf18f72" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="3a883583-d593-4c2d-8bd5-c2b34fbdd43e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="1252a5ce-b000-4bf1-b468-82d03b6024f9" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="47a32faa-aa29-4a3e-83b4-83c5688cf6b6" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="6253ec54-db74-4c62-9d3b-8a6c98b0b7d3" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="55d680d4-84d9-4498-acec-5af3d30e2283" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="6edbc786-174b-4379-ab4e-3cc359898e08" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="10eee377-d4a6-4a1f-b7da-6e508101247e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="1bd5f460-9739-4a90-aa22-5c7cb39dbe4b" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary></details></li></ul><p id="d4b6020e-d6fd-4e7d-9520-4ec0982d335a" class="">
+</p><p id="964ec0ef-aa1b-4cef-8301-152420df5d1d" class="">
+</p></div><div id="f7c0906f-4667-451d-bca2-f18dcc30c772" style="width:20%" class="column"><h2 id="fa48746f-2fb8-407a-abd6-01e273494a9b" class="block-color-teal_background">TUESDAY</h2><hr id="2850af2a-602c-46d9-bb4d-70968f0bcbd8"/><p id="fcba616e-d08a-4818-a30b-85ecd1e1bc86" class="">Most important tasks</p><ul id="06f30bc1-ab1a-4dfa-ba9d-7ee06cc6189f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="a246ffbf-0b84-4100-b8c8-0072f9fbf781" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="ae1ac1fb-dc05-4adf-8cf0-4e5b07c83ac4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="22e4010c-c9b3-43c8-95dc-0c94f793fcd1" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="54076ffa-bb63-485c-9ab2-7c000e37317c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="415b4afd-afcc-4eb9-a843-11bab5492c0a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="d270a058-231a-48fd-a94e-1397de5435be" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="7a860c53-9300-418a-b358-ad6c933fa1a1" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="13408ca0-17e2-4415-8e05-de28057c3a18" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="8d0f18e1-d090-4187-bf9c-bab958e7057c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="40e9733f-9ce8-4f5e-9acc-5cc4d872abad" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="d3e37f98-3cbb-4758-94bb-10a64819a8f6" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary></details></li></ul><p id="bc29769f-2fc9-423e-8dcf-a5e73f056a44" class="">
+</p><h2 id="0b2765ff-0d48-498c-80ef-5e0f88f324dc" class="block-color-red_background">SUNDAY</h2><hr id="43fedbc5-15f9-4f9b-bf00-caf2c90aae54"/><p id="5b9e9769-5bd4-417f-aa28-d15be14bc5e1" class="">Most important tasks</p><ul id="371e9cf7-270a-4203-888f-158d1552b58e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="d2351b4b-b896-4c5f-97da-110995ede4bf" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="392559f6-be36-456f-837e-202de59df85d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="61ae43fc-ff41-45b5-a209-49fc04a31450" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="b37ab8e2-9a7b-49f5-86de-eb2a5ec09094" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="82b338bd-3fc8-48b4-b49f-2f6ab765964e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="f78fb6c8-70bb-4e2a-b2fb-d2a4b5e5ee45" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="0969c161-9672-4113-85da-df7053e5b584" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="cf7187a0-849e-4079-950a-edb3255a0bca" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="47299b15-0d87-4ef4-867f-dce6a2e087ac" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="e0aa9dad-4381-457e-b055-bad161281e98" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="ea4d0d1a-27eb-4ffb-a33e-6dc1f01a6aba" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary><p id="a721ef8d-9b38-47ec-a38e-00d07208cef3" class="">
+</p></details></li></ul><p id="bfbaafc9-d98c-4929-9a8c-33d7b2254d61" class="">
+</p></div><div id="b623e417-55d5-4b55-ba83-a08c96863f24" style="width:20%" class="column"><h2 id="0f101008-b7da-409b-a68d-0c353ccbd5ca" class="block-color-purple_background">WEDNESDAY</h2><hr id="344e16e6-2168-4fea-bc90-d3bdf6d709f0"/><p id="f19981bc-758a-4500-8774-da8087c7a879" class="">Most important tasks</p><ul id="dd1f6f19-4987-44d0-ba74-34769109232a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="2ab66c00-8cd5-4806-bb78-f55c37cbf003" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="85965fbe-36bc-405b-b481-89f0472523b0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="a6451280-afe8-4359-90cd-a694e16650a5" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="26712e91-1fb5-47ff-8627-75572c36cf65" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="3d160ca7-b4d2-4b87-973c-f533fc19409d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="758e3608-679d-44a2-a27b-ead268443159" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="4637c65a-b58c-4ae2-be2c-09989a54a6be" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="0e482754-3770-4b71-908b-cc6dd0040bf0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="b52a3634-a2eb-4eb5-a795-5661c68f8ff5" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="e06377a1-d970-4111-8d36-c975d509c27d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="4dfcd432-4fc0-49db-9b9c-fc35574c1f8e" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary><p id="8fe0e78d-e346-4d44-8308-53e9dc1eaaaa" class="">
+</p></details></li></ul><p id="4b31e03c-b998-4a31-b5ad-ecbfccbd9ba9" class="">
+</p><h2 id="4e52d5da-c72d-4019-a6fe-6ad0d090a211" class="block-color-pink_background">OUTSTANDING</h2><hr id="9f3f9aa9-e010-414c-84df-26bcaf130fd4"/><p id="f7cbda08-3ba6-4bb3-b46a-3b842daea09b" class="">What didn&#x27;t get done that was planned this week?</p><ul id="728d74f1-863b-439d-a4d7-8b1250658248" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="acba4cef-1b57-47f8-adbc-58237d63bacb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="41a90dda-da4a-48b4-8901-e41f702dbf0a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><p id="02f25f94-c5d6-43c0-867b-af540823d10f" class="">
+</p></div><div id="07bde5d4-9da8-4769-8b07-091ac9dd8e64" style="width:20%" class="column"><h2 id="eb5307e1-3896-4af3-b6c9-cc5c52d2ef0b" class="block-color-brown_background">THURSDAY</h2><hr id="a821bff9-1579-44db-877c-6c23516c5307"/><p id="0018c35a-f2d5-40fb-8e53-95873ca8317d" class="">Most important tasks</p><ul id="615fe47e-0060-4b5a-b6ba-9ef219b95048" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="58259cd0-fa21-4d90-aec8-9a53ae2ce559" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="4d082340-161f-4a32-afa5-90e1a1cc527e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="4bc03429-34ae-421a-a523-53c7681aa7ae" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="3624cf5b-8730-4716-b67c-0ae2e1831c0d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="6f6b727a-f7ba-4411-b837-68f1b6354ff2" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="be42e102-822d-442f-aa24-c5285e18b80f" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="9fe91bc5-1ff4-4ecd-b12b-aea5aaa5c618" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="955ad4ee-8ee0-485e-ab9e-46b87990d9a8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="98df3d41-2fbb-435b-be44-174af800f0e3" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="2b99a1b1-53db-4c29-bf57-c1dc45cccac7" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="b00b55a1-4992-480b-a164-bd4a45d8e9c5" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary></details></li></ul><p id="7e592fb6-a6a6-4355-815b-9f50890f55e4" class="">
+</p><h2 id="e1b0ab35-b924-415f-b487-4a7066851fdb" class="block-color-yellow_background">BACKLOG</h2><hr id="7fc881bb-53e9-484c-a471-cc33bd2177b2"/><p id="dff3d080-2c68-401a-b3f0-53b82c33368e" class="">Items I did not plan for, but that needs to be done. </p><ul id="32c06614-49c9-4b1b-96db-537889d4034a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="e028ed6f-88a6-4ea2-b0dd-4304bb0d7399" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="7e5981da-4075-49c8-8a25-e0ca483e7ae0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><p id="065ac3fb-e92c-47bb-bb68-ca355039cbf5" class="">
+</p><p id="b3b5ee98-17a4-4daf-a684-5cc385753ddc" class="">
+</p></div><div id="ca9a1e92-ba65-4e4c-a2a1-6d11dce30dfe" style="width:20%" class="column"><h2 id="fcdce421-98f0-4f18-9f4e-d2cfc786c8bd" class="block-color-yellow_background">FRIDAY</h2><hr id="24443d22-3bf8-47c3-bd05-60a1697a64f5"/><p id="fa06ce40-04fc-42bb-9791-27b62b440e6e" class="">Most important tasks</p><ul id="085e28e6-2e14-4936-9ef4-7dbaed7ef25c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="337fb728-7a46-4dd1-a927-39122f973d3e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="58923b68-2fc1-423d-a4b9-ad07b96e89be" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul><ul id="15530cf0-d18a-409f-836b-06ae3cee13f0" class="block-color-gray_background toggle"><li><details open=""><summary>Routine tasks</summary><ul id="3bac0476-e29f-44d1-bfdc-502d9f1f7796" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="477da38b-6f1f-45e4-9f3f-237361ad7d0d" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="fdbf46c7-11f3-4664-8a9b-03e2b3f09b8e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="2a1d706d-d95d-4bb9-9486-1d2c7d7ddc9b" class="block-color-gray_background toggle"><li><details open=""><summary>Reading/Learning</summary><ul id="544ec1aa-bae4-4a96-9ddc-03cb6bc52db7" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 1</span></li></ul><ul id="d183f001-0ba9-4242-a6a1-f667e70cc350" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 2</span></li></ul><ul id="e7d9eb3d-8523-4b9b-b75e-19af695af4f0" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Task 3</span></li></ul></details></li></ul><ul id="d16676a4-3e60-45a2-81a5-7a4ae099acd5" class="block-color-gray_background toggle"><li><details open=""><summary>Notes</summary></details></li></ul><p id="40b61969-57be-416c-bdb0-d901c9f752a7" class="">
+</p><h2 id="0db5717f-0eaa-4389-bcca-2cc367fc4c96" class="block-color-red_background">PLAY &amp; LEISURE</h2><p id="ee9029ea-ecc0-4bfb-91f9-532d3cabf132" class="">What fun thing am I looking forward to this weekend?</p><blockquote id="59ee5e76-bb9b-4f7b-9f8f-caf982160451" class="">Enter fun thing here</blockquote></div></div><hr id="7b5be405-fd33-4961-a680-2f683121c56e"/><div id="91761fba-fe32-48cf-8b6b-80d01ee041e1" class="column-list"><div id="41090a3a-2c45-40a6-b5f8-abebcbbecd5d" style="width:34.375%" class="column"><h2 id="2fe5cce5-2c36-4db5-a1aa-41655fb42a7e" class="">WEEKLY REFLECTION</h2><ul id="425940b5-4dfb-4c5b-9c5c-89db1f937591" class="toggle"><li><details open=""><summary>Productivity</summary><p id="f4cfb951-54c2-43ff-907c-1dc80576ac6c" class="">
+</p></details></li></ul><ul id="156d9e37-e7c8-4aeb-878e-f768e5bc0a6d" class="toggle"><li><details open=""><summary>Emotion</summary><p id="8ec1760c-e93d-408b-bb36-bebaad25edc0" class="">
+</p></details></li></ul><ul id="27e5a82d-4c46-40b7-be17-b3b3ebce425d" class="toggle"><li><details open=""><summary>Describe the week in 3 words</summary><p id="1b610655-304e-4cce-8d76-753ce5e19f9a" class="">
+</p></details></li></ul><ul id="9448a507-bea7-4c99-bd19-4d5dfe019fc7" class="toggle"><li><details open=""><summary>This weeks highs / good / happy / proud moments</summary></details></li></ul><ul id="7f6f27ed-e79a-4b10-a30e-43ee1069b1c8" class="toggle"><li><details open=""><summary>This weeks lows / frustrations / challenges / struggles</summary></details></li></ul><ul id="8b4397fb-7cc1-451c-be82-4720f861c156" class="toggle"><li><details open=""><summary>What I learnt this week</summary></details></li></ul><ul id="f0d53956-05a9-461c-b9b6-b115890304a6" class="toggle"><li><details open=""><summary>Who / What I&#x27;m grateful for</summary></details></li></ul><ul id="66e199bf-6417-4c2e-b1ff-17c300c4be95" class="toggle"><li><details open=""><summary>What I&#x27;d like to improve on / what I hope for</summary><p id="3e716137-be32-4555-9508-051cd21fee33" class="">
+</p></details></li></ul><p id="66e65799-f4a1-48bb-881e-9f7cb26882eb" class="">
+</p><p id="7b206de3-a517-4a05-aa54-eeff71e8fefb" class="">
+</p></div><div id="0854345a-11b1-486e-8215-a6b3e1cdaa7e" style="width:21.875%" class="column"><h2 id="288fcabb-40a9-41db-b03b-120153dd319d" class="">NEXT WEEK</h2><ul id="c285ef90-b936-454a-bb7d-b7d865896fac" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><ul id="4e7dca7b-4e03-4e03-bf8c-0d1036dc0685" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><ul id="9ad6bfda-e59c-4e54-9645-9f00bc79eb2e" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><p id="2eb5feaf-2aa6-461d-91ee-1e040b54efa0" class="">
+</p></div><div id="96336913-3183-409f-bed6-701d8885bae5" style="width:18.750000000000032%" class="column"><h2 id="9aaa4996-13a6-4a5f-8196-5dbcbad8db85" class="">NEXT MONTH</h2><ul id="ea54673e-1563-4372-84a6-3e141a42b5ce" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><ul id="16f50372-c223-4a1a-b647-ea95c57356f4" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><ul id="134bbdcd-8679-494f-8a86-f8a2d3180dcb" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">To-Do</span></li></ul><p id="de02a5bd-6567-4bc8-8824-f5eb88041722" class="">
+</p></div><div id="50cc60ce-e169-48bc-b88f-302391feed6c" style="width:25.000000000000007%" class="column"><h2 id="c8db2aac-cfdf-4850-aa6d-65586c6deffc" class="">Today&#x27;s quote</h2><blockquote id="2f8c5067-9246-456d-b0e2-757885743143" class="block-color-teal_background">Plan carefully and you will have plenty, if you act too quickly, you will never have enough.</blockquote><p id="a5b87ecf-7d87-441f-b3a7-ec13c28119d0" class="">
+</p></div></div><hr id="4a7dc1ca-084d-4fef-991b-5582c4a5bb92"/><h1 id="5253fbde-c15b-4d89-8350-d2155dfd9548" class="block-color-yellow">Archive</h1><hr id="573f25af-908c-49d5-86fe-ecd7d80bda17"/><div id="ff61b8f1-0a51-4a45-9090-abbb8b178fc0" class="column-list"><div id="4392f830-4304-4f03-8e6f-2463f78c9f39" style="width:16.666666666666668%" class="column"><h2 id="683b8d84-fb2b-4698-b0dd-ad55ee7281bf" class="block-color-gray_background">January</h2><figure id="f6258b66-620d-4ceb-887f-37198a0be498" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20f6258b66620d4ceb887f37198a0be498.html">Copy of Week 1</a></figure><figure id="27fbafa8-dc60-4107-9fa2-9070aebc0a40" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%2027fbafa8dc6041079fa29070aebc0a40.html">Copy of Week 2</a></figure><figure id="7b2ea245-37be-4219-9ce8-d6acb20027fa" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%207b2ea24537be42199ce8d6acb20027fa.html">Copy of Week 3</a></figure><figure id="f0f51c0e-5e5c-47d9-88c5-15e9fb09c9ab" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20f0f51c0e5e5c47d988c515e9fb09c9ab.html">Copy of Week 4</a></figure><h2 id="e4954f1f-8c67-48b2-ba6f-ba0f4616fa17" class="block-color-pink_background">July</h2><figure id="285b06da-0428-40ca-a446-79833e56feec" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20285b06da042840caa44679833e56feec.html">Copy of Week 1</a></figure><figure id="e4bd47ba-0d85-4c7f-bc9b-1ff089069c0e" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20e4bd47ba0d854c7fbc9b1ff089069c0e.html">Copy of Week 2</a></figure><figure id="afac4b39-c085-4ad5-bab2-8a9bc34d4114" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20afac4b39c0854ad5bab28a9bc34d4114.html">Copy of Week 3</a></figure><figure id="aa569304-b09b-4f12-b615-045db51b6eb6" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20aa569304b09b4f12b615045db51b6eb6.html">Copy of Week 4</a></figure><p id="38135f2c-db5f-4b4f-b3f9-ad5be61a2f7d" class="">
+</p><p id="0c2ae49d-ca7f-47e1-9ed3-0c61be17e3eb" class="">
+</p><p id="95b05691-618d-4a5e-93a9-65ae0e0a2bfc" class="">
+</p><p id="56ed2c73-4334-4dc8-a052-1cc4c0a85a60" class="">
+</p></div><div id="1339c814-2e88-48f5-8311-41e7786477b3" style="width:16.666666666666668%" class="column"><h2 id="bc40fb4c-be47-4009-bab4-6d8548bc3b5e" class="block-color-brown_background">February</h2><figure id="4f35a197-ab88-4eb5-a760-0fa470d63b48" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%204f35a197ab884eb5a7600fa470d63b48.html">Copy of Week 1</a></figure><figure id="f527f487-8492-4f27-ba55-539db28d1897" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20f527f48784924f27ba55539db28d1897.html">Copy of Week 2</a></figure><figure id="e4c8d20e-608c-434c-9220-14ab22bfa900" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20e4c8d20e608c434c922014ab22bfa900.html">Copy of Week 3</a></figure><figure id="5ad671c0-35e6-49e7-834b-ef7a37f16e13" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%205ad671c035e649e7834bef7a37f16e13.html">Copy of Week 4</a></figure><p id="3264493d-df74-4b06-af20-e77b7b85b171" class="">
+</p><h2 id="e981dc09-b6e0-4666-b2a3-6ef3a2a74122" class="block-color-red_background">August</h2><figure id="b0bc6f1b-3d0a-4ad4-bd77-7ca1bba9f508" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20b0bc6f1b3d0a4ad4bd777ca1bba9f508.html">Copy of Week 1</a></figure><figure id="0e2502bc-381c-4c09-ae96-e2948bb7b18e" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%200e2502bc381c4c09ae96e2948bb7b18e.html">Copy of Week 2</a></figure><figure id="04af6214-f3ab-49ca-90c6-decd1883c03d" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%2004af6214f3ab49ca90c6decd1883c03d.html">Copy of Week 3</a></figure><figure id="64de50b5-9a0d-4785-8fcb-8e4996a77dba" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%2064de50b59a0d47858fcb8e4996a77dba.html">Copy of Week 4</a></figure><p id="50f179af-2d46-4ac6-a828-c3425e83b616" class="">
+</p></div><div id="8bf40395-af14-4af8-afe8-3a5fcdf39cc9" style="width:16.666666666666664%" class="column"><h2 id="c6accb4f-e467-4310-adc1-2a56726d3b68" class="block-color-orange_background">March</h2><figure id="daa5cf22-4183-482d-b47f-4b7e94af268e" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20daa5cf224183482db47f4b7e94af268e.html">Copy of Week 1</a></figure><figure id="3c441ffc-0f78-4c84-8058-e6fc8aa3f648" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%203c441ffc0f784c848058e6fc8aa3f648.html">Copy of Week 2</a></figure><figure id="110ad470-3fbc-414f-bc56-39dfa9c02155" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20110ad4703fbc414fbc5639dfa9c02155.html">Copy of Week 3</a></figure><figure id="2b7f2423-c630-4ccb-b8f4-1610ed59f142" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%202b7f2423c6304ccbb8f41610ed59f142.html">Copy of Week 4</a></figure><p id="333ad560-fc61-40ae-9e2c-76581ebbbe18" class="">
+</p><h2 id="36fef417-ebc7-4cb7-83a3-af3c537f000b" class="block-color-teal_background">September</h2><figure id="7842761c-1e59-48b9-9317-6b024c3228ae" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%207842761c1e5948b993176b024c3228ae.html">Copy of Week 1</a></figure><figure id="cc6b2f96-a89f-4da8-b3aa-a57c251936fc" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20cc6b2f96a89f4da8b3aaa57c251936fc.html">Copy of Week 2</a></figure><figure id="dc76cfdd-705a-4df9-9351-22a9520fb8bb" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20dc76cfdd705a4df9935122a9520fb8bb.html">Copy of Week 3</a></figure><figure id="84e91796-ed7a-4b4c-91d6-a96a14b1d888" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%2084e91796ed7a4b4c91d6a96a14b1d888.html">Copy of Week 4</a></figure><p id="85270bea-217d-4063-9476-3d29af242ac0" class="">
+</p></div><div id="8a14bd94-dfe0-463e-afd5-2ed9504f116b" style="width:16.66666666666667%" class="column"><h2 id="8d9fd4bf-093b-44dc-a1c8-27538eb09b77" class="block-color-teal_background">April</h2><figure id="15bb65d6-da1f-4568-a3aa-0b867b0bd1c0" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%2015bb65d6da1f4568a3aa0b867b0bd1c0.html">Copy of Week 1</a></figure><figure id="47fdb1c4-4fae-4f7c-b67f-e10001daa1e8" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%2047fdb1c44fae4f7cb67fe10001daa1e8.html">Copy of Week 2</a></figure><figure id="56872f1f-8c44-4754-821a-4d893d3f9e51" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%2056872f1f8c444754821a4d893d3f9e51.html">Copy of Week 3</a></figure><figure id="ad304c4c-549c-4cf0-9d33-4fd5bc9850cb" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20ad304c4c549c4cf09d334fd5bc9850cb.html">Copy of Week 4</a></figure><p id="e1d083d3-10d8-4f63-a1c8-f1b717c109a8" class="">
+</p><h2 id="761a15eb-f1d8-4201-96a3-6d22e7308094" class="block-color-orange_background">October</h2><figure id="657c0022-420f-4e24-9892-8a46744fbaae" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20657c0022420f4e2498928a46744fbaae.html">Copy of Week 1</a></figure><figure id="b852c914-94ea-451e-877a-5bf41f6304b0" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20b852c91494ea451e877a5bf41f6304b0.html">Copy of Week 2</a></figure><figure id="14517fb9-59b7-4c02-90ec-b92a3973cb91" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%2014517fb959b74c0290ecb92a3973cb91.html">Copy of Week 3</a></figure><figure id="f0867686-318a-42d8-a9bb-68c0eb2b4f5c" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20f0867686318a42d8a9bb68c0eb2b4f5c.html">Copy of Week 4</a></figure></div><div id="89ea9b02-48f1-4d46-9902-58cff58eb469" style="width:16.666666666666668%" class="column"><h2 id="e2a94bd3-800a-461a-a925-fbca1045413a" class="block-color-blue_background">Mary</h2><figure id="a3f04b2c-fa45-4a6c-a845-242092f7abad" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20a3f04b2cfa454a6ca845242092f7abad.html">Copy of Week 1</a></figure><figure id="ef4b4c4e-3f05-4c58-9f72-be9343af3c1e" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20ef4b4c4e3f054c589f72be9343af3c1e.html">Copy of Week 2</a></figure><figure id="6971fc0a-0bb9-44cb-b052-88b4e9f447fc" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%206971fc0a0bb944cbb05288b4e9f447fc.html">Copy of Week 3</a></figure><figure id="d1003c17-554a-4091-8ed7-78f7b9b4d3f1" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20d1003c17554a40918ed778f7b9b4d3f1.html">Copy of Week 4</a></figure><p id="a72104b3-2eae-41e5-b9b7-b88d53d21587" class="">
+</p><h2 id="ee50e897-d87d-4a32-accd-484860fe0745" class="block-color-blue_background">November</h2><figure id="a088f416-ee32-4c3e-ad8f-5275e39419f7" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20a088f416ee324c3ead8f5275e39419f7.html">Copy of Week 1</a></figure><figure id="ab61f665-f8b4-4a2c-b1a8-b1228fa62ce1" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%20ab61f665f8b44a2cb1a8b1228fa62ce1.html">Copy of Week 2</a></figure><figure id="b3cf191c-ee49-4358-8949-dce05d351b87" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20b3cf191cee4943588949dce05d351b87.html">Copy of Week 3</a></figure><figure id="81c67079-43e2-40e3-9ef6-725a5129e57f" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%2081c6707943e240e39ef6725a5129e57f.html">Copy of Week 4</a></figure><p id="7273ab57-e32d-4fbe-9e31-6d90863f53e5" class="">
+</p></div><div id="10d7dc23-885e-48a9-8ba7-8add1fe8c62c" style="width:16.666666666666664%" class="column"><h2 id="65bbcec2-01b5-477b-afdb-6ba404cf8028" class="block-color-pink_background">June</h2><figure id="638a9b10-2f58-48fe-8783-28dad2903922" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%20638a9b102f5848fe878328dad2903922.html">Copy of Week 1</a></figure><figure id="9dde155f-af07-4dd6-80dc-dad270bc4ea5" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%209dde155faf074dd680dcdad270bc4ea5.html">Copy of Week 2</a></figure><figure id="f3c80888-5310-4e9a-853e-807644549848" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%20f3c8088853104e9a853e807644549848.html">Copy of Week 3</a></figure><figure id="6cca6514-72e1-4207-802e-1c0d287db42b" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%206cca651472e14207802e1c0d287db42b.html">Copy of Week 4</a></figure><p id="a58a6dfb-1434-4cba-a795-999addc32f65" class="">
+</p><h2 id="cbe520af-7c9c-4c96-9c53-458e687279f8" class="block-color-gray_background">December</h2><figure id="24c7b86e-e2a5-4530-9b23-1ca1b0720a05" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%201%2024c7b86ee2a545309b231ca1b0720a05.html">Copy of Week 1</a></figure><figure id="5e8a08e7-101b-45a5-a962-44b2869168cb" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%202%205e8a08e7101b45a5a96244b2869168cb.html">Copy of Week 2</a></figure><figure id="6f7b3318-1685-4ed3-889f-8963a1f1d9fb" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%203%206f7b331816854ed3889f8963a1f1d9fb.html">Copy of Week 3</a></figure><figure id="dc9462da-d7b9-4870-8b94-08caa2dcf6db" class="link-to-page"><a href="Weekly%20Planning%20Template%2034e3da7cccde4803919da812e2c9740b/Copy%20of%20Week%204%20dc9462dad7b948708b9408caa2dcf6db.html">Copy of Week 4</a></figure><p id="0a3119bd-29d8-4198-b0d9-32635ecb90f1" class="">
+</p><p id="360a2405-ff64-44fb-bb61-32af4ab367ce" class="">
+</p></div></div></div></article></body></html>

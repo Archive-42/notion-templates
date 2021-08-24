@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>DoorDash and Societal Arbitrage</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="0c3da2ba-a215-4d41-b11c-96c39a975e10" class="page sans"><header><h1 class="page-title">DoorDash and Societal Arbitrage</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://themargins.substack.com/p/doordash-and-societal-arbitrage" class="url-value">https://themargins.substack.com/p/doordash-and-societal-arbitrage</a></td></tr></tbody></table></header><div class="page-body"><p id="7a9880fb-14f1-4938-8f79-764328f441ee" class=""><a href="https://twitter.com/home"><em>Ranjan</em></a><em> here. This week I&#x27;ll be writing about...yes, Doordash. Note, a lot of this post assumes you read that ‘other’ post. </em><a href="https://themargins.substack.com/p/doordash-and-pizza-arbitrage"><em>ICYMI, here’s the pizza link</em></a><em>.</em></p><p id="c052de32-93a2-48c9-a48a-20ed02df043b" class="">I caught this bit in Verge coverage of the Doordash S-1:</p><blockquote id="2d127b0e-cd6d-465d-b1c3-579c554a683d" class="">Under “factors affecting our performance,” the company says its rapid growth strained its IT and accounting systems, processes, and personnel, and an independent auditor found “material weakness in our internal control over financial reporting.” [emphasis mine]</blockquote><p id="cc72d54d-0e14-4aa9-9c0d-add62d2175f3" class="">It was funny to read it laid out like that. That lack of cohesive financial controls which created an environment where a $24 pizza could be sold for $16 was explicitly acknowledged in the S-1. I had promised myself I wouldn&#x27;t dive too deep into the S-1 yet, but figured I&#x27;d do a quick CMD+F for &quot;internal controls&quot;.</p><p id="ffee3e7d-21c7-4b1e-92e0-4db631aecf66" class="">Just as a warning, if you enjoyed the story of Wall Street-inspired imaginary pizza trading, this newsletter is the exact opposite. We’re going to start by looking at a very niche financial regulation called Section 404 of the 2002 Sarbanes-Oxley Act.</p><h2 id="ff2082d9-e58d-4ab4-bcd3-9636a11f654a" class="">SOX 404</h2><p id="2e1f3fc6-91e6-4997-8640-01b40ca128d9" class="">One of the things that jumped out for me was Doordash filed as an &quot;emerging growth company&quot;. It&#x27;s a status designated by the JOBS Act of 2012 that allowed smaller, fast-growing companies to avoid a number of audit regulatory requirements.</p><figure id="3e5cd07a-4c4c-418e-a1b5-6efb123a2cbe" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fd3faf1c9-9aac-490f-8806-4e520b1b9f73_1600x457.png"><img style="width:700px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fd3faf1c9-9aac-490f-8806-4e520b1b9f73_1600x457.png"/></a></figure><p id="3e76027f-8950-400a-ae1b-d46dbea046a8" class="">they go on:</p><figure id="81e31553-18f1-413b-b7b7-b17ed361d372" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff7b21c2f-812e-4f08-8dd9-a0796d38e4d0_1552x102.png"><img style="width:700px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff7b21c2f-812e-4f08-8dd9-a0796d38e4d0_1552x102.png"/></a></figure><p id="7b265842-98ea-4e83-9c65-2ff236ffeb90" class="">and a bit later:</p><figure id="1dd20162-cd36-4b4e-afea-f5fca4d235a0" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fa871aa9e-9606-4188-a475-eff58b865802_1600x154.png"><img style="width:700px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fa871aa9e-9606-4188-a475-eff58b865802_1600x154.png"/></a></figure><p id="0d2bd556-c23a-4141-9fc8-57225dd7d085" class="">That language is quite eyebrow-raising, but also feels a bit like standard cover-your-ass legalese. I was more curious how a company last valued at $16 billion, and rumored to be looking for <a href="https://www.wsj.com/articles/doordash-ipo-filing-shows-a-profitable-quarter-11605276373">a $25 billion valuation at IPO</a>, with $1.9 billion of revenue in 9 months, would be allowed to be called &#x27;emerging&#x27; and get to avoid regulatory disclosures.</p><p id="779c57f6-c6e8-4ea0-aa33-f600d3ad1923" class="">Internal Audit isn’t necessarily the most riveting of industries, but it’s a profoundly important one. Let&#x27;s take a step back to 2002. I entered the workforce right around the time of two spectacular corporate fraud scandals:<a href="https://en.wikipedia.org/wiki/Enron"> Enron</a> and <a href="https://en.wikipedia.org/wiki/MCI_Inc.">MCI Worldcom</a>. They were both underpinned by accounting shenanigans, where the trio of management, boards of directors, and auditors all failed together. The disasters brought about the Sarbanes-Oxley Act (SOX), which was meant to enhance all levels of corporate governance.</p><p id="742a2063-d53d-425b-bcfc-7c56cbb250bd" class="">To an audit layperson like myself, Section 404 of SOX seems quite well-intentioned:</p><figure id="71871eeb-6267-4922-bce3-511b166937a6" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb0f108bd-f1ce-402f-84bb-eca8453177cd_1376x726.png"><img style="width:700px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb0f108bd-f1ce-402f-84bb-eca8453177cd_1376x726.png"/></a></figure><p id="872bf6f6-f99f-4c9f-88de-c4d07d6ce7e0" class="">Management is responsible to make sure there are sound internal financial controls - sales are being recorded, contractual liabilities are accounted for, no money is leaking out, no <a href="https://www.acfeinsights.com/acfe-insights/2017/4/28/kozlowskis-6000-shower-curtain-added-to-the-acfe-fraud-museum">$6,000 golden shower curtains</a> are being purchased [<em>Note 1</em>] - nothing too groundbreaking. The auditor must legally attest that management is telling the truth, as well as do their own digging into the state of the overall financial control system. You’re affirming your house is in order and you, along with the firm getting paid a lot to keep an eye on you, are both willing to legally stand by that affirmation. That seems like a pretty reasonable responsibility for a company looking to sell shares to the public, right?</p><p id="bb7ea7d6-212e-4241-98aa-a4f8e9a5c198" class="">What ended up happening was the rule adversely affected smaller businesses. It makes sense - the cost of getting an expensive auditor to fully vet and take legal responsibility for your financial controls doesn’t linearly scale with revenue. It’d give bigger companies a significant compliance cost advantage.</p><p id="317c8028-b8e3-48a5-aeac-3b1b305ef085" class="">From<a href="https://www.wsj.com/articles/obamas-regulations-arent-the-only-trump-target-1483053980"> the WSJ</a>:</p><blockquote id="225b6f50-880e-487e-bebb-3f07aaf41b81" class="">As noted in a 2011 report from President Obama’s Council on Jobs and Competitiveness, “Regulations aimed at protecting the public from the misrepresentations of a small number of large companies have unintentionally placed significant burdens on the large number of smaller companies.”</blockquote><p id="6c25fe84-dc04-48b4-8fc5-23dfe75c4303" class="">So the JOBS Act provided exemptions for &#x27;emerging growth companies&#x27; to help propel more SMBs into the public markets. The WSJ opinion<a href="https://www.wsj.com/articles/obamas-regulations-arent-the-only-trump-target-1483053980"> piece continues</a> (<em>this is priceless</em>):</p><blockquote id="d16d7a14-2085-4608-8fe4-7278c5ccc242" class="">A few years after Sarbox, however, 80% of firms launched IPOs greater than $50 million, according to the Obama Jobs Council report, and IPOs of greater than $1 billion have since become a normal occurrence. Facebook waited until it could launch an IPO of $16 billion and had an $80 billion market valuation before it went public in 2012. Many speculate that Uber may not go public until it is worth more than $100 billion.</blockquote><p id="890386a0-25cc-45fd-b8a4-e28dc20e6c52" class="">Yes. The goal of exempting companies from Section 404 costs was to spur smaller IPOs. Of course, a number of big tech companies now take the exemption. Peloton, Palantir, even Twitter back in the day - they all claimed the status. There&#x27;s something perfectly Softbankian about it becoming standard practice for companies worth billions of dollars to claim an exemption brought about to help allay costs for small businesses [<em>Note 2</em>].</p><p id="a92bc996-42b2-4a96-b00b-faf9fc1185b8" class="">But here we are. These are the rules as we&#x27;ve collectively set them up. Doordash is just playing by them, and they&#x27;re playing incredibly well.</p><h2 id="18b43717-4b80-4f54-9408-04365ca0f253" class="">We are legal</h2><p id="ed91f59a-354d-43fd-acbf-e9a7d6a9e67e" class="">It might seem superfluous to spend this much time obsessing over a tiny financial regulatory exemption that every tech company seems to take, but it captures how these businesses operate. They are hyper-aggressive and will attack every imaginable loophole and push every possible regulatory boundary. It&#x27;s just the nature of the capital and the culture.</p><p id="570b08f9-b0fc-412a-af3d-429dc00d41d9" class="">I think back to <a href="https://www.notion.so/27887324235104578244231122376480">this 2013 Travis Kalanick story</a>:</p><blockquote id="ca17a88e-2052-4a1c-a478-6c244a7fb56d" class="">When I suggest to Mr. Kalanick that Uber, in the fine startup tradition, was using the &quot;don&#x27;t ask for permission, beg for forgiveness&quot; approach, he interrupts the question halfway through. &quot;We don&#x27;t have to beg for forgiveness because we are legal,&quot; he says. [emphasis mine] &quot;But there&#x27;s been so much corruption and so much cronyism in the taxi industry and so much regulatory capture that if you ask for permission upfront for something that&#x27;s already legal, you&#x27;ll never get it. There&#x27;s no upside to them.&quot;</blockquote><p id="57700f81-6a56-408c-ac21-eb1f4a87d85d" class=""><strong>“we are legal”.</strong></p><p id="30bc5f9b-35cb-4d80-9f94-0b2b8437a523" class="">That’s it. Those three words. Even if things seemed out of bounds, everything Uber was doing was within the limits of the law. Everything Doordash has done has been within the rules of the game as we, as a society, have outlined them.</p><ul id="7fa800a4-8636-4406-8b03-bc084be84bdb" class="bulleted-list"><li>Scraping websites of unwitting restaurants under the guise of &quot;demand generation&quot;. It&#x27;s legal!</li></ul><ul id="988b0232-078b-43bc-b377-30cbd393b013" class="bulleted-list"><li>Misleading customers around tipping practices <a href="https://techcrunch.com/2019/11/19/doordash-tipping-practices-prompts-lawsuit-from-dc-attorney-general/">and blaming a confusing UX</a>? It only counts if you get caught!</li></ul><ul id="3776f041-8660-49e6-a7e2-77fac0ee4dd1" class="bulleted-list"><li>Paying your workers substandard wages while not providing health insurance, meanwhile<a href="https://www.cnbc.com/2020/11/05/california-prop-22-win-improves-doordash-instacart-ipo-prospects.html"> investing $48 million</a> into a political campaign to make sure they will never be employees, and<a href="https://help.doordash.com/dashers/s/voices-from-dashers-of-color?language=en_US"> creating councils</a> and writing<a href="https://blog.doordash.com/doordash-releases-first-ever-economic-impact-report-511ae6187437"> long blog posts</a> about<a href="https://blog.doordash.com/redoubling-our-commitment-to-empower-local-communities-6759ea582329"> empowering minorities</a>? A+ to the content and policy teams.</li></ul><ul id="8737a3cb-9070-432f-aaea-c70228716e17" class="bulleted-list"><li>Making<a href="https://www.eater.com/2019/8/1/20750912/doordash-buys-caviar-food-delivery-app-410-million"> an antitrust-y acquisition</a> before the topic really became part of the national conversation? Approved.</li></ul><ul id="e269d91f-b380-42c3-a2ae-6ca2f1fa0421" class="bulleted-list"><li>And of course, continuing to raise hundreds of millions of dollars while losing money. Then being celebrated for &#x27;only&#x27; losing $131 million. Welcome to 2020.</li></ul><p id="28fb941b-acbb-4413-96fc-b1a85c52c39b" class="">It’s all within the rules. The regulatory rules. The labor rules. The antitrust rules. The consumer protection rules. Full credit to Tony Xu and their team - they have out-executed every competitor. They are winning this weird and twisted game of heavily-funded food delivery apps.</p><figure id="fd67d75e-e2e9-4544-a5b5-8156a1e327d5" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F3350c9be-52b7-4835-ae05-961e4c02b347_605x355.png"><img style="width:605px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F3350c9be-52b7-4835-ae05-961e4c02b347_605x355.png"/></a></figure><p id="4e0d5396-c099-43fe-8655-06b6df4cf12a" class="">But this is less a &#x27;good for them&#x27; than a &#x27;bad on us&#x27; sentiment.</p><h2 id="1796acd1-f80b-4075-9a01-9b2a4ff31ae2" class="">More of the Same</h2><p id="85cfe97b-3a74-4880-aa73-ac7f86a285f4" class="">That pizza arbitrage post went pretty nuts. A lot of people seemed to worry about the future of their local restaurants. But guess what? It&#x27;s now November 2020. There was no second stimulus. Restaurants are heading into a terrifying winter with no lifelines other than delivery platforms. Uber bought Postmates. Just Eat bought GrubHub. Californians voted for Proposition 22.</p><p id="2b140264-91b6-41b5-968a-346b38fad7fe" class="">…and Doordash just released financials that show that for one brief quarter, in a time when they effectively became critical infrastructure with monopolistic pricing power, they were able to eke out a tiny profit. At a time when being a Dasher was one of the only jobs available and restaurants went from using the service as a supplementary income to being completely dependent on it, they showed a profit.</p><p id="18673a22-7d2e-42f9-8eae-6404e07dffcb" class="">To their credit, scaling from $600 million to $1.9 billion in revenue is no easy task. Doordash showed us a world where the business model of food delivery could make sense. Take a minute and think back to Q2. Local restaurants closing left and right. Workers making substandard wages and risking their safety in the midst of widespread joblessness. The <a href="https://www.cnet.com/personal-finance/americas-v-shaped-vs-k-shaped-economic-recovery-what-does-it-all-mean/">top half of the K</a> working from home and ordering marked up burritos. That is a world we might likely see again this winter and one where Doordash will thrive.</p><p id="95b31941-4f16-4bae-b1b5-5deb88cba34c" class="">This isn&#x27;t about Uber Eats vs. Doordash (where Doordash seems to be handily winning the battle). This is about structuring the world as we collectively want it to be. We are all responsible for the rules. When a multi-billion dollar tech company takes a hidden audit regulatory exemption, that&#x27;s on all of us. They&#x27;re going to keep doing it. Building a business model that relies on a permanent underclass under the doublespeak of &quot;entrepreneurship&quot; and &quot;freedom&quot;, and then spending tens of millions to make sure that you will never have to provide health insurance to your workers will always continue on if it&#x27;s allowed. As a formerly famous person<a href="https://www.vox.com/2016/10/7/13206364/vox-sentences-trump-sexual-assault"> once said</a>, &quot;they let you do it. You can do anything&quot;.</p><p id="6ecd4aee-6e41-406e-b3d0-2a3f43fe0bd3" class="">You see it throughout the S-1. The document is dripping with <em>&quot;they let you do it&quot;s</em>.</p><h2 id="72c8e00a-bbed-472a-a97d-1852d9822e69" class=""><strong>Big Chains</strong></h2><p id="5a3a34ad-dfdd-4c0e-91db-ce949cb8bceb" class="">The entire introduction is a touching story about the immigrant experience and an inspiring vision for a local commerce platform empowering small businesses to operate in a digital-physical world. Yet hidden away, they make it clear it’s their national brand partnerships that are the critical ones (I&#x27;d be genuinely curious what McDonald&#x27;s average fee is versus a single restaurant):</p><h2 id="b4dae70e-759a-46bc-8dd5-6a94d62dba5d" class=""><strong>IPO Windfalls</strong></h2><p id="e49a5936-c97d-43b7-9262-4dff80de445b" class="">An IPO is normally that time the entire workforce of a startup gets to financially celebrate their success. At no point did I imagine that Dashers would be given equity, but Dan Primack at Axios confirmed it:</p><blockquote id="2cada7a3-2da8-4067-918e-5b67c4a24478" class="">There are no equity grants or purchase programs for Dashers. The company did yesterday announce a $200 million workforce development program that will include around $12 million in cash bonuses.</blockquote><p id="fa02946a-d547-41ee-a612-adc770e666fb" class="">$12 million. Doordash announced 1.9 million new Dashers on the platform since mid-March. Taking that number (assuming the number of Dashers would be much larger) that&#x27;s $6.25 per Dasher. Merry Christmas!!!</p><p id="fbe0532b-ef27-4e08-82d7-4449d10801fc" class="">Meanwhile, the top management will be absolutely raking it in. If they hit that $25 billion valuation, assuming the CEO has a 25% stake, that&#x27;d be....$6.25 billion. A perfect 1 billion-to-1 ratio of CEO to frontline worker financial IPO windfall.</p><p id="f7cc3319-e5f2-4dc5-b73f-6e3e6d8e5174" class="">Now, to confirm, <strong>I completely made up the numbers above</strong> about the CEO&#x27;s stake. That’s because.…..they do not disclose founder Class A ownership. I wasn&#x27;t sure if I was missing it, but<a href="https://www.nytimes.com/2020/11/13/technology/doordash-reveals-ipo-filing.html"> the NYT confirmed</a>:</p><blockquote id="42003cbb-d7c3-4389-97a1-f83b41aa210e" class="">Mr. Xu owns 41.6 percent of the company’s class B stock, which gives holders 20 votes per share. The prospectus did not say how much of DoorDash he would own after the offering.</blockquote><p id="9a40a4b7-0b2d-4f80-ac96-5e10648cfb2d" class=""><em>(I’m still a bit confused if I’m missing the founding team’s Class A ownership. According </em><a href="https://thehustle.co/11162020-DoorDash-IPO/"><em>to The Hustle</em></a><em>, “the co-founders’ combined stake — Stanford classmates Tony Xu (CEO), Andy Fang (CTO), and Stanley Tang (CPO) — is worth $2.3B.”)</em></p><p id="ad014d1d-ed64-459f-bbcf-a012a4c2caaa" class="">They do, however, specify the ownership of the Class B shares, which remind us - we&#x27;re once again seeing the new<a href="https://www.bloombergquint.com/business/doordash-moves-ahead-with-ipo-files-to-list-shares-on-nyse"> standard of supervoting shares</a>:</p><p id="2b2eaf2c-b626-4549-bc9a-bd0139bbe386" class=""><a href="https://twitter.com/ellenhuet/status/1327274569183346689?s=20">November 13th 2020</a></p><figure id="ebfba6ba-2ce6-415d-9b05-c05af6d00140" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fpbs.substack.com2Fmedia2FEmtr_3rVoAElre8.png"><img style="width:600px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fpbs.substack.com2Fmedia2FEmtr_3rVoAElre8.png"/></a></figure><p id="e12e33d8-b620-439e-aabd-445615bbf5bc" class="">One of the reasons cited for the WeWork blowup was<a href="https://www.vox.com/recode/2019/9/24/20882133/wework-adam-neumann-dual-super-voting-stock-shares-tech-ipo"> Adam Neumann&#x27;s supervoting shares</a>. There was chatter that maybe, finally, we’d see some power lean back to shareholders, but we&#x27;re right back here. Investors will let Doordash do it, so of course, they’ll do it.</p><h2 id="f0728166-1ec3-43be-9afa-6b7a53b22341" class="">Societal Arbitrage</h2><p id="32c245dd-add2-4ca3-b339-830a6b42148a" class="">The more you read the risk factors laid out in the S-1, the more the story comes together. There are thousands of words on the risks surrounding the Dasher pay model. There <a href="https://www.vice.com/en/article/88aggz/doordash-says-its-own-pay-model-is-a-risk-to-its-business-in-public-filing">are paragraphs about restaurants</a>, the theoretical “partners” of Doordash, potentially getting jealous at Doordash’s success and pushing for regulation. There’s a ton about the threat of regulation. There’s even plenty of shade about the media.</p><p id="ba9b17ab-f61f-4d2a-8553-d35023c9ca4a" class=""><a href="https://twitter.com/caleweissman/status/1327266949663961089">November 13th 2020</a></p><figure id="244a9376-c4f9-492d-b019-528826b3be59" class="image"><a href="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fpbs.substack.com2Fmedia2FEmtmQNJXMAIxVU3.png"><img style="width:600px" src="DoorDash%20and%20Societal%20Arbitrage%200c3da2baa2154d41b11c96c39a975e10/https3A2F2Fpbs.substack.com2Fmedia2FEmtmQNJXMAIxVU3.png"/></a></figure><p id="7763a783-03a8-4674-a1cd-90b96f39699d" class="">We all know the reclassification of workers is an existential risk for the model. We know restaurant ‘partners’ are a flight risk because this is not a genuine partnership, it’s extractive. We know customers won’t use the service if they’re exposed to the true price. And we know regulators and lawmakers have let this industry develop in exactly this way.</p><p id="b9250a0e-fd8c-4eb8-922b-d2cc345b4444" class="">While we were laughing about $8 in pizza arbitrage profits, Doordash built a $25 billion business powered by a combination of regulatory and labor arbitrage. While Doordash’s messy financial controls ended with us swapping a few pizzas, our broken regulatory system has fundamentally reshaped the economy in a way that allows Doordash to extract billions in revenue during a time of national crisis. Where I saw an opportunity in an erroneously scraped menu price, Doordash capitalized on a much bigger mistake: a labor market in flux, a society not ready to grasp with the power of technology companies, a political system in complete disarray, and a genuine shift towards online purchasing.</p><p id="d07f2d62-89d5-420f-b8b5-57f532333460" class="">If your business model wouldn’t make sense hiring W2 employees and paying payroll tax and health insurance, just call it a new way of gig work, and avoid all those costs. If consumers are not receptive to your service at a breakeven price point, find billions of dollars in Softbank money to subsidize the service to build a new consumer habit. If you don’t want to deal with the compliance costs that companies far smaller than you take on to go public, call yourself an ‘emerging growth company’.</p><p id="9e609f4c-ef6f-45d9-9bca-cc4fee7f8e92" class="">It’s the greatest arbitrage of all.</p><p id="20c2a831-336b-4637-b54c-0256a6dd55fa" class="">People (especially the class with political power) slowly get used to comfortable rides and sushi deliveries, and these platforms became enmeshed in the societal fabric. Their model of worker compensation, their culture of pushing legal boundaries, their dependence on market concentration, and their slowly accrued power over the suppliers in their marketplaces all become the norm.</p><h2 id="687a26d6-2799-4e40-b87a-9541765d9417" class="">Buy $DASH?</h2><p id="9a70e3cd-ab0c-4cd6-86b9-29f3aec73f43" class="">I’m going to end this by noting as I read through the S-1, you can’t help but develop a grudging respect for Tony Xu and his team. It’s the ultimate encapsulation of <em>don’t hate the player, hate the game</em>.</p><p id="d8a58c8b-64b0-4195-8d28-b209a78d6eb4" class="">They push the limits, but in ways that everyone allows them to. Those “demand generation” tests, where they scraped restaurant websites, exemplify this entire way of doing business. It might seem shady as hell, but hey, it’s legal. If you’re betting on which food delivery platform is most likely to achieve enough market power to raise prices while making sure their workers will never become employees, I’d certainly take $DASH over the other folks (Uber Eats LOL). In fact, if the regulatory status quo remains, $DASH has a pretty good shot. Don’t take my word for it. The imperative to maintain the regulatory status quo is a sentiment littered throughout the S-1.</p><p id="82a23c86-d7db-4154-aad5-1d6365a3ff2c" class="">And that’s the question we all need to be asking ourselves, what do we want a post-pandemic world to look like. Should it just be an extension of where we are today?</p><p id="85a07d65-1c8f-493d-8c77-b8115a81081c" class="">Indoor dining in the wintertime <a href="https://www.theatlantic.com/health/archive/2020/07/why-arent-we-talking-more-about-airborne-transmission/614737/">is going to be a disaster</a>. There is no national strategy for how to best help restaurants. They’re very likely going to revert to almost all delivery once again. We could easily come out on the other side of this with hundreds of local establishments out of business as the economics of a Doordash do not make sense for a restaurant unless it’s supplemental income on top of your dine-in revenue. We’ll all eventually subsist on a steady rotation of Chili&#x27;s, McDonald’s, and ghost kitchens. The death of local restaurants will simply be collateral damage as Doordash moves on to its vision of creating a “local logistics” platform, partnering with <a href="https://www.supermarketnews.com/online-retail/cvs-taps-doordash-same-day-delivery-groceries-and-non-rx-items">more national chains like CVS</a>. More industries move to a &#x27;gig economy&#x27; model, turning the nature of work into some <a href="https://www.reddit.com/r/blackmirror/comments/dxw7w3/is_there_a_irl_app_that_lets_you_find_1_time_gig/">Black Mirror-ian gamified fight for scraps</a>, exacerbating every element of income inequality.</p><p id="505225ed-9d71-437f-a8cf-db2dae4fb08b" class="">I seriously had not planned on writing about Doordash again because, hey, the sequel is never as good. But going down the Sarbanes-Oxley Section 404 exemption rabbit hole made me want to write this entire newsletter. A hidden loophole, meant for small businesses, co-opted by multibillion-dollar tech companies to avoid accountability, just because they can. It’s so niche, it almost feels meaningless, but that’s the point. We’ve all just been letting these things go. Props to Doordash. They’re certainly capitalizing on it.</p><p id="23fd1c6d-95dc-4a06-9b19-4d1441229cc2" class="">Note 1: The “<a href="https://www.wsj.com/articles/SB106977531567170400">$6,000 gold shower curtain</a>” was a famous symbol of excess of Dennis Kozlowski, the disgraced CEO of Tyco. I found out the curtain <a href="https://www.acfeinsights.com/acfe-insights/2017/4/28/kozlowskis-6000-shower-curtain-added-to-the-acfe-fraud-museum">now resides at the museum of the Association for Certified Fraud examiners</a>. I wonder what artifacts from our current business cycle end up making it in.</p><p id="4b3fc877-863b-4d64-846b-755684ebe910" class="">Note 2: Doordash filed $1.9 billion in revenue for 2020, yet supposedly is no longer an emerging growth company if they have total annual revenue of $1.07 billion 🤷🏽‍♂️.</p><p id="05917713-4abb-4cee-9ad5-7c7022d307c8" class="">Note 3: As a sign of how quickly times and narratives can change, the headline of the WSJ interview <a href="https://www.notion.so/27887324235104578244231122376480">where I pulled the Travis quote</a>. It was only 7 years ago that Uber was the trustbuster:</p><p id="84a6a80a-a6c1-4f42-b79f-81d4441c5284" class="">Note 4: I’m actually a bit hopeful about where things are going. I share a lot of the sentiment in <a href="https://mattstoller.substack.com/p/congress-gets-ready-to-smash-big">this recent Matt Stoller post</a> where we are moving in the right direction to begin reshaping the economy in a better way. Get your shit together Biden administration.</p></div></article></body></html>

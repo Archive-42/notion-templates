@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Links are not buttons. Neither are DIVs and SPANs</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1fb912e3-b293-4392-9638-b2f9102921bc" class="page sans"><header><h1 class="page-title">Links are not buttons. Neither are DIVs and SPANs</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://karlgroves.com/2013/05/14/links-are-not-buttons-neither-are-divs-and-spans" class="url-value">https://karlgroves.com/2013/05/14/links-are-not-buttons-neither-are-divs-and-spans</a></td></tr></tbody></table></header><div class="page-body"><p id="ed6ed96c-026a-498b-ab59-1a888a031efe" class=""><strong>Quick: what is this?</strong></p><p id="0087e786-96a1-4e73-a1a0-8a3f3a3ad7f3" class="">If the word “Button” comes to mind, you might be right. Unfortunately we’ve been seeing a lot of instances in our testing where an image or CSS styling is used to trigger an action of some kind. Here are some markup samples:</p><pre id="dea10f4b-c574-4751-bae8-26c25ea46c06" class="code code-wrap"><code>&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/image.gif&quot; /&gt;&lt;/a&gt;
+
+&lt;span class=&quot;btn\_addnew&quot;&gt;&lt;/span&gt;
+
+&lt;a class=&quot;btn\_addnew&quot;&gt;&lt;/a&gt;
+
+&lt;a href=&quot;javascript:myFunc();&quot;&gt;&lt;img src=&quot;path/to/image.gif&quot; /&gt;&lt;/a&gt;
+</code></pre><h2 id="a37fa011-82d8-491a-86e7-035045fc7f19" class="">BUTTON considerations</h2><p id="80fed4e5-d704-4bf2-9d65-87899798e465" class="">In each of the cases listed above, the markup is inappropriate and creates unneeded accessibility problems. In the case of buttons, we need to keep in mind the following accessibility considerations:</p><ol type="1" id="659db2f3-5e17-4b5e-9667-c9b7bf4d8c8a" class="numbered-list" start="1"><li><strong>Device independence:</strong> Users must not be required to use any specific device to operate the control. In other words, users must be able to gain focus on it and activate it using a keyboard or voice commands as well as a mouse</li></ol><ol type="1" id="904e6837-af71-4eaa-a809-33c40bf76bb9" class="numbered-list" start="2"><li><strong>Color Contrast:</strong> The design of the button must have sufficient color contrast, and the button must not disappear in high contrast mode.</li></ol><ol type="1" id="2f6c4ad8-24c4-4a86-8ef9-fcc641adf45f" class="numbered-list" start="3"><li><strong>Name, State, Role, Value:</strong> The button must properly expose itself to accessibility APIs using the appropriate Name, State, Role, and Value for what the object is. <a href="http://www.karlgroves.com/2013/03/02/name-state-role-and-value-whats-it-all-about/">As I’ve described in another blog post</a>:<ol type="a" id="591e52d8-1631-403c-8139-ee11b9f7e990" class="numbered-list" start="1"><li><strong>Name</strong> – Similar to a person’s unique name, what is the name of this thing?</li></ol><ol type="a" id="807776a7-381d-4ac6-b92e-34c6511a7f80" class="numbered-list" start="2"><li><strong>State</strong> – What is this thing doing? Implicitly, what else can it do?</li></ol><ol type="a" id="1ca53950-10ba-4f2f-9ea7-8ab06073387a" class="numbered-list" start="3"><li><strong>Role</strong> – What type of object is this thing?</li></ol><ol type="a" id="89e833cf-4b5f-44f2-b79d-dae6993de922" class="numbered-list" start="4"><li><strong>Value</strong> – What value does this thing have? (Typically only form elements have a value)</li></ol></li></ol><h2 id="21e5d495-8f3b-4414-804b-16af56f3fd7b" class="">DIVs and SPANs are not buttons</h2><p id="ba7e5e57-a310-408d-b56f-83c7a9a49c6f" class="">The first thing to be aware of is that a SPAN should never be used as a button. <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html">“Elements that only expose the HTML core attributes are represented by the base HTMLElement interface.”</a></p><pre id="e30bd378-b1c9-4f1f-aaa8-446be1cd0ae0" class="code code-wrap"><code>interface HTMLElement : Element {
+    attribute DOMString       id;
+    attribute DOMString       title;
+    attribute DOMString       lang;
+    attribute DOMString       dir;
+    attribute DOMString       className;
+};
+</code></pre><p id="425cb4b7-5427-40e9-a699-75e94a7e7f06" class="">Furthermore, you should never use a DIV, either. Its DOM interface is the same as a SPAN except that it adds one new attribute, ‘align’, which is deprecated.</p><pre id="07ef4571-9606-42b8-8e4c-188656982e17" class="code code-wrap"><code>interface HTMLDivElement : HTMLElement {
+    attribute DOMString       align;
+};
+</code></pre><p id="700744e1-f496-4bf7-bfe3-f721f2ee5614" class="">Here, however, is the DOM Interface for a BUTTON element:</p><pre id="0b9b58f1-2124-4fc9-b69c-0a0e6b6635f8" class="code code-wrap"><code>interface HTMLButtonElement : HTMLElement {
+    readonly attribute HTMLFormElement form;
+    attribute DOMString       accessKey;
+    attribute boolean         disabled;
+    attribute DOMString       name;
+    attribute long            tabIndex;
+    readonly attribute DOMString       type;
+    attribute DOMString       value;
+};
+</code></pre><p id="ca67924b-79b3-40f9-aabf-0b0e79f8f19c" class="">and here is the interface for the A element:</p><pre id="996207b5-d9bd-4be7-9bdf-6b29e36003d3" class="code code-wrap"><code>interface HTMLAnchorElement : HTMLElement {
+    attribute DOMString       accessKey;
+    attribute DOMString       charset;
+    attribute DOMString       coords;
+    attribute DOMString       href;
+    attribute DOMString       hreflang;
+    attribute DOMString       name;
+    attribute DOMString       rel;
+    attribute DOMString       rev;
+    attribute DOMString       shape;
+    attribute long            tabIndex;
+    attribute DOMString       target;
+    attribute DOMString       type;
+    void               blur();
+    void               focus();
+};
+</code></pre><p id="caa848c9-a270-47ff-9a89-9fbfd6edf9de" class="">(The above DOM interface descriptions come from: <a href="http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html">http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109/html.html</a>)</p><p id="1f109f42-8b44-45de-a961-faa6c2e9735b" class="">You should notice a few very important new attributes: ‘tabIndex’, ‘accessKey’, and in the case of BUTTON, ‘value’. We’ll skip over <a href="http://webaim.org/techniques/keyboard/accesskey">discussion of the accessKey property</a> other than to mention that according to the HTML specification, items for which the accesskey and tabindex attributes are valid are links, buttons, and form fields. In other words: items that are natively available in the tab order and therefore able to be accessed in a device-independent manner. You’ll notice no such properties for DIV or SPAN.</p><p id="cbb5e532-9aa9-476d-b03b-fc7795398d39" class="">Using our list of considerations above, let’s compare DIV &amp; SPAN against A &amp; BUTTON</p><p id="18e97547-9d48-4787-9b40-6ccbd7bde8fe" class="">Requirement</p><p id="a8deda27-7fb5-4fe7-b57d-14943cbb089c" class="">DIV &amp; SPAN</p><p id="c560e56e-6299-403e-9bc5-7960153e86ee" class="">A &amp; BUTTON</p><p id="a0418c8a-8811-4450-80e9-e720250af33d" class="">Natively keyboard accessible</p><p id="c0432fe0-f70d-469c-ac1c-d80fd55911ba" class="">No</p><p id="7d2da555-8eff-439b-acda-59b2e0b9cef4" class="">Yes (for A, only when href present)</p><p id="066986e6-efe3-4ea8-8632-128ae74327a5" class="">Sufficient Color Contrast</p><p id="abec897e-879f-4573-a3f6-9b8410be6de8" class="">Design Dependent</p><p id="3eec870d-43c9-44f5-b395-572cbd491b59" class="">Design Dependent (unless using native BUTTON with no CSS)</p><p id="2d6930eb-70d6-4568-a07a-cbcb32e416c3" class="">Exposes appropriate name, state, role, value</p><p id="1ade05e8-3894-4128-af67-e67714444df8" class="">No</p><p id="f62994cd-ba11-4747-9aa1-03d65b64b0d8" class="">Yes</p><p id="18ca717a-177b-48b2-aeae-9b598ff510c3" class="">Some readers may note that you can manipulate Name, State, Role, and Value on DIVs and SPANs using <a href="http://www.w3.org/WAI/PF/aria-implementation/#mapping_role_table">WAI-ARIA</a>. The authors of the WAI-ARIA spec say: It is not appropriate to create objects with style and script when the host language provides a semantic element for that type of objects (<a href="http://www.w3.org/TR/wai-aria/introduction">source</a>). A button is clearly one of those things where a semantic element exists. WAI-ARIA is best reserved for those cases where there’s no other way to accomplish your goals. In other words, WAI-ARIA is great for tri-state checkboxes and date pickers, but just plain silly for buttons. In short, DIVs and SPANs aren’t buttons (or links, for that matter) no matter what you do. If you use them, you are wrong.</p><h2 id="983dd1cf-fe25-4d8b-9e04-e1213f8c087f" class="">How to choose between a link and a button</h2><p id="3fd4f194-1791-4383-bd90-af7220efb439" class="">Now we’re left with links and buttons. How do we choose between the two? Quite simply, by answering one question: What will happen when the user activates this control? The Microsoft User Interface Interaction Guidelines <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa511453.aspx#rightcontrol">discussions of buttons</a> and <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa511483.aspx#rightcontrol">links</a> outline this decision-making process rather well (paraphrased here):</p><ol type="1" id="b022c712-9cb9-463e-9dcd-9ee42894b067" class="numbered-list" start="1"><li>Will this control be used to initiate an immediate action?</li></ol><ol type="1" id="ebacbd09-ac4b-47d7-bc9e-b46096365dc2" class="numbered-list" start="2"><li>Is the action to navigate to another page?</li></ol><p id="1e09c636-c185-4945-bec6-621287eba1b1" class=""><a href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa511454.aspx">Elsewhere</a> they outline some general guidelines on making the choice:</p><ul id="6002963c-e7a5-4b3b-a97c-c8d98ee5a15f" class="bulleted-list"><li>Use command buttons for:<ul id="a0b27f55-b338-4192-9634-dbf011cfee3f" class="bulleted-list"><li>Primary commands.</li></ul><ul id="833d2d6b-0605-4a81-9a6f-550afafd76e3" class="bulleted-list"><li>Displaying windows used to gather input or making choices, even if they are secondary commands.</li></ul><ul id="c40f8265-e72f-4a77-a0dd-db5c66869123" class="bulleted-list"><li>Destructive or irreversible actions, as well as commitment within wizards and page flows.</li></ul></li></ul><ul id="cc8529f9-3e66-49e9-bb2c-22807bde1388" class="bulleted-list"><li>Use links for navigation to another page, window, or Help topic; display definitions; and command menus.</li></ul><p id="6462daec-765c-41b4-8e4d-11070aaead62" class="">Whether or not you’re a Windows, Mac, or Linux person, these UI paradigms are the de-facto standard for link and button controls across all operating systems.</p><ul id="6d10f77f-3d7a-42aa-abdc-97561512d07f" class="bulleted-list"><li>A button initiates an immediate action, such as form submission.</li></ul><ul id="eea2ecd2-52ac-44d7-8d61-c3cdbd18ce17" class="bulleted-list"><li>A link triggers navigation to a different resource.</li></ul><h2 id="6dbfaffd-eb49-4404-85ce-85bceb508f70" class="">A link with a crappy (or missing) href isn’t a button</h2><p id="cae0b37b-26d1-4780-9bc4-9ea038e2e53f" class="">I must see things like these at least once a day:</p><pre id="33db4753-d9f1-4047-a9f2-80384082f3b8" class="code code-wrap"><code>1. &lt;a class=&quot;btn\_addnew&quot;&gt;&lt;/a&gt;
+2. &lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;path/to/image.gif&quot; /&gt;&lt;/a&gt;
+3. &lt;a href=&quot;#&quot;&gt;&lt;/a&gt;
+4. &lt;a href=&quot;#&quot;&gt;Some button text&lt;/a&gt;
+</code></pre><p id="0a56908e-8071-4cc3-bd34-0a4292da1687" class="">In first case, I often see these with background image sprites that give the control the visual look of a button. In this case this item is neither a button or a link. Because this item lacks an href attribute, it is an “anchor”, not a link. As an anchor it is not keyboard focusable. Furthermore, due to the use of a background image sprite, the item has no text alternative for the image and therefore no ‘name’. For low-vision users in High Contrast Mode, the image will disappear. For voice dictation users, they will be unable to use link or button commands on that control. From an accessibility standpoint, this item may as well not exist at all and the use of A here is no better than SPAN.</p><p id="95b003eb-40a7-4416-b7fb-124e41d7de83" class="">The second example is being seen less and less these days, superseded as it were, by some variations of 3 or 4. In each of these cases, these objects are only marginally better than the first example. In the first example, the lack of an href attribute meant that the item can’t get focus via keyboard. In these examples we see the use of href=”#”. Developers often use the hash mark to have a link that (they think) does nothing. The problem is that they’re wrong in multiple ways.</p><p id="c427a5f0-80bc-4216-b26a-83b9b40e86f8" class="">Per the specification, the ‘#’ is a <a href="http://tools.ietf.org/html/rfc3986#section-3.5">“Fragment Identifier Separator”</a>. In other words, the “#” is meant to precede a string of text which identifies a fragment on the page – a named anchor or an object’s specific ID. Developers think that by having no identifier it points to nothing, and unfortunately they’re 100% right. In certain browser/ operating system combinations, this may also mean that focus is shifted elsewhere. In some cases, for instance, it has the apparent effect of pointing to the browser window or body element. From there the tab order re-starts from the beginning.</p><p id="f0f97e14-fd7e-4479-9d56-147608f67368" class="">Imagine this scenario: you’ve programmed a pseudo button which navigates through a wizard-like process with multiple steps, each using that &lt;a href=”#”&gt; link. Each time a keyboard user completes one step, they need to start over at the very top of the page, tabbing through to the next step. Lame.</p><p id="7aa8d812-8412-4dd7-9595-6f594397546a" class="">Perhaps the thing that confounds me the most about using links (or spans or divs) as buttons is that there’s no intelligent argument that can be made in favor of this practice. The BUTTON element can be styled just like links, divs, and spans and no matter which of these elements you choose you still need to bind the relevant events to your control. <strong>So if it looks like a button and acts like a button, what compelling reason is there to not just use a button?</strong></p><h2 id="b84604c0-5efe-4b8b-9199-0f2c884655d3" class="">TL;DR</h2><ol type="1" id="061c67fc-fc5d-4294-891c-5e13a5d62f98" class="numbered-list" start="1"><li>DIVs and SPANs are not buttons</li></ol><ol type="1" id="f72247f8-c9b6-4489-a9fe-a7d725fe346b" class="numbered-list" start="2"><li>If it navigates, it is a link. Use link markup with a valid hypertext reference</li></ol><ol type="1" id="5f28676a-5418-4dc6-b253-be62f58290a2" class="numbered-list" start="3"><li>If it triggers an action, it is a button. Use a BUTTON element</li></ol><ol type="1" id="36e82161-a778-44d1-8fca-85462b2e59a5" class="numbered-list" start="4"><li>If you don’t like how a button looks, style it with CSS.</li></ol></div></article></body></html>

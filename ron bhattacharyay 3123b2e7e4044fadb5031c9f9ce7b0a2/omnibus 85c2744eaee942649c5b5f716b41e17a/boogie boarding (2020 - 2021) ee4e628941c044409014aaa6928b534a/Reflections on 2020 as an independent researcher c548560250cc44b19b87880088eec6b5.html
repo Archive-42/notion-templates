@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Reflections on 2020 as an independent researcher</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c5485602-50cc-44b1-9b87-880088eec6b5" class="page sans"><header><h1 class="page-title">Reflections on 2020 as an independent researcher</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://andymatuschak.org/2020/" class="url-value">https://andymatuschak.org/2020/</a></td></tr></tbody></table></header><div class="page-body"><p id="baa7c3d9-4d8f-4998-9f2c-281e671f26a8" class="">2020 was my second year as an “independent researcher.” I’m grateful for the freedom that strange job title entails, but it’s certainly not well-defined. I’ve needed to grope around in the dark for patterns and structures which pre-existing institutions and roles would ordinarily provide. To kick off 2021, I’ll share some of what I’ve learned, as well as of the outstanding questions which seem most pertinent. These observations are necessarily quite personal, but I hope they’ll be of interest or use to others considering similar paths.</p><h2 id="d313285f-b37f-4b8f-ab0c-0fb71d50099a" class="">1. Why work independently?</h2><p id="176da35f-3b34-4a65-b1f1-39926377dc41" class="">I’m not interested in independence for its own sake. I’m interested in inventing environments which significantly expand what people can think and do. That aspiration is what drives my work, rather than a particular title, role, or practice. When I use phrases like “independent researcher” to describe my work, the title is a loosely-held shorthand for what I really value: freedom of inquiry.</p><p id="3e90a23a-5ed8-483b-84ca-cbcb980b0b2e" class="">For that matter, I’m skeptical that “independent researcher” is a stable or desirable long-term identity. Independence offers freedom, but it’s also quite limiting, as I’ll discuss in more detail later in this essay. If the work goes well, an independent researcher will likely find compelling opportunities to evolve into some higher-leverage institution—a studio, a foundation, an academic center, a business. If the work doesn’t go well, most independent researchers would have trouble staying afloat.</p><p id="3799dc0a-ad54-42de-bb80-36177b405bbc" class="">In my case, the aspiration isn’t just to solve the object problem of, say, <a href="https://andymatuschak.org/books">forgetting what you read</a>. I want to more deeply understand the properties of enabling environments—principles of operation, design procedures and patterns, relationship to individual and social cognition—<a href="https://numinous.productions/ttft/">to foster a community which routinely invents new environments of this kind</a>. Field creation will almost certainly involve institution creation. But my understanding is too weak right now to see much further.</p><h3 id="17dc7ce6-408b-4a4a-9d0a-39555753c12a" class="">Why not start a startup?</h3><p id="2d5a9f11-00eb-423a-81d9-6c0f7b20b801" class="">I understand theories by making software, and I live in San Francisco, so people often expect that I’m planning to launch a startup. But my interests are misaligned with <a href="http://paulgraham.com/growth.html">a startup’s fundamental drive: growth</a>. I’m interested in generating insight, not in generating growth, except insofar as growth is necessary to understanding the ideas I’m trying to explore.</p><p id="27495e0f-24cb-4c9b-9687-36b316b63ed9" class="">Some companies figure out how to align these aspirations so that marginal revenue/usage enables marginal fundamental insight, which enables marginal revenue/usage, and so on, in a virtuous cycle. Pixar is a good example. Cutting-edge graphics research enables new kinds of storytelling, which in turn funds more research. To be sure, many startups do uncover fundamental insights, but usually as an inconsistent means, rather than as an end. A steady loop like Pixar’s is quite rare. You need a specific theory about why a given business model is connected to a given type of insight generation. You also need to explain why marginal insight remains an <em>ongoing</em> prerequisite to marginal business, rather than a “nice to have” which can be cut when convenient. I don’t have a theory like this for my own work yet. Such flywheels are particularly rare in my domain, since <a href="https://numinous.productions/ttft/#why-not-more-work">novel interface ideas are typically public goods</a>. Their development might require significant investment, but once created they can often be copied cheaply by others, limiting returns to the inventor.</p><p id="aab25a3b-41de-438c-8954-55dcce111b0f" class="">A related question I’ve had to straighten out for myself: am I really aiming for insight, or for impact? Is my goal only to invent such environments—or also to operationalize, scale, and spread them? Well, it’s true that my work is <a href="https://en.wikipedia.org/wiki/Pasteur%27s_quadrant">use-inspired</a>; I identify more with applied researchers than with basic scientists motivated purely by discovery. So I wouldn’t want to work on a project without the possibility of transformative impact. But so long as I have some persuasive theory of how that impact could happen, I prefer to focus on producing insight through prototypes. I’d rather let others operationalize those insights into scaled products.</p><p id="ae9b2ab8-9ee0-49d6-b1c4-b63123c18d74" class="">To put this another way, I’ll invoke a common trope about startups: “ideas are cheap; execution is what matters.” It’s a decent if overstated rule of thumb—but not because new ideas are unimportant. Startups are fragile. They usually focus on niches where execution is the primary factor because they <em>have</em> to. They tend to die if they tackle a niche which continuously demands both outstanding execution and also deep, original insight. This lens suggests a useful way to frame my goal: developing ideas far enough that they become “obvious,” the banal fodder for half a dozen companies in a future YC batch.</p><p id="cd7c31fc-cd3d-4eac-8eea-d6e8c20d5a23" class="">Another key misalignment makes me hesitant to consider a startup: culture. Tech culture is different from research culture, and I’m already quite overweight on tech culture. Anyone working in an industry for a while tends to adopt elements of that culture—its processes, its norms, its values, its tacit knowledge. Much of this is incredibly valuable, of course, but these norms also create constraints.</p><p id="42456adc-a97a-475c-af9d-85ac9d015152" class="">For example, tech culture is calibrated to a much faster pace than research culture. A “huge project” for a Silicon Valley tech person may be a year or two long; a “huge project” for a researcher may last a decade. Persistence with a difficult problem may require tens of hours for a tech person and hundreds (or thousands) of hours for a researcher, no matter how quickly try to work. It’s not that the tech people are constitutionally lazy or something like that: in industry, it usually is, in fact, a bad idea to spend many hundreds of hours thinking about a single problem. Better to create an 80/20 solution or try a different approach. But foundational insights often do require more patient, focused thought than heuristics from tech culture would naturally encourage. Coming from the tech industry, my expectations around the pace of progress are often seriously miscalibrated for many problems I’m tackling. I’ll feel like I’ve been banging my head against a question forever, but it’s only been a few tens of hours. That’s nothing! With this mindset, I’ll miss the results I seek and, as a bonus, drive myself nuts. I’m working to become much more comfortable slowing down.</p><h3 id="83a658d1-1bc5-4dd6-a795-5c1199a3ee69" class="">Why not become an academic?</h3><p id="aa9d4bb3-f5e0-47bd-b3c7-1b55cffa54a6" class="">If I’m interested in freedom of inquiry and focused on generating insight, why not join academia? There are some boring stock answers: publish-or-perish, the grant treadmill, overbearing administrative responsibilities, conservatism, etc. But the real reason is my choice of field. My goals, values, and practices align poorly with the academic discipline which would most naturally host my work, human-computer interaction (HCI). If, in some alternate universe I were interested in a different topic, there’s a good chance I’d have become an academic.</p><p id="17a8fffc-735c-403c-bdb7-471fb1017b84" class="">That’s a dispassionate way to put it. A subjective and inflammatory way to put it is that I feel academic HCI discourages vision and imagination. Part of the trouble seems to be that the field’s trying too hard to be a science. It emphasizes an empirical approach, often producing elaborate artificial evaluations of uninteresting systems. Peer reviewers seem to reward analysis and data over ingenuity and compelling direction. <a href="https://dubfuture.blogspot.com/2009/11/i-give-up-on-chiuist.html">The field disincentivizes building systems significant enough to explore new paradigms</a>; published systems are rarely driven by <a href="https://numinous.productions/ttft/#serious-work">a serious context of use</a>. I read the major conferences’ proceedings every year, yet I learn much more about HCI from studying game designers and idiosyncratic Twitter tinkerers. Of course, there are a few researchers who do great work in spite of the field’s challenges. It’s hard not to be inspired by people like Hiroshi Ishii or Ken Perlin. And I should be clear that these are comments about the field, not about the individuals in it, who have consistently struck me as kind and well-intentioned. The headwinds just seem too strong to justify.</p><p id="b91cd2bd-69c2-47b0-8406-91620a401d23" class="">I’ll share one more story about the field. I noticed a professor’s name on several papers I enjoyed, so I invited them to chat. We had a friendly, wide-ranging conversation about topics in the field. Then at one point, I asked: “How do you balance pressing your own long-term research agenda in your lab with supporting the inquiry of your grad students?” They replied with some consternation: “Oh, no no, you have it wrong. I view my primary role as helping students pursue their own research projects. I’m not trying to push any long-term agenda of my own.” I suspect they exaggerated their stance here. Beneath the surface, I can see some consistent theories threading through the students’ papers. But if all professors really operated according to this one’s belief, we can see the problem that would be induced. The entire field would consist of nothing but student work, without any venue for senior researchers to develop an idea of their own over time. I’m sure that’s not actually what’s happening, but qualitatively, the sense I get reading the major conference proceedings isn’t so different. It feels like skimming a sea of churning froth—tiny isolated studies rarely accreting into a broader current.</p><p id="b1479444-cb86-4a14-b9f4-6c5492208606" class="">I criticize academic HCI not out of ill will but out of genuine perplexity. I honestly don’t understand why the field behaves as it seems to behave. I’d really love to be wrong. If you think I’ve misunderstood something, I’d love to read your comments. Maybe the problem is that I’m actually trying to start a field which doesn’t exist yet, so of course HCI looks misaligned. Maybe this is my version of <a href="https://www.econlib.org/call-it-sour-grapes/">Bryan Caplan’s sour grapes</a>. Maybe I’m too arrogant or closed-minded.</p><p id="4ceee9ce-3a33-42e2-afdb-176e5d220151" class="">So I work independently. Not because that’s an ideal arrangement, but because I don’t see a good alternative. I don’t yet know how to create or join an institution which would enable better work. Part of the trouble comes from working in a proto-field, without methodology or principles solid enough to effectively support a pipeline of new investigators. In fact, I don’t understand yet my own projects well enough to effectively coordinate a large team around them, though I could certainly put a few more hands to good use. The most concrete incremental constraint is, of course, funding. Let’s talk about funding.</p><h2 id="e57e15d3-6628-4d12-97eb-57e00a968729" class="">2. The unexpected success of crowdfunding research</h2><p id="0d58546e-0c66-4185-8740-d22148dba445" class="">When I left Khan Academy in early 2019, my (very understanding) wife and I made a rough plan: in 2019, I’d focus on the work and avoid thinking about funding at all; in 2020, I’d figure out some plan for sustainability and begin moving towards it; hopefully by the end of 2021, we’d stop burning cash. My collaborator <a href="https://michaelnielsen.org/">Michael Nielsen</a> suggested we set up <a href="http://patreon.com/quantumcountry">a Patreon</a> to solicit funding for our work, and I agreed, not thinking much of it. He’s now moved on, but I’m quite grateful to him for that early nudge.</p><p id="ac70b2a0-abe0-48e6-a0db-ec2d8434049c" class="">Less than two years later, my patrons have crowdfunded roughly a graduate student’s fellowship grant. It’s not lucrative, but it’s enough to cover my living expenses. That’s an important milestone! So long as this income stream continues, my runway has been extended indefinitely—or at least until I start getting nervous about not being able to save. My goal was to end 2020 with a plan for how to eventually fund my work, but I’m astonished to now find myself ending 2020 with solid funding in hand.</p><p id="888f2b44-246c-4449-a246-5147f57195b9" class="">Is this a model which other independent researchers could use? My story doesn’t necessarily generalize, but I’ll share some observations which might be useful to others interested in experimenting with crowdfunded research.</p><h3 id="1c526c6d-79e4-4df8-93c5-8247df9daf55" class="">Growing a crowdfunded research grant</h3><p id="fbaf230a-11cc-4368-ab93-8e138f9a7cae" class="">First, we should examine the dynamics of growth and churn. The funding must be <em>stable</em> if it is to be a viable source of independent research. In <em>Technology and Courage</em>, <a href="http://andymatuschak.org/files/papers/Sutherland%20-%201996%20-%20Technology%20and%20Courage.pdf">Ivan Sutherland describes courage as one of the key ingredients for research</a> and notes:</p><blockquote id="4430be0f-c3f2-4f3f-b4cc-86fed387214a" class="">I find that I have only so much room for taking risks. When I can reduce the risk in some places in my life, I can more easily face risk in other areas. I provide myself the courage to do some things by reducing my need for courage in other areas.</blockquote><p id="2add0bc8-c836-4baa-b70e-b9e8669bcfce" class="">This certainly matches my experience, not just with Patreon but with marriage, home ownership, investments in well-being, and so on.</p><p id="f9293086-b588-4f4b-a214-28ab1449f435" class="">These charts depict the shape of monthly revenue and membership count growth over 2020 (the differences are due to volatility in the distribution of patrons’ pledge sizes):</p><figure id="fbd63031-bfc4-40e7-9127-d7d3d93a9b60" class="image"><a href="Reflections%20on%202020%20as%20an%20independent%20researcher%20c548560250cc44b19b87880088eec6b5/graph.png"><img style="width:700px" src="Reflections%20on%202020%20as%20an%20independent%20researcher%20c548560250cc44b19b87880088eec6b5/graph.png"/></a></figure><p id="2668edb7-426c-4aff-84e7-f65390524715" class="">On the whole, then, my Patreon experience has been characterized by modest but steady growth. To understand how stable the funding is, we should understand the dynamics of churn, which these charts don’t depict. The story there looks decent: monthly new patron rate (median, 25–75th %ile) was 9% (8–15%); monthly departing patron rate was 3% (2–4%). This suggests reasonable stability, though departure numbers should increase over time since the Patreon is new, while new patron growth may decline as I saturate my interested audience.</p><p id="ea109db4-c86e-45d9-9bba-403f8e4f50ba" class="">Annual billing has been a helpful boon for me. Roughly a quarter of new patrons elect to pledge on an annual basis. Assuming steady revenue growth, then, these patrons’ annual commitments let me fast-forward about three months into the future along my growth curve. Annual pledges also offer a helpful extra measure of stability.</p><p id="95ef40b8-afd6-46b4-8388-db5ce932b764" class="">On my Patreon, I offer three funding tiers: $5, $20, and $100. The tiers are mostly arbitrary for now—the only difference is that the $100 tier comes with public attribution (which no sponsor seems to care much about). But the tiers give people a way to modulate their support according to their interest and capacity. I’m quite happy with how the price mix has worked out. Most of my revenue comes from $5 members, while a smaller number of more generous sponsors’ contributions boost my funding considerably. In aggregate, that mix generates a grant large enough to live on, while freeing me from worries about any individual funder. This does wonders for my peace of mind. At Khan Academy, we were often quite dependent on a small number of huge-value donors, and we’d regularly fret about appeasing them; when one would decline to offer another grant, it would create tremendous stress. The “grassroots” situation creates a much healthier interpersonal relationship with funders, some of whom are personal friends—I’d hate for anyone to feel like they need to keep funding me out of some sense of guilt.</p><p id="173e6e1f-c270-4189-b053-ac7cf49d9fb0" class="">Patron growth appears to be roughly linear, but you’ll notice a discontinuity in the slope of the graph around May. That’s when I decided to try sharing more exclusive writing with patrons. This does seem to have worked as an enticement, though I’m actually not sure how important exclusivity is. I expect the articles drive new patron growth in part because they create repeated opportunities for others in patrons’ networks to stumble upon my work. Is the higher rate of growth because people want to unlock the paywall, or because articles create traffic? I hardly promote the Patreon at all—I’m not yet sure how to do that in a way that makes me feel comfortable—so this type of traffic may be important.</p><h3 id="d2b9b2f3-8263-45af-964b-be98c744f7a8" class="">Researching in public</h3><p id="fbd51eb6-91a3-49f4-8392-5bf205e3f337" class="">One surprise of crowdfunding research has been the pleasure of building a closer relationship with a community of people enthusiastic about my ideas. But to do good work, I mostly need to avoid thinking about funding and funders. The promise of ongoing exclusive content creates some tension, then. Unlike a typical paid newsletter or blog, funder-exclusive writing is a secondary by-product of my primary work. In this way, I’m not a traditional “content creator.” Sometimes I catch myself thinking in terms of what I’ll write or report next to my funders. That’s not good. Such a mindset, taken too seriously, encourages shallower work designed to appease others. Also, I’m human, so I naturally want to report successes. But this can create the same pressures which exist in scientific publishing: short-term-ism, conservatism, publication bias, harmful over-claiming. In research, it’s terribly important that you be brutally honest with yourself. I don’t think it’s possible to craft marketing-like messages about your “great progress” without closing your own eyes to what’s actually happening—which means you’d better be brutally honest when talking to others about your work.</p><p id="aa698d08-fca0-41c6-bed0-ce464b463181" class="">As an antidote, I’ve tried to engage in what Michael has called “anti-marketing”. That is, to make a point of focusing publicly on the <em>least</em> rosy parts of my projects—what’s confusing, what’s frustrating, what’s not working. It’s hard to do consistently, but when anti-marketing is the goal, then interesting challenges become something positive: useful fodder for public conversation, rather than something to be swept under the rug. I suspect it also builds a deeper, more authentic relationship with an audience.</p><p id="e688e903-c3c4-49c7-9457-b97bf1ce7983" class="">More broadly, I’ve experimented this year with a mindset I’ve been calling “<a href="https://notes.andymatuschak.org/z21cgR9K3UcQ5a7yPsj2RUim3oM2TzdBByZu">working with the garage door up</a>.” I try to share rough, ongoing artifacts from my process, including <a href="https://notes.andymatuschak.org/About_these_notes">the working notes</a> where I do most of my daily thinking. This has worked quite well when I adopt the right mindset—that I’m sharing objects made as part of my primary work, rather than things created specifically for publication.</p><p id="df53d492-224e-4582-ab0f-b78636dd3ddb" class="">The practice generates more conversation and serendipitous inbounds “for free.” It’s worth noting that in most ways, unusual inbounds are a better leading indicator for my work than page views or other more traditional metrics. Popular projects might garner a lot more mass attention but a lot <em>less</em> attention from unusual, singular people. Those people often introduce surprising (and more meaningful) insights and opportunities.</p><p id="70d3b1c4-0376-4e04-bdbc-9fdc4c0738ea" class="">Apart from potential distraction and distortion, there’s another subtle issue with talking to a broad audience about ongoing research. The clearest, most familiar parts of your ideas are the ones which you’ll have the easiest time communicating and which your conversation partner will have the easiest time grasping. Often, those elements are already somewhat mainstream or even clichéd. Others are likely to have lots of cached thoughts around such ideas, and they’ll tend to be interpreted incrementally.</p><p id="7ca93092-b649-4297-b383-eb0ffc75b06e" class="">But if you’re doing something original, the most interesting aspects are the ones which others—and you!—understand least well. Particularly early on, you may not be able to articulate the new element you’re reaching for very clearly. It may just sound like an unusual adverb choice or an innocuous-seeming qualifier. Others’ replies will tend to emphasize the most mainstream elements, since they may not notice or know how to react to the aspects you least understand. Such conversation will often drag you back towards the mainstream. It’s a kind of “regression to the mean” for ideas.</p><p id="e39db96a-2f14-48cb-a406-02a500419596" class="">Great colleagues and collaborators can take more active steps to mitigate the issue. For instance, if Michael hears me talking about some idea that seems fairly banal on the surface, he’ll deliberately tug at the vague spots where I’m straining to reach past typical interpretations. This was part of a broader practice he called “listening for enablement.” My Khan Academy research colleague <a href="http://maylikhoe.com/">May-Li Khoe</a> would respond to my poorly-understood ideas by riffing in unpredictable directions. Her sketches would often explore wildly different paths, but those vivid reactions often helped me understand my own inklings better. Unfortunately, I’m not yet sure how to avoid the regression problem when discussing ideas regularly with a broad audience.</p><h3 id="99b0e1f3-15d2-4eee-810b-05c3fc983a0a" class="">What are patrons buying?</h3><p id="0f29b1e9-8327-4005-9516-be494cda0a35" class="">Free web sites often have a “donate” button with language like “if you enjoyed this (free) content, please consider showing your appreciation with a donation.” That’s how we thought of Patreon initially: roughly like a tip jar. But in a patronage model, people fund the work in an ongoing fashion. The tip jar model doesn’t explain that behavior very well. Why donate repeatedly over time out of gratitude for past material?</p><p id="44612151-6c7a-4e81-934c-a5075a8ab9ff" class="">In my interactions with patrons, I’ve been surprised to find that altruism is rarely the dominant force. Patrons mostly don’t think of themselves as paying for consumption of past work; they’re buying into production of future work.</p><p id="a529330f-f409-4563-b455-f512afa55955" class="">From this angle, it may make more sense to think of the production of the work itself as a product. What are patrons buying when they buy that product? In its most compelling form, a patron’s purchase <em>causes future work to be produced which would not have been produced without it</em>. Perhaps without that patron’s contribution, the creator must spend some of their time freelancing to pay the bills, so their projects were limited in scope; but with that patron’s contribution, the creator can work full-time on much more ambitious projects. Or maybe they can hire a freelance artist to illustrate their game, etc. This is like a Kickstarter crowdfunding campaign, except in an ongoing fashion instead of for a one-time effort. In my current situation, marginal funds buy something subtler: growing confidence and stability; freedom from foundation or investor appeasement. As funding continues to grow, marginal funds will likely buy contractor time to expand my scope.</p><p id="399e3d90-4812-409f-8cd2-b3c75baa4baf" class="">In December of 2020, I asked my patrons to briefly explain why they support my work. Roughly a quarter of my patrons wrote back. The vast majority framed their motivations in terms of supporting production of future work. Some people quite specifically want to use a prototype I’m developing; others just want to see certain ideas developed further. About a third framed their funding in terms of “<a href="https://www.nature.com/articles/477529a">people, not projects</a>,” expressing general confidence that I’ll do interesting work. Naturally, that’s my favorite kind of support. After this cluster of answers, the distant second most common motivation was access to the behind-the-scenes content.</p><p id="5a2efba9-2e56-48d3-9108-9a3ebfc62d53" class="">I considered asking patrons to pick their top couple reasons from a pre-authored list, but I thought it would be more interesting to read open-ended responses. I’m glad I did! I wouldn’t have included any of the following motivations, but each was expressed by &gt;10% of respondents:</p><ul id="b24518f1-09d3-4045-8d14-1140fd63d05e" class="bulleted-list"><li>patronage creates a feeling of being “on the edge” of something new</li></ul><ul id="2fa0e9af-bfa3-4155-ac80-cf6589cd6ab8" class="bulleted-list"><li>participating in the experiment of crowdfunding research</li></ul><ul id="2b36f569-eecd-4b2a-b0d0-380c74744a8d" class="bulleted-list"><li>seeing my work “up close” is a source of personal inspiration</li></ul><ul id="e3f7c9ad-3f05-42e9-a0c4-0bd2acf87e37" class="bulleted-list"><li>wanting to support “tools for thought” in general (rather than any of my specific projects)</li></ul><p id="8b8c5553-b8a6-49fa-9534-545c24218d5a" class="">Understanding all this helps me better frame how I describe and relate to the Patreon publicly. For example, relatively few readers cited exclusive content as an important motivation, but it clearly accelerated the growth of funding. Seeing these responses from patrons, I dug into the data and noticed that after I started sharing extra content with patrons, patron drop-off rates fell roughly by half. My current theory is that for many patrons, this insider content is important mostly because it reinforces the (approximately true) impression that their support is <em>creating</em> marginal production, which is by far the dominant motivation people cite.</p><h3 id="791b4b64-8f16-4c0e-af18-feb02ee03456" class="">My path to sustainability</h3><p id="2b0498f9-0389-4927-8411-f80d3d5b3588" class="">How repeatable is my modest success with crowdfunding? Could others follow this path? I can’t know, of course, but it’s worth articulating some of the factors which may have been essential. At a high level, my story is one of leveraging <a href="https://concepts.effectivealtruism.org/concepts/career-capital/">career capital</a> from the tech industry. <a href="https://adamwiggins.com/making-computers-better/together">As Adam Wiggins suggests</a>, I suspect it’s possible for more tech people to do this once they have some years under their belt.</p><p id="7dc7f816-4a61-436e-b29d-b4d093c5b020" class="">First and foremost, I was in a position financially to draw no income for (as originally planned) several years. In terms of the general population, this is a very unusual and fortunate position! For many tech workers, though, it’s not a terribly outlandish goal. Most of this capital came from five years spent at Apple: joining Khan Academy (a non-profit) cut my income by two thirds. San Francisco is quite expensive, but we’ve lowered our costs by owning rather than renting our home, which of course also required capital. My wife’s generous understanding was unusual and essential. Practically speaking, though, it helps that she’s a doctor. Having trained from 2011 through mid-2020 (medicine is wild!), she recently began her first “full” attending position, now at last with plenty of earning potential of her own. Also, we don’t have (or plan to have) kids; our mortgage is our only debt; our families don’t need our financial support. It’s a fairly ideal situation financially, except for the San Francisco part.</p><p id="8281ac7d-7274-4987-80ac-4208ba6afd1e" class="">I should mention that there was another straightforward path for me (and for many other tech workers) which wouldn’t have required crowdfunding at all. Before I left Apple, my plan was to save enough that I could quit and pay myself a grad student’s stipend from the interest indefinitely. It would have taken another five years or so, depending on my diligence. That seems very achievable, though I was so uninspired by the work at Apple at that point that it might have done some permanent damage!</p><p id="d45c8538-8082-4720-9334-846dfa8bb9e5" class="">While I’d planned to live without income, I avoided burning through savings by becoming the lucky recipient of an <a href="https://www.mercatus.org/emergent-ventures">Emergent Ventures</a> grant. It covered my first year’s expenses. I would certainly recommend Emergent Ventures to others trying to find a way to support their independent work. The application took only a couple hours; I enjoyed a half hour of thoughtful conversation with Tyler Cowen; they made a decision within a few days; my only obligation was to send them a few short reports. Emergent Ventures stands in delightful and courageous contrast to the intensely burdensome experiences I’ve typically had interacting with foundations. The grant successfully bootstrapped me: by the time the grant expired, my patrons mostly covered my expenses. Self-obsolescence seems like an ideal outcome for a philanthropic grant. I suspect this kind of bootstrapping would be quite important for many people to crowdfund independent work: patrons take time to accumulate, but the first few hundred donations aren’t enough to quit your job.</p><p id="05d7d548-9a73-4550-9e13-c91b698902d8" class="">Finances aside, a few related career capital factors have likely been crucial to my progress. They may be important for others doing similar work.</p><p id="b4a91a62-a000-448b-8ba5-b01ddb44d0db" class="">First and foremost, I’ve had enough professional experience to build up a rare skillset. I can independently research, design, implement, analyze, and report on novel software environments. I’m certainly not a world-class graphic designer or literature reviewer, but being able to execute the whole end-to-end process myself makes an enormous difference. There’s also a matter of degree. Being able to prototype systems is important, but I’m comfortable rapidly building highly polished production systems, systems which can attract users organically and engage with serious, real-world contexts. I suspect one key challenge for academic HCI is that researchers often lack the skills (if the inclination) to design and execute consumer-quality software. Without those skills, many projects are trapped in toy contexts.</p><p id="fe902f79-fbb2-4569-a75e-d994833c0813" class="">My past experiences have also yielded essential social capital. Most people don’t seem to care that I’m unaffiliated, but I suspect that’s only because I can introduce myself by saying I helped build iOS at Apple and led R&amp;D at Khan Academy. Without some kind of strong social proof, it may have been hard to get anyone to engage seriously with my work. Along the same lines, my past work and writing has accumulated a modest but substantial online audience. I don’t need an academic journal or publisher to market my work for me because I can “publish” on Twitter. My audience isn’t large by “public intellectual” standards, but it’s enough to produce strong network effects which propagate the work quite broadly and prompt interesting inbound relationships. This same network is the source of most of my patrons. I don’t think I could have recruited this audience of funders without Twitter—at least not with such little effort and distraction.</p><p id="e0609bf8-90c2-43d8-81fd-af35b4ae7dcc" class="">So there seems to be some important path dependence to my career journey. If I’d tried to jump into my present work immediately, I’d lack many key skills; I’d work too slowly; I’d be distracted by promoting my work and marketing to funders. Maybe I would have made good progress despite these challenges. I’m not sure! But my experiences do suggest that many more “staff/principal”-level tech workers could successfully pivot to an independent practice.</p><p id="ef542cc3-4032-43c1-a455-9eba1a9e9184" class="">I’m much less sure about this last point, but I suspect my work depends on time spent living in San Francisco. Prior to the COVID pandemic, most of my evenings were filled with conversation which reinforced a mindset of earnestness, intensity, disagreeableness, resourcefulness, and so on. Patrick Collison <a href="https://patrickcollison.com/advice">advises</a>: “Figure out a way to travel to San Francisco and to meet other people who’ve moved there to pursue their dreams. Why San Francisco? San Francisco is the Schelling point for high-openness, smart, energetic, optimistic people. Global Weird HQ.” I think he’s right. Living here has changed me deeply. Probably other places would have had a similar (or a better?) effect on similar axes. For example, I like what conversation in Cambridge, MA does to my state of mind. But when I lived in Portland, OR, for example, the environment tended to emphasize a different set of values—community, craft, sustainability, enjoyment. I liked these values, too, but I suspect they would not so naturally reinforce my current work.</p><p id="f3220d6b-8b88-4dfc-a9e2-011d0319d040" class="">Can you absorb a scene’s values through the internet? I certainly did to some degree as a teenager living in Saint Louis. Social technology has only improved since then. In many ways, distributed networks like Twitter transmit values more fluidly than live interaction. But my sense is that bandwidth limitations in interaction are significant. There are depths which are hard to absorb without constant physical immersion.</p><h2 id="c1bf51c5-3751-4cb7-b018-34e9160eae71" class="">3. Working alone</h2><p id="ff94783d-244d-4ddf-a01a-5824eb3f4250" class="">I may be working independently, but that doesn’t have to mean working alone.</p><h3 id="3f8ef859-d580-4dfb-a92c-31bdebca2370" class="">Executing alone</h3><p id="00e6610f-8d2e-4f8a-9437-64e1e1df163a" class="">I’m very grateful to have a modest and possibly sustainable source of funding for my work. But as pseudonymous blogger Applied Divinity Studies <a href="http://mail01.tinyletterapp.com/AppliedDivinityStudies/about-applied-divinity-studies/18411054-applieddivinitystudies.com/hiatus/?c=7759c90d-0b72-4152-bd07-f6e91b678096">writes</a> (after receiving an Emergent Ventures grant of their own):</p><blockquote id="ac09e308-990e-492d-b887-d7a379c741af" class="">I suppose the expectation is that I’ll just save the money or spend it on rent. The implicit assumption being that I have a burn rate, this defines my runway, and money is used to extend the time I have to continue to do what I’m already doing.</blockquote><blockquote id="1a161098-14cc-40fd-9c45-94ae1abf9e7b" class="">But that’s crazy. This isn’t how any ambitious person spends money, nor is it a path to long term growth. Surely there’s some way I can spend this money to actually do better work, earn more money, and grow exponentially? … Surely there’s something I can do with the money other than give it to my landlord?</blockquote><p id="74ed4dee-2ac8-43a8-ad2f-cc1b15bbc88e" class="">I’ve been writing about a related metric in my work since 2018: how much capital do I feel I could productively deploy towards my goals (annually, say)? In early 2019, it was a few tens of thousands; now I’d put the number at a million or two. It’s still not a high number, but at least it’s climbing. The difference is that I now understand the work well enough to imagine how I could accelerate it with a team.</p><p id="1cca7cc5-651a-40f5-8928-92a2d6c950da" class="">I also understand an enormous challenge I face in working alone, doing the type of projects I’m doing. I might be a jack-of-all-trades, but practically speaking, I worry that I can’t do good research if I’m also doing all the implementation work. The simple version of the problem is that there are prototype ideas which I don’t explore because it would take too long, and there are many concepts I’ve sketched yet haven’t had time to implement. But there’s a deeper problem here.</p><p id="e10a9c10-5171-4dca-8e1a-05fcdaa68f79" class="">My approach requires developing new software interfaces which express insights, then studying those interfaces and their use to generate new insights, and so on. Michael and I called this “<a href="https://numinous.productions/ttft/#how-to-invent-hindu-arabic-numerals">insight through making</a>.” In practice, it’s quite difficult to think deeply about theories while in the midst of a significant software development project. They’re different states of mind. And it’s hard to build momentum on software development when spending much of one’s day in reflection, writing, and study. Worse: switching costs are high between software development and research thinking. I’ve not had much success when dividing my days or even my weeks into “building” and “thinking” blocks.</p><p id="55c3be5d-51b3-4ca5-a521-ae07587e2c31" class="">In March 2020, I wrote a list of research questions for <a href="https://numinous.productions/ttft/#introducing-mnemonic-medium">the mnemonic medium</a>, then embarked on building <a href="https://withorbit.com/">Orbit</a>, which I planned to use to study those questions. Nine months later, I’ve made little progress on those research questions. I’ve mostly been building. At some point I’ll need to execute a “hard switch” back to thinking about those questions for a while, during which time it’ll be difficult for me to build anything significant for Orbit.</p><p id="a3082af7-6fe7-4688-81a3-8a005ebf1d25" class="">Maybe that’s fine. I just need to spend months at a time in one mode or the other, and I need to get more patient. But when I’m deep in software development, reaching flow on a daily basis, my mind narrows to a kind of tunnel-vision, totally fixated on the software systems and their problems. The problem isn’t just about escaping tunnel-vision in that moment. I’m worried that engineering mindset stunts my growth as a researcher (still quite nascent), even in the weeks following an intense period of implementation.</p><p id="997f6148-ef84-4b33-9506-320a255b3de0" class="">Another problem with cycling slowly back and forth is that feedback loops become too long. For example, in February, Michael and I published an experiment involving a new kind of spaced repetition prompt, an “<a href="https://notes.andymatuschak.org/The_mnemonic_medium_can_help_readers_apply_what_they%E2%80%99ve_learned_through_simple_application_prompts">application prompt</a>” which we thought might help readers apply what they read. We’ve run some initial analyses and interviews around those prompts, but in truth we’ve learned surprisingly little about them since their introduction—mostly because I’ve been focused on building Orbit. A very reasonable criticism of my year is that I’ve built a grand new observatory before I’d come close to exhausting what I could see what the one I already had.</p><p id="f0b82334-8c90-4929-bc13-a174ee8556ff" class="">I understand at least some of my projects well enough to accelerate them through execution-oriented teammates. In 2021, I’d like to experiment with volunteer and (funding dependent) contract collaborators. It would be easy for coordination overhead to do net damage to my work—so this goal will depend on finding the right people.</p><h3 id="69faa60e-6e55-428b-8e12-3caab1ef1d91" class="">Culture and scenius</h3><p id="6f981356-b8f7-465a-a88d-37f4fb335a24" class="">I may not want to join academia, but I deeply envy a good field’s intellectual kinship. Solo engineering has fairly obvious limitations; solo research presents subtler problems. I’m grateful for intermittent conversations with others doing related work, but for the most part it’s not enough.</p><p id="3a960af1-6475-45c6-bb97-b86f07626b27" class="">I want to be part of a rich <a href="https://kk.org/thetechnium/scenius-or-comm/">scenius</a> of serious, capable people doing full-time original research on enabling environments. I want to attend colloquia in which I’m regularly stunned by the ideas presented. I want peers who will candidly observe the limitations of my ideas, then work with me to improve them.</p><p id="d59fd926-22fd-4392-9e1d-2c85126831c7" class="">I don’t yet know how to make this happen. My proto-field has (hopefully) a proto-scenius: many part-time tinkerers, many startups doing research-ish work when they can spare the time. Funding is one limiting factor for a bloom of full-time work. But culture is another. This scene, as far as it exists, mostly draws its norms and values from tech culture—just as I originally did. I like the influence of arts culture on this scene, supporting a more expansive, playful design orientation. But I worry that we need a significant injection of research culture to support the patient, probing, self-critical work which can yield transformative insights.</p><p id="d696ffb1-5f7c-492e-a1b8-c2b60a8807cc" class="">I recognize the irony in calling for more research culture after earlier maligning academic HCI. But my problem is with norms and goals at the field level; many individuals working in it could still provide great influence. And we could draw on researchers in other fields, as I’ll describe in the next section.</p><p id="4146df22-d2df-4509-82b7-f78c182100d0" class="">I’d like to focus more effort on this problem in 2021.</p><h3 id="e82738e1-ec42-49af-af99-d0d3311a099c" class="">Serious contexts of use</h3><p id="fac4be3b-992b-4360-9dbd-7cc078309284" class="">The most serious problem for me in working alone is that it means I lack a serious context of use. I’m building tools for tools’ sake. As Michael and I described <a href="https://numinous.productions/ttft/#serious-work">elsewhere</a>, this is one of the most common failure modes for work like mine.</p><p id="225836b3-b43e-4c21-9e68-3e6c14a8bc2c" class="">The Apollo program created countless powerful scientific and engineering tools, but the point was putting people on the moon (and showing up the Soviets). Likewise, when Pixar created its revolutionary animation tools, many teams had been working on computer graphics for years, but Pixar’s systems emerged from a zealous pursuit of a storytelling dream. Mathematica is great because Wolfram built it to help with his own mathematics research. And so on.</p><p id="47ce7046-9491-4046-9217-01e74033bc79" class="">Practically speaking, such contexts provide deeply meaningful feedback. Many critical insights about a prototype system will only emerge in the context of a serious creative problem that’s not about the system itself. But perhaps most importantly, these projects also provide the intense personal connection which makes great work possible.</p><p id="16fd51e8-1ea1-4262-9ced-9342fa3fe1f6" class="">Adjacent to my work, there are many “<a href="https://explorabl.es/">explorable explanations</a>” which attempt to explain a subject through novel interactive media. Some of these articles are quite striking. But most are primarily motivated by the author’s interest in the experimental medium. Most authors’ skills lie primarily in building interfaces, rather than in whatever discipline they’re trying to explain. These authors’ medium ideas are limited by their lack of domain expertise and domain motivation. By contrast, it was important that <a href="https://quantum.country/">Quantum Country</a> had a serious context of use: to help earnest students learn all the fundamental principles of quantum computing and quantum mechanics, as well as several applications. This richer context was possible because Michael is a pioneering quantum computer researcher.</p><p id="22d85fe0-ab0f-4eda-bbaa-2a6387a871a4" class="">So one recipe for insight through making might be deep collaboration between some colleagues focused on some serious domain problem which might benefit from augmentation (“tool-users”), and other colleagues looking to use that context to drive the creation of new environments (“tool-makers”). My plan for 2020 was to start an experimental media studio along these lines with Michael, but I shelved that approach when his plans changed, since it depended on his skills as a synthesist. I’ve spent the last few months building relationships with domain experts who might make interesting collaborators in a similar vein. It’s too early yet to declare success or failure, but this type of collaboration is not easy to establish.</p><p id="773ce84f-f55e-434b-96b9-5765b8f03f03" class="">What are the limits of independent research, and of independent funding? If independent research is a stepping stone, what new paths does it open? Is my position a fluke or an example? Can independent researchers be coordinated into a scene without traditional institutions?</p><p id="6436e95f-4500-4676-a87a-dab9a41997a7" class="">I’m not sure how to answer any of these questions, but I’m grateful to be trying. Happy new year.</p><p id="e662f842-2129-4613-888b-d1d37a91d00e" class="">This essay was originally <a href="https://www.patreon.com/quantumcountry">patron-only</a>. I decided to make it available publicly a few weeks later after a number of emails from patrons who wanted to refer to it in public conversation.</p><p id="ab643160-9757-410a-81b7-9a19c8d70ab7" class="">Special thanks to my sponsor-level patrons as of publication: <a href="http://www.adammarblestone.org/">Adam Marblestone</a>, <a href="https://twitter.com/hirodusk">Adam Wiggins</a>, <a href="https://asuth.com/">Andrew Sutherland</a>, <a href="http://somethingdoneright.net/">Bert Muthalaly</a>, <a href="http://calv.info/">Calvin French-Owen</a>, <a href="https://www.linkedin.com/in/dwight-crow-73122621">Dwight Crow</a>, <a href="https://fnnch.com/">fnnch</a>, <a href="https://jameshk.com/">James Hill-Khurana</a>, <a href="https://lambdalabs.com/">Lambda AI Hardware</a>, <a href="https://twitter.com/ludwig">Ludwig Petersson</a>, <a href="http://www.t-1ventures.com/">Mickey McManus</a>, <a href="http://mintter.com/">Mintter</a>, <a href="https://patrickcollison.com/">Patrick Collison</a>, Paul Sutter, <a href="https://peterhartree.co.uk/">Peter Hartree</a>, <a href="https://www.sanalabs.com/">Sana Labs</a>, <a href="https://shripriya.com/">Shripriya Mahesh</a>, <a href="https://www.oreilly.com/tim/">Tim O’Reilly</a>.</p></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Understanding Venture Capital as an LP</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f1b6ee1a-a051-4f9f-8094-34751f717fd2" class="page sans"><header><h1 class="page-title">Understanding Venture Capital as an LP</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://aanandbajaj.substack.com/p/understanding-venture-capital-as" class="url-value">https://aanandbajaj.substack.com/p/understanding-venture-capital-as</a></td></tr></tbody></table></header><div class="page-body"><p id="7411fc84-84b4-4927-a172-0a637acb6ac0" class="">I work on the Investments Team at the Cystic Fibrosis Foundation. We have total assets of $5 billion and have a sizeable target allocation to venture capital. I wanted to write down a post synthesizing all my thoughts on investing in venture capital funds from an LP’s perspective.</p><p id="5344cf3f-f7cf-4cb0-8380-a5cd108d56f1" class="">This post will be go over the following topics:</p><ul id="3b24466e-1739-4725-876a-1cc9474cd7ef" class="bulleted-list"><li>How Venture Capital works</li></ul><ul id="70342210-0388-4dd7-a243-655fcb331c35" class="bulleted-list"><li>Why Venture Capital matters</li></ul><ul id="69287a38-f57f-44ce-9ae2-0274e5505451" class="bulleted-list"><li>Venture Capital&#x27;s role in a diversified portfolio</li></ul><ul id="67b3b197-bf45-48df-9a98-7cdcad4a9ea8" class="bulleted-list"><li>How to select Venture Capital managers</li></ul><h2 id="2d0667bc-7218-47fc-98ed-36cf292811aa" class="">Overview</h2><p id="3712edae-9651-47af-9100-e47d4931f940" class=""><strong>What is Venture Capital?</strong></p><p id="85899b5f-4713-4d72-80d9-3eb1c67931cf" class="">Simply put, venture capital is a <strong>type of investment </strong>raised by startups for the sole purpose of funding growth.</p><p id="daef929c-02d3-4751-8264-32aa1ad7a031" class="">The chart below sums up the size of the US venture capital landscape pretty well. Deal value below indicates the total <strong>amount </strong>invested by venture capitalists into companies. Deal count indicates the total <strong>number </strong>of companies invested in by venture capitalists.</p><p id="6fcb0192-9bd6-4914-a652-0c995fcd7eff" class="">Source: Pitchbook NVCA Venture Monitor Q4 2020</p><figure id="74e96bc3-69d4-45c3-8578-4014fded7cad" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcd21228d-2813-4936-a41d-7294c2879368_480x290.png"><img style="width:480px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fcd21228d-2813-4936-a41d-7294c2879368_480x290.png"/></a></figure><p id="b315f357-c035-479e-b230-4026d72e52e5" class="">Venture capital investing can be divided up into three main stages:</p><ul id="0e00f1f3-cf54-4b53-8784-225c859bb59c" class="bulleted-list"><li>Angel and Seed stage</li></ul><ul id="cad22755-d747-4ff5-9b13-31e6bf38fb17" class="bulleted-list"><li>Early-stage</li></ul><ul id="b88064bd-486e-44a2-adaa-de5be6d0b536" class="bulleted-list"><li>Later-stage</li></ul><p id="a8eea0e6-de6d-4455-a152-f575106d1729" class="">Why are there different investment stages? Investing in startups is very risky, and so investors want to know <strong>the level of risk they are taking on </strong>when investing in a startup. For example, if you invest really early in startup X (i.e. two kids in their college dorm room) you are taking on a lot of risk. Compare that scenario to investing in startup Y that has customers, already has revenue, and has a larger team. Investing in Y still has risk, but it is less risk than investing in X. This difference in risk is why investors have separated investing in startups into three different stages. As a startup grows and increases its customer base, there is less investment risk from the point of view of an investor.</p><p id="761f1259-9ff9-4dc0-9293-e8e85575988f" class=""><strong>Why Venture Capital Matters</strong></p><p id="ed701228-abca-498d-81d5-93d413666dcb" class="">A Stanford <a href="https://www.gsb.stanford.edu/insights/how-much-does-venture-capital-drive-us-economy">paper</a> released in 2015 outlined the value of venture capital to the US economy. A few summary statistics from the analysis are detailed below:</p><ul id="d80f0d4c-ac6e-48c6-8bc7-ef76db71d391" class="bulleted-list"><li>Post-1979, 43% of the companies that were founded that went on to go public were VC-backed</li></ul><ul id="10864b3e-5ccf-4f7a-bf75-c34667d6e1bc" class="bulleted-list"><li>VC-backed public companies now account for 42% of total R&amp;D spending by all public companies</li></ul><ul id="4a1daf36-a797-46fa-a98c-affb14b223ab" class="bulleted-list"><li>Over the past 50 years, the U.S. VC industry has raised $0.6 trillion, while the traditional private equity (buyout) industry has raised $2.4 trillion</li></ul><ul id="1da8cc78-021f-49b8-8778-3798ed711634" class="bulleted-list"><li>VC-backed public companies employ more than 4 million people</li></ul><p id="cea8438c-d1aa-4da3-90db-208e8944eaa2" class="">The statistics are helpful, but why does venture capital <strong>really matter?</strong></p><p id="dc8a730a-80d9-4287-a746-eaee84e54a3a" class="">Venture capital matters because it allows people to truly innovate, break boundaries, and build new things that can significantly improve people’s lives. Over the past few decades, the category defining companies have been funded by venture capital, such as Airbnb, Google, and Uber. These companies have produced enormous returns for venture capital funds, which is what makes investing in startups attractive. A few notable examples of the largest venture capital exits can be seen below:</p><p id="9802d55b-022b-445b-a96e-290b775f8ff9" class="">https://www.cbinsights.com/research/best-venture-capital-investments/</p><figure id="e3055fff-0343-45de-b0cc-9d37fb09130f" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F963e41c8-12ee-40aa-8cc1-68419d9165aa_3624x2492.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F963e41c8-12ee-40aa-8cc1-68419d9165aa_3624x2492.png"/></a></figure><h2 id="aeb9a789-f4c8-4d20-8d37-5a06c74611d4" class=""><strong>How Venture Capital Works</strong></h2><p id="3a0f5d57-f323-49eb-9da0-e2ab877d093b" class=""><strong>Fund Structure</strong></p><p id="dca2ce81-f5ee-4a11-8312-76381e269541" class="">The below graph sums up the legal fund structure of a venture capital fund:</p><p id="f896ecad-6935-4cbc-b1aa-83c2f61156f0" class="">Source: Wikipedia</p><figure id="b5cbbe4b-c560-412e-a52c-6f7cc6bf1acc" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fd2e78aa0-54a1-4f1b-88ca-ff8a496cf3c0_500x314.png"><img style="width:500px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fd2e78aa0-54a1-4f1b-88ca-ff8a496cf3c0_500x314.png"/></a></figure><p id="add89c4f-f1ee-4652-9e04-7e1886d214e5" class="">Let’s try to understand how the above (seemingly complicated) structure works through a story. Bob lives in Silicon Valley. Bob has many friends who have their own startups. Bob believes he can invest in a few of his friends’ startups and make a lot of money. Bob only has $2 million of his own, but to invest in at least 10 startups, he needs $50 million. Where will he get this money? Bob decides to talk to Sam, someone he knows at the New York State Pension (a pension fund gets money from people when they are young, invests it, grows the money, and pays out the money to the people when they are in retirement). The NY State Pension has $5 billion, and they want to invest in startups, but they don’t know how to, so they accept the meeting from Bob.</p><p id="11314f3e-8699-4a6f-baa1-e7b9830df909" class="">Bob tells Sam that he has friends that have startups and that Bob can invest in their startups. Sam from the NY State Pension is excited because the pension fund wants to grow their money by investing <strong>some of their money</strong> in startups but they don’t know how to do so. Sam decides that he can give Bob the $50 million from the pension fund, Bob can invest it in startups, and then hopefully that money will grow overtime. Bob estimates after 10 years he can give $100 million back to the NY State Pension. Sam is ecstatic because he thinks that Bob can double the State Pension’s $50 million.</p><p id="bd103768-5600-4cb4-9be5-db3f474ae2bd" class="">Bob then creates his venture capital company (called the General Partner, or GP, shown by the red box above) and he is the sole owner of this company. However, to take the State Pension’s $50 million, Bob needs to create a <strong>fund, </strong>so bob creates a venture capital fund (blue box) with the help of a lawyer. Once Bob creates this fund, the State Pension wires his fund the $50 million. Now Bob has $50 million to invest in his friends’ startups!</p><p id="af3fcd2d-2408-4f89-b645-2b997e6b5f7e" class="">The above example illustrates effectively how a venture capital structure is formed and who the investors are in a venture capital fund (in the above case, the New York State Pension fund).</p><p id="17e2cd52-5306-4075-8403-80f7072963ec" class=""><strong>Mechanics</strong></p><p id="c66d73b9-98d6-4dd6-9a45-49dc34efa36b" class="">There are a few things to note about venture capital funds from a legal standpoint. Usually, funds have finite lives (unlike mutual funds, for example). Most venture capital funds have a fund life of about 10 years. However, many funds technically exist for longer than 10 years because it can take many years to exit a company and return the capital to investors. Overall, fund life can be separated into four main phases:</p><p id="ef00d910-0d59-458a-9f57-b444209d0b98" class="">Source: AllenLatta.com</p><figure id="a70f4cf2-1c30-4e82-887a-2821cc3c39e4" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F98be32c0-e033-4681-a218-b52c3d799b73_1111x232.jpeg"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F98be32c0-e033-4681-a218-b52c3d799b73_1111x232.jpeg"/></a></figure><p id="33daa52c-d40c-499a-9ab2-1f2bf8fc34f3" class=""><em>Formation</em>: In this stage, the partners of the GP (in the above case, this would be Bob) set up the actual fund, do all the paper work, find Limited Partners (in the above case, this would be the New York State Pension), and actually get the dollars from the Limited Partners (LPs).</p><p id="fc068e15-df9c-452d-becd-ce9cae9ed0df" class=""><em>Investment: </em>Once all the legal work is done, and the GP actually has the money from the Limited Partners, it is ready to invest in companies. The investment period is usually defined in the paper work in the <em>formation stage </em>and is an agreed upon period of time by both the LPs and the GP. This period of time is usually 3-5 years and this is usually the most labor-intensive part of the entire investment process for the GP, as it has to find companies to invest in. During this stage, a venture capital fund usually “reserves” a certain amount of money for expected follow-on financings. We’ll discuss this again below.</p><p id="93438bc5-7ee3-4d80-bde3-acbf3bb0e3f2" class=""><em>Harvesting: </em>After the <em>investment stage</em> is complete, the GP is done making initial investments. During this stage, the partners of the private equity fund help their companies (termed “holding companies”) in any way they can to grow further. In venture capital, during this stage the GP may have to invest further in their holding companies. Why? This can be explained through an example below.</p><p id="bf82cb77-9d46-4eb6-a489-0c1053807c51" class="">Say there is a company setup by two founders (Company XYZ). The company is 100% owned by the co-founders at this point.</p><figure id="3f63cbc1-cb30-48fa-96e4-4ea2450139c9" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc40f6ef8-e9cf-4a98-89fb-d5cd3b9f3ab3_481x289.png"><img style="width:481px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc40f6ef8-e9cf-4a98-89fb-d5cd3b9f3ab3_481x289.png"/></a></figure><p id="fd94c594-b360-4aa9-bab2-c90aa2b234af" class="">After some time, company XYZ needs money from venture capital investors. A venture firm (V1) invests in Company XYZ in exchange for 25% of the company. After this investment, the ownership of the company looks like this:</p><figure id="b3ae21dc-9571-45b4-919a-98a643c733db" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F8aef4dc5-e70b-459f-9dbb-07e4abd31f34_481x289.png"><img style="width:481px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F8aef4dc5-e70b-459f-9dbb-07e4abd31f34_481x289.png"/></a></figure><p id="997910a5-144d-4225-a758-75a98eca72fe" class="">The ownership of the founders has been reduced from 100% to 75%. This is called “dilution.” Sometime further in the future, Company XYZ needs more money, so another venture capital firm comes in to invest money (V2). This fund invests money into the company in exchange for 20% of the company. What happens to the ownership of the first venture investor (V1) and the co-founders? It gets reduced by 20% because they have implicitly “sold” 20% of their respective ownership stakes to the third investor (V2). For example, V1’s new ownership = V1’s old ownership (25%) x (1 - 20%)</p><figure id="f9959685-4595-4747-9cad-b9764a505e6d" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc3c377c2-c40c-4dff-a6c3-3f82b407099f_481x289.png"><img style="width:481px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc3c377c2-c40c-4dff-a6c3-3f82b407099f_481x289.png"/></a></figure><p id="4a73d2f3-9985-4151-b2e7-c6af812fef3d" class="">Bringing this back to the fund mechanics, effectively fund managers want to avoid getting their ownership reduced in their companies (what happened to venture firm V1 above) by new investors, so they “reserve” a part of the money given to them by LPs to invest in their best companies so that they maintain their ownership in these firms.</p><p id="48f0bccb-3986-4582-bd2c-17bbe2a4af29" class=""><em>Exit</em></p><p id="503ef48b-81d2-4f19-b7fd-5d736dba4a1f" class="">So the venture capital fund invests money into companies, but how does it exactly make money? The fund makes money when other investors buy their shares from them at a higher price than the price they paid (just like the stock market). This can happen in two ways:</p><p id="6be5d4f2-b18e-479e-965b-564b94902e00" class="">1) Mergers and Acquisitions (M&amp;A): in this case, another company (usually larger) acquires or merges with a venture capital fund’s holding company. In this case, the acquiring company pays money to buy the holding company, and the venture fund receives its pro-rata amount (amount paid to acquire the company x equity ownership %).</p><p id="4ee0c7a1-b4ee-4fd2-a952-e9298e1ef246" class="">2) IPO: in this case, the venture capital fund’s holding company goes public and lists on the stock exchange. During this process, the venture capital fund can sell its private shares to public market investors.</p><p id="d97d614b-fb13-42fe-9d30-ba05c49b94fd" class="">The discussion below on fees will specifically outline how both the GP and the LP make money.</p><p id="a1e59116-8d49-4cfb-8cc8-a28df6eab02b" class=""><strong>Fees</strong></p><p id="8ef346ce-e4db-4bb5-93e0-7e7226c1ceb3" class=""><em>Management Fees</em></p><p id="debd8b34-f97d-4d2d-ae0e-090936032a62" class="">In the venture capital industry (and in private equity in general), the GP requires that the LP pay them a certain fee every year for managing the money and investing it in companies. This fee is usually used to fund expenses such as salaries (people who need to go out, find companies, hire lawyers to sign the paper work to invest in the companies, etc.) and other back office functions like accounting. This fee is called the management fee. It is usually 2% of the total fund assets.</p><p id="4b5f83d3-abec-4b5a-92dc-d7246652cde1" class=""><em>Carried Interest</em></p><p id="e7110575-6c67-4544-b427-ddc05be58075" class="">The second type of fee that GPs receive is called the “carried interest” or “carry.” This type of fee aligns the incentives of the LP (the institutions providing the money in anticipation of return) and the GP (fund managers who want to use their expertise in investing to make money). Effectively, the GP earns a carry if it makes a profit on its investment. A simplified example is provided below:</p><p id="044a0cb3-07e0-4c8a-87b7-118207b1500b" class="">Example: A venture capital fund (Fund XYZ) has $100m in its fund contributed by LPs. It invests in company A for $20m. 7 years later, Fund XYZ sells its investment in Company A for $100m. This is a 5x return. First, Fund XYZ usually returns the invested amount to the LP at no charge (this would be $20m in this case). Any amount above the $20m is profit, which is $80m in this case. Of this $80m, a pre-set percentage is rewarded to the fund managers (this % is set in the formation stage of the fund life cycle). Usually, this is 20%, so in this case the fund managers would get 20% x $80m which is $16m and the LPs would get the other $64m. The breakdown of returns can be seen below:</p><figure id="b61d9eea-46c9-4303-8fe7-c560db4b9889" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F9ebd0417-5ad7-47d4-865f-1a8011b72cf3_321x311.png"><img style="width:321px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F9ebd0417-5ad7-47d4-865f-1a8011b72cf3_321x311.png"/></a></figure><p id="deb4290d-02e5-4ad4-89dc-c8a596f0519c" class="">“Gross” return is defined as the return that the LP has on “paper” before paying the GP carry. This is the $100m that the company was sold for divided by the initial investment in the company ($20m). However, the LP doesn’t actually get a 5x return because it has to pay 20% of the profit to the GP (deservingly so, since the GP found the company and did all the work to invest in it). So the “Net” return is after the LP has paid the GP carry, which is the actual return, in this case 4.2x. There are a lot more details when it comes to carry, but they will not be covered in this post.</p><h2 id="700e9807-2b6f-4cde-bd3a-a2bf6b91a1f8" class="">Venture Capital&#x27;s Role in a Diversified Portfolio</h2><p id="ad153e1e-5112-4c41-934e-e759b924a62f" class="">As an investor who does not want to put all their eggs in one basket, the real question is: how much of your portfolio should be in venture capital? All large investors such as pensions, endowments, and foundations have to wrestle with this question.</p><p id="75c2e385-d1cc-4f30-bf99-f41766322772" class="">Fundamentally you want to answer this question from the perspective of &quot;how much are you willing to lose?&quot; In other words, you need to think about risk. A helpful framework from the Wealth Management world can be seen below:</p><p id="e8258da3-b90e-4247-a154-17fabfcb0cb9" class="">Graphic from RalphWakerly.com</p><figure id="fb2d9d06-66a4-4d2f-900d-a91462ee26df" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fee2242bb-7d8a-4d51-9f2e-50ef34fab023_771x449.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fee2242bb-7d8a-4d51-9f2e-50ef34fab023_771x449.png"/></a></figure><p id="5e5290ec-2c38-42aa-b03b-5b551f401668" class="">As an investor, you need to assess yourself on these three criterion to determine how much to put into risky assets (public equities, private equity, etc.). There are many methods for doing this, but one method is to do a wealth management survey which will output a numerical score for each of these criteria.</p><p id="c5ea521c-786f-4c12-a12a-912b19f6f64e" class="">Effectively, if your ability to take risk is high (long time horizon and you have a lot of current liquidity or cash), your willingness to take risk is high (how much money you are willing to lose), and your need to take risk is high (you need to hit a high return number for your portfolio), having a material portion of your portfolio in venture capital makes sense.</p><p id="d4460f09-9b11-4514-a8de-4840ce29f3ff" class="">Next, you would so some sort of portfolio optimization math to figure out <strong>exactly how much of your portfolio </strong>you should have in venture capital. This is based on how much you as an investor should expect to make by investing in venture capital and other asset classes.</p><h3 id="64335332-b3cb-4771-80ef-ea83bb90a2bf" class="">What is an Appropriate Expected Return in Venture Capital?</h3><p id="d76dad16-82d8-4b18-bb4d-41929d6def21" class="">To determine how much you <strong>expect</strong> to return on an annualized basis from venture capital investing, you must determine your hurdle rate for investing in this area. To determine this, one methodology called the “building-block” approach can be used. This approach effectively says:</p><ul id="b8dd18cf-1ab0-4742-97f3-b7387390a5b7" class="bulleted-list"><li>The return I expect from venture capital (say in the US) should equal the return I expect from investing in large US companies <strong>plus</strong> the return I expect to compensate me for locking up my capital for 10+ years <strong>plus </strong>the return I expect to compensate me for taking the risk of investing in small startups</li></ul><p id="be896e52-f1d4-4b1d-b604-d58b18975fca" class="">This can be visually seen as follows:</p><figure id="22ff503c-2909-4c02-a1be-4d3e032ab63e" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F78f0072c-1b71-41e2-8dee-9367eb8e6a3b_723x281.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F78f0072c-1b71-41e2-8dee-9367eb8e6a3b_723x281.png"/></a></figure><p id="5b832a46-558c-4eac-b373-25269d2e99ed" class="">This intuitively makes sense: you expect to make more money investing in venture capital than by investing in large established businesses (yellow box, such as Coca Cola) because you are taking on more risk by investing in venture capital. You are also locking up your money when you invest in a venture capital fund (you may not get back money until 10 years in the future) and this is another risk because if you need money between now and the 10 years, you won’t be able to take it out of the venture capital fund.</p><p id="c11ccdec-9836-4595-9688-d939d52aeef2" class="">To actually determine the numerical percentage annual return is out of the scope of this post, but if most people expect to earn 7-8% a year by investing in the stock market, a return of around 12% is not unreasonable to expect when investing in venture capital given the increased risk. Over a 10 year fund, this equates to about a <strong>3x return on capital (before fees). </strong>In other words, if you invest $100 in 2010 in a venture capital fund, by 2020 you should expect to receive $300 (this is an oversimplification since usually the fund will exit some companies in less than 10 years and some companies in greater than 10 years).</p><p id="35cd6420-a149-4f3e-a98c-2055362adab4" class="">Now, the real question is, how probable is it for me, as investor to earn this 3x return (just to keep it simple, before fees) when investing in venture capital?</p><h3 id="40c5a904-16be-4453-8fa1-c5965710e880" class="">The Distribution of Venture Capital Fund Returns</h3><p id="a3c72b4a-c6c0-422e-8538-61b91e2ce308" class="">A distribution of returns lays out all the annual/by fund returns of an asset class so that an investor can understand what’s the <strong>probability</strong> they will earn a specific return in any given year/fund. For example, the annual return distribution of the S&amp;P 500 index is shown below:</p><p id="1c58936d-2514-4f1d-81d6-9c7cdbd5b403" class="">Source: Bessemer Trust</p><figure id="bbd7f833-0297-4b5a-927f-9b00456f2889" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F951f61ea-20d4-4c80-b5eb-bdf14b6ef04f_950x628.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F951f61ea-20d4-4c80-b5eb-bdf14b6ef04f_950x628.png"/></a></figure><p id="c7cf81d6-4bee-4287-9035-5424b6492622" class="">The return distribution resembles a normal distribution, and this helps us understand what we can expect our future distribution to at least resemble. For example, we see that there are very few situations where the market has a -30 to -40% return on annual basis, which means we can expect this to happen in rare situations such as an economic collapse/recession.</p><p id="42fbac12-04a9-4257-a236-eae4caf2f0ea" class="">There is also data to help us understand the distribution of venture capital returns. The returns of venture capital funds are influenced by the underlying returns of the companies they invest in. We can first try to understand the distribution of the underlying holding companies.</p><p id="9e56b041-91c1-4b9d-909b-d6d2231db91d" class=""><strong>Return Distribution of Realized Venture Outcomes</strong></p><p id="d235d22f-4132-4342-90b3-49b443bc782f" class="">Source: Sethlevine.com</p><figure id="88cfe445-0350-4258-a453-c261becc2c45" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F3e88bd07-3665-4537-a521-26e90bc31bb6_1024x607.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F3e88bd07-3665-4537-a521-26e90bc31bb6_1024x607.png"/></a></figure><p id="7db0efba-a239-44b5-8021-6126acc99017" class="">The above chart shows the distribution of returns by investing in US startups between the years of 2009 and 2018. We can clearly see that most startups lose money (about 64% of the time), while very few startups return a 10-20x multiple (3% of the time). This is referred to as a <strong>power-law distribution</strong>, where a small percentage of startups make up most of the returns generated by investing in this space.</p><p id="352286d6-3a3d-4ac4-9b1a-f944f92d7271" class="">So clearly, you want the venture capital fund you are investing in to be able to get those 10-20x or more outcomes (the Googles and Facebooks of the world), but how probable is this?</p><p id="02901def-4219-459e-9116-b8e3e1a336d5" class=""><strong>Return Distribution of Venture Capital Funds</strong></p><p id="28dc0dc9-5d23-45e1-be8c-3faaff1cbb48" class="">There is some data on the return distribution of the venture capital funds themselves. The California Public Employees Retirement System (CalPERS) is an active investor in venture capital funds (it is an LP, as we defined earlier), and released data on 135 venture capital fund investments between funds that commenced between 1999 and 2009. The distribution of returns can be seen below:</p><p id="50e35a15-0924-4e62-b722-dcc2870e1989" class="">https://medium.com/@guillemsague/understanding-the-nature-of-venture-capital-returns-95846c65c049</p><figure id="0ca8bd2b-b05d-4771-a40c-b32e663258e3" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F63ea37d3-0592-4221-a09a-8a32bd37a2ea_1897x917.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F63ea37d3-0592-4221-a09a-8a32bd37a2ea_1897x917.png"/></a></figure><p id="b5400b47-7c51-4ddd-9ab6-7aee6da34440" class="">The above graph shows that the average multiple return by investing in venture capital funds is about 1.6x, a far-cry from the 3x that we require (over a 10 year period). This means there is a mismatch between what we expect and what venture capital funds actually return. We can further solidify this point by trying to model a venture portfolio:</p><p id="7ad7844b-1225-4eda-8510-a3abbdf496fb" class=""><strong>Modelling a Venture Capital Fund Portfolio</strong></p><figure id="b1894c1c-bfa4-4610-858c-aaa1607ad0d1" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fff8acda6-7e3a-4ea5-8d17-7327567da7a7_635x499.png"><img style="width:635px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fff8acda6-7e3a-4ea5-8d17-7327567da7a7_635x499.png"/></a></figure><p id="c08affb6-dae6-467d-a606-1648671b3207" class="">A very simplified model of a venture capital portfolio can be seen above (doesn’t include follow-on financings and dilution, etc.). The yellow highlighted region is where we can input what the realized multiple will actually be of the investments in each bucket of returns (based on the distribution shown above). Overall, we can see that to get around a 3x (gross) return, the venture capital fund must find a “home-run” investment. Without the homerun, the return looks like this:</p><figure id="e027fa9e-6c15-432c-8288-0656cd475ace" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F73883c54-4cf5-41ae-bd83-32f884e1b5e3_635x499.png"><img style="width:635px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F73883c54-4cf5-41ae-bd83-32f884e1b5e3_635x499.png"/></a></figure><p id="af7226d1-8f53-46b1-ae1c-0cbf827ba593" class="">In the above case, the homerun investment makes or breaks the fund. This is also evident in the real-world, where <strong>6%</strong> of all venture deals make up for <strong>60% </strong>of the industry’s returns. This is further validated by the below chart by Horsley Bridge which shows that for funds that had returns above 5x, less than 20% of deals produced 90% of the fund’s returns.</p><p id="f01b966b-acc9-405f-8ddd-5f3881648461" class=""><a href="https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F93031d7e-19d4-44e7-b89f-47c1391a67c6_1721x1001.png">10x Returning (\&quot;Home Run\&quot;) Deals in a VC Fund Have the Ability to Return The Majority of the Fund&#x27;s Capital&quot;,&quot;title&quot;:null,&quot;type&quot;:null,&quot;href&quot;:null}&quot; src=&quot;https://cdn.substack.com/image/fetch/w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F93031d7e-19d4-44e7-b89f-47c1391a67c6_1721x1001.png&quot;&gt;</a>Source: Toptotal</p><p id="a791dcb7-b1d1-4c70-a4d5-8928e38ac693" class="">So is it all about having enough “shots on goal” so that you are maximizing your chance of hitting a unicorn?</p><p id="f1b7c6ed-db17-42c4-970c-7cb08865efe8" class="">Not quite. It is a chicken-and-egg problem, because as you increase the number of investments in the fund, more companies will fail and your homerun investment will have to return more money to compensate for the increased losses. For example, using the same model above, if we increase the number of investments to 60 it results in the following output:</p><figure id="acebeb68-2c5a-42e3-896a-cc59cdf47853" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fa0bdb8e4-afbd-4ff9-9f80-eabe5487aa0d_635x499.png"><img style="width:635px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fa0bdb8e4-afbd-4ff9-9f80-eabe5487aa0d_635x499.png"/></a></figure><p id="ba9560dd-9cb6-47de-9c9d-21c45e3e1389" class="">The amount in each investment goes down, but the realized multiple on the <strong>homerun </strong>investment (&gt;20x investment) needs to be <strong>much higher </strong>to make the fund have a realized multiple of 3x. Again, this is a simplified approach to modelling a venture portfolio because ideally you would want to model the follow-on capital invested at later rounds into the one company that is a greater than 20x, but the key insight is to get a 3x multiple on the fund, a venture fund does not only have to have enough shots on goal, but it also needs to make sure it does not “over-diversify” such that it becomes too hard to get to the 3x target return.</p><p id="517f3623-9d7f-481f-b228-b99c56f1479e" class="">This leads us to our next question: as an LP, 1) how do you structure a VC portfolio, and 2) how do you select the VCs that will have the highest chance of returning a 3x?</p><h2 id="f9aa30db-68ff-459f-8730-3c1f782bbdac" class="">Building a Venture Capital Fund Portfolio as an LP</h2><h3 id="3ce0acb1-25ad-4d0d-91b6-53e1f041a152" class="">Structuring a Venture Program</h3><p id="50a02764-8fce-4fe5-aeca-d223887c26e0" class="">As an LP, there is a choice to make:</p><ul id="5c65668f-390a-4e48-95c0-cf7fc078ef0a" class="bulleted-list"><li>Either have many venture funds in the portfolio, which allow for many shots on goal, and invest a small amount with each one</li></ul><ul id="e28c542d-407c-4058-802e-61ee316e9e49" class="bulleted-list"><li>Or have a few venture fund investments in the best brand/highest quality funds</li></ul><p id="4835d86d-eb27-47bd-81e7-af99f7f9cec9" class="">The problem with a “splatter” approach where an LP would invest in many venture funds is that it results in an over-diversification problem. For example, if an LP had $1B allocated to venture capital and it had 30 funds at an investment of ~$33m per fund, and each fund had 30 holding companies, that is an exposure to 900 underlying companies. For the overall venture program to return a 3x, there would have to be at least 18 companies that have a ~70x return in the entire program. Given the distribution above, this seems probable (just apply the 2% probability of &gt; 20x return). However, what does this actually mean?</p><p id="0123c52e-a9f1-4b91-9db9-47e517512764" class="">The below model shows the LP Venture Program model:</p><figure id="5f343787-abe6-4aa8-bfd0-f1b93b2e8fe8" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fbf146827-c2fd-4c9e-976b-cd06e406e5a2_663x556.png"><img style="width:663px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fbf146827-c2fd-4c9e-976b-cd06e406e5a2_663x556.png"/></a></figure><p id="0ea7b735-4add-488e-b872-d704175a21e5" class="">What we have to understand is this is implying that the venture program is involved in around <strong>18-near unicorn companies</strong>. This is because if the post-money valuation of each company at investment time is about $11m ($1.11m invested / 10% average ownership), a 70x multiple would mean the company is reaching almost unicorn status at exit. For an average LP to expect their venture program to result in 18 unicorns over 10 years is possibly a stretch.</p><p id="986ee92a-c4a6-40c3-afcd-0db08c7a380e" class=""><strong>Conclusion: </strong>It may be a more realistic approach to have a concentrated group of venture managers. This is because the point of venture in a portfolio is not to diversify the portfolio or dampen volatility, it is to generate strong multiples. Having a very diversified portfolio of venture managers makes this harder to achieve because as you increase the number of managers, the chance you get a mean return goes up and mean venture returns are not attractive (as we’ll look at in the next section).</p><h3 id="9daf2cdc-27f3-450b-98f2-c837018d0322" class="">Venture Capital Fund Returns - Is it Worth It?</h3><p id="b83333fd-028d-486c-888b-80d29c76af4b" class="">So is venture even worth it from a portfolio perspective? It gets all the hype these days, let’s see if it has delivered.</p><p id="27507d73-b3d9-46b2-aae8-c64ff5dd56ec" class="">The Kauffman Foundation has been an LP in venture capital funds for decades. It’s asset base today stands at about $2.6 billion. In 2012, the Foundation released a report that outlined key lessons from its twenty years of venture capital fund investing, during which it invested in over 100 venture capital funds. The key insight was: <strong>firstly,</strong> <strong>the average VC fund fails to return investor capital after fees and secondly, most venture capital programs do not produce returns that exceed the public equity benchmark by 3-5% a year.</strong> In other words, the average VC fund produces no returns (returning capital means a 1x return).</p><p id="f08589fd-4f2a-4f39-8d83-e565d57d6c44" class="">Investing in venture in the early to mid-1990s generated strong returns that beat the public markets. However, after that period, returns have not been able to beat the public markets (NASDAQ):</p><p id="565ec746-cd23-4d37-bb8d-953b733dd041" class="">Source: Cambridge Associates, FactorResearch</p><figure id="cd9ff292-8e6f-494a-aa80-00c6459e3a33" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb7c3c681-85cc-40bd-8225-b22d7f62135c_640x272.png"><img style="width:640px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb7c3c681-85cc-40bd-8225-b22d7f62135c_640x272.png"/></a></figure><p id="204216b4-d23d-46ca-b437-8a61fda698d9" class="">Most of the outperformance versus the NASDAQ happened before the burst of the Tech Bubble. After that point, returns have not kept up with the public market index.</p><figure id="93f17423-865a-4d28-a7a7-a17b07bedd7d" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F185785fc-c161-4c68-8f04-514dfb0b145c_1000x506.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F185785fc-c161-4c68-8f04-514dfb0b145c_1000x506.png"/></a></figure><p id="2c4db50e-fa3d-4e9a-afe2-441d098c8db5" class="">As mentioned in an above section, an investor should at least expect venture capital funds to produce better returns than the public market alternative since VC funds lock up capital for at least 10 years whereas investing in the public market allows investors to buy and sell at any point. The Kauffman Foundation also concluded that only 16 of the 100 funds they invested in generated a return of more than 2x, while the rest underperformed dramatically, resulting in an overall return of 1.31x for the entire venture portfolio over their time horizon (a far cry from the required multiple of about 3x as mentioned above).</p><p id="feeb7b36-112a-4825-a5cf-fced3271da97" class="">Source: Kauffman Foundation</p><figure id="0775da65-cec7-4d15-b654-92335cf2a4a7" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb0c3166d-8196-4b17-a2d8-2ee9a234ba5f_1918x1065.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb0c3166d-8196-4b17-a2d8-2ee9a234ba5f_1918x1065.png"/></a></figure><p id="1413d61b-9b96-4cef-8e3e-bf9ca32681e2" class="">The Foundation’s overall return was actually on the high end compared to other LPs over the same time period, as shown below:</p><p id="abefb1bd-31f6-473f-a710-816e46f50af3" class="">Source: Kauffman Foundation</p><figure id="08b7b798-7b10-4c27-9c5b-6d5aa1a804d1" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F68e658ee-d16e-40ca-8bc8-9e7e7f0c9010_1979x876.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F68e658ee-d16e-40ca-8bc8-9e7e7f0c9010_1979x876.png"/></a></figure><p id="697bd8da-9434-4c1c-af53-dad6b07d645d" class="">Another way of viewing the same data is to look at the KS PME metric (Kaplan-Schoar). As explained on <a href="https://pitchbook.com/blog/what-is-the-difference-between-irr-and-pme">Pitchbook.com</a>:</p><blockquote id="1a39af46-e377-42cf-9652-4224db418e0a" class="">“The results of the calculation are straightforward; If the end value is higher than one, then the private market fund has outperformed the respective public market index and if it’s lower than one, it underperformed.”</blockquote><p id="205ff70b-203f-4bde-b3a1-c0a9380e55dd" class="">It is helpful to use the KS-PME metric because to assess private equity performance because it does not use IRR, which is a commonly cited metric by venture managers, because IRR can be easily manufactured due to its sensitivity to cash flow timing. The below chart shows the KS-PME for venture funds by vintage year by percentile, and also indicates that the median fund does not outperform the index, which in this case is the S&amp;P 500:</p><p id="a4932e79-e4dc-4980-86aa-99fc5c4e81ef" class="">Source: Pitchbook</p><figure id="9643dbaa-02ab-4be5-b411-54185fd60eb3" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff1e48d8d-24b2-460e-b8aa-5a7d1d138650_1446x1180.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Ff1e48d8d-24b2-460e-b8aa-5a7d1d138650_1446x1180.png"/></a></figure><p id="1d0302d5-ed52-4654-9312-5cdabf516c6c" class="">In other words, the <strong>average venture capital fund doesn’t do well</strong>. Only a select group of managers in the top quartile and top decile outperform.</p><p id="e15721be-8172-4fc9-a643-f70debae5620" class="">This leads us to a key question:</p><p id="4739cdf0-8336-4c52-96e3-5f525b4fafcd" class=""><em>Which types managers are in the top quartile and decile? In other words, can LPs predict which managers will outperform the public market alternative?</em></p><h3 id="f49e71c5-6530-4ff3-96b6-775ada352b38" class="">What Matters in Venture Capital</h3><p id="48759bef-81b5-49bf-9ca4-f73485ef1f5e" class="">The above analysis indicates that investing in venture capital funds only makes sense if one can invest in the top funds. As the Kauffman Foundation points out:</p><blockquote id="1207e8a7-e884-43cd-871d-432cab88e751" class="">“VC Returns typically are concentrated in only ten to twenty partnerships out of hundreds competing for investor capital, and that elite group of investment managers can disproportionately impact average return results for VC funds as a whole.”</blockquote><p id="daf24984-5150-462b-8d9e-22e78d32ffc9" class="">Is this as simple as investing in Sequoia or Andreesen (top venture capital firms)? Not necessarily. For one, emerging and new managers have been generating an increasing percentage of venture capital gains overtime, as shown by the below chart:</p><figure id="084def3a-7fed-4351-b270-97db5194bf03" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc894f953-23da-416f-a87f-b640f4fa499f_827x518.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fc894f953-23da-416f-a87f-b640f4fa499f_827x518.png"/></a></figure><p id="c8e58fdd-bbfe-4e0c-b067-72c5cc448596" class="">Okay, so if both emerging and established managers can generate attractive returns, then what predicts venture fund outperformance? To understand that, it’s important to understand what drives the outlier returns for venture capital funds.</p><p id="5e6f2faf-4d9d-451d-be91-0032d0f022c2" class="">To understand what drives returns in venture capital, we have to try to understand what separates the homerun companies from the ones that are not.</p><p id="bc19d7f7-06c0-4ae7-8e4b-82d0e8b78735" class="">There is an ongoing study by <a href="https://www.entrepreneur.com/article/308447">CB Insights</a> which has a database of 240+ post-mortem letters from entrepreneurs and why their businesses failed. The main reason why is <strong>product-market fit</strong>.</p><p id="2227f27b-c9aa-4418-83f7-4a68f5c7825b" class="">The second main reason is <strong>lack of cash</strong>, and the third main reason is <strong>inappropriate team</strong>.</p><p id="0ec5e5ee-9964-4740-b811-f3cf8c96ad89" class="">Starting with the first problem, what does product-market fit mean? There are a variety of definitions, and many <a href="https://pmarchive.com/guide_to_startups_part4.html">VCs have written about this in the past</a> but it is really: <strong>does the product provide significant value to a subset of the population (</strong>customers segment) <strong>and can the company communicate that value to the potential customers?</strong></p><p id="46683861-3ae3-4f81-b070-be215e123a97" class="">In other words, it’s about product and distribution. However, you can only build a product/distribution if you have the team with the right skillset, passion, and experience. So the main factors seem to be:</p><p id="b8871d95-a4ad-4aaf-8f9c-b90716d5a08e" class="">1) How strong is the founder/team for the type of business they want to create. This influences what is in the founder’s control: product and distribution.</p><p id="a091dbe7-8162-46a4-9dc2-34ab69d98294" class="">2) The market the founder is trying to go after.</p><p id="44e95c22-351d-46df-8d03-9b2b94ce4a21" class="">3) Whether the founder can provide enough value to the customers in the target segment (product-market fit).</p><p id="7dba1ea8-0661-4a7b-8204-ef2b967ca9e5" class="">As a venture capital investor, it’s important to be able to assess product-market fit, and be able to invest in the best founders building category-defining companies. To put it simply, it’s about <strong>1) having the network to be able to invest in the best founders</strong>, and <strong>2) assess which “areas” are worth going after</strong>.</p><p id="e5a9df12-e86b-4811-8143-a4eb9e37cb3c" class="">Not all venture capital investors had access to SpaceX’s early funding round. Only the ones that had personal relationships with Elon Musk or truly believed in his vision were able to win the deal and invest in the company.</p><p id="326309ad-3c0c-4b9e-b1cc-03afe8c2e506" class="">The third variable is whether the venture fund is able to “pull-the-trigger” on the highest conviction investments. This is because continuing to back a successful company to maintain ownership % (avoiding dilution, as discussed above) is not easy for most venture investors because it results in some form of concentration, the antithesis of conventional venture investing (many bets, few wins). For example, in the model investment below, a fund below invested in Company XYZ at a valuation of $10m and received 10% ownership. This company ends up being a home-run, with its valuation going up 100x, but the fund’s ownership gets diluted from 10% to 2%, dampening its return to a 20x, which is still a homerun but may not be enough if the fund is extremely diversified. The venture fund could have done a better job in making sure it was a significant investor in later rounds. This would have resulted in a higher overall return for the fund. However, this requires 1) preferential access since the founder of the startup should continue to want the venture capital firm to be an investor, and 2) conviction from the venture capital fund to size up the position.</p><figure id="695191e1-78a2-4b04-b591-18b45b2d7399" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F23dbabb2-b55f-4baa-bd1c-1b8e98a5aa16_741x195.png"><img style="width:700px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F23dbabb2-b55f-4baa-bd1c-1b8e98a5aa16_741x195.png"/></a></figure><p id="58432ffa-2a06-4406-98af-c919ce7ca9a0" class="">A paper published in the <em>Journal of Financial Economics</em> titled, “The Persistence Effect of Initial Success: Evidence from Venture Capital” noted:</p><blockquote id="218dce43-d32d-4198-9ef6-abc76bba8e65" class="">“We find that initial success appears to depend in large part on being in the right places at the right times. VC firms, however, do not appear to have any ability to select those attractive segments on a consistent basis. Differences in the selection or nurturing of specific portfolio companies also appear to contribute little to explaining persistence. Overall, our results appear most consistent with performance persistence in venture capital arising from differential access to deal flow for VCs whose initial investments were more successful.”</blockquote><p id="d5314fe3-7651-4e12-b12d-bfaf91f526f2" class="">Firstly, it’s important to point out that <strong>initial success matters in venture capital</strong>. This is not intuitive, because initial success in public market funds does not predict future returns (correlation of close to 0). In venture capital, on the other hand, the correlation between future fund performance and historical fund performance can be as high as 0.7. <a href="https://aanandbajaj.substack.com/p/understanding-venture-capital-as">1</a></p><p id="b6adf958-06bb-4b21-ae56-1cb236ece99f" class="">There are two key implications from the above analysis:</p><p id="5916eb81-76c6-44bc-906d-9054a34d251e" class="">1) What matters the most in venture capital is deal flow, or the ability to invest in the best companies</p><p id="15b957dd-f8a8-4768-b410-2bdcc9fdc67a" class="">2) Success begets success because initial success results in preferential access going forward.</p><p id="2dfb9613-dd1e-49c3-835b-7d6c30d9dc9e" class="">Yet again, a further question arises: <strong>what predicts initial success?</strong></p><p id="c311d0dd-6d04-40ee-ae77-a1bdb05d31ac" class="">Using data analysis, the paper mentioned prior concludes that initial success is based “almost entirely” on investing in the right segment at the right time, either by chance or by the ability to anticipate emerging trends. Interestingly, the paper also noted that VCs that invested in attractive segments in the past had no consistent ability to do this going forward.</p><p id="4dcde096-3e16-4c42-a572-aa1f254289c3" class="">Going even deeper, the outperformance and performance persistence seems to lie not only with specific venture funds, but also with specific individual <strong>partners</strong>. A paper published in <em>The Journal of The American Finance Association</em> noted<a href="https://aanandbajaj.substack.com/p/understanding-venture-capital-as">2</a>:</p><blockquote id="a1956c3b-cc4d-484e-b072-a0836d209711" class="">“We find evidence of skill and exit style differences even among venture partners investing at the same VC firm at the same time. Furthermore, our estimates suggest the partners&#x27; human capital is two to five times more important than the VC firm&#x27;s organizational capital in explaining performance.”</blockquote><p id="84e41fe7-48e2-48bd-9d0c-6e3ef66677be" class="">This may also explain why emerging managers have been producing a greater share of the returns over the past few years, since partners regularly leave a venture capital firm that they were successful in to start their own fund.</p><p id="61ba00f4-ff17-40d9-ad02-7b37398805c0" class="">The last point to note is that there is strong evidence of mean reversion of returns for VC funds who have had strong performance and performance persistence overtime. Several papers, such as Harris et al (2014) and Nanda et al (2019) have concluded this. This could be due to the following reasons:</p><ul id="f61b4bbc-f830-475f-9b5a-14f5bf78c04d" class="bulleted-list"><li>Size: Initial success begets further success, which attracts further investors and an attractiveness to larger funds (more fees for the GP)</li></ul><ul id="4c96b2c1-daf2-4984-8caf-5bfa0b3715e6" class="bulleted-list"><li>Partner Attrition: As we saw, most of the venture capital fund outperformance can be attributed to specific partners within a fund, and sometimes partners leave and start their own fund.</li></ul><p id="ae93af82-f0fb-4915-b8f1-b4202735784b" class="">The point on size is also supported by evidence. As the Kauffman Foundation notes, “we have no funds in our portfolio that have raised more than $500m and returned more than 2x our capital after fees.” This makes sense because the larger the fund, the larger the check sizes, and the larger the companies need to exit at to deliver a 3x return. For example, for a company valued at $10m to return a 50x, it needs to get to a valuation of $500m. On the other hand, for a $500m valuation company to deliver a 50x, it needs to get to a valuation of $25 <strong>billion.</strong> Larger companies attract more competition, and more competition dampens profits and therefore puts an upper cap at the size of company size.</p><h3 id="7749548f-47fb-42a2-91bf-7603a7b362ad" class="">How Can LPs Stack the Odds in Their Favor?</h3><p id="be871a34-3e97-4fb1-be3d-4317d3bcdd5a" class="">Now that we have established what matters in venture capital (to deliver outperformance), how can LPs who want to build a venture program actually execute and stack the odds in their favor?</p><p id="efab71ed-6749-4de0-acfd-0e05d488a49c" class="">First, it would be summarize everything mentioned above to evaluate all the different “flavors” in venture capital fund investing from an LP’s perspective.</p><p id="d95de92a-4786-4580-a408-e59ecb9cb186" class=""><strong>Different Types of Funds to Invest in and Their Characteristics</strong></p><p id="6b1bf06a-d3db-49ae-837e-0ebaa683b963" class="">The rows:</p><ul id="d00f7749-b74c-4a84-89f6-cc9a7a4b9bdd" class="bulleted-list"><li>Emerging Partner: a partner who does not have past success in venture capital (i.e. first-time venture partners). These could include academics, entrepreneurs, and so on.</li></ul><ul id="b70d9fa9-4972-4741-a1ea-5efab09f638d" class="bulleted-list"><li>Emerging Fund: a partner who has had either only initial success or initial success and persistent success in venture capital investing, usually at a more established firm but now has started his own firm.</li></ul><ul id="f91488c5-1df5-4a0a-b1a7-99e9efb385dc" class="bulleted-list"><li>Established Fund: a fund that has many partners and has been around for a long time. Usually this fund has had initial and persistent success overtime, which has led to larger fundraises.</li></ul><p id="20273db2-b7b2-485f-b014-bc8caec16aa9" class="">The columns:</p><ul id="aa1b8a09-a28e-43d7-be3a-f9180a1c43c3" class="bulleted-list"><li>Startup Risk: the fact that there is some risk in starting a new firm. Emerging partners and funds have to figure out how to hire analysts, build the operations, raise capital, etc. Further, sometimes emerging funds/partners team up with partners from other firms for the first time, and there is some risk involved because sometimes people don’t get along with each other.</li></ul><ul id="a31193e5-8d6b-4a48-a4fc-1cf7909f81b7" class="bulleted-list"><li>Generational Planning Risk: this is the risk that since partners are getting older, they need to appoint younger partners as the leaders of the firm going forward. This is usually high for established funds because they have been around for a long time.</li></ul><ul id="40826015-9e52-49fa-b728-a18b20e872c4" class="bulleted-list"><li>Probability of LP Access: this is the chance that a LP building out its venture program for the first time can have access to the fund. For emerging partners/funds who need capital and new LPs, the chance that a new LP can commit capital here is higher. For established funds like Sequoia who have relationships with LPs for many years (sometimes decades) will probably continue to take the capital from those LPs going forward as well.</li></ul><ul id="aec3a99a-a48c-4c04-a6af-70a29b244e68" class="bulleted-list"><li>Level of Reversion to the Mean: this is the level of mean reversion the fund’s performance is likely to experience going forward. For a newer fund, the chance of this is low because usually these funds are smaller and the differentiated access is likely still present. For an established fund with partner attrition and larger fund size, the level of reversion to the mean going forward is likely high.</li></ul><h3 id="e2eb852d-c3c4-40fe-8f78-8c66710cad46" class="">Summary</h3><p id="10e199e7-f5a3-4258-843b-d3b81f8e3648" class="">To summarize:</p><ul id="f197fd31-bb50-4977-b465-ee81aa4c55dc" class="bulleted-list"><li>Venture capital funds have raised more capital and larger funds over the last 20 years as companies have opted to stay private longer and raise funds at larger private valuations. Continued monetary easing and lower interest rates have also pushed more institutional investors (endowments, pensions) to invest in riskier asset classes, such as venture capital, further increasing fund sizes.</li></ul><ul id="c71aecca-6efa-4099-a16b-092faed54783" class="bulleted-list"><li>Venture returns both on the company-level and the fund-level are power-law distributed. For contrast, public market returns are normally distributed.</li></ul><ul id="913f7d32-3694-4612-b3fe-e560e7fbe055" class="bulleted-list"><li>All that matters in venture is not the amount of losses in the portfolio, or the average return of the companies. <strong>It’s all about home-runs.</strong></li></ul><ul id="a889f785-0003-472b-b0ca-334955af206b" class="bulleted-list"><li>Overtime, the mean/median return in public markets is around 6-7%, while it is much lower for venture capital funds. This is counter-intuitive, since one would expect venture capital funds to deliver higher returns given the higher risk (investing in startups) involved. This is further evident by the fact that median venture returns have not kept up with public market returns (NASDAQ, S&amp;P) over the past 20 years.</li></ul><ul id="77ec3c96-f600-478c-a6e3-05044d14bf83" class="bulleted-list"><li>However, the dispersion in performance across venture capital funds is high, meaning the top funds significantly outperform both the bottom funds and the public market alternative. This is where attractiveness of venture capital lies.</li></ul><ul id="4a41ccdb-7788-4d2a-a81e-ccf28e852fcd" class="bulleted-list"><li>What are the characteristics of these top venture capital funds? It’s mostly about <strong>access</strong> so that the fund is able to invest in the best founders and their companies.</li></ul><ul id="766c7bb4-00a1-4e09-b85f-0045a2829f8f" class="bulleted-list"><li>One has to zoom in even further, to a partner-level, where is also significant dispersion even intra-firm. <strong>These successful venture funds have partners who have had initial success by investing in companies in “breakout segments,” which has resulted in them getting preferential deal flow going forward, and therefore continued outperformance</strong> <strong>on their deals</strong> relative to peers and public market returns.</li></ul><ul id="4c3aa09e-f0b5-41db-a7db-d722df03a4e5" class="bulleted-list"><li>The venture partner either got that initial success through luck, or by identifying which segments were going to breakout. Either way, the home-runs that they invest in successfully <strong>achieved product-market fit</strong>.</li></ul><ul id="894161c6-adce-421b-936f-47d2e0d83fa8" class="bulleted-list"><li>An LP can invest in these top partners by either backing them 1) before they get initial venture capital success (emerging partner), 2) after they’ve gotten venture capital success at another firm and have left that firm to start their own fund (emerging fund), or 3) by backing established venture capital funds that house successful partners (i.e. Sequoia).</li></ul><ul id="f13eab82-c885-4051-a73f-3a4dd08e6606" class="bulleted-list"><li>Lastly, in constructing a portfolio, an LP should consider the “full-stack” of investing, including across stages, and not “pigeon-hole” themselves in a specific stage.</li></ul><ul id="c8dcbff4-9ae0-48f9-8d95-3d424591b0e1" class="bulleted-list"><li>LPs can invest in 1) unproven investors in unproven areas, 2) unproven investors in proven areas, and 3) proven investors in proven areas. The one they should re-consider are proven investors in unproven areas as this approach has not resulted in performance persistence, even if the firm has had success in a prior area (i.e. a fund that has had success in software raising a new biotech fund). Areas can either be industry segments (biotech, hardware, software) or regions (China, India, South East Asia).</li></ul><ul id="65a83343-b2e6-4208-ad8d-1bc1e3d767f0" class="bulleted-list"><li>What LPs actually invest in depends on which funds they can get access to, their level of risk tolerance, and their understanding of the area they are investing in.</li></ul><ul id="7fde82d7-41e9-43de-824c-fb80ca8ebf3f" class="bulleted-list"><li>An LP that is building a new venture program should focus on building a group of proven partners that have left big firms and are starting their own funds. Preferably, an LP should only have a few relationships (concentrated approach). A smaller (and more diversified) part of the portfolio can be further optionalized, which would consist of unproven partners who have not had initial success but are operating with <strong>an edge </strong>in a new area (unproven area) such as a new region (South East Asia) or industry (hardware).</li></ul><ul id="69e77284-817d-4a39-9685-5551531be5e3" class="bulleted-list"><li>Lastly, to differentiate between luck and skill, an LP should assess the venture manager’s 1) network within the area they had initial success in, 2) assess the manager’s deep knowledge in the area they have expertise in. This should allow the LP to differentiate between managers who had the initial success due to luck versus skill. References with entrepreneurs and other investors in the area to determine the venture manager’s reputation are also key.</li></ul><p id="103d5e37-a784-4812-ab59-95fa9fac8701" class="">The “menu” of venture capital fund investing from an LP perspective:</p><figure id="4fa241ac-084f-42a8-b256-614754481903" class="image"><a href="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F4d4a40ff-d327-451b-aadc-6652ebc90f04_288x145.png"><img style="width:288px" src="Understanding%20Venture%20Capital%20as%20an%20LP%20f1b6ee1aa0514f9f809434751f717fd2/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F4d4a40ff-d327-451b-aadc-6652ebc90f04_288x145.png"/></a></figure></div></article></body></html>

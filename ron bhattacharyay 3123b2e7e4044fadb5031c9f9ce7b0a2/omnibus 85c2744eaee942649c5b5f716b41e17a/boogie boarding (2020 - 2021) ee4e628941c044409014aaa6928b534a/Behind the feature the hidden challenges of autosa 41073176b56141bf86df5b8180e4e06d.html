@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Behind the feature: the hidden challenges of autosave</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="41073176-b561-41bf-86df-5b8180e4e06d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🏠</span></div><h1 class="page-title">Behind the feature: the hidden challenges of autosave</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/behind-the-feature-autosave/" class="url-value">https://www.figma.com/blog/behind-the-feature-autosave/</a></td></tr></tbody></table></header><div class="page-body"><p id="568db7a5-fa7a-4fcb-9f9e-237d30ab3986" class=""><em>We recently expanded </em><a href="https://help.figma.com/hc/en-us/articles/360040328553-Can-I-work-offline-with-Figma-"><em>autosave in Figma</em></a><em> so you can work offline without worrying about losing changes. Engineer </em><a href="https://twitter.com/digitalfreepen"><em>Rudi Chen</em></a><em> takes us behind the scenes of building this update: how we made product decisions, managed large merge conflicts, and navigated the complexities of Figma’s multiplayer technology.</em></p><p id="b0007eb3-7e29-493e-b80d-d9150863b2d8" class="">It wasn’t so long ago that software made you hit the save key obsessively. After all, we’ve all had an unlucky circumstance in which we closed the application accidentally, it crashed, or we lost power—and hours of work. In online applications like Figma, we flush changes to the server as soon as they’re made; offline changes can’t sync with the server until you reconnect to the internet. Until recently, users ran the risk of losing data should something happen to their computer or browser while offline.</p><p id="2e6c838b-4c9d-43ae-b23d-a3f92869c328" class="">With our newly expanded autosave system, edits now save to disk when a document becomes disconnected from the server so changes to the document persist—even if the tab with Figma closes. When the user next reloads this document in a new tab, the changes will be restored and uploaded to the server.</p><p id="81e24940-8ee2-4c09-997c-973f886c490c" class="">But why does such a feature warrant a blog post? “Saving the file to disk periodically” isn’t exactly a groundbreaking innovation. But as it often happens, interesting challenges lie not in individual features, but the interaction between them. Figma’s central paradigm is being a browser-based, cloud-based, and realtime application. <a href="https://www.figma.com/blog/how-figmas-multiplayer-technology-works/">We’ve written</a> about how we handle conflict resolution in multiplayer before. Now, in the process of examining autosave, we’ll see how how supporting multiplayer adds a lot of complexity to other features too.</p><p id="0607ea8e-0de6-4887-84c1-aeb3f5efdf2a" class="">The most intuitive way to save a document is how it has always been done: serialize the in-memory representation of the document as a backup file and write it to disk. Restoring lost changes is as simple as opening the backup. There’s not much room for things to go wrong in this approach.</p><p id="98f8f3e9-b129-4fd1-a86f-f96dc2714433" class="">Unfortunately, in the context of a cloud-based application, this approach isn’t practical both from a technical and product standpoint.</p><p id="6f1a764b-4eec-4ed5-b964-a17c5f57e013" class="">In Figma, documents are represented as a tree of layers (nodes). We refer to it as the <strong>scenegraph</strong> and it is our central data structure. It turns out that our users can and do create very large documents. We regularly see files that are tens of megabytes as a compressed binary and hundred of megabytes when loaded in memory. Serializing the largest files can actually take a few seconds. Last year, this was a big enough issue to <a href="https://www.figma.com/blog/how-we-built-the-figma-plugin-system/">disqualify our initial implementation</a> for a plugin sandboxing.</p><p id="a3441547-fa9f-439a-84fb-a149f2c6d90d" class="">In fact, the performance requirements for autosave are actually much higher than plugins. Even if we managed to optimize serialization by 10-20x so that it only takes 100ms, this is still unacceptable. The user would experience a regular 100ms stutter whenever we save the file since Figma is built in the browser and JavaScript and WASM are single-threaded.</p><p id="a7e908a5-1f59-4137-9ff4-5f8c5a4924db" class="">It would be nice to use shared memory multithreading, but it’s barely supported by browsers and not a safe option. Rather, a typical way that Figma deals with expensive operations is to split work across multiple frames. However, this isn’t merely a browser/JavaScript problem. Concurrency, regardless of how it’s achieved, opens up an even bigger challenge: the problem that the user could make changes to the document during serialization.</p><p id="78563a19-32db-476c-8fdb-9fb2f85dce74" class="">In an ideal architecture, serialization would read-off an immutable scenegraph. However, while elegant, that would require an immense rewrite of the application, as the scenegraph is used by almost every bit of our product code. Furthermore, immutable data structures are not a silver bullet—they come with tradeoffs such as slower write performance and increased memory usage.</p><p id="6c466d0d-d93e-46b0-bcb2-ef685390a17e" class="">Finally, in terms of product decisions, saving the entire file also opens up non-trivial questions. Since our files are cloud-based and can be edited by multiple people at once, replacing the existing file with the backup could end up overwriting <em>newer</em> changes in the file. Leaving the backup as a copy also fails, because some files are the source of truth for shared assets (components such as buttons, modals in a design system).</p><p id="663992d2-f775-4e06-8505-14c321fee65e" class="">The alternative to saving the entire file is to write to disk only the changes made since the document went offline. We have this “delta” as part of our collaborative editing system, to keep track of which changes need to be sent to and acknowledged by the server. To restore changes, it suffices to apply this diff on top of the latest version of the document.</p><p id="2bbd661d-8fee-4541-8300-ca35cf52a9c4" class="">So the prototypical case looks something like this:</p><ul id="0c00e923-93c1-45b6-a824-baca5ab8ce09" class="bulleted-list"><li>User loads document</li></ul><ul id="fd73ff9c-eacf-48c5-898f-993f68c90a1e" class="bulleted-list"><li>User ends up offline</li></ul><ul id="26ef9a3a-9619-4d15-b55a-5ca33f0c3103" class="bulleted-list"><li>User makes changes, which get stored in an in-memory pending changes buffer</li></ul><ul id="d2a97c10-c2d8-47b9-bbc6-8b0d4e8258ff" class="bulleted-list"><li>Contents of the pending change buffer are committed to disk on a regular interval</li></ul><ul id="8ae6a32f-0e54-413b-ad36-a8bd028cd4f0" class="bulleted-list"><li>Document closes unexpectedly</li></ul><ul id="b0313ea6-469d-40f7-ad4b-e4c37f06da67" class="bulleted-list"><li>User loads document again</li></ul><ul id="e9c378cc-679b-43d0-a117-4bf3eb042581" class="bulleted-list"><li>Pending changes are deserialized and applied on top of the document</li></ul><ul id="a523a41a-7f86-45ea-a822-eb935b31c4fc" class="bulleted-list"><li>Pending changes are uploaded to the server</li></ul><p id="7e93f5cc-a006-4a26-94ac-766777fb2aea" class="">There are a few options for on-disk storage via browser APIs. Since we want to store potentially large amounts of data, in smaller chunks for access performance, and data integrity is important, we use IndexedDB. Key features include database indices and transactional operations.</p><p id="3dd2990f-76d3-410a-8d1d-8be38eede230" class="">The pending changes are stored as a set of property changes on a per-file, per-(node/layer) basis. This level of granularity helps achieve a balance between storage overhead and redundant IO. The more granular the changes, the more overhead is used to store each row. However, if we stored pending changes for all nodes in a single object, then we would have to write the entire set of pending changes every time a change is made. By storing changes per-node, we only need to write changes between commits.</p><p id="70462d71-ca85-47b8-a28f-6f65c885712a" class="">When dealing with linear history, re-applying a stored diff to a document isn’t hard. After all, that’s how undo-redo works, a pretty basic feature in Figma.</p><figure id="e4efc94c-52f3-46c0-af34-5ca37a279bb5" class="image"><a href="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/1-LinearEdits-updated.gif"><img style="width:700px" src="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/1-LinearEdits-updated.gif"/></a></figure><p id="e1f43830-52b9-497b-8c6f-e754553f7b9e" class="">If Figma was a single-user application, it’d be relatively easy to ensure that [autosave] <em>only</em> needs to be implemented in the context of a linear history. For example, you could ensure that only one instance of Figma could open a file at a given time, and require the user to apply or discard autosaved changes immediately upon re-opening the file.</p><figure id="2ae39d67-7f0d-46ee-b5ef-d6d35dbd6c25" class="image"><a href="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/2-LinearLoseChanges.gif"><img style="width:700px" src="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/2-LinearLoseChanges.gif"/></a></figure><p id="2e4acc01-3784-4345-b9a6-487441de7c55" class="">However, in a collaborative editor, documents don’t have a purely linear history. Even when users are not explicitly creating branches of their document, they are continuously creating implicit branches whenever they make local edits. We don’t normally think of these as branches, because the real-time capabilities of the editor means these transient branches get “merged” within fractions of a second. But as the animation shows below, we might say that a branch was created at some point in time.</p><figure id="f4e4a69c-e261-4153-a2ee-a5f507008f76" class="image"><a href="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/3-ServerChanges.gif"><img style="width:700px" src="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/3-ServerChanges.gif"/></a></figure><p id="97d89f71-1bd8-4b5a-ad6c-971151b28e5c" class="">The autosave feature, however, targets use cases in which the user is disconnected from our servers for minutes to hours. The client could be making much larger sets of changes and leave them on disk for days. The server could also have receiving much larger sets of changes from other clients in the meantime. Then, autosave changes are more clearly a branch that split off from the file at the time the user disconnected.</p><p id="91b284ac-fbc8-4b67-993f-5e85459887b7" class="">Therefore, autosave often needs to “merge” the diff on top of the latest document. And doing so creates unexpected and rather subtle issues.</p><figure id="dc65e612-a824-4978-b23d-6cc6782130de" class="image"><a href="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/4-ServerLoseChanges-updated.gif"><img style="width:700px" src="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/4-ServerLoseChanges-updated.gif"/></a></figure><p id="5a6699c7-29a6-470a-829e-cb0bee9a47e3" class="">Even in the absence of other users, it’s possible for the same user to edit a document from multiple tabs. These sets of changes must then be applied sequentially on top of the latest document.</p><p id="5860855d-824a-475f-bdd6-afa9942a8ad8" class="">Most of the time, merging diffs just works. After all, our data structures are designed to support concurrent editing. However, our multiplayer system is meant to handle small conflicts during editing. The assumption is that you get immediate visual feedback if changes between you and your coworker are clashing. Our system does not understand <em>user intent</em>, a notoriously hard problem, and therefore may not be able to effectively merge large-scale changes without creating a <em>mess</em>.</p><p id="5219a191-508c-4964-afc5-982a5454d219" class="">However, just because these large-scale conflicts are <em>possible</em> doesn’t mean that they are <em>common</em>. To optimize for making the common use case work smoothly, we automatically create a version history checkpoint (a feature in Figma similar to a Git commit) before and after applying the diff. This allows the user to easily revert the merge in the event in these special cases.</p><p id="3cb7b35d-3c79-414c-994f-70518da2cde9" class="">A more proper solution would be to create an interface that would allow users to resolve merge conflicts. However, effectively representing diffs visually for a 2D design document is still an unsolved problem in the industry and could well be a larger project than autosave itself. (Of course, that’s also worth solving, but as a separate problem.) By making product decisions such that the two projects aren’t interdependent, we can function more effectively as an organization. It may be less exciting, but it lowers coordination overhead needed when adding more people to a project. It also makes it easier to validate our solutions incrementally. Sometimes, we run into unexpected technical limitations or user feedback that require us to redo parts of a project. Leaner projects lower that risk.</p><p id="36b99a00-0a6b-4279-8d25-21ac3537ddca" class="">When a technical solution isn’t available yet, we can also help mitigate the issue via product solutions. We also show UI in the file browser that actively prompts the user to restore their changes. Besides reducing the chances of server-side conflict, this design indicate that this feature is meant for crash recovery, not as a long-term local storage solution. After all, it is only storing diffs, not entire files.</p><p id="a0043ca9-2779-4439-95be-fcfbe8012166" class="">The tradeoff is that when you do have changes, the UI is intentionally very prominent. Therefore, it becomes especially important to not have autosave changes if the user doesn’t “expect” to have lost changes.</p><p id="f8a9f96d-e771-4b77-aee7-90f9570a0ab8" class="">We’ve looked at the targeted use case where we leave local changes on disk and the tab closes. But the most common scenario is when the tab stays open: we write changes to disk, then latter the tab reconnects, syncs change to the server, then clears those changes from disk.</p><figure id="3fecbdf3-6391-44d9-9d02-1081e9ca0809" class="image"><a href="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/5-ServerReconnect-updated.gif"><img style="width:700px" src="Behind%20the%20feature%20the%20hidden%20challenges%20of%20autosa%2041073176b56141bf86df5b8180e4e06d/5-ServerReconnect-updated.gif"/></a></figure><p id="6b9eee02-2e01-4e27-94ec-5e424df59948" class="">It’s important to make sure these changes have been cleared from disk. With autosave, an important invariant is that the node changes stored on disk are exactly equal to the pending node changes stored in memory.</p><p id="0f41391a-55a5-442c-9bcf-c6405d3a05a4" class="">Clearly, if we’re missing a change on disk, then there’s a potential data loss bug.</p><p id="543e7ce2-a3a5-4df1-b499-8132467db1dc" class="">However, if we have extra changes on disk, that’s <em>also</em> a problem. From a UX perspective, it’s quite confusing for the user to be prompted about unsaved changes that have, in reality, already been saved to the server. But stale changes are even worse than redundant changes. For example, if one of the changes says “set the height of nodeID=15 to 100” but the user had since changed the height of that node from 100 to 50, that’s also a bug.</p><p id="c3fe93b2-0e5b-4608-a4ce-4574b0bdacb6" class="">If we were dealing with linear history, the worst a stale change could do is no-op. Still, even no-op changes are noisy. Furthermore, with branching history, the stale change could end up overwriting a newer change. Although the checkpoint we create makes this reversible, it still appears to the user as if “Figma lost some recent edits,” thereby reducing user trust and counteracting the whole point of this feature to begin with.</p><p id="6df52e97-b6f3-42bb-a423-00a6a0731681" class="">We’ve run into a number of ways in which we can end up with stale changes on disk. First, there’s the asynchronous nature of the process. When a tab reconnects to the server, it sends the pending changes, then waits for an acknowledgment. Until then, the document is in an unsaved state and we prevent the user from closing the tab to avoid losing changes. However, while an autosave change is stale as soon as it arrives on the server, it is safe to clear from disk once the client has received the ack. Therefore, we consider the document to be in an unsaved state until the changes are acknowledged by the server <em>and</em> cleared from disk.</p><p id="ff08e538-8f93-42c2-8700-9f62131d547a" class="">We also encountered subtle bugs. For example, some changes never got cleared from disk if a tab disconnected and reconnected. To share some context, the autosave implementation involves a document change observer to keep track of changes that need to be uploaded to the server, or written to disk. The issue was that after connecting, we reapply any local offline changes on top of the latest version of the document from the server. However, if the local change was the same as the latest server change, the property setter would no-op and short-circuit the code before it triggered the observers. As a result, the autosave system was never notified that this change needed to be removed from disk. Our solution to this issue was to take a more conservative approach. After reconnecting, it’s safer to erase the changes already stored on disk and re-serialize all pending changes. With IndexedDB, this can be done in a single transaction.</p><p id="95b1a8d2-d686-4548-8557-5a16930795dd" class="">On one hand, the additional complexity to implement autosave is largely <em>accidental</em>, having only to do with the particular design of the system. The exact wrinkles to iron out will differ from system to system. However, the fact that there are many of these sorts of wrinkles is fundamentally due to the branching that occurs because of Figma’s multiplayer capabilities. And that, is <em>essential</em> complexity.</p><p id="274ae09f-b5e6-430e-a4ae-f99279443b36" class="">The challenges we encountered implementing autosave are representative of a more general set of challenges we encounter at Figma. As much as we would like a multiplayer system to be a self-contained black box, the truth is that it&#x27;s a leaky abstraction. Supporting collaborative editing as a central paradigm in our application means that we&#x27;re introducing a lot more asynchronous behavior such as transient branches. This then leads to thorny issues and ultimately, more complexity in the many of the features we build.</p><p id="2f1ffa6e-1607-4276-9a3a-ca4ebd1a66ac" class="">These features are what make Figma a powerful product and as a side effect, there are always plenty of interesting engineering challenges to solve. If collaborative editing and building reliable systems sounds interesting to you, <a href="https://www.figma.com/careers/">we’re hiring</a>!</p><p id="8d8139c9-b110-47a9-bb43-94c7452e90ad" class=""><a href="https://www.figma.com/blog/behind-the-feature-shadow-spread/">An engineer shares how we built support for shadow spread in Figma: exploring algorithms, going down W3C spec rabbit holes, and how she made hard decisions about a (seemingly) simple user request.</a></p></div></article></body></html>

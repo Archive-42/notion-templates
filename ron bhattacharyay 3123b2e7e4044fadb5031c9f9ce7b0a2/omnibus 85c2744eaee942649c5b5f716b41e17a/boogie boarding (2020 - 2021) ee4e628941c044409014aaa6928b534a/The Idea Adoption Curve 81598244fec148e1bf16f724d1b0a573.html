@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Idea Adoption Curve </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="81598244-fec1-48e1-bf16-f724d1b0a573" class="page sans"><header><h1 class="page-title">The Idea Adoption Curve </h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://stratechery.com/2020/the-idea-adoption-curve/" class="url-value">https://stratechery.com/2020/the-idea-adoption-curve/</a></td></tr></tbody></table></header><div class="page-body"><p id="c863c3ad-1244-4484-97b6-86c7f43612dc" class="">Matthew Yglesias, in his new book <a href="https://www.penguinrandomhouse.com/books/636499/one-billion-americans-by-matthew-yglesias/">One Billion Americans</a>, admits:</p><blockquote id="33086197-3930-4416-83f3-256266b70bd2" class="">The One Billion Americans agenda — tripling the American population — is a radical suggestion that lies well outside the boundaries of conventional political arguments.</blockquote><p id="5d3d5e3f-7d25-43fa-99d0-3850ab07f4ce" class="">Ezra Klein, in his new book <a href="https://simonandschusterpublishing.com/why-were-polarized/">Why We’re Polarized</a>, promises:</p><blockquote id="c4d2d19c-ce9a-4781-9047-a0d5c7bdab85" class="">What I am trying to develop here isn’t so much an answer for the problems of American politics as a framework for understanding them. If I’ve done my job well, this book will offer a model that helps make sense of an era in American politics that can seem senseless.</blockquote><p id="9faa0ab8-763d-4919-8142-dbbf720b5595" class="">Klein’s promise is very similar to the brand promise of <em>Vox</em>, the digital media site he co-founded with Yglesias and Melissa Bell: “Explain the news”. Yglesias, on the other hand, seems more invested in creating the news that future <em>Vox</em> might one day explain. I think the distinction is meaningful even with the news that both Yglesias and Klein are leaving the company they founded: in fact, I think the distinction explains their destinations.</p><h3 id="f9f77983-9617-4b50-a726-4f83808f04fc" class="">Crossing the Chasm</h3><p id="d746856e-8eb2-4fd7-b129-49077b186f2f" class="">In the introduction of his classic tech marketing book, <a href="https://www.harpercollins.com/products/crossing-the-chasm-3rd-edition-geoffrey-a-moore?variant=32130444066850">Crossing the Chasm</a>, Geoffrey A. Moore writes:</p><blockquote id="b5f7c18c-9fa4-4e7f-9ea8-b4466e5dba77" class="">This book is unabashedly about and written specifically for marketing within high-tech enterprises. But high tech can be viewed as a microcosm of larger industrial sectors. In this context, the relationship between an early market and a mainstream market is not unlike the relationship between a fad and a trend. Marketing has long known how to exploit fads and how to develop trends. The problem, since these techniques are antithetical to each other, is that you need to decide which one—fad or trend—you are dealing with before you start. It would be much better if you could start with a fad, exploit it for all it was worth, and then turn it into a trend.  That may seem like a miracle, but that is in essence what high-tech marketing is all about. Every truly innovative high-tech product starts out as a fad—something with no known market value or purpose but with “great properties” that generate a lot of enthusiasm within an “in crowd” of early adopters. That’s the early market. Then comes a period during which the rest of the world watches to see if anything can be made of this; that is the chasm. If in fact something does come out of it—if a value proposition is discovered that can be predictably delivered to a targetable set of customers at a reasonable price—then a new mainstream market segment forms, typically with a rapidity that allows its initial leaders to become very, very successful.  The key in all this is crossing the chasm—performing the acts that allow the first shoots of that mainstream market to emerge. This is a do-or-die proposition for high-tech enterprises; hence it is logical that they be the crucible in which “chasm theory” is formed. But the principles can be generalized to other forms of marketing, so for the general reader who can bear with all the high-tech examples in this book, useful lessons may be learned.</blockquote><p id="779e7e28-4d77-4091-b11b-fcdfb0c9d39a" class="">Moore divided tech markets into five parts, that I summarized in 2015’s <a href="https://stratechery.com/2015/end-trickle-tech/">The End of Trickle-Down Technology</a>:</p><blockquote id="36a0d02a-04d3-4601-9ca9-79635036bdf1" class="">Technology Enthusiasts love tech first and foremost, and are always looking to be on the cutting edge; they are the first to try a new product Visionaries love new products as well, but they also have an eye on how those new products or technologies can be applied. They are the most price-insensitive part of the market Pragmatists are a much larger segment of the market; they are open to new products, but they need evidence they will work and be worth the trouble, and they are much more price conscious Conservatives are much more hesitant to accept change; they are inherently suspicious of any new technology and often only adopt new products when doing so is the only way to keep up. Because they don’t highly value technology, they aren’t willing to pay a lot Skeptics are not just hesitant but actively hostile to technology</blockquote><figure id="5125f27b-dedb-4368-aa49-d716f1dad2fc" class="image"><a href="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/image-26.jpg"><img style="width:700px" src="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/image-26.jpg"/></a></figure><p id="2f336ce2-54a5-4eaa-b9e7-5d44c1cc581e" class="">Allow me to take Moore at his word, and apply this model to something rather different than tech B2B marketing: ideas. It seems to me that Yglesias and Klein are focused on different parts of this adoption cycle. Yglesias is somewhere between an enthusiast and a visionary; the core concept of his book is closer to the former, and the policy prescriptions closer to the latter. Klein, meanwhile, is focused more on pragmatism, or even conservatism: explaining, instead of creating.</p><p id="ca731a2d-0137-4406-9efb-ab80c49ef81d" class="">This is, to be sure, a crude simplification of two writers with nearly 40 years of material between them, but I don’t think it is an accident that <a href="https://www.slowboring.com/p/welcome-to-slow-boring">Yglesias has set out on his own on Substack</a>, whereas <a href="https://www.nytco.com/press/ezra-klein-joins-times-opinion-as-columnist-and-podcast-host/">Klein is joining the New York Times</a>.</p><h3 id="eabf9ec1-6462-4c73-8699-4debae82a01c" class="">The Idea Adoption Curve</h3><p id="11e88755-cdd8-4371-963e-d2fd77a644b0" class="">I wrote <a href="https://stratechery.com/2020/twitter-responsibility-and-accountability/">last month</a> about the <em>New York Times</em>‘s traditional role in setting the national news agenda; headlines in the <em>New York Times</em> in the morning were lead stories on national newscasts in the evening, and headlines in regional papers the following day. If you map this dynamic to Moore’s model, it might look like this:</p><figure id="1ab926f3-110c-4153-a5ad-346a456c50a1" class="image"><a href="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-2.png"><img style="width:700px" src="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-2.png"/></a></figure><p id="b00574de-3bca-4986-9fcd-2f25cc484baf" class="">Where, though, did the <em>New York Times</em> get its ideas? Obviously a lot of stories came from its own reporting, or that of its peers, but the “enthusiast” part of the curve was mostly centered in academia. Visionaries, meanwhile, were a collection of think tanks, journals, and speciality magazines that operated at a loss, which was fine because making money was never the point: getting ideas into publications like the <em>New York Times</em> was.</p><figure id="e19c12c4-93c6-4fb7-965a-714ee01cf1ed" class="image"><a href="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-3.png"><img style="width:700px" src="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-3.png"/></a></figure><p id="60d139e2-e842-4b2d-aca3-bc2243a26f55" class="">What happened in the 2000s, when Yglesias and Klein first burst on the scene as part of the original generation of political bloggers, was the development of a new genre of “enthusiasts” who were creating and debating new ideas mostly for free. Sure, most of these bloggers found work with publications like <em>American Prospect</em> (Yglesias) or <em>Washington Monthly</em> (Klein), but those publications were political projects, not economic ones, with the goal of influencing the mass market, not monetizing it.</p><p id="aa57ee8d-f375-4fc7-b28d-1d99e5f6e6b9" class=""><em>Vox</em>, on the other hand, has been something much different, both in terms of mission statement and business model. “Explaining the news” is, from a certain perspective, about crossing the chasm on the idea curve; enthusiasts have created new ideas, and visionaries have refined them, and now the challenge is to spread those ideas to the population generally. <em>Vox</em>’s business model, meanwhile, is firmly on the right hand side of the curve. Advertising is all about scale, and the vast majority of the market falls to the right of the chasm.</p><p id="35cfefec-01b4-454a-b6d7-9995e488434f" class="">The problem with this approach, though, is that publications simply aren’t as good at advertising as Facebook and Google. I wrote five years ago in <a href="https://stratechery.com/2015/popping-the-publishing-bubble/">Popping the Publishing Bubble</a>:</p><blockquote id="8da7939e-785e-4bc3-aa95-a645a6080976" class="">Publishers and ad networks are locked in a dysfunctional relationship that doesn’t serve readers or advertisers, and it’s only a matter of time until advertisers — which again, care only about reaching potential customers, wherever they may be — desert the whole mess entirely for new, more efficient and effective advertising options that put them directly in front of the people they care about. That, first and foremost, is Facebook, but other social networks like Twitter, Snapchat, Instagram, Pinterest, and others will benefit as well:</blockquote><figure id="7c44dd11-42e3-4e7f-9bd3-e5f89ecce73b" class="image"><a href="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/stratechery-Year-One-240.png"><img style="width:700px" src="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/stratechery-Year-One-240.png"/></a></figure><p id="170acbd9-ffb9-44be-bc64-3bf2cc70b485" class="">I don’t know the specifics of how <em>Vox</em>’s business is doing, although it is notable that the site’s previous ad inventory is now mostly filled with requests for donations; meanwhile, there is no confusion about the business models of either Substack or the <em>New York Times</em>.</p><h3 id="6f929388-73b7-4c73-83ef-0ea6245af0ed" class="">Visionaries and Substack</h3><p id="3c1c4f50-37be-405a-91ca-193ed2ed3e2f" class="">Start with Yglesias, and Substack; this is obvious a business model near-and-dear to my heart, given that Stratechery was perhaps the first site built around the idea of a one-person publication supported by subscriptions at scale.</p><p id="42b8b340-34ad-4ce7-a3a6-f0b090d047a6" class="">I don’t have any illusions about reaching the mass market; Stratechery is very much predicated on capturing the “Visionary” part of the curve. Read again the explanation I excerpted above:</p><blockquote id="109f6332-1a4f-4bbc-8b43-beeb09b57cfb" class="">Visionaries love new products as well, but they also have an eye on how those new products or technologies can be applied. They are the most price-insensitive part of the market</blockquote><p id="bfdbfcb7-5dd6-43a3-8853-d72f862c7632" class="">The “price-insensitive” part is key: Stratechery and Substack publications like <em>Slow Boring</em> may not be that expensive, but they are, relative to text on the Internet, shockingly pricey. Subscribers, though, don’t mind, as long as what they are getting is consistently unique and provocative; look no further than <em>One Billion Americans</em>, or Yglesias’s <a href="https://twitter.com/mattyglesias/">Twitter account</a>, to see why he ended up on Substack.</p><p id="68d19b40-05a2-42ac-b3cc-d4e1793209e2" class="">What is neat about this model is that it is far more sustainable and accessible than the old model of corporations and donors subsidizing think tanks, journals, and specialty magazines, and far more ideologically diverse than academia. It is important, though, to be honest about the model’s limitations: while I remain very bullish about the potential of <a href="https://stratechery.com/2017/the-local-news-business-model/">subscription-based local news entities</a>, it is difficult to envision a future where most people pay for news or analysis directly.</p><p id="19eb4b09-57a1-427d-9571-986262130239" class="">One way to understand why is to map the <em>Idea Adoption Curve</em> against a “Willingness-to-Pay Curve”; I suspect it looks something like this:</p><figure id="4881ca7f-b395-4515-93fd-16de225dab3a" class="image"><a href="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-4.png"><img style="width:700px" src="The%20Idea%20Adoption%20Curve%2081598244fec148e1bf16f724d1b0a573/curve-4.png"/></a></figure><p id="dad8257a-98e8-45ed-be98-c29ff17c0e38" class="">Enthusiasts — now on Twitter, for the most part — generate and debate ideas for free, while the real money, at least from an average revenue per user perspective, is with the visionaries. This is where the Substack model makes the most sense. What is notable, though, is that the chasm of ideas is also a chasm of monetization.</p><h3 id="ddfeb345-02e3-4f53-9113-2c69b9bf7ff8" class="">Push Versus Pull</h3><p id="a521a02d-3913-4048-9e91-b202549d159f" class="">How do ideas cross the chasm into popular acceptance and public policy? <em>Vox</em> tried to pull them over, with, I think, limited success; the <em>New York Times</em>, on the other hand, has been positioned to cross the chasm for decades. What has changed is that while the <em>New York Times</em> used to be mostly supported by advertising, which incentivized it to remain planted on the right side of the divide, pulling ideas from the fringes into the mainstream, its shift to subscriptions has pushed it to the left part of the curve, incentivizing the newspaper of record to more actively generate and push new ideas.</p><p id="c62df94b-52a7-468e-b206-27f290d8ae5c" class="">This has, as I noted in <a href="https://stratechery.com/2020/never-ending-niches/">Never-Ending Niches</a>, changed the <em>New York Times</em>:</p><blockquote id="0b11f890-ffb5-4eb0-9d3d-3a9af3102fac" class="">To the extent that the New York Times has been successful online — and the company has been very successful indeed! — it follows that the company is well-placed in terms of both focus and quality, and in that order.  In this view, the fact that deeply reported articles about Chinese disinformation on Twitter are held as being low quality by the Chinese government is immaterial; what matters is that the New York Times‘ audience, which is mostly in the United States, finds it of high quality (I certainly do).  That’s an easy example, but there are ones that hit closer to home; for example, I thought this 2018 story that claimed that Facebook Gave Data Access to Chinese Firm Flagged by U.S. Intelligence was, as I wrote at the time, “deeply flawed at best, and willfully mendacious at worst.” It turns out, though, that I am not particularly interested in the “Everything tech does is bad” niche; that story was very high quality for much of the New York Times’s audience.</blockquote><p id="56dc944e-04b8-4a61-a986-854271b3bdf9" class="">These two stories were in the <em>News</em> section, not <em>Opinion</em>, but the point is that the distinction matters less than ever before; the pursuit of subscription revenue pushes the <em>New York Times</em> to the left side of the chasm, which means that to the extent it still fulfills it role of conveying ideas across the chasm it is more focused on pushing particular points of view into the broader public, as opposed to pulling ideas the broader public may favor. This certainly makes the <em>New York Times</em> an attractive landing place for Klein, who, for all of his focus on “explaining the news”, has never been shy about his political preferences and desire to influence policy. Now he can do so from a platform that has long been defined by its ability to cross the chasm.</p><h3 id="ec163562-7415-4d5d-805a-0f05dbbec224" class="">BuzzFeed Versus the New York Times</h3><p id="a867944d-d6bc-4c2f-8707-19af4a36853e" class="">Yglesias and Klein’s departures from <em>Vox</em> weren’t the only media news of the week; BuzzFeed acquired HuffPost (and some cash from Verizon). In <a href="https://www.vox.com/recode/2020/11/19/21578476/buzzfeed-huffpost-new-york-times-jonah-peretti-interview-podcast?scrolla=5eb6d68b7fedc32c19ef33b4">an interview on Recode Media</a>, BuzzFeed CEO and founder — of both BuzzFeed and HuffPost! — Jonah Peretti took aim at the New York Times’ shift; from <a href="https://www.vox.com/recode/2020/11/19/21578476/buzzfeed-huffpost-new-york-times-jonah-peretti-interview-podcast">Recode</a>:</p><blockquote id="a4def14f-ed7d-47fe-a128-fe294488db44" class="">The Times, Peretti allowed, has since refined a very good subscription business model, which has allowed it to make better journalism by hiring more and better talent. This is not a controversial opinion. But the next part may be: The New York Times, Peretti argued, can’t really be called “the paper of record” anymore — because of that same subscription model.  “A subscription business model leads towards being a paper for a particular group and a particular audience and not for the broadest public,” Peretti said. He’s alluding, in part, to the theory that the Times’s subscriber base wants to read a certain kind of news and opinion — middle/left of center, critical of Donald Trump, etc. — and that straying from that can cost it subscribers. But he’s also simply arguing that the act of requiring readers to pay to read cuts the Times off from a big audience.  Peretti’s solution to that problem, it turns out, sounds a whole lot like a combined BuzzFeed/HuffPost — publications that are widely distributed, supported by advertising, and free:  “Will a subscription newspaper that is read by a subset of society have as big an impact as it could on voters, on the broad public, on young people, on the more diverse rising generation of millennials and Gen Z?” he argued. “I think there’s a huge opportunity to serve those consumers. And not all of them are going to be subscribers to any publication.”</blockquote><p id="9f2219b1-a4a7-465c-8dd7-c21631bbdf9b" class="">BuzzFeed is firmly planted on the right side of the <em>Idea Adoption Curve</em>; most of the publication’s content is about anything other than news or ideas, and its primary distribution network is Facebook (Twitter is for the left side of the curve, and Facebook the right). It also has an advertising kitchen sink business model, with a combination of premium advertising, programmatic advertising, affiliate marketing, e-commerce, etc., all of which only make sense at scale.</p><h3 id="14a05833-61f2-4abc-9d8c-876a82e59dfc" class="">The Implications of Abundance</h3><p id="4cce3eb4-97bd-4d90-813d-3e6c83988c51" class="">At the same time, it is worth noting that the <em>New York Times</em> has, contrary to Peretti’s implication, never been a newspaper for the masses. Sure, its subscription model is by default exclusionary, but only being available in printed form, mostly in New York, was far more exclusionary. The point about subscriptions driving a particular point of view is a valid one, but then again, it is not as if BuzzFeed has been shy about its political preferences either. The reality is that the implication of the Internet is that ideas are in abundance, and people will seek out what they already agree with, as opposed to accepting what is delivered to them.</p><p id="0f7be7c1-23c9-48c5-bc96-953caf990889" class="">This explains the newly prominent role of the right side of the <em>Idea Adoption Curve</em>; I noted while summarizing the <em>Technology Adoption Curve</em>:</p><blockquote id="c1c17150-84e4-47c0-a211-7954890e588a" class="">Skeptics are not just hesitant but actively hostile to technology</blockquote><p id="baa0c03e-7ce2-4d54-bcec-6b07d4d97b60" class="">This, translated to ideas, explains the prominence of conspiracy theories and misinformation. These strains of belief have always existed, in America in particular, but one implication of the Internet leveling the information playing field is that these alternative views of reality can both spread further than ever before, even as they are far more visible to everyone else. This is both reason for alarm, and for skepticism about said alarm: yes, the misinformation problem is worse than before, but much of our fear is rooted in newfound awareness of an old problem, and there is a strong case to be made that <a href="https://stratechery.com/2020/zero-trust-information/">the emergence of valuable information</a> makes up for the propagation of misinformation that mostly feeds confirmation biases.</p><p id="6920614d-edfb-4254-bf74-6cfa3f9bb324" class="">What is indisputable, though, is that the nature of information and its spread has been fundamentally altered in a way unseen <a href="https://stratechery.com/2019/the-internet-and-the-third-estate/">since the printing press</a>. It affects Yglesias and Substack, Klein and the <em>New York Times</em>, and, one increasingly suspects, the very fabric of society and the foundation of our political institutions and organizing principles. And, if this is right, we are only now at the end of the beginning.</p></div></article></body></html>

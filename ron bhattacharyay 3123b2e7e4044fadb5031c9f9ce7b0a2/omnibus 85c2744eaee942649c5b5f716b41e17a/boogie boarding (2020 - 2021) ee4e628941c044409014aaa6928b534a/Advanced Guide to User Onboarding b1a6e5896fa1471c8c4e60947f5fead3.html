@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Advanced Guide to User Onboarding</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b1a6e589-6fa1-471c-8c4e-60947f5fead3" class="page sans"><header><h1 class="page-title">Advanced Guide to User Onboarding</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.julian.com/guide/growth/user-onboarding" class="url-value">https://www.julian.com/guide/growth/user-onboarding</a></td></tr></tbody></table></header><div class="page-body"><figure id="8244b78c-9273-42f3-8b39-49bcf7b5cbbc" class="image"><a href="Advanced%20Guide%20to%20User%20Onboarding%20b1a6e5896fa1471c8c4e60947f5fead3/5b41245de9023e84d1ef73bb_5a9b05a0a5e9fa00010b5ac1_js-banners-new-13.svg"><img style="width:700px" src="Advanced%20Guide%20to%20User%20Onboarding%20b1a6e5896fa1471c8c4e60947f5fead3/5b41245de9023e84d1ef73bb_5a9b05a0a5e9fa00010b5ac1_js-banners-new-13.svg"/></a></figure><h2 id="572b203e-6b0c-416a-9016-b6421e90dc66" class="">User onboarding is critical</h2><p id="d3903b51-0180-49e5-b522-00e0ac8ef219" class="">Welcome people into your product in a way that excites them to become lifelong customers. Excitement is achieved through delightful onboarding experiences.</p><p id="aa9f5f99-94e0-47d4-b9ab-c1d0695d4c54" class="">You could have the world&#x27;s best landing page, but if your onboarding experience is poor, people fall off before actually buying from you.</p><p id="1c6ae268-1d3a-4da4-b988-78e07a474fbf" class="">&quot;Onboarding&quot; is the user&#x27;s experience between:</p><ul id="a5d177c8-6e15-401e-8f81-8ea8bc09d17a" class="bulleted-list"><li>Signing up.</li></ul><ul id="3688bce2-2964-49e9-9aab-ed7dd7bac9f4" class="bulleted-list"><li>Becoming an engaged user.</li></ul><p id="62b34254-422f-48b4-9bf9-04d7eef84e91" class="">This experience consists of two phases:</p><ul id="a73aafa8-d05e-410a-9c12-77331e4d24fd" class="bulleted-list"><li><strong>Their first use</strong> — Everything the user experiences <em>immediately</em> upon signing up or buying <em>for the first time</em>. If you lose them here, odds are you&#x27;ll lose them forever.</li></ul><ul id="5fe884ca-6550-4ca3-8b3f-3f1db2eb081c" class="bulleted-list"><li><strong>Plus, follow-on engagement</strong> — This includes the (1) messaging (emails, push notifications) that keep them engaged, plus (2) your sales and support outreach.</li></ul><p id="c2e328dd-702f-4077-a8d2-2249e9017bd5" class="">These phases are unique to new users. New users must be treated differently than established customers.</p><p id="0e487ca8-39ca-4dac-aed1-b84ce3d632cf" class="">On this page, I cover the first phase. You&#x27;ll learn:</p><ul id="f84db491-dd2e-4957-aa23-900fb8c4fd32" class="bulleted-list"><li>How to make onboarding enticing</li></ul><ul id="552f0997-1888-4b08-b5de-cb7bb0e96ff2" class="bulleted-list"><li>How to move the user along your product journey</li></ul><ul id="4e768ceb-a7db-4ad5-a714-d3f2751c50c6" class="bulleted-list"><li>Referrals and virality</li></ul><h3 id="ff895352-9824-4fe0-b038-470198096ac9" class="">A brief warning</h3><p id="63743507-70e8-40f2-800e-c723cdbc6d58" class="">Most SaaS apps lose 95% of their new users after 90 days. That is insane.</p><p id="bc906d8a-0c64-4648-9bc6-f4ca7dab2a2b" class="">When you lose a user&#x27;s interest during onboarding, your first impression is complete, and they typically never return.</p><p id="02911d4d-955c-4548-a404-994a94f0efde" class="">During onboarding, nearly everyone is skeptical of your product. Consider how many services they sign up for each month. And how many services waste their time with marketing tricks and poor products.</p><p id="75e9a678-58f1-437b-9c51-aad81e42ba4f" class="">Yet, onboarding is usually the most half-baked aspect of SaaS products. You get spammed with tooltips then dumped into a boring dashboard.</p><p id="010ea502-3d1d-4559-a6d8-b5ce9f95f93b" class="">Why? Because there’s often no individual on a tech or marketing team who&#x27;s responsible for it. Either there are marketers <em>acquiring</em> users or product managers <em>developing</em> features. No one is sitting in between to <em>onboard </em>those users.</p><p id="178b637f-b198-4924-a509-62f10b61987f" class="">But, onboarding is a feature unto itself. It warrants resources dedicated to its thoughtful design, development, and optimization.</p><h2 id="fac1215f-a97a-427b-b629-3c1a29f79846" class="">Onboarding strategy</h2><p id="3c3b854f-fdd9-4270-bed8-77488185e893" class="">To create an onboarding experience that helps people fall in love with your product:</p><ol type="1" id="96278715-0ce5-4f2d-a541-d3648d646181" class="numbered-list" start="1"><li>First, identify your product&#x27;s value to the user.</li></ol><ol type="1" id="5e49d93d-f7d4-43c4-926c-1ab680479d9d" class="numbered-list" start="2"><li>Then, map out the user&#x27;s journey toward that value.</li></ol><ol type="1" id="2516e8ab-58c0-4ad7-83bd-8c24f8741671" class="numbered-list" start="3"><li>Identify the obstacles that exist along the way.</li></ol><ol type="1" id="16854152-b78d-49ab-a008-bcf008cd731a" class="numbered-list" start="4"><li>Address them.</li></ol><p id="6933d01c-46b0-4b67-abe0-4b830edc994f" class="">You address obstacles by making them:</p><ul id="24479682-2ff4-41a7-a729-dc6633f4666e" class="bulleted-list"><li>Educational</li></ul><ul id="a5cab116-168d-4066-a06d-662eddd91321" class="bulleted-list"><li>Enticing</li></ul><ul id="2db2fbfe-350b-4b9d-b6ae-f8879af66854" class="bulleted-list"><li>Low friction</li></ul><ul id="d465934d-7767-4295-988e-2adb243c5e35" class="bulleted-list"><li>Optionally, productive</li></ul><p id="dca3bec9-1174-457c-b1db-18ae34514327" class="">Before we learn to address obstacles, let&#x27;s learn to identify them in SaaS products.</p><h2 id="a3291203-1e2e-4626-b8ab-cf4a5e10846d" class="">Obstacle identification</h2><p id="7973be3a-6326-41a5-9a2d-42606fbc57a1" class="">Most obstacles will be obvious to you. They are the steps in a user&#x27;s journey that:</p><ul id="2a5b698d-cab4-48aa-bad5-81cd8c2ab58b" class="bulleted-list"><li>Require the most work.</li></ul><ul id="f46458c8-9994-4389-b4f6-8d84905555af" class="bulleted-list"><li>Are the most boring to complete.</li></ul><p id="98147b6b-1bc5-4188-b5f4-a2216a0bad92" class="">But some obstacles are hidden. To identify hidden ones, record users using your app: You can literally record people&#x27;s browser activity using a tool like <a href="http://fullstory.com/">Full Story</a>.</p><p id="a66e170d-93e5-450a-b3cf-d89415751c5c" class="">Watching recordings reveals — in context — the interaction patterns users fall prey to when using your app.</p><p id="19935af4-0e18-4f34-b4e9-e5bb4d87d9d4" class="">Here&#x27;s an example of a bad interaction pattern: A user often creates then immediately deletes new projects. Hmm.</p><p id="98d4a15a-f75f-4042-b36d-e523c1875228" class="">What are they <em>really</em> trying to accomplish? Was there an intermediate feature they wanted to momentarily access? If so, how about extract that feature to stand alone so they don&#x27;t waste their time with fake project creation?</p><p id="133a2820-3d01-4d92-8b15-c1dfec061f92" class="">You&#x27;ve found a hidden obstacle — unnecessary friction that analyzing analytics data alone would have been unlikely to reveal.</p><p id="6dec55c9-40b0-43b8-a886-c64f2c464035" class="">More broadly, user recordings reveal where people spend more time than they should. And what causes them to get stuck and give up.</p><p id="91fcc692-46d2-4021-a0d4-eb409abcb463" class="">Study as many recordings as you can and write down the obstacles you identify.</p><h3 id="25af43a4-034f-4e5d-ae5e-8a80e31dd467" class="">Getting more value from user recordings</h3><p id="46b24cb4-9b99-47dc-9b6c-379ba9afd0c1" class="">Removing obstacles is step one. Step two is funneling users into the <em>best</em> experience.</p><p id="1fc53f50-c15b-451e-8f5a-ad4ba83aa5ed" class="">Configure Full Story to track purchase events so you can compare the average onboarding journey of users who purchased versus those who did not.</p><p id="c18682cc-a067-4d2f-bee6-aa0ca703dbfd" class="">Then, optimize your onboarding flow to usher more people toward mimicking the behaviors of those who purchase.</p><h3 id="47669dee-62d8-446a-8cb9-4201b5e3b9f1" class="">Example: Twitter</h3><p id="b650bb04-5f64-4c91-a7a4-6acd7da2f9fa" class="">Twitter studied their users&#x27; onboarding behavior and discovered that if a new user doesn’t Follow at least a handful of Twitter users immediately upon signing up, they’re much less likely to return in the near future.</p><p id="fca48a74-676b-4927-8a84-1e2cf04577e9" class="">Twitter therefore redesigned their onboarding to <em>force</em> users to follow a minimum of five people. And they ensure this process is low friction: They show you celebrities you&#x27;re likely familiar with from topics (e.g. sports, movies) you indicated you liked.</p><h3 id="6aceef55-eee6-454a-a434-93a317c93b25" class="">Recordings versus analytics</h3><p id="b8a088c9-7936-491a-af64-ad9f43c2834a" class="">When identifying obstacles, I recommend watching recordings instead of cherry picking analytics data because analytics lack the context of the user&#x27;s full experience.</p><p id="873f6212-7c8d-44a3-883b-b94b599b6314" class="">Further, analytics often require the pre-configuration of tracked events <em>a priori</em>. This leads to false conclusions, and it reduces the chance of discovering the unexpected.</p><p id="d8c81f15-6213-4d3e-aff8-bbe05547bb10" class="">So, begin onboarding obstacle identification by watching a significant sample of recordings. Then, refer to analytics to <em>support</em> hunches you acquire from recordings.</p><h2 id="abefe6c2-5a86-4365-9ca1-27c2fa663207" class="">Addressing obstacles</h2><p id="29c0b4bc-f087-4094-85b0-4527ab2eadfb" class="">We have an idea of the types of obstacles we&#x27;re looking for. Now let&#x27;s address them.</p><p id="4dd4723c-85bf-4a5c-a97d-296e75d8bf2b" class="">As a refresher, our goal is to make onboarding enticing and frictionless. And, optionally, to make it educational and productive when appropriate.</p><h3 id="ef3c836f-f533-4fed-8c78-02503896c61b" class="">I. Onboarding should be educational</h3><p id="80cb7a55-4747-4cc5-8034-2b678990af72" class="">When someone signs up, the in-product experience must immediately answer:</p><blockquote id="ec8b3bf3-2bad-4939-a5fb-30ad9b782ab9" class="">How do I get value out of this product?</blockquote><p id="92921cf7-0281-47d2-8e20-df9a80fdbde0" class="">If the answer isn&#x27;t self-evident, elucidate it with one of these assistive experiences:</p><ul id="f58307d4-e786-44c5-a46a-ab1ef8044705" class="bulleted-list"><li><strong>Integrated walkthrough</strong> — Walk the user through one feature at a time while having them fill out their profile or create a sample project in the process. This way, they&#x27;re not empty-handed after your (likely boring) walkthrough. For example, if you’re building a website design tool, have them choose a starting template to tweak as they walk through your product.</li></ul><ul id="b9d96049-4f69-40a7-bfdb-a0491344cb18" class="bulleted-list"><li><strong>Sample data and tooltips</strong> — Or, if using your product is straightforward, you can place users directly into the dashboard. If relevant, provide pre-filled values and content to play with wherever they are expected to enter their own. This way, you don&#x27;t force them do meaningless work to see how your product functions. Pair this sample data with callouts pointing out product features and their value. Be sparse with callouts. One or two is enough. More than that gets ignored.</li></ul><ul id="10f0bf05-5bf9-4b47-8a73-a123b9365e24" class="bulleted-list"><li><strong>Video</strong> — Only if (a) your product&#x27;s value <em>can</em> be enticingly visualized or (b) you have a complex product requiring detailed explanation, then coerce the user into watching a video demonstrating how to use your product. Keep the video short, get to the point immediately, skip the sales fluff (they&#x27;ve already decided to try you), and use captions so that audio isn&#x27;t required.</li></ul><ul id="53b3fdbe-e9d0-485f-a1fd-a0afd19c1424" class="bulleted-list"><li><strong>Full course</strong> — If your product is really, <em>really</em> complex, you can consider developing a video course like <a href="http://university.webflow.com/">Webflow</a>&#x27;s. You should be worried if this is required.</li></ul><p id="4b11ed6a-f873-4f6e-9bbe-5f24cfaa737f" class="">Remember, these assistive onboarding experiences should concisely answer:</p><blockquote id="6bafe765-efb5-468f-9e0d-43c2b44ab8dc" class="">How do I get value out of the product?</blockquote><p id="264cb446-b63b-4a96-9eba-217675ff388b" class="">If your product is dead simple and does not require user education, simply skip the educational experience. Don&#x27;t waste people&#x27;s time giving advice they already know.</p><h3 id="f7aeb6df-3e53-41e5-80bc-66e563890f94" class="">II. Onboarding should be enticing</h3><p id="0d2104fd-cf59-4b53-b32f-eed2a913836c" class="">Onboarding should never be just educational <em>or</em> enticing. It should be both.</p><p id="327b76ab-c376-49c3-abfa-b0d8968d79ec" class="">When you educate new users, entice them with value props so they&#x27;re willing to put up with the education. Tease them with how amazing life will be once they are done.</p><p id="22d787cc-3f8d-46dc-9f74-1c2789436660" class="">To do this, start by identifying the magical moments in your product — where the user gets maximum value. Maybe it&#x27;s receiving a payment, finding a date, or killing an enemy tank. Then, visualize these outcomes <em>during</em> the onboarding experience.</p><p id="6d212254-9539-4e60-b7c5-7847afc1757d" class="">For example, look at how the scammy &quot;dating&quot; site, Ashley Madison, <a href="https://s3-us-west-2.amazonaws.com/useronboard/ashleymadison/slide-026.jpg">does it</a>. They visualize your end goal (“finding women”) through blurred background photos while asking you to painstakingly enter your profile details.</p><p id="6615e96a-c1b0-45e3-a0fe-ddabe923ae93" class="">They&#x27;re teasing you with their magical moment while putting you through a slog.</p><p id="7a1e949e-cf65-408a-859b-e2812752b00b" class="">This principle extends to your entire customer journey: Don&#x27;t ask someone to do something until they’ve previewed the value they’ll get from doing it. For example:</p><ul id="5a594a26-317a-4969-a7d2-af107110adc0" class="bulleted-list"><li>Want someone to read your boring tooltips during a walkthrough? How about wait until they engage with a feature before you explain it. <em>That&#x27;s</em> when they&#x27;ll care.</li></ul><ul id="150e5e12-702f-48d8-a65f-51091b318b3c" class="bulleted-list"><li>Want someone to download your Chrome extension? Wait until they&#x27;ve become hooked by your web app. <em>Then</em> prompt them to adopt your whole ecosystem.</li></ul><ul id="6a9048f0-3797-4c26-8168-053eb7c1b6ef" class="bulleted-list"><li>Want someone to read your lengthy ebook? Wait until they&#x27;ve read one of your short, fantastic blog posts.</li></ul><ul id="8a701154-3c33-4ffe-8aa7-cd6772dcc408" class="bulleted-list"><li>Want someone to signup for your newsletter? Don&#x27;t ask them immediately upon visiting your site. First, let them learn you&#x27;re worth subscribing to.</li></ul><p id="c8965358-1fce-4180-b7b2-992de252b3e2" class="">That&#x27;s how you get people to take action.</p><h3 id="97c24549-7916-427c-b750-82f612603e1b" class="">Write out your pitch if you have nothing to visualize</h3><p id="97ec3174-d84d-4e46-bb4a-605967e61409" class="">If you have nothing enticing to visualize during onboarding, either short-form or bullet point the value they&#x27;ll get.</p><p id="001f53cb-f6c4-4793-84e3-e0882209bfa4" class="">For example, if you’re a service that helps people quit smoking, tell them how many other people successfully quit smoking using the service:</p><blockquote id="013ba391-4ddf-4f6a-90c4-96a4b0d599d0" class="">“About 15% of those who finish registering then complete the course. Don’t be one of the quitters, because if you complete this program, you have a whopping 85% chance of quitting smoking for life. This is your opportunity.”</blockquote><h3 id="270d6b41-eca4-495f-a94c-bb185709110b" class="">III. Onboarding should be low friction</h3><p id="1707dbb0-0375-4864-a26b-45fd08799fe5" class="">The previous two onboarding principles — education and enticement — matter most at the very beginning of your onboarding experience. The next two principles — friction and productivity — matter equally throughout the entire experience.</p><p id="8cdd3706-261c-452a-ba13-b5c273ecdfeb" class="">Let&#x27;s begin with friction.</p><p id="5e9512b3-8651-4cd1-8a34-be33f0fb1550" class="">During onboarding, it must be clear what the next step is:</p><blockquote id="6ac27a2a-9498-4bb8-8ce4-75e4cbf2948f" class="">Okay, I understand how to use the product. But, what should I do first?</blockquote><p id="ecb2fe0e-0e96-4956-ae22-c86c5ef5990d" class="">Not only should each next step be obvious, it should appear <em>low-friction</em>: it must be easy and quick to perform.</p><p id="d24e563c-e063-4119-bf52-7b205cf4bd3d" class="">That&#x27;s how you build momentum that propels users toward the end of your journey.</p><p id="ac9b0cde-60a7-4acf-9361-6903f4c1e896" class="">Start by listing every action users take toward purchasing. For a website design tool, users might follow this path:</p><ol type="1" id="a445d856-0eb7-4ebb-8fcb-3a26da67a506" class="numbered-list" start="1"><li>Enter their email and password.</li></ol><ol type="1" id="12357004-d6e0-4602-a43b-4820f7072969" class="numbered-list" start="2"><li>Create a sample site.</li></ol><ol type="1" id="3f9da1ac-1f1f-41a9-bce8-6208e47a5250" class="numbered-list" start="3"><li>Fool around with the design tool.</li></ol><ol type="1" id="3431acd5-be58-46f9-b7cb-132ed01c4f1d" class="numbered-list" start="4"><li>Invite team members.</li></ol><ol type="1" id="cfe274b0-19d0-4372-9206-e0bf3a5e1023" class="numbered-list" start="5"><li>Fully build a site.</li></ol><ol type="1" id="a7f0c171-f456-4f7b-b577-8d05961730fa" class="numbered-list" start="6"><li>Enter their credit card.</li></ol><ol type="1" id="e6f34cb8-cbdc-41ca-9212-463deeaea067" class="numbered-list" start="7"><li>Publish the site.</li></ol><p id="70877283-f6a7-496d-b34d-87f1ef0f365e" class="">Next, reduce friction at each step by applying these principles:</p><ul id="4bcaf2f8-c9c0-4ad7-b0b5-d42e99838908" class="bulleted-list"><li><strong>Reduce choice anxiety</strong> — Hand-hold users through anxious moments. Any form field that requires users to put a lot of thought into their input (e.g. a dating profile bio) should be accompanied with suggestions on how to fill it out, e.g. “Describe your unique interests and explain why you&#x27;re passionate about them.” And explain the outcome of filling each non-self-evident input. For example, if you have a share button for inviting coworkers, say, &quot;If you invite coworkers, you can instantly share your work without having to manage back-and-forth emails.&quot; Ahh, so that&#x27;s why I shouldn&#x27;t ignore this button!</li></ul><ul id="ad8dc0f7-c005-4004-9ce1-81cd24961513" class="bulleted-list"><li><strong>Reduce total workload</strong> — Only ask for what you need. For example, consider pre-filling form inputs with your best guesses as to what the user would enter, then prompt them to correct each guess. Another tactic: Defer asking for input until you require it. Do you really need their full name to create their account, or can you request that after they’re engaged? (Once a user is engaged, you can get away asking them for a <em>lot more</em>.)</li></ul><ul id="00282fbf-fa8b-4c06-819f-eca7d5ca79bc" class="bulleted-list"><li><strong>Reduce perceived complexity</strong> — You can reduce the perceived complexity of onboarding tasks by visualizing what needs to be done using GIFs: Break the task into steps and visually demonstrate each. This approach covers how everyone likes to learn: visual, incremental, and structured.</li></ul><p id="1a22163e-ac66-4b9a-b792-5b813535f895" class="">In summary, remove friction along the path to purchase.</p><h3 id="61ba17fe-9840-4e58-aaa0-a7a54dbbff7c" class="">IV. Onboarding should be productive</h3><p id="43f15dfb-c74b-47e4-a473-937d30b15b7d" class="">The lengthier your onboarding, the more important it is that it doesn&#x27;t leave users empty-handed at the end of it.</p><p id="74c06dc2-0cd4-4e16-a4fb-b72f16571c13" class="">For example, if you’re an email app, have your walkthrough guide the user through cleaning up their inbox. This way, users accomplish something they care about while learning to use your app. It leaves them with a small dopamine hit. It delights them.</p><p id="dbbbe678-4469-4f60-964d-22df95d42f27" class="">Another example: If you’re a project management app, have your walkthrough leave users with the scaffolding required to share their project with team members.</p><p id="8cf36433-398b-4fc8-a87d-d2ef36526315" class="">Nothing is more validating than receiving a product&#x27;s value within minutes.</p><h3 id="8f3bab31-0fd2-4b65-b8d8-4dae26504a60" class="">Onboarding examples+</h3><h2 id="734d500f-7c7b-4b73-9eb7-ec07df1a0c7c" class="">Here&#x27;s the point</h2><ul id="9748e550-5af6-44b6-af35-e8739f6ace06" class="bulleted-list"><li>Your onboarding should answer: &quot;How do I get value out of the product?&quot;</li></ul><ul id="22f4caa2-9126-41b1-941d-3921f322d0a3" class="bulleted-list"><li>Assume users are skeptical, lazy, and impatient.</li></ul><ul id="781250b0-f232-4d8d-8226-bc3d7226b4af" class="bulleted-list"><li>Onboarding is an amazing, high-leverage opportunity for <em>you</em>: If you nail the experience, you can instantly turn a user into a loyal customer.</li></ul><h2 id="5438a186-a7aa-4506-b361-d78293093aa5" class="">Virality</h2><p id="8a0a50ae-b6af-4495-a948-91050d0dd31a" class="">I&#x27;ll conclude with a brief discussion of virality. Because the triggers for virality surface during the onboarding experience:</p><ul id="d40f66ff-e7e2-4b24-9088-432802bbc581" class="bulleted-list"><li>From the <strong>referrer</strong>&#x27;s perspective, you&#x27;re often prompted to invite your friends and colleagues after signing up for an app.</li></ul><ul id="7d09b696-80a0-4ca9-a1e0-fc0016f4bf37" class="bulleted-list"><li>From the <strong>referee</strong>&#x27;s perspective, onboarding is one of the first things you experience after clicking an invite link.</li></ul><p id="03760dc5-91ea-4400-b9c8-83797da15d6a" class="">It&#x27;s time for this page to focus on the latter: Consider how, as the person being invited, you didn&#x27;t come to the product because you necessarily had prior interest in it. Rather, you were prodded by someone into checking it out.</p><p id="c485abb3-30b9-416a-b677-a3860f69a55f" class="">This means you&#x27;re even <em>more</em> out of touch as to why you should bother using the app. The app&#x27;s onboarding experience is therefore doubly critical.</p><p id="39ae632b-5cbc-4a31-847d-1c9d9ad82e32" class="">Consider how a referred user should not be directed to a signup page that immediately instructs them to claim their referral reward. First, pitch them on <em>why</em> they should even care to use the product and claim the reward.</p><h3 id="0b617e03-3170-4779-9c76-76274977cf21" class="">Types of virality</h3><p id="20e8b451-7086-46b1-bb8f-1d82e71bceab" class="">To get users to invite others and to compel invited users to purchase, focus your efforts on the most appropriate viral channel for your product.</p><p id="a2b5306e-6b9b-4638-a20f-d35cf4e7eb36" class="">There are three types of viral channels:</p><ul id="1dc2fa06-b61b-4dc4-86b3-5efda53852a5" class="bulleted-list"><li><strong>Inherent virality</strong> occurs as a function of the product’s use. For example, to pay someone with PayPal, the payment recipient needs to first <em>join</em> PayPal. And who&#x27;s not going to signup to get paid? No wonder PayPal&#x27;s user base exploded.</li></ul><ul id="c12db08a-0e13-4e29-8cb8-9c59937e4742" class="bulleted-list"><li><strong>Word-of-mouth</strong> happens when users are overjoyed then proactively recommend your product.</li></ul><ul id="e322041e-9ce9-448b-a917-8f69ca260301" class="bulleted-list"><li><strong>Artificial virality</strong> is a contrived reward system (e.g. cash, access) for referring others.</li></ul><h3 id="119975a4-1cf1-4bb0-ab10-d61ec69010df" class="">Inherent virality</h3><p id="867208bb-c160-4550-b33b-a89a0f6f10c8" class="">Inherent virality is the best virality for <em>explosive</em> growth. It&#x27;s possible when either:</p><ul id="613b35d8-f07b-4cd4-a395-3b20874bc22b" class="bulleted-list"><li>Users use your app to <em>transact</em> or <em>collaborate</em> with others.</li></ul><ul id="80e3c42c-5211-4af7-bd59-35acadfee19e" class="bulleted-list"><li>Users use your app to <em>create content</em> that is intended <em>to be shared</em>.</li></ul><p id="7521e906-e146-4f5d-a5b3-b920c42467de" class="">Your product either falls into one of those two categories or it doesn&#x27;t. If it doesn&#x27;t, inherent virality is not going to happen.</p><p id="bffa2966-c25f-400b-94fe-a43a24827bf1" class="">The power of inherent virality is you don&#x27;t have to artificially incentivize users to refer — they&#x27;re going to want to do it on their own.</p><h3 id="ff0cc694-03b5-4080-9681-db723b74da3d" class="">Word-of-mouth</h3><p id="a4aa5247-243f-4169-b7de-c63f5f7d1841" class="">The second best virality is via word-of-mouth. It&#x27;s a measure of how good your product experience is. And it&#x27;s proof that product experience <em>is</em> growth marketing.</p><p id="9434b9bf-6833-4e5e-939e-60641fc7032b" class="">Many successful companies have never spent a dime on advertising. Instead, they built something people couldn&#x27;t stop talking about and sharing.</p><p id="945f2ce4-f9bb-4e88-b64e-1656f5192ab8" class="">Word-of-mouth&#x27;s potential for your business is a function of how large your market is. If you only service 10 customers per month, you are unlikely to see runaway word-of-mouth. The law of large numbers isn&#x27;t on your side, so you&#x27;ll need to introduce <em>artificial</em> virality: coerce your few customers into referring at a very <em>high rate</em>.</p><p id="f5851bba-9da5-41e1-8ddc-15865cafd13d" class="">Regardless of where you fall on this spectrum, every company should be earnestly pursuing word-of-mouth virality.</p><h3 id="4c6b6f3a-bb80-4481-a36e-30f95ca4cbea" class="">Artificial virality</h3><p id="42933565-8156-4d73-b5fc-3f6c00948660" class="">Artificial virality boils down to knowing when to prompt for it and knowing how to best reward users.</p><p id="a54899ed-de22-46ec-b5f4-22c256b525b4" class="">Here&#x27;s when a user is most receptive to referring others: when they&#x27;ve experienced a dopamine hit from your product. This happens when they get <em>value</em> from the product.</p><p id="6d22d4ca-bfab-43f1-9d74-f8b6b36ce8d2" class="">During these moments, make it frictionless to invite others — and consider providing an incentive.</p><p id="10e1718a-d5e9-4b76-99f4-08f160a92e54" class="">(A common incentive is the dual-ended reward, in which both the referrer and the referee are rewarded. Usually this takes the form of account credits or a discount.)</p><p id="883df0d8-613a-4cab-a170-323ab043e60c" class="">Artificial virality has modestly succeeded for some companies. But it&#x27;s rarely a slam dunk. Because <em>most</em> of your users simply don&#x27;t care about earning a little bit of cash. They didn&#x27;t sign up for your app to make a few bucks. Plus, they&#x27;re jaded by the flood of over-marketed offers they see on the Internet every day.</p><p id="5df2866a-9809-46de-8e69-519396f353bb" class="">So, instead of offering cash, I recommend doling out rewards in the form of your product&#x27;s primary value proposition. Meaning, provide <em>greater access to the product</em>.</p><p id="62566c00-3bb7-4703-ad08-73ef9cfa259b" class="">For example, when referring someone to Dropbox, you&#x27;re rewarded with more gigabytes of storage. Storage is a more tangible, more immediate, and more relevant value proposition to you than getting $25 in credits to redeem at a later date.</p><p id="1686eac2-37bd-40a2-966a-d0915c32dba9" class="">After all, you signed up for Dropbox because you <em>need</em> to store files. Leverage this user need instead of waving a couple hours&#x27; of minimum wage in someone&#x27;s face.</p><p id="270f7afe-9d0b-4c5a-8efd-714d5d565d1d" class="">Even if the cash and the storage are equivalent in value, our minds favor the storage.</p><p id="f59368e7-b5b5-4ec1-9748-b261e05c980b" class="">However, if you don&#x27;t have a product that can be doled out in chunks (e.g. GB&#x27;s, videos hosted, matches swiped), the cash reward needs to be <em>significant</em>:</p><ul id="b07e6af1-bb4e-4be4-8324-69dbdbf4e34d" class="bulleted-list"><li>For example, if you&#x27;re a subscription service, offer the service <em>for free </em>for <em>many </em>months. Not just one month.</li></ul><ul id="f84a5c23-6cd1-493c-862b-70fa94344620" class="bulleted-list"><li>If you&#x27;re ecommerce, offer the product<em> for free</em> when someone refers X people.</li></ul><p id="466fafa6-5a60-4946-bf80-b77160bb9ce0" class="">Otherwise, most people aren&#x27;t strongly motivated by an offer for a bit of cash.</p><h3 id="a91b5883-b76c-4c9a-b85b-83f4286c2980" class="">Optimizing virality</h3><p id="1b082d0c-1bc7-412b-ab13-78bc3f6ac305" class="">When measuring and optimizing virality, focus on three metrics:</p><ul id="42b0c653-952d-4a21-8923-cfe773117f70" class="bulleted-list"><li>The <em>lag time</em> between when a user signs up and refers someone.</li></ul><ul id="b0db3967-57c3-4a0c-bb71-98d64d881d5d" class="bulleted-list"><li>The number of referrals made per user.</li></ul><ul id="c50d96a7-fcd8-460b-a408-0f084e9d6ee6" class="bulleted-list"><li>The <em>signup percentage</em> of those who received an invite.</li></ul><p id="22ada440-7e3a-4a2a-b6ac-2134771630d7" class="">If you multiply the last two numbers together, you get your Viral Coefficient. A viral coefficient above 1 is an indicator of viral potential. If you couple this with a short lag time, you experience explosive growth.</p><p id="d6fecad8-d126-4354-8e6e-d5472cbc15be" class="">And if users are paying you instead of just signing up for free, congrats.</p><h2 id="d375dbd2-ed10-4b05-8756-312a8302e148" class="">How to get better at growth</h2><p id="593d585c-8ace-4183-a035-b4f9a73b5dcc" class="">I&#x27;ll train <a href="https://www.demandcurve.com/?utm_campaign=growth_guide&amp;utm_medium=growth_guide&amp;utm_source=growth_guide">you or your company</a> in modern growth marketing.</p><p id="8f8018e3-ea87-4199-a805-454a33cc19cb" class="">Here&#x27;s how it works:</p><ul id="4a1de7be-f14b-4d6b-aaab-0c819842019c" class="bulleted-list"><li>Get a senior understanding of growth tactics. We&#x27;ll help you boot up and optimize advanced Facebook and Instagram ads, Google Search ads, content marketing, B2B lead gen, and more. We&#x27;ll also help you rewrite your landing pages and fix your current bottlenecks.</li></ul><ul id="0c90c106-68d3-4196-b79f-dd9bbea94f23" class="bulleted-list"><li>Get live feedback and screenshares; nothing is pre-recorded.</li></ul><ul id="d25c4b75-53ca-4b18-9273-4d051010762b" class="bulleted-list"><li>This is the only training program customized to your company&#x27;s specific product, vertical, and growth challenges. It&#x27;s not just theory, but rather training for the hard skills you tell us you need right now.</li></ul><ul id="e1275ca9-68c4-4c7c-bcdc-763d06808826" class="bulleted-list"><li>Learn during your company&#x27;s work hours. Everything you work on throughout the program is a deliverable your company can use right away — from ads to landing pages and more.</li></ul><p id="bada4f8e-337d-47f9-a36b-fc1d4037cdd4" class="">Go <a href="https://www.demandcurve.com/?utm_campaign=growth_guide&amp;utm_medium=growth_guide&amp;utm_source=growth_guide">here</a> to learn which growth topics we teach.</p><p id="89d4034e-8a54-49e7-8c89-43f730336907" class="">We also run our own <a href="https://www.bellcurve.com/">growth agency: BellCurve.com.</a></p></div></article></body></html>

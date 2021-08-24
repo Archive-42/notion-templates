@@ -1,0 +1,1378 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>A half-hour to learn Rust - fasterthanli.me</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="04ce8415-54a6-45a6-b203-95c821e0d1ae" class="page sans"><header><h1 class="page-title">A half-hour to learn Rust - fasterthanli.me</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://fasterthanli.me/articles/a-half-hour-to-learn-rust" class="url-value">https://fasterthanli.me/articles/a-half-hour-to-learn-rust</a></td></tr></tbody></table></header><div class="page-body"><figure id="2b9f6d98-9bf4-4978-bf68-6992eb87e358" class="image"><a href="A%20half-hour%20to%20learn%20Rust%20-%20fasterthanli%20me%2004ce841554a645a6b20395c821e0d1ae/logo-square.png"><img style="width:256px" src="A%20half-hour%20to%20learn%20Rust%20-%20fasterthanli%20me%2004ce841554a645a6b20395c821e0d1ae/logo-square.png"/></a></figure><p id="7ebcf197-dc69-4425-a7ed-5f2cfa08a498" class="">In order to increase fluency in a programming language, one has to read a lot of it. But how can you read a lot of it if you don&#x27;t know what it means?</p><p id="7a929f64-748c-4444-bfea-0a7c8620748e" class="">In this article, instead of focusing on one or two concepts, I&#x27;ll try to go through as many Rust snippets as I can, and explain what the keywords and symbols they contain mean.</p><p id="d6795579-f0d0-4a2d-b450-c41720f60886" class="">Ready? Go!</p><p id="9c5b1232-40ee-4b57-b11d-dd9c13f24891" class=""><code>let</code> introduces a variable binding:</p><pre id="131939b6-6641-4fe2-9c3b-b9c0aa4095ae" class="code"><code>Rust codelet x; // declare &quot;x&quot;
+x = 42; // assign 42 to &quot;x&quot;</code></pre><p id="189d488c-d73f-45ef-a330-edbb228d935c" class="">This can also be written as a single line:</p><pre id="ee434615-a5c6-4b9b-af5e-7e4f7ae58c3f" class="code"><code>Rust code</code></pre><p id="a27647b4-5054-4110-9033-30b568400026" class="">You can specify the variable&#x27;s type explicitly with <code>:</code>, that&#x27;s a type annotation:</p><pre id="327f3e8f-4ee0-4417-9c7e-c98fce0c7715" class="code"><code>Rust codelet x: i32; // `i32` is a signed 32-bit integer
+x = 42;// there&#x27;s i8, i16, i32, i64, i128//    also u8, u16, u32, u64, u128 for unsigned</code></pre><p id="ba286f70-ce66-4018-90b5-a84f6ca52687" class="">This can also be written as a single line:</p><pre id="62f19e83-b1e9-49a3-8fe4-dee4600f0df8" class="code"><code>Rust codelet x: i32 = 42;</code></pre><p id="d791f473-43aa-4910-8971-a1617dd86f39" class="">If you declare a name and initialize it later, the compiler will prevent you from using it before it&#x27;s initialized.</p><pre id="40dd32e9-ff99-435b-94f7-96e02237af1b" class="code"><code>Rust codelet x;foobar(x); // error: borrow of possibly-uninitialized variable: `x`
+x = 42;</code></pre><p id="2b9855a3-82ff-4ac3-ba67-c0a4354df3cd" class="">However, doing this is completely fine:</p><pre id="b851bcbd-503c-4d5b-8d51-ca274b5368e9" class="code"><code>Rust codelet x;
+x = 42;foobar(x); // the type of `x` will be inferred from here</code></pre><p id="7a96ca27-ed07-4a56-8927-6bbfad72a541" class="">The underscore <code>_</code> is a special name - or rather, a &quot;lack of name&quot;. It basically means to throw away something:</p><pre id="1dab7802-7142-42d8-84b7-89644a3d67d8" class="code"><code>Rust code// this does *nothing* because 42 is a constantlet _ = 42;// this calls `get_thing` but throws away its resultlet _ = get_thing();</code></pre><p id="a73b44f4-7901-4990-ad26-b6b41b4da1b7" class="">Names that <em>start</em> with an underscore are regular names, it&#x27;s just that the compiler won&#x27;t warn about them being unused:</p><pre id="d0b7d857-5658-4c10-96ed-e08f7c6119c7" class="code"><code>Rust code// we may use `_x` eventually, but our code is a work-in-progress// and we just wanted to get rid of a compiler warning for now.let _x = 42;</code></pre><p id="879cd568-c3ed-4519-976f-dee90b70ef81" class="">Separate bindings with the same name can be introduced - you can <em>shadow</em> a variable binding:</p><pre id="389dc27e-4076-4862-b9bf-fe831dc51f09" class="code"><code>Rust codelet x = 13;let x = x + 3;// using `x` after that line only refers to the second `x`,// the first `x` no longer exists.</code></pre><p id="0a28d3f5-9055-464b-9972-eafbcaa4ef0d" class="">Rust has tuples, which you can think of as &quot;fixed-length collections of values of different types&quot;.</p><pre id="942dfe6a-4994-4bb6-9441-5364a99f7569" class="code"><code>Rust codelet pair = (&#x27;a&#x27;, 17);
+pair.0; // this is &#x27;a&#x27;
+pair.1; // this is 17</code></pre><p id="787ff2e3-2a12-4a32-b86e-910a0beb1a1e" class="">If we really we wanted to annotate the type of <code>pair</code>, we would write:</p><pre id="d24cf111-7217-4f7e-9344-937d85181ee6" class="code"><code>Rust codelet pair: (char, i32) = (&#x27;a&#x27;, 17);</code></pre><p id="4ac878f0-a48b-4d7e-851c-2218ef8edbe8" class="">Tuples can be <em>destructured</em> when doing an assignment, which means they&#x27;re broken down into their individual fields:</p><pre id="25e0eddc-9515-4200-85e7-f6d04e47b05d" class="code"><code>Rust codelet (some_char, some_int) = (&#x27;a&#x27;, 17);// now, `some_char` is &#x27;a&#x27;, and `some_int` is 17</code></pre><p id="f0493291-f4f5-49f4-925d-07a6b458794b" class="">This is especially useful when a function returns a tuple:</p><pre id="956fa6d5-2bf6-431b-b41c-4d7ed0e7e444" class="code"><code>Rust codelet (left, right) = slice.split_at(middle);</code></pre><p id="1a4d7d75-cd19-4b33-a151-fa269d0f127d" class="">Of course, when destructuring a tuple, <code>_</code> can be used to throw away part of it:</p><pre id="97de06ba-847b-42f6-817a-c01586c90f3b" class="code"><code>Rust codelet (_, right) = slice.split_at(middle);</code></pre><p id="2690c7ee-ad3f-4608-8e86-3a08e2c1d9db" class="">The semi-colon marks the end of a statement:</p><pre id="0a5b213f-e9ac-4f59-89f7-b36aea57b72a" class="code"><code>Rust codelet x = 3;let y = 5;let z = y + x;</code></pre><p id="c1244782-8439-4dc7-8c14-a3b9d31c8a04" class="">Which means statements can span multiple lines:</p><pre id="c29b8478-eb6c-41e2-a7d1-d0cdcea757d6" class="code"><code>Rust codelet x = vec![1, 2, 3, 4, 5, 6, 7, 8].iter().map(|x| x + 3).fold(0, |x, y| x + y);</code></pre><p id="2d76c4f2-d9dd-4419-9ae4-d3ce8e904aaf" class="">(We&#x27;ll go over what those actually mean later).</p><p id="df5ad07e-f1e3-407f-9a20-726e8896987d" class=""><code>fn</code> declares a function.</p><p id="468c7304-53e2-489c-8e86-09275685d09d" class="">Here&#x27;s a void function:</p><pre id="8b9f5a47-819a-4e94-a1f9-d4157a9b17cf" class="code"><code>Rust codefn greet() {
+    println!(&quot;Hi there!&quot;);
+}
+</code></pre><p id="61788a82-72af-4d42-a1ad-46acf4a4dd0d" class="">And here&#x27;s a function that returns a 32-bit signed integer. The arrow indicates its return type:</p><pre id="86d57a55-6249-402c-9ea8-40b8cf540872" class="code"><code>Rust codefn fair_dice_roll() -&gt; i32 {
+    4
+}
+</code></pre><p id="17a304a3-d0ba-49af-83f6-c56ecfdb3aaa" class="">A pair of brackets declares a block, which has its own scope:</p><pre id="38d9b885-a0fe-4daa-a30e-48456eb2599b" class="code"><code>Rust code// This prints &quot;in&quot;, then &quot;out&quot;fn main() {
+    let x = &quot;out&quot;;
+    {
+        // this is a different `x`let x = &quot;in&quot;;println!(x);
+    }
+    println!(x);
+}
+</code></pre><p id="ce847d49-ad5d-433e-9590-a70d5a99c06b" class="">Blocks are also expressions, which mean they evaluate to.. a value.</p><pre id="8cc6a651-5180-400e-a65f-a65f7e725d0a" class="code"><code>Rust code// this:let x = 42;// is equivalent to this:let x = { 42 };</code></pre><p id="15ed5e6a-8fe7-4dc3-b638-bb7b763df9be" class="">Inside a block, there can be multiple statements:</p><pre id="ad2c064d-1571-468b-affb-a897a6610b1e" class="code"><code>Rust codelet x = {
+    let y = 1; // first statementlet z = 2; // second statement
+    y + z // this is the *tail* - what the whole block will evaluate to
+};</code></pre><p id="6e7942a3-efcd-4773-a2ac-6024ad4afa54" class="">And that&#x27;s why &quot;omitting the semicolon at the end of a function&quot; is the same as returning, ie. these are equivalent:</p><pre id="074c18c5-c51a-4541-b057-899ba2d83b03" class="code"><code>Rust codefn fair_dice_roll() -&gt; i32 {
+    return 4;
+}
+
+fn fair_dice_roll() -&gt; i32 {
+    4
+}
+</code></pre><p id="07d7ef84-57f7-4cf3-a015-4d9e8c11b176" class=""><code>if</code> conditionals are also expressions:</p><pre id="044b66a4-395d-4a7f-9cf8-2dc8da9c1a7f" class="code"><code>Rust codefn fair_dice_roll() -&gt; i32 {
+    if feeling_lucky {
+        6
+    } else {
+        4
+    }
+}
+</code></pre><p id="f350f86c-912d-4473-8ed5-4a5e151b2252" class="">A <code>match</code> is also an expression:</p><pre id="12c29c7f-9005-4470-81bb-6bc388782786" class="code"><code>Rust codefn fair_dice_roll() -&gt; i32 {
+    match feeling_lucky {
+        true =&gt; 6,
+        false =&gt; 4,
+    }
+}
+</code></pre><p id="1f5f0197-643e-475a-ae97-321513d63327" class="">Dots are typically used to access fields of a value:</p><pre id="93bb686c-1165-4c8c-9098-53d3b11c5abd" class="code"><code>Rust codelet a = (10, 20);
+a.0; // this is 10let amos = get_some_struct();
+amos.nickname; // this is &quot;fasterthanlime&quot;</code></pre><p id="67a31f47-7f54-45f3-bad8-9d3a098d75a1" class="">Or call a method on a value:</p><pre id="29a9b25e-4849-482c-b522-01826f900d0b" class="code"><code>Rust codelet nick = &quot;fasterthanlime&quot;;
+nick.len(); // this is 14</code></pre><p id="c68c4cb5-d373-4d93-a4b3-9c043eb1c930" class="">The double-colon, <code>::</code>, is similar but it operates on namespaces.</p><p id="a0de7896-be2d-4171-9a3a-5cfdc6773eff" class="">In this example, <code>std</code> is a <em>crate</em> (~ a library), <code>cmp</code> is a <em>module</em> (~ a source file), and <code>min</code> is a <em>function</em>:</p><pre id="a165f400-5c36-4f72-9520-808e9e5d0ba4" class="code"><code>Rust codelet least = std::cmp::min(3, 8); // this is 3</code></pre><p id="55d28de7-ec0a-4af6-8e49-e93f7791de27" class=""><code>use</code> directives can be used to &quot;bring in scope&quot; names from other namespace:</p><pre id="5e2fe483-10c8-4e16-80be-e195f0633918" class="code"><code>Rust codeuse std::cmp::min;let least = min(7, 1); // this is 1</code></pre><p id="429d3acb-6398-492a-8f82-849e16979974" class="">Within <code>use</code> directives, curly brackets have another meaning: they&#x27;re &quot;globs&quot;. If we want to import both <code>min</code> and <code>max</code>, we can do any of these:</p><pre id="a9535bcd-13d7-40aa-b3e5-8787f6b3ece9" class="code"><code>Rust code// this works:use std::cmp::min;use std::cmp::max;// this also works:use std::cmp::{min, max};// this also works!use std::{cmp::min, cmp::max};</code></pre><p id="060c3265-9d05-4933-9784-eb67dad08967" class="">A wildcard (<code>*</code>) lets you import every symbol from a namespace:</p><pre id="30f9ddd0-27e7-4002-b8fb-4167ea9fa933" class="code"><code>Rust code// this brings `min` and `max` in scope, and many other thingsuse std::cmp::*;</code></pre><p id="c4db689f-2aaf-4a49-b753-ebf01f5c9715" class="">Types are namespaces too, and methods can be called as regular functions:</p><pre id="42445696-bf9c-4c3c-b7be-35b454db54bd" class="code"><code>Rust codelet x = &quot;amos&quot;.len(); // this is 4let x = str::len(&quot;amos&quot;); // this is also 4</code></pre><p id="bb511b7a-48c3-4a62-a97e-c4e74980fc20" class=""><code>str</code> is a primitive type, but many non-primitive types are also in scope by default.</p><pre id="87d51968-a3a4-40dd-ad78-971f79aabe18" class="code"><code>Rust code// `Vec` is a regular struct, not a primitive typelet v = Vec::new();// this is exactly the same code, but with the *full* path to `Vec`let v = std::vec::Vec::new();</code></pre><p id="17df8d5a-24e1-4c33-ab87-662933019874" class="">This works because Rust inserts this at the beginning of every module:</p><pre id="f815ea42-890b-41e1-9f37-db24a56f0202" class="code"><code>Rust codeuse std::prelude::v1::*;</code></pre><p id="d94e7eba-d536-4a26-b112-efbf28533950" class="">(Which in turns re-exports a lot of symbols, like <code>Vec</code>, <code>String</code>, <code>Option</code> and <code>Result</code>).</p><p id="f4a54b71-62ce-41d5-ab70-74090a4f7933" class="">Structs are declared with the <code>struct</code> keyword:</p><pre id="1ccd15d7-6855-4bc6-9634-eb142915db8a" class="code"><code>Rust codestruct Vec2 {
+    x: f64, // 64-bit floating point, aka &quot;double precision&quot;y: f64,
+}
+</code></pre><p id="34c9c3c1-aa3d-48c2-a1a8-904ae3d50403" class="">They can be initialized using <em>struct literals</em>:</p><pre id="3f09274d-e34c-424a-a3f1-7689eb2ce58d" class="code"><code>Rust codelet v1 = Vec2 { x: 1.0, y: 3.0 };let v2 = Vec2 { y: 2.0, x: 4.0 };// the order does not matter, only the names do</code></pre><p id="9f5d0349-7d0b-4bc8-acbc-8e0b8f7dbcfc" class="">There is a shortcut for initializing the <em>rest of the fields</em> from another struct:</p><pre id="fc59c625-97c2-4fbc-b6d3-f83b009ce88b" class="code"><code>Rust codelet v3 = Vec2 {
+    x: 14.0,
+    ..v2
+};</code></pre><p id="1883e953-26de-4682-852d-ec1f41254c15" class="">This is called &quot;struct update syntax&quot;, can only happen in last position, and cannot be followed by a comma.</p><p id="8b78dc7f-6337-4263-903f-289fdd72ba7d" class="">Note that <em>the rest of the fields</em> can mean <em>all the fields</em>:</p><p id="667c92dc-66bb-4328-adf7-c871dbc23b42" class="">Structs, like tuples, can be destructured.</p><p id="ec114349-eeb2-4fb8-9d3b-24e281d70fc7" class="">Just like this is a valid <code>let</code> pattern:</p><pre id="04edd9ad-2950-4503-8b62-a14eb1d198fd" class="code"><code>Rust codelet (left, right) = slice.split_at(middle);</code></pre><p id="bfa10c1f-c9c1-404e-a025-a23b33aa63e2" class="">So is this:</p><pre id="2d1745d6-878b-400a-bdab-92602fc9d5bb" class="code"><code>Rust codelet v = Vec2 { x: 3.0, y: 6.0 };let Vec2 { x, y } = v;// `x` is now 3.0, `y` is now `6.0`</code></pre><p id="bdb56799-d489-47e7-b840-365af57aa7b8" class="">And this:</p><pre id="fcfed850-9894-4e97-8781-7b076fb35e18" class="code"><code>Rust codelet Vec2 { x, .. } = v;// this throws away `v.y`</code></pre><p id="f9a65425-7769-4c17-bd2b-2588068231d5" class=""><code>let</code> patterns can be used as conditions in <code>if</code>:</p><pre id="5688a39a-76b5-4f07-af85-b21201f655b6" class="code"><code>Rust codestruct Number {
+    odd: bool,
+    value: i32,
+}
+
+fn main() {
+    let one = Number { odd: true, value: 1 };let two = Number { odd: false, value: 2 };print_number(one);print_number(two);
+}
+
+fn print_number(n: Number) {
+    if let Number { odd: true, value } = n {
+        println!(&quot;Odd number: {}&quot;, value);
+    } else if let Number { odd: false, value } = n {
+        println!(&quot;Even number: {}&quot;, value);
+    }
+}
+
+// this prints:// Odd number: 1// Even number: 2</code></pre><p id="eefab0b4-8448-4f0f-8dcf-e96a03c8fc22" class=""><code>match</code> arms are also patterns, just like <code>if let</code>:</p><pre id="eb002905-e981-426c-a59a-68c41a81ef78" class="code"><code>Rust codefn print_number(n: Number) {
+    match n {
+        Number { odd: true, value } =&gt; println!(&quot;Odd number: {}&quot;, value),
+        Number { odd: false, value } =&gt; println!(&quot;Even number: {}&quot;, value),
+    }
+}
+
+// this prints the same as before</code></pre><p id="b625e1a7-38e3-403e-9236-15344781e193" class="">A <code>match</code> has to be exhaustive: at least one arm needs to match.</p><pre id="6d411279-8c16-49c1-a710-1baca7880229" class="code"><code>Rust codefn print_number(n: Number) {
+    match n {
+        Number { value: 1, .. } =&gt; println!(&quot;One&quot;),
+        Number { value: 2, .. } =&gt; println!(&quot;Two&quot;),
+        Number { value, .. } =&gt; println!(&quot;{}&quot;, value),
+        // if that last arm didn&#x27;t exist, we would get a compile-time error
+    }
+}
+</code></pre><p id="9ffef1f5-def4-4d45-9b96-38db6ca0b6a5" class="">If that&#x27;s hard, <code>_</code> can be used as a &quot;catch-all&quot; pattern:</p><pre id="4ed3007e-db99-45ba-bb77-5cffddd076bc" class="code"><code>Rust codefn print_number(n: Number) {
+    match n.value {
+        1 =&gt; println!(&quot;One&quot;),
+        2 =&gt; println!(&quot;Two&quot;),
+        _ =&gt; println!(&quot;{}&quot;, n.value),
+    }
+}
+</code></pre><p id="1adf1119-a98c-4eb9-902c-76954cbc774d" class="">You can declare methods on your own types:</p><pre id="512a0fe1-1cc3-4c71-820a-6a4e021e2509" class="code"><code>Rust codestruct Number {
+    odd: bool,
+    value: i32,
+}
+
+impl Number {
+    fn is_strictly_positive(self) -&gt; bool {
+        self.value &gt; 0
+    }
+}
+</code></pre><p id="fe7dd33e-42c0-4e64-8d17-75bffcb4ea65" class="">And use them like usual:</p><pre id="5c43dcca-1896-4a13-baaa-401fe586ec0a" class="code"><code>Rust codefn main() {
+    let minus_two = Number {
+        odd: false,
+        value: -2,
+    };println!(&quot;positive? {}&quot;, minus_two.is_strictly_positive());// this prints &quot;positive? false&quot;
+}
+</code></pre><p id="90d8d303-3581-4103-a522-56e00f1cfecf" class="">Variable bindings are immutable by default, which means their interior can&#x27;t be mutated:</p><pre id="0f88118b-b9c1-4512-b2ca-d9e16eb0fe79" class="code"><code>Rust codefn main() {
+    let n = Number {
+        odd: true,
+        value: 17,
+    };
+    n.odd = false; // error: cannot assign to `n.odd`,// as `n` is not declared to be mutable
+}
+</code></pre><p id="9bea8ea4-901a-4d72-83b6-86d76aa7d12b" class="">And also that they cannot be assigned to:</p><pre id="ca99562a-f648-4664-b2ca-2fc8c0e526ac" class="code"><code>Rust codefn main() {
+    let n = Number {
+        odd: true,
+        value: 17,
+    };
+    n = Number {
+        odd: false,
+        value: 22,
+    }; // error: cannot assign twice to immutable variable `n`
+}
+</code></pre><p id="290610ca-9771-46f4-90fe-70e993153466" class=""><code>mut</code> makes a variable binding mutable:</p><pre id="fedddedc-06ad-4a66-99e2-4148aca6c567" class="code"><code>Rust codefn main() {
+    let mut n = Number {
+        odd: true,
+        value: 17,
+    }
+    n.value = 19; // all good
+}
+</code></pre><p id="04618a9f-36da-44af-a80d-f418cc0a3532" class="">Traits are something multiple types can have in common:</p><pre id="32cdfc2f-4465-471a-845b-0a581fa10183" class="code"><code>Rust codetrait Signed {
+    fn is_strictly_negative(self) -&gt; bool;
+}
+</code></pre><p id="368ad628-a100-4898-a7b1-8b51cf1f064d" class="">You can implement:</p><ul id="c5302b29-0740-42f9-a194-4c131ded5dae" class="bulleted-list"><li>one of your traits on anyone&#x27;s type</li></ul><ul id="48038c09-9fe7-4273-9f0a-32679a8f89db" class="bulleted-list"><li>anyone&#x27;s trait on one of your types</li></ul><ul id="9eda5f70-c340-42c7-965a-2c730cb6a53e" class="bulleted-list"><li>but not a foreign trait on a foreign type</li></ul><p id="f24c7891-7428-4566-95f1-9c128a406832" class="">These are called the &quot;orphan rules&quot;.</p><p id="dafac9ce-e6f0-4ef7-844c-506b69666650" class="">Here&#x27;s an implementation of our trait on our type:</p><pre id="150204fe-782c-4499-8993-4518c622ac5d" class="code"><code>Rust codeimpl Signed for Number {
+    fn is_strictly_negative(self) -&gt; bool {
+        self.value &lt; 0
+    }
+}
+
+fn main() {
+    let n = Number { odd: false, value: -44 };println!(&quot;{}&quot;, n.is_strictly_negative()); // prints &quot;true&quot;
+}
+</code></pre><p id="80950158-1296-40aa-9fac-9cc4bce9cbc8" class="">Our trait on a foreign type (a primitive type, even):</p><pre id="c8b014ac-92b1-4a6b-acb1-fbd75cd23cfe" class="code"><code>Rust codeimpl Signed for i32 {
+    fn is_strictly_negative(self) -&gt; bool {
+        self &lt; 0
+    }
+}
+
+fn main() {
+    let n: i32 = -44;println!(&quot;{}&quot;, n.is_strictly_negative()); // prints &quot;true&quot;
+}
+</code></pre><p id="bc236808-0a66-4913-9901-cdaefab4e77a" class="">A foreign trait on our type:</p><pre id="4a3419cf-9bdc-42d5-b9ce-53cbc204069f" class="code"><code>Rust code// the `Neg` trait is used to overload `-`, the// unary minus operator.impl std::ops::Neg for Number {
+    type Output = Number;fn neg(self) -&gt; Number {
+        Number {
+            value: -self.value,
+            odd: self.odd,
+        }        
+    }
+}
+
+fn main() {
+    let n = Number { odd: true, value: 987 };let m = -n; // this is only possible because we implemented `Neg`println!(&quot;{}&quot;, m.value); // prints &quot;-987&quot;
+}
+</code></pre><p id="1d945980-d3a0-4d7a-9c12-16f1a5271e09" class="">An <code>impl</code> block is always <em>for</em> a type, so, inside that block, <code>Self</code> means that type:</p><pre id="a099760d-5d82-4e82-9c81-495e13592960" class="code"><code>Rust codeimpl std::ops::Neg for Number {
+    type Output = Self;fn neg(self) -&gt; Self {
+        Self {
+            value: -self.value,
+            odd: self.odd,
+        }        
+    }
+}
+</code></pre><p id="bcf2ee0c-a9fd-48cf-a0b3-b5b0da0a8d78" class="">Some traits are <em>markers</em> - they don&#x27;t say that a type implements some methods, they say that certain things can be done with a type.</p><p id="a79c7e00-5285-4b56-9589-1057dd97b8ca" class="">For example, <code>i32</code> implements trait <code>Copy</code> (in short, <code>i32</code> <em>is</em> <code>Copy</code>), so this works:</p><pre id="d0758142-7598-4fe9-b806-43271f123416" class="code"><code>Rust codefn main() {
+    let a: i32 = 15;let b = a; // `a` is copiedlet c = a; // `a` is copied again
+}
+</code></pre><p id="e96f8976-ffba-4fad-8eaf-9b2e357d2891" class="">And this also works:</p><pre id="9e272c3e-c09c-4c6e-a68b-894bace95860" class="code"><code>Rust codefn print_i32(x: i32) {
+    println!(&quot;x = {}&quot;, x);
+}
+
+fn main() {
+    let a: i32 = 15;print_i32(a); // `a` is copiedprint_i32(a); // `a` is copied again
+}
+</code></pre><p id="917757bb-b539-432e-804e-991db36708dd" class="">But the <code>Number</code> struct is not <code>Copy</code>, so this doesn&#x27;t work:</p><pre id="50d1701f-796c-488a-8489-3fdf3e03a5f7" class="code"><code>Rust codefn main() {
+    let n = Number { odd: true, value: 51 };let m = n; // `n` is moved into `m`let o = n; // error: use of moved value: `n`
+}
+</code></pre><p id="137aeb2a-12bf-46ec-a568-d7e74b83b917" class="">And neither does this:</p><pre id="d5f9ef4d-261b-478f-98c4-60cbd5981d89" class="code"><code>Rust codefn print_number(n: Number) {
+    println!(&quot;{} number {}&quot;, if n.odd { &quot;odd&quot; } else { &quot;even&quot; }, n.value);
+}
+
+fn main() {
+    let n = Number { odd: true, value: 51 };print_number(n); // `n` is movedprint_number(n); // error: use of moved value: `n`
+}
+</code></pre><p id="d21a2201-7265-4a4f-9b2e-8dc866b86312" class="">But it works if <code>print_number</code> takes an immutable reference instead:</p><pre id="5a9ff60b-d554-4405-acc8-50c254047248" class="code"><code>Rust codefn print_number(n: &amp;Number) {
+    println!(&quot;{} number {}&quot;, if n.odd { &quot;odd&quot; } else { &quot;even&quot; }, n.value);
+}
+
+fn main() {
+    let n = Number { odd: true, value: 51 };print_number(&amp;n); // `n` is borrowed for the time of the callprint_number(&amp;n); // `n` is borrowed again
+}
+</code></pre><p id="f8f8f983-3006-438f-af12-bab7d44bc833" class="">It also works if a function takes a <em>mutable</em> reference - but only if our variable binding is also <code>mut</code>.</p><pre id="cbd99728-60ad-4ce2-a7ac-3c69641bb56c" class="code"><code>Rust codefn invert(n: &amp;mut Number) {
+    n.value = -n.value;
+}
+
+fn print_number(n: &amp;Number) {
+    println!(&quot;{} number {}&quot;, if n.odd { &quot;odd&quot; } else { &quot;even&quot; }, n.value);
+}
+
+fn main() {
+    // this time, `n` is mutablelet mut n = Number { odd: true, value: 51 };print_number(&amp;n);invert(&amp;mut n); // `n is borrowed mutably - everything is explicitprint_number(&amp;n);
+}
+</code></pre><p id="2d539021-95c0-4d27-9215-4d28337aa680" class="">Trait methods can also take <code>self</code> by reference or mutable reference:</p><pre id="cf34f711-e31b-4a14-b969-d7b01f1cec42" class="code"><code>Rust codeimpl std::clone::Clone for Number {
+    fn clone(&amp;self) -&gt; Self {
+        Self { ..*self }
+    }
+}
+</code></pre><p id="ad8e970a-61c3-46dd-be59-300ae2cdc288" class="">When invoking trait methods, the receiver is borrowed implicitly:</p><pre id="3c100453-1d51-4a70-99c8-fd0065e5809f" class="code"><code>Rust codefn main() {
+    let n = Number { odd: true, value: 51 };let mut m = n.clone();
+    m.value += 100;
+    
+    print_number(&amp;n);print_number(&amp;m);
+}
+</code></pre><p id="7a0f7deb-1f6c-45af-ab2f-0e1959db1329" class="">To highlight this: these are equivalent:</p><pre id="f62600d9-fc7a-43c0-8d17-a9512db38973" class="code"><code>Rust codelet m = n.clone();let m = std::clone::Clone::clone(&amp;n);</code></pre><p id="d5210270-906b-4497-a568-dc5f64ff6711" class="">Marker traits like <code>Copy</code> have no methods:</p><pre id="4196b27e-f32f-4643-8083-94becc7c9ca7" class="code"><code>Rust code// note: `Copy` requires that `Clone` is implemented tooimpl std::clone::Clone for Number {
+    fn clone(&amp;self) -&gt; Self {
+        Self { ..*self }
+    }
+}
+
+impl std::marker::Copy for Number {}
+</code></pre><p id="8b88baa3-3d49-4bd1-b633-f0b60480e89b" class="">Now, <code>Clone</code> can still be used:</p><pre id="9cc47890-4ae2-417d-83b3-bd5e5709a4eb" class="code"><code>Rust codefn main() {
+    let n = Number { odd: true, value: 51 };let m = n.clone();let o = n.clone();
+}
+</code></pre><p id="1a718b34-0caa-414a-ac30-e3fd8493818d" class="">But <code>Number</code> values will no longer be moved:</p><pre id="858626f9-0c54-4c62-9902-bb4a05fb5cf8" class="code"><code>Rust codefn main() {
+    let n = Number { odd: true, value: 51 };let m = n; // `m` is a copy of `n`let o = n; // same. `n` is neither moved nor borrowed.
+}
+</code></pre><p id="fdcb7308-0c79-4780-a29f-a336f013313d" class="">Some traits are so common, they can be implemented automatically by using the <code>derive</code> attribute:</p><pre id="30ebbd9b-ba55-4e13-9d01-16d1173d2738" class="code"><code>Rust code#[derive(Clone, Copy)]struct Number {
+    odd: bool,
+    value: i32,
+}
+
+// this expands to `impl Clone for Number` and `impl Copy for Number` blocks.</code></pre><p id="cd5d76b2-1ace-43b1-89aa-7a93fc64cf2e" class="">Functions can be generic:</p><pre id="1fd88578-5b9d-4f48-8dba-c3bcb14f673d" class="code"><code>Rust codefn foobar&lt;T&gt;(arg: T) {
+    // do something with `arg`
+}
+</code></pre><p id="df6e0c36-f78d-421e-be1a-23d226097f71" class="">They can have multiple <em>type parameters</em>, which can then be used in the function&#x27;s declaration and its body, instead of concrete types:</p><pre id="6d1c11c1-410a-4c5a-8f38-539a1f41066b" class="code"><code>Rust codefn foobar&lt;L, R&gt;(left: L, right: R) {
+    // do something with `left` and `right`
+}
+</code></pre><p id="3737a90d-81e2-4606-8db8-c6d342d9c9d4" class="">Type parameters usually have <em>constraints</em>, so you can actually do something with them.</p><p id="5291ed9a-1c50-4b5d-a9ba-dae23492b1cf" class="">The simplest constraints are just trait names:</p><pre id="09ccd073-ff38-4b77-864c-e42cd27e2bc3" class="code"><code>Rust codefn print&lt;T: Display&gt;(value: T) {
+    println!(&quot;value = {}&quot;, value);
+}
+
+fn print&lt;T: Debug&gt;(value: T) {
+    println!(&quot;value = {:?}&quot;, value);
+}
+</code></pre><p id="0cb15327-5002-4de9-a026-72322fa83de0" class="">There&#x27;s a longer syntax for type parameter constraints:</p><pre id="0c100c87-303b-423e-9638-20aa504e1871" class="code"><code>Rust codefn print&lt;T&gt;(value: T)whereT: Display,
+{
+    println!(&quot;value = {}&quot;, value);
+}
+</code></pre><p id="5f519ddd-7ac1-4eb7-a161-7b5e76b70324" class="">Constraints can be more complicated: they can require a type parameter to implement multiple traits:</p><pre id="51e9097b-05b4-4904-ac08-a3e40e7e5dd7" class="code"><code>Rust codeuse std::fmt::Debug;fn compare&lt;T&gt;(left: T, right: T)whereT: Debug + PartialEq,
+{
+    println!(&quot;{:?} {} {:?}&quot;, left, if left == right { &quot;==&quot; } else { &quot;!=&quot; }, right);
+}
+
+fn main() {
+    compare(&quot;tea&quot;, &quot;coffee&quot;);// prints: &quot;tea&quot; != &quot;coffee&quot;
+}
+</code></pre><p id="435e9e73-5043-4566-8d28-c8c59a7e3232" class="">Generic functions can be thought of as namespaces, containing an infinity of functions with different concrete types.</p><p id="d91611ee-f8b0-449b-bf4d-446047ab1db7" class="">Same as with crates, and modules, and types, generic functions can be &quot;explored&quot; (navigated?) using <code>::</code></p><pre id="d37bc019-1a10-4b12-b31c-228de72fb69c" class="code"><code>Rust codefn main() {
+    use std::any::type_name;println!(&quot;{}&quot;, type_name::&lt;i32&gt;()); // prints &quot;i32&quot;println!(&quot;{}&quot;, type_name::&lt;(f64, char)&gt;()); // prints &quot;(f64, char)&quot;
+}
+</code></pre><p id="932b0019-51b5-4a48-a427-2c42bcd2282c" class="">This is lovingly called <a href="https://turbo.fish/">turbofish syntax</a>, because <code>::&lt;&gt;</code> looks like a fish.</p><p id="2125046c-56d7-4ba0-850f-2f82dfae525c" class="">Structs can be generic too:</p><pre id="1e056c41-1b5d-449c-8c99-b5f07d65cbcb" class="code"><code>Rust codestruct Pair&lt;T&gt; {
+    a: T,
+    b: T,
+}
+
+fn print_type_name&lt;T&gt;(_val: &amp;T) {
+    println!(&quot;{}&quot;, std::any::type_name::&lt;T&gt;());
+}
+
+fn main() {
+    let p1 = Pair { a: 3, b: 9 };let p2 = Pair { a: true, b: false };print_type_name(&amp;p1); // prints &quot;Pair&lt;i32&gt;&quot;print_type_name(&amp;p2); // prints &quot;Pair&lt;bool&gt;&quot;
+}
+</code></pre><p id="5c6d185e-d15e-46ab-9e4e-997c736cfdeb" class="">The standard library type <code>Vec</code> (~ a heap-allocated array), is generic:</p><pre id="1abfbfc3-676a-4b1f-8d2c-024d47cd3aeb" class="code"><code>Rust codefn main() {
+    let mut v1 = Vec::new();
+    v1.push(1);let mut v2 = Vec::new();
+    v2.push(false);print_type_name(&amp;v1); // prints &quot;Vec&lt;i32&gt;&quot;print_type_name(&amp;v2); // prints &quot;Vec&lt;bool&gt;&quot;
+}
+</code></pre><p id="b65d9075-e454-470c-83ce-94cfa275de12" class="">Speaking of <code>Vec</code>, it comes with a macro that gives more or less &quot;vec literals&quot;:</p><pre id="8d04ea7a-12d8-4011-81e7-f6ffa2dd710b" class="code"><code>Rust codefn main() {
+    let v1 = vec![1, 2, 3];let v2 = vec![true, false, true];print_type_name(&amp;v1); // prints &quot;Vec&lt;i32&gt;&quot;print_type_name(&amp;v2); // prints &quot;Vec&lt;bool&gt;&quot;
+}
+</code></pre><p id="85d9f273-d4af-422f-9cd5-290d79e3500c" class="">All of <code>name!()</code>, <code>name![]</code> or <code>name!{}</code> invoke a macro. Macros just expand to regular code.</p><p id="d4d48577-4d57-4561-98cb-c78caab4de48" class="">In fact, <code>println</code> is a macro:</p><pre id="ebc02611-04a0-4fc2-9cee-f47322ac3abd" class="code"><code>Rust codefn main() {
+    println!(&quot;{}&quot;, &quot;Hello there!&quot;);
+}
+</code></pre><p id="5a97d04b-bf68-4f34-a1f1-1bb4b092973b" class="">This expands to something that has the same effect as:</p><pre id="604e34c0-cdca-45bc-99d6-388210738e47" class="code"><code>Rust codefn main() {
+    use std::io::{self, Write};
+    io::stdout().lock().write_all(b&quot;Hello there!\n&quot;).unwrap();
+}
+</code></pre><p id="8d080b66-f539-40d8-b635-d62851c3a053" class=""><code>panic</code> is also a macro. It violently stops execution with an error message, and the file name / line number of the error, if enabled:</p><pre id="86e3d2cd-3296-4fab-a583-3e7818e6b8b5" class="code"><code>Rust codefn main() {
+    panic!(&quot;This panics&quot;);
+}
+// output: thread &#x27;main&#x27; panicked at &#x27;This panics&#x27;, src/main.rs:3:5</code></pre><p id="ccafbbf4-3ee6-4441-b540-49cd58d0b265" class="">Some methods also panic. For example, the <code>Option</code> type can contain something, or it can contain nothing. If <code>.unwrap()</code> is called on it, and it contains nothing, it panics:</p><pre id="4a1453e0-b5f1-47ab-8149-e7280a8f425e" class="code"><code>Rust codefn main() {
+    let o1: Option&lt;i32&gt; = Some(128);
+    o1.unwrap(); // this is finelet o2: Option&lt;i32&gt; = None;
+    o2.unwrap(); // this panics!
+}
+
+// output: thread &#x27;main&#x27; panicked at &#x27;called `Option::unwrap()` on a `None` value&#x27;, src/libcore/option.rs:378:21</code></pre><p id="b7b7669e-17bc-4a32-8151-b4e6e5827c72" class=""><code>Option</code> is not a struct - it&#x27;s an <code>enum</code>, with two variants.</p><pre id="aa906b0a-ad46-4b03-b691-d820cfeec9c7" class="code"><code>Rust codeenum Option&lt;T&gt; {
+    None,
+    Some(T),
+}
+
+impl&lt;T&gt; Option&lt;T&gt; {
+    fn unwrap(self) -&gt; T {
+        // enums variants can be used in patterns:match self {
+            Self::Some(t) =&gt; t,
+            Self::None =&gt; panic!(&quot;.unwrap() called on a None option&quot;),
+        }
+    }
+}
+
+use self::Option::{None, Some};fn main() {
+    let o1: Option&lt;i32&gt; = Some(128);
+    o1.unwrap(); // this is finelet o2: Option&lt;i32&gt; = None;
+    o2.unwrap(); // this panics!
+}
+
+// output: thread &#x27;main&#x27; panicked at &#x27;.unwrap() called on a None option&#x27;, src/main.rs:11:27</code></pre><p id="304c362d-7432-4105-a338-770329709e2e" class=""><code>Result</code> is also an enum, it can either contain something, or an error:</p><p id="1e5031c4-d6a4-4dde-b57e-adc04c10a7ab" class="">It also panics when unwrapped and containing an error.</p><p id="4b5101dc-031b-4ad4-9eeb-898a39027592" class="">Variables bindings have a &quot;lifetime&quot;:</p><pre id="a1f18a3b-85f1-4b7d-9552-f6ee97f5bc1e" class="code"><code>Rust codefn main() {
+    // `x` doesn&#x27;t exist yet
+    {
+        let x = 42; // `x` starts existingprintln!(&quot;x = {}&quot;, x);// `x` stops existing
+    }
+    // `x` no longer exists
+}
+</code></pre><p id="05c5982a-6087-4412-b2fc-8dc06da44bfb" class="">Similarly, references have a lifetime:</p><pre id="d2842e88-150d-41fd-b39d-29bda0efdb17" class="code"><code>Rust codefn main() {
+    // `x` doesn&#x27;t exist yet
+    {
+        let x = 42; // `x` starts existinglet x_ref = &amp;x; // `x_ref` starts existing - it borrows `x`println!(&quot;x_ref = {}&quot;, x_ref);// `x_ref` stops existing// `x` stops existing
+    }
+    // `x` no longer exists
+}
+</code></pre><p id="eca21472-b77f-45ae-bab5-baafdd119404" class="">The lifetime of a reference cannot exceed the lifetime of the variable binding it borrows:</p><pre id="8b5d0ea5-e303-481a-9996-8ae29347ab50" class="code"><code>Rust codefn main() {
+    let x_ref = {
+        let x = 42;&amp;x
+    };println!(&quot;x_ref = {}&quot;, x_ref);// error: `x` does not live long enough
+}
+</code></pre><p id="088fffad-28af-42ea-b142-59c1d4e94f54" class="">A variable binding can be immutably borrowed multiple times:</p><pre id="0ffc9331-a58d-4f70-83bd-7fc5954debfa" class="code"><code>Rust codefn main() {
+    let x = 42;let x_ref1 = &amp;x;let x_ref2 = &amp;x;let x_ref3 = &amp;x;println!(&quot;{} {} {}&quot;, x_ref1, x_ref2, x_ref3);
+}
+</code></pre><p id="e0bd3585-bd86-4482-bde6-3d6a6d786ff4" class="">While borrowed, a variable binding cannot be mutated:</p><pre id="d3937e54-c0f0-4500-a288-57db4aeff720" class="code"><code>Rust codefn main() {
+    let mut x = 42;let x_ref = &amp;x;
+    x = 13;println!(&quot;x_ref = {}&quot;, x_ref);// error: cannot assign to `x` because it is borrowed
+}
+</code></pre><p id="0e85abf6-9c5a-41e4-9893-9638b811b93c" class="">While immutably borrowed, a variable cannot be <em>mutably borrowed</em>:</p><pre id="6e020037-6a8d-4a68-8627-bac5ec025843" class="code"><code>Rust codefn main() {
+    let mut x = 42;let x_ref1 = &amp;x;let x_ref2 = &amp;mut x;// error: cannot borrow `x` as mutable because it is also borrowed as immutableprintln!(&quot;x_ref1 = {}&quot;, x_ref1);
+}
+</code></pre><p id="16f4f4e3-c082-4d7a-af9d-d0777c6ed921" class="">References in function arguments also have lifetimes:</p><pre id="5c333d71-60c3-4026-8630-a2ffbf08d4bb" class="code"><code>Rust codefn print(x: &amp;i32) {
+    // `x` is borrowed (from the outside) for the// entire time this function is called.
+}
+</code></pre><p id="060252b2-dc68-4b6e-9500-8c7a1d93341f" class="">Functions with reference arguments can be called with borrows that have different lifetimes, so:</p><ul id="9acabb02-744a-426c-a8b9-333dc8aab1c9" class="bulleted-list"><li>All functions that take references are generic</li></ul><ul id="76a79f32-a3cb-49b8-83e4-8acb846c7fd2" class="bulleted-list"><li>Lifetimes are generic parameters</li></ul><p id="4c4920a7-e6b7-4957-b7dc-e8917224a3de" class="">Lifetimes&#x27; names start with a single quote, <code>&#x27;</code>:</p><pre id="5d06d4db-94cb-4d72-bee1-9ab55511bb28" class="code"><code>Rust code// elided (non-named) lifetimes:fn print(x: &amp;i32) {}
+
+// named lifetimes:fn print&lt;&#x27;a&gt;(x: &amp;&#x27;a i32) {}
+</code></pre><p id="b1ed3998-adfc-4525-80bd-2a8c421408a2" class="">This allows returning references whose lifetime depend on the lifetime of the arguments:</p><pre id="4a2515fa-0eac-4512-b66c-af344bb7c5fe" class="code"><code>Rust codestruct Number {
+    value: i32,
+}
+
+fn number_value&lt;&#x27;a&gt;(num: &amp;&#x27;a Number) -&gt; &amp;&#x27;a i32 {
+    &amp;num.value
+}
+
+fn main() {
+    let n = Number { value: 47 };let v = number_value(&amp;n);// `v` borrows `n` (immutably), thus: `v` cannot outlive `n`.// While `v` exists, `n` cannot be mutably borrowed, mutated, moved, etc.
+}
+</code></pre><p id="c9ec2062-01fa-4e3b-9486-eeac1e9a7692" class="">When there is a <em>single</em> input lifetime, it doesn&#x27;t need to be named, and everything has the same lifetime, so the two functions below are equivalent:</p><pre id="735b0fc9-01b5-495e-846e-e45fe9ae8dff" class="code"><code>Rust codefn number_value&lt;&#x27;a&gt;(num: &amp;&#x27;a Number) -&gt; &amp;&#x27;a i32 {
+    &amp;num.value
+}
+
+fn number_value(num: &amp;Number) -&gt; &amp;i32 {
+    &amp;num.value
+}
+</code></pre><p id="06fa8254-4860-41f8-b7d6-7754e93d6770" class="">Structs can also be <em>generic over lifetimes</em>, which allows them to hold references:</p><pre id="8e2753bd-c049-4a28-af98-010eab1c81e4" class="code"><code>Rust codestruct NumRef&lt;&#x27;a&gt; {
+    x: &amp;&#x27;a i32,
+}
+
+fn main() {
+    let x: i32 = 99;let x_ref = NumRef { x: &amp;x };// `x_ref` cannot outlive `x`, etc.
+}
+</code></pre><p id="9ccf789f-e477-4c79-acbb-dfdcc5c7cfd2" class="">The same code, but with an additional function:</p><pre id="325b281d-1707-4fce-b8e4-47da30ccb04a" class="code"><code>Rust codestruct NumRef&lt;&#x27;a&gt; {
+    x: &amp;&#x27;a i32,
+}
+
+fn as_num_ref&lt;&#x27;a&gt;(x: &amp;&#x27;a i32) -&gt; NumRef&lt;&#x27;a&gt; {
+    NumRef { x: &amp;x }
+}
+
+fn main() {
+    let x: i32 = 99;let x_ref = as_num_ref(&amp;x);// `x_ref` cannot outlive `x`, etc.
+}
+</code></pre><p id="d813f266-9b90-4621-8677-159c91e1691c" class="">The same code, but with &quot;elided&quot; lifetimes:</p><pre id="9ad08632-c7f0-4fb3-ac20-61cd29f0eadb" class="code"><code>Rust codestruct NumRef&lt;&#x27;a&gt; {
+    x: &amp;&#x27;a i32,
+}
+
+fn as_num_ref(x: &amp;i32) -&gt; NumRef&lt;&#x27;_&gt; {
+    NumRef { x: &amp;x }
+}
+
+fn main() {
+    let x: i32 = 99;let x_ref = as_num_ref(&amp;x);// `x_ref` cannot outlive `x`, etc.
+}
+</code></pre><p id="b2aab880-5fd4-4c3a-be11-e7f2ee919a15" class=""><code>impl</code> blocks can be generic over lifetimes too:</p><pre id="6663d6ef-41fa-4c11-8e65-f304048f5925" class="code"><code>Rust codeimpl&lt;&#x27;a&gt; NumRef&lt;&#x27;a&gt; {
+    fn as_i32_ref(&amp;&#x27;a self) -&gt; &amp;&#x27;a i32 {
+        self.x
+    }
+}
+
+fn main() {
+    let x: i32 = 99;let x_num_ref = NumRef { x: &amp;x };let x_i32_ref = x_num_ref.as_i32_ref();// neither ref can outlive `x`
+}
+</code></pre><p id="0cf6cfdc-7ec8-4cc7-aa85-efb28f8c24e5" class="">But you can do elision (&quot;to elide&quot;) there too:</p><pre id="5d79e5b7-f6b6-40d6-8bfe-34153c8e4e62" class="code"><code>Rust codeimpl&lt;&#x27;a&gt; NumRef&lt;&#x27;a&gt; {
+    fn as_i32_ref(&amp;self) -&gt; &amp;i32 {
+        self.x
+    }
+}
+</code></pre><p id="4dbd2566-2d1a-480c-ad59-a091934c6862" class="">You can elide even harder, if you never need the name:</p><pre id="04015fe3-6e17-4668-8866-461abd9b5761" class="code"><code>Rust codeimpl NumRef&lt;&#x27;_&gt; {
+    fn as_i32_ref(&amp;self) -&gt; &amp;i32 {
+        self.x
+    }
+}
+</code></pre><p id="b2f1d9f6-8015-4830-ba24-336bb7e5bd7f" class="">There is a special lifetime, named <code>&#x27;static</code>, which is valid for the entire program&#x27;s lifetime.</p><p id="e44ec656-0aa2-4f42-8690-0cc6d22657f4" class="">String literals are <code>&#x27;static</code>:</p><pre id="1d74cce8-f1f7-4eaf-bc6c-8014bd43d1ee" class="code"><code>Rust codestruct Person {
+    name: &amp;&#x27;static str,
+}
+
+fn main() {
+    let p = Person {
+        name: &quot;fasterthanlime&quot;,
+    };
+}
+</code></pre><p id="c6700986-606d-46eb-a6a5-6b60108e7721" class="">But <em>owned strings</em> are not static:</p><pre id="c2425e9b-8c13-4fa4-946c-8283b87a235c" class="code"><code>Rust codestruct Person {
+    name: &amp;&#x27;static str,
+}
+
+fn main() {
+    let name = format!(&quot;fasterthan{}&quot;, &quot;lime&quot;);let p = Person { name: &amp;name };// error: `name` does not live long enough
+}
+</code></pre><p id="652c90ad-b5a4-4f2a-af66-aaa8062bb6b6" class="">In that last example, the local <code>name</code> is not a <code>&amp;&#x27;static str</code>, it&#x27;s a <code>String</code>. It&#x27;s been allocated dynamically, and it will be freed. Its lifetime is <em>less</em> than the whole program (even though it happens to be in <code>main</code>).</p><p id="51a20ede-4d12-49af-9dc8-2b43d693f9bc" class="">To store a non-<code>&#x27;static</code> string in <code>Person</code>, it needs to either:</p><p id="8a1d6651-cb71-41de-8fb2-b77c0ef8db88" class="">A) Be generic over a lifetime:</p><pre id="64f93292-b79f-4cd7-8fed-72e447dd805a" class="code"><code>Rust codestruct Person&lt;&#x27;a&gt; {
+    name: &amp;&#x27;a str,
+}
+
+fn main() {
+    let name = format!(&quot;fasterthan{}&quot;, &quot;lime&quot;);let p = Person { name: &amp;name };// `p` cannot outlive `name`
+}
+</code></pre><p id="0995d457-56bc-4771-a4e4-b01e303d0b3a" class="">or</p><p id="e47b30e5-fad1-48fa-9555-ea44684816c3" class="">B) Take ownership of the string</p><pre id="afe1394a-1c8c-4632-b237-8b90c2f042fe" class="code"><code>Rust codestruct Person {
+    name: String,
+}
+
+fn main() {
+    let name = format!(&quot;fasterthan{}&quot;, &quot;lime&quot;);let p = Person { name: name };// `name` was moved into `p`, their lifetimes are no longer tied.
+}
+</code></pre><p id="8098c229-fdc4-4158-8f2d-f012712fd1c0" class="">Speaking of: in a struct literal, when a field is set to a variable binding of the same name:</p><pre id="8b42985b-bc67-4e22-92cd-17abcf29d0a7" class="code"><code>Rust code</code></pre><p id="a90f6711-8c48-4585-a7fa-e565e2975b37" class="">It can be shortened like this:</p><p id="8dd77e8d-14e2-4ea2-94b8-073a80d990a7" class="">For many types in Rust, there are owned and non-owned variants:</p><ul id="20989657-c7d6-41bc-a4ec-71e020fc7fd1" class="bulleted-list"><li>Strings: <code>String</code> is owned, <code>&amp;str</code> is a reference</li></ul><ul id="5e115350-44ec-4db0-8365-98d9c0921415" class="bulleted-list"><li>Paths: <code>PathBuf</code> is owned, <code>&amp;Path</code> is a reference</li></ul><ul id="af5961e8-9fa8-4985-a61e-1b014485a685" class="bulleted-list"><li>Collections: <code>Vec&lt;T&gt;</code> is owned, <code>&amp;[T]</code> is a reference</li></ul><p id="8a3b82b2-f014-4de9-a3f7-eff7db537bc4" class="">Rust has slices - they&#x27;re a reference to multiple contiguous elements.</p><p id="33f0985c-46d9-4167-a06b-41cd5b2ccf99" class="">You can borrow a slice of a vector, for example:</p><pre id="22b3a2f4-3475-45d9-abb7-563a539fcf90" class="code"><code>Rust codefn main() {
+    let v = vec![1, 2, 3, 4, 5];let v2 = &amp;v[2..4];println!(&quot;v2 = {:?}&quot;, v2);
+}
+
+// output:// v2 = [3, 4]</code></pre><p id="609db30d-1a8d-49e1-a679-9ca4932d2d23" class="">The above is not magical. The indexing operator (<code>foo[index]</code>) is overloaded with the <code>Index</code> and <code>IndexMut</code> traits.</p><p id="b39a2ddb-b39e-450f-935b-bbdb470b0d59" class="">The <code>..</code> syntax is just range literals. Ranges are just a few structs defined in the standard library.</p><p id="19434ab7-ea12-43f0-b371-04662f781d38" class="">They can be open-ended, and their rightmost bound can be inclusive, if it&#x27;s preceded by <code>=</code>.</p><pre id="a95a2453-3349-4619-8c90-5cd03c37700e" class="code"><code>Rust codefn main() {
+    // 0 or greaterprintln!(&quot;{:?}&quot;, (0..).contains(&amp;100)); // true// strictly less than 20println!(&quot;{:?}&quot;, (..20).contains(&amp;20)); // false// 20 or less than 20println!(&quot;{:?}&quot;, (..=20).contains(&amp;20)); // true// only 3, 4, 5println!(&quot;{:?}&quot;, (3..6).contains(&amp;4)); // true
+}
+</code></pre><p id="83492aa1-e4fd-420c-9be5-71531138ba9f" class="">Borrowing rules apply to slices.</p><pre id="943163b5-dfcd-4ad2-8da2-99af49ad4cf4" class="code"><code>Rust codefn tail(s: &amp;[u8]) -&gt; &amp;[u8] {
+  &amp;s[1..] 
+}
+
+fn main() {
+    let x = &amp;[1, 2, 3, 4, 5];let y = tail(x);println!(&quot;y = {:?}&quot;, y);
+}
+</code></pre><p id="49b6c95c-9c1f-4623-aad2-d7d25ace2596" class="">This is the same as:</p><pre id="2bf1207e-059d-4122-8309-aa17eedcbc25" class="code"><code>Rust codefn tail&lt;&#x27;a&gt;(s: &amp;&#x27;a [u8]) -&gt; &amp;&#x27;a [u8] {
+  &amp;s[1..] 
+}
+</code></pre><p id="eed36aa1-ca19-4b29-bfa7-3da9b200a576" class="">This is legal:</p><pre id="f079334f-9e97-4082-a593-99309fff640c" class="code"><code>Rust codefn main() {
+    let y = {
+        let x = &amp;[1, 2, 3, 4, 5];tail(x)
+    };println!(&quot;y = {:?}&quot;, y);
+}
+</code></pre><p id="6166cf6f-548d-4bd7-8e5a-e00fe4eee09b" class="">...but only because <code>[1, 2, 3, 4, 5]</code> is a <code>&#x27;static</code> array.</p><p id="c9889948-ee7c-43fb-8cc2-64feac58dc66" class="">So, this is illegal:</p><pre id="70d4a09f-7af0-40ed-9255-91cdeb24627e" class="code"><code>Rust codefn main() {
+    let y = {
+        let v = vec![1, 2, 3, 4, 5];tail(&amp;v)// error: `v` does not live long enough
+    };println!(&quot;y = {:?}&quot;, y);
+}
+</code></pre><p id="7338f23e-2c78-4224-81c9-041023394360" class="">...because a vector is heap-allocated, and it has a non-<code>&#x27;static</code> lifetime.</p><p id="e21ae38b-cde6-4eac-8359-82e3514ea598" class=""><code>&amp;str</code> values are really slices.</p><pre id="761a8033-60f3-41cc-b9df-6ceb46f97a97" class="code"><code>Rust codefn file_ext(name: &amp;str) -&gt; Option&lt;&amp;str&gt; {
+    // this does not create a new string - it returns// a slice of the argument.
+    name.split(&quot;.&quot;).last()
+}
+
+fn main() {
+    let name = &quot;Read me. Or don&#x27;t.txt&quot;;if let Some(ext) = file_ext(name) {
+        println!(&quot;file extension: {}&quot;, ext);
+    } else {
+        println!(&quot;no file extension&quot;);
+    }
+}
+</code></pre><p id="dfdb361e-934d-4b07-a884-b0ca194286e7" class="">...so the borrow rules apply here too:</p><pre id="04275c49-7d73-4cc2-bf42-ccfd4fa1ad80" class="code"><code>Rust codefn main() {
+    let ext = {
+        let name = String::from(&quot;Read me. Or don&#x27;t.txt&quot;);file_ext(&amp;name).unwrap_or(&quot;&quot;)// error: `name` does not live long enough
+    };println!(&quot;extension: {:?}&quot;, ext);
+}
+</code></pre><p id="2f2d4608-8c6b-4fc1-92f0-55cc8015bfa6" class="">Functions that can fail typically return a <code>Result</code>:</p><pre id="73817ac3-5c29-4d7a-878c-0b885f5fbb84" class="code"><code>Rust codefn main() {
+    let s = std::str::from_utf8(&amp;[240, 159, 141, 137]);println!(&quot;{:?}&quot;, s);// prints: Ok(&quot;🍉&quot;)let s = std::str::from_utf8(&amp;[195, 40]);println!(&quot;{:?}&quot;, s);// prints: Err(Utf8Error { valid_up_to: 0, error_len: Some(1) })
+}
+</code></pre><p id="358eb4c6-c004-44ad-aeb6-1e8471edf551" class="">If you want to panic in case of failure, you can <code>.unwrap()</code>:</p><pre id="ef6825d8-74d5-47b5-8a49-442204fde9b8" class="code"><code>Rust codefn main() {
+    let s = std::str::from_utf8(&amp;[240, 159, 141, 137]).unwrap();println!(&quot;{:?}&quot;, s);// prints: &quot;🍉&quot;let s = std::str::from_utf8(&amp;[195, 40]).unwrap();// prints: thread &#x27;main&#x27; panicked at &#x27;called `Result::unwrap()`// on an `Err` value: Utf8Error { valid_up_to: 0, error_len: Some(1) }&#x27;,// src/libcore/result.rs:1165:5
+}
+</code></pre><p id="3a308e81-5b7f-41e2-b9a5-0fcd07c97409" class="">Or <code>.expect()</code>, for a custom message:</p><pre id="58cc41ce-6184-4f55-ae4d-e5d27843ecf2" class="code"><code>Rust codefn main() {
+    let s = std::str::from_utf8(&amp;[195, 40]).expect(&quot;valid utf-8&quot;);// prints: thread &#x27;main&#x27; panicked at &#x27;valid utf-8: Utf8Error// { valid_up_to: 0, error_len: Some(1) }&#x27;, src/libcore/result.rs:1165:5
+}
+</code></pre><p id="15c0d0d7-dd39-4108-bc74-90b6566d169b" class="">Or, you can <code>match</code>:</p><pre id="5e943899-7d94-4eef-88ec-8eac7942d1ee" class="code"><code>Rust codefn main() {
+    match std::str::from_utf8(&amp;[240, 159, 141, 137]) {
+        Ok(s) =&gt; println!(&quot;{}&quot;, s),
+        Err(e) =&gt; panic!(e),
+    }
+    // prints 🍉
+}
+</code></pre><p id="b17aaad5-1615-4e05-9477-25e977bdfab4" class="">Or you can <code>if let</code>:</p><pre id="bb5fa1ee-37bd-4b99-a7f3-9f48a7bdd4e4" class="code"><code>Rust codefn main() {
+    if let Ok(s) = std::str::from_utf8(&amp;[240, 159, 141, 137]) {
+        println!(&quot;{}&quot;, s);
+    }
+    // prints 🍉
+}
+</code></pre><p id="11d20102-7790-4880-9a00-28ace9c5f9a3" class="">Or you can bubble up the error:</p><pre id="dd5aaa5e-39d9-4cf3-8fa0-dfc8d18b2aa0" class="code"><code>Rust codefn main() -&gt; Result&lt;(), std::str::Utf8Error&gt; {
+    match std::str::from_utf8(&amp;[240, 159, 141, 137]) {
+        Ok(s) =&gt; println!(&quot;{}&quot;, s),
+        Err(e) =&gt; return Err(e),
+    }
+    Ok(())
+}
+</code></pre><p id="2e44d5f1-8fb3-4989-81d8-b8228adb7cb2" class="">Or you can use <code>?</code> to do it the concise way:</p><pre id="8985eac9-eb22-446d-871c-6247c8cd4773" class="code"><code>Rust codefn main() -&gt; Result&lt;(), std::str::Utf8Error&gt; {
+    let s = std::str::from_utf8(&amp;[240, 159, 141, 137])?;println!(&quot;{}&quot;, s);
+    Ok(())
+}
+</code></pre><p id="67d4704f-8479-4440-8a92-ca86e791ef04" class="">The <code>*</code> operator can be used to <em>dereference</em>, but you don&#x27;t need to do that to access fields or call methods:</p><pre id="c5473b05-7850-4ad2-a1a8-9f5724523294" class="code"><code>Rust codestruct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() {
+    let p = Point { x: 1.0, y: 3.0 };let p_ref = &amp;p;println!(&quot;({}, {})&quot;, p_ref.x, p_ref.y);
+}
+
+// prints `(1, 3)`</code></pre><p id="1bee16d1-acbe-4861-9575-15023c28b966" class="">And you can only do it if the type is <code>Copy</code>:</p><pre id="c17edc69-04a9-4e69-8dd3-23d192fbdcac" class="code"><code>Rust codestruct Point {
+    x: f64,
+    y: f64,
+}
+
+fn negate(p: Point) -&gt; Point {
+    Point {
+        x: -p.x,
+        y: -p.y,
+    }
+}
+
+fn main() {
+    let p = Point { x: 1.0, y: 3.0 };let p_ref = &amp;p;negate(*p_ref);// error: cannot move out of `*p_ref` which is behind a shared reference
+}
+</code></pre><pre id="416898c7-0c4a-4d58-bac5-b9776bb85e7f" class="code"><code>Rust code// now `Point` is `Copy`#[derive(Clone, Copy)]struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn negate(p: Point) -&gt; Point {
+    Point {
+        x: -p.x,
+        y: -p.y,
+    }
+}
+
+fn main() {
+    let p = Point { x: 1.0, y: 3.0 };let p_ref = &amp;p;negate(*p_ref); // ...and now this works
+}
+</code></pre><p id="e89711cb-60b4-42a4-a116-3cd7debc2fc1" class="">Closures are just functions of type <code>Fn</code>, <code>FnMut</code> or <code>FnOnce</code> with some captured context.</p><p id="8b844344-3518-48c7-818a-671e1d5dcda4" class="">Their parameters are a comma-separated list of names within a pair of pipes (<code>|</code>). They don&#x27;t <em>need</em> curly braces, unless you want to have multiple statements.</p><pre id="d278af07-d1ed-4eed-a82b-0b588fe50445" class="code"><code>Rust codefn for_each_planet&lt;F&gt;(f: F)where F: Fn(&amp;&#x27;static str)
+{
+    f(&quot;Earth&quot;);f(&quot;Mars&quot;);f(&quot;Jupiter&quot;);
+}
+ 
+fn main() {
+    for_each_planet(|planet| println!(&quot;Hello, {}&quot;, planet));
+}
+
+// prints:// Hello, Earth// Hello, Mars// Hello, Jupiter</code></pre><p id="a9bd93ae-5d48-4185-ae9e-26a8a4ded39f" class="">The borrow rules apply to them too:</p><pre id="b19ee56e-ef6c-402c-974b-f74bce911111" class="code"><code>Rust codefn for_each_planet&lt;F&gt;(f: F)where F: Fn(&amp;&#x27;static str)
+{
+    f(&quot;Earth&quot;);f(&quot;Mars&quot;);f(&quot;Jupiter&quot;);
+}
+ 
+fn main() {
+    let greeting = String::from(&quot;Good to see you&quot;);for_each_planet(|planet| println!(&quot;{}, {}&quot;, greeting, planet));// our closure borrows `greeting`, so it cannot outlive it
+}
+</code></pre><p id="d6322311-6791-4a99-ad87-3c6f8a17dba5" class="">For example, this would not work:</p><pre id="70382fc0-2d81-477a-8ba6-aa3f595faa89" class="code"><code>Rust codefn for_each_planet&lt;F&gt;(f: F)where F: Fn(&amp;&#x27;static str) + &#x27;static // `F` must now have &quot;&#x27;static&quot; lifetime
+{
+    f(&quot;Earth&quot;);f(&quot;Mars&quot;);f(&quot;Jupiter&quot;);
+}
+
+fn main() {
+    let greeting = String::from(&quot;Good to see you&quot;);for_each_planet(|planet| println!(&quot;{}, {}&quot;, greeting, planet));// error: closure may outlive the current function, but it borrows// `greeting`, which is owned by the current function
+}
+</code></pre><p id="8dd2e918-3495-4f4e-af15-baf65b7f2e76" class="">But this would:</p><pre id="fb604e59-5067-4197-9f62-763e50d33339" class="code"><code>Rust codefn main() {
+    let greeting = String::from(&quot;You&#x27;re doing great&quot;);for_each_planet(move |planet| println!(&quot;{}, {}&quot;, greeting, planet));// `greeting` is no longer borrowed, it is *moved* into// the closure.
+}
+</code></pre><p id="c06e4c8d-d232-4c24-9657-c71aa7f4fe14" class="">An <code>FnMut</code> needs to be mutably borrowed to be called, so it can only be called once at a time.</p><p id="751b80ba-2dc8-452c-ab61-f34adef85390" class="">This is legal:</p><pre id="1a7ac1ed-ef59-4573-aaf1-909db80b8331" class="code"><code>Rust codefn foobar&lt;F&gt;(f: F)where F: Fn(i32) -&gt; i32
+{
+    println!(&quot;{}&quot;, f(f(2))); 
+}
+ 
+fn main() {
+    foobar(|x| x * 2);
+}
+
+// output: 8</code></pre><p id="a128a752-0d88-4f16-8510-ab4ec909c1cc" class="">This isn&#x27;t:</p><pre id="bb581eda-71be-4de1-acaf-03c8df92e84c" class="code"><code>Rust codefn foobar&lt;F&gt;(mut f: F)where F: FnMut(i32) -&gt; i32
+{
+    println!(&quot;{}&quot;, f(f(2)));// error: cannot borrow `f` as mutable more than once at a time
+}
+ 
+fn main() {
+    foobar(|x| x * 2);
+}
+</code></pre><p id="34a06eab-1ec0-46ed-807a-5571216950d4" class="">This is legal again:</p><pre id="5989ba33-5f55-47c0-a7b3-816fef3e140a" class="code"><code>Rust codefn foobar&lt;F&gt;(mut f: F)where F: FnMut(i32) -&gt; i32
+{
+    let tmp = f(2);println!(&quot;{}&quot;, f(tmp)); 
+}
+ 
+fn main() {
+    foobar(|x| x * 2);
+}
+
+// output: 8</code></pre><p id="ef9f2fff-aa40-41bc-8eca-30b8ab61f2cb" class=""><code>FnMut</code> exists because some closures <em>mutably borrow</em> local variables:</p><pre id="f9344758-59b4-472f-9fa3-3e9337739172" class="code"><code>Rust codefn foobar&lt;F&gt;(mut f: F)where F: FnMut(i32) -&gt; i32
+{
+    let tmp = f(2);println!(&quot;{}&quot;, f(tmp)); 
+}
+ 
+fn main() {
+    let mut acc = 2;foobar(|x| {
+        acc += 1;
+        x * acc
+    });
+}
+
+// output: 24</code></pre><p id="52f8993d-82d6-4a00-a353-d8fb0ee7154d" class="">Those closures cannot be passed to functions expecting <code>Fn</code>:</p><pre id="6f39fef7-1c8b-48d7-9fae-0415efefcd94" class="code"><code>Rust codefn foobar&lt;F&gt;(f: F)where F: Fn(i32) -&gt; i32
+{
+    println!(&quot;{}&quot;, f(f(2))); 
+}
+ 
+fn main() {
+    let mut acc = 2;foobar(|x| {
+        acc += 1;// error: cannot assign to `acc`, as it is a// captured variable in a `Fn` closure.// the compiler suggests &quot;changing foobar// to accept closures that implement `FnMut`&quot;
+        x * acc
+    });
+}
+</code></pre><p id="c1fbd0a4-d159-4d8c-8b0b-2fa0bfd2a910" class=""><code>FnOnce</code> closures can only be called once. They exist because some closure move out variables that have been moved when captured:</p><pre id="d57029a1-e121-42e2-aeab-65f263ef305b" class="code"><code>Rust codefn foobar&lt;F&gt;(f: F)where F: FnOnce() -&gt; String
+{
+    println!(&quot;{}&quot;, f()); 
+}
+ 
+fn main() {
+    let s = String::from(&quot;alright&quot;);foobar(move || s);// `s` was moved into our closure, and our// closures moves it to the caller by returning// it. Remember that `String` is not `Copy`.
+}
+</code></pre><p id="ddd4a2a0-04a7-40b8-81c6-92a8ab5e1fc6" class="">This is enforced naturally, as <code>FnOnce</code> closures need to be <em>moved</em> in order to be called.</p><p id="c7b874db-1206-4914-bf5d-1b5d3193f514" class="">So, for example, this is illegal:</p><pre id="b424b1a7-b8ce-420d-899d-d9141f632d46" class="code"><code>Rust codefn foobar&lt;F&gt;(f: F)where F: FnOnce() -&gt; String
+{
+    println!(&quot;{}&quot;, f());println!(&quot;{}&quot;, f());// error: use of moved value: `f`
+}
+</code></pre><p id="86dd0cd7-30b8-4571-af7d-a363a77f59a8" class="">And, if you need convincing that our closure <em>does</em> move <code>s</code>, this is illegal too:</p><pre id="831fb91e-80ab-4a42-bfeb-ff75c5a2aa39" class="code"><code>Rust codefn main() {
+    let s = String::from(&quot;alright&quot;);foobar(move || s);foobar(move || s);// use of moved value: `s`
+}
+</code></pre><p id="b361f789-c349-4109-b912-67c22723f490" class="">But this is fine:</p><pre id="213507a3-4f3d-4f07-996e-60e509905353" class="code"><code>Rust codefn main() {
+    let s = String::from(&quot;alright&quot;);foobar(|| s.clone());foobar(|| s.clone());
+}
+</code></pre><p id="adc14a39-6e24-4822-a99c-f7316ea298aa" class="">Here&#x27;s a closure with two arguments:</p><pre id="0d172e87-f63c-417b-b97d-61330b47ed22" class="code"><code>Rust codefn foobar&lt;F&gt;(x: i32, y: i32, is_greater: F)where F: Fn(i32, i32) -&gt; bool
+{
+    let (greater, smaller) = if is_greater(x, y) {
+        (x, y)
+    } else {
+        (y, x)
+    };println!(&quot;{} is greater than {}&quot;, greater, smaller);
+}
+ 
+fn main() {
+    foobar(32, 64, |x, y| x &gt; y);
+}
+</code></pre><p id="3237ec58-fe4d-4348-a556-3eae6373987d" class="">Here&#x27;s a closure ignoring both its arguments:</p><pre id="4488e694-2b62-44cd-8f0c-9269202b9400" class="code"><code>Rust codefn main() {
+    foobar(32, 64, |_, _| panic!(&quot;Comparing is futile!&quot;));
+}
+</code></pre><p id="168338c9-b922-4488-b085-ffe11f7bb226" class="">Here&#x27;s a slightly worrying closure:</p><pre id="68de7541-6e36-4dac-a2cc-f570b35011eb" class="code"><code>Rust codefn countdown&lt;F&gt;(count: usize, tick: F)where F: Fn(usize)
+{
+    for i in (1..=count).rev() {
+        tick(i);
+    }
+}
+ 
+fn main() {
+    countdown(3, |i| println!(&quot;tick {}...&quot;, i));
+}
+
+// output:// tick 3...// tick 2...// tick 1...</code></pre><p id="1a847e53-3c70-43ce-93cc-327446762730" class="">And here&#x27;s a toilet closure:</p><pre id="49192445-d75e-4023-bc8b-282abcdb33a7" class="code"><code>Rust codefn main() {
+    countdown(3, |_| ());
+}
+</code></pre><p id="453d3e64-d5f7-4726-8b38-0252bc3a66ad" class="">Called thusly because <code>|_| ()</code> looks like a toilet.</p><p id="44133edf-74ab-4eca-9824-acf8f71ed0e4" class="">Anything that is iterable can be used in a <code>for in</code> loop.</p><p id="f2c7227e-ee02-43b3-8451-c24998a2efd7" class="">We&#x27;ve just seen a range being used, but it also works with a <code>Vec</code>:</p><pre id="ea30f879-4d81-44be-8cf7-20ed2445f21c" class="code"><code>Rust codefn main() {
+    for i in vec![52, 49, 21] {
+        println!(&quot;I like the number {}&quot;, i);
+    }
+}
+</code></pre><p id="713bff1a-bf58-40b2-9f52-87ffffc7b57c" class="">Or a slice:</p><pre id="e858d3f3-23b4-4a8f-a095-fad156ede3b4" class="code"><code>Rust codefn main() {
+    for i in &amp;[52, 49, 21] {
+        println!(&quot;I like the number {}&quot;, i);
+    }
+}
+
+// output:// I like the number 52// I like the number 49// I like the number 21</code></pre><p id="2a293a7b-f72e-491f-b59d-662d348dc669" class="">Or an actual iterator:</p><pre id="0512da2f-54d5-4418-b858-167245041faa" class="code"><code>Rust codefn main() {
+    // note: `&amp;str` also has a `.bytes()` iterator.// Rust&#x27;s `char` type is a &quot;Unicode scalar value&quot;for c in &quot;rust&quot;.chars() {
+        println!(&quot;Give me a {}&quot;, c);
+    }
+}
+
+// output:// Give me a r// Give me a u// Give me a s// Give me a t</code></pre><p id="985f0786-255c-4e06-b10d-86ab805907c1" class="">Even if the iterator items are filtered and mapped and flattened:</p><pre id="c7078c5c-9342-4fe8-b04d-b616e2e101eb" class="code"><code>Rust codefn main() {
+    for c in &quot;sHE&#x27;S brOKen&quot;.chars().filter(|c| c.is_uppercase() || !c.is_ascii_alphabetic()).flat_map(|c| c.to_lowercase())
+    {
+        print!(&quot;{}&quot;, c);
+    }
+    println!();
+}
+
+// output: he&#x27;s ok</code></pre><p id="9858bbb8-b98a-48b3-8e0a-ed900e9dfb56" class="">You can return a closure from a function:</p><pre id="92784a4a-d221-4f99-811c-231bf60f3f39" class="code"><code>Rust codefn make_tester(answer: String) -&gt; impl Fn(&amp;str) -&gt; bool {
+    move |challenge| {
+        challenge == answer
+    }
+}
+
+fn main() {
+    // you can use `.into()` to perform conversions// between various types, here `&amp;&#x27;static str` and `String`let test = make_tester(&quot;hunter2&quot;.into());println!(&quot;{}&quot;, test(&quot;******&quot;));println!(&quot;{}&quot;, test(&quot;hunter2&quot;));
+}
+</code></pre><p id="cf007763-8035-440c-9a55-9373b6447ff8" class="">You can even move a reference to some of a function&#x27;s arguments, into a closure it returns:</p><pre id="5c1acb14-9cb9-42bc-b068-dbb77270cf96" class="code"><code>Rust codefn make_tester&lt;&#x27;a&gt;(answer: &amp;&#x27;a str) -&gt; impl Fn(&amp;str) -&gt; bool + &#x27;a {
+    move |challenge| {
+        challenge == answer
+    }
+}
+
+fn main() {
+    let test = make_tester(&quot;hunter2&quot;);println!(&quot;{}&quot;, test(&quot;*******&quot;));println!(&quot;{}&quot;, test(&quot;hunter2&quot;));
+}
+
+// output:// false// true</code></pre><p id="43e5e842-af65-4217-97f3-d3589f12369a" class="">Or, with elided lifetimes:</p><pre id="2b2fe0d3-5552-410c-af27-92f94c73c192" class="code"><code>Rust codefn make_tester(answer: &amp;str) -&gt; impl Fn(&amp;str) -&gt; bool + &#x27;_ {
+    move |challenge| {
+        challenge == answer
+    }
+}
+</code></pre><p id="cde15a74-3f6b-43de-849c-09c2fd65b579" class="">And with that, we hit the 30-minute estimated reading time mark, and you should be able to read <em>most</em> of the Rust code you find online.</p><p id="650fd411-0639-4ac0-93e0-6d994b6aeb46" class="">Writing Rust is a very different experience from reading Rust. On one hand, you&#x27;re not reading the <em>solution</em> to a problem, you&#x27;re actually solving it. On the other hand, the Rust compiler helps out a <em>lot</em>.</p><p id="ddfda861-4874-4dbc-8900-032a3087d285" class="">For all of the intentional mistakes made above (&quot;this code is illegal&quot;, etc.), rustc always has very good error messages <em>and</em> insightful suggestions.</p><p id="605b20c3-c1ec-4217-bb68-f066915238ad" class="">And when there&#x27;s a hint missing, the compiler team is <a href="https://mobile.twitter.com/fasterthanlime/status/1219601989404954624">not afraid to add it</a>.</p><p id="f8655223-58a8-4158-8ea9-25f82ae919a6" class="">For more Rust material, you may want to check out:</p><p id="335509b7-6ff0-48f7-9ad3-d1f522dd35b9" class="">I also <a href="https://fasterthanli.me/tags/rust/">blog about Rust</a> and <a href="https://twitter.com/fasterthanlime">tweet about Rust</a> a lot, so if you liked this article, you know what to do.</p><p id="a3150715-297b-4be4-a4dc-704268a6f2e1" class="">Have fun!</p><p id="d168c5e8-b504-4bae-8244-b17ca144b817" class="">This article was made possible thanks to my patrons: Bob Ippolito, John Van Enk, metabaron, Isak Sunde Singh, Ali Yazdani, Philipp Gniewosz, Mads Johansen, lukvol, Ives van Hoorne, Jan De Landtsheer, Daniel Strittmatter, Evgeniy Dubovskoy, Alex Rudy, Romet Tagobert, Douglas Creager, Gus W, Corey Alexander, Molly Howell, knutwalker, Zachary Dremann, Sebastian Ziebell, Julien Roncaglia, Amber Kowalski, T, Juniper Wilde, Paul Kline, Kristoffer Ström, Astrid Bek, Yoh Deadfall, Justin Ossevoort, taziden, Harsh Shandilya, Tomáš Duda, Jeremy Banks, Rasmus Larsen, Torben Clasen, Sam Rose, C J Silverio, Walther, Pete Bevin, Shane Sveller, Thomas Schultz, Ivan Dubrov, jer, Wonwoo Choi, João Veiga, Richard Pringle, Adam Perry, Benjamin Röjder Delnavaz, Matt Jadczak, tavr, Mara Bos, Jonathan Knapp, Maximilian, Seth Stadick, brianloveswords, Sean Bryant, Ember, Sebastian Zimmer, Fernando, Makoto Nakashima, Geert Depuydt, Geoff Cant, Geoffroy Couprie, Michael Alyn Miller, o0Ignition0o, Zaki, Raphael Gaschignard, Romain Ruetschi, Ignacio Vergara, Pascal, Jane Lusby, Nicolas Goy, Ted Mielczarek, Someone, Ryszard Sommefeldt, Jesús Higueras, Aurora.</p></div></article></body></html>

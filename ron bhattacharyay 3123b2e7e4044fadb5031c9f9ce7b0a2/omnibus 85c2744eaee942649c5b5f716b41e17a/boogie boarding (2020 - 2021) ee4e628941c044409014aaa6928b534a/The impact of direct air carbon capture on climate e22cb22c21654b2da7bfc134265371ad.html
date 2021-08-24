@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The impact of direct air carbon capture on climate change</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e22cb22c-2165-4b2d-a7bf-c134265371ad" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📍</span></div><h1 class="page-title">The impact of direct air carbon capture on climate change</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-default">Climate</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="http://cognitivemedium.com/dac-notes" class="url-value">http://cognitivemedium.com/dac-notes</a></td></tr></tbody></table></header><div class="page-body"><p id="559de395-175f-4ea9-a8e5-221128a8850c" class=""><strong>Note:</strong> <em>Rough and incomplete working notes, me thinking out loud. I’m not an expert on this, so the notes are tentative, certainly contain minor errors, and probably contain major errors too, at no extra charge! Thoughtful, well-informed further ideas and corrections welcome.</em></p><p id="f8ed4ef8-1033-4ff8-a63e-636e117325cc" class="">In these notes I explore one set of ideas for helping address climate change: direct air capture (DAC) of carbon dioxide – basically, using clever chemical reactions to pull CO2 out of the atmosphere, so it can be stored or re-used.</p><p id="69597ed1-aa1c-417a-b557-afc6c6ef6054" class="">It’s tempting (and fun) to begin by diving into all the many possible approaches to DAC. But before getting into any such details, it’s helpful to think about the scale of the problem to be confronted. How much will DAC need to cost if it’s to significantly reduce climate change? Let’s look quickly at two scenarios for the cost of DAC, just as baselines to keep in mind. I’ll discuss how realistic (or unrealistic) they are below.</p><p id="f564cf5e-11a1-4fd2-8e79-982edd0932e4" class="">As of 2014, the United States <a href="https://web.archive.org/web/20191019082428/https://www.epa.gov/climate-indicators/climate-change-indicators-us-greenhouse-gas-emissions">emits</a> about 6 billion tonnes of CO2 each year. Suppose it cost about 100 dollars per tonne of CO2 to do direct air capture. To capture the entire annual CO2 production from the US would cost about 600 billion dollars.</p><figure id="f1a31b9c-d451-4dae-acfc-144cedfa942b" class="image"><a href="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/epa_emissions.png"><img style="width:700px" src="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/epa_emissions.png"/></a></figure><p id="04aaba31-2e27-4a52-9b24-ef5c41f231eb" class="">That’s a lot of money! As of 2019, the US military budget was about 700 billion dollars, so at 100 dollars per tonne the cost of DAC would be a little less than the military budget. And it would be a little over half of <a href="https://web.archive.org/web/20190813091450/https://www.eia.gov/todayinenergy/detail.php?id=40773">total energy spending</a> in the US (about 1.1 trillion dollars in 2017).</p><p id="9ebd858a-a1e8-45d8-b633-4962844e5b88" class="">Suppose instead that direct air capture cost 10 dollars per tonne. In this scenario the cost to capture all the US’s CO2 emissions would be about 60 billion dollars per year.</p><p id="8208c3c3-41a7-4db7-aabe-53a95efc50cc" class="">That’s still a lot of money, but it’s starting to look like the cost of a <em>lot</em> of things humans already do, in government, in commerce, and even in philanthropy.</p><p id="4304e715-0f8e-46df-ac90-63353edb4c77" class="">A particularly striking cost comparison is to the amount we already spend on cleaning up or preventing air pollution. In 2011 the US Environmental Protection Agency <a href="https://www.epa.gov/clean-air-act-overview/benefits-and-costs-clean-air-act-1990-2020-second-prospective-study">estimated</a> that compliance with the Clean Air Act cost about 65.5 billion dollars in 2010.</p><p id="23c1441c-36a8-4582-bd32-57426a84cbd3" class="">(The choice of year may sound a little odd and dated – why did I go all the way back to 2010? It’s not a cherrypicked year – rather, the EPA only very rarely reports on the costs of the Clean Air Act, and it happens that 2010 is the most recent year for which an estimate is available. It is, by the way, in line with the EPA’s estimates for earlier years, and it seems reasonable to assume with the cost in more recent years.)</p><p id="da3d6edf-dde4-4dcf-8d7f-aa8e0bd78734" class="">So if DAC cost 10 dollars per tonne of CO2, the cost to make the US carbon neutral would be comparable to the existing cost of compliance with the Clean Air Act and associated regulations.</p><p id="8e2b250e-0a42-4b65-902e-a369279d2acb" class="">To make the comparison more concrete, let me mention the sort of regulations (and benefits) the Clean Air Act involves. One example is the imposition of emissions standards on vehicles, and the requirement that they use catalytic converters to reduce pollution. Catalytic converters typically run to a few hundreds dollars, and nearly 20 million cars and trucks are sold annually.</p><p id="a5710a4b-50d6-40b9-87a5-57e796974558" class="">Presto: many billions of dollars each year in compliance costs!</p><p id="623c521a-eed9-48e8-a582-e557008feccd" class="">Of course, what we get in exchange for this money is far cleaner skies over our cities, and a much improved quality of life. I don’t just mean that it’s pleasant to enjoy smog-free days; I also mean that this makes a particularly large difference in the quality of life for asthmatics and people with respiratory diseases, and certainly saves many, many lives. Overall, it’s a very good exchange, in my opinion, though I know people who disagree.</p><p id="a5ae6968-a730-4384-9ee4-9aa9ec4e0388" class="">Returning to direct air capture, it’s worth keeping these two numbers in mind as reference points: at 100 dollars per tonne for DAC, the cost of DAC is comparable to the US military budget; and at 10 dollars per tonne for DAC, the cost is comparable to the cost of compliance with the Clean Air Act and related regulations.</p><p id="94d2c420-18c7-4f67-9786-f51fb533a796" class="">None of this tells us at what cost point it’s possible to do DAC. It doesn’t tell us how to set up a carbon economy to fund this, at any price point, or how to get the political will for any necessary changes (as was required for the Clean Air Act). Nor does it tell us what to do about other greenhouse gases, or other countries.</p><p id="d02f3b5b-465c-46ff-b6f9-8f4905587eca" class="">Still, it’s helpful to have a ballpark figure to aim for. If DAC is scalable at $100 per tonne, it starts to get very interesting. And at $10 per tonne, the costs start to resemble things we’ve done before for environmental concerns.</p><p id="d03b42a2-ca66-4c15-90f1-7ee1df3e4bd0" class="">As we’ll see in a moment, the $100 cost estimate is at least plausible with near-future technology. $10 per tonne is more speculative, but worth thinking about.</p><p id="32aa9ece-71e9-4e67-8257-81ac9de8f7f5" class="">What I like and find striking about this frame is that many people are extremely pessimistic about climate change. They can’t imagine any solution – often, they become mesmerized by what appears to be an insoluble collective action problem – and fall into fatalistic despair. This direct air capture frame provides a way of thinking that is at least plausibly feasible. In particular, the $10 per tonne price point is striking. The Clean Air Act was contentious and required a lot of political will. But the US did it, and many other countries have implemented similar legislation. It’s a specific, concrete goal worth thinking hard about.</p><p id="a64e3355-2420-41a3-9414-683bec5f7272" class="">Incidentally, in most analyses like this it’s conventional to engage in a lot of cross-comparison between approaches. Analyses which don’t do such cross-comparisons tend to get criticised: “but why didn’t you consider [other approach] which [works better because]”. Doing such comparisons makes good sense if your goal is to figure out where to invest resources, or what outcomes are likely. But those aren’t the point of this analysis. The point here is to more clearly understand the bounds on the overall complexity of the problem. If <em>some</em> approach can work at a reasonable price point, then better solutions are certainly possible. So let me say: I think we can likely do much better than direct air capture. But I think this analysis is useful for bounding the difficulty of the problem.</p><p id="9e7cde7b-fc9f-40b3-9223-294b2536286e" class="">I’ve been talking at an abstract level, in terms of government programs and so on. It’s also worth putting these numbers in individual terms. On average, US citizens produce about 20 tonnes of CO2 emissions each year. At $100 per tonne for DAC, that’s $2,000 each year. At $10 per tonne, it’s $200 each year. Again, we can see that the $10 per tonne price point looks very feasible – $200 is quite a bit of money for most people, but it’s about what they routinely spend for many important things in their life. And while $2,000 really is a lot of money for most people, it’s also much less than the median US citizen routinely spend for many important aspects of their lives.</p><p id="c068cdf8-5097-48ba-8262-3cb68434313f" class="">There’s a lot of variation in other countries, but among large, wealthy countries the US is on the high end of per-capita emissions. In countries like France and Sweden, which have worked hard on reducing emissions, the numbers tend to be more like 5 tonnes of CO2 emissions per year. And so $100 DAC comes out to $500 per person per year, and $10 DAC to $50 per person per year.</p><p id="701781df-e9f2-4b5e-a1a0-4a78c95bb0f7" class="">I guess it’s not currently popular to memorize numbers and simple models of climate change. Still, I wish people discussing climate change knew not just these numbers (or some equivalently informative set), but also many more. I’ve sat in meetings about climate change where many attendees appeared to have almost no quantitative awareness of the scale of the problem. Without such an awareness of, and facility with, quantitative models, their only chance of making substantive progress is by accident, in my opinion.</p><h1 id="d88c0b0b-f2d6-4c9a-b6d5-f1a6d04d7d68" class="">How much will direct air capture cost, in the near future?</h1><p id="f0989008-2295-4134-a0f2-56558fdddcf4" class="">So, how much does direct air capture actually cost? And what are the prospects for driving the costs down?</p><p id="026e3057-366d-4391-adf3-5a8a307656af" class="">Unfortunately, it’s not very clear. Although technologies for direct air capture have been used since the 1930s, it’s usually been done on a small scale, for reasons unrelated to climate. Doing it at the giant scales – ultimately, billions of tonnes! – required to impact the climate is quite another matter.</p><p id="64ec8781-532b-4703-b8ed-0b1308739d0f" class="">If you read around about direct air capture, you discover a few things: there are many approaches, with widely-varying cost estimates; those estimates are often back-of-the-envelope theory, not even based on a pilot, much less an operating large-scale plant. There’s nothing quite as inexpensive as an industrial plant that exists only on paper. Or, as I once overheard someone say, half cynically, half optimistically: “my favourite form of science fiction is the pitch deck.”</p><p id="5e14eed2-fca2-40d9-9535-864d0263aec7" class="">One of the most detailed proposals comes from the company Carbon Engineering, which has been working on direct air capture since 2009. In 2018 they published a <a href="https://www.cell.com/joule/fulltext/S2542-4351(18)30225-3">paper</a> estimating the costs associated to direct air capture. Their basic proposal is to build cooling towers, filled with a liquid that absorbs CO2, and run big fans to blow air from the atmosphere over that liquid. They then run the resulting material through a second process that produces nearly pure CO2 as output. That CO2 then needs to either be stored or else somehow re-used, perhaps as raw material for manufacturing fuel or something similar. Obviously, this is a very simplified account of what they’re doing, that leaves many details out!</p><figure id="bd217807-9115-4520-b8cc-08541ce310cb" class="image"><a href="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/ce_abstract.png"><img style="width:553px" src="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/ce_abstract.png"/></a></figure><p id="de3cba39-0066-46a2-90eb-8ab9169a10fc" class="">Unlike many proposals, Carbon Engineering isn’t just working on paper. They’ve built a small pilot plant in the town of Squamish, British Columbia, an hour north of Vancouver. It runs at a rate of hundreds of tonnes of CO2 captured per year. They’ve attempted to do detailed costings of all components necessary to make a large-scale plant, one with a capacity, if run at full utilization (they estimate it’ll be run at about 90% utilization), of removing a million tonnes of CO2 from the atmosphere each year. They estimate that it’ll cost from $94 to $232 per tonne of carbon removed. The exact amount depends on details of the configuration the plant is run in, and also reflects things like possible variations in interest rates on debt, and so on.</p><figure id="c274e92f-d182-4204-a2ce-ba29365a9bb6" class="image"><a href="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/ce_pic.png"><img style="width:421px" src="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/ce_pic.png"/></a></figure><p id="330535ee-2f3f-4d77-ae23-6cd7d4570723" class="">It’s tempting to be skeptical of this proposal. For one thing, in the short term Carbon Engineering has a vested interest in making their direct air capture scheme look attractive and inexpensive. And there’s also just natural human entrepreneurial optimism, and the fact that, by definition, you can’t anticipate the details of unexpected problems. So caution is called for. I also lack the expertise to seriously evaluate the technical details of their proposal. While to my eye, it looks as though Carbon Engineering has been careful, maybe they’ve missed some important factor, and their estimates are way off. On the other hand, there are at least quite a few eyes on it – although the paper was published just a year ago, in 2018, it’s already been cited 132 times, and it’s clear it’s seen as something of a gold standard.</p><p id="10cb86da-d0f1-4ac3-8044-b29472a200a9" class="">There are some interesting critiques of direct air capture in the scientific literature. For instance, <a href="https://www.pnas.org/content/pnas/108/51/20428.full.pdf">this 2011 paper</a> by House <em>et al</em> claims a minimal cost of $1,000 per tonne, based on a relatively general argument, whose main input appears to be the cost of electricity. The analysis is quite complicated, and I don’t understand many of the details (working on it, but it’s a real research project to track everything down!) The essential gist seems to be: when you separate the CO2 from the atmosphere, you’re ordering the system, and so necessarily lowering the entropy of the system. The second law of thermodynamics tells us there will be an intrinsic energy cost associated to doing this, even if done with maximal efficiency; that, in turn, puts some constraints on the costs. In any case, they conclude that “many estimates in the literature appear to overestimate air capture’s potential”.</p><p id="9d3cc636-9e84-4548-a0a0-939e1f5497fd" class="">The Carbon Engineering paper mentions this paper and similar critiques, and rebuts it with an argument that amounts to “well, we actually went and built a plant which works, and we did detailed costings of how to scale it up”. This is a good start on a rebuttal, but obviously as an outsider it’d be good to go back and dig into both pro and con details much more than I have. That may be a project I do in the future. For the sake of argument, and the remainder of these notes, let’s stick with Carbon Engineering’s numbers, but keep in mind that they should be taken with a grain of salt, until examined much more closely.</p><p id="aa6b4437-403b-4efa-9baa-1979d1abe820" class="">I must admit, part of the reason I’m inclined to be sympathetic toward Carbon Engineering’s estimate is that I read lead author (and Carbon Engineering’s cofounder) David Keith’s book about a different topic, <a href="https://www.amazon.com/Climate-Engineering-Boston-Review-Books/dp/0262019825">solar geoengineering</a>. Keith seemed to me to be very honest in the book, carefully describing many of his own uncertainties, the complexities of the problem, and giving charitable explanations of the position of his critics. None of that makes him correct, but I’m inclined to believe he’s careful, serious, and worth paying attention to.</p><p id="3438050d-a55a-4d94-89c5-8361d30cf388" class="">An influential <a href="https://infoscience.epfl.ch/record/200555/files/dac2011.pdf">prior study</a> of DAC came in 2011 from an American Physical Society (APS) study. The costs estimated were much higher, more in the ballpark of $600 per tonne of CO2.</p><p id="31e2044e-027c-4f6c-85bf-f4a5b0067555" class="">What accounts for the difference – likely a factor of 3 or more?</p><p id="97371b54-496a-4768-8b62-cc1f45e18b01" class="">In the words of Carbon Engineering’s paper:</p><blockquote id="a0d631bb-98a1-4238-90e6-cd0c7e4dab43" class="">The cost discrepancy is primarily driven by divergent design choices rather than by differences in methods for estimating performance and cost of a given design. Our own estimates of energy and capital cost for the APS design roughly match the APS values.</blockquote><p id="1f8e0e5d-bb62-4203-a20a-9b6f05529dff" class="">This is then followed by a relatively detailed (and, to my eye, plausible) account of the differences in design choices, and how Carbon Engineering improved on the prior design decisions. I’ll say a bit more about that below.</p><p id="4e5d15c5-f45f-48a2-8cda-5e1450263b74" class="">On its face, the numbers in the Carbon Engineering paper don’t seem so encouraging. Let’s call it $200 per tonne. At that level, for the US to achieve carbon neutrality would cost more than the US currently spends on energy in total.</p><p id="3c321f1c-512c-4ebd-8e0e-eefa033d62b1" class="">What about other approaches? Let’s broaden the field, and consider <em>negative emissions technologies</em> in general, especially those pulling CO2 directly out of the atmosphere in some way. (In contrast to technologies which capture carbon at the source of production – often a less costly but also less general, more bespoke approach.)</p><p id="d50377b3-4bd0-43c7-b2c8-bf0fea328534" class="">Earlier this year, the US National Academies of Sciences, Engineering, and Medicine released an informative <a href="https://www.nap.edu/catalog/25259/negative-emissions-technologies-and-reliable-sequestration-a-research-agenda">report</a> surveying negative emissions technologies. In the report, they attempt to estimate both cost ranges and the scalability of many different technologies. If you’re interested, there’s a good summary on pages 354-356 of the report.</p><p id="70dea287-9230-494e-bb3a-932880bbfb88" class="">I won’t summarize all their results here. But there is much (cautiously) encouraging news. There are a lot of possible negative emissions technologies. One approach is <em>coastal blue carbon</em> – storing carbon in mangroves, marshes, and sea grasses, the kind of ecosystems one sees along the coastline. This perhaps doesn’t sound terribly promising. But the big advantage is that the carbon tends to be stored underground, in the soil, and can be stored there for decades or centuries. The NAS survey reports a cost estimate of $10 per tonne.</p><p id="9e802ee3-bd4b-4095-a188-bdd18ab96056" class="">That price point is much more encouraging than Carbon Engineering’s. Unfortunately, the report also projects a “potential [global] capacity with current technology and understanding” of 8-65 billion tonnes. That’s not enough for even two years of global CO2 production. So at most, this can simply help out.</p><p id="3df45f87-6f84-47b8-971f-8b14fa7c3980" class="">Another approach is based on storing carbon in forests. The National Academies report’s estimated price is somewhat higher – from $15-50 per tonne of CO2. (I don’t know if that includes proper burial – when trees die most of their CO2 is typically returned to the atmosphere). But the approach is also much more scalable, with an estimated global capacity of from 570 to 1,125 billion tonnes, using “current technology and understanding”. Per year, the NAS estimates a capacity of 2.5 to 9 billion tonnes, again using current technology and understanding. That’s global, so it’s not enough to make the world carbon neutral (global CO2 emissions are almost 40 billion tonnes per year). But it’s starting to put a sizeable dint in the problem.</p><p id="1e0e6ee8-12ce-4b85-9d74-7d1cead8714c" class="">(A caveat to the discussion in this section: I haven’t been careful about which of these numbers include the cost of storing or utilizing carbon. That’s a genuine cost. My impression is that it’s likely to cost less than $20 per tonne, maybe much less, or even turn a profit. This is based in part on the cost of storing CO2 in the Utsira formation – a giant undersea aquifer off Scandinavia – where several million tonnes of CO2 have been stored at a Wikipedia-reported price of 17 dollar per tonne. If this impression is correct then the cost of capturing CO2 is likely to either dominate or in worst case be comparable to the cost of storage and utilization. Still, a more detailed analysis would be careful about this costing.)</p><h1 id="35421e45-8a3e-4bd8-8b00-2732c0ccc7e8" class="">How much can the costs drop?</h1><p id="5ee40fa0-0092-4933-a189-b78f38039373" class="">These numbers are tantalizing. Apart from the (probably not scalable) coastal blue carbon, they’re about an order of magnitude away from where they need to be for climate to be a problem of similar order to air pollution. But the numbers are also based on “current technology and understanding”.</p><p id="3c294d75-a2fd-42c3-a713-2649ce5bacde" class="">How much can these costs drop with improvements in technology? And are there other ways of dropping the effective costs?</p><p id="07521302-d632-42fc-bea3-97e821f880bb" class="">The most famous technology cost curves are those associated to Moore’s Law – the exponential increase in transistor density in semiconductors, and associated things like computer speed, memory, energy efficiency, and so on.</p><p id="43b9cb20-dffd-49d8-b5bd-c0485f96ffd0" class="">This is, in fact, a common (though not universal) pattern across technologies. It seems to have first been pointed out in a 1936 paper by the aeronautical engineer Theodore Wright. Wright observed the cost of producing airplanes dropped along an exponential curve as more were produced. Very roughly speaking, for each doubling in production, costs dropped by about 15 percent. Essentially, as they made more airplanes, the manufacturers learned more, and that helped them lower their costs.</p><p id="d6f19c2f-3dbe-4698-ba32-7d7dec3a4309" class="">This pattern of exponential improvement is seen for many technologies, not just in semiconductors and airplane manufacture. It’s been common in energy too. For instance, the cost of solar energy has dropped by roughly a factor of 100 over the past four decades (<a href="http://news.mit.edu/2018/explaining-dropping-solar-cost-1120">link</a>, <a href="https://www.sciencedirect.com/science/article/pii/S0301421518305196">link</a>). That cost reduction was driven in part by technological improvement, and in part by economies of scale.</p><p id="34fe9f8b-d2eb-43a1-92e7-69a75feafdca" class="">One wonders: will the cost of direct air capture or some other negative emission technology follow something like Wright’s Law? If so, one might hope that it would drive the cost of carbon capture in some form down below 10 dollars per tonne. Indeed, it’s even possible to start to think about whether there’s ways it could be made net profitable.</p><p id="7936df58-a2df-4139-928b-0e93f004c625" class="">Unfortunately, while Wright’s Law is interesting, it’s far from a compelling argument. Indeed, it’s a little silly to call it a Law: it’s an observed historical regularity, an observation about the past for certain technologies. If you’re Intel, planning for 5 to 10 or more years from now, you need to <a href="https://en.wikipedia.org/wiki/International_Roadmap_for_Devices_and_Systems">set targets</a>. You may perhaps be able to project reliably a few years on the basis of in-train improvements. But longer-term improvements may be more speculative, and require new ideas, ideas that by definition you can’t directly incorporate into your current models. Studying history is an alternative approach to help set plausible targets. But eventually such historical regularities break down. Indeed, we see this in recent years where many aspects of Moore’s Law have started to break down.</p><p id="1d019ff2-135d-4b58-9336-5c166273dcec" class="">And so the fundamental problem here is that we don’t know how much the costs of DAC will go down. At best, we can make guesses. That’s a nervous position to be in – the usual situation for challenging problems!</p><p id="f3e1b299-5359-4f6a-b6b2-2a4c99da5043" class="">To make this more concrete, let’s come back to Carbon Engineering’s proposal for DAC. Here, in more detail, is how they cut the cost by a factor 3 or so from the APS study. The details won’t make much sense, unless you’ve read the paper (or similar work); what’s important is to read for the general gist:</p><blockquote id="661e59b8-6245-430a-888f-ba4822996f16" class="">The cost discrepancy is primarily driven by divergent design choices… The most important design choices involved the contactor including (1) use of vertically oriented counterflow packed towers, (2) use of Na+ rather than K+ as the cation which reduces mass transfer rates by about one-third, and (3) use of steel packings which have larger pressure drop per unit surface area than the packing we chose and which cost 1,700 $/m3, whereas the PVC tower packings we use cost less than 250 $/m3. … In rough summary, the APS contactor packed tower design yielded a roughly 4-fold higher capital cost per unit inlet area, and also used packing with 6-fold higher cost, and 2-fold larger pressure drop.</blockquote><p id="0213174b-ffc8-463c-bfa6-28fcd1c3df71" class="">The paper continues with a discussion of <em>why</em> the APS made those different design choicees, and also with a discussion of some differences in the way input energy was used in Carbon Engineering’s design versus the APS design.</p><p id="8a186186-07c5-4450-b348-a00c1fdbecfa" class="">I’m not an industrial chemist, but to me those changes sound like low-hanging fruit. But they’re also not the kind of low-hanging fruit that the APS could have planned for in 2011. If they could have planned for it, they would have come up with a different cost estimate.</p><p id="3c6efa22-4037-499c-8f91-948afa109077" class="">Of course, low-hanging fruit is what you’d expect. Carbon Engineering has been, until recently, a tiny company, with a small handful of staff. They were founded in 2009, and appear to have subsisted on relatively small grants and seed funding until 2019, when they raised 68 million dollars. It’s interesting to think about what they’ll achieve with that funding. Hopefully, they’ll be able to pick some higher-hanging fruit. Assuming their initial cost estimates bear out, for this design, will it be possible for them (or someone else working on direct air capture) to achieve another factor of 3 reduction in cost?</p><p id="bab7e489-9b15-421a-96df-3dbe29818849" class="">I’ve been focusing on cost reductions due to better design and technology. In fact, part of the job will be done in a very different way. The <em>carbon intensity</em> of a country is the CO2 emissions per dollar of GDP. Carbon intensities in the US dropped more than 18% per decade from 1990 to 2014, the latest year for which the World Bank reports numbers. This isn’t surprising: all other things equal, most people and companies try to keep doing things in more energy-efficient ways, since energy costs them money. If this drop in carbon intensity continues, it means that considered as a fraction of the total economy, the cost of DAC will go down. Effectively, it’s as though we’re automatically making progress toward $10 DAC, at a rate of about 18 percent per decade. On its own that won’t make DAC economically feasible. But over two or three decades, it’ll help a lot.</p><p id="a69f95fc-d62b-4756-bbda-2aba561e4fee" class="">It’s also interesting to think about cost reductions due to plausible emissions reductions. As noted earlier, in countries such as France, Sweden, etc, average emissions per capita are something like 4 times lower than in the US. This is often attributed causally to their extensive use of nuclear power; nuclear certainly plays a large role, but as far as I can see it can only be part of the story (since electricity production is only responsible for a moderate fraction of total emissions). Rather, it’s that they’ve also been more serious than the US in other ways about reducing emissions; their use of nuclear is, in part, a symptom of this seriousness, not the cause. In any case, such examples illustrate that nuclear plus other moderate efforts can lead to large emissions reductions.</p><p id="acc7cddf-8046-4569-b94c-a7bc0acb3e0a" class="">(I should point out: of course, drops in carbon intensity and emissions reductions are intertwined, not independent! I’ve mentioned them separately because there are ways in which they’ve very different kinds of goals with, for example, different kinds of expression in policy.)</p><p id="7ab77598-0766-4ac3-80c5-93ff1a27a154" class="">Of course, neither changes in carbon intensity nor emissions reductions are literally the same as a drop in price of direct air capture. But considered as a fraction of the economy they may as well be; it’s a kind of drop in the effective cost of DAC. And so I think a factor 10 or more reduction in the effective cost of DAC is plausibly possible, in part through technological improvements, in part through emissions reductions as already implemented in countries with similar standards of living, and in part through reduced carbon intensity. Put another way: it’s plausible that doing DAC to make the US carbon neutral ends up costing an amount comparable to or less than the current cost of the Clean Air Act, as a fraction of the total economy. That seems encouraging.</p><p id="2b6e2ab8-00c8-4562-a660-9670ee5e118f" class="">I’ve focused a lot on direct air capture, and it sounds like I’m bullish about this approach. Actually, I’m too ignorant to have a really strong opinion. From my point of view, a big part of concentrating here was simply that (a) there was what seemed a particularly juicy paper to dig into, and (b) as I said at the start, this could be treated as a boundary case, setting a kind of worst-case scenario. It’s entirely possible – indeed, likely, – that other approaches to dealing with climate are considerably better. But this already looks promising. My tentative conclusions are that <em>direct air capture offers a promising but far from certain approach to making major progress on climate change</em>. And, more broadly: <em>negative emissions technologies offer a promising approach to making major progress on climate change</em>.</p><p id="fce14aeb-f3c5-461f-9229-2472da44dc4e" class="">I got interested in direct air capture in part after reading Matt Nisbet’s survey of US climate and energy foundation funding (<a href="https://web.northeastern.edu/matthewnisbet/2018/05/21/summary-of-strategic-philanthropy-in-the-post-cap-and-trade-years-reviewing-u-s-foundation-climate-and-energy-funding-at-wires-climate-change/">summary here</a>, with a link to the full survey). Here’s his summary chart. Note that it covers funding from 19 major funders of climate and energy work, and the years from 2011 to 2015:</p><figure id="c8f3dc64-00e5-48fb-a20d-8c4c1cabe039" class="image"><a href="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/nisbet_balance.png"><img style="width:700px" src="The%20impact%20of%20direct%20air%20carbon%20capture%20on%20climate%20e22cb22c21654b2da7bfc134265371ad/nisbet_balance.png"/></a></figure><p id="cd8b351b-1dfe-4521-8587-4b26ca47689d" class="">You see enormous sums of money going into renewable energy, sustainable aagriculture, and into opposing fossil fuels. But just a tiny fraction of the spending – 1.9%, or just over 10 million dollars – went to other low carbon energy technologies. And of that, just $1.3 million went to evaluate carbon capture and storage.</p><p id="abd696d6-90fe-4a04-a47a-4da50051c8ef" class="">Now, admittedly, these numbers focus on just a tiny slice of the total funding pie (US foundation funding), and are somewhat outdated. In particular, the last few years have seen substantial progress on investment in negative emissions technologies (as witness the $68 million invested in Carbon Engineering). Still, my impression is that the qualitative picture from Nisbet’s research holds more broadly. Humanity’s collective priorities are research and development focused on renewable energy sources, especially solar and wind; and anti-fossil fuel messaging and lobbying. By contrast, negative emissions technologies like DAC are receiving relatively little funding.</p><p id="cf6a3982-7e40-4981-8531-bfce18a8d65e" class="">As a non-expert, I’m reluctant to hold too firm opinions here. But, frankly albeit tentatively I think this makes no sense! Of course, renewables (say) should receive a lot of funding. But if you genuinely believe climate change is a huge threat, then we should collectively and determinedly pursue lots of different strategies. Direct air capture (and, more broadly, negative emissions) look very underfunded and underexplored. Yes, it requires considerable improvement. But compared to other historic technologies, it’s within striking distance of being able to have a huge impact, especially considering the relatively minor effort so far put into it.</p><p id="2a3ae97f-1c71-436a-a3c3-014ab9b177bc" class="">This is a tiny slice through a tiny slice (direct air capture) of the climate problem. Climate is intimidating in part because the scale of understanding required is so immense. You can spend a lifetime studying the relevant parts of just one of: the climate itself, the energy industry, solar, wind, nuclear, politics, economics, social norms. It’s extremely difficult to get an overall picture; it’s easy to miss very big things. I wrote these notes mostly because the only way I know to get a handle on big problems is to start by doing detailed investigations of very tiny corners. So consider this one very tiny corner.</p><p id="a72ecda8-911b-4f62-a068-aff282d6ea13" class="">To finish, I can’t resist reporting an uncommon opinion: overall, and over the long term, I’m optimistic about climate.</p><p id="0cb8af7c-5917-4aac-ae13-afaf6ab23081" class="">I’ve focused on direct air capture, but it seems to me there are many other promising approaches. I believe humans will figure out how to address climate change. There will be a lot of suffering along the way, much of it falling to the world’s poorest people. That’s a terrible tragedy, and something we’re too late to entirely avert; indeed, it’s very likely already happening. But over the long term work on this problem will <em>also</em> lead us to strengthen existing institutions, and to invent new institutions, institutions which will make life far better for billions of people. It’s a huge challenge, but I think we’ll rise to the challenge, and make human civilization much better off for it.</p><p id="c1ad7cbe-64a2-48eb-8d24-c351c0b79b6e" class=""><em>Acknowledgments:</em> Thanks to Andy Matuschak for conversations about climate.</p><p id="68781db7-6008-4674-bf68-1ce15b4c38fe" class="">Please <a href="https://www.patreon.com/quantumcountry">help support my work on Patreon</a>, and please <a href="https://twitter.com/michael_nielsen">follow me on Twitter</a>.</p></div></article></body></html>

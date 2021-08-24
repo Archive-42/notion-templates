@@ -1,0 +1,641 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Tesseract: Economics of an Information Space</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7e3a8c79-c1c3-462f-a184-9b4fe6e0f71e" class="page sans"><header><h1 class="page-title">The Tesseract: Economics of an Information Space</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://geoff-yamane.com/blog/2020/6/30/the-tesseract-economics-of-an-information-space" class="url-value">https://geoff-yamane.com/blog/2020/6/30/the-tesseract-economics-of-an-information-space</a></td></tr></tbody></table></header><div class="page-body"><figure id="fba78649-fb5d-4019-ac14-0366775d6d09" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/1-252BRooms252Bof252Bthe252Btesseract.jpg"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/1-252BRooms252Bof252Bthe252Btesseract.jpg"/></a></figure><p id="bee095ea-225d-4f93-b570-a9e5e3c89496" class="">The last essay ended with an idea:</p><blockquote id="bfa76452-ffc8-4e09-9061-155ef7113684" class="">Where new competitive moats have likely emerged is in higher levels of networks, complexity and inter-dependency – Competitive Moats in an Information World</blockquote><p id="170e9121-975b-46ac-871d-6ef15a4ed909" class="">This essay is about a single idea which we will revisit again and again, what networks, complexity and inter-dependency describe are the physical features of a city:<strong> networks are spatial relationships among objects in a digital world</strong>.</p><p id="7f7e6bff-7963-42ce-b3bd-480fd54903b7" class="">In the physical world these networks of <strong>proximity</strong> create value in real estate, or any tangible asset. This proximity exists in physical things, like cities and biological organisms, where physical distance circumscribes interactions, ranging from streets to central business districts, to the collective computation of squamous cells and chemical messengers in-situ. But proximity also exists in the abstract of ideas, software, social networks, trust and pedigree.</p><p id="29ae2427-2a47-4c73-a3bf-585532b6d919" class="">Network effects and increasing returns to scale are a common feature of <strong>proximity</strong>, but historically their effects were largely local limited by the effectiveness of communications technologies. Simplified to its essence, proximity seems to describe the relationships between computation and data, through the communication of physical (light, sound, chemical, electrical) or digital (binary) information. It seems in a digital world, these features of proximity define the earnings power of any asset; the economics of real estate describes its features.</p><p id="5c1d95b4-6960-4586-bae6-3b0a421b45b0" class="">To see <strong>proximity</strong> in a digital world, we must first imagine it.</p><p id="a3f1fadf-8791-4893-a1c6-8c6d0dac9d99" class="">When you log on to the internet, you exist in an digital information space. From your original search query, network hops describe how far you’ve traveled and minutes of engagement define how long you’ve stayed. For the more technically inclined, what we are describing is the layering of open- and closed- protocols which sit atop one another whose economic profits derive from bargaining power between information protocol layers.</p><p id="4d31d191-dd39-4f0d-9280-6c5d0c419316" class="">The size of this space is partly defined by the information available, and like a library of books, much of that information – of websites, Wikipedia articles, and information – was produced in the past. Mostly unrecognized, books were the first information space whose contents spanned place and time:</p><blockquote id="b79a0c4c-9172-4f96-ad47-d773ea9803b3" class="">“There is no Frigate like a Book,” wrote Emily Dickinson, “to take us Lands away.” Though the young (Abraham) Lincoln never left the frontier, would never leave America, he traveled with Byron’s Childe Harold to Spain and Portugal, the Middle East and Italy; accompanied Robert Burns to Edinburgh; and followed the English kings into battle with Shakespeare. As he explored the wonders of literature and the history of the country, the young Lincoln, already conscious of his own power, developed ambitions far beyond the expectations of his family and neighbors. It was through books that he was able to transcend his surroundings.-- “Team of Rivals: The Political Genius of Abraham Lincoln”, Doris Kearns Goodwin (2005).</blockquote><p id="a8cea292-4bab-4b6a-bd90-b7bdb8e17f69" class="">This essay is about the business model of (information) platforms, like Google, Facebook and Tencent, which are some of the most dominant businesses the world has ever seen. Imagining these platforms as information spaces may provide insight into five economic concepts which seem important – the economics of proximity (real estate), scaling limits, bargaining power, incremental returns and valuation.</p><h3 id="bc14f2ee-3f05-450f-a214-718400212485" class="">The Tesseract</h3><p id="dd982531-289e-470f-93b9-4c6858e51f41" class="">Towards the end of Christopher Nolan’s movie Interstellar, Joseph Cooper (Matthew McConaughey) falls into a black hole and enters a four-dimensional space called the Tesseract (<a href="https://www.youtube.com/watch?v=GtTkcM9BfXM">Video)</a>. The idea of the Tesseract provides a physical form to the information space of the Internet.</p><p id="f78ecbd7-d6b1-4c20-b6b2-bd9178611646" class="">As Cooper manoeuvres within this space, each direction leads him to a different moment in time in his daughter’s bedroom. The metaphor of the Tesseract depicts an information space which describes physical space (events which happen within the bedroom) and time (events which happen across his daughter’s life). Each bedroom is a place and time, but it is also merely the information of things which happen in the present and past.</p><p id="718f64ed-df2d-4b6c-abf5-84577e1966cf" class="">That our Tesseract encompasses the dimension of time recognizes how information summarizes and compresses physical reality, all information is a summary of the past:</p><p id="2527f37e-5593-467c-a38f-a69a09af99b5" class="">“Data is old news. By its nature, it tells us about things that have already happened.”
+-- “<a href="https://www.wired.co.uk/article/improbable-quest-to-build-the-matrix">The Improbable Quest to Build the Matrix</a>”, Wired (2017)</p><p id="16975570-cd16-4dbc-8324-f8646e3ade3f" class="">This metaphor allows us to visualize the spatial relationships among information objects which have no tangible form:</p><figure id="2f8e5690-2c17-4e49-a622-365bfe361ada" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/1-2BRooms2Bof2Bthe2Btesseract.jpg"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/1-2BRooms2Bof2Bthe2Btesseract.jpg"/></a></figure><p id="f7f28e40-3305-402b-a99b-18be6a5bc563" class="">The Tesseract is a digital world of bytes which is seamlessly re-arranged by those who control its spaces (Google, Facebook, Tencent, etc).</p><p id="e18040be-d707-4f41-ad99-bf07c68a75c9" class="">On the internet, the number of network hops between a search query and a transaction is a measure of physical distance, similar to how flight connections from Wuhan map the spread of Covid-19 around the world. Minutes of engagement on a specific website are the GPS coordinates which describe our location, similar to how longitude and latitude mark our location in a physical space and measure distances to other places.</p><p id="a2c54588-6dc0-4e1e-8207-199b7593aa7b" class="">Proximity to (past) information manifests as Google searches improve as algorithms learn our preferences through repeated use. Our commitment to Gmail or Microsoft Outlook increases as we accumulate more data, and time invested, in their services.</p><p id="cf4cdc57-65b9-4e65-a0e7-fbad136a672e" class="">We transpose the economics of real estate onto this information space of the internet. What defines economic value in an information space seems similar to real estate: <strong>proximity</strong>, <strong>specialization</strong> and <strong>monetization</strong>. For example, the customer funnel describes how we move from curation / discovery to specialized websites, to different methods of monetization:</p><figure id="c54b2a45-d4a7-4d7e-9a7a-9caf46da8027" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/2-Customerfunneldiagram1.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/2-Customerfunneldiagram1.png"/></a></figure><p id="60725439-6553-40db-b652-052f0e32eae1" class="">The economics of real estate are a function of space (square feet) and monetization (rent per squarefoot, sales/sqft, ebit/sqft, etc). The economics of an information space then are defined relative to minutes of time:</p><p id="5de44e93-301e-4c74-af27-435e28e5cd52" class="">Revenue = Total time (“engagement”) x Monetization rate ($ per minute)
+Total time is a function of <em>curation</em>, <em>conversion</em>, <em>specialization</em> and <em>proximityMonetization</em> rate is a function <em>proximity</em> and <em>method</em> of monetization</p><p id="8efd072f-0c19-40ed-9435-7c8d067458ff" class="">Measuring the monetization of information intangibles in units of time is not new: Nielsen TV Advertising has always compared minutes of time spent versus amount of revenue generated.</p><p id="95b8db06-768f-42f9-84dd-72744b57972e" class="">It seems this bridge of time creates a link between the economics of the physical world and the economics of the emerging digital world. The disruption of physical retail is not clicks over bricks, it is the equation which compares aggregate customer time * monetization rate - cost per unit of customer time (rent), versus the alternatives now available online, with costs described in CAC, unit costs of delivery and the like.</p><h3 id="762ddcd2-b93d-4350-9562-47839596fa4f" class="">The Physical World</h3><p id="d6394165-3666-447b-a655-c6bd02d96643" class="">In the physical world GPS coordinates measure our engagement in a specific place and define our <strong>proximity</strong> to other spaces. We can describe the four walls of a retail store as physical square footage but also the amount of time a customer spends <em>physically</em> within the GPS coordinates of its footprint; in this way location can be described in minutes of time. A store in shopping mall might define its proximity as conveniently located near an anchor tenant, Class-A office space, and within walking distance to the subway.</p><p id="af6c3040-0298-46c1-bdf9-d543ff673e4b" class="">Real estate’s highest and best use depends on <strong>specialization</strong>, or how the space is configured for customer demand and a type of monetization which maximizes revenue. Airport terminals are plastered with JC Decaux advertisements for high-income travelers; Dentist offices are configured for servicing teeth.</p><p id="316f3c2d-8cab-486c-ad45-0dc637afd930" class=""><strong>Monetization</strong> describes the relationship between the time of customers and revenue generated. A store in the suburbs might have customer footfall of a 1,000 prospects per day with a<strong> conversion</strong> of 10% (100 people) who will become customers. Each customer visits the store for 10 minutes, or a 1,000 minutes per day of <strong>engagement</strong>. Over the course of a day, that store might sell a $1,000 of merchandise equivalent to a monetization rate of $1 per minute of customer time.</p><p id="6e2b536e-4c20-40d0-b9c6-6766d8504bcf" class="">For a store in the urban core, in <strong>proximity </strong>to banks, bakeries, subways, and offices, minutes of time might increase ten-fold and monetization per minute, due to higher customer basket sizes, convenience and spending power, might double.</p><p id="306b44d8-1fec-49a5-b1a7-4f5d829a0d2b" class="">Real estate development is an activity that creates value by <strong>proximity</strong>, improving <strong>specialization</strong>, and optimizing <strong>monetization</strong>. The super-linear economic scaling of cities then is a product of physical <strong>proximity</strong> — among labor, capital and ideas, Ricardo’s <strong>specialization</strong>, and a unit of trade (<strong>monetization</strong>).</p><p id="9a97dc5a-32ca-4e31-98e1-bf8cff661892" class="">As an example, real estate in Manhattan starts with a square city block of land in proximity to our homes and subways. Buildings increase floor space, or the amount of time we spend within its walls. Value per square foot can be improved through specialization to purpose. Merchants monetize customer time in different ways through commerce (retail stores), payments (Western Union), advertising (JC Decaux), entertainment (movie theaters), and O2O (florists).</p><p id="9b186c01-e6d0-4a52-8a1b-a522be5f70cb" class=""><strong>Mostly unrecognized, the value of every tangible asset relies on unstated assumptions of proximity: </strong>to infrastructure (sewers, electricity, subways, etc) and a method of monetization. The problem of brick and mortar retail is not an inability to sell goods in a store, it is insufficient monetization relative to the costs of a physical presence, and the alternatives now available (<a href="https://geoff-yamane.com/blog/2019/5/27/the-abstracted-physical-world-where-bytes-meet-bricks">The Abstracted World</a>). Location matters, and now the place of customer time matters: great products or assets are not islands of isolation but exist amidst other features of their environment.</p><figure id="eaa0c893-f32a-425d-9496-c75d375db23b" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/5-Improbablegames2CGoogleCloudNext2017.png"><img style="width:409px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/5-Improbablegames2CGoogleCloudNext2017.png"/></a></figure><p id="48622d4a-71b5-4989-be47-35aabac7800b" class="">Every physical asset exists in proximity to other physical things creating a reliable constancy of atoms positioned relative to other atoms. Buildings in cities exist in close proximity to a cohesive urban environment of utilities, streets, and people. Network effects merely describe proximity in the digital space. Credit: Improbable Games, Google Cloud Next 2017</p><h3 id="13110ce8-26aa-4b74-b37e-cb846025862c" class="">Curation</h3><p id="21a34d77-0a5a-4a38-966f-26e3ba35d8fa" class="">Our tour of the Tesseract begins in its lobby. The hyper-scale cloud vendors operate the projectors of the Tesseract, charging by the second for compute, storage, networking services on which this information space is created. Where we are in this dimensionless space is defined by our time and engagement.</p><figure id="4c6d5756-c9c4-484f-8640-4ef5c7ceb12b" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/6-Tesseractlobby.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/6-Tesseractlobby.png"/></a></figure><p id="dc9e13df-2deb-47c9-8815-353eeadf8348" class="">Cooper’s time in the Tesseract begins in its lobby. From here as he searches for different moments in his daughter’s bedroom, this information space of bytes morphs into rooms and hallways reflecting the curation of his intent. Every information platform is a curation / discovery service which re-arranges and monetizes the information of the internet around us. This is consistent with our original understanding of operating systems as searching and coordinating among a hard drive, memory, systems peripherals, to display and retrieve information.</p><p id="3be638f7-653a-4d53-a16c-c2af0e31e9b2" class="">The first thing to notice about our digital economy is the scarcity of demand and supply are now inverted. Our economic assumptions of unlimited demand and insufficient supply are no longer true. Its disorienting, but in a digital space of zero marginal cost software what is scarce is now demand -- the minutes of engagement of all 7.5 billion of us. Our descriptions of an economy comprised of finding demand in the ether, through engagement, subscriptions, recurring customer cohorts and customer acquisition costs already reflect this reality.</p><p id="2b624ec1-ca24-4686-ae4e-3aaf981805a0" class="">The key to solving the investment problem is understanding that economic value always emerges from scarcity, and we, the inhabitants of this information space, are the ultimate actors of our economy. An empty virtual world of Second Life spanning thousands of kilometers has no value if it is not populated by the time of us.</p><p id="5c495431-89a2-4b75-b676-77ef2035863a" class="">The economics of the Tesseract revolve around the aggregate time we spend within it. There are roughly 1.3 billion desktop users, 3.2 billion smartphone users, and <a href="https://wearesocial.com/blog/2019/01/digital-2019-global-internet-use-accelerates">4.4 billion unique internet users in the world</a>. On average, each of us spend <a href="https://www.statista.com/statistics/319732/daily-time-spent-online-device/">171 minutes per day</a> within the Tesseract, a number which increases each year, as the economic activities we formerly pursued in the physical world are enveloped.</p><figure id="ce38f13f-692f-4466-a67d-b7f319390ede" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/7-Tesseractendpoints.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/7-Tesseractendpoints.png"/></a></figure><p id="6359465f-2602-46cb-a0b9-6688fb298179" class="">As Cooper peers out from the Tesseract into the physical reality of his daughter’s bedroom, it captures this idea that a bedroom or a hallway in the Tesseract can exist almost anywhere in the physical world. Where our economy is digitized, the proximity and fragmentation of physical geography have disappeared.</p><p id="8d56104f-ce73-4070-9acc-81f6af4db24d" class="">We enter the Tesseract from our living rooms, offices, and bedrooms, through one of the many competing hardware endpoints: desktop computers (Windows), mobile phones (iOS or Android), voice assistants (Alexa, Google Assistant), or perhaps eventually, augmented or virtual reality.</p><p id="7ca94995-8fef-45c0-a265-15dd8e06725c" class="">Standing in the lobby, the first problem of an unbounded information space is one of curation: what are we looking for and where do we want to go. The largest and most successful internet companies operate businesses which curate the information space around us.</p><p id="58533320-5bee-4b50-8014-3380b4ca9f3e" class="">In the internet’s early days curation was non-existent and the protocols were crude: HTTP, Telnet, FTP, TCP/IP. The Web 1.0 generation of commercial curation services were the web portals of Yahoo, AOL, Prodigy and Compuserve. Web 2.0 brought more effective curation through the wisdom of crowds: Google PageRank curated this world by consensus and Boolean search. Social networks curate based on the suggestions of our friends: in links (Facebook), pictures (Instagram, Pinterest) and messaging (Whatsapp, Snap, Messenger, WeChat). The curated portals still exist, but they’ve morphed from desktop to mobile (iOS or Android home screens, WeChat Mini-apps).</p><p id="2a30ad5c-f3ae-447c-b4a4-e961d5e8f6c9" class="">When we search Google for “Barcelona Hotels”, the Tesseract is transformed into blue links which take us to hotels, airlines, reviews and the like. Facebook’s lobby is similar, our newsfeed is curated by our friends pointing us to funny videos, e-commerce links, and articles which exist somewhere in the ether. Newer services like Bytedance / Tiktok are mere improvements over the curation and proximity of these earlier information platforms.</p><p id="8ce27633-e5f7-4768-86ee-9db73f4caac6" class="">Social networks possess special features of proximity that depend on the simultaneous decisions of many independent participants to exist in a shared information space, such as Facebook, Whatsapp, iMessage, or Instagram. These are the town squares of an information age.</p><p id="2be45c0b-e863-4d20-bb3c-1c452ecf149f" class="">These curators of the Tesseract capture the economics of information spaces created by others in ways not possible in the physical world: news content created by others is “wrapped” in Facebook’s newsfeed (closed-protocol) allow the capture of economics akin to a tax on your time for reading the newspaper.</p><p id="8576664f-0d55-442f-9de6-85bde9d37fdf" class="">In each instance, for each user want, the lobby of the Tesseract is reconfigured, with the economics of its space flowing in different ways to different companies:</p><figure id="e9bd0a07-0e17-42a9-98be-b93f1d6f3f30" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/8-2BReconfigured2BTesseract.jpg"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/8-2BReconfigured2BTesseract.jpg"/></a></figure><p id="88915ad7-b827-42df-af9d-2c539b5c9616" class="">A search for travel in Google might rearrange the customer funnel to one of Tripadvisor, Booking.com, or Expedia, who monetize through sales commissions. A search for iOS games, creates a different funnel, with new beneficiaries.</p><p id="df546673-edcf-4622-bc68-03ca5db42b40" class="">The major platforms are the landlords, or top-of-funnel, of this information space. Like real estate developers, to improve its value they expand the size of their space (time spent within it), improve its proximity to other services (CAC, seamless delivery, payments, integrations with other applications, nearby data), optimize for specialization (better targeting, higher “rent” rates) and improve its rate of monetization (payments, advertising, O2O, entertainment).</p><p id="c4faf106-ad39-461a-a14f-57f3063cad78" class="">For example, Google extends control of its Tesseract lobby (search) by securing its endpoints (Android, Google Assistant, Fitbit), expanding its size / specialization (YouTube, Google Maps, Gmail, G-suite), its proximity (Google Meet is nested in Gmail, blue links go to Google Maps, Google travel summarizes the flight itinerary in your inbox), and improving its monetization (YouTube TV subscriptions, Google Pay, Google Travel meta-search). You will notice that employees are mostly incidental to the means by which Google interacts with the physical world (advertising clients).</p><p id="2ee25c9d-0791-4ca5-a5f7-9001bb1f186a" class="">Untethered to the physical world, these platforms are free to define <strong>proximity</strong> through affiliate links, payments, Application Programming Interfaces (API’s), or direction of traffic to other owned spaces. Proximity is not defined by the kilometers of distance, but by the network hops of adjacency, and like main street, proximity has a cost (rent).</p><figure id="ea60c599-4543-4aaa-ad90-689ce5060995" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/12-Dropboxdiagram.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/12-Dropboxdiagram.png"/></a></figure><p id="c8d3d720-6af3-40c5-84dd-ac5954b04f52" class="">Box’s ecosystem is similar to a city: a great product will have little value if it lacks proximity to other things which matter. In a digital space these networks connect to product GUI’s, systems of record (excel files, emails, documents), adjacent applications / API’s.</p><p id="d781f131-d0d9-48fa-8912-db42dfa052be" class="">What’s changed in the Tesseract is <strong>proximity</strong>, like stores amidst fixed urban environments, is not defined by the reliable constancy of atoms physically positioned relative to other atoms, instead it is malleable bytes curated and reconfigured for us by those who control its spaces.</p><p id="9e7e2870-b78f-4d93-943b-7997ea942c3b" class="">The popularity of circular flywheels of competitive advantage seem to implicitly recognize that great products create self-reinforcing interactions with the malleable features of their environment. This is different than the past, where one could sell a great product on a busy street. Today the “streets” of these digital cities are constantly in flux.</p><p id="b20732f1-a55e-4252-ad65-f9748b887875" class="">For investors, we may have lost something in the constant <strong>proximity</strong> we took for granted of the past, for every physical asset digitized, there are now thousands of substitutes located within close proximity to where we now exist:</p><blockquote id="a654a932-e50f-4fc5-8964-4a69716f6842" class="">Many investment strategies implicitly encode for these assumptions. As a simple illustration, let’s re-frame Warren Buffett’s purchase of Berkshire Hathaway textiles: a physical (factory) asset purchased below cost / replacement value might have latent earnings power. This mean-reversion was possibly something else – it was the “scarcity” of the factory being located in a physical place with property rights (town with access to cheap energy) with existing distribution (on a river) and valuable customer relationships (retailers / regional warehouses) that might have an alternative highest-and-best-use. When textile production permanently moved to the American South, these assumptions were no longer true, and the value of the factory amid that scarcity was lost. – The Abstracted World</blockquote><p id="c0c93532-183b-4733-905f-fb79b4ee4155" class="">Predictably many investors will point out that not all businesses are digital and not all hardware can be so easily substituted, but it seems due to aggregation of bargaining power, that information (software) often cannibalizes hardware.</p><p id="9c947641-6a85-44a3-903a-f5e87f4969a3" class="">Yet our analogy is not necessarily terminal for the third-party tenants of the Tesseract. Just as a Louis Vuitton store exists on top of the expensive rents (property rights) of Fifth Avenue in Manhattan, the solution to a monopolist landlord controlling scarce information space is simply another business model with an orthogonal moat. Businesses selling cheap information trinkets unable to effectively monetize their customers’ time will go the same way as souvenir stores amidst the high per square foot rents of Times Square.</p><h3 id="f66c193c-da44-4ae5-9721-10090243d56f" class="">Specialization</h3><p id="3ab7a276-53c5-4699-a6e1-85cee278a5c9" class="">The boundaries of the curation lobbies seem to be defined by information services with higher specialization or a more effective monetization; or some interface with the hardware of the offline world (deliveries, services, experiences, food).</p><figure id="91d2b2dc-9887-4e50-9a75-a225c963d673" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/9-TheverticalizationofZoom.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/9-TheverticalizationofZoom.png"/></a></figure><p id="a72a6863-2683-483e-bfa3-7bf865707ab6" class="">The disintermediation if Zoom might occur through services which are better specialized for specific use-cases. “The Verticalization of Zoom”, JJ Oslund, 2020.</p><p id="fedad0cb-a4b9-4fd9-bc26-ec604f1ee69f" class="">If our search query in the Tesseract began with a search for “Barcelona hotels”, Google might present us with a lobby of blue links to other information spaces: Kayak.com, Booking.com, Expedia.com, Airbnb.com. Each of these services provides the consumer a degree of specialization that Google does not, ranging from reviews to payments, or perhaps controls valuable bricks / mortar travel assets (cruise ships, hotels, attractions).</p><p id="266e97e6-17be-4a26-a1e1-856a6542b469" class="">From our Tesseract lobby controlled by the major curation platforms, wormholes extend to different information spaces controlled by other companies:</p><figure id="e17694a3-7c64-4c67-a9c9-1fd935b3d19a" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/10-Otherinformationspaces.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/10-Otherinformationspaces.png"/></a></figure><p id="56b52501-c628-461c-945e-dc17a1498665" class="">Like bedrooms in a house, each information space is configured for a specific use.</p><p id="e1665363-40fb-4c83-806a-5f791a41b701" class="">The conundrum in the Tesseract is each of these spaces is fungible: Google adopts many of the services provided by Booking.com without undertaking any expensive ownership of assets in the physical world; they are direct competitors even where not readily apparent.</p><p id="db0f1674-a19f-4bee-bd0e-13375cf42c42" class="">In the case of online travel, Google is an aggressive landlord constantly upgrading its search lobby. Whereas a few years ago a search for “Barcelona hotels” might lead us to the ticket scalpers of travel meta-search, today this information space is much improved. Date toggles narrow results while providing us alternatives to book directly with the hotels (payments) or link us to recent reviews.</p><p id="73d7f0b2-5c5f-4fa0-b22b-fce0e856ed1d" class="">Like a real estate developer, Google has captured more economics by expanding our time in their lobby, exploiting its proximity to where we are (low friction bookings from search), improving specialization (rates per night, book now button, date toggles, third-party reviews) and monetization (payments, advertising, nearby attractions).</p><p id="d26f277c-7247-4714-a030-ea3081d8ba3d" class="">Tenants like Booking.com, in turn must improve the monetization rate of their information space by providing higher specialization (more hotel selection, reviews), better proximity (consolidated itineraries, interconnections to attractions, events, flights) and pushing their own economics further through to the end points of monetization (payments, final booking); or perhaps seeking to control physical delivery (attractions).</p><p id="fb38c516-f605-4d31-9551-b08ccf1c7eb4" class="">What determines the success in this dance of economic interests is what it always has: relative economic bargaining power among the parties. And information, like the intangible coordination of a labor union, succeeds in shifting bargaining power among parties to a transaction in ways which require no difficult rearrangement of atoms. The power of a blockchain revolves around this reality, a world of open- and closed- information protocols.</p><p id="63ba95eb-3de3-4aa3-ab60-a8679e35c6c2" class="">We adhere to an idea (labor unions, religion) and negotiate on the internet as a collective consumer purchasing bloc (merchandise price transparency), as if we are a single large entity despite vast physical distances of separation and <a href="https://pubmed.ncbi.nlm.nih.gov/32212028/">functional independence</a>. What unites us as a group is the transparency of information we share.</p><p id="7a714e0c-84b0-41c3-81ed-1836a3576435" class="">Open-protocols like labor unions widely share the benefits of their collective action, closed-protocols like search privatize the benefits to a single party. For example, Google’s Android OS captured the profits of the mobile phone as an endpoint, while OEM manufacturers, telecoms and handset brands compete for the scraps left over. Google knew very little about most of these hardware businesses, but it didn’t have to.</p><figure id="9b385d76-10b0-443c-925b-dac1ab14f95b" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/Adjustments.jpeg"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/Adjustments.jpeg"/></a></figure><p id="91f231af-adfe-4246-8a2e-56d66134b193" class="">Today <a href="https://www.theverge.com/2019/11/14/20961523/amazon-walmart-target-package-delivery-sales-tax-montana-roundup?utm_campaign=buffer&amp;utm_content=buffer820c5&amp;utm_medium=social&amp;utm_source=twitter.com">arbitragers located in the Philippines</a> already do this on Amazon: focused on exploiting weak price differentials in one-day sales at Target, they arbitrage these “fungible commodities” through drop shipments and repackaging depots, picking off the poor Target store manager who chose San Bernardino for a blue-light sales special. They may exist as a single individual 7,000 miles away, but their collective behavior overwhelms the economics of a multi-billion dollar retailer. They are the RenTech’s of the physical world.</p><p id="a142944f-8483-4d10-b008-98806727dc26" class="">Stock markets were also an information space with similar dynamics: they created markets where capital arbitraged incremental investment returns globally. Their transmutation into fully abstract representation (digital information) occurred in the 1970’s with the de-coupling from capital’s physical form (gold).</p><p id="af1e7e0b-c8e1-4757-b1d6-f67048ac197e" class="">In almost any competition between a software information business (Android OS) and a hardware manufacturer (HTC), it seems it is the information business which inherits the profits. This is the economic power of the (information) platform.</p><h3 id="196ba366-a2d4-41f2-9d7d-770a073d0722" class="">Monetization</h3><p id="4d4fd2cc-c1b3-42b1-8227-96e7c8ecbaa9" class="">Information spaces located off the Tesseract Lobby can also be differentiated by their monetization of consumer intent. In the new urban spaces at the turn of the century, early companies sought to monetize customer time by plastering advertisements across its surface area. In cities this was achieved by stacking advertisements vertically, in an information space this occurs by plastering advertisements across time through cookies in your browser which follow and re-target you.</p><figure id="308fee7e-108a-468f-932e-0f4c852313e0" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/13-BenedictEvansadvertising.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/13-BenedictEvansadvertising.png"/></a></figure><p id="23afd026-7c8d-4bea-9004-05322815c613" class="">Credit: Benedict Evans</p><p id="1391245a-e60b-4ed0-86c8-0ffd6dfe0a88" class="">That advertising was the predominant means of monetization is happenstance: the original internet did not have an easy way to facilitate micro-payments, let alone know precisely who “you” were as an anonymous participant. In the Tesseract, vendors advertise to you, but they also sell you merchandise (e-commerce), services (subscriptions, gaming) or offload the activity in the form of physical goods delivered to your doorstep (Meituan, O2O).</p><p id="70918013-493a-4238-b6bc-daca7d8e337b" class="">Subscriptions both recognize the value of accumulated time and reduce its churn, the same way a convenience store on the corner owned your time by virtue of being on your way to work. Location in a physical space, was an unrecognized “subscription” on the customer’s time.</p><p id="fd51c2dc-c3d8-44f7-991b-f5c259e5e3ce" class="">As the internet evolved, its methods of monetizing our time evolved with new enabling technologies, broadening the information spaces where the Tesseract replaced the economic activities of our physical world. The extent of commerce that happens in the Tesseract depends on the nature of what is being sold. Virtual goods like e-gaming and software have value-chains which now exist almost entirely within this space. More tangible goods like merchandise, services, capital goods must eventually be offloaded into the world of bricks / mortar atoms.</p><p id="a642a949-0bfb-4c5f-b6b9-efc385c67454" class="">The first models of monetization were limited to what was possible on a desktop computer. Then innovation seemed to come in waves, capitalizing on a new enabling technology which expanded the edges of this information space to new business activities previously untouched. The “internet winners” were path-dependent through the good fortune of right place / right time, a good idea, an enabling technology, and an effective means of monetization. For the Chinese internet, the dominant platforms were largely founded during the dawn of the PC internet 1997 - 2000 (Alibaba, Tencent, Netease, JD, Ctrip, Sina) and the smartphone era 2010 - 2013 (Meituan, ByteDance, iQiYi, Momo, Weibo).</p><p id="f632e38b-18fd-43cb-b314-27d7b5bf9cd8" class=""><a href="https://geoff-yamane.com/blog/2019/2/28/the-investing-meta-game">The Investing Meta-Game</a> observed that something changed in investing around 2014. There are many explanations for this conundrum: quantitative easing, low interest rates, or passive indexation, yet the direction of causality is hard to determine. Yet, maybe one reality is what the smartphone did was push the boundaries of the Tesseract to simultaneously envelope many industries which had so far been relatively unaffected, from taxi cabs, to food delivery, to entertainment and advertising, transforming the economics of atoms into the information of bytes and changing the economic assumptions underlying formerly successful investment strategies.</p><figure id="0c8bc320-fef2-4c6c-96a9-de83a785407f" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/18-TheRiseofFANG.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/18-TheRiseofFANG.png"/></a></figure><h3 id="22b63593-2cc7-4654-bb61-ce817c5d9e12" class="">Data Proximity</h3><p id="e766af07-4c76-4dd9-8231-4230697d18ad" class="">The problem of proximity across time is more vexing. Hyper-scale cloud vendors define explicit costs around the proximity of (old) data: hot- or cold-storage, data egress charges. The fluency of data between business silos (Alibaba) supposedly creates higher efficiency.</p><p id="d5d2a0e8-d2da-4fe9-9395-66aa27812b91" class="">Investors often talk about the value of data: whether it is legacy databases, systems of record, or training data. Software engineers refer to this idea as <a href="https://www.cio.com/article/3331604/data-gravity-and-what-it-means-for-enterprise-data-analytics-and-ai-architectures.html">Data Gravity</a> and the analogy is not wholly inappropriate.</p><p id="633d0a41-a4d2-4ce2-99a8-cb5605f5456f" class="">Towards the end of Interstellar, Cooper is plunged into the blackhole and enters the Tesseract. Within this space, measurements taken within the blackhole are conveyed back to Earth in Cooper’s wristwatch.</p><p id="6b00dd00-43fe-4f16-b8e7-624d1963965a" class="">The Tesseract’s solution is a combination of <strong>computation</strong> (his daughter mind) and <strong>proximity</strong> to information (the watch).</p><figure id="04c921cd-416b-4303-be42-feac52983d81" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/14-TheWatch.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/14-TheWatch.png"/></a></figure><p id="d00c97d8-c932-4356-bc4e-14d3cb86419e" class="">Medical training is a combination of memorization of biology over years (textbooks) and rational / logical computation (human brain). Machine-learning incorporates ideas of information proximity through the combination of a computation algorithm (inverse deduction, backpropagation, neural net, probabilistic inference, analogy / support vector machine) and proximity to training data (relevant data of the recent past).</p><p id="adde4a6a-dd7a-4ab9-8753-11365f638ba5" class="">Gathering training data creates <strong>proximity</strong> among objects in an information space.</p><p id="acc27abf-6a56-4993-a9c1-e8f73f4427d6" class="">One of the problems with investing today amidst abundant information, is the analyst’s insights are no longer merely competing with the market participants of the present, but also the participants of the past. The presence of large amounts of information is pernicious to anyone or any business whose profits depend on natural asymmetries of information borne of the rigidities of geography and localization (<a href="https://geoff-yamane.com/blog/2019/9/3/the-commoditization-of-information">The Commoditization of Information</a>).</p><p id="3eb594c1-675c-496b-aa89-fcf81aba3d7e" class="">In the extreme short-end of opportunity, supposedly Renaissance Technologies Medallion Fund is essentially market-making in thousands of weak price signals around the world. Operating at scale while exploiting low persistence price spreads of pennies, with terabytes of exclusive proprietary historical datasets, it has generated returns of 60%+ gross for years. Valuable data + computation = short-term prediction.</p><p id="5aebdbec-9299-4fb9-9e78-aea25cf2ccf3" class="">At the longer end of the curve, for almost any security in nearly any market around the world, someone has already discovered it. They call it a ‘quality business’, talk about its ROIC, its competitive moats, its culture and managers. Those insights are also often easily available to the next investor who stumbles across it, and the information insights are now cumulative not independent.</p><p id="f97b0755-ea63-49d2-8a36-f583e281534b" class="">If the effectiveness of an investor is gauged by the quality of his computation (competitive moats, Graham’s net current assets, “mental models”) and his access and capacity to process information (Reg FD, alt data, social contacts, market access, Bloomberg), then it seems reasonable that proximity in our Tesseract might encompass both the information that exists in the present and its proximity to information of the recent past.</p><p id="e2d07360-6293-45e0-8ad3-f1cf264c74ec" class="">When investors describe Google’s search moat as being about more data, Facebook’s advertising moat as being about better targeting, and Gmail’s moat being about the historical data artifact of your emails, what we are really describing is this idea of <strong>proximity</strong> to past information (and perhaps the sunk costs of your <em>time</em>).</p><p id="f4cd5b3b-4b57-42f1-9383-8469db6765fb" class="">If the determinant of competitive advantage revolves around information, then the investment solution exists as the dichotomy of hyper-local and hyper-scale. You either are running an information business which exists locally and is currently difficult to digitize (coffee shops, experiences, niche-specialization, political risk consulting) or competing against hyper-scale information (platform) businesses whose cost structures are global-scale and difficult to compete against without access to billions in funding.</p><p id="5675667f-cb3f-4faf-888f-d5e39f7a8757" class="">Yet abstractions aside, where is this discussion going and why is an information space so important to investing?</p><h3 id="fb2cc712-c0ae-4c4c-9066-750e0604eb58" class="">The Nature of the Firm</h3><p id="7bb9c3b6-3ab1-4f53-aec3-8c5074e91248" class="">Our discussion of an information space is not merely abstract. In fact, its ideas intersect with the very beginning of the definition of the industrialized firm as put forward by economist Ronald Coase in 1937, ideas for which he won the Nobel Prize in Economics in 1991.</p><p id="a0d58d26-dadc-47fe-aa29-5940f8096398" class="">Coase’s paper initially grapples with the definition of a firm as an information coordination problem of marshaling resources where no market price exists or transactions, which suffer from high coordination costs. The role of the firm is a legal and economic construct to coordinate internal resources, like employees and intellectual property.</p><p id="75a948e4-fdbc-4e89-bd80-0757c019e007" class="">Coase is a describing a <strong>software (information) problem</strong> of coordinating human workers and machines in a pre-digital world.</p><p id="104be820-fe93-49ae-adc5-ae4172ea7399" class="">He then observes that the limits of a firm are defined by the limits of information coordination, such as management attention, spatial distribution (assets being located too far apart), or fidelity of information transmitted (politics, time delay, etc).</p><p id="f217100b-4586-413b-a8b3-1aa330663f56" class="">Coase is describing the<strong> information problem</strong> as the <strong>scaling limit of a firm</strong>:</p><figure id="caebaa80-c274-4dad-bece-ad094f9e4d5a" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/15-RonaldCoase.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/15-RonaldCoase.png"/></a></figure><p id="fffc7c74-a1d0-422f-b37c-5088b991c5c3" class="">“The Nature of the Firm”, by R.H. Coase, Economica, Nov 1937</p><p id="82f8e6ca-43d8-4221-952e-3a6913b943a8" class="">If you read books like It’s Always Day One, Invisible Asymptotes, The Amazon Merchandising Algorithm, The Everything Store, Kochland, The Demon in the Machine, The Code Economy, or Jeff Bezo’s obsession with an out of print book called Creation: Life and How to Make It, which explained simulating evolution in software through information “primitives”, you realize that what algorithms, Application Programming Interfaces, micro-services, information protocols, and integrations have likely done is redefine the scaling limits of the firm, into a form which would not be recognizable to most:</p><p id="8f7d18c5-baad-4c2a-9052-a573541fb200" class="">The <a href="https://gigaom.com/2011/10/12/419-the-biggest-thing-amazon-got-right-the-platform/">Bezos API Mandate</a> (2002)
+1) All teams will henceforth expose their data and functionality through service interfaces.
+6) Anyone who doesn’t do this will be fired.
+7) Thank you; have a nice day!</p><p id="3015674a-e170-488d-af60-58c20c0d2fd2" class="">The British East India company exploited the value of proximity along its railroads, the Raj of AWS takes a percent of sales per second for every company operating on top of its computing rails, and Amazon.com seems to operate at scale across a spectrum of industries whose synergies are mysterious, if we ignore the role that information proximity plays in the synergies which might exist.</p><figure id="88414b50-ce5a-4442-9306-ee5b07b568e7" class="image"><a href="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/16-Amazongraphic.png"><img style="width:700px" src="The%20Tesseract%20Economics%20of%20an%20Information%20Space%207e3a8c79c1c3462fa1849b4fe6e0f71e/16-Amazongraphic.png"/></a></figure><p id="758e3b16-cdaa-417e-be57-0bd10e6976e4" class="">Amazon may not be a corporation as we’ve traditionally defined it, it merely exists within the corporate legal shell which we’ve inherited from history. Whatever <em>it is</em>, judging by its breadth of activities, it seems to have scaling limits and achieve a level of information coordination never before seen.</p><p id="66c6a8dc-31a8-4f8b-8c0a-4ef8fea2fc92" class="">The most important question about any of these information platforms, is where do their incremental economics come from and what are the impending limits to scale, whether by regulation, emerging economic inequalities, Fernando de Soto’s “property rights” of information, or the frictional limits of these new information machines.</p><h3 id="42cfb942-2309-49e8-82b4-4a12e5e610bf" class="">What is an Information Platform?</h3><p id="af338c8a-7a33-4673-b706-9ec75a80df8f" class="">Conceiving of the internet as the Tesseract offers a novel trick: it allows us to explicitly define the economics of platforms in features of <strong>proximity</strong>, Coase’s scaling limits, bargaining power and incremental returns. The dominant information platforms of today do not resemble the configuration of firm’s we are familiar with, because they appear not to be constrained and molded by the same economic forces which dominated the past, mainly limits of geography, communication fidelity and (human) coordination.</p><p id="8b2d8a76-dc24-4e72-b8a3-9095780392b4" class="">This is not to say their growth is endless, only that its constraints will be possibly greater and may violate the mean reversion assumptions which we are so deeply attached.</p><p id="978132df-c91b-4c86-9b07-a0ec5b4c1aaf" class=""><strong>Controlling proximity</strong></p><p id="0174c6ec-b5d3-437d-8345-08d2efeaad3d" class="">Like a landlord who controls the city center, each new information space created by a platform is valuable by virtue of its proximity to other spaces they already control. When Microsoft developed OneDrive, irrespective of product quality, it was instantly located in close proximity to historical data-sets (Office files), interconnected productivity applications (Office 365) and within a certified compliance architecture. In fact, Office 365 today auto-defaults to saving in OneDrive creating new information proximity for billions of users. This proximity seems analogous to property rights and rent but we have not yet realized that the public roads on which we traverse are entirely controlled by others.</p><p id="eb1b866c-fd95-4940-9016-53ede88b59d9" class=""><strong>Scaling limits</strong></p><p id="37054f41-55d7-4ee7-b039-9bc3040201ac" class=""><em>“The mountains are high and the emperor is far away” – Chinese proverb</em></p><p id="0e45e017-b4f4-4b02-b4cd-7fd721ae954e" class="">The economics of this corporate entity not only encompasses the economic value-add of its employees, but the labors of the wider eco-system, and goes some way to arguing that our historical assumptions about the scaling limits of the firm may be wrong. For example, does AWS’s as a firm encompass the software created with its cloud services? Do we as human beings define our individuality at the cell level (mitochondria), at the physical level (skin barrier) or at the organized group level of culture, religion or belief (meta-individuals) from which we often act in unison?</p><p id="b241cac9-cc03-4657-b20b-e88b47d6932a" class="">What changed is software allows a sharing of continuing economics not previously possible: when a customer buys a lawnmower to run a landscaping business, he does not owe the manufacturer a continuing royalty on his labor.</p><p id="e85138d9-721e-49c6-ae68-a6be8b223527" class="">Coase’s theory of the firm defined the boundaries of a firm as an information coordination problem and managing the complexity of that organism as its scaling limit. As Coase identified, improved (Telegraph) communications seemed to facilitate the creation of larger corproate entities. In 2020, Amazon added nearly 175,000 employees, or nearly 15,000 two-pizza teams.</p><p id="a17a1568-a234-400d-897c-56f349a7f314" class="">Every city and every organism has a scaling limit that is inherent to its structure: these emerge from inescapable trade-offs between specialization and the costs of complexity. It seems the repeatable templates which give Amazon its global scale, will also inhibit its ambitions, as the complexity and scalability of the general merchandising experience, create niche opportunities for specialists provided large fixed-cost problems such as discovery / curation, CAC and last-mile delivery are fairly available to all.</p><p id="0ef79f97-3009-43bf-87ed-f1c4f24ae6da" class=""><strong>Bargaining power</strong></p><p id="c7292630-8d88-4bf5-b294-9613e38b9007" class="">Platforms inherit the bargaining power of their constituents, even when those constituents are economically independent: every Android OEM hardware manufacturer contributes to the strength of Android’s eco-system, but share no economic benefits of its App Store. They are minority shareholders with no economic rights, bound by information and data they share without recompense.</p><p id="3accb519-2ac2-449c-bdda-64840375d276" class=""><strong>High incremental returns</strong></p><p id="82196a93-19be-4bc9-897f-943d33fee3a7" class="">By definition high incremental returns simply describe profits which scale based on something other than additional capital. Mean regression in ROIC then is the product of an optimization problem and a frictional limit. The optimization problem arises as new competition competes away high returns. Frictional limits occur when scale in and of itself becomes inefficient as firms balance niche specialization and functional complexity.</p><p id="8e218d8e-0d77-4ba2-a650-4defd3851389" class="">These limits can also manifest from frictional costs of the physical world (distance, time zones), geographic fragmentation (culture, language, market access) or from Fernando de Soto’s conception of economic property rights (building a new store next door). In a frictionless information space without property rights nor traditional physical frictions, it seems the amount of capital required for expansion simply reflects the competitive forces (optimization) acting on the opportunity.</p><p id="61a570fd-109e-49c1-bd6a-d2428492aff0" class="">Google often builds new spaces (Maps, Gmail, YouTube, G-suite, GCP), Tencent facilitates it’s creation with others through equity (JD, Riot Games, Universal Music Group, Pinduoduo) while Facebook seeks to retain economics by extending itself through control of payments in other spaces (Libra). In the world of software, AWS primitives such as compute, network, storage, allow others to build and extend the spaces of the Tesseract, as do other platform-primitives (Twilio, Shopify, etc), while retaining the economics of these new information spaces owned and operated by others.</p><p id="3baa3dda-105b-4212-923e-bf6d34bd922e" class=""><strong>Valuation</strong></p><p id="06a8d259-d716-4c5e-b78c-7c56b354ab18" class="">Considering the high valuation multiples of these companies seems to suggest their growth trajectories will continue unabated. But we must also grapple with the question of where competition for capital investment and the frictional declining returns manifest themselves. It seems many but not all companies that trade at statistically high valuation multiples may reflect a simple reality: not only do these platforms control vast information spaces of still unmonetized time, but they also own the property rights to expand such spaces costlessly through the direction of user traffic.</p><p id="37ac6af4-573f-49db-ab38-ffab867ff710" class="">Is this not akin to Graham’s net-nets where controlling undervalued capital-assets in <strong>proximity</strong> to other production inputs justified a very viable investment strategy at the turn of the century? The bridge between the world of the physical and information seems to be recognizing deeper underlying realities: perhaps it is not “capital” which is a signal of unrecognized value, rather it is information space of unmonetized time.</p><p id="e381ace7-506f-4515-ad98-4524f03e9232" class="">The continued outperformance of the market-cap weighted SP500 (trending) versus equal-weighted SP500 (mean reverting), or growth (intangibles such as information) versus value (historically invested capital) could be explained thus.</p><p id="6407f88e-bcfe-4c25-b9bd-a1a797025206" class="">The failure of Value Investing and its focus on low market capitalization relative to capital invested or historical earnings power may in fact merely reflect how <strong>proximity</strong> in the economy is changing. What many of the successful investors in the current environment seem to share, either by intention or accident, is they are implicitly long information platform businesses.</p><p id="7bf11904-fd99-41ef-8e11-742220946dfd" class="">It seems like every investment regime starts with structural business changes which create newly anointed investment managers (<a href="https://geoff-yamane.com/blog/2018/09/17/the-investment-paradox-of-software">The Investment Paradox of Software</a>). If 1990 - 2007 was the era of the corporate governance, improved capital allocation, and deep value catalyzed by the optimization of poorly managed assets. The beginning of our present regime might be the smartphone and the ubiquity of increasing returns to scale where growth managers appear savants.</p><p id="ef377b18-f6a5-47dd-83f9-050b29c799a8" class="">As our cities have been transformed by changing features of proximity, the solution to imagining many new business models on the internet will likely involve imagining new configurations of the value-chain from curation to monetization. Like the department stores a century ago, not every business has to be located on main street and not every digital experience needs to begin from the (curation) lobby of the Tesseract.</p><h3 id="da51e5cd-30b0-4252-be05-e76e54828090" class="">Conclusion</h3><p id="c3aef771-561d-409e-8cb7-15c92e3f61ee" class="">If the internet is an information space, then perhaps the best way to understand it is within the Tesseract’s wire-frame model of spatial relationships between physical space, information, and time. Its structure is also likely to be internally consistent: it was <a href="https://www.amazon.com/gp/product/B00NUB4EVC/ref=dbs_a_def_rwt_bibl_vppi_i0">designed by Caltech theoretical physicist Kip Thorne</a>.</p><p id="fea34b6e-afd8-465a-88e4-5ea2c39d037a" class="">In our information world, most of our best ideas come from others. They are in no particular order: HL who taught me why “curation” matters in the China internet and why the mobile phone enabled new business models at the edge. KP who better understands the statistical implications (and their investment strategies) in this world of bytes. MD who suggested I watch the movie “Just in Time”. DS who explained the economics and fragility of Nelson Complexity in petroleum refineries. DT who explained Nielson in media and provided thoughts / comments. LF who asked about the interaction effects where digital and physical worlds meet. And NL who helped me realize that the scarcity of the internet is not exclusive to capital and place, rather it begins in the lobby of the Tesseract.</p><p id="610356d5-4165-41df-a8f7-6385d0ccb2ad" class="">This is my intuition, which is probably wrong, but its a useful for my purposes. Differing opinions welcome.</p></div></article></body></html>

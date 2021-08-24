@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Programmer’s Short and Practical Guide to Graph Theory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="23c4ca66-98bf-42e4-8cad-a8db705c3ed1" class="page sans"><header><h1 class="page-title">The Programmer’s Short and Practical Guide to Graph Theory</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://betterprogramming.pub/a-short-practical-programmers-guide-to-graph-theory-bfc87bc52581" class="url-value">https://betterprogramming.pub/a-short-practical-programmers-guide-to-graph-theory-bfc87bc52581</a></td></tr></tbody></table></header><div class="page-body"><figure id="2031fe42-e052-4892-8448-542f8639e0c9" class="image"><a href="The%20Programmer%E2%80%99s%20Short%20and%20Practical%20Guide%20to%20Grap%2023c4ca6698bf42e48cada8db705c3ed1/1LBB3mtw4NH1Rsd7S6UDBjQ.png"><img style="width:700px" src="The%20Programmer%E2%80%99s%20Short%20and%20Practical%20Guide%20to%20Grap%2023c4ca6698bf42e48cada8db705c3ed1/1LBB3mtw4NH1Rsd7S6UDBjQ.png"/></a></figure><p id="081e1d3a-b494-4a5f-8005-993d357ad50d" class="">Image source: Author</p><p id="5922290f-b60b-461e-bc64-d429d968efef" class="">Graphs are very useful structures to work with in programming since very often computer science problems can be represented as a graph and solved with one of many existing graph techniques. In addition, not necessarily directly using graphs but approaching the problem through graph-based thinking and modelling can improve task clarity and efficiency.</p><p id="9bfbe4e4-af13-41a7-a813-3c415b7697d3" class="">While graph theory is a deep and fascinating field, this article will use the following sections cover broad parts of graph theory relevant to the programmer:</p><ul id="ab3763f5-c625-4128-90d3-4642ab3ecceb" class="bulleted-list"><li>Graph/node-based thinking and approaches to search problems</li></ul><ul id="e78a64ff-6707-4513-8ebe-bccb9b3e420c" class="bulleted-list"><li>Implementation of a graph with object-oriented programming</li></ul><ul id="0b11eaaf-0018-46f7-b99c-98e7256eea2f" class="bulleted-list"><li>Different representations of graphs (adjacency lists, adjacency matrices)</li></ul><ul id="a87c5060-b602-4d46-b9e1-4640d845eb1c" class="bulleted-list"><li>Types of graphs and their implementations: un/directed graphs, un/weighted graphs, cycle graphs, a/cyclic graphs</li></ul><ul id="c9344bb5-a624-48d2-b480-9bef2410173a" class="bulleted-list"><li>Dijkstra’s algorithm, weaknesses, and alternatives</li></ul><ul id="e97045e4-f543-4cca-968e-ad2b51ad5f01" class="bulleted-list"><li>Applications of graph theory</li></ul><ul id="327317b2-80fe-48ea-935d-04e344e06673" class="bulleted-list"><li>Summary/key points</li></ul><p id="9630bf4d-e2f8-4882-95ba-c1940f62f9af" class="">An undirected and unweighted graph is the simplest form of a graph (besides a single node). It consists of two types of elements only: nodes, which can be thought of as points, and edges, which connect these points together. There is no idea of distance/cost or direction, which is why it is undirected and unweighted.</p><p id="2f200055-c200-45ed-93cd-fb55b3afb1bb" class="">Image source: Author</p><p id="9bd2ea8e-ac57-488e-a069-89083a9f3702" class="">For instance, consider the following search problem, and represent it as an undirected and unweighted graph:</p><p id="450e273e-6ef3-4689-99a3-69388579c35d" class="">You have a padlock with two digits, initialized to 00. Each move, you can move one of the four two up or down (moving 0 up is 1, moving 0 down is 9 — the wheels are circular). There are “dead combinations,” in which the padlock will permanently lock if the combination ever equals one of those values. Find the minimum number of moves it takes to reach a target combination without locking, or if it is possible at all.</p><p id="4f0b5e3e-ff5a-40f3-afec-69960f42c624" class="">Dead combinations: [10, 90, 12]. Target: 11.</p><p id="76bd169e-c674-4fd1-8ff1-c6241be8ab75" class="">First, we construct a root, or head of the graph, which is necessary in scenarios where we need to generate the graph as we go. This is 00, or the root case from which branching cases will be generated.</p><p id="bb2b89d7-92ef-44a6-b4fd-d63d191c4baf" class="">The four neighbors of node 00 are 01, 10, 90, and 09, corresponding to various combinations of moving wheels up and down. Our graph already has five nodes and four edges.</p><p id="65a65531-7ced-4321-84f3-0549868406a7" class="">Image source: Author</p><p id="0a850d0f-7dc8-4443-aca9-2eee635fb2f9" class="">For each newly added node, we will continue searching for its neighbors and add it to the graph, unless it is a dead node.</p><p id="4e907753-925b-42e4-9844-b90fed0074e0" class="">Image source: Author</p><p id="aa5301e2-e2cd-4fb5-9ae2-4438ca689e1e" class="">When we have found the target combination, we can retrace our steps and count how many it takes to reach the root node again. Alternatively, we could have been keeping track of the steps each time a node is generated.</p><p id="db01b4b9-4b05-4be3-b5b8-bf0199f09db4" class="">Image source: Author</p><p id="834e19ce-398e-4936-be7d-1b9b8922e8be" class="">If you want to implement the solution to this problem, you can use a queue and breadth-first search, which is more efficient than actually coding a graph.</p><p id="2f7317bd-161d-48f8-98df-009b79818742" class="">This was an example of using graph-based thinking. Since graphs are very ordered and clean structures, thinking and implementing possibilities as nodes and variants as neighbors can result in a complex but clean and understandable search. Additionally, using graphs allows for many studied methods in graph theory to be implemented to speed up search.</p><p id="f6ea9f28-27a0-47fc-8c26-ff332b6c02a7" class="">However, in this padlock problem, graphs did not actually need to be implemented. The most common method to implement a complete graph is to use two objects (classes), a <code>Node</code>, the primary building block, and a <code>Graph</code>, which is comprised of <code>Node</code>s and provides an interface to access information about the graph as a whole.</p><p id="de2da903-b5f4-41b2-9464-cb60dc77da19" class="">Image source: Author</p><p id="2e05b2fc-443c-4de1-a0ef-3568c7243e64" class="">For example, each element in the graph below can be represented in code as their own <code>Node</code>. Each is connected to each other through their <code>Neighbors</code>. If we were to call something like <code>NodeA.Neighbors[1].Neighbors[1].Value</code>, we should receive 2. This is because the second index of Node A’s neighbors is Node C, and the second index of Node C’s neighbors is Node B, which has a value of 2. This kind of easy connectivity allows for easy traversal.</p><p id="6edab799-d438-4704-beaa-fbdc1f940a95" class="">For notation, ‘A 1’ means ‘Node A has value 1’. (Image source: Author)</p><p id="3bb71d42-8447-4f85-8f72-cf5e3f85149d" class="">A directed graph, or a graph where edges only go in one direction, is easy to implement with this design. For example, if a one-way edge were to connect Node A to Node B, Node A’s neighbor would be Node B, but Node B would have no neighbors. Rephrased, neighbors only indicate <em>outbound edges</em>. Note that bidirectional edges can still exist in directed graphs.</p><p id="dc9b6f50-5052-4a16-8430-73e17ec4305c" class="">Image source: Author</p><p id="d55050d5-ccff-4781-aec1-5c30ff6a5f11" class="">If one were to traverse the graph according to neighbors and end up at Node C or Node F, they would be stuck because those nodes have no neighbors and hence no outbound directions.</p><p id="db1cc75b-8db6-447d-85cc-ad301f369cab" class="">Alternatively, a graph can be represented more simply, but at the cost of being less easy to traverse, with two lists representing the edges and nodes (vertices). These are sometimes called <em>adjacency lists</em> since they express in list format the adjacencies between edges (adjacencies being edges and adjacent nodes being neighbors).</p><p id="8d3ea01f-aeca-4630-8dfe-992956e413bc" class="">In the example above, <code>V</code> declares the nodes that exist, and E declares an edge from one node to another (<code>AC</code> means <code>A</code>→<code>C</code>). Since it is compact and simple notation, graphs will often be presented this way.</p><p id="b933fce8-8fd2-4268-9226-02317b30214a" class="">Alternatively, it could be written as a dictionary (map), in which the key is a starting node and its value is a list of elements it points to.</p><pre id="ef32b4d1-cfc5-403b-abea-71f1af080505" class="code code-wrap"><code>adj_l = {A:[B,C], B:[C], C:[F,E], D:[F], E:[A], F:{B,D]}</code></pre><p id="b54ff74d-9050-4859-80c8-14208c1b7049" class="">Graphs, both directed and undirected, can contain loops. A <em>cycle graph</em> is a graph consisting of only one cycle, in which there are no terminating nodes and one could traverse infinitely throughout the graph. A <em>cyclic graph</em> is a graph that consists of several cycle graphs, where traversals can still be infinite but more complex.</p><p id="91c20438-a555-4e9f-91ae-04b25aaada26" class="">Image source: Author</p><p id="32b66972-24c2-45f3-b3fa-73c15d24ef3e" class="">For example, within the complete cyclic graph, A→B→C→D→A is a four-cycle graph, and E→F→G→E is a three-cycle graph. More hidden is another four-cycle graph, B→E→F→G→B.</p><p id="0cd09a98-bcec-48d7-be8b-7ff1b8a9ae99" class="">Certain types of cycles within cyclic graphs, or other components within graphs in which each node is connected to each other node, are known as <em>strongly connected components</em>. For instance, E→F→G→E is a strongly connected component because each of the nodes {E, F, G} has a path to another, regardless of direction. B→E→F→G→B is also a strongly connected component. On the other hand, A→B→C→D→A is not because there is no connection between component members B and D.</p><p id="6e0aa6bb-0c41-4a4c-bd26-f13716a232e4" class="">On the other hand, as the name suggests, acyclic graphs are ones where no cycle exists, and any traversal long enough will eventually terminate. In the graph below, no matter which node you start on, a traversal will always terminate.</p><p id="b2886b80-802e-426c-ba80-b4b65422dfaf" class="">Image source: Author</p><p id="52b32720-406b-46f9-aaeb-616d0dfe20fd" class="">It is not always true in more complex problems that edges can naively be treated as equal to travel. For instance, if you’re planning the best route to go from a start to an end destination, you’re going to consider not only the number of segments but also the distance and the cost.</p><p id="ca9f31ee-ed37-4edd-9ec5-ab9b251020b8" class="">For instance, the shortest path to go from S→E is S→D→F→E, which requires only three edge traversals. However, that route takes a very small, crowded street. Alternatively, S→A→B→C→E takes four edges but travels most of the distance along a highway, and the overall cost is lessened. When the notions of distance and cost are added to a graph, it becomes weighted.</p><p id="a6469321-05cb-4428-a929-5ce9382924a4" class="">Image source: Author</p><p id="bf7154eb-9f20-4cc4-8350-6097dcc985b8" class="">To implement this into our existing framework for graph structure, we can include for each element in <code>Neighbors</code> another number describing the cost to reach that neighbor. For instance, it may be stored in tuples <code>[(n, c), (n, c)]</code>, where <code>n</code> represents the node and <code>c</code> represents the cost.</p><p id="5b5a667d-3db5-46d5-8d8b-77114dfbfeb3" class="">Image source: Author</p><p id="bf0ac128-9ad3-4d08-8c2a-96239a668606" class="">Often, graphs will also be presented in the form of a matrix, known as an <em>adjacency matrix</em>. This is not as compact as an adjacency list but can represent weighted graphs more naturally. In the matrix, each row and column represents a node and the cell located at (<em>x</em>, <em>y</em>) represents the edge <em>y</em>→<em>x</em> (or vice versa, it’s a matter of notation). If there is no edge, the value is 0. If there is, the value is the cost of that edge.</p><p id="8a7fbf91-7c48-4f15-9aca-33864a2b8963" class="">Image source: Author</p><p id="6be0b7c0-e72e-4e02-b4b0-eb51931a1957" class="">Adjacency matrices also have the advantage of easy lookup of costs, even with unweighted graphs, over adjacency lists and an object-oriented representation. Note that undirected graphs will have symmetrical adjacency matrices. Since matrices are also easier to manipulate, many graph operations and algorithms are commonly implemented on adjacency matrices.</p><p id="5d346dde-47c3-4e5a-b8f7-1748f3981953" class="">Various algorithms have been created to find the shortest path for weighted graphs, like Dijkstra’s algorithm (pronounced <em>dike-strah</em>). Essentially, Dijkstra’s algorithm is very similar to the brute-force style search discussed earlier with the padlock problem but does so in a way that is most logical. The rough outline of the algorithm is as follows:</p><ol type="1" id="0baa3ced-58ba-40e7-9f48-bd671f8365c6" class="numbered-list" start="1"><li>Begin at the start node and initialize a list (priority queue) to keep track of which nodes to process.</li></ol><ol type="1" id="1c7cb8e0-aaae-44f5-afc5-3d6638c289bf" class="numbered-list" start="2"><li>At each iteration of the algorithm, find the first element of the list. Process the element by finding all its neighboring nodes (that haven’t been explored before).</li></ol><ol type="1" id="6e0c0dca-71ef-486d-a4d7-c71d1bf6e1a3" class="numbered-list" start="3"><li>For each neighbor, calculate the total distance/cost to reach that node from the start node. Put these neighbor nodes into the list such that the nodes with the lowest costs are at the front.</li></ol><ol type="1" id="f2779c81-beb2-4d4c-a2a1-832627b8e2cd" class="numbered-list" start="4"><li>Repeat until the end node has been processed.</li></ol><p id="c5fcb27b-cdb6-4aef-b9aa-2b4230c2be73" class="">There are plenty more in-depth resources about Dijkstra’s algorithm, but primarily, its main difference from a brute-force search is that it processes nodes currently with the smallest costs first, which is logically correct. This can speed up redundant searching by taking into account weights.</p><p id="88de0c93-50db-4e3a-8ade-6511cdea4cbb" class="">While powerful in many instances, Dijkstra is naïve in that it only chooses to process nodes that currently hold the best costs, in the hopes that the complete path will also hold a similarly small cost, when this may not be the case at all. This can be a problem in large graphs.</p><p id="01e821e8-9eec-4216-9456-7c4cd83dd375" class="">For instance, consider this grid of nodes, where each connection has the same cost to traverse; Dijkstra’s algorithm (slightly varying depending on implementation) will search through all the light nodes before arriving at the end node <code>E</code>. It’s like pouring a bucket of water at the location of node <code>S</code> and hoping it eventually spreads to the target node.</p><p id="072e9ca0-1c04-40f8-bb62-6e0042bfd758" class="">Image source: Author</p><p id="95ce41c9-da29-451a-a44d-88c50e083eef" class="">The A Star algorithm and many other variants take into account these weaknesses and add enhancements, like stronger memory and direction to improve traversals throughout graphs. Machine learning, particularly reinforcement learning, is central to more recent methods of highly efficient graph traversal. In reinforcement learning, probabilities and states are often represented as graphs an agent traverses.</p><p id="d84aed18-ead1-4a9f-adbc-1d3ef6f87d50" class="">Graphs and graph-based thinking can be used in many other computer science problems, even when it is not obvious. Any time you approach a difficult problem, attempting to represent it using vertices and edges can inspire new ideas, simplify and reduce the problem, or even be one solution to the problem.</p><p id="55b36f3d-cac1-41c7-8a97-dbab0c8b4133" class="">Some applications of graph theory in computer science include:</p><ul id="460202f8-ceec-4d95-a503-9aac58932e3f" class="bulleted-list"><li>Modelling of complex networks, like social networks or in the simulation of a disease like the new coronavirus. Each node can represent one person or a population, and edges can represent probability/easiness of transmission. In this model, we can try to identify or form circular, closed graphs.</li></ul><ul id="b076b7a2-86fa-4c12-a1f4-6d8731a9993c" class="bulleted-list"><li>Organization and anything hierarchical. Graphs don’t have to be loopy and cyclical; they can also express a hierarchy. For instance, if you were to create an API for a local library to access books by various content, you’d want to create a graph. If you wanted to create a site map for your website, you’d use a graph. <a href="https://en.wikipedia.org/wiki/Graph_database">Graph databases</a> are types of databases that specifically rely on the graph’s organized hierarchies to store data.</li></ul><ul id="5c7f654b-93ab-455e-bd28-52a0112d655a" class="bulleted-list"><li>Any problem that involves an agent travelling between many locations or states is most likely represented well with a graph. Using graphs can help reduce the complexity of almost any programming problem.</li></ul><ul id="a7ce5e56-392b-44ba-8b1d-8abb3d9c44fd" class="bulleted-list"><li>A service like Google Maps, which tells you the best route to take, considering not only distance but traffic time, elevation, tolls, etc. It is, essentially, finding the best path in a massive weighted graph (imagine a node every few feet or so, and a graph spanning the Earth).</li></ul><ul id="556b338a-f77c-412c-a22f-9a3a3b5eae50" class="bulleted-list"><li>Graph theory was involved in the proving of the <a href="https://en.wikipedia.org/wiki/Four_color_theorem">Four-Color Theorem</a>, which became the first accepted mathematical proof run on a computer.</li></ul><ul id="0e6902f2-bafb-4140-a3ee-9e092fc0de6c" class="bulleted-list"><li>In natural language processing, a division of machine learning that handles the modelling of language, weighted <a href="https://towardsdatascience.com/mining-order-from-chaos-the-ingenious-and-creative-fusion-of-nlp-graph-theory-954b10e2f976">graph representations of words</a> and text are extremely valuable because they can provide insight into, for example, words that belong to a similar cluster (<em>apples</em>, <em>oranges</em>) or mean similar things through distance.</li></ul><h1 id="fadf6e6b-620c-44ed-a487-a95431aef72f" class="">Key Points</h1><ul id="1d1ed409-e8aa-4881-a72e-74f691a08d39" class="bulleted-list"><li>Graphs are comprised of a set of nodes, also called vertices, and edges, or connections between the nodes.</li></ul><ul id="d44a675f-18ba-4a7e-b072-850b992de3e5" class="bulleted-list"><li>Two representations of graphs include adjacency lists and adjacency matrices. The latter supports easier indexing and manipulation but takes up more space than the former.</li></ul><ul id="1a1d3dd2-d922-4b19-8dc6-4f93586c0bb5" class="bulleted-list"><li>Complete graphs can be implemented using <code>Node</code> objects, which have a value and a set of neighbors.</li></ul><ul id="1738bd29-8b94-4612-a08e-f88d95a402b5" class="bulleted-list"><li>Directed graphs have direction. Weighted graphs apply the idea of distance or cost to each edge. Cyclic graphs contain cycles that can be infinitely traversed.</li></ul><ul id="55d4839d-820f-4e75-ae98-4da3b659c102" class="bulleted-list"><li>Dijkstra’s algorithm is used to find the shortest distance between two nodes in a weighted graph. It is usually effective but somewhat naïve, which is why there exists a host of other algorithms dedicated to finding the best graph traversal.</li></ul><ul id="be80bdc2-5073-476b-83de-0d57d5c65791" class="bulleted-list"><li>Graphs, both in their implementation and in a thinking paradigm, can be applied to a very wide set of computer science and programming problems.</li></ul></div></article></body></html>

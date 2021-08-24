@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Wireless is a trap</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="855aa8df-3373-4ab5-9b28-ca05d835e65d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕹️</span></div><h1 class="page-title">Wireless is a trap</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-blue">Research</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.benkuhn.net/wireless/" class="url-value">https://www.benkuhn.net/wireless/</a></td></tr></tbody></table></header><div class="page-body"><p id="607ac895-6557-4223-b049-e8a00cd921fb" class="">I used to be an anti-wire crusader. I hated the clutter of cables, and my tendency to unconsciously chew on them if they got anywhere near my face. But running into bug after tricky wireless bug—mostly while trying to make my video calls work better—I’ve apostasized. The more I’ve learned about wifi, Bluetooth and related protocols, the more I’m convinced that they’re often worse, on net, than wires.</p><p id="5469a2cf-c826-4506-ba01-6e8767ba5187" class="">For instance: most people, when their video call stutters, blame their Internet service provider. That’s understandable, since most ISPs are overpriced oligopolists with barely-usable software and horrible customer service. However, every time I can remember helping someone track down the source of their connection problems, the culprit has turned out to be their wifi. And often, the easiest fix has been to run a cable.</p><p id="f66312a7-0634-49fc-a958-a326e9c50094" class="">Wifi (and bluetooth, etc.) sucker you in by making it seem like they “just work.” But if you investigate, you’ll often find that the wireless link is operating in a degraded state that performs much worse than a wired equivalent. Since this degradation is silent, it’s often not obvious that the problem is the wireless—instead, you’ll probably conclude that it’s your device/software/self.</p><p id="3d69b71d-c3a2-482e-86c3-93076a602746" class="">Over and over again, I’ve seen people fix some wireless-related problem and go <a href="https://www.jefftk.com/p/ethernet-is-worth-it-for-video-calls">“wow, I had no idea how much better this could be!&quot;</a></p><figure id="79d0532f-9f31-41de-83a8-2434be50e75c" class="image"><a href="Wireless%20is%20a%20trap%20855aa8df33734ab59b28ca05d835e65d/desk_hu18de0b9e12a1a70caedb5f95b671d2c6_5832704_600x400_resize_q75_box.jpg"><img style="width:600px" src="Wireless%20is%20a%20trap%20855aa8df33734ab59b28ca05d835e65d/desk_hu18de0b9e12a1a70caedb5f95b671d2c6_5832704_600x400_resize_q75_box.jpg"/></a></figure><figure id="bec0cab0-1eda-4e83-ae6e-203274409cd7" class="image"><a href="Wireless%20is%20a%20trap%20855aa8df33734ab59b28ca05d835e65d/under_hu63e9800c185aac6c3ebf266a25d00a9b_5406720_600x400_resize_q75_box.jpg"><img style="width:600px" src="Wireless%20is%20a%20trap%20855aa8df33734ab59b28ca05d835e65d/under_hu63e9800c185aac6c3ebf266a25d00a9b_5406720_600x400_resize_q75_box.jpg"/></a></figure><p id="5299e65b-bb3c-4300-8f37-88b72a9b4aad" class="">Fig. 1b: less-managed cables underneath.</p><p id="1fe79bac-2ea4-48d7-b99c-454c8b45a4f0" class="">Recently, I finally ragequit and replaced all my desk’s wireless devices with wired ones. While I had to invest a bit in figuring out cable management (and break my habit of chewing on headphone cables), I was able to achieve nearly the same level of tidiness, with <em>much</em> better reliability, quality and speed. I no longer have to worry about my equipment failing to pair, running out of battery, or spontaneously giving me garbled robot voice during a livestreamed talk. It’s dramatically reduced my level of device-related agony.</p><p id="e5fee13e-e0cd-4d1a-85a1-9b19e85d6b65" class="">To illustrate the degree of agony I’m talking about, below I’ll cover some of the subtle, hard-to-notice but severe problems I’ve run into with wireless protocols. If you’re convinced, try out some wires—you, too, can figure out whether you’ve been a victim of the wireless trap.</p><h2 id="de12515d-9000-491d-8a16-c15ca864edee" class="">Wifi</h2><p id="fd2c8fb9-cde6-48cf-ad71-34112881fd9f" class=""><strong>Interference.</strong> If multiple wireless networks are operating on the same “channel” (radio frequency band), their transmissions can interfere with each other. When that happens your device needs to re-send the same information, which makes your wifi slow.</p><p id="18b66a85-fd76-4c8e-8962-470dbf8d0baf" class="">You might think this could be solved by having routers automatically figure out the least interference-prone channel to use, but many of them seem to be quite bad at this. (Also, the old 2.4GHz wifi protocol was only allowed to use three non-overlapping channels.)</p><p id="1cfc5131-12e7-4023-aa89-7f39d2b2fc6d" class="">That means in dense areas (e.g. apartment buildings), routers will often pick a bad channel and end up interfering with each other. There’s no way for your router or device to notify you if it’s experiencing interference, so you’ll only learn about it if you know how fast your router “should” be and notice that it’s slower.</p><p id="01ecc0ed-062b-40be-8a70-74f34b7dd2ca" class=""><strong>Dead zones.</strong> If you’re too far from your router, your computer may not be able to reliably receive the signal that the router is sending, or vice-versa. How far is “too far” can also be affected, sometimes in weird ways, by whatever walls or ceilings are in the way. Unless you know a lot about how radio waves interact with building materials, it’s hard to predict where your dead zones are.</p><p id="bacc400c-ad25-4cfb-be38-45ac98fbe270" class="">The worst part is that many dead zones aren’t fully dead: your computer and the router will try to retransmit each data packet multiple times before giving up, and often it will eventually go through. If that’s what mostly happens, instead of a dead zone you’ll end up with a “slow zone” where your internet works, but is subtly crappy.</p><p id="2e214958-6940-4bf0-bf5b-0a2707eb4602" class="">Of course, unless you’re keeping a close eye on your network performance statistics and how they relate to your spatial location, you’d never notice a slow zone. If you noticed anything, it would be that sometimes your internet is randomly worse than other times.</p><p id="3cca43c7-f8ba-4eed-9f3f-a6bc240dfb51" class=""><strong>Polling.</strong> Any program on your computer can ask your wireless card to enumerate the nearby networks. This causes it to go into “polling mode,” where it spends less time transmitting data and more time listening for routers advertising their network info (it can’t transmit and receive at the same time). Thus, it will cause a sudden burst of network delays that can e.g. cause your video call to stutter or freeze for a few seconds.</p><p id="7fa3d400-42aa-4fb7-8c34-9767ad8005b5" class="">Most programmers don’t realize that wireless polling interferes with network performance, so they ask the OS to poll with wild abandon. I’ve been burned by this many times.</p><p id="be14b27b-3716-4127-8d65-ea74b633033f" class="">The most egregious instance was when I noticed that my video calls sometimes stuttered with an oddly regular frequency. Here’s the tortuous process by which I tracked down the culprit:</p><ul id="2ef8a052-5c55-470c-8283-98d8e87a4339" class="bulleted-list"><li>I <a href="https://en.wikipedia.org/wiki/Ping_%28networking_utility%29">pinged</a> my router every second for about 10 minutes, then plotted the output in Excel and confirmed that the slow pings were exactly 30 seconds apart. That made me guess it was probably a software problem.</li></ul><ul id="17422477-1b94-4301-a000-21795e3b2cf8" class="bulleted-list"><li>I asked for help debugging it on Facebook and someone recommended <a href="https://twitter.com/benskuhn/status/952245967931215872">enabling macOS wireless debug logging</a>.</li></ul><ul id="9687840d-b903-41ed-8370-a174df696d79" class="bulleted-list"><li>I enabled the debug logging and noticed that several apps, when I had them open, would requesting network scans, at times correlated to the increased ping latencies.</li></ul><ul id="77cfa350-da71-4c05-b654-118bdd72a4b4" class="bulleted-list"><li>After narrowing it down to those few apps, I <a href="https://apple.stackexchange.com/questions/310218/stop-destroying-network-performance-every-time-an-app-scans-for-wifi-networks">asked how to stop them from doing that on AskDifferent</a>.</li></ul><ul id="bafe5051-828e-45f2-98a8-a88ffabff69c" class="bulleted-list"><li>Someone on AskDifferent tracked the problem down to <a href="https://www.qt.io/">Qt</a>, a software framework for making user interfaces, used by apps with millions of users.</li></ul><p id="686e5e1d-0d98-4f02-a474-055ef71bb7fd" class="">Qt included a component which would poll for networks every 30 seconds whenever a “network access manager” was instantiated, causing pretty much <em>any Qt app</em> using the network to degrade your wifi for ~5 out of every 30 seconds.</p><p id="76a04e51-0029-4cec-a6da-e868cc63a0b5" class="">There were already multiple bug reports for this issue, <a href="https://bugreports.qt.io/browse/QTBUG-46015?focusedCommentId=290240&amp;page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-290240">one of which</a> was declared “closed” by an engineer because they allowed users to use an <a href="https://en.wikipedia.org/wiki/Environment_variable">environment variable</a> to disable the polling.</p><p id="82884894-615a-400d-a081-ff7bdddfe72d" class="">Of course, this is an unbelievably useless “solution” because most users won’t realize that their wifi is degraded; those who do won’t realize that it’s Qt’s fault; and those who realize will still have a hard time Googling for the appropriate fix (let alone implementing it, unless they can code).</p><p id="61e8348d-d288-450e-8cdc-53f90d9abce8" class="">This behavior is so user-unfriendly, and the “fix” so laughable, that it seems likely that the Qt developers somehow failed to realize the severity of the problem—I’d guess it ruined video calls for on the order of a million people, since, for instance, it affected qBittorrent which has been downloaded <a href="https://en.wikipedia.org/wiki/QBittorrent">75m times</a>. Most of those million people were probably not technical enough to figure out how to “set the <code>QT_BEARER_POLL_TIMEOUT</code> environment variable to <code>-1</code>.”</p><p id="9f81fe3d-4050-4b05-9901-eb366a806dde" class="">(Fortunately, it does look like in 2017—three years after the original bug report—they finally realized they should just <em>stop polling</em> and <a href="https://codereview.qt-project.org/c/qt/qtbase/+/214029">fixed the bug the right way</a>.)</p><p id="16c2c7fd-c188-4dfe-bdbf-dabfe8fd5487" class="">Qt was the worst offender, but it’s far from the only one. Even macOS had a bug for a while where the same thing would happen when you opened Spotlight (which I do frequently during video calls, if someone asked me to look at a particular file, or if I want to zone out and read the internet multitask). I had to fix it by disabling individual Spotlight result types until I found out which one was causing the problem. So it seems even Apple’s own developers don’t realize that wifi polling is a hazard.</p><h2 id="1c190a64-6ae2-4cb4-a7ce-2a60fe4277c5" class="">Bluetooth audio</h2><p id="0b742850-49a7-4fff-9700-80ae45114d2f" class=""><strong>High latency.</strong> Most Bluetooth headsets introduce <a href="https://www.rtings.com/headphones/tests/connectivity/bluetooth#comparison_4115">around 150-300ms of latency</a> (the time between my computer receiving the audio from the Internet, and the sound coming out of the headphones). That means that if I’m chatting with a friend in New York, the audio data will take about 50ms to get from them to my computer, and, say, 200ms—<em>4x as long</em>—to get from my computer to my ears. Since high latency ruins the natural flow of conversations, I’d like to eliminate as much of it as I can.</p><p id="2b7470c0-b947-4392-9797-26789f5f4adf" class="">It’s possible to find lower-latency Bluetooth headsets if they support the right “codec,” like “AptX Low Latency.” Of course, in addition to supporting the codec in theory, they have to agree with your computer to use it, which can sometimes fail. (The option to inspect which codec is being used is, of course, buried in various hidden menus and settings depending on your OS.)</p><p id="4353d51f-cd56-4195-b1c1-530bf3717527" class=""><strong>Low quality.</strong> Related to the codec issue, many bluetooth devices will play high-quality audio when the microphone is turned off, but degrade to much lower-quality audio when it’s turned on. You can test this for yourself if you have a bluetooth headset: play music on it, then open your microphone settings to the page where it shows the mic input volume. You’ll probably hear the audio cut out for a second, then return at lower quality. (This happens even with devices you might expect to be high-end, like my Airpods Pro + 2018 Macbook Air.)</p><h2 id="82fcf8bc-14cf-4a96-8773-8cd377d27016" class="">Bluetooth general</h2><p id="4ac116c1-9ed6-410b-a9ee-d83dd69dd715" class=""><strong>Bluetooth bugs.</strong> Even though all computers now have built-in Bluetooth, many Bluetooth accessories also ship with proprietary <a href="https://en.wikipedia.org/wiki/Dongle">dongles</a> that use a different protocol. (For instance, Jabra headsets, Logitech keyboards/mice, <a href="https://antlionaudio.com/products/modmic-wireless?variant=12529444126775">this headset mic</a>.) These dongles apparently use different forms of wireless transmission because Bluetooth drains lots of power, adds latency, and is less reliable.</p><p id="cc4486f0-96ca-4451-95f0-fd25b8b088fc" class="">For instance, on my Mac’s built-in bluetooth, my mouse (a Logitech MX Master) displayed noticeable jank—stopping, then jumping, instead of moving smoothly. I’ve seen this happen on three different Macs, so it seems likely to be a software problem. When I switched to using Logitech’s dongle it stopped.</p><p id="98537cd8-9605-4d96-872c-651311568cc7" class="">Similarly, when connected to Mac bluetooth, my Jabra Evolve 75 headset would frequently have the mic or sound drop. It (mostly) worked fine on its own dongle.</p><p id="0656a3b5-e36f-414a-b85c-5f5a254e23c3" class="">I’m not sure whether to blame Jabra/Logitech or Apple (or the Bluetooth standards body) for these problems. But either way, when device manufacturers are abandoning it for other protocols that require a dongle-per-device, we know Bluetooth has failed.</p><p id="428645c4-3bb6-4a54-bedb-bb9c274cede8" class="">The original goal of Bluetooth was to unify different wireless devices in a single wireless radio and protocol, <a href="https://en.wikipedia.org/wiki/Bluetooth#Name_and_logo">much like Harald Bluetooth unified Denmark</a>. Meanwhile, here in reality, I recently had to buy a USB hub just for the dongles for my keyboard, mouse, headphones and microphone.</p><p id="9665c122-63fc-4a82-873a-27cea2626ae7" class=""><strong>Reliability.</strong> Even with proprietary dongles, wireless devices are much less reliable than wired. For instance, I wrote above that my Logitech MX Master worked fine once I switched to the proprietary dongle, but that’s not quite true: it worked fine for a while, then one day it started janking again for no discernible reason. (That was the day I finally apostasized and threw out my desk’s wireless gear.)</p><p id="f31db063-9643-4272-8ae7-288aadd8d9a3" class="">I encounter other Bluetooth bugs that require me to un-pair and re-pair a few times a week. For instance, my AirPods sometimes “desynchronize” so that one is playing back audio a few milliseconds ahead of the other, causing a strange and really unpleasant echo effect.</p><p id="bc14bc3d-1cd8-4c55-a67a-526651cfd0e0" class=""><strong>Interference.</strong> One possible reason for poor reliability is that Bluetooth and 2.4GHz wifi interfere with each other. Much like wifi interference, your devices will never warn you if they’re experiencing interference; you’ll notice only because they suddenly become kind of crappy.</p><p id="0f696fd2-d1f3-4e95-bb02-71566aead726" class=""><strong>Charging.</strong> Not the fault of Bluetooth per se, but a downside of using too many wireless devices is that it’s really annoying to remember to keep them all charged. Mine tended to die at the least opportune times, e.g. during video calls.</p><h2 id="8bad5d48-9cb9-4086-b470-2f320a78e862" class="">Conclusion</h2><p id="22ea600e-a8af-4048-8ca6-c76b2d452d55" class="">Most of these problems shared a few things in common:</p><ul id="36b88ea2-aa2f-411b-bebe-803786bd3b18" class="bulleted-list"><li>Things didn’t break completely, they just degraded. That’s probably the right call, but it meant that I didn’t immediately notice there was a problem.</li></ul><ul id="15cb4039-9590-419c-b366-d9e56a907885" class="bulleted-list"><li>Compounding this, I had no idea how well the device “should” work, so I took a long time to notice that it was in a degraded state.</li></ul><ul id="8d525bfa-2b36-445f-8c26-01db18822954" class="bulleted-list"><li>Even once I was aware of the problem, it was hard or impossible to understand the root cause and fix it because I didn’t know the right diagnostics (or they didn’t exist).</li></ul><p id="af5c6de2-5b59-4d63-8a83-cbc6ad0fa739" class="">I want my tools to be <em>predictable</em>—to have consistent performance and fail in ways that I understand. Wireless protocols are inherently more complex (because many devices share the same airspace) and have more different ways to fail, so they’re much less predictable than wires. For me, the convenience often isn’t worth that cost.</p><p id="3ac04e9a-af61-4219-84d1-b24277669437" class="">I still use wireless gear when it’s clearly worth it—for instance, I use wifi for my laptop since it moves around a lot, and I use a wireless charger for my phone since I don’t really care how fast it charges. But for serious work, I’ll spend the time to fiddle around with cable routing and wire everything.</p><p id="24513f60-4735-4d30-8261-a6a9996cb2e1" class="">This makes me wonder what the world would look like if we took 10% of the effort we currently spend on removing wires from everything, and put it into ingenious cable routing solutions instead. I’d bet that a lot of wireless-dependent activities like video calls would be way more pleasant.</p><p id="da7ccf0b-1fde-4852-a35e-80c4111c28b3" class=""><em>Correction: a previous version of this post mistakenly described Bluetooth devices’ proprietary dongles as Bluetooth dongles. Thanks to helpful </em><a href="https://news.ycombinator.com/item?id=23592695"><em>Hacker News commenters</em></a><em> for the correction, which even more strongly supports my point that Bluetooth sucks :)</em></p></div></article></body></html>

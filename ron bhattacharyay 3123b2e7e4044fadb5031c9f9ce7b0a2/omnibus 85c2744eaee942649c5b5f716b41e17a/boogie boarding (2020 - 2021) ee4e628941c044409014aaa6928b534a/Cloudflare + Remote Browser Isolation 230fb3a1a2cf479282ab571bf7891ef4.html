@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Cloudflare + Remote Browser Isolation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="230fb3a1-a2cf-4792-82ab-571bf7891ef4" class="page sans"><header><h1 class="page-title">Cloudflare + Remote Browser Isolation</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://blog.cloudflare.com/cloudflare-and-remote-browser-isolation/" class="url-value">https://blog.cloudflare.com/cloudflare-and-remote-browser-isolation/</a></td></tr></tbody></table></header><div class="page-body"><p id="815e12c5-dade-40f5-837b-aea3f0f2f94b" class="">Cloudflare announced today that it has purchased S2 Systems Corporation, a Seattle-area startup that has built an innovative remote browser isolation solution unlike any other currently in the market. The majority of endpoint compromises involve web browsers — by putting space between users’ devices and where web code executes, browser isolation makes endpoints substantially more secure. In this blog post, I’ll discuss what browser isolation is, why it is important, how the S2 Systems cloud browser works, and how it fits with Cloudflare’s mission to help build a better Internet.</p><h3 id="aeccf1eb-a2e7-4d5b-a10d-8dc1bdd84bfd" class="">What’s wrong with web browsing?</h3><p id="7d78c468-3adb-4311-b97b-49d5a9bf0720" class="">It’s been more than 30 years since Tim Berners-Lee wrote the project proposal defining the technology underlying what we now call the world wide web. What Berners-Lee envisioned as being useful for “<em>several thousand people, many of them very creative, all working toward common goals</em>”[1] has grown to become a fundamental part of commerce, business, the global economy, and an integral part of society used by more than 58% of the world’s population[2].</p><p id="23a63939-9361-49f8-b56d-023d00da61df" class="">The world wide web and web browsers have unequivocally become the platform for much of the productive work (and play) people do every day. However, as the pervasiveness of the web grew, so did opportunities for bad actors. Hardly a day passes without a major new cybersecurity breach in the news. Several contributing factors have helped propel cybercrime to unprecedented levels: the commercialization of hacking tools, the emergence of malware-as-a-service, the presence of well-financed nation states and organized crime, and the development of cryptocurrencies which enable malicious actors of all stripes to anonymously monetize their activities.</p><p id="6f17562e-5b6f-45ae-8621-7f899ff6e133" class="">The vast majority of security breaches originate from the web. This should not be surprising. Although modern web browsers are remarkable, many fundamental architectural decisions were made in the 1990’s before concepts like <em>security</em>, <em>privacy</em>, <em>corporate oversight</em>, and <em>compliance </em>were issues or even considerations. Core web browsing functionality (including the entire underlying WWW architecture) was designed and built for a different era and circumstances.</p><p id="0ee66cce-b626-48f1-b143-b452143e39c2" class="">In today’s world, several web browsing assumptions are outdated or even dangerous. Web browsers and the underlying server technologies encompass an extensive – and growing – list of complex interrelated technologies. These technologies are constantly in flux, driven by vibrant open source communities, content publishers, search engines, advertisers, and competition between browser companies. As a result of this underlying complexity, web browsers have become primary attack vectors.</p><p id="cd347fcf-af48-4ffd-b6d7-7d0595f33676" class="">The very structure and underlying technologies that power the web are inherently difficult to secure. Some browser vulnerabilities result from <em>illegitimate use of legitimate functionality</em>: enabling browsers to download files and documents is good, but allowing downloading of files infected with malware is bad; dynamic loading of content across multiple sites within a single webpage is good, but cross-site scripting is bad; enabling an extensive advertising ecosystem is good, but the inability to detect hijacked links or malicious redirects to malware or phishing sites is bad; etc.</p><h3 id="b3943b09-e25e-471f-b427-e3fda913f436" class="">Enterprise Browsing Issues</h3><p id="75f502ef-5868-44c4-8732-a95e9e940f84" class="">Enterprises have additional challenges with traditional browsers.</p><p id="debb8a3a-6ecf-4092-a631-93ca7e660c64" class="">Paradoxically, IT departments have the least amount of control over the most ubiquitous app in the enterprise – the web browser. The most common complaints about web browsers from enterprise security and IT professionals are:</p><ol type="1" id="41008999-e578-480e-9829-ebeae5f12d95" class="numbered-list" start="1"><li><strong>Security</strong> (obviously). The public internet is a constant source of security breaches and the problem is growing given an 11x escalation in attacks since 2016 (Meeker[3]). Costs of detection and remediation are escalating and the reputational damage and financial losses for breaches can be substantial.</li></ol><ol type="1" id="d20126e4-613b-4fd4-b62d-4c4535ae576a" class="numbered-list" start="2"><li><strong>Control</strong>. IT departments have little visibility into user activity and limited ability to leverage content disarm and reconstruction (CDR) and data loss prevention (DLP) mechanisms including when, where, or who downloaded/upload files.</li></ol><ol type="1" id="0cc9961c-491f-4303-bab8-86da11b08372" class="numbered-list" start="3"><li><strong>Compliance</strong>. The inability to control data and activity across geographies or capture required audit telemetry to meet increasingly strict regulatory requirements. This results in significant exposure to penalties and fines.</li></ol><p id="ced4aeaf-93a7-42ce-b9bc-9dfaf1d47e42" class="">Given vulnerabilities exposed through everyday user activities such as email and web browsing, some organizations attempt to restrict these activities. As both are legitimate and critical business functions, efforts to limit or curtail web browser use inevitably fail or have a substantive negative impact on business productivity and employee morale.</p><p id="593c02e1-c618-4b1b-9bc6-349cf5f24bad" class="">Current approaches to mitigating security issues inherent in browsing the web are largely based on <em>signature</em> technology for data files and executables, and lists of known good/bad URLs and DNS addresses. The challenge with these approaches is the difficulty of keeping current with known attacks (file signatures, URLs and DNS addresses) and their inherent vulnerability to zero-day attacks. Hackers have devised automated tools to defeat signature-based approaches (e.g. generating hordes of files with unknown signatures) and create millions of transient websites in order to defeat URL/DNS blocklists.</p><p id="3e5ea029-bc7b-4b72-896e-3936897a22ce" class="">While these approaches certainly prevent some attacks, the growing number of incidents and severity of security breaches clearly indicate more effective alternatives are needed.</p><h3 id="e0a03cc3-3bec-430c-b63c-436ee23fde95" class="">What is browser isolation?</h3><p id="4a5b784d-b95d-4afc-bc9e-f95a76a5a279" class="">The core concept behind browser isolation is security-through-physical-isolation to create a “gap” between a user’s web browser and the endpoint device thereby protecting the device (and the enterprise network) from exploits and attacks. Unlike secure web gateways, antivirus software, or firewalls which rely on known threat patterns or signatures, this is a zero-trust approach.</p><p id="6e4ae970-9577-4dcc-911a-c5aa40d1140f" class="">There are two primary browser isolation architectures: (1) client-based <em>local </em>isolation and (2) <em>remote </em>isolation.</p><p id="aa8a7d5b-011b-4efb-9f5d-e4ac2fbaed5b" class=""><strong>Localbrowser isolation</strong> attempts to isolate a browser running on a local endpoint using app-level or OS-level sandboxing. In addition to leaving the endpoint at risk when there is an isolation failure, these systems require significant endpoint resources (memory + compute), tend to be brittle, and are difficult for IT to manage as they depend on support from specific hardware and software components.</p><p id="427ff747-b40e-4905-adb0-c49bba3e760f" class="">Further, local browser isolation does nothing to address the control and compliance issues mentioned above.</p><p id="c7cbb811-6f51-48a6-912e-133660c491d3" class=""><strong>Remote browser isolation</strong> (RBI) protects the endpoint by moving the browser to a remote service in the cloud or to a separate on-premises server within the enterprise network:</p><ul id="d1fcc430-6cdc-4b0e-a9cd-06cf6fcd414c" class="bulleted-list"><li>On-premises isolation simply relocates the risk from the endpoint to another location within the enterprise without actually eliminating the risk.</li></ul><ul id="949d4cf7-a7fb-410c-ad3b-eaeca816f8a1" class="bulleted-list"><li>Cloud-based remote browsing isolates the end-user device and the enterprise’s network while fully enabling IT control and compliance solutions.</li></ul><p id="c7350556-eb32-4d11-a578-27684956a915" class="">Given the inherent advantages, most browser isolation solutions – including S2 Systems – leverage cloud-based remote isolation. Properly implemented, remote browser isolation can protect the organization from browser exploits, plug-ins, zero-day vulnerabilities, malware and other attacks embedded in web content.</p><h3 id="cd85614d-7ec4-4be3-a4af-dcd6fd24f8b8" class="">How does Remote Browser Isolation (RBI) work?</h3><p id="32fdf82d-5d01-4c6d-aca7-a871a78ec233" class="">In a typical cloud-based RBI system (the blue-dashed box ❶ below), individual remote browsers ❷ are run in the cloud as disposable containerized instances – typically, one instance per user. The remote browser sends the rendered contents of a web page to the user endpoint device ❹ using a specific protocol and data format ❸. Actions by the user, such as keystrokes, mouse and scroll commands, are sent back to the isolation service over a secure encrypted channel where they are processed by the remote browser and any resulting changes to the remote browser webpage are sent back to the endpoint device.</p><figure id="e16c4dab-ccc4-4179-80fe-3f541e1ec3f4" class="image"><a href="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image3-2.png"><img style="width:700px" src="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image3-2.png"/></a></figure><p id="035e9fcd-5f06-459d-9746-ad07debc0804" class="">In effect, the endpoint device is “remote controlling” the cloud browser. Some RBI systems use proprietary clients installed on the local endpoint while others leverage existing HTML5-compatible browsers on the endpoint and are considered ‘clientless.’</p><p id="cd03a5e9-804d-49e9-80f5-cf8354b317b9" class="">Data breaches that occur in the remote browser are isolated from the local endpoint and enterprise network. Every remote browser instance is treated as if compromised and terminated after each session. New browser sessions start with a fresh instance. Obviously, the RBI service must prevent browser breaches from leaking outside the browser containers to the service itself. Most RBI systems provide remote file viewers negating the need to download files but also have the ability to inspect files for malware before allowing them to be downloaded.</p><p id="85c0675e-4d4c-41e4-a71b-bc9c0b936b9b" class="">A critical component in the above architecture is the specific remoting technology employed by the cloud RBI service. The remoting technology has a significant impact on the operating cost and scalability of the RBI service, website fidelity and compatibility, bandwidth requirements, endpoint hardware/software requirements and even the user experience. Remoting technology also determines the effective level of security provided by the RBI system.</p><p id="c4cb2979-6c13-4f7a-938f-5f491ee649db" class="">All current cloud RBI systems employ one of two remoting technologies:</p><p id="260319ad-4561-4eb3-a312-8c203bc5f746" class="">(1) <strong>Pixel pushing</strong> is a video-based approach which captures pixel images of the remote browser ‘window’ and transmits a sequence of images to the client endpoint browser or proprietary client. This is similar to how remote desktop and VNC systems work. Although considered to be relatively secure, there are several inherent challenges with this approach:</p><ul id="c364a1ed-582c-41c0-bac2-36bf4c068b06" class="bulleted-list"><li>Continuously encoding and transmitting video streams of remote webpages to user endpoint devices is very costly. Scaling this approach to millions of users is financially prohibitive and logistically complex.</li></ul><ul id="38f1905d-ef2f-48f9-9d8a-e5d46b895b25" class="bulleted-list"><li>Requires significant bandwidth. Even when highly optimized, pushing pixels is bandwidth intensive.</li></ul><ul id="64b9e658-593f-416f-be90-d3d6088ab3e1" class="bulleted-list"><li>Unavoidable latency results in an unsatisfactory user experience. These systems tend to be slow and generate a lot of user complaints.</li></ul><ul id="ce7adc35-97dc-471c-9730-d3af1da56fc7" class="bulleted-list"><li>Mobile support is degraded by high bandwidth requirements compounded by inconsistent connectivity.</li></ul><ul id="79b5fe72-8b31-4745-90bb-356e4f28631a" class="bulleted-list"><li>HiDPI displays may render at lower resolutions. Pixel density increases exponentially with resolution which means remote browser sessions (particularly fonts) on HiDPI devices can appear fuzzy or out of focus.</li></ul><p id="bcf3437d-b0ce-4451-8df9-e026d429b285" class="">(2) <strong>DOM reconstruction</strong> emerged as a response to the shortcomings of pixel pushing. DOM reconstruction attempts to clean webpage HTML, CSS, etc. before forwarding the content to the local endpoint browser. The underlying HTML, CSS, etc., are <em>reconstructed</em> in an attempt to eliminate active code, known exploits, and other potentially malicious content. While addressing the latency, operational cost, and user experience issues of pixel pushing, it introduces two significant new issues:</p><ul id="908ea40f-b6ee-4755-954c-52c18d669421" class="bulleted-list"><li>Security. The underlying technologies – HTML, CSS, web fonts, etc. – are the attack vectors hackers leverage to breach endpoints. Attempting to remove malicious content or code is like washing mosquitos: you can attempt to clean them, but they remain inherent carriers of dangerous and malicious material. It is impossible to identify, in advance, all the means of exploiting these technologies even through an RBI system.</li></ul><ul id="2166d7fc-21b6-4cbb-834b-2569aeac58f5" class="bulleted-list"><li>Website fidelity. Inevitably, attempting to remove malicious active code, reconstructing HTML, CSS and other aspects of modern websites results in broken pages that don’t render properly or don’t render at all. Websites that work today may not work tomorrow as site publishers make daily changes that may break DOM reconstruction functionality. The result is an infinite tail of issues requiring significant resources in an endless game of whack-a-mole. Some RBI solutions struggle to support common enterprise-wide services like Google G Suite or Microsoft Office 365 even as malware laden web email continues to be a significant source of breaches.</li></ul><figure id="9d34bbe0-af2f-4f5f-b829-c8918ce2ca3e" class="image"><a href="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image2-4.png"><img style="width:700px" src="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image2-4.png"/></a></figure><p id="fdeb186a-0559-4cc4-b232-2c4b7d41ef8b" class="">Customers are left to choose between a secure solution with a bad user experience and high operating costs, or a faster, much less secure solution that breaks websites. These tradeoffs have driven some RBI providers to implement both remoting technologies into their products. However, this leaves customers to pick their poison without addressing the fundamental issues.</p><p id="47f25c3b-76d0-42b9-9a6d-016853740f96" class="">Given the significant tradeoffs in RBI systems today, one common optimization for current customers is to deploy remote browsing capabilities to only the most vulnerable users in an organization such as high-risk executives, finance, business development, or HR employees. Like vaccinating half the pupils in a classroom, this results in a false sense of security that does little to protect the larger organization.</p><p id="2b13f340-58ae-44d4-9ca3-1c7dcb7a7719" class="">Unfortunately, the largest “gap” created by current remote browser isolation systems is the void between the potential of the underlying isolation concept and the implementation reality of currently available RBI systems.</p><h3 id="c0f8d71f-9500-4773-8e9c-724b22e86ede" class="">S2 Systems Remote Browser Isolation</h3><p id="3754a876-14f3-4205-8f8f-b415251649c2" class="">S2 Systems remote browser isolation is a fundamentally different approach based on S2-patented technology called Network Vector Rendering (NVR).</p><p id="81df2fab-7653-4df1-b511-bcf8406a428c" class="">The S2 remote browser is based on the open-source Chromium engine on which Google Chrome is built. In addition to powering Google Chrome which has a ~70% market share[3], Chromium powers twenty-one other web browsers including the new Microsoft Edge browser.[4] As a result, significant ongoing investment in the Chromium engine ensures the highest levels of website support, compatibility and a continuous stream of improvements.</p><p id="e18212d2-0ac2-450e-9624-d92684ac5c38" class="">A key architectural feature of the Chromium browser is its use of the<a href="https://skia.org/"> Skia</a> graphics library. Skia is a widely-used cross-platform graphics engine for Android, Google Chrome, Chrome OS, Mozilla Firefox, Firefox OS, FitbitOS, Flutter, the<a href="https://electronjs.org/"> Electron</a> application framework and many other products. Like Chromium, the pervasiveness of Skia ensures ongoing broad hardware and platform support.</p><p id="64227d80-1929-4a08-9313-2397ee9c6433" class=""><em>Skia code fragment</em></p><p id="cbd0768c-7167-4910-8348-87e09c3b6cd0" class="">Everything visible in a Chromium browser window is rendered through the Skia rendering layer. This includes application window UI such as menus, but more importantly, the entire contents of the webpage window are rendered through Skia. Chromium compositing, layout and rendering are extremely complex with multiple parallel paths optimized for different content types, device contexts, etc. The following figure is an egregious simplification for illustration purposes of how S2 works (apologies to Chromium experts):</p><figure id="b6c5251e-0114-47b7-b46f-cebcada3aeda" class="image"><a href="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image4-2.png"><img style="width:700px" src="Cloudflare%20+%20Remote%20Browser%20Isolation%20230fb3a1a2cf479282ab571bf7891ef4/image4-2.png"/></a></figure><p id="640f7274-06fe-47c8-8a41-1eff10bb68e5" class="">S2 Systems NVR technology intercepts the remote Chromium browser’s Skia draw commands ❶, tokenizes and compresses them, then encrypts and transmits them across the wire ❷ to any HTML5 compliant web browser ❸ (Chrome, Firefox, Safari, etc.) running locally on the user endpoint desktop or mobile device. The Skia API commands captured by NVR are pre-rasterization which means they are highly compact.</p><p id="92cd126c-1d0c-4954-b73f-0eb2bf25da11" class="">On first use, the S2 RBI service transparently pushes an NVR<a href="https://webassembly.org/"> WebAssembly</a> (Wasm) library ❹ to the local HTML5 web browser on the endpoint device where it is cached for subsequent use. The NVR Wasm code contains an embedded Skia library and the necessary code to unpack, decrypt and “replay” the Skia draw commands from the remote RBI server to the local browser window. A WebAssembly’s ability to “<em>execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms</em>”[5] results in near-native drawing performance.</p><p id="2acc6b52-b549-4156-a702-bb7470423b0c" class="">The S2 remote browser isolation service uses headless Chromium-based browsers in the cloud, transparently intercepts draw layer output, transmits the draw commands efficiency and securely over the web, and redraws them in the windows of local HTML5 browsers. This architecture has a number of technical advantages:</p><p id="c2cbac0c-b065-4a56-bced-176b432ca1c7" class="">(1) Security: the underlying data transport is not an existing attack vector and customers aren’t forced to make a tradeoff between security and performance.</p><p id="72eaa9ee-ca3f-4de3-a97c-abbbd26e34e3" class="">(2) Website compatibility: there are no website compatibility issues nor long tail chasing evolving web technologies or emerging vulnerabilities.</p><p id="a9409b1a-e686-413e-9ee1-551ab4e4f519" class="">(3) Performance: the system is very fast, typically faster than local browsing (subject of a future blog post).</p><p id="017efcb6-aa28-4073-8995-534809ee3fd7" class="">(4) Transparent user experience: S2 remote browsing feels like native browsing; users are generally unaware when they are browsing remotely.</p><p id="fe43fc60-9817-47b0-b9ef-c7372aac0d7c" class="">(5) Requires less bandwidth than local browsing for most websites. Enables advanced caching and other proprietary optimizations unique to web browsers and the nature of web content and technologies.</p><p id="4aec2755-2049-4c8a-8e1c-6ed90cbfe321" class="">(6) Clientless: leverages existing HTML5 compatible browsers already installed on user endpoint desktop and mobile devices.</p><p id="11517361-b91a-4749-a4a4-c5634feb37df" class="">(7) Cost-effective scalability: although the details are beyond the scope of this post, the S2 backend and NVR technology have substantially lower operating costs than existing RBI technologies. Operating costs translate directly to customer costs. The S2 system was designed to make deployment to an entire enterprise and not just targeted users (aka: vaccinating half the class) both feasible and attractive for customers.</p><p id="650800ac-b21d-4034-b068-ed4400e37ab2" class="">(8) RBI-as-a-platform: enables implementation of related/adjacent services such as DLP, content disarm &amp; reconstruction (CDR), phishing detection and prevention, etc.</p><p id="9d3057ca-65d1-4e60-9a87-e5911f6319cb" class="">S2 Systems Remote Browser Isolation Service and underlying NVR technology eliminates the disconnect between the conceptual potential and promise of browser isolation and the unsatisfying reality of current RBI technologies.</p><h3 id="de7e86dc-8af9-4ce4-a74b-9fb8d8699946" class="">Cloudflare + S2 Systems Remote Browser Isolation</h3><p id="15e2b421-52cd-4905-b544-b5b2445f2da7" class="">Cloudflare’s global cloud platform is uniquely suited to remote browsing isolation. Seamless integration with our cloud-native performance, reliability and advanced security products and services provides powerful capabilities for our customers.</p><p id="9565408d-f853-4518-8877-649f789fff5a" class="">Our Cloudflare Workers architecture enables edge computing in 200 cities in more than 90 countries and will put a remote browser within 100 milliseconds of 99% of the Internet-connected population in the developed world. With more than 20 million Internet properties directly connected to our network, Cloudflare remote browser isolation will benefit from locally cached data and builds on the impressive connectivity and performance of our network. Our Argo Smart Routing capability leverages our communications backbone to route traffic across faster and more reliable network paths resulting in an average 30% faster access to web assets.</p><p id="55131a37-fde9-40a4-ba16-8a8756302375" class="">Once it has been integrated with our Cloudflare for Teams suite of advanced security products, remote browser isolation will provide protection from browser exploits, zero-day vulnerabilities, malware and other attacks embedded in web content. Enterprises will be able to secure the browsers of all employees without having to make trade-offs between security and user experience. The service will enable IT control of browser-conveyed enterprise data and compliance oversight. Seamless integration across our products and services will enable users and enterprises to browse the web without fear or consequence.</p><p id="7e5106c9-12cb-440d-b092-a3b7127051db" class="">Cloudflare’s mission is to help build a better Internet. This means protecting users and enterprises as they work and play on the Internet; it means making Internet access fast, reliable and transparent. Reimagining and modernizing how web browsing works is an important part of helping build a better Internet.</p><p id="54d135a7-ad37-48b7-abea-8f1f9cb524ef" class="">[1] <a href="https://www.w3.org/History/1989/proposal.html">https://www.w3.org/History/1989/proposal.html</a></p><p id="7073af13-68fc-4bb3-bb1a-7cddc04d3136" class="">[2] “<a href="https://www.internetworldstats.com/stats.htm">Internet World Stats</a>,”<a href="https://www.internetworldstats.com/">https://www.internetworldstats.com/</a>, retrieved 12/21/2019.</p><p id="ed161397-ff06-46dc-b35a-7ce475931112" class="">[3] “Kleiner Perkins 2018 Internet Trends”, Mary Meeker.</p><p id="0d285140-76ef-4098-a46b-842c8bda3648" class="">[4]<a href="https://www.statista.com/statistics/544400/market-share-of-internet-browsers-desktop/"> https://www.statista.com/statistics/544400/market-share-of-internet-browsers-desktop/</a>, retrieved December 21, 2019</p><p id="90baa676-0595-4588-b17d-0425314cc277" class="">[5]<a href="https://en.wikipedia.org/wiki/Chromium_(web_browser)"> https://en.wikipedia.org/wiki/Chromium_(web_browser)</a>, retrieved December 29, 2019</p><p id="875c2284-817a-41d2-a292-bba1e1785225" class="">[6]<a href="https://webassembly.org/"> https://webassembly.org/</a>, retrieved December 30, 2019</p></div></article></body></html>

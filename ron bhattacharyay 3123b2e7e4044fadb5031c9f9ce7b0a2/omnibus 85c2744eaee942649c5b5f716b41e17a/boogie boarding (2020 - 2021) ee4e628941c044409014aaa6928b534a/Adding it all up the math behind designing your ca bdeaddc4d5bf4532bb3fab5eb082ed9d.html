@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Adding it all up: the math behind designing your career</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="bdeaddc4-d5bf-4532-bb3f-ab5eb082ed9d" class="page sans"><header><h1 class="page-title">Adding it all up: the math behind designing your career</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/adding-it-all-up-the-math-behind-designing-your-career/" class="url-value">https://www.figma.com/blog/adding-it-all-up-the-math-behind-designing-your-career/</a></td></tr></tbody></table></header><div class="page-body"><p id="f680028d-6114-4e0b-8bb4-58976920b6fd" class=""><em>December is always a time to reflect, and this year in particular has given us a lot to think about. As we head into the new year and one of the busiest times for hiring and job-searching, Kylie, Design Lead at Google, shares personal reflections on her own trajectory, plus a framework for thinking about the 90,000 hours that make up your career—whether you’re looking for a new role, hiring for your team, or just evaluating your next step.</em></p><p id="4ed77dc5-2621-4b18-b131-1c0a4c39d2aa" class="">Recently I had to write an introductory bio for a schmooze-fest. Excited to be official enough to merit a byline, I sat down and tapped away:</p><p id="bed21a6c-fbe1-4d89-8b54-c133127b3efd" class=""><em>Kylie is a design lead at Google, working on Gmail and Chat. Before Google, Kylie got her start in startups and earned a B.S. in Symbolic Systems with a focus in Human-Computer Interaction from Stanford University.</em></p><p id="fcfda2d9-b37f-4cb3-80be-e86411807ad8" class="">Two things were instantly clear:</p><ol type="1" id="1a6031f0-6b3f-4c67-891d-868eac7f5096" class="numbered-list" start="1"><li>Kylie sure does like writing in the third person.</li></ol><ol type="1" id="1956784b-a92b-40ae-8253-79757a9560bf" class="numbered-list" start="2"><li>It makes it sound like Kylie’s whole life was a supply chain destined for work at Google someday.</li></ol><figure id="492cfa52-cc7f-4ec1-9b7f-c53cc527cffd" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/1_kylies-interests-time.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/1_kylies-interests-time.png"/></a></figure><p id="2c084257-573c-45ec-9b1a-24640310321f" class="">When we talk about our careers, we often speak in trend lines—the prevailing course of a collection of data—taking where we are now and then looking back, connecting the relevant plot points to tell a good story.</p><figure id="bfc7421a-a49e-4c1e-9f6b-83660ca5a105" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/2_kylies-interests-time-2.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/2_kylies-interests-time-2.png"/></a></figure><p id="5ac7a69c-b95a-497c-8e6f-b4441a6ffb70" class="">But trend lines are only derived <em>after</em> the data have been collected. We live life in scatterplots—jumping from interest to interest and job to job looking for the right fit. From any given point, we can’t forecast the trend looking forward. That’s why it’s intimidating to choose a next step. We want to make a move that reinforces a trend line we cannot yet see. It is only in looking back that our path is clear.</p><p id="f69945d3-e33e-438a-89f4-3d7626e701f5" class="">It’s understandable, however, that we want to know where we’re going and that it will be a meaningful use of our time. The average person will spend 90,000 hours (one third of their waking time) working. Work constitutes significantly more of our lives than eating, vacationing, talking to grandma, or, thankfully, exercising. It’s second only to sleeping.</p><figure id="e7122f96-3ffb-4a31-88cf-4b5c0df6d06d" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/3_intro-activities-time-spent.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/3_intro-activities-time-spent.png"/></a></figure><p id="2536b443-8165-45f9-b81e-a5a3426c98b9" class="">Beyond the sheer number of hours, work is at the center of how we make a living. It is a source of stability, purpose, frustration, pride, angst, and (unfortunately) the majority of small talk. There’s a profound pressure to get the most out of those 90,000 hours: can we be fulfilled and live comfortably?</p><p id="ab1fbb90-af23-414e-b7d4-c81fedbe9c93" class="">Like any good problem, the key to solving it is understanding the whole equation and using the right tools to break it down into its constituent parts. By regularly doing the math, we can build a trend line that more accurately reflects our career trajectories.</p><p id="79b5b676-1892-40cb-8e9d-b856ee82fd1c" class="">Often used in set theory, Venn diagrams are simple illustrations of the logical intersection of multiple groups.</p><figure id="6b8b0436-c386-44ed-99cd-4ecfa93a27c3" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/4_venn-diagrams.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/4_venn-diagrams.png"/></a></figure><p id="a7f3cf57-268b-45ce-9fb3-b9b798740349" class="">Outside of their strict mathematical purpose, Venn diagrams challenge us to be creative about what happens when disparate things overlap. A lot of the world’s greatest innovations come from unexpected combinations.</p><p id="999b78f8-0148-4bd2-9b12-365ee930bbf8" class="">Exhibit A:</p><figure id="eedc7e6b-b026-49c7-bd6d-a644eb4b6f09" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/5_exhibit-a.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/5_exhibit-a.png"/></a></figure><p id="bdf715de-5e43-4a10-abd7-5f12fba539c3" class="">Used incorrectly, Venn diagrams can perpetuate false dichotomies (just plain bad math). I remember being told to enjoy hobbies in my youth because when I grew up I wouldn’t have time for them. This was going to be my life:</p><figure id="5119f892-3f80-4a13-90f3-59b673e889f0" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/6_interests-kylie-job.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/6_interests-kylie-job.png"/></a></figure><p id="c1355117-d4b6-415c-8aa2-2c8052fd99b0" class="">And certainly if you don’t do the math, this <em>could</em> be your life. (And, for many, necessity drives life in this direction). But having the opportunity to pursue a career, and especially one designed around your passions is a great privilege. Why not make the most of it? The intersections of your hobbies and interests can serve as a guide.</p><p id="4dbc9ac2-54e9-4dc2-ba88-3bf6685e22bd" class="">When I was a kid, my mom brought home a shiny white box full of what must have been 50 floppy disks to install new software called CorelDRAW. When she finally fired it up, she showed me how it provided a canvas to arrange clipart, text, and color. Overnight my life’s purpose became designing posters—I printed out pages to ask my parents for ice cream, cheer on my brother’s youth football league, and run for treasurer of my student council (“Vote for Kylie...it makes cents”).</p><p id="afba6468-6785-437e-8a21-648dd6aee7d9" class="">Fast forward to college, where my brother’s hippest friend was a designer. Not only was Rob talented, he was confident and singular in his focus—design was his destiny. While I was interested in working in tech, I didn’t have nearly the experience Rob did. Design felt out of reach and instead I interned in everything else: recruiting, marketing, engineering, and project management.</p><p id="aeeaa4d1-036d-4544-b5f6-132d91310910" class="">In one of my internships, I was lucky to befriend a hip, but approachable designer who demonstrated that craft was perfected through hard work and tireless iteration. Katherine was patient enough to give constructive feedback on my most Frankenstein ideas and built my confidence to earnestly give design a try.</p><p id="5c65fac9-14d5-4df1-b746-8df258589410" class="">It was only years later that I realized that design had always been one of my interests. The poster hustling hobby of my youth became the foundation of my career. A quick look at my hobbies could have given me the confidence to pursue my passions sooner.</p><p id="a0e8eb50-905a-42ec-917f-7e5e7639dd52" class="">Technology (CorelDRAW) combined with my other passions of storytelling and people makes product design an obvious fit. Excitingly, if and when my passion for pixels fades, there are many other opportunities to explore:</p><figure id="e3eaef03-532b-4bf4-89cd-2dc6feee1c26" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/7_job-venn.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/7_job-venn.png"/></a></figure><p id="768fdb3a-4619-4794-a38a-cee9b12070a2" class="">So what’s the point of rekindling that love of underwater basket weaving? It may help you unlock a career you’d never dreamed of or give you the courage to pursue one you’ve been eyeing. To find the most fulfilling work, start from the overlap of your interests. What careers can be found there?</p><p id="d259eacf-5fba-4b5d-8719-62433ee63f81" class="">Even if the desired outcome is clear, there’s wiggle room in how you get there. There are many values of x and y to satisfy the equation.</p><figure id="ce2933bf-f790-430c-adf1-828856b58163" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/8_variables.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/8_variables.png"/></a></figure><p id="90e44e30-f8ed-4b93-ba0b-24fe9c2c2563" class="">Drawing portraits of juggling dogs may satisfy your interests, but there’s so much more to building a life. Building a career also goes hand-in-hand with all sorts of <em>life</em> decisions: do I want to own a house? Live in a big city? Support a family? Live my best #vanlife?</p><figure id="b0f95759-6656-4e16-b02a-5b2ccc51a271" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/9_juggling-dog.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/9_juggling-dog.png"/></a></figure><p id="97441f21-fde3-47c3-846e-e9be3d24e115" class="">It’s easy to look at life’s variables and conclude that money is the solution. Money affords life’s opportunities—the house, the family, the van. But money is only a store for value, it can’t provide value itself. There are many paths to achieving these dreams.</p><p id="0c9fc512-7c74-4f12-a2bb-ddb795393579" class="">Instead of looking for one solution to all of life’s variables, what does it look like if you play with the numbers?</p><p id="d944bb47-c0d5-4e2b-ad9c-3c43060a85a6" class="">My high school friend Brad always dreamed of living a life centered on grand adventure. So while the rest of us started pushing paper, he sought out jobs like managing restaurants in the mountains and working with the Boy Scouts in the desert. In doing so, he had the time to search for abandoned treasure, motorcycle around Indonesia, and sail across the Atlantic Ocean. Brad has wholeheartedly pursued his passions, adjusting the variables to find his own perfect outcome.</p><figure id="1adf77ef-ec32-42e3-b510-d93ac0050871" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/10_brad-sail__1_.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/10_brad-sail__1_.png"/></a></figure><p id="62c5945a-1df0-4434-acb1-854725bdee0e" class="">Many of us have a Brad in our lives—someone we admire and (secretly) envy for their courage to throw out the rulebook and follow their passions. Admiration and envy are nudges to revisit our own dreams and desires. They are small voices reminding us to revisit the variables. Catching up with Brad reminds me to step away from my desk sometimes and rekindle my sense of adventure.</p><p id="7e65f745-2c78-4a72-906b-fc71151687fe" class="">And adventure is but one of many variables. There are countless others to explore—remote work, big name company, power, access to horses, travel, free time, health benefits, distance from in-laws, or proximity to the Carolina Panthers. Everybody’s list looks different. And the list can always change.</p><p id="3ec82da6-00d8-4073-9775-a63e684e992d" class=""><em>What are the things you need and what are the nice-to-haves?</em></p><p id="d89aa12b-8c67-49b4-a04e-d017be88f66f" class="">The goal isn’t to solve for all the variables today, but to continue returning to the list when weighing big choices. The combination of your interests and your variables will help navigate the difficult choices life always has in store.</p><p id="ed531e7f-f2b6-45ad-83f5-1581125b1ea9" class="">One of the first classes I took in college was Computer Science 142: Web Applications (in other words, how to build a website for dummies). While I struggled to get a simple text box centered on the page, other students were demo-ing flashy sites they had built over the summer. I sat in my first lecture, woefully behind, wondering if I should drop the class.</p><p id="df68d4a3-4bf8-4fc5-8572-21a185deb829" class="">My professor, John Ousterhout, had a tradition of saving the last 5 minutes of Friday’s class for his <em>Thought for the Weekend</em>—a pithy principle for why the material mattered. His thought that particular Friday was: “a little bit of slope makes up for a lot of y-intercept.”</p><figure id="a9ad82e4-8eb0-4a13-b0a8-2d7b19cfd6f4" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/11_slope-vs-y-intercept.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/11_slope-vs-y-intercept.png"/></a></figure><p id="e9fa3243-39f9-4f84-9fd2-aa568a3a8af9" class="">From a mathematical perspective, it’s irrefutable: if you have two lines, eventually the one with greater slope will surpass the other, regardless of how high a point on the y-axis it started from.</p><p id="681f7810-c86c-40ae-a24c-0d072f5397a2" class="">But it also applies in life: how fast you learn and how hard you work are a lot more important than how much you know or how much experience you have to begin with. When setting out as the red line, it’s easy to look at the blues of the world and think they will always exceed you. I could look at my peers and consider dropping the class, or be afraid to look for a new job, or not sign up for that marathon because I’ve never trained. But, the most meaningful things in life are the products of learning and hard work. The more effort you put into accomplishing something, the prouder you are of the results.</p><figure id="95a8c7bf-a376-4429-a32e-1ddab530b57c" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/12_meaning-hardness.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/12_meaning-hardness.png"/></a></figure><p id="ebc7dc81-5437-4747-a999-534483d20336" class="">Leonard Cohen once caught up with his friend Bob Dylan at a cafe in Paris. Particularly interested in a new tune of Cohen’s, Dylan asked how long it had taken him to write it. Out of fear of judgment, Cohen claimed two years, though records show he had been iterating on it for nearly five by that time. While it was ultimately recorded in 1984 for a studio album, live performances of the song in 1988 and 1994 contained completely different verses.</p><p id="0c57a7d1-9105-4c51-b2d7-ab569f8bc8f9" class="">In total, Cohen wrote 80 stanzas, scaling it down to 15 for the final version. It has since been covered by over 300 musicians, arguably becoming one of the greatest songs of all time. The song? <em>Hallelujah</em>.</p><figure id="1951b13a-87cf-4246-9b98-9c6c25dd654b" class="image"><a href="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/13_leonard-cohen.png"><img style="width:700px" src="Adding%20it%20all%20up%20the%20math%20behind%20designing%20your%20ca%20bdeaddc4d5bf4532bb3fab5eb082ed9d/13_leonard-cohen.png"/></a></figure><p id="92282019-d8dd-4be3-9adc-80076548da81" class="">Never let the hard work dissuade you—it will be the greatest source of meaning (or music) in your life.</p><p id="0ce8a7dc-e4d9-408a-ae0c-e2afcfba4c7c" class="">Here’s where I tell you that if you periodically do the math, you’ll find the right solutions. And, though true, it trivializes how difficult it is to design a life. The tricky thing about the whole equation is that it only adds up in the end, when we’ve completed our 90,000 hours of work.</p><p id="fe949430-651c-49cc-9a4d-eaf941d25638" class="">In the meantime, the goal is to periodically return to your interests and variables to evaluate your slope. Just because it’s easy to connect the dots to where you are now, doesn’t mean you can’t go somewhere new. What sets us humans apart from the strict confines of simple algebra is that we’re non-linear.</p><p id="a236811e-b478-4cd2-b7a4-045f199d7ad5" class="">Personally, the exercise of writing a bio reminded me that there are so many variables and interests that aren’t yet a part of my story. Thankfully, I can take the time to enjoy where I am now in my scatterplot, knowing that I have plenty of hours left to fill...tens of thousands of them.</p><p id="451b4c28-e6df-45dd-8e1c-a6758d7ca0c7" class="">If you&#x27;re looking for more resources, I&#x27;ve found that the book <a href="https://designingyour.life/the-book/"><em>Designing Your Life</em></a> and <a href="https://medium.com/@elleluna/the-crossroads-of-should-and-must-90c75eb7c5b0">&quot;The Crossroads of Should and Must&quot;</a> both offer helpful frameworks to get you started.</p><p id="3bc6761c-ca31-433c-869e-c8b39e923f8b" class=""><a href="https://www.figma.com/blog/the-dropbox-guide-to-building-creative-culture/">Learn how the design team at Dropbox builds creative culture. Get the Team Values Toolkit, along with tips for running the exercise with your team.</a></p><h2 id="59a74c5e-406c-4edf-80b0-56685013bd01" class="">Try Figma for free.</h2></div></article></body></html>

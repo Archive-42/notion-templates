@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The coming civil war over general purpose computing</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="8ae46e2f-81fb-48fc-ad32-712769ada7df" class="page sans"><header><h1 class="page-title">The coming civil war over general purpose computing</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://boingboing.net/2012/08/23/civilwar.html" class="url-value">https://boingboing.net/2012/08/23/civilwar.html</a></td></tr></tbody></table></header><div class="page-body"><h2 id="9094ccc9-94d9-4771-85ea-7516c41973de" class="">Even if we win the right to own and control our computers, a dilemma remains: what rights do owners owe users?</h2><p id="569f092a-2def-4ea0-8978-0f0bbc51fd70" class=""><em>This talk was delivered at Google in August, and </em><a href="http://longnow.org/seminars/02012/jul/31/coming-century-war-against-your-computer/"><em>for The Long Now Foundation</em></a><em> in July 2012. A transcript of the notes follows.</em></p><p id="e90ee621-bcae-490f-b165-bca5cf5e79ca" class="">I gave a talk in late 2011 at 28C3 in Berlin called &quot;<a href="http://boingboing.net/2012/01/10/lockdown.html">The Coming War on General Purpose Computing</a>&quot;</p><p id="81b2cb42-8a94-488a-8147-0523b0e6e99d" class="">In a nutshell, its hypothesis was this:</p><ul id="dd68fc95-fe21-476d-afbb-d25a023693f5" class="bulleted-list"><li>Computers and the Internet are everywhere and the world is increasingly made of them.</li></ul><ul id="a91bdfd1-0a7f-44ed-a408-2dfa20255c52" class="bulleted-list"><li>We used to have separate categories of device: washing machines, VCRs, phones, cars, but now we just have <em>computers</em> in different cases. For example, modern cars are computers we put our bodies in and Boeing 747s are flying Solaris boxes, whereas hearing aids and pacemakers are computers we put in our body.</li></ul><ul id="e5a71544-3fac-4e9c-a0fc-f47ce406f5e3" class="bulleted-list"><li>This means that all of our sociopolitical problems in the future will have a computer inside them, too—and a would-be regulator saying stuff like this:</li></ul><p id="43747b16-fff4-4479-852c-db71946115f0" class=""><em>&quot;Make it so that self-driving cars can&#x27;t be programmed to drag race&quot;</em></p><p id="7187cb59-e6f6-4900-8ce2-feec1c7d584b" class=""><em>&quot;Make it so that bioscale 3D printers can&#x27;t make harmful organisms or restricted compounds&quot;</em></p><p id="98daafab-402f-4da0-851d-d97da310f64f" class="">Which is to say: <em>&quot;Make me a general-purpose computer that runs all programs except for one program that freaks me out.&quot;</em></p><p id="acb80505-f554-42d3-926f-c543b6c1390f" class="">But there&#x27;s a problem. We don&#x27;t know how to make a computer that can run all the programs we can compile <em>except</em> for whichever one pisses off a regulator, or disrupts a business model, or abets a criminal.</p><p id="f6c21f1a-512e-450f-ab72-8c032d64fa46" class="">The closest approximation we have for such a device is a computer with <em>spyware</em> on it— a computer that, if you do the wrong thing, can intercede and say, &quot;I can&#x27;t let you do that, Dave.&quot;</p><p id="e6b90b58-f43f-4634-9564-a251dafc9377" class="">Such a a computer runs programs designed to be hidden from the owner of the device, and which the owner can&#x27;t override or kill. In other words: DRM. Digital Rights Managment.</p><p id="cd28ef5d-d3ac-457c-aba6-7410ba750d68" class="">These computers are a bad idea for two significant reasons. First, they won&#x27;t solve problems. Breaking DRM isn&#x27;t hard for bad guys. The copyright wars&#x27; lesson is that DRM is always broken with near-immediacy.</p><p id="c59d88fc-ea7b-478b-93f2-1181fcd96567" class="">DRM only works if the &quot;I can&#x27;t let you do that, Dave&quot; program stays a secret. Once the most sophisticated attackers in the world liberate that secret, it will be available to everyone else, too.</p><p id="535ba495-038f-4bac-974f-d1417b83d5aa" class="">Second, DRM has <em>inherently</em> weak security, which thereby makes overall security weaker.</p><p id="0790c688-4edf-4d25-a84e-57b70657c252" class="">Certainty about what software is on your computer is fundamental to good computer security, and you can&#x27;t know if your computer&#x27;s software is secure unless you know what software it is running.</p><p id="a43db6e6-01f7-430e-a60a-6fffc4d2f682" class="">Designing &quot;I can&#x27;t let you do that, Dave&quot; into computers creates an enormous security vulnerability: anyone who hijacks that facility can do things to your computer that you can&#x27;t find out about.</p><p id="02f237b9-099b-4d89-aed5-8438fe591c6f" class="">Moreover, once a government thinks it has &quot;solved&quot; a problem with DRM—with all its inherent weaknesses—that creates a perverse incentive to make it illegal to tell people things that might undermine the DRM.</p><p id="7e8e8bf6-ab56-45a6-8cb9-6dd9e5fa7fbb" class="">You know, things like how the DRM works. Or <em>&quot;here&#x27;s a flaw in the DRM which lets an attacker secretly watch through your webcam or listen through your mic.&quot;</em></p><p id="c188c8a4-7ddc-4005-a17b-9080f021cdb3" class="">I&#x27;ve had a lot of feedback from various distinguished computer scientists, technologists, civil libertarians and security researchers after 28C3. Within those fields, there is a widespread consensus that, all other things being equal, computers are more secure and society is better served when owners of computers can control what software runs on them.</p><p id="d1251d17-13da-4f08-9e3f-5a0165896487" class="">Let&#x27;s examine for a moment what that would mean.</p><p id="1e356378-ea9c-4c13-9d4e-a7c4ba854165" class="">Most computers today are fitted with Trusted Platform Module. This is a secure co-processor mounted on the motherboard. The specification of TPMs are published, and an industry body certifies compliance with those specifications.</p><p id="86b6d253-f2c9-4785-b9e2-31fad947c854" class="">To the extent that the spec is good (and the industry body is diligent), it&#x27;s possible to be reasonably certain that you&#x27;ve got a real, functional, TPM in your computer that faithfully implements the spec.</p><p id="300915e4-b22c-46b9-b4ef-6f1ec1e2c959" class="">How is the TPM secure? It contains secrets: cryptographic keys. But it&#x27;s also secure in that it&#x27;s designed to be tamper-evident. If you try to extract the keys from a TPM, or remove the TPM from a computer and replace it with a gimmicked one, it will be very obvious to the computer&#x27;s owner.</p><p id="e9ff22ff-fd70-4596-a221-ff111659d41a" class="">One threat to TPM is that a crook (or a government, police force or other adversary) might try to compromise your computer — tamper-evidence is what lets you know when your TPM has been fiddled with.</p><p id="1b2ceb58-c6a2-4cee-83e2-a9aa087be4e7" class="">Another TPM threat-model is that a piece of malicious software will infect your computer</p><p id="9f9dc394-d406-46f0-ac0f-58b951504423" class="">Now, once your computer is compromised this way, you could be in great trouble. All of the sensors attached to the computer—mic, camera, accelerometer, fingerprint reader, GPS—might be switched on without your knowledge. Off goes the data to the bad guys.</p><p id="cbdaabc2-3179-4a40-a5f3-5c7200176479" class="">All the data on your computer (sensitive files, stored passwords and web history)? Off it goes to the bad guys—or erased.</p><p id="051d398c-6a28-484e-82d2-f2cfe5ced975" class="">All the keystrokes into your computer—your passwords!—might be logged. All the peripherals attached to your computer—printers, scanners, SCADA controllers, MRI machines, 3D printers— might be covertly operated or subtly altered.</p><p id="b6d6f650-88ac-4194-a3a5-93b2cea7bdb8" class="">Imagine if those &quot;other peripherals&quot; included cars or avionics. Or your optic nerve, your cochlea, the stumps of your legs.</p><p id="ff8360f2-ec06-4a4b-86f7-ba929ab89a16" class="">When your computer boots up, the TPM can ask the bootloader for a signed hash of itself and verify that the signature on the hash comes from a trusted party. Once you trust the bootloader to faithfully perform its duties, you can ask it to check the signatures on the operating system, which, once verified, can check the signatures on the programs that run on it.</p><p id="c4fe9f33-a34c-4408-9879-cda3932f9d24" class="">Ths ensures that you know which programs are running on your computer—and that any programs running in secret have managed the trick by leveraging a defect in the bootloader, operating system or other components, and not because a new defect has been inserted into your system to create a facility for hiding things from you.</p><p id="a9c63d38-165e-4f89-8f8a-065d710abd21" class="">This always reminds me of Descartes: he starts off by saying that he can&#x27;t tell what&#x27;s true and what&#x27;s not true, because he&#x27;s not sure if he really exists.</p><p id="7f98f2f8-73f1-4fa6-917e-e5b0394fb244" class="">He finds a way of proving that he exists, and that he can trust his senses and his faculty for reason.</p><p id="7af085e9-a193-41cf-b6e6-a2e3019adb23" class="">Having found a tiny nub of stable certainty on which to stand, he builds a scaffold of logic that he affixes to it, until he builds up an entire edifice.</p><p id="76a59662-b0ea-43b8-bf86-e36df31e72dd" class="">Likewise, a TPM is a nub of stable certainty: if it&#x27;s there, it can reliably inform you about the code on your computer.</p><p id="f8b659dd-8e10-4b86-b343-3746bb3b2f02" class="">Now, you may find it weird to hear someone like me talking warmly about TPMs. After all, these are the technologies that make it possible to lock down phones, tablets, consoles and even some PCs so that they can&#x27;t run software of the owner&#x27;s choosing.</p><p id="f284f297-a047-4895-99ce-9bf66776c4f4" class="">Jailbreaking&quot; usually means finding some way to defeat a TPM or TPM-like technology. So why on earth would I want a TPM in my computer?</p><p id="b2396af0-ab09-4650-bc19-b966a46a43e9" class="">As with everything important, the devil is in the details.</p><p id="1be7a3e6-cd5d-4a5e-8198-a7ea9497f214" class="">Imagine for a moment two different ways of implementing a TPM:</p><p id="cc0012fd-ec52-45c2-a9a7-900b14d6c96c" class=""><strong>1. Lockdown</strong></p><p id="e0d83899-e6b5-40d8-9429-b48ecf92e5f9" class="">Your TPM comes with a set of signing keys it trusts, and unless your bootloader is signed by a TPM-trusted party, <em>you</em> can&#x27;t run it. Moreover, since the bootloader determines which OS launches, <em>you</em> don&#x27;t get to control the software in <em>your</em> machine.</p><p id="6027ca32-c05a-4356-9236-abbf566d4b81" class=""><strong>2. Certainty</strong></p><p id="22312476-2079-40c1-b62f-cc553dd7ec57" class=""><em>You</em> tell your TPM which signing keys you trust—say, Ubuntu, EFF, ACLU and Wikileaks—and it tells you whether the bootloaders it can find on your disk have been signed by any of those parties. It can faithfully report the signature on any other bootloaders it finds, and it lets <em>you</em> make up <em>your</em> own damn mind about whether you want to trust any or all of the above.</p><p id="49ae2e2f-3605-4f30-8d31-b631bc6241ec" class="">Approximately speaking, these two scenarios correspond to the way that iOS and Android work: iOS only lets you run Apple-approved code; Android lets you tick a box to run any code you want. Critically, however, Android lacks the facility to do some crypto work on the software before boot-time and tell you whether the code you think you&#x27;re about to run is actually what you&#x27;re about to run.</p><p id="e3d47daf-7e64-412b-a2e4-6ff66e967257" class="">It&#x27;s freedom, but not certainty.</p><p id="6a27b509-b78e-46a3-b4f5-377770ae1aff" class="">In a world where the computers we&#x27;re discussing can see and hear you, where we insert our bodies into them, where they are surgically implanted into us, and where they fly our planes and drive our cars, certainty is a big deal.</p><p id="f5bee10c-1bc2-4ef7-b0e2-a37b7b559ad1" class="">This is why I like the idea of a TPM, assuming it is implemented in the &quot;certainty&quot; mode and not the &quot;lockdown&quot; mode.</p><p id="b90e4cbd-b66b-4d2e-bf6a-9f8ad021e0d8" class="">If that&#x27;s not clear, think of it this way: a &quot;war on general-purpose computing&quot; is what happens when the control freaks in government and industry demand the ability to remotely control your computers</p><p id="aaf2efdc-24c9-4fd9-af17-714084085b40" class="">The defenders against that attack are also control freaks—like me—but they happen to believe that device-owners should have control over their computers</p><p id="88ce002e-379f-404b-a26d-60040c88bc27" class="">Both sides want control, but differ on which side should have control.</p><p id="b1dd4a44-bea9-44d4-8578-79e0b1e140f9" class="">Control requires knowledge. If you want to be sure that songs can only moved <em>onto</em> an iPod, but not <em>off of</em> an iPod, the iPod needs to know that the instructions being given to it by the PC (to which it is tethered) are emanating from an Apple-approved iTunes. It needs to know they&#x27;re not from something that impersonates iTunes in order to get the iPod to give it access to those files.</p><p id="06dbf8d9-2b5b-4a1c-b23b-8dd09bd082fb" class="">If you want to be sure that my PVR won&#x27;t record the watch-once video-on-demand movie that I&#x27;ve just paid for, you need to be able to ensure that the tuner receiving the video will only talk to approved devices whose manufacturers have promised to honor &quot;do-not-record&quot; flags in the programmes.</p><p id="d2d94d83-8ef5-47b7-bd4d-13a5a982975b" class="">If I want to be sure that you aren&#x27;t watching me through my webcam, I need to know what the drivers are and whether they honor the convention that the little green activity light is <em>always</em> switched on when my camera is running.</p><p id="4b0d6b5b-e58f-4471-a665-c56ba0503c79" class="">If I want to be sure that you aren&#x27;t capturing my passwords through my keyboard, I need to know that the OS isn&#x27;t lying when it says there aren&#x27;t any keyloggers on my system.</p><p id="7c0d45d2-a956-4c39-bbc6-07ab713fe01b" class="">Whether you want to be free—or want to enslave—you need control. And for that, you need this knowledge.</p><p id="8d38698d-2445-46a6-bf7f-338eaaf86e86" class="">That&#x27;s the coming war on general purpose computing. But now I want to investigate what happens <em>if we win it</em>.</p><p id="6a123989-564e-4b0d-b83a-5f5148a7a589" class="">We could face a interesting prospect. This I call the coming <em>civil</em> war over general purpose computing.</p><p id="90efeb3c-cdc2-4e8a-9ea5-03efbd776e9c" class="">Let&#x27;s stipulate that a victory for the &quot;freedom side&quot; in the war on general purpose computing would result in computers that let their owners know what was running on them. Computers would faithfully report the hash and associated signatures for any bootloaders they found, control what was running on computers, and allow their owners to specify who was allowed to sign their bootloaders, operating systems, and so on.</p><p id="be2d6fa1-ddd0-40b8-a36c-56349c4576a6" class="">There are two arguments that we can make for this:</p><p id="c278036a-12d0-4613-b2b1-dd0049e5990f" class=""><strong>1. Human rights</strong></p><p id="68256794-37fe-4b9b-be57-ac9fe21d8a0f" class="">If your world is made of computers, then designing computers to override their owners&#x27; decisions has significant human rights implications. Today we worry that the Iranian government might demand import controls on computers, so that only those capable of undetectable surveillance are operable within its borders. Tomorrow we might worry about whether the British government would demand that NHS-funded cochlear implants be designed to block reception of &quot;extremist&quot; language, to log and report it, or both.</p><p id="af05c065-bbd1-4a3a-aa95-9f3a13bdccb6" class=""><strong>2. Property rights</strong></p><p id="52b5ef81-ecf2-414b-84a7-f51dc3d27c6c" class="">The doctrine of first sale is an important piece of consumer law. It says that once you buy something, it belongs to you, and you should have the freedom to do anything you want with it, even if that hurts the vendor&#x27;s income. Opponents of DRM like the slogan, &quot;You bought it, you own it.&quot;</p><p id="94244b4d-15ff-4854-b9ba-027c09688b44" class="">Property rights are an incredibly powerful argument. This goes double in America, where strong property rights enforcement is seen as the foundation of all social remedies.</p><p id="d8619a25-7606-4d9c-9cb5-9f4b3ceb1ddc" class="">This goes triple for Silicon Valley, where you can&#x27;t swing a cat without hitting a libertarian who believes that the major — or only — legitimate function of a state is to enforce property rights and contracts around them.</p><p id="8d137c98-dc24-46bd-8c37-0caa01dc1550" class="">Which is to say that if you want to win a nerd fight, property rights are a powerful weapon to have in your arsenal. And not just nerd fights!</p><p id="8efc651e-b9f1-4d0a-9d1f-c2ac3ea6afaa" class="">That&#x27;s why copyfighters are so touchy about the term &quot;Intellectual Property&quot;. This synthetic, ideologically-loaded term was popularized in the 1970s as a replacement for &quot;regulatory monopolies&quot; or &quot;creators&#x27; monopolies&quot; — because it&#x27;s a lot easier to get Congress to help you police your property than it is to get them to help enforce your monopoly.</p><p id="5ce8641e-c0e7-426e-8890-b751110381c6" class="">Here is where the <em>civil</em> war part comes in.</p><p id="030b749f-225a-4765-9c21-4fc672d5ed1d" class="">Human rights and property rights both demand that computers not be designed for remote control by governments, corporations, or other outside institutions. Both ensure that owners be allowed to specify what software they&#x27;re going to run. To freely choose the nub of certainty from which they will suspend the scaffold of their computer&#x27;s security.</p><p id="fe830709-b793-4a06-912a-cb5fc53eacba" class="">Remember that security is relative: you are secured from attacks on your ability to freely use your music if you can control your computing environment. This, however, erodes the music industry&#x27;s own security to charge you some kind of rent, on a use-by-use basis, for your purchased music.</p><p id="01782640-6d62-4686-b7b9-c5907ada06e1" class="">If <em>you</em> get to choose the nub from which the scaffold will dangle, you get control and the power to secure yourself against attackers. If the the government, the RIAA or Monsanto chooses the nub, they get control and the power to secure themselves against <em>you</em>.</p><p id="481d734e-6717-40ff-ad8d-7c330903a2ef" class="">In this dilemma, we know what side we fall on. We agree that at the very least, <em>owners</em> should be allowed to know and control their computers.</p><p id="930c8f6a-3a05-4bc4-b733-be787aad37ab" class="">But what about <em>users?</em></p><p id="fa270b9f-7924-4dc2-9a66-8a3454028355" class="">Users of computers don&#x27;t always have the same interests as the owners of computers— and, increasingly, we will be users of computers that we don&#x27;t own.</p><p id="eebd3b78-8b05-43e8-94ba-a4f2df39e7bf" class="">Where you come down on conflicts between owners and users is going to be one of the most meaningful ideological questions in technology&#x27;s history. There&#x27;s no easy answer that I know about for guiding these decisions.</p><p id="043c80b9-a68c-46f9-9329-3de7b76417e3" class="">Let&#x27;s start with a total pro-owner position: &quot;property maximalism&quot;.</p><ul id="045f6d90-77be-443d-88b0-0504a37d5d38" class="bulleted-list"><li><em>If it&#x27;s my computer, I should have the absolute right to dictate the terms of use to anyone who wants to use it. If you don&#x27;t like it, find someone else&#x27;s computer to use.</em></li></ul><p id="1f705f9b-fc41-46af-8a8f-8e848fe346a9" class="">How would that work in practice? Through some combination of an initialization routine, tamper evidence, law, and physical control. For example, when you turn on your computer for the first time, you initialize a good secret password, possibly signed by your private key.</p><p id="dff90235-616c-45c8-9eeb-a5ff9155e790" class="">Without that key, no-one is allowed to change the list of trusted parties from which your computer&#x27;s TPM will accept bootloaders. We could make it illegal to subvert this system for the purpose of booting an operating system that the device&#x27;s owner has not approved. Such as law would make spyware really illegal, even moreso than now, and would also ban the secret installation of DRM.</p><p id="d8e824cc-7458-4a32-ba72-65694d00f328" class="">We could design the TPM so that if you remove it, or tamper with it, it&#x27;s really obvious — give it a fragile housing, for example, which is hard to replace after the time of manufacture, so it&#x27;s really obvious to a computer&#x27;s owner that someone has modified the device, possibly putting it in an unknown and untrustworthy state. We could even put a lock on the case.</p><p id="806cb329-cc08-4e57-a6c8-de5ee175c53f" class="">I can see a lot of benefits to this, but there downsides, too.</p><p id="3645a1ab-5350-443c-a4e2-6d0fed774dfc" class="">Consider self-driving cars. There&#x27;s a lot of these around already, of course, designed by Google and others. It&#x27;s easy to understand, how, on the one hand, self-driving cars are an incredibly great development. We are terrible drivers, and cars kill the shit out of us. It&#x27;s the number 1 cause of death in America for people aged 5-34.</p><p id="0910a7a4-972a-4a8d-bfd1-f9554a6d4be2" class="">I&#x27;ve been hit by a car. I&#x27;ve cracked up a car. I&#x27;m willing to stipulate that humans have no business driving at all.</p><p id="6552435d-0952-4b79-a16e-b5106f4fe2c1" class="">It&#x27;s also easy to understand how we might be nervous about people being able to homebrew their own car firmware. On one hand, we&#x27;d want the source to cars to be open because we&#x27;d want to subject it to wide scrutiny. On the other hand, it will be plausible to say, &quot;Cars are safer if they use a locked bootloader that only trusts government-certified firmware&quot;.</p><p id="c12d9336-8176-42bd-9e73-47a9cf042987" class="">And now we&#x27;re back to whether <em>you</em> get to decide what <em>your</em> computer is doing.</p><p id="8102894a-adb9-4e6a-813b-54e9f0a97b56" class="">But there are two problems with this solution:</p><p id="4c8027ad-22f2-4b22-a38e-5306e8080b49" class="">First, it won&#x27;t work. As the copyright wars have shown up, firmware locks aren&#x27;t very effective against dedicated attackers. People who want to spread mayhem with custom firmware will be able to just that.</p><p id="a382de34-c32c-4d0b-b642-0ac79ce55a9c" class="">What&#x27;s more, it&#x27;s not a good security approach: if vehicular security models depend on all the <em>other</em> vehicles being well-behaved and the unexpected never arising, we are dead meat.</p><p id="6a89eef2-2929-45cd-a5ce-982ad8910a35" class="">Self-driving cars must be conservative in their approach to their own conduct, and liberal in their expectations of others&#x27; conduct.</p><p id="e7999939-8894-4146-8508-8f6a87b8969b" class="">This is the same advice you get in your first day of driver&#x27;s ed, and it remains good advice even if the car is driving itself.</p><p id="c29f2347-b412-4a0c-a17c-bbb61c5f12b0" class="">Second, it invites some pretty sticky parallels. Remember the &quot;information superhighway&quot;?</p><p id="58a3d6a3-f875-460f-a32c-5be8474a8df0" class="">Say we try to secure our physical roads by demanding that the state (or a state-like entity) gets to certify the firmware of the devices that cruise its lanes. How would we articulate a policy addressing the devices on our (equally vital) metaphorical roads—with comparable firmware locks for PCs, phones, tablets, and other devices?</p><p id="526d7699-7153-4d65-87ed-7ea82093bec0" class="">After all, the general-purpose network means that MRIs, space-ships, and air-traffic control systems share the &quot;information superhighway&quot; with game consoles, Arduino-linked fart machines, and dodgy voyeur cams sold by spammers from the Pearl River Delta.</p><p id="cecfcfd0-40f4-4adc-b7bc-cb593df90148" class="">And consider avionics and power-station automation.</p><p id="a547da51-4975-4750-a991-00c763551360" class="">This is a much trickier one. If the FAA mandates a certain firmware for 747s, it&#x27;s probably going to want those 747s designed so that it and <em>it alone</em> controls the signing keys for their bootloaders. Likewise, the Nuclear Regulatory Commission will want the final say on the firmware for the reactor piles.</p><p id="0e65c503-abc6-44e0-9efb-c2be05a48288" class="">This may be a problem for the same reason that a ban on modifying car firmware is: it establishes the idea that a good way to solve problems is to let &quot;the authorities&quot; control your software.</p><p id="fd99be10-ecb9-48a5-93e6-287f2a4a934a" class="">But it may be that airplanes and nukes are already so regulated that an additional layer of regulation wouldn&#x27;t leak out into other areas of daily life — nukes and planes are subject to an extraordinary amount of no-notice inspection and reporting requirements that are unique to their industries.</p><p id="74471b2d-9965-448c-8241-53ef6f2abbb1" class="">Second, there&#x27;s a bigger problem with &quot;owner controls&quot;: what about people who use computers, but don&#x27;t own them?</p><p id="72e3913b-c748-4a62-9678-c2b0e3e2368d" class="">This is not a group of people that the IT industry has a lot of sympathy for, on the whole.</p><p id="d756ab45-4afb-4bd2-9e94-2643dca13ab3" class="">An enormous amount of energy has been devoted to stopping non-owning users from inadvertently breaking the computers they are using, downloading menu-bars, typing random crap they find on the Internet into the terminal, inserting malware-infected USB sticks, installing plugins or untrustworthy certificates, or punching holes in the network perimeter.</p><p id="0ca7104c-e37b-4a30-a436-60d604146cd1" class="">Energy is also spent stopping users from doing deliberately bad things, too. They install keyloggers and spyware to ensnare future users, misappropriate secrets, snoop on network traffic, break their machines and disable the firewalls.</p><p id="586876a0-346c-467d-884b-43e01893f153" class="">There&#x27;s a symmetry here. DRM and its cousins are deployed by people who believe you can&#x27;t and shouldn&#x27;t be trusted to set policy on the computer you own. Likewise, IT systems are deployed by computer owners who believe that computer users can&#x27;t be trusted to set policy on the computers they use.</p><p id="005a96b1-89da-4472-a2ca-2e43fe69f067" class="">As a former sysadmin and CIO, I&#x27;m not going to pretend that users aren&#x27;t a challenge. But there are good reasons to treat users as having rights to set policy on computers they don&#x27;t own.</p><p id="e1992edd-08a7-481e-99fe-467faa3546fb" class="">Let&#x27;s start with the business case.</p><p id="69ca5367-587b-4506-8dfc-1def6df1c04e" class="">When we demand freedom for owners, we do so for lots of reasons, but an important one is that computer programmers can&#x27;t anticipate all the contingencies that their code might run up against — that when the computer says yes, you might need to still say no.</p><p id="cad747a8-c0b0-4927-a4c3-c9810b4f3944" class="">This is the idea that owners possess local situational awareness that can&#x27;t be perfectly captured by a series of nested if/then statements.</p><p id="b91acb5e-c08b-46ed-bc9f-aa867400b076" class="">It&#x27;s also where communist and libertarianis principles converge:</p><ul id="48b5342a-d612-4406-b6da-aaf4fa3a07f1" class="bulleted-list"><li>Friedrich Hayek thought that expertise was a diffuse thing, and that you were more likely to find the situational awareness necessary for good decisionmaking very close to the decision itself — devolution gives better results that centralization.</li></ul><ul id="758a5c6c-bc5e-4ade-968d-ef195051abcc" class="bulleted-list"><li>Karl Marx believed in the legitimacy of workers&#x27; claims over their working environment, saying that the contribution of labor was just as important as the contibution of capital, and demanded that workers be treated as the rightful &quot;owners&quot; of their workplace, with the power to set policy.</li></ul><p id="6c9d0876-594a-4b62-817f-2f0d02a4a647" class="">For totally opposite reasons, they both believed that the people at the coalface should be given as much power as possible.</p><p id="e26b634a-dfd3-479e-844a-405abfe62790" class="">The death of mainframes was attended by an awful lot of concern over users and what they might do to the enterprise. In those days, users were even more constrained than they are today. They could only see the screens the mainframe let them see, and only undertake the operations the mainframe let them undertake.</p><p id="b8444372-0405-42f6-8cab-c24832f2f200" class="">When the PC and Visicalc and Lotus 1-2-3 appeared, employees risked termination by bringing those machines into the office— or by taking home office data to use with those machines.</p><p id="efef0e11-6a0c-4925-9eba-3bbbc70adc03" class="">Workers developed computing needs that couldn&#x27;t be met within the constraints set by the firm and its IT department, and didn&#x27;t think that the legitimacy of their needs would be recognized.</p><p id="53938697-9a60-4416-8c48-5185416371db" class="">The standard responses would involve some combination of the following:</p><ul id="8683c53c-1b3f-41f0-aedc-d26bff0599c3" class="bulleted-list"><li>Our regulatory compliance prohibits the thing that will help you do your job better.</li></ul><ul id="8870d926-a05b-4e2d-bd62-9070a0c458fc" class="bulleted-list"><li>If you do your job that way, we won&#x27;t know if your results are correct.</li></ul><ul id="cf664a7f-63b4-4922-9a45-2340def5b4d5" class="bulleted-list"><li>You only <em>think</em> you want to do that.</li></ul><ul id="08afa5dc-93e6-4149-b601-03e1e58adeaf" class="bulleted-list"><li>It is impossible to make a computer do what you want it to do.</li></ul><ul id="c7b5d77f-7627-4986-ad6e-2260e24e3009" class="bulleted-list"><li>Corporate policy prohibits this.</li></ul><p id="da08327b-a577-40a6-939e-a6ff27c30f70" class="">These may be true. But often they aren&#x27;t, and even when they are, they&#x27;re the kind of &quot;truths&quot; that we give bright young geeks millions of dollars in venture capital to falsify—even as middle-aged admin assistants get written up by HR for trying to do the same thing.</p><p id="22da6a44-b334-4b32-a8e2-29a3249fa651" class="">The personal computer arrived in the enterprise by the back door, over the objections of IT, without the knowledge of management, at the risk of censure and termination. Then it made the companies that fought it billions. <em>Trillions</em>.</p><p id="95bf3692-681b-455f-9baf-49996f29d8b6" class="">Giving workers powerful, flexible tools was good for firms because people are generally smart and want to do their jobs well. They know stuff their bosses don&#x27;t know.</p><p id="a0bb24a4-9051-4de9-b3bd-f5c4a2876444" class="">So, as an owner, you don&#x27;t want the devices you buy to be locked, because you might want to do something the designer didn&#x27;t anticipate.</p><p id="952d0a64-924a-4f67-9cc4-5b972c4e0a87" class="">And employees don&#x27;t want the devices they use all day locked, because they might want to do something useful that the IT dept didn&#x27;t anticipate.</p><p id="63ddc656-b582-4120-81c3-3cdbcab3c34d" class="">This is the soul of Hayekism — we&#x27;re smarter at the edge than we are in the middle.</p><p id="aef5d78b-062f-481c-9fa7-498275276286" class="">The business world pays a lot of lip service to Hayek&#x27;s 1940s ideas about free markets. But when it comes to freedom within the companies they run, they&#x27;re stuck a good 50 years earlier, mired in the ideology of Frederick Winslow Taylor and his &quot;scientific management&quot;. In this way of seeing things, workers are just an unreliable type of machine whose movements and actions should be scripted by an all-knowing management consultant, who would work with the equally-wise company bosses to determine the one true way to do your job. It&#x27;s about as &quot;scientific&quot; as trepanation or Myers-Briggs personality tests; it&#x27;s the ideology that let Toyota cream Detroit&#x27;s big three.</p><p id="16c1fc1f-e73a-4972-9d40-61897f408837" class="">So, letting enterprise users do the stuff they think will allow them to make more money for their companies will sometimes make their companies more money.</p><p id="0d6cd06a-670e-4b24-bbde-9c1898bf6e8e" class="">That&#x27;s the <em>business</em> case for user rights. It&#x27;s a good one, but really I just wanted to get it out of the way so that I could get down to the real meat: <strong>Human rights</strong>.</p><p id="2d108eb7-179b-40a6-81c1-8aeadc170350" class="">This may seem a little weird on its face, but bear with me.</p><p id="19c04625-4271-403e-bd32-6f002e64c9b8" class="">Earlier this year, I saw a talk by Hugh Herr, Director of the Biomechatronics group at The MIT Media Lab. Herr&#x27;s talks are electrifying. He starts out with a bunch of slides of cool prostheses: Legs and feet, hands and arms, and even a device that uses focused magnetism to suppress activity in the brains of people with severe, untreatable depression, to amazing effect.</p><p id="cb3b75e0-16e3-4d4b-bd5a-65798ac4f3b8" class="">Then he shows this slide of him climbing a mountain. He&#x27;s buff, he&#x27;s clinging to the rock like a gecko. And he doesn&#x27;t have any legs: just these cool mountain climbing prostheses.</p><p id="53e88b5b-70b9-4a9d-8018-6a06f2de9a63" class="">Herr looks at the audience from where he&#x27;s standing, and he says, <em>&quot;Oh yeah, didn&#x27;t I mention it? I don&#x27;t have any legs, I lost them to frostbite.&quot;</em></p><p id="ea666fb9-fac7-43e0-815d-e81111bae4c6" class="">He rolls up his trouser legs to show off these amazing robotic gams, and proceeds to run up and down the stage like a mountain goat.</p><p id="b883f525-6d9d-4a4b-8f0b-4b96eaff6e4e" class="">The first question anyone asked was, &quot;How much did they cost?&quot;</p><p id="d3249ace-c31e-4aee-8fc4-d01f25978c12" class="">He named a sum that would buy you a nice brownstone in central Manhattan or a terraced Victorian in zone one in London.</p><p id="583a4573-9cf3-4211-8b47-b4bb4268f824" class="">The second question asked was, &quot;Well, who will be able to afford these?</p><p id="94888261-e65b-42e3-a49c-6700a730be58" class="">To which Herr answered &quot;Everyone. If you have to choose between a 40-year mortgage on a house and a 40-year mortgage on legs, you&#x27;re going to choose legs&quot;</p><p id="3025760e-1d55-4f0e-b48c-2cd63590fc7f" class="">So it&#x27;s easy to consider the possibility that there are going to be people — potentially a lot of people — who are &quot;users&quot; of computers that they don&#x27;t own, and where those computers are part of their bodies.</p><p id="5baa9e90-6c30-4d69-bb67-ba00a4ae0dc9" class="">Most of the tech world understands why you, as the owner of your cochlear implants, should be legally allowed to choose the firmware for them. After all, when you own a device that is surgically implanted in your skull, it makes a lot of sense that you have the freedom to change software vendors.</p><p id="45f5bb45-68f1-4ef3-b813-33b5e7594d4b" class="">Maybe the company that made your implant has the very best signal processing algorithm right now, but if a competitor patents a superior algorithm next year, should you be doomed to inferior hearing for the rest of your life?</p><p id="112c5b5f-b8d3-461b-ac95-7c4800d45fd7" class="">And what if the company that made your ears went bankrupt? What if sloppy or sneaky code let bad guys do bad things to your hearing?</p><p id="69f220ea-35c2-4360-9ecf-3804dcf366d9" class="">These problems can only be overcome by the unambiguous right to change the software, even if the company that made your implants is still a going concern.</p><p id="9cd170fd-0c39-418c-a828-198e4355e74b" class="">That will help <em>owners</em>. But what about users?</p><p id="797d3524-0885-41c1-ba28-3ee0693ee4cb" class="">Consider some of the following scenarios:</p><ul id="3ac61875-1097-4d07-bbe8-b4a943cb2e1b" class="bulleted-list"><li>You are a minor child and your deeply religious parents pay for your cochlear implants, and ask for the software that makes it impossible for you to hear blasphemy.</li></ul><ul id="bc630ab1-7e06-4208-8298-29a233c58e4d" class="bulleted-list"><li>You are broke, and a commercial company wants to sell you ad-supported implants that listen in on your conversations and insert &quot;discussions about the brands you love&quot;.</li></ul><ul id="5f5a23bb-4e2e-4930-abf6-98ff6a8a07e4" class="bulleted-list"><li>Your government is willing to install cochlear implants, but they will archive everything you hear and review it without your knowledge or consent.</li></ul><p id="d8512c7a-feb9-4732-a764-cb794597c482" class="">Far-fetched? The Canadian border agency was just forced to abandon a plan to fill the nation&#x27;s airports with hidden high-sensitivity mics that were intended to record everyone&#x27;s conversations.</p><p id="e65d7c69-7c6f-4926-a57f-8815c08e07d4" class="">Will the Iranian government, or Chinese government, take advantage of this if they get the chance?</p><p id="1b0612af-7c26-4179-8de3-fddf087bda31" class="">Speaking of Iran and China, there are plenty of human rights activists who believe that boot-locking is the start of a human rights disaster. It&#x27;s no secret that high-tech companies have been happy to build &quot;lawful intercept&quot; back-doors into their equipment to allow for warrantless, secret access to communications. As these backdoors are now standard, the capability is still there even if your country <em>doesn&#x27;t</em> want it.</p><p id="1e8be0a7-a127-41fa-900a-ada2a77219ed" class="">In Greece, there is no legal requirement for lawful intercept on telcoms equipment.</p><p id="4e5e31c6-c2a7-4042-ba8e-badba100c9b8" class="">During the 2004/5 Olympic bidding process, an unknown person or agency switched on the dormant capability, harvested an unknown quantity of private communications from the highest level, and switched it off again</p><p id="efccf8e7-033b-4108-8f42-786b3976ace8" class="">Surveillance in the middle of the network is nowhere near as interesting as surveillance at the edge. As the ghosts of Messrs Hayek and Marx will tell you, there&#x27;s a lot of interesting stuff happening at the coal-face that never makes it back to the central office.</p><p id="54f95cd3-aeb0-4c51-8444-570b91a09e04" class="">Even &quot;democratic&quot; governments know this. That&#x27;s why the Bavarian government was illegally installing the &quot;bundestrojan&quot; — literally, state-trojan — on peoples&#x27; computers, gaining access to their files and keystrokes and much else besides. So it&#x27;s a safe bet that the totalitarian governments will happily take advantage of boot-locking and move the surveillance right into the box.</p><p id="2be3c7df-cfa2-49ac-b14d-ae854580a52f" class="">You may not import a computer into Iran unless you limit its trust-model so that it only boots up operating systems with lawful intercept backdoors built into it.</p><p id="254adde2-bf75-4398-bc9d-64904bec8cfc" class="">Now, with an owner-controls model, the first person to use a machine gets to initialize the list of trusted keys and then lock it with a secret or other authorization token. What this means is that the state customs authority must initialize each machine <em>before</em> it passes into the country.</p><p id="d0962fef-106e-4058-8aa3-0c61a472d68b" class="">Maybe you&#x27;ll be able to do something to override the trust model. But by design, such a system will be heavily tamper-evident, meaning that a secret policeman or informant can tell at a glance whether you&#x27;ve locked the state out of your computer. And it&#x27;s not just repressive states, of course, who will be interested in this.</p><p id="7784b2e0-9cfa-4a7e-a5c5-9dc30cf83abd" class="">Remember that there are four major customers for the existing censorware/spyware/lockware industry: repressive governments, large corporations, schools, and paranoid parents.</p><p id="eea560e4-2791-419f-a3af-57d87f8ed359" class="">The technical needs of helicopter mums, school systems and enterprises are convergent with those of the governments of Syria and China. They may not share ideological ends, but they have awfully similar technical means to those ends.</p><p id="349866cd-6512-4076-9e19-5211e1197f9e" class="">We are very forgiving of these institutions as they pursue their ends; you can do almost anything if you&#x27;re protecting shareholders or children.</p><p id="5ed77237-b5c4-44e9-99e3-59d29ae9b1ca" class="">For example, remember the widespread indignation, from all sides, when it was revealed that some companies were requiring prospective employees to hand over their Facebook login credentials as a condition of employment?</p><p id="ed6b94c2-b461-42aa-b566-1294eccb39cd" class="">These employers argued that they needed to review your lists of friends, and what you said to them in private, before determining whether you were suitable for employment.</p><p id="9f85d81f-8d2f-4cc9-a911-1dd9a8342f51" class="">Facebook checks are the workplace urine test of the 21st century. They&#x27;re a means of ensuring that your private life doesn&#x27;t have any unsavoury secrets lurking in it, secrets that might compromise your work.</p><p id="fe6b0738-2733-4466-90e5-f5e8eece1219" class="">The nation didn&#x27;t buy this. From senate hearings to newspaper editorials, the country rose up against the practice.</p><p id="0a28507e-c583-42b8-bcba-fd4d5068e890" class="">But no one seems to mind that many employers routinely insert their own intermediate keys into their employees&#x27; devices — phones, tablets and computers. This allows them to spy on your Internet traffic, even when it is &quot;secure&quot;, with a lock showing in the browser.</p><p id="de7cf5de-b2ea-4c86-b5a0-d9a25b972780" class="">It gives your employer access to any sensitive site you access on the job, from your union&#x27;s message board to your bank to Gmail to your HMO or doctor&#x27;s private patient repository. And, of course, to everything on your Facebook page.</p><p id="d555e9a9-3e44-403e-b6d9-e5af0d0d93a0" class="">There&#x27;s wide consensus that this is OK, because the laptop, phone and tablet your employer issues to you are not your property. They are company property.</p><p id="5b015764-84e0-4d12-8fd8-aa9887fe2162" class="">And yet, the reason employers give us these mobile devices is because there is no longer any meaningful distinction between work and home.</p><p id="768fddfd-30d5-42c9-bb53-b6799cd70e98" class="">Corporate sociologists who study the way that we use our devices find time and again that employees are not capable of maintaining strict divisions between &quot;work&quot; and &quot;personal&quot; accounts and devices.</p><p id="e2198335-8cb7-4aee-9945-903899f97015" class="">America is the land of the 55-hour work-week, a country where few professionals take any meaningful vacation time, and when they do get away for a day or two, take their work-issued devices with them.</p><p id="10d0fd19-e62e-45c5-bdfc-e66f63bd5fdd" class="">Even in traditional workplaces, we recognized human rights. We don&#x27;t put cameras in the toilets to curtail employee theft. If your spouse came by the office on your lunch break and the two of you went into the parking lot so that she or he could tell you that the doctor says the cancer is terminal, you&#x27;d be aghast and furious to discover that your employer had been spying on you with a hidden mic.</p><p id="0686db14-b308-4709-8370-dfb96d49260e" class="">But if you used your company laptop to access Facebook on your lunchbreak, wherein your spouse conveys to you that the cancer is terminal, you&#x27;re supposed to be OK with the fact that your employer has been running a man-in-the-middle attack on your machine and now knows the most intimate details of your life.</p><p id="a0fc6749-48b3-4c91-8069-4f92fcf67642" class="">There are plenty of instances in which rich and powerful people — not just workers and children and prisoners — will be users instead of owners.</p><p id="30aca1d1-644f-425e-a6e6-8422009a4b48" class="">Every car-rental agency would love to be able to lo-jack the cars they rent to you; remember, an automobile is just a computer you put your body into. They&#x27;d love to log all the places you drive to for &quot;marketing&quot; purposes and analytics.</p><p id="8ca5aaae-979c-4638-ac8d-d3bede518e18" class="">There&#x27;s money to be made in finagling the firmware on the rental-car&#x27;s GPS to ensure that your routes always take you past certain billboards or fast-food restaurants.</p><p id="b49a43e6-3fed-47dd-825c-9667ac6e2b0a" class="">But in general, the poorer and younger you are, the more likely you are to be a tenant farmer in some feudal lord&#x27;s computational lands. The poorer and younger you are, the more likely it&#x27;ll be that your legs will cease to walk if you get behind on payments.</p><p id="cd39912a-fb54-437e-a01e-d8853240db8c" class="">What this means is that any thug who buys your debts from a payday lender could literally — and legally — threaten to take your legs (or eyes, or ears, or arms, or insulin, or pacemaker) away if you failed to come up with the next installment.</p><p id="93d576e9-799f-457f-b9a8-9adf7fbde949" class="">Earlier, I discussed how an <em>owner</em> override would work. It would involve some combination of physical access-control and tamper-evidence, designed to give owners of computers the power to know and control what bootloader and OS was running on their machine.</p><p id="9bbe5a76-bc96-471d-b6ed-a6550f5ca6db" class="">How would a <em>user</em>override work? An effective user-override would have to leave the underlying computer intact, so that when the owner took it back, she could be sure that it was in the state she believed it to be in. In other words, we need to protect users from owners and owners from users.</p><p id="883bdd6c-55ca-40a2-ae8f-f0328c60d443" class="">Here&#x27;s one model for that:</p><p id="bfad1b7a-888b-420a-9bff-9a6eac94fd6b" class="">Imagine that there is a bootloader that can reliably and accurately report on the kernels and OSes it finds on the drive. This is the prerequisite for state/corporate-controlled systems, owner-controlled systems, and user-controlled systems.</p><p id="4db067df-f85c-4b52-b903-a446da2f80cb" class="">Now, give the bootloader the power to suspend any running OS to disk, encrypting all its threads and parking them, and the power to select another OS from the network or an external drive.</p><p id="46120233-a7d4-4d46-a2a3-72bf2e51002e" class="">Say I walk into an Internet cafe, and there&#x27;s an OS running that I can verify. It has a lawful interception back-door for the police, storing all my keystrokes, files and screens in an encrypted blob which the state can decrypt.</p><p id="e3a9b33f-aaec-4efc-b154-91ca65971c70" class="">I&#x27;m an attorney, doctor, corporate executive, or merely a human who doesn&#x27;t like the idea of his private stuff being available to anyone who is friends with a dirty cop.</p><p id="c49f0365-6c4b-4c54-965a-309265e3e891" class="">So, at this point, I give the three-finger salute with the F-keys. This drops the computer into a minimal bootloader shell, one that invites me to give the net-address of an alternative OS, or to insert my own thumb-drive and boot into an operating system there instead.</p><p id="7007d640-f332-46a5-a031-8730d2db7727" class="">The cafe owner&#x27;s OS is parked and I can&#x27;t see inside it. But the bootloader can assure me that it is dormant and not spying on me as my OS fires up. When it&#x27;s done, all my working files are trashed, and the minimal bootloader confirms it.</p><p id="1f8ae671-fd79-4ada-ba43-c9bee99b0b28" class="">This keeps the computer&#x27;s owner from spying on me, and keeps me from leaving malware on the computer to attack its owner.</p><p id="e2a6dfdf-df33-4850-9c12-9cb560b17c46" class="">There will be technological means of subverting this, but there is a world of difference between starting from a design spec that aims to protect users from owners (and vice-versa) than one that says that users must always be vulnerable to owners&#x27; dictates.</p><p id="69dcf8e3-cc2f-47eb-b316-0b3ebc5440bc" class="">Fundamentally, this is the difference between freedom and openness — between free software and open source.</p><p id="21a1e4ba-b13f-4401-a13f-8870122de408" class="">Now, human rights and property rights often come into conflict with one another. For example, landlords aren&#x27;t allowed to enter your home without adequate notice. In many places, hotels can&#x27;t throw you out if you overstay your reservation, provided that you pay the rack-rate for the rooms — that&#x27;s why you often see these posted on the back of the room-door</p><p id="04184ba9-d0de-4819-9698-54f3ba442dd5" class="">Reposession of leased goods — cars, for example — are limited by procedures that require notice and the opportunity to rebut claims of delinquent payments.</p><p id="4d79bae2-a3b7-4e15-b4a6-0a8511fd5762" class="">When these laws are &quot;streamlined&quot; to make them easier for property holders, we often see human rights abuses. Consider robo-signing eviction mills, which used fraudulent declarations to evict homeowners who were up to date on their mortgages—and even some who didn&#x27;t have mortgages.</p><p id="94e60aac-223c-4d91-b52e-fd850f166f20" class="">The potential for abuse in a world made of computers is much greater: your car <em>drives itself to the repo yard</em>. Your high-rise apartment building switches off its elevators and climate systems, stranding thousands of people until a disputed license payment is settled.</p><p id="5a185458-7149-4af0-958e-1fa90014925d" class="">Sounds fanciful? This has already happened with multi-level parking garages.</p><p id="4149bde5-6052-4b13-b921-ecae7d13438f" class="">Back in 2006, a 314-car Robotic Parking model RPS1000 garage in Hoboken, New Jersey, took all the cars in its guts hostage, locking down the software until the garage&#x27;s owners paid a licensing bill that they disputed.</p><p id="4407f831-1312-4103-b659-8207b1ee1fc2" class="">They had to pay it, even as they maintained that they didn&#x27;t owe anything. What the hell else were they going to do?</p><p id="402f499b-97c5-4109-be04-236d59c9fb19" class="">And what will</p><p id="d3d8f1d3-ffc0-4039-a661-a36adcffdc38" class="">you</p><p id="5d08ca74-dcc0-4ad7-af2f-265a233ae8e5" class="">do when your dispute with a vendor means that you go blind, or deaf, or lose the ability to walk, or become suicidally depressed?</p><p id="b03f31a5-2ca2-4e8c-96a4-bb008c02646b" class="">The negotiating leverage that accrues to owners over users is total and terrifying.</p><p id="a745fa1f-6d2b-4d18-8e83-077d10a9379b" class="">Users will be strongly incentivized to settle quickly, rather than face the dreadful penalties that could be visited on them in the event of dispute. And when the owner of the device is the state or a state-sized corporate actor, the potential for human rights abuses skyrockets.</p><p id="3bad86b5-be49-4713-9cad-32810fa0dc48" class="">This is not to say that owner override is an unmitigated evil. Think of smart meters that can override your thermostat at peak loads.</p><p id="a70a0297-0bbf-4cc0-a5fa-bf1655a41b75" class="">Such meters allow us to switch off coal and other dirty power sources that can be varied up at peak times.</p><p id="5faba950-8453-4358-bf73-a2676a0b07d9" class="">But they work best if users — homeowners who have allowed the power-company to install a smart-meter — can&#x27;t override the meters. What happens when griefers, crooks, or governments trying to quell popular rebellion use this to turn heat off during a hundred year storm? Or to crank heat to maximum during a heat-wave?</p><p id="cec91a84-bbbc-4a4e-9c8b-26ba2dc946b2" class="">The HVAC in your house can hold the power of life and death over you — do we really want it designed to allow remote parties to do stuff with it even if you disagree?</p><p id="d8841409-997f-4943-b349-217b02596e53" class="">The question is simple. Once we create a design norm of devices that users can&#x27;t override, how far will that creep?</p><p id="0ca5a2fc-a148-44b2-876d-d66ccb755ecb" class="">Especially risky would be the use of owner override to offer payday loan-style services to vulnerable people: Can&#x27;t afford artificial eyes for your kids? We&#x27;ll subsidize them if you let us redirect their focus to sponsored toys and sugar-snacks at the store.</p><p id="063a59a6-72ff-414a-b87d-812c74957c9b" class="">Foreclosing on owner override, however, has its own downside. It probably means that there will be poor people who will not be offered some technology at all.</p><p id="75454faf-beba-443a-b961-673b5c2191c1" class="">If I can lo-jack your legs, I can lease them to you with the confidence of my power to repo them if you default on payments. If I can&#x27;t, I may not lease you legs unless you&#x27;ve got a lot of money to begin with.</p><p id="ba45581d-3f25-43e9-93bd-3a1919f5fd01" class="">But if your legs can decide to walk to the repo-depot without your consent, you will be totally screwed the day that muggers, rapists, griefers or the secret police figure out how to hijack that facility.</p><p id="3d55339d-3f2f-4b48-822e-12a66434ad00" class="">It gets even more complicated, too, because you are the &quot;user&quot; of many systems in the most transitory ways: subway turnstiles, elevators, the blood-pressure cuff at the doctor&#x27;s office, public buses or airplanes. It&#x27;s going to be hard to figure out how to create &quot;user overrides&quot; that aren&#x27;t nonsensical. We can start, though, by saying a &quot;user&quot; is someone who is the</p><p id="40491b8d-0194-47ac-807d-10769b5c9753" class="">sole</p><p id="ea190fbb-5395-4f87-974f-f46a64951b15" class="">user of a device for a certain amount of time.</p><p id="98adf3d0-53b8-4266-a0eb-98e65691f844" class="">This isn&#x27;t a problem I know how to solve. Unlike the War on General Purpose Computers, the Civil War over them presents a series of conundra without (to me) any obvious solutions.</p><p id="cfbc7c36-f782-4ef4-ba79-57d281b4be17" class="">These problems are a way off, and they only arise if we <em>win</em> the war over general purpose computing first</p><p id="b7090161-b6ba-410c-adb0-50d2a6ebc27c" class="">But come victory day, when we start planning the constitutional congress for a world where regulating computers is acknowledged as the wrong way to solve problems, let&#x27;s not paper over the division between property rights and human rights.</p><p id="820d4b0c-2986-4919-a3d6-ca0c576f52f9" class="">This is the sort of division that, while it festers, puts the most vulnerable people in our society in harm&#x27;s way. Agreeing to disagree on this one isn&#x27;t good enough. We need to start thinking now about the principles we&#x27;ll apply when the day comes.</p><p id="2f818be2-eb4d-43d7-be27-53226c768252" class="">If we don&#x27;t start now, it&#x27;ll be too late.</p><p id="7f9e4c60-9e17-4eb3-9dbc-0762ac31a6bf" class=""><em>Video: Google. Photos: Cory Doctorow. Layout: Rob Beschizza</em></p></div></article></body></html>

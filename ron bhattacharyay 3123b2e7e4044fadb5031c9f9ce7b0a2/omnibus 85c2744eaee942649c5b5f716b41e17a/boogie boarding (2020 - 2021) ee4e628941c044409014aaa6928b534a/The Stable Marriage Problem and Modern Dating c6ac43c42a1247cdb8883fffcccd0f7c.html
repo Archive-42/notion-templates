@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Stable Marriage Problem and Modern Dating</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c6ac43c4-2a12-47cd-b888-3fffcccd0f7c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">👩‍❤️‍💋‍👨</span></div><h1 class="page-title">The Stable Marriage Problem and Modern Dating</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-default">Dating</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.arvarik.com/the-stable-marriage-problem-and-modern-dating" class="url-value">https://www.arvarik.com/the-stable-marriage-problem-and-modern-dating</a></td></tr></tbody></table></header><div class="page-body"><p id="c4878846-7259-4db0-92fe-97a51a02cb65" class="">This post is a follow-up to the intro post about <a href="https://www.arvarik.com/visiting-the-stable-marriage-problem">The Stable Marriage Problem</a>. Check out the previous post to understand the problem/solution because this post examines its implications, particularly in the modern dating world.</p><p id="11a761d5-f1c9-46f7-807b-3549e185752f" class="">
+</p><h2 id="b63f5108-b062-437d-b5d3-bfbac39db2a3" class="">Modern Times</h2><p id="88ed6b08-ccd5-4827-9c94-4ccaf638d675" class="">A fascinating consequence of the internet is how much closer it has brought the problem of finding your soulmate, as well as how much closer the assumptions in the original Stable Marriage Problem (SMP) are true in reality. The <a href="https://www.eecs.harvard.edu/cs286r/courses/fall09/papers/galeshapley.pdf">original paper</a> from 1962 has assumptions that neither worked then nor now, but it started the discussion on how to best pair people for marriage and any entities for any purpose in general.</p><p id="ac2ff56b-4ab5-42d0-9b4e-8402d31fb101" class="">
+</p><p id="6dc7ac16-39a4-4909-9a88-83f9001c6e05" class="">The original SMP assumes that everybody knows everybody so that each person can rank everyone in the opposite gender. This was a clearly unrealistic assumption back in 1962, however, nothing has been a more unifying resource in the history of humanity than the interent.</p><p id="cd3a8e24-ee3d-4536-9b2c-ac82939e6568" class="">
+</p><p id="08f7e32c-b041-414a-83fc-582ed478e17b" class="">While the SMP may have been an interesting experiment to replicate in a small closed off town 25 years ago, people are finding other people at a much greater rate and from a larger and more diverse group, allowing the SMP to simulate real life more accurately.</p><p id="fddf797a-8c20-4fd8-b804-3156ad6b9026" class="">
+</p><p id="a8cfe2a0-f580-4ffb-b628-6df8e3a04cf3" class="">The table below shows the top three ways people have met their partner by decade in the past 50 years:</p><p id="88635163-30a1-46ea-a19e-6a7dc96ddb89" class="">
+</p><div id="5788991e-57f6-448b-95e9-051816a91503" class="collection-content"><h4 class="collection-title"></h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>1960’s</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Through Friend (19%)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Through Family (13%)</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Primary / Secondary School (12%)</th></tr></thead><tbody><tr id="0fe52f8c-843d-4c11-bf32-a4c3e593b7ab"><td class="cell-title"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/Untitled%20Database%205788991e57f6448b95e9051816a91503/1970%E2%80%99s%200fe52f8c843d4c11bf32a4c3e593b7ab.html">1970’s</a></td><td class="cell-3;uP">Through Friend (21%)</td><td class="cell-E@7m">Through Family (13%)</td><td class="cell-W0.S">Bar / Restaurant (10%)</td></tr><tr id="24e419b8-5680-4d27-a372-1cc61d5b6de2"><td class="cell-title"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/Untitled%20Database%205788991e57f6448b95e9051816a91503/1980%E2%80%99s%2024e419b856804d27a3721cc61d5b6de2.html">1980’s</a></td><td class="cell-3;uP">Through Friend (18%)</td><td class="cell-E@7m">Through Coworker (16%)</td><td class="cell-W0.S">Bar / Restaurant (14%)</td></tr><tr id="b0c659e8-9641-44b6-8781-ad67f6cb1c96"><td class="cell-title"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/Untitled%20Database%205788991e57f6448b95e9051816a91503/1990%E2%80%99s%20b0c659e8964144b68781ad67f6cb1c96.html">1990’s</a></td><td class="cell-3;uP">Through Friend (18%)</td><td class="cell-E@7m">Through Coworker (15%)</td><td class="cell-W0.S">Bar / Restaurant (12%)</td></tr><tr id="86863c78-6cc6-4e83-a566-7d7728f8eba0"><td class="cell-title"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/Untitled%20Database%205788991e57f6448b95e9051816a91503/2000%E2%80%99s%2086863c786cc64e83a5667d7728f8eba0.html">2000’s</a></td><td class="cell-3;uP">Through Friend (19%)</td><td class="cell-E@7m">Bar / Restaurant (11%)</td><td class="cell-W0.S">Through Coworker (10%)</td></tr><tr id="dab3ff45-9540-4d4a-9bc6-c1c159c4eb74"><td class="cell-title"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/Untitled%20Database%205788991e57f6448b95e9051816a91503/2010%E2%80%99s%20dab3ff4595404d4a9bc6c1c159c4eb74.html">2010’s</a></td><td class="cell-3;uP">Met Online (19%)</td><td class="cell-E@7m">Through Friend (17%)</td><td class="cell-W0.S">Bar / Restaurant (15%)</td></tr></tbody></table></div><p id="f5b65b4b-0c01-4863-9098-323db9eb8968" class="">The 2010’s showed a monumental rise in online dating, and the number of people who have met their significant other online is only going to continue to grow. Online dating is interesting in particular because it provides us with a breadth of information on dating patterns in the modern age.</p><p id="d63c4daf-2687-448c-91be-48daf4acf238" class="">
+</p><p id="4f732115-0281-4bfb-bad0-f04f82476964" class="">I wanted to see how the SMP actually worked when run through some simulations, and how well it actually models real life.</p><p id="e4f90964-8664-4f0b-9c4c-ab33c8f4a928" class="">
+</p><p id="4bf0121c-e4dd-458a-9486-30a50941d8f9" class="">In order to benchmark some variants of the SMP that model real life more accurately, let&#x27;s start off by simulating the classic problem scenario proposed over 50 years ago.</p><h2 id="7471eaf8-7ff1-4778-b689-3b917400782f" class="">Simulations</h2><p id="486090c4-1e67-4f06-9b9f-97ef040a8a80" class="">
+</p><h3 id="a2e834a1-8e47-452e-8fd1-a8345c671a9f" class="">Classic</h3><p id="65a6cd99-e7ee-4a71-a72b-d14a04cec4f4" class="">I created a <a href="https://github.com/Arvind-Arik/stable-marriage-problem/blob/master/classic/stable_marriage_problem_classic.py">Python implementation</a> of the classic SMP solution in order to calculate some initial results on what a &#x27;perfect&#x27; world would be like.</p><p id="951b51a3-fdd0-46b9-a7f1-b4173d4c6b2a" class="">
+</p><p id="4ed53049-561b-4f96-b65a-35f5da048572" class="">The assumptions in the classic SMP scenario is that everybody knows each other and people&#x27;s preference towards the opposite group is randomly and uniformly distributed. This basically means that everybody has an equal chance to be liked by someone of the opposite gender.</p><p id="63487e66-06af-40ad-9e77-30dc2ffc0ded" class="">
+</p><p id="56f05812-d9bd-4b1b-9f92-b4936e0b0679" class="">The standard algorithm was run with different population levels and the number of iterations to find a stable matching as well as the preference rank each person matched with on average was recorded.</p><p id="37746b1f-15b4-4126-b60c-80238ab3b3ff" class="">
+</p><p id="0eabd751-dfea-4626-bc8b-da097360ee8f" class="">The latter point is shown in the second graph and is portrayed as the difference between the rank of what every girl got, minus the rank of what every guy got (notice the title indicates an advantage for men, this is because in pretty much all scenarios the man came out higher in the matching, a.k.a the &#x27;reacher&#x27;)</p><p id="261bcac6-861f-4430-a547-a3fd9ec2e52c" class="">
+</p><figure id="abf7d53d-626e-4f1a-a8fb-406d7dc56feb" class="image"><a href="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/classic_simulation_multiple_iterations.png"><img style="width:600px" src="The%20Stable%20Marriage%20Problem%20and%20Modern%20Dating%20c6ac43c42a1247cdb8883fffcccd0f7c/classic_simulation_multiple_iterations.png"/></a></figure><p id="5d8c2394-46ec-4f56-97d2-e86e3f14301f" class="">Classic Simulation</p><p id="f9296fe2-7151-41d9-aab9-6c7d89803d77" class="">From the simulations we can observe two things:</p><p id="fa535cd7-8dad-4c35-a953-c7186cb88f7e" class="">
+</p><ul id="0a9b8616-f4e9-4e94-bfdc-899e5594bda6" class="bulleted-list"><li>The first graph demonstrates the <code>O(n²)</code> complexity of the algorithm. We can see that as the community grows larger, even by a small amount, the amount of iterations it takes to solve the matching problem grows exponentially.<ul id="9b54705b-447b-47d8-850c-1a4eabe93c4b" class="bulleted-list"><li>It shows how the difficulty of finding a stable matching between two people grows at a disproportionate rate when population of the community increases.</li></ul></li></ul><ul id="20e24c14-f680-4eed-a015-4f87075c82dc" class="bulleted-list"><li>The second graph shows the difference in preference ranks for each group of people. It is calculated by examining each matching and seeing where the woman lies on the man&#x27;s preference rank and where the man lies on the woman&#x27;s preference rank.<ul id="ef726f1a-b0a3-4ad1-93bf-d1c93378682c" class="bulleted-list"><li>Since the only difference between the two groups is which group &#x27;proposes&#x27; first, we see as an outcome that men have an advantage in this scenario in that, compared to women, they end up with a partner higher on their preference list.</li></ul><ul id="35955324-5f8b-4200-8b8d-d0c8d3d8dc58" class="bulleted-list"><li>The advantage starts off high, and seems to converge at around 13-14% advantage for men</li></ul></li></ul><h3 id="9d4f8a99-889f-408f-be4e-2d51b487efd1" class="">Preference Manipulated by Dating Pattern</h3><p id="35a5cdf7-f962-419f-9587-fe292494a1eb" class="">
+</p><p id="7f2f4bfe-5a0d-40a7-9729-5e10407c8b8b" class="">There are some pretty large assumptions being thrown around in the classic SMP scenario.</p><p id="02d62738-45a4-4ceb-b714-19944b26c38c" class="">
+</p><p id="b3b3f851-9f06-4627-b47c-8e6bb35c9e44" class="">In my opinion, the biggest assumption made is that preference sets are randomly assigned and uniformly distributed. This means that everyone&#x27;s preference is not correlated with one another&#x27;s, and that for large enough populations everyone&#x27;s attractivness is roughly the same (based on how the opposite gender ranks).</p><p id="09867f52-f81e-4fd4-8317-1854b6516208" class="">
+</p><p id="3aa1b68a-b42e-40bb-bee1-3270e56b8a31" class="">I don&#x27;t know about you, but I certainly don&#x27;t have an online following of girls gushing over me like Timothée Chalamet does.</p><p id="ae39ca87-1d62-4b83-b234-2ce5308e627b" class="">
+</p><p id="0f87a3a3-59fb-4e89-9335-ea823037c123" class="">As mentioned before, one of the interesting ramifications of the rise in online dating is the amount of data we can aggregate from it.</p><p id="903b5550-89f1-420e-bc1d-4a66c88fbdce" class="">
+</p><p id="8b58dcc9-926b-4867-826c-77a9dea03a65" class="">OkCupid periodically releases dating information in <a href="https://theblog.okcupid.com/">their blog</a>, and some time ago they released some interesting numbers in how men perceive attractiveness of the opposite sex versus women. The following charts outline the discrepancy:</p><p id="8379c541-b4b6-4717-80f2-e13b2321cf93" class="">
+</p><p id="942eb77a-e9e1-40bd-a887-d0b455772925" class="">From the data (specifically the dotted lines) we can see two things:</p><ul id="bf61b921-cc16-4118-a2fd-a9ac2bcccbd6" class="bulleted-list"><li>Men&#x27;s ranking of women pretty closely resembles a <a href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a>. This is easy to conceptualize as essentially half of women in mens eyes are above average and half are below.</li></ul><ul id="50c56bb3-bb39-4eaf-a1e0-35067d23d246" class="bulleted-list"><li>Women&#x27;s ranking of men is more closely related to the <a href="https://en.wikipedia.org/wiki/Pareto_distribution">Pareto distribution</a>, also known as the 80-20 distribution. With respect to this problem, it means that if we could quantify attractiveness for every guy, the top 20% of men hold 80% of cumulative attractiveness in the eyes of women. In an unrelated note, Bernie seems a lot more appealing right about now.</li></ul><p id="858bfde3-b348-47fa-9a97-eb2f2bfd36cc" class="">
+</p><h3 id="4ee68ccb-798f-4f20-82c9-f5d4faf301d3" class="">So how do we change our problem?</h3><p id="242d4a06-a028-44f5-8510-6e6372217a61" class="">
+</p><p id="b8952440-1aff-4ef8-8742-deabcc60ea63" class="">We can tweak our original code so that each gender&#x27;s preference rankings are more aligned with their respective distribution of opposite sex attractiveness.</p><p id="ac340381-3c45-4281-b425-23317dda4924" class="">
+</p><p id="46381ad2-3b21-4e45-bc00-d8b878ceaa92" class="">Here is the <a href="https://github.com/Arvind-Arik/stable-marriage-problem/blob/master/distribution/stable_marriage_problem_distribution.py">updated code</a>. Take a look in particular about the shuffling code for preference lists. The new shuffling code applies the normal distribution for guys and pareto distribution for girls.</p><p id="bba2fd91-8554-4b86-82ee-3bca5d900506" class="">
+</p><p id="b313dcc4-1149-4cd7-aadf-3b7d47727aeb" class="">I ran the same simulations again with the updated code and it produced the following results:</p><p id="d6226ca5-788f-4236-9f3f-674ed2d1c878" class="">This is the same type of data analyzed from the previous simulation, but with much different results:</p><ul id="eca09b51-877b-4d83-8e96-3663a9b3c20e" class="bulleted-list"><li>The first graph shows a similar <code>O(n²)</code> complexity of the algorithm, but the constant value for the graph&#x27;s equation is much higher<ul id="1516f29c-8c8c-46be-8a10-e804e4a359dc" class="bulleted-list"><li>The standard SMP for 1000 pairings took around 7,000 iterations to complete - with the new simulations, the SMP algorithm runs in about 21,000 iterations, or 3 times as much</li></ul><ul id="8524ca3b-3952-4537-abf2-970e3c3a50a6" class="bulleted-list"><li>This makes sense in terms of the distributions. Since more women now have the same few men in the top 20% of their preference lists, the number of conflicts increases when running the algorithm and causes a lot more men to be dumped and subsequently resume their search for a better soulmate</li></ul></li></ul><ul id="9c33b814-bf0f-430d-b192-0b31b5b56375" class="bulleted-list"><li>The second graph is particularly interesting and shows a marked increase in the &#x27;advantage&#x27; men have simply for being the proposers<ul id="35e7c117-faf1-4f7d-87a5-a6618f0b0d8b" class="bulleted-list"><li>The increase here stabilizes at around 38-39% and is again around 3 times larger than the advantage men had in the classic SMP scenario</li></ul><ul id="dd686de2-9620-4637-9b54-bc004248d430" class="bulleted-list"><li>This increase also makes sense because of the discrepancies in preferences between men and women. If the average man was paired with the average woman, the OkCupid data shows that the man would see the woman as average in attractiveness while the woman would see the man as below average attractiveness</li></ul></li></ul><h2 id="cf3c6729-58de-4204-a3ff-45fdeed9b99c" class="">What Did We Learn From This?</h2><p id="647739fe-21ce-4d7b-9257-4fa00b85c20f" class="">
+</p><p id="69ccc20f-5852-4a71-882e-b33fd415d642" class="">There&#x27;s obviously many gross inaccuaries when trying to reasonably model the dating world, but the SMP offers an initial glimpse as to why dating is so difficult and why certain tropes exist.</p><p id="3f135fbf-72db-4307-92ef-a75acb5d918a" class="">
+</p><h3 id="fd95e21f-86e9-4ccf-abd5-4429480bfeea" class="">Why it&#x27;s always better to be the initiator</h3><p id="9845dacb-e06f-43b0-849f-e03c1b97318e" class="">
+</p><p id="bd0b7f97-0c80-4cbb-99e1-5d99125ff711" class="">A clear callout from the analysis is that men end up having the advantage when everyone is paired. There&#x27;s two main reason for this:</p><p id="eaf0b339-611a-444e-a6a4-fb8be7b03580" class="">
+</p><p id="02f781f8-044a-491f-a04f-34aa6ff3ceed" class=""><strong>1) Societal Expectations:</strong></p><p id="6d7babe7-21ce-4f62-b827-8f751910f106" class="">Men are traditionally assumed to be the first group to make a move and it is why the men in the code simulations make the first move. Because men make the first move, the algorithm benefits men as it works in a <a href="https://en.wikipedia.org/wiki/Greedy_algorithm">greedy behavior</a> to get them the best possible partner.</p><p id="5c93737e-595b-40ab-9396-245662a76074" class="">
+</p><p id="a13a314a-44fb-4581-b166-66355278401d" class="">With respect to the problem, any gender can theoretically be the one to make the first move and reap the benefits demonstrated by the SMP simulations.</p><p id="46e7b886-5de6-455b-ac4f-a0acca040f9f" class=""><em>⠀From WikiHow, I can&#x27;t really draw this well</em></p><p id="7f49b7d9-eff2-4093-9ff0-f629644d2495" class="">
+</p><p id="21f2512e-ebd4-497d-8681-51947ea962a3" class=""><strong>2) Preferences of Men vs Women:</strong></p><p id="5643b25f-87cb-4604-a23b-eb350c85b938" class="">
+</p><p id="99c13b23-4817-4ec7-bc91-71f9eb5773d6" class="">The discrepancy in preferences for the opposite sex between men and women is what caused the stable pairing advantage for men to jump from 13% to 39%. While all other things are held constant, it was the preferences that caused this jump because it all ends up relating to how people <em>perceive</em> attractiveness.</p><p id="d627bab5-65b1-4fa7-a38b-82c880f24373" class="">
+</p><p id="17d0d29c-5bec-4740-9700-1d2129823f08" class="">The OkCupid data shows that women have higher standards for men than men have for women, and this is the main driver for why there is a larger male advantage when the SMP algorithm incorporated the gender attractiveness distributions.</p><p id="cb8b5fe6-3070-4203-8fa1-040a9af87d8e" class="">
+</p><p id="71e9244b-edfa-49df-86e5-75d56c9a70ae" class="">I am in no way concluding that women are unhappier with men in their relationships - there are a million other factors including personality, status and chemistry that affect how each person in the relationship views each other.</p><p id="c9af0d57-b8a4-453f-9db3-87f915f8badc" class="">
+</p><p id="fd2d2d8d-5a05-40cf-8ac2-ac3ed13789ef" class=""><em>However</em>, it does lead us to how the outside world perceives the relationships...</p><p id="bdb3dd4f-fffa-4089-ac8a-ba642ce2341e" class="">
+</p><h3 id="c4f678ae-c4e9-4ffa-988c-9a04536ad303" class="">Settlers and Reachers</h3><p id="02970061-1bc0-4203-bc2a-412537621b2a" class="">
+</p><p id="8003ae0a-c518-405a-8ccc-1027943c8896" class="">The show <em>How I Met Your Mother</em> was a staple TV show during my coming of age years, and it surprisingly had many apt theories surrounding modern dating.</p><p id="eee8ac6f-cc5e-4d14-98c6-97a4bccce45b" class="">
+</p><p id="b11b81c6-17bf-475c-bac4-b4c905806bde" class="">One of the most notable ones was the concept of Settlers and Reachers - as said in the show:</p><p id="f8a6a423-1aec-4721-b45b-b311ef8a1007" class="">
+</p><blockquote id="1b662db2-e419-4cdf-b21a-369074a13a75" class="">Every good relationship has a reacher and a settler. One person reaches for someone out of their league, while the other one settles for someone below theirs.</blockquote><p id="6fe86372-e20d-4f4e-8e8c-8dabbdee8ed1" class="">
+</p><p id="96c59c29-aceb-47e0-9f34-a77097e0b5aa" class="">Based on everything we&#x27;ve learned thus far, we have seen that for the most part the men are the reachers and the women are the settlers.</p><p id="07fd66b3-6ca8-43aa-b087-461bd65f646a" class="">
+</p><p id="04b321fc-2922-4159-82c6-1daa5224f862" class="">Once again, this is just a generalization that only looks at pairings of men and women as a whole, and there are always examples that prove the opposite. But in my opinion, it does explain why in so many relationships that <em>I</em> see, my initial appearance based reaction is that the guy is punching above his weight class.</p><p id="5cccaa8c-9942-4f28-b82a-728e8aab1bc8" class="">
+</p><p id="3a6bc04b-dbef-4e48-b73c-3a98de2478b3" class="">And there&#x27;s plenty of media examples to back this up.</p><p id="a96e9cf2-ba70-42b6-a89b-037ccc4ceaaa" class=""><em>⠀⠀The guys really do be having a good personality though</em></p><p id="04b347fd-8839-4808-9474-f9676ec85d9e" class="">
+</p><p id="91d56e43-16c1-4b46-bb62-97583bc6b7ce" class="">The observation is also noted by critics as the <a href="https://www.vulture.com/2016/02/love-tv-attractiveness-gap.html"><em>Movie and Television&#x27;s attractiveness gap</em></a>. And there&#x27;s even a <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/UglyGuyHotWife">TV tropes article</a> for it!</p><p id="3a316774-021b-49e1-9f2d-af87672805d7" class="">
+</p><h3 id="b2e10d72-43cf-4c82-9767-125352b4bb17" class="">Modern Dating is harder than ever</h3><p id="d34fd710-15f7-4d4f-845b-f70d154d4226" class="">
+</p><p id="2763c0ce-f54b-4ed9-bd11-7d1d07912eb0" class="">Lastly, this point is about the complexity of the SMP algorithm and why it matters.</p><p id="6cb8d333-cb6c-40ee-9603-1a0a34ceb075" class="">
+</p><p id="970bce78-e9f1-43ce-b1e0-e077b9421e1f" class="">You can throw a rock towards any college and it would probably hit a student in an overcrowded Computer Science class who would be ecstatic to tell you all about why an <code>O(n²)</code> algorithm is the worst thing since jorts.</p><p id="fd94413a-8882-4f95-bae0-84e5682b9913" class="">
+</p><p id="ec0c2394-e5fb-42cd-b3b2-e7d6cd342532" class="">The exponential nature of this algorithm shows that as a given community grows, it becomes exponentially harder to match people in a stable manner.</p><p id="1cb0625f-d3c0-4aee-ac5d-ffe030c571ce" class="">
+</p><p id="73e2fec9-9d7f-49d7-b8a8-6c66396d385c" class="">If you grew up in Tolono, Illinois, and all you&#x27;ve ever known were the proud people of Tolono, you&#x27;ll probably find an easier time finding a partner than if you packed your bags and ran off to the Big Apple.</p><p id="30dd79ce-30c1-415f-b284-c43d3804df27" class="">
+</p><p id="fef4e163-5913-4894-8ff6-1f566c25bba4" class="">It is why it was much easier (in my opinion) to find a partner 30 years ago than it is today. Our commmunity has become increasingly global, and we&#x27;re meeting people from all walks of life through all of our technological achievements.</p><p id="a31f7ba1-8cb8-4bfe-b19e-57fa63a8fb9b" class="">
+</p><p id="0d1235b5-6cfc-49ee-b900-65c8b83c7a0d" class="">Of course, this is all undeniably better for the advancement of the human race, <em>however</em>, it does make dating now just a little bit harder.</p><p id="96850177-591c-48b1-ba9e-77108fae6200" class="">
+</p><p id="0cfd7ed8-fb1d-4f4e-8936-111cfc87d60a" class="">Did I write all of this to justify why I&#x27;m single?</p></div></article></body></html>

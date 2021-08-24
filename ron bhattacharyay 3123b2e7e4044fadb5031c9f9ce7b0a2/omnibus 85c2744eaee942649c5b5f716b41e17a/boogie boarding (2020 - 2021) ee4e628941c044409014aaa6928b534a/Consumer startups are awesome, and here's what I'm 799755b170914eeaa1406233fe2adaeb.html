@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Consumer startups are awesome, and here&#x27;s what I&#x27;m looking for at a16z</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="799755b1-7091-4eea-a140-6233fe2adaeb" class="page sans"><header><h1 class="page-title">Consumer startups are awesome, and here&#x27;s what I&#x27;m looking for at a16z</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://andrewchen.co/consumer-startups-at-a16z/" class="url-value">https://andrewchen.co/consumer-startups-at-a16z/</a></td></tr></tbody></table></header><div class="page-body"><figure id="029f8ee8-ad74-4702-bd0f-e7a392ca8482" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z-summit_LP-Consumer-Growth_A-Chen_v10b.001.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z-summit_LP-Consumer-Growth_A-Chen_v10b.001.jpeg"/></a></figure><p id="36041398-9b44-4d07-ba56-9d6787b99492" class="">Above: New technology has always captivated consumers!</p><p id="8f89aa2d-ccd4-476d-9901-e43cf5cee271" class="">Dear readers,</p><p id="fc496d27-75da-45db-98eb-adbe64305e6c" class="">I’m often asked- so what kind of startups are you investing in at Andreessen Horowitz? And since I’m focused mostly on consumer companies – is there anything exciting happening? After all, if we’re “between” platforms, and there isn’t something as big as the iPhone coming up, is there anything interesting left?</p><p id="68bf56fc-bd5f-48d8-81c0-280b2a01035b" class="">I’m really bullish about what’s around the corner – and I want to unpack what I’m looking for, how I’ve drawn insights from history, and what’s around the corner. In the 70 slide deck below, I cover a couple key concepts:</p><ul id="f2e5f328-4462-4c33-b227-dd23ff9fd128" class="bulleted-list"><li><strong>Accelerating technology adoption</strong>. Why the telephone took 50+ years to adopt, but the mobile phone was &lt;10 years</li></ul><ul id="5486c1a3-0f92-4482-88d0-54eedd709592" class="bulleted-list"><li>Three historical examples and their modern antecedents  <ul id="46296149-27a6-4806-bed6-f528fc081eb0" class="bulleted-list"><li><strong>Content marketing</strong>. The origin of the Michelin Guide and why content marketing still works</li></ul><ul id="e786915d-c6d3-4e74-858e-297f19e5aebe" class="bulleted-list"><li><strong>Viral growth</strong>. How chain letters were invented and rethinking its effectiveness in the framework of viral growth</li></ul><ul id="9db2c913-df16-469b-ab05-9e6bb23dcb0b" class="bulleted-list"><li><strong>Marketplaces</strong>. How to bootstrap marketplace businesses and the cold-start problem, and what the story of toothpaste can tell us about that</li></ul></li></ul><ul id="4670493f-1bc4-461b-b41b-39831250e6fe" class="bulleted-list"><li>The most exciting new technologies coming around the corner, and how to evaluate them for producing new startups  <ul id="019e5476-8320-4d7f-ae6c-20d781d1f2cb" class="bulleted-list"><li><strong>Video</strong>. Why video is big, and will get even bigger</li></ul><ul id="364b424b-ca51-49be-b974-26c5e009b6e6" class="bulleted-list"><li><strong>Offline</strong>. How the <a href="https://andrewchen.co/irl-channel/">offline-to-online channel</a> has been used by scooters and rideshare, to great effect</li></ul></li></ul><ul id="11bc4880-d039-4901-b133-4b4bcdab773b" class="bulleted-list"><li><strong>My investing thesis</strong>. The intersection of growth hacking, new tech, and pre-existing consumer motivations</li></ul><ul id="e9f859e0-5c2f-4994-a07e-8792e684fd5d" class="bulleted-list"><li><strong>Closing</strong>. Technology changes, but people stay the same</li></ul><p id="c96f669c-9f65-4d7c-9586-9b1403a21e7d" class="">I presented all of this at the Andreessen Horowitz Summit in 2018, which gathers our portfolio companies, partners, LPs, and close friends. It’s great to be able to publish it here as well. Hope you enjoy it.</p><p id="0e2a7c4b-06d6-4540-b7c0-ffaa570dccbe" class="">Another note is that this is closely related to, and complimentary, to this deck: <a href="https://andrewchen.co/investor-metrics-deck/">The red flags and magic numbers that investors look for in your startup’s metrics.</a> If the below deck is the macro view of how I’m looking at markets, industries, and technologies, then the metrics deck gives my POV on how to diligence each company.</p><p id="eb9a373a-824b-42fc-98d9-6f998cab6020" class="">Finally, before I jump in, it’s true that I talk about what sectors I’m into as well – and here are few areas I’m digging into:</p><ul id="7a1ccbd0-1c0e-43fe-9797-ed838b1d7d93" class="bulleted-list"><li>Unbundling my Uber expertise  <ul id="4667ad0b-2cee-4460-9a2a-e13cae3952ed" class="bulleted-list"><li>Marketplaces (particularly the $10T service economy – <a href="https://andrewchen.co/how-marketplaces-will-reinvent-the-service-economy/">more on that here</a>)</li></ul><ul id="ee25d8dc-9fd0-45be-95a6-a07a92538b8e" class="bulleted-list"><li>Transportation and travel</li></ul><ul id="9ee7f646-2c85-4b95-9db3-0e64cd4e4349" class="bulleted-list"><li>The future of work (Bottoms up SaaS, full-stack autonomy, etc)</li></ul></li></ul><ul id="d6d8c4d4-80f1-438c-8f32-d8e0691e287d" class="bulleted-list"><li>Next generation entertainment and networks of people+content  <ul id="d3e3bc8a-dc61-4e0d-b0b1-f8e490f1206e" class="bulleted-list"><li>eSports, gaming, virtual worlds</li></ul><ul id="881c1d75-6d3f-4d20-9bc5-e0168ea0993a" class="bulleted-list"><li>Reinventing traditional media (Podcasting, eBooks, etc)</li></ul><ul id="9dc2b1ab-47eb-4225-a1d3-86c5b5b85e36" class="bulleted-list"><li>Content creator / influencer economy</li></ul></li></ul><ul id="74a1c749-e705-4ea6-832d-7747cb606ece" class="bulleted-list"><li>… plus, anything else that looks like a network with network effects</li></ul><p id="267c37fe-b801-455a-b63f-214b08741454" class="">Obviously if you are working on anything in this area, and have some traction in the US, would love to talk more. Get an intro through your investors and come find me! Happy to chat.</p><p id="5a86cdd8-2076-4d3a-9faf-24674734404a" class="">Thanks again!</p><p id="5c597554-8dbf-4185-8c01-ffe1b1fe56d5" class="">Andrew San Francisco, CA</p><p id="e06075aa-6eed-4389-9174-057e26c450f2" class=""><strong>Download the deck</strong></p><p id="12b2ca74-f835-4935-b3a8-0d38e83abcfa" class="">Get this deck as a PDF, plus new updates and essays in the future by <a href="http://andrewchen.co/subscribe">subscribing to my newsletter</a>.</p><p id="5b43c3c8-ab5f-45b0-a257-6696b4fce8d6" class=""><strong>The Deck</strong></p><figure id="3196fa5d-2e45-4fcf-82b3-f4a64c468782" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.002-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.002-1024x576.jpeg"/></a></figure><p id="6b6b2865-b696-41ad-937a-0a3c14b4042d" class="">Today, we’re going to talk about what’s exciting and new in consumer startups, and what I’m investing in at Andreessen Horowitz. But to hit this topic, I want to start by zooming out. Here’s a graph of many of the new consumer technologies that have been introduced in the US over the past 100 years. The X-axis is years, and the Y-axis is the % of US households that tech reached.</p><p id="ed28c020-ce91-4656-95d7-fd8bd87d0bcb" class="">Each line represents a different technology – you can see the car, the radio, air conditioning, the microwave, and so on. Lots of important consumer tech that was new at some point. But you also see something pretty interesting – some of the most important tech took decades to adopt.</p><p id="9927344c-bba6-4bfc-96ca-00559bfbe7ea" class="">Let’s take a look at the telephone, in particular.</p><figure id="3bc5b65e-1a58-47fc-9075-5a150a94780b" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.003-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.003-1024x576.jpeg"/></a></figure><p id="d0c12320-978e-4c29-a510-783f9117c614" class="">Above: Now, remember that the motivation of communicating with your friends and family has been around since the dawn of time. But when you look at the phone, it took 5 decades to break into the majority of US households. Wow! And of course at the time, there were other technologies competing for engagement – there was the telegraph, postal mail, etc. In fact, early on the phone was marketed as the “speaking telegraph.” Nevertheless, for something we now take for granted, several decades is a long time.</p><p id="7370df6e-a5b0-4d76-8bbb-c64e0bc8f0e2" class="">Why is that?</p><figure id="d597ea57-a622-4c5f-bfd6-e2415c6d573f" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.004-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.004-1024x576.jpeg"/></a></figure><p id="e5d23680-5376-47ac-9080-659eff13121c" class="">Above: Here’s why. These were the kinds of instructions that had to be packaged alongside the Bell Telephone System – how to hold the phone, which side went to your ear and which side was next to your mouth. And if someone called, you were supposed to say hello!</p><p id="8a0553d4-80db-45aa-894d-19d634e6f4a7" class="">While the human motivation was there to speak to friends and family, we had to build the behavior from scratch.</p><figure id="9fdc9578-9693-4622-999f-250d4ef71560" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.005-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.005-1024x576.jpeg"/></a></figure><p id="b1e015e4-c48f-4f05-a342-defd4f8b3cbd" class="">Above: Let’s contrast this to the cell phone, which took a much shorter time to conquer the market. And in fact, if you were to think about the next few years after it hit mass penetration in the US households, we also know it hit several billion active handsets worldwide. Some developing countries are truly mobile-first – they have mobile phones before they have computers, land lines, or reliable access to water.</p><figure id="38d131f9-31aa-4bf7-8614-ec6f6e734f79" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.006-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.006-1024x576.jpeg"/></a></figure><p id="75136017-b861-4c55-b3e0-086a3c682335" class="">Above: Each new technology is able to build on each other. You can use radio ads to market the TV. You can use the TV to market mobile phone services. And so we see an accelerating adoption rate of new technology introduction.</p><p id="f3ca36b8-1538-4266-8eb1-3bff6bcd086b" class="">What a time to be alive! It’s only going to go faster.</p><figure id="47b0e202-853d-4083-ab3e-8d76e7618c3d" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.007-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.007-1024x576.jpeg"/></a></figure><p id="819f32b3-e885-41be-96bf-a34394dd065e" class="">Above: And yet, even with the backdrop of all of these new technologies, we are still fundamentally the same people from many eras ago. We haven’t physically changed much.</p><figure id="638de220-ece8-47ed-9e21-9d9102257db7" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.008-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.008-1024x576.jpeg"/></a></figure><p id="62861d69-28dc-4034-9f46-93606efd0e42" class="">Above: We are the same humans who painted the walls of caves, because we love art, and love creativity.</p><figure id="a667dc5a-37a9-44c8-a926-1ef6316e1388" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.009-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.009-1024x576.jpeg"/></a></figure><p id="60f7aab3-7559-4067-aa40-ce9fb728b2a6" class="">Above: We are the same people who built massive theaters, because we love to be entertained.</p><figure id="9ab7ae41-8b15-4011-a3b6-0e0cf0cc6e5e" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.010-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.010-1024x576.jpeg"/></a></figure><p id="b7856cfa-be02-4b8c-8e44-0eb431b9f900" class="">We took selfies as soon as the technology allowed.</p><figure id="dbc5025d-17ea-4bbf-88de-9d6dc247d127" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.011-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.011-1024x576.jpeg"/></a></figure><p id="ea3f0def-494c-45f3-bdd7-a9d94190ecf7" class="">… and it turns out, we have always loved scooters. In fact, the US Postal Service tried these gas-powered units out to deliver mail a century ago.</p><figure id="bee7ae2d-81d5-413b-9132-0a3e6c16735b" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.012-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.012-1024x576.jpeg"/></a></figure><p id="f33983ed-cac8-4139-a1f0-e58eb943e6c5" class="">Above: In other words, while technology changes rapidly, people stay the same. And that’s the opportunity.</p><figure id="4b6222e7-1626-4ef1-96dc-ab75924c90b1" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.013-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.013-1024x576.jpeg"/></a></figure><p id="ab6d16d3-a410-4a64-a39d-889c98064384" class="">When we spot new startups who can take advantage of a moment in time, at the intersection of new technology, pre-existing human motivation, and can find a clever growth trick to get going – that’s exciting. That gets my attention.</p><p id="08947c21-bcc9-4989-8b1a-ffd01cb0ba2f" class="">Let’s look at a couple historical examples where these kinds of intersections have happened, and also some modern echoes of their impact.</p><p id="d6327fd1-bf1a-43ab-a64a-2f75030ab4ae" class="">First example, we’ll go back in time.</p><figure id="892817ea-02d9-40b2-8418-c151b58c46d2" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.014-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.014-1024x576.jpeg"/></a></figure><p id="c2e00732-f42b-470d-82cc-e42c4e705b9b" class="">Above: It’s 1900, and there’s a new technology – cars. But there’s only 3,000 automobiles in France, because they’re hand-made, they break down all the time, and it’s not actually clear why they are superior to horses.</p><figure id="f5cf69e9-7f61-4422-b035-80814320cce8" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.015-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.015-1024x576.jpeg"/></a></figure><p id="f2b6c43d-d6e5-45db-8114-40d4baf7cc24" class="">Above: They look like this.</p><p id="9f34ff73-f6ac-45de-b35f-4c48c3ea1563" class="">In the introduction of these new technology, there forms an ecosystem of new companies that stand to benefit from more cars on the road. There’s gas stations, there’s maintenance businesses, and there’s also tires.</p><figure id="96acc7c5-2b38-408e-860d-5df776039a95" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.016-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.016-1024x576.jpeg"/></a></figure><p id="a67b9665-9cc2-4e8d-ad7e-65cdb762d8b0" class="">Above: One of these companies you’re familiar with – they’re called the Michelin Tire Company. And certainly you recognize the Michelin Man on the left over here.</p><p id="e3d0f508-263b-418a-b423-f6c6db8e1e15" class="">Now they have a tough problem to get their business to grow. Remember, there’s only 3,000 cars. Selling tires is hard because what you actually need is to get car owners to drive more, and to create more car owners as well. That’s tricky! It’s a very indirect problem that requires a clever solution.</p><p id="0ab7119d-2405-49b1-942b-d96bac12895a" class="">What was Michelin’s solution? We’re all familiar with the answer: They created the Michelin Guide.</p><figure id="632b5184-82eb-48ba-a372-4c3246b1b9e5" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.017-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.017-1024x576.jpeg"/></a></figure><p id="23e716a0-4e92-497d-ab2e-421a15dd0ce5" class="">Above: This small red book is one of the first Michelin Guides, given out with the subtitle, “Free for Drivers.”</p><p id="b8ab78ff-1d0b-4902-a092-66be1f923831" class="">This is a really clever effort for Michelin, because by packaging all the destination restaurants across France, and eventually Europe and the world, they gave people a reason to drive. And for existing automobile-owners, a reason to visit more towns and drive longer. And in fact, the Michelin Guide is so successful that many of us today don’t have much need for their tires, but certainly rely on their recommended restaurants.</p><figure id="c00c57d3-0ea2-4fc0-b700-f44afe12d322" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.018-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.018-1024x576.jpeg"/></a></figure><p id="42576f8a-f8b6-4795-af65-0d65a0521836" class="">This is a great example of a “hack” that gets their core business growing. And today, we’d call it Content Marketing, and it still works.</p><p id="91d9ece5-ed2a-4dd8-8d79-4c89b099596f" class="">Let’s us a contemporary example that builds on their content marketing push.</p><figure id="2d1236e1-558a-4b3c-a6fe-df6e52969927" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.019-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.019-1024x576.jpeg"/></a></figure><p id="d3202147-6e9b-445d-9beb-1284c17242c8" class="">Google wants us all to be engaged in their mobile apps, search functions, and other properties – but they want to be relevant in our lives in other ways too, for example in our culture and media. One way Google does this is that they have a great app, called the “Google Arts and Culture” app, which demonstrates the world’s great works of art. They have virtual tours of museums, 360 degree photos, videos, and more.</p><p id="13556399-4eac-40ad-bd45-fff1494f02b2" class="">But the best feature they built is the “take a selfie and see what kind of famous artwork you resemble” feature. As we saw earlier, we’ve always been obsessed with selfies. So this was successful. Very, very successful.</p><figure id="e41aa06c-db6e-47c7-bfec-736a683a34ed" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.020-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.020-1024x576.jpeg"/></a></figure><p id="c0d4d6c9-bb5b-4a3d-928e-641a79da7b95" class="">Above: We saw famous people like Kumail from HBO’s Silicon Valley take selfies and publish them – this is a pretty good one! And not only did celebrities share their photos, many everyday consumers did too. A lot of them.</p><p id="f8e38f02-3426-405f-9218-2836010083b7" class="">This was so viral, in fact, that eventually this app was downloaded millions of times.</p><figure id="8921f0f1-4930-4908-a938-7bc884716e06" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.021-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.021-1024x576.jpeg"/></a></figure><p id="b962fd9c-a9ea-43d2-8e39-52f06894e6ed" class="">In early 2018, it became the most downloaded app at that time. More than YouTube. More than Facebook. Wow! That’s fantastic.</p><p id="57190fee-42e2-45ef-bcbd-535218d4e136" class="">But what does this have to do with Google? This is such an indirect way for Google to tell their message, and to engage us in their products. But it’s a much fancier form of content marketing that lives in a mobile app. It worked for Michelin a hundred years ago, and it works for Google today too.</p><p id="d2f2e937-7d04-45eb-8a2f-6e3d40f03dd5" class="">The second example I’ll talk about is more of a consumer user-generated content play. It starts in 1775.</p><figure id="8e4d6e77-45ce-4f6a-a6c4-2a2391e4a2e5" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.022-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.022-1024x576.jpeg"/></a></figure><p id="e977ef1f-8087-4e93-b2c8-1c60353dcc93" class="">Above: In 1775, the US Postal Service was founded!</p><figure id="c5c9f608-c35f-45c3-a49a-edf522e9ed9c" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.023-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.023-1024x576.jpeg"/></a></figure><p id="366cadf9-7581-4d69-8928-74fcef82c8c8" class="">You may know that this guy – Benjamin Franklin – started it.</p><p id="1e9d8e80-5038-42e4-a2d7-86fd0eff00b3" class="">One way to think of the service, in contemporary jargon: The postal service was a new user-to-user communications platform that allows millions of consumers to communicate with each other for the first time. Before social media, and before email, the postal service let people do what we now take for granted.</p><p id="9098b089-d769-457f-a899-fe2a410e7542" class="">There are, of course, a lot of reasons to use the postal service – there’s personal correspondence, bills, advertising, and many other uses. But one of the major uses of mail came unexpectedly, and introduced millions of people to new ways to use mail – the chain letter! It turns out sometimes, as a platform, you’re super lucky, and your customers find new ways to engage and grow your service for you.</p><figure id="d1307dee-4cdb-4cce-996f-bb3c81b61b43" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.024-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.024-1024x576.jpeg"/></a></figure><p id="b99cc7ec-f548-4ab9-8edb-1bff0366beac" class="">In the photo above, you can see one of the world’s first chain letters. When enterprising individuals started to experiment with postal mail, they figured out they could get a ton of engagement when they worded the letters a certain way, and promised certain things.</p><p id="307a820d-906a-4faa-9330-ebb3cb6f0596" class="">The variant above behaved like the following: When you received one, it asked you to remove the top name, add your name to the bottom of the list, and mail a new dime to everyone on the list. And then to share the chain letter with 5 of your friends within 3 days. Specific, clear call-to-actions. If you followed the instructions in the letter, you would receive 15,625 letters with $1,500+ in dimes. In today’s dollars, this is about $33,000. What a great outcome! For folks who’d never seen this kind of letter, and who saw their friends slowly getting rich – one dime at a time – this was enticing.</p><p id="22cc4c7d-c72f-4d1f-8e41-57c414e64b92" class="">These chain letters worked. In fact, they worked really well – too well. Within the first few months, this chain letter reached tens of millions of copies. It eventually became so successful that the US Postal Service had to shut it all down.</p><p id="b72c44f0-ee73-427e-8aa6-8ad2f91f1037" class="">And thus, to this day, chain letters are illegal to send on the US Postal Service!</p><figure id="b9486342-007f-404e-ae69-c18fd3a69116" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.025-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.025-1024x576.jpeg"/></a></figure><p id="abc1fa66-e457-4b13-a8e4-28ff436d2a9f" class="">The chain letter was a clever creation, of course, but today we’d just call this viral user acquisition. Getting people to tell their friends and family to spread the word is something that’s always worked – and it works today as well! The modern version is far more sophisticated.</p><figure id="1991a2f1-502e-46b7-8333-fe2588e7f713" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.026-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.026-1024x576.jpeg"/></a></figure><p id="3e333aea-bf9d-460b-8f6c-2c5835dbeca3" class="">Above: Companies like Airbnb and Uber have referral programs, where you can send credits to your friends that can be redeemed on their trips. And you get credits in your account when they accept it too – it’s a reciprocal give/get program. Of course, we’ve improved the whole thing based on the latest tech. It integrates into Facebook Messenger and your email addressbook. It has tracking codes so you can see how well it circulates, and you A/B test the whole thing to make sure it’s highly optimized to be viral and spread.</p><p id="12ae8c09-aa2e-4470-9905-98d85c8b62ac" class="">Yet in the end, the mechanics are the same – you can get people to tell their friends and family, if you make it enticing for them, and also for yourself.</p><p id="04a55402-df2c-4a71-bf01-824616568015" class="">The last historical example I’ll use is a story about the “cold start” problem – but we’ll use grocery stories and toothpaste as our example.</p><figure id="f096867a-e286-4b89-82fc-bbacff6c6297" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.027-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.027-1024x576.jpeg"/></a></figure><p id="e47832c2-3085-41c5-8347-e5ac36c61d2f" class="">In the early 1900s, it was the dawn of consumer packaged goods companies, who were still figuring out their distribution models. Amazingly, many of the household goods that we’re now familiar with hadn’t been invented yet. People still weren’t really bathing on a regular basis. It was an earlier, simpler time for CPG companies.</p><figure id="9e921ae1-fa83-4dc9-be39-9aa61374e705" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.028-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.028-1024x576.jpeg"/></a></figure><p id="9ea08b66-b76a-401e-b387-580841d28b9b" class="">The amazing thing about the story of toothpaste – the above is a box by Pepsodent – is that toothpaste had to be invented. Even more amazing, people needed to be taught how to use toothpaste, and why.</p><p id="f00c4353-d6e7-44c6-8800-14ae334e30e5" class="">You could advertise to spread the word with consumers, of course, but there was a second problem: How do you get the toothpaste in the hands of consumers?</p><figure id="993b71d7-2e0c-4e25-beb3-1152283a7c32" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.029.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.029.jpeg"/></a></figure><p id="78a52e33-3e85-4e0b-90b7-1cb7c67673c5" class="">Above: Across the US, there were tons of “mom and pop” grocery stores like these. They needed to carry the toothpaste so that consumers could come in and buy them. The problem is, they don’t want to stock the toothpaste (which they would need to buy) if consumers weren’t asking for it. And of course, consumers wouldn’t ask for the product – at least you couldn’t count on it – unless it was in stock.</p><p id="0f42364c-f00d-458f-b4bd-550b5f9241c0" class="">This is a classic chicken and egg problem. So how do you solve this?</p><figure id="3d65ee23-611c-4f15-9d98-3facd8c1b153" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.030-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.030-1024x576.jpeg"/></a></figure><p id="8e2cb2e6-0179-47ac-952d-77a6c11d6f93" class="">Above: The answer was simple: Advertising, and lots of it, and coupons too. First, it was important for the CPG companies to convince consumers that they had a yucky film on their teeth that could only be solved with toothpaste. And then they offered them coupons to come and try it.</p><p id="451f682b-1710-4cf6-b51c-cdaee8c897cb" class="">Before running a big campaign like this, they could go to the grocery stores and say, “We’re about to create a ton of consumer demand! Folks are going to come in and ask for toothpaste, so now’s the time to stock it.” This solves the chicken and egg.</p><figure id="b44a8ce0-162f-41e7-93d5-e26af583d185" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.031-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.031-1024x576.jpeg"/></a></figure><p id="8379839e-b602-4074-a915-3b829e6cbb01" class="">Solving the chicken and egg problem was hard then, and it’s hard now. And yet it’s something that every marketplace company has to do.</p><figure id="9683a0ed-b182-43c1-9d2d-ccb7f5b58a0d" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.032-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.032-1024x576.jpeg"/></a></figure><p id="88c6d2cf-34c5-49c2-bcf9-42629576fc2b" class="">Above: If this example sounds familiar, it’s because it was used recently by our portfolio company Instacart too. Today, Instacart has deep relationships with the nation’s top grocers. But when they first got started, they just built a great app, got consumers buying things, and started dispatching shoppers to pick up their orders. As more demand was built, eventually Instacart could approach the grocery chains and set up a formal partnership to make the experience even better.</p><p id="2d33c87e-7422-4bb2-8249-624a4bb72dd7" class="">A hundred years ago, CPGs used advertising and coupons to drive demand to solve their chicken and egg. Today, startups use awesome mobile apps to create demand and to solve the same problem. It still works.</p><figure id="63440d6d-1762-470f-9045-da507be49335" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.033-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.033-1024x576.jpeg"/></a></figure><p id="24d30508-30de-4b14-80a9-992a1c396962" class="">Above: As you might imagine, you could go for hours on these kinds of historical examples. There are a ton of them.</p><figure id="0815cac7-e509-4c15-95de-390058471c1d" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.035-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.035-1024x576.jpeg"/></a></figure><p id="740a7015-377f-4c47-9665-854681c7e1d1" class="">The important, core concept here is simple:</p><ul id="0b94b01a-e93a-4d33-ac5b-b8dad68d4888" class="bulleted-list"><li>When there are new technologies and platforms hitting scale…</li></ul><ul id="4875b667-dfc6-46b2-aaf9-f7cda13e0075" class="bulleted-list"><li>… and products tap in pre-existing consumer motivations</li></ul><ul id="e6b67bd9-07cd-44a1-b910-dd272ec7f26e" class="bulleted-list"><li>… and there are “growth hacks” that create slingshot opportunities to quickly and scalable grow</li></ul><p id="7ae6ee74-3d0b-46a9-87dc-e53200610582" class="">At the intersection of these three factors, amazing things can happen.</p><p id="8f17307a-d6d5-4b82-9a6a-55a00f291816" class="">Get this deck as a PDF, plus new updates and essays in the future by <a href="http://andrewchen.co/subscribe">subscribing to my newsletter</a>.</p><p id="c407b7de-2526-4ab8-8c3d-a5f247e36dea" class="">So it’s my goal to spot new products that look like this, and to evaluate them. (In a separate deck, I talk more about the <a href="https://andrewchen.co/investor-metrics-deck/">extensive techniques from the metrics and growth function that can be used to evaluate startups</a>).</p><figure id="1875b602-3f7a-4c2e-a64e-4c2d103d373c" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.036-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.036-1024x576.jpeg"/></a></figure><p id="d59e73e1-44ee-4d62-825a-092e71dfd4e6" class="">Of course, the first of the triumvirate is critical – and that is new technologies and platforms. And there are a ton of exciting ones right around the corner. But let’s first cover many of the new platforms that have hit major scale.</p><figure id="338aefa7-aa56-4fa8-b3d8-9122713e7760" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.037-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.037-1024x576.jpeg"/></a></figure><p id="b5afea40-aa99-4248-a7aa-ad8aa8f6dbb8" class="">We have IoT devices, particularly voice assistants that live inside Google Homes and Amazon Echoes.</p><figure id="6ff965dd-7697-443c-b669-4ef48408fa92" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.038-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.038-1024x576.jpeg"/></a></figure><p id="082ef3af-77f4-419e-9884-eb7261ead304" class="">We have over a hundred million units of smart TV devices that combine media and computing. That’s exciting.</p><figure id="ac1544c1-28ef-4b07-81bb-94ebf70b58f4" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.039-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.039-1024x576.jpeg"/></a></figure><p id="508f2b11-5a1f-48e3-9658-facfe309b795" class="">We have platforms like YouTube with over a billion active users. Wow!</p><figure id="2040bd69-bb5f-40f9-8617-d62d5f36de0e" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.040-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.040-1024x576.jpeg"/></a></figure><p id="78022545-f88f-4c4e-b622-91d655df8161" class="">And wearables with hundreds of millions of units that sometimes run apps themselves, or help augment experiences on your phone.</p><figure id="a35b495c-e785-4e89-ba0d-3094ed855854" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.041-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.041-1024x576.jpeg"/></a></figure><p id="8f2b0ef5-c757-4874-9632-a394acef1e0b" class="">Not only there many platforms at scale, but it’s exciting to see a couple emerging categories as well.</p><figure id="e67785b5-f397-4d6f-99b5-db34c89cb1ee" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.042-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.042-1024x576.jpeg"/></a></figure><p id="caa3b918-436b-44cb-89d1-e14e6530dd07" class="">There are Nintendo Switches, which have sold tens of millions of units. They focus on games, of course, but you can run cloud-connected games like Fortnite. And perhaps people will creative about what kinds of other apps work too.</p><figure id="695e3616-19b1-4107-90d7-a4571ea52249" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.043-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.043-1024x576.jpeg"/></a></figure><p id="50eec85f-3825-4ff1-babb-5106e4c79c5b" class="">All modern appliances are adding internet-connectivity. Fridges are an obvious one, but we all have seen Amazon add Alexa to microwaves too. What’s next after that??</p><figure id="cbd1a202-c447-48bf-8dcf-4ba2a4c76836" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.044-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.044-1024x576.jpeg"/></a></figure><p id="f623e93d-dead-45a1-8b7a-5aac7c8c6cf4" class="">There continue to be companies working on smart glasses. Above is from North, who are making Augmented Reality inside a pair of glasses that almost look identical to the ones you already have on your face. I think this will be a really compelling category in the next decade.</p><figure id="1140e827-83f3-4787-8326-48fcfe9dbf4a" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.045-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.045-1024x576.jpeg"/></a></figure><p id="c42bca07-3ade-48e0-bc12-5f49388de983" class="">And finally, as autonomous cars come out, we’ll have to rethink the entire driving experience to mostly be a riding experience. I expect a lot more video, gaming, and interactive media in the car. This is an emerging area too over the next decade.</p><p id="9feb0218-e305-4b2e-b1a0-0109a1510a7a" class="">So there are a ton of new technologies right around the corner. We just need one or two to break out, in addition to the surefire opportunities around marketplaces, B2B, mobile, and other existing categories.</p><figure id="7b9a35ea-89c9-47eb-b13b-aa23551f2483" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.046-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.046-1024x576.jpeg"/></a></figure><p id="b1f25bef-f70a-418f-9ef6-7a6c6bd517ac" class="">The question is: Which platforms am I most excited about? What are examples of growth tactics that are working now that are super clever? In the intersection of the three things I mentioned earlier, what would I zoom in on?</p><p id="8e31e69c-7686-45af-a18c-ff00199ad8af" class="">Let’s talk through a couple.</p><figure id="6d0778ec-2098-433f-a83e-7fa71b6a35ed" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.047-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.047-1024x576.jpeg"/></a></figure><p id="18e27732-441e-456f-96e7-101d87f8975e" class="">The first category of products I’d call “Video Native” products.</p><figure id="0a2a67b0-5aa6-498c-bcf2-1ca481cdece2" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.048-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.048-1024x576.jpeg"/></a></figure><p id="4f634e0b-a328-48c5-81cf-f64a1b67a2a5" class="">Above: The new technology at scale is video. We already talked about how big it is – but let’s give a really concrete example.</p><figure id="04c7f703-901c-4109-ace6-7877a005ff5f" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.049-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.049-1024x576.jpeg"/></a></figure><p id="5f93c473-da52-43d4-a7ed-85c7dc9ea472" class="">You all remember Gangnam Style, our favorite Korean pop song from 2013. And we’ve all heard Despacito (even if you don’t know you have). <a href="https://www.youtube.com/watch?v=kJQP7kiw5Fk">Here’s the link if you need a refresher</a>.</p><p id="59e0c709-ee9e-424a-8e81-1ee9d7f07c61" class="">Both videos are very popular, and have been viewed billions of times.</p><figure id="bd23746e-2c0c-408f-9b68-f8ca56f957f8" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.050-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.050-1024x576.jpeg"/></a></figure><p id="5aedad93-e0c9-4a11-a908-b15f08ff04f2" class="">It took Gangnam Style nearly 5 years to be viewed three billion times. It’s an amazing feat, but even more amazing is that it took Despacito just a year!</p><p id="5ea94b3d-d41d-4337-ac42-145208e3d4c2" class="">Today, as of this writing, Depacito has been viewed 5.7 billion times. Wow.</p><figure id="2bdfeeed-cf67-44b0-9b15-a7d4cd01d843" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.051-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.051-1024x576.jpeg"/></a></figure><p id="306ed77c-bb1b-4932-9427-a8b3bc6473cd" class="">Video is huge, but not just for music videos. It can be used by many other forms of entertainment and media to boost their growth as well.</p><p id="53466ce4-4f56-4d03-9031-2bcd0374340e" class="">My hypothesis: One of the big opportunities right now is that any product that automatically generates video when users engage will create more video sharing activity, thus more viral acquisition and engagement.</p><figure id="969047fd-1b3e-43c4-b89e-b8312e907c32" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.052-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.052-1024x576.jpeg"/></a></figure><p id="443ff1f2-966b-467e-b843-bb1faf0ff0ca" class="">No wonder eSports are such a big deal right now. And it’s one of the reasons I’ve been spending time in this space.</p><figure id="eff7f901-be34-4ef7-96a2-2b2cbf00fe8b" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.053-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.053-1024x576.jpeg"/></a></figure><p id="a3d3fae3-763a-400b-bffd-4972388b9fe1" class="">When you look at a game like League of Legends, created by Riot Games, you see some amazing stats.</p><figure id="21bcc160-9b1b-4858-a9ae-5edc2838cbf3" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.054-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.054-1024x576.jpeg"/></a></figure><p id="c5d10703-4197-495a-aff2-bc711c2b00e4" class="">The 2017 League of Legends championship was viewed by over 100 million live viewers. Compare that to Wimbeldon, which had a mere 9.4 million viewers. That’s over 10X. And yet we think of video games as a vertical niche – it’s certainly not. It’s mainstream, and it’s big.</p><figure id="d616cfb3-0083-4a9a-b911-607cc4c11ff7" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.055-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.055-1024x576.jpeg"/></a></figure><p id="e0abe953-662b-4579-95e7-089dfcb78e1c" class="">One startup I’m excited about is Sandbox VR and the category of location-based virtual reality (LBVR). I think this is the format that is most likely to break virtual reality into the mainstream – not in-home. Sandbox asks for people to bring their friends, as a group, to a retail location to use what I think is the best VR experience on the planet. You wear haptic suits, there’s a motion capture system, props, and special effects. It’s next level.</p><p id="86af624a-f511-4d0a-9023-2eac52c4702a" class="">It’s an incredible experience – <a href="https://www.youtube.com/watch?v=FBZjl4RZ_i8">you can see the trailer here</a> and try it in San Mateo <a href="https://sandboxvr.com/sf/location/san-mateo/">here</a>.</p><figure id="a7665904-996e-4af3-a512-19ad16cdc754" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.056-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.056-1024x576.jpeg"/></a></figure><p id="d7cdddda-09f9-4e79-8c82-7ac4d585fa66" class="">With your friends, you fight pirates and zombies. And pirate zombies. They currently have two games, with more coming.</p><figure id="4dcbda9d-e48d-4a0c-9d92-d3bde5e48d38" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.057-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.057-1024x576.jpeg"/></a></figure><p id="457421c4-8c12-4980-ae4e-9ed976b4ea6f" class="">The whole experience is cool, but part of the reason I’m excited about the company is that they have an awesome growth tactic that connects directly to video.</p><figure id="9780dbb6-7340-46fe-88ac-b1b58c9f3d81" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.058-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.058-1024x576.jpeg"/></a></figure><p id="78e2e959-b592-4612-85d8-fa087f7ef7a8" class="">Above: Every time you go with friends, it’s an event – you take a ton of pictures and video. In fact, Sandbox helps you generate a mixed reality video with that’s shareable. You publish it on Facebook and other social media, and it looks like so much fun that friends want to try it too. All of this generates viral growth! It’s a fantastic growth tactic.</p><p id="476bb76b-32dd-4f01-912b-b392b4a20a69" class="">It’s no wonder that one of the company’s slogans is – “Fun to play, but fun to watch too.”</p><figure id="6b3f1479-78da-4a4d-8af0-4ef933f84fc0" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.059-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.059-1024x576.jpeg"/></a></figure><p id="976e1638-f6a8-449a-b733-8481dbc7b88f" class="">The second example I want to use is “Offline to Online.” We all know about going online to offline, which has been enabled by companies like Amazon, eBay, and more. You can think of the first generation of marketplaces and internet products as filling this niche. However, this is the other way around.</p><figure id="a21026a8-9065-4579-9d1c-124152ade505" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.060-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.060-1024x576.jpeg"/></a></figure><p id="6edd5505-6d4b-4189-a805-2e576b256941" class="">Above: The fundamental technology shift that’s allowing this is everything to do with maps, GPS, and AR – all in your pocket, on your mobile phone. This enables both new product experiences but also new growth tactics too.</p><figure id="aa369580-a37c-4be9-864d-3ed4392457b3" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.061-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.061-1024x576.jpeg"/></a></figure><p id="4093347f-9124-4e86-aab6-d308c76e7ef2" class="">The growth hack I have in mind is that you can now have highly visible offline experiences that then drive people towards using their app. As online channels become saturated – Facebook and Google ads are expensive, there are literally millions of apps in the app store – it turns out the real world gets pretty attractive.</p><p id="899c839f-59aa-4f19-8db8-00a24146bfd2" class="">Let’s look at some examples:</p><figure id="6ea4e2b3-44e7-4681-ab1f-9b2c97262812" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.062-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.062-1024x576.jpeg"/></a></figure><p id="f1b9feed-c5ac-4616-8311-013595116856" class="">First, there’s Pokemon Go, by Niantic. You see yourself on a map, with Pokemon all around you. Collect them all! It’s fun, but it also means that people are watching others play. Sometimes this is a small reminder, if you see a small group gathered trying to collect a rare Pokemon.</p><p id="62c11e6e-6cb5-45df-a8d3-1e217af58ee0" class="">But sometimes it gets big – really big.</p><figure id="43889260-33a1-4363-955b-3a84bf0a2a02" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.063-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.063-1024x576.jpeg"/></a></figure><p id="e70f6ff0-cf5d-4844-ad4d-3d69c7104d6d" class="">Here’s a photo of tends of thousands of people who showed up for a Pokemon event. This is just one example, but Niantic does events all over the world, all the time.</p><figure id="5f57c9ce-3547-44bc-9e84-130f7f2cb5bc" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.064-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.064-1024x576.jpeg"/></a></figure><p id="7a395889-3498-4ef6-9ba7-121a2244f3b8" class="">Of course, rideshare looks like this too. Who can forget the pink mustaches from across the city that remind us to try and use Lyft?</p><p id="a93c80c9-7c80-4f97-a4ce-a6617e852425" class="">Transportation is an intrinsically viral product – they are social activities. You bring your friends and loved ones in the car with you, to share the costs. Even the fully utilitarian version – going from point A to point B – can be social, since there’s often a person on the other side. These mean that the rideshare companies all benefit from significant viral and organic traffic to their products.</p><figure id="afed1d8f-aa34-4605-9fa6-1e6053f07181" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.065-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.065-1024x576.jpeg"/></a></figure><p id="1e47c4fd-1adb-4a3e-9fb5-331b31846e1b" class="">Scooters are another great example. Our portfolio company Lime has their scooters deployed across a city, and each scooter is literally a mini-billboard to try it out. And the first time you’ve seen someone ride a scooter, they probably had a big smile on their face! It looks fun. And because of that, they benefit from the offline to online effect.</p><figure id="4c519b79-347b-4c51-b043-fd1923e0debd" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.066-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.066-1024x576.jpeg"/></a></figure><p id="38f939f5-e24d-4f6c-8216-7ca0734ad4e6" class="">Above: So these are two quick examples – I’m keeping my eye on more, but again, it’s all about the intersection of new tech, existing consumer behavior, and an insight about growth. If you can get these three together, it’s super interesting.</p><figure id="df84b4c7-6e4a-45d2-84c5-7e28e72bd6e5" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.067-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.067-1024x576.jpeg"/></a></figure><p id="8486502d-82ae-46a3-89c2-3c97d163c99c" class="">There are a ton of new plaforms hitting scale. I’m also interested in GSuite, which is hitting critical mass across SMBs and enterprises. I mentioned Alexa. You can see products like Twitch and Tik Tok growing quickly – with the former adding extensions and the ability for apps to integrate. And Minecraft and Roblox are fascinating virtual worlds that bundle social networks and content together in one place – also fascinating to track.</p><p id="c9a7eaec-11fb-4ec4-beac-f3fe4bdf72af" class="">Get this deck as a PDF, plus new updates and essays in the future by <a href="http://andrewchen.co/subscribe">subscribing to my newsletter</a>.</p><p id="b7dc3a43-634f-4184-850e-d21528f3fea1" class="">As these platforms emerge, there will be new startups can be built adjacent or on top of them.</p><figure id="4696386c-e636-460d-9724-6a58604ba8cf" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.068-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.068-1024x576.jpeg"/></a></figure><p id="9f6dd0a7-db11-4a00-b8b1-ab117ef2c74d" class="">I’m very excited about what’s going on in consumer – and am excited to see what people build.</p><figure id="edd35ac1-6b0b-40e0-a326-ce56df5882f6" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.069-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.069-1024x576.jpeg"/></a></figure><p id="a9fc722a-013a-48b0-bd6e-721461da17f1" class="">Again, here’s my investing framework – 1, 2, and 3. It’s important to see the intersection.</p><p id="2a1bdd39-af03-4bd8-947d-84ce71fb4496" class="">The important idea here is simple:</p><figure id="63b31e2e-7e66-4559-8ebd-822c16ba822d" class="image"><a href="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.070-1024x576.jpeg"><img style="width:700px" src="Consumer%20startups%20are%20awesome,%20and%20here&#x27;s%20what%20I&#x27;m%20799755b170914eeaa1406233fe2adaeb/a16z_summit_deck_2018.070-1024x576.jpeg"/></a></figure><p id="ed7bd37a-a50e-4814-86a5-a715f9562f59" class="">Technology changes, but people stay the same. If we can spot the new, breakthrough products that can grow at the intersection of this technological change, and peoples’ behaviors, then we’ll build the next generation of startups. (And yes, we have really always loved selfies – it’s not a new thing).</p><p id="3d82f8da-e783-4286-86c4-72b498801b05" class=""><strong>PS. Get new updates/analysis on tech and startups</strong></p><p id="cf7662f2-b39f-4437-a4dd-d62182ba7b2d" class="">I write a high-quality, weekly newsletter covering what&#x27;s happening in Silicon Valley, focused on startups, marketing, and mobile.</p><p id="f9b9dfd5-7343-4c26-819c-7f02962a3ece" class="">Views expressed in “content” (including posts, podcasts, videos) linked on this website or posted in social media and other platforms (collectively, “content distribution outlets”) are my own and are not the views of AH Capital Management, L.L.C. (“a16z”) or its respective affiliates. AH Capital Management is an investment adviser registered with the Securities and Exchange Commission. Registration as an investment adviser does not imply any special skill or training. The posts are not directed to any investors or potential investors, and do not constitute an offer to sell -- or a solicitation of an offer to buy -- any securities, and may not be used or relied upon in evaluating the merits of any investment.</p><p id="f658d111-b452-4ead-8aff-e6d2bbeb5e63" class="">The content should not be construed as or relied upon in any manner as investment, legal, tax, or other advice. You should consult your own advisers as to legal, business, tax, and other related matters concerning any investment. Any projections, estimates, forecasts, targets, prospects and/or opinions expressed in these materials are subject to change without notice and may differ or be contrary to opinions expressed by others. Any charts provided here are for informational purposes only, and should not be relied upon when making any investment decision. Certain information contained in here has been obtained from third-party sources. While taken from sources believed to be reliable, I have not independently verified such information and makes no representations about the enduring accuracy of the information or its appropriateness for a given situation. The content speaks only as of the date indicated.</p><p id="eaaea63d-1163-4488-89ce-c931f2b3fec2" class="">Under no circumstances should any posts or other information provided on this website -- or on associated content distribution outlets -- be construed as an offer soliciting the purchase or sale of any security or interest in any pooled investment vehicle sponsored, discussed, or mentioned by a16z personnel. Nor should it be construed as an offer to provide investment advisory services; an offer to invest in an a16z-managed pooled investment vehicle will be made separately and only by means of the confidential offering documents of the specific pooled investment vehicles -- which should be read in their entirety, and only to those who, among other requirements, meet certain qualifications under federal securities laws. Such investors, defined as accredited investors and qualified purchasers, are generally deemed capable of evaluating the merits and risks of prospective investments and financial matters. There can be no assurances that a16z’s investment objectives will be achieved or investment strategies will be successful. Any investment in a vehicle managed by a16z involves a high degree of risk including the risk that the entire amount invested is lost. Any investments or portfolio companies mentioned, referred to, or described are not representative of all investments in vehicles managed by a16z and there can be no assurance that the investments will be profitable or that other investments made in the future will have similar characteristics or results. A list of investments made by funds managed by a16z is available at https://a16z.com/investments/. Excluded from this list are investments for which the issuer has not provided permission for a16z to disclose publicly as well as unannounced investments in publicly traded digital assets. Past results of Andreessen Horowitz’s investments, pooled investment vehicles, or investment strategies are not necessarily indicative of future results. Please see <a href="https://a16z.com/disclosures">https://a16z.com/disclosures</a> for additional important information.</p></div></article></body></html>

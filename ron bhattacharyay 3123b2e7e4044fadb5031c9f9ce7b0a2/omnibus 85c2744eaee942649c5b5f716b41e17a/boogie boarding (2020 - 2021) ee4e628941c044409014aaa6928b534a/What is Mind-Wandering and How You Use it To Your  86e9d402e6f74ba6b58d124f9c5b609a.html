@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>What is Mind-Wandering and How You Use it To Your Advantage? </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="86e9d402-e6f7-4ba6-b58d-124f9c5b609a" class="page sans"><header><h1 class="page-title">What is Mind-Wandering and How You Use it To Your Advantage? </h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://durmonski.com/productivity/what-is-mind-wandering/" class="url-value">https://durmonski.com/productivity/what-is-mind-wandering/</a></td></tr></tbody></table></header><div class="page-body"><figure id="6c616a1c-3160-4d58-89a8-c289a4fe1003" class="image"><a href="What%20is%20Mind-Wandering%20and%20How%20You%20Use%20it%20To%20Your%20%2086e9d402e6f74ba6b58d124f9c5b609a/what-is-mind-wandering.jpg"><img style="width:700px" src="What%20is%20Mind-Wandering%20and%20How%20You%20Use%20it%20To%20Your%20%2086e9d402e6f74ba6b58d124f9c5b609a/what-is-mind-wandering.jpg"/></a></figure><p id="933bc6d2-915d-4c5d-b736-8ef05be0033c" class=""><em>In the age of productivity and endless distractions, your ability to stay focused on a task for prolonged periods of time is essential for both your economic state and self-worth. The more you’re able to repeal against the distractions that are trying to robe you from your focus, the more you’ll make progress on important tasks. This will lead to higher incomes and give you a sense of completion. But battling disturbing noises</em> <em>is almost impossible not because of our phones, it’s because our mind has the tendency to self-generate thoughts that are unrelated to the current task.</em></p><p id="c57f5c08-1aab-46bf-8921-4a567897f848" class="">Our conscious experience is unstable. We can rarely stay focused on a single topic for extended periods of time. And although modern distractions are contributing to our inability to concentrate, the most significant aspect of our vulnerable concentration is explained by the concept of mind-wandering.</p><p id="3478bea7-696e-40d6-911f-97dcead6269b" class="">You can’t <a href="https://durmonski.com/productivity/how-to-read-more-books/">read a book</a> not because you don’t understand the words inside, but because your mind is constantly producing a web of thoughts that are totally different from the current task.</p><p id="1114d198-04ec-49fc-9303-d31c466b6780" class="">Failure to realize when your mind-wanders and your inability to capture a fleeting conscious, train it, and re-focus, is costly. You’ll always be late with tasks and your overall concentration will suffer.</p><p id="785a49ce-a283-4936-9a47-c4fdcf4381dd" class="">In this article, we’ll explore what is mind-wandering, how can you use it to your advantage and how can you reduce the drifting attention so you can boost your productivity.</p><h2 id="08843322-a62e-45eb-84c3-9dd76c726f65" class="">What is Mind-Wandering?</h2><p id="529bab38-754f-418c-8a73-5a7435c89ab6" class="">What happens in our mind is often not related to what we’re experiencing, here and now. Mind-wandering is the ability of the brain to generate thoughts that are unrelated, or somehow related to what we’re actually doing <em>right now</em>.</p><p id="94524f82-ff93-4388-a91f-b522b2ebd885" class="">As stated in a recent study, “when the mind wanders, attention drifts from its current train of thought (often an external task) to mental content generated by the individual rather than cued by the environment.”<a href="https://durmonski.com/productivity/what-is-mind-wandering/">1</a></p><p id="ce03a75f-449f-49c2-8978-c2a38f7d6d7b" class="">These self-generated thoughts can be categorized as task related as well as task unrelated.</p><p id="c5c0d08a-d183-46a6-8aa1-1fd6d08d0d54" class="">And if you think that you don’t ever fall under the time-wasting <a href="https://durmonski.com/book-summaries/rich-dads-cashflow-quadrant/">quadrants</a>, studies on the subject indicate that we spend up to 50% of our waking hours thinking about things that are not related to our current activity.<a href="https://durmonski.com/productivity/what-is-mind-wandering/">2</a></p><p id="96114f51-b7e1-46e0-8b54-530d5d203e29" class="">This means that our ability to self-generate thoughts is not only an inseparable part of our daily lives, it’s basically how half of our lives are lived. And since what we think is basically what we actually experience, understanding how, why, and when the mind-wanders is going to help you understand more deeply yourself.</p><h2 id="6e2cfbc7-0ca9-4d46-9e1f-3ebf54ebb347" class="">Why The Mind-Wanders and Why It’s Important to Understand?</h2><p id="1205f632-03a0-46c3-bf4f-a7c56969a625" class="">First, let’s take a look at why the mind-wanders:</p><p id="1365c725-a64a-4103-830e-346a9af275e0" class="">The most common reason our minds are racing and looking for different things to engage in is how we perceive the current task. If the outcome of what we’re doing right now, is considered with low value, we’ll automatically seek to find another goal that is with higher value – or at least something that can give us a faster outcome.<a href="https://durmonski.com/productivity/what-is-mind-wandering/">3</a></p><p id="2d8a7eeb-03f3-44c0-83e1-720e4a674f89" class="">For example, the outcome of <a href="https://durmonski.com/book-summaries/how-to-read-a-book/">reading a lengthy book</a> comes after you’ve finished the book – or at least that how most people think. So, naturally, if you’re just starting, the perceived end result, and gain, will probably take a week, or more – depending on how fast you read. Once you realize that the present goal is not going to produce <a href="https://durmonski.com/self-improvement/lack-of-feedback/">immediate results</a>, we conclude (unconsciously) that it’s much wiser to stop reading and start doing something with a faster outcome – <a href="https://durmonski.com/life-advice/why-i-quit-social-media/">check social media</a> for example.</p><p id="096614b3-f146-4e12-949c-1e497f4c65b0" class="">All of this happens without our conscious consent. Simply the mind does some calculations in the background and forces us to direct our thoughts towards tasks that give us immediate results.</p><p id="68775772-64b9-4a84-ab84-7eeada4e4761" class="">In addition to the above, there are two other things that are common escape routes for the mind: past-related thoughts and future thinking. These two are the common paths our mind takes to disengage from the current task.</p><p id="96d1669a-aa69-4af3-b4a1-cb11577f373a" class="">Let’s review them in short:</p><p id="55f6f758-5a27-4148-a528-39e028b690ff" class="">Unhappiness and past problems, or current, which are again based on past experiences, stray our minds towards past events. For example, if you’re worried about your job because you failed to deliver a report on time, your mind will jump back in time and play events that are related to this line of thought.</p><p id="fa3a375c-d251-401a-8502-62a8e4e551da" class="">On the other hand, the future-thinking model is more related to happy feelings. If we’re working on a <a href="https://durmonski.com/self-improvement/the-three-year-rule/">long-term goal</a>, you’ll often think about the possible happy outcomes. If you’re <a href="https://durmonski.com/business/1000-true-fans-theory/">starting a business</a> or if you have a scheduled vacation, you’ll interrupt your tasks with thoughts about the joyful moments that are yet to come.</p><p id="7534c26e-5f2e-4edf-b379-b887b6b57693" class="">With the above being said, the importance of acknowledging mind-wandering is pretty obvious. If we don’t control our thoughts we’ll constantly find ourselves thinking about tasks that are not in line with that we’re doing. And since we’ll think about happy or not so things, we will never successfully do the work that is required of us at the moment.</p><h2 id="2b8ea594-92df-45e3-b45e-6488eb3db9de" class="">How is Mind-Wandering Influencing Our Lives?</h2><p id="d0d823e2-a528-4f9d-9c1a-43f58960b084" class="">Apart from forcing us to think about I-can’t-believe-I-did-this type of events that can lead to depression, the other most common downside of this unfocused way of thinking is <a href="https://durmonski.com/productivity/how-to-become-more-productive-and-less-lazy/">reduced productivity</a>.</p><p id="df5e308e-40ee-489f-ace2-d4d36fe2c37c" class="">When you’re unable to control your line of thought, you’ll constantly start over and spend hours doing the simplest activities.</p><p id="e048a9f2-caea-4ab2-a614-8e1ad2a50c50" class="">But spending an hour to write a simple “Thank You” email is nothing compared to the following consequence…</p><p id="ff42a210-23cd-4506-9313-490f846deab5" class="">In our daily lives, the most dangerous result of our tendency to constantly self-generate thoughts is when we drive. If we’re not 100% focused on the road and on what is happening around us, we can make wrong decisions – or even worse, not make a decision at all when we have to – which can lead to bad consequences. And while thinking about what you want to eat while you steer the wheel might not be so bad, we have a tendency to completely detach ourselves from the current realm and go to another, imaginary place.</p><p id="da3d73da-8add-4a03-96a3-50854a8c187a" class="">This important aspect of mind-wandering is called perceptual decoupling. In this state, we completely disengaging from what is happening here and now. We focus on internal desires and pay little, or no attention to what’s happening around us. Zoning out is a way to understand this distracted state of the mind.</p><p id="b6e51a09-a876-4523-91a2-0ff236da071d" class="">During perceptual decoupling, we become oblivious to our current surroundings.</p><p id="dd410f20-1e4c-4ab0-9a11-66ddb19d1da4" class="">And if during mind-wandering you’re just thinking about doing something else, when in perceptual decoupling you’re basically imagining a whole new world.</p><p id="7f5eeb95-79eb-4854-8081-1f69cc95461e" class="">The consequences as mentioned can be quite devastating. From not doing your job on time to not paying attention to the road when you’re driving.</p><h2 id="8649d31b-0aab-4b3d-ad6a-6555abf4491c" class=""><strong>How Can You Reduce Mind-Wandering?</strong></h2><p id="abb318c5-ac09-4cfd-8e8b-c59a54273a5b" class="">You can’t completely shut off-task thoughts. What you can do though, to <a href="https://durmonski.com/productivity/the-one-thing-principle/">increase your productivity</a> and to make sure you’re concentrated while performing important tasks such as driving, is to direct (on time) your focus on the activities that are happening here and now.</p><p id="7e933c37-a331-4b05-93f5-c2712b1eea34" class="">Here are some things you can practice to reduce wandering of the mind and improve your focus:</p><ul id="8435aea8-05a8-45d2-855e-a5e5459b7c24" class="bulleted-list"><li><strong>Increase difficulty</strong>: Tasks that are nearly automated and require little mental effort from your side are mind-wandering breeders. If the current task can’t challenge your thinking you’ll immediately start thinking about other things. The easiest way to concentrate and decrease the number of off-topic thoughts that circle in your mind is to increase the difficultly of the task. To engage in works that are more demanding.</li></ul><ul id="e25bd664-562c-40d9-a2d0-8c4454f2a283" class="bulleted-list"><li><strong>Social pressure</strong>: Another way to manipulate your concentration, in a good way, is to put yourself in front of others. When we’re exposed, we have the ability to concentrate. For example, public speaking is a form of social stress that will force you to focus. If you have to make a presentation, or if you publicly declare that you’ll do something, the social stress and the fear of being publicly ashamed will arm you with the power to focus and do your job. In addition to this, you can consider “getting” an accountability partner. Get someone watch over your shoulder and “check-in” with you regularly to see how you’re progressing.</li></ul><ul id="3d49b111-1143-48d1-8227-f35fc41e0397" class="bulleted-list"><li><strong>Journaling</strong>: Current or past problems, if not 100% solved, are constantly present in the back of our mind, stealing our attention and hurting our mood negatively. When there are important tasks or problems that are pending, the best way to get them off your head is by writing them down. The act of writing what needs to be done will liberate you from the constant thoughts associated with this problem or situation.</li></ul><ul id="298d35ec-df29-4431-a780-d449c496532c" class="bulleted-list"><li><strong>Meta-awareness</strong>: The role meta-awareness plays when your mind is drifting is huge. The faster you “catch” yourself drifting, the faster you’ll bring your mind back to the task at hand. Letting your mind wanders for long periods of time will greatly reduce your performance. And if you let your mind carelessly explore off-topics when you actually need to work you’ll turn this into a nasty habit. When you realize that you’re zoning out, you can write down what you’re thinking about on a piece of paper and move on with your task. The act of writing will give a physical shape to your thoughts and let them out. Overall, meta-awareness is nothing more than realizing that you’re slacking off and bringing your mind back to your tasks.</li></ul><p id="99ea453a-90c9-4c3e-ae5c-ab5211a4cb60" class="">Meta-awareness is when you realize that your mind is not focused on the current task. Your ability to quickly return to what you’re doing now, is essential for your productivity – and a lot of times your safety.</p><ul id="b22a2e47-6e12-4a03-b9f2-42411c815fde" class="bulleted-list"><li><strong>Mindfulness training</strong>: Such programs are about helping your mind stay focused on tasks that are happening in the present. Researchers show that this is one of the best ways to reduce the constant buzzing thoughts and train your mind to concentrate for longer periods of time. Mindfulness training includes things like meditation and breathing exercises. Fortunately, the web is full of this type of exercise.</li></ul><ul id="74e55cea-a418-40ae-98d0-aa24e865cd84" class="bulleted-list"><li><strong>Remove distractions</strong>: The easiest way to reduce the amount of not-related thoughts is by removing distractions from your work environment. This is something pretty obvious but people are often neglecting it. When your phone is not in front of you, when you receive new messages, you will obviously not check it because you will not see it. There are many books on the subject that you can further check: <a href="https://durmonski.com/book-summaries/make-time/">Make Time</a> and <a href="https://durmonski.com/book-summaries/digital-minimalism/">Digital Minimalism</a> are my top recommendations.</li></ul><h2 id="8d950df3-8b83-4772-b039-52c9ed05e2c2" class=""><strong>How Can You Use Mind Wandering to Your Advantage?</strong></h2><p id="6ab86172-7428-4b2c-b103-a3873ac80c92" class="">It’s hard to imagine that letting your mind drift can benefit your life but there are certain gains.</p><p id="fa1eee08-a5b0-45cc-9d9e-0ba3a5deee15" class="">Here’s how you can take advantage of thinking about non-related tasks:</p><ul id="f2e14402-f451-4a5d-ae3c-11eef3cf72f9" class="bulleted-list"><li><strong>A sense of meaning</strong>: If what you are doing right now feels meaningless, your ability to question the task and have an inner dialog about the importance of the job will give you a sense of purpose and direction. For example, if you’re working on an assembly line that requires little mental effort, you’ll probably often feel worried about your place in the world. By letting your mind wander, you can explain to yourself why you’re doing what you’re doing (you need money?) and make plans for the future so you can move to a place/job that is more mind-demanding. Therefore, <a href="https://durmonski.com/book-summaries/mans-search-for-meaning/">more meaningful</a>.</li></ul><ul id="3420c8b9-8087-47e5-93d7-9201ed5badee" class="bulleted-list"><li><strong>Mental break</strong>: Forcing yourself to focus all the time can lead to burnout. Mental rest is just as important as physical rest, if not more so. That’s why techniques like the Pomodoro Technique are so popular. You can force yourself to focus for a period of 25 minutes, but you also need to allow yourself a few minutes to rest – to totally disengage from the task. This gives your brain room to breathe and recover. In addition, if you’re in a bad mood, forcing yourself to think about future pleasant events can make you feel better and help you go through a negative episode in your life.</li></ul><ul id="e3c5cb1b-0745-4a15-926a-b0a75c6ffe4e" class="bulleted-list"><li><strong>Creativity</strong>: Finding new, original solutions to current problems or “inventing” something new can rarely happen when you’re focused on a current task that has pre-set outcomes. You need to let your mind drift to solve problems in a new way. And such solutions can happen only when you allow yourself the luxury of generating mental worlds and imaginary places that are beyond here and now. The more vivid your imagination is, the better you’ll become at problem-solving. Or in other words, your creativity is limited by the scope of your own imagination. If you are unable to imagine non-existing places and abstract solutions, you’ll rarely come up with something new and genuine. That’s why it’s important to engage in deliberate mind-wandering – this will help you increase the scope of your imagination.</li></ul><blockquote id="5e90c806-afde-443e-9c8a-e26e4e855c6a" class="">Over 40% of the participants’ creative ideas occurred when they were engaged in a non-work-related activity and/or thinking about something unrelated to the topic. Moreover, although creative ideas that occurred during mind wandering were not rated overall as more creative, they were more likely to be characterized as involving an “Aha!” experience.” Jonathan Smallwood and Jonathan W. Schooler</blockquote><h2 id="73004abf-587f-43c2-a96a-957628503d39" class="">Some Closing Thoughts</h2><p id="dd410761-8012-41bb-a7ac-d3db3627be30" class="">Your ability to recognize when your mind is self-generating thoughts can help beyond being more productive. It can enable you to become a better parent, partner, and friend.</p><p id="1cc88b29-dd5a-40a0-a728-7a9e0aca228e" class="">We’re prone to think about ourselves and about things that interest solely us. And since other people are doing the same, instead of having a dialog with others, we’re mostly engaged in let-me-tell-you-about-me spectacles.</p><p id="e21dda51-c04b-4726-9f07-64dc800a201d" class="">When talking with your friends and family members, if you force yourself to really listen and hear what they’re saying, and stop the creation of thoughts that are only about you, you can have a meaningful conversation and make others feel understood.</p><p id="52bfd9a7-eb3d-45c3-8b4c-d74652a16cf0" class="">Or in other words, being fully present when around other people is a valuable skill that requires mental effort but it can have huge positive outcomes for you and others.</p><h2 id="348b24eb-d711-4232-af77-48436bd320a8" class="">Footnotes:</h2></div></article></body></html>

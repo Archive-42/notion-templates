@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The sad state of personal data and infrastructure</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4c5c3ff3-828c-4e69-a85a-c06629689458" class="page sans"><header><h1 class="page-title">The sad state of personal data and infrastructure</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://beepb00p.xyz/sad-infra.html#why" class="url-value">https://beepb00p.xyz/sad-infra.html#why</a></td></tr></tbody></table></header><div class="page-body"><ul id="4c768af9-be9f-4887-b19a-786507be115e" class="bulleted-list"><li><p id="d04aede9-2cb7-4094-b9e5-83c8c64aadbc" class="">Sure, it&#x27;s a free market, just switch to another/better service, right? Switching to new and unfamiliar tools is cognitively hard enough as it is, but what&#x27;s even worse is that in most cases you have to <strong>leave behind</strong> all your old data. You&#x27;re lucky if you can do some sort of data import/export and if it works properly.</p></li></ul><p id="71dfa7d5-1300-4883-bebc-c16fda731e33" class="">Personal data is in a sad state these days. Let me elaborate.</p><p id="0504576e-1cc1-4ee3-92d7-f242fc64c00a" class="">To be fair, I don&#x27;t understand how does it <strong>not</strong> bother you!</p><p id="3b10e8c2-9267-4c5a-a89a-61e30e2bf8e4" class="">To start with, allow me to quote <a href="https://beepb00p.xyz/orger.html">myself</a> here:</p><blockquote id="7d0247e8-ae56-45f6-9055-14c6bfac6a8c" class="">I consume lots of digital content (books, articles, Reddit, Youtube, Twitter, etc.) and most of it I find somewhat useful and insightful. I want to use that knowledge later, act and build on it. But there&#x27;s an obstacle: the human brain.   It would be cool to be capable of always remembering and instantly recalling information you&#x27;ve interacted with, metadata and your thoughts on it. Until we get augmented though, there are two options: the first is just to suck it up and live with it. You might have guessed this is not an option I&#x27;m comfortable with.     That sounds simple enough but as with many simple things, in practice you run into obstacles. I&#x27;ll give some I&#x27;ve personally been overcoming as examples:    searching data, e.g.:  search function often just isn&#x27;t available at all, e.g. on Instapaper, you can&#x27;t restrict search to highlights. If it is available, it&#x27;s almost never incremental. builtin browser search (Ctrl-F) sucks for the most part: it&#x27;s not very easy to navigate as you don&#x27;t get previews and you have to look through every match sometimes you vaguely recall reading about something or seeing a link, but don&#x27;t remember where exactly. Was it on stackoverflow? Or in some github issue? Or in a conversation with friend?  data ownership and liberation, e.g.   what happens if data disappears or service is down (temporary/permanently) or banned by your government?   You may think you live in a civilized country and that would never affect you. Well, in 2018, Instapaper was unavailable in Europe for several months (!) due to missing the GDPR deadline.   if you delete a book on Kobo, not only you can&#x27;t access its annotations anymore, but they seem to get wiped from the database.</blockquote><p id="6f64ed04-8f0c-47b4-9eac-705f62bfa5ac" class="">As you can see, my main frustrations are around the lack of the very basic things that computers can do <strong>extremely well</strong>: data retrieval and search.</p><p id="1637a029-ae73-47c8-8138-a83637e0dd94" class="">I&#x27;ll carry on, just listing some examples. Let&#x27;s see if any of them resonate with you:</p><h3 id="b0fd91d1-0937-49d1-a03c-419004954a16" class="">Why can&#x27;t I search over all of my personal chat history with a friend, whether it&#x27;s ICQ logs from 2005 or Whatsapp logs from 2019?</h3><h3 id="a0c67d2a-71e8-4756-87d2-bc61ce8f831f" class="">Why can&#x27;t I have incremental search over my tweets? Or browser bookmarks? Or over everything I&#x27;ve ever typed/read on the Internet?</h3><h3 id="10cc1b11-6554-4ecf-a1f7-e23e0c03146f" class="">Why can&#x27;t I search across my watched youtube videos, even though most of them have subtitles hence allowing for full text search?</h3><h3 id="9275acc0-c9a4-417b-8975-30e06388f9b2" class="">Why can&#x27;t I see the places my friends recommended me on Google maps (or any other maps app)?</h3><p id="026bf807-5794-4ca4-98c8-0c0376191545" class="">It&#x27;s just a matter of extracting links to maps from the chat apps and generating a list of coordinates. It&#x27;s got to be trivial.</p><h3 id="83c21ea2-9396-43de-94d8-913c5d5b5620" class="">Why can&#x27;t my Google Home add shopping list items to Google Keep? Let alone other todo-list apps.</h3><p id="0d2063fe-5df9-4404-b4d5-64942322eab3" class="">Instead, it puts them in a completely separate product, <a href="https://shoppinglist.google.com/">Shopping list</a>. If any of these had an API, <strong>any programmer</strong> could write a script to synchronize them in a few hours.</p><h3 id="219535c1-116a-405d-8ee7-af663e847d0a" class="">Why can&#x27;t I create a task in my todo list or calendar from a conversation on Facebook Messenger/Whatsapp/VK.com/Telegram?</h3><p id="b4b20333-176c-45f2-aeb2-131eb6248f9a" class="">Often, a friend recommends a book to you so you want it to add to your reading list. Or they ask you for something and you want to schedule a reminder.</p><p id="c45b1e21-c048-426f-a34e-724001b060f6" class="">Instead, these apps <strong>actively prevent</strong> me from using builtin Android share functions (because it means leaving the app presumably).</p><h3 id="9f08aca6-34eb-40bc-9eff-f7d33b1c7b26" class="">Why do I have to lose all my browser history if I decide to switch browsers?</h3><p id="b6211aed-b021-4ea9-9a1e-4010e10ec4bc" class="">Even when you switch between major ones like Chrome/Firefox. Let alone for less common alternatives.</p><h3 id="11a72d33-3340-4208-adc6-072fd6108fab" class="">Why can&#x27;t I see all the places I traveled to on a single map and photos alongside?</h3><p id="6ffb0d83-be1c-4d6f-a9c6-fe22aabb7ce1" class="">I have location tracking and my photos have GPS and timestamps.</p><h3 id="396cfc14-32a6-4338-920c-f9b8e3a3a4d1" class="">Why can&#x27;t I see what my heart rate (i.e. excitement) and speed were side by side with the video I recorded on GoPro while skiing?</h3><p id="4f183fe6-0ae3-4f00-89ba-fe553b0e3640" class="">I&#x27;ve used HR tracking and location tracking, surely that&#x27;s possible?</p><h3 id="367f85b8-ec57-4509-92cb-6fa3eb5aef65" class="">Why can&#x27;t I easily transfer all my books and metadata if I decide to switch from Kindle to PocketBook or vice versa?</h3><h3 id="229a4f19-ab91-461c-811b-1ee476b83e32" class="">Why can&#x27;t I have single &#x27;read it later&#x27; list, unifying all things saved on Reddit/Hackernews/Pocket?</h3><h3 id="267a3a98-3f44-4843-94bf-ff30608b2e1d" class="">Why can&#x27;t I use my todo app instead of &#x27;Watch later&#x27; playlist on youtube?</h3><p id="15a66824-17cc-4d89-a06d-a61fc4d2a849" class="">&#x27;Watch later&#x27; is fine for short videos that I can watch over dinner or on my commute. Longer videos like talks and lectures need proper time commitment hence prioritizing.</p><p id="b309e1a2-f9b6-4270-8f8e-84b70d1d952d" class="">Or any other service that doesn&#x27;t have this feature implemnted. It&#x27;s just a matter of regularly fetching new stories/comments by a person and showing new items, right?</p><h3 id="da10f130-8496-4bca-909c-d65c33f9b469" class="">Why can&#x27;t I see if I&#x27;ve run across a Youtube video because my friend sent me a link months ago?</h3><p id="d7055bca-e5ca-49ce-88d9-9012fb56524c" class="">The links are there in the chat history, surely it&#x27;s a trivial task to find it?</p><h3 id="31616d99-f016-4dff-b724-444d0afc4613" class="">Why am I forced to use Spotify&#x27;s music recommendation algorithm and don&#x27;t have an option to try something else?</h3><h3 id="de7efef1-d9f5-4807-8d86-696c6e2b34a9" class="">Why can&#x27;t I easily see what were the books/music/art recommended by my friends or some specific Twitter/Reddit/Hackernews users?</h3><h3 id="e429a000-ffde-428d-995e-635190939ede" class="">Why can&#x27;t I tell if I was more sedentary than usual during the past week and whether I need to compensate by doing a bit more exercise?</h3><p id="15186a07-8035-4d5f-8c06-1c078224449c" class="">I have all my location (hence step data), so what&#x27;s the issue?</p><h3 id="8801699d-e35c-4181-8184-055b06c30075" class="">Why can&#x27;t I have a dashboard for all of my health: food, exercise and sleep to see baselines and trends?</h3><p id="72a07fa7-265e-4c95-a2d8-03140295c983" class="">Why do I need to rely on some startup to implement this and trust them with my data?</p><h3 id="140ed4db-8c16-41cd-b88d-1980287eb65e" class="">Why can&#x27;t I take my Headspace app data and see how/if meditation impacts my sleep?</h3><h3 id="50350971-4b8d-4b2e-a14d-64a2ca043a2d" class="">Why can&#x27;t I run a short snippet of code and check some random health advice on the Internet against <strong>my</strong> health data.</h3><h3 id="aeff669d-91d9-49ec-a720-5f23d5959cee" class="">Why do I have to suffer from poor management and design decisions in UI changes, even if the interface is not the main reason I&#x27;m using the product?</h3><h3 id="bb09639f-edd6-4faa-9e83-4654b8969355" class="">Why can&#x27;t I leave private notes on Deliveroo restaurants/dishes, so I&#x27;d remember what to order/not to order next time?</h3><p id="b8ec5c4e-8fb5-4741-acde-f99679ed40c7" class="">Not to undervalue Inbox developers, but fundamentally it&#x27;s <strong>just</strong> a different interface. I&#x27;m sure there are plenty of engineers who would happily support it in their spare time if only they had access to the APIs.</p><p id="fde819ad-875b-45f8-8e21-4dbb5b615c55" class="">I think all of this is pretty sad. Note that I haven&#x27;t mentioned any mad science fiction stuff like tapping directly into the brain (as much as I wish it was possible). All these things are totally doable with the <strong>technology we already possess</strong>.</p><p id="f1126eb2-9edb-4a9d-a67f-a164a270eaca" class="">I wonder what computing pioneers like <a href="https://en.wikipedia.org/wiki/Douglas_Engelbart#Career_and_accomplishments">Douglas Engelbart</a> (e.g. see <a href="https://mnielsen.github.io/notes/engelbart/engelbart.html">Augmenting Human Intellect</a>) or <a href="https://en.wikipedia.org/wiki/Alan_Kay#Early_life_and_work">Alan Kay</a> thought/think about it and if they&#x27;d share my disappointment. So many years have passed since the computing (and personal computers) spread, and we&#x27;re still not quite there. And companies are <strong>actively</strong> promoting these silos.</p><p id="3c8d4cdc-2bf3-46f2-957d-999b2b642704" class="">Imagine if all of this was on your fingertips? If you didn&#x27;t have to think about <strong>how and where</strong> to find information and could just access it and interact with it? If you could let computers handle the boring bits of your life and spend time on fun and creative things?</p><p id="f254a2a4-0e9c-4a12-aa8b-5bb2e3353df6" class="">Things I listed above are frustrating enough as they are. There is another aspect to this: your data is <strong>slipping away</strong>.</p><p id="3fb04a8b-13d5-4598-b6b7-9359a1bcafef" class="">Privacy concerns are important and it&#x27;s understandable when people are pissed about services keeping hold of their data instead of properly wiping it.</p><p id="91292037-c4de-48fd-9f2d-1697075ff7e6" class="">However, oftentimes the opposite is the case and you find that your data is gone or very hard to access:</p><ul id="bf0175ce-bd44-4012-a6fd-2bc677b3617c" class="bulleted-list"><li>Google Takeout data, that is, all your browser activity, Youtube watch history, etc., are only kept by Google for <a href="https://beepb00p.xyz/takeout-data-gone.html">few years</a>  <p id="c134a8a3-6ff7-47d8-81e0-2a0b5168302d" class="">If you only began exporting it today, chances are you&#x27;ve already lost some of your history.</p></li></ul><ul id="cedc37cd-f9b2-4a5d-a568-a54552250ee1" class="bulleted-list"><li>Chrome browser deletes history older than <a href="https://superuser.com/a/364475/300795">90 days</a></li></ul><ul id="a6e19664-cf42-4690-9ff9-f00abfd4a4d8" class="bulleted-list"><li>Firefox browser expires history based on some <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Places_Expiration">magic algorithm</a></li></ul><ul id="29404b3a-02c9-4bf2-bf82-9090e1bb6927" class="bulleted-list"><li><a href="https://github.com/karlicoss/rexport#limitations">Reddit API</a> limits your requests to 1000 results only</li></ul><ul id="a759086a-7535-44c8-ac7a-cb2d05e92ba9" class="bulleted-list"><li><a href="https://developer.twitter.com/en/docs/tweets/timelines/api-reference/get-statuses-user_timeline">Twitter API</a> would only give you 3200 latest tweets  <p id="4060c158-9cdd-476f-82af-143f2346289a" class="">You can get the rest of your tweets via manual export, but then you&#x27;ll have to integrate two different ways of accessing data.</p></li></ul><ul id="45a63967-d7de-4690-a47f-bf4239dccc93" class="bulleted-list"><li><a href="https://docs.monzo.com/#list-transactions">Monzo API</a> only allows fetching all of your transactions within 5 minutes of authentication.  <p id="50f30c95-09cf-46c4-8ede-892cd807a583" class="">I understand that it&#x27;s a security measure, but my frustration still stands.</p></li></ul><p id="6e4be3e9-7db3-499c-a8b0-478171caf002" class="">The problems above are sort of technical and in theory, can be solved by some engineering. There is another side to vanishing data:</p><ul id="12438763-4198-4bfb-b668-64ae27d1a9b8" class="bulleted-list"><li>information is generally <a href="https://www.gwern.net/Archiving-URLs#link-rot">rotting away</a> from the Internet</li></ul><ul id="67833732-d36c-493c-964a-e1a010b4759a" class="bulleted-list"><li>comments/posts/tweets you&#x27;ve interacted with get deleted by their authors  <p id="8293b23c-f71b-4e30-9fac-daa114677bd1" class="">While people have the right to delete their data from the Internet, arguably it doesn&#x27;t extend to derived content like comments or thoughts that you had on it.</p></li></ul><p id="6474e96f-76e5-450a-a824-5123dcaa42a7" class="">And a bit more:</p><ul id="2bbb891f-edc6-42e6-aa69-552e3e3dc485" class="bulleted-list"><li> <blockquote id="0c3bf9d0-2ffd-4c77-9f81-0fcea22b1e69" class="">In July 2017 Jawbone announced[73] it would liquidate its assets. Since the app is still available for at least some phones (Android) and the servers seem to be running, it is unclear who has access to collected personal data.</blockquote><p id="fdf57f8c-2900-4092-88ea-f96c7f3c2a16" class="">sweet. In addition, <a href="https://www.jawbone.com/nudge/api">the API</a> doesn&#x27;t work anymore either, so if you haven&#x27;t been exporting data, it&#x27;s basically gone.</p></li></ul><ul id="d53e4cdf-56e6-4268-b2fa-61a50af49ff7" class="bulleted-list"><li><p id="b6d54b7c-52ca-4a21-9aa5-4c09423d1226" class="">Ok, the author apparently violated Github&#x27;s code of conduct, and Github has the right to ban him. Does it really require shadowbanning the code and other people&#x27;s comments on issues though? Would you be happy if your contributions were gone without any trace?</p></li></ul><p id="33246431-295e-4f8a-87bf-7d197bcf0661" class="">If you consider your digital trace <a href="https://beepb00p.xyz/tags.html">part of yourself</a>, this is completely unacceptable. But sadly it&#x27;s happening all the time. You <strong>can&#x27;t rely on third parties</strong> to keep it safe.</p><p id="05186f76-aaa4-4e47-979f-b7aa958c570a" class="">I want all these inconveniences somehow solved, but I live in the real world and it&#x27;s not gonna magically happen. So let me be more specific: I argue that one <strong>major</strong> reason these tools and integration I want don&#x27;t exist is that people don&#x27;t have easy uniform access to their data in the first place.</p><p id="c785768e-c542-4544-9cd0-86400cba1259" class="">&quot;Easy&quot; is used here in two senses:</p><ul id="12c125ff-7e9b-4878-936c-cb953596ebb0" class="bulleted-list"><li><strong>easy for humans</strong> to look at and browse through  <p id="32c0e6f4-a72f-4b9a-ab2a-fd83ef4d2811" class="">This bit is hard in practice as (typically) the more machine friendly something is, the less human friendly it&#x27;s.</p></li></ul><ul id="bc057a49-8d4e-4184-bcb7-626e65c82f15" class="bulleted-list"><li><strong>easy for programmers</strong> to manipulate, analyze and interact with  <p id="ce5d1851-6b5a-44dc-b986-64532f3abad8" class="">Let&#x27;s concentrate on this part for now. If this is solved, it automatically enables programmers to develop human-friendly tools. In addition, playing with data and building tools on it feels fun as it is (unlike getting the data).</p></li></ul><p id="fe59cf37-950d-4f27-ba9a-2b29adaf05db" class="">So how would &#x27;easy access to data&#x27; look in an ideal world? Let me present you my speculations on it, and I would be happy to hear your opinions on it!</p><p id="c5a3c9f3-2823-48a6-b6e4-720101f3a3d6" class="">I want <strong>an API</strong> that I can query and get any of my personal data. Ideally, it wouldn&#x27;t really matter where the data is and it could be a web API.</p><p id="b9882ddb-49fe-4eed-beb3-541ee1c8a49b" class="">Realistically, as of today, the easiest way to quickly access your data and more importantly, play with it, is when it&#x27;s <strong>already on your filesystem</strong>.</p><p id="f7c03a5a-5567-4873-88f3-17efc0e8b431" class="">Whether it&#x27;s plaintext, sqlite or some sort of binary data – doesn&#x27;t matter, already having it locally saves you from the whole class of problems (which I&#x27;m about to pinpoint in the following section).</p><p id="4137356a-f609-4ffa-8b8e-36ce7f8fad64" class="">As you&#x27;ve probably noticed, it&#x27;s almost never the case that you have your personal data locally at hand. You need to spend extra effort to achieve this.</p><p id="5f7037db-6881-4007-803f-04a25e0d56a6" class="">Hopefully we can agree that the current situation isn&#x27;t so great. But I am a software engineer. And chances that if you&#x27;re reading it, you&#x27;re very likely a programmer as well. Surely we can deal with that and implement, right?</p><p id="c3ccbd4a-c8c6-4dff-bdf8-3370a36ae47f" class="">Kind of, but it&#x27;s <strong>really hard</strong> to retrieve data created by you.</p><blockquote id="205358a5-73a1-41e0-ae8b-4367a1174054" class="">Recommended soundtrack for rest of the section: The World&#x27;s Smallest Violin, playing for us software engineers.</blockquote><p id="c376acc4-04ed-42cd-96ea-e4dd7f172b08" class="">At first glance it doesn&#x27;t look like a big deal. It&#x27;s just data, right? Every programmer should be capable of getting it from the API, right?</p><p id="dbb00a73-36ce-47d2-8b36-55e5e71c2ada" class="">This is until you realize you&#x27;re probably using at least ten different services, and they all have different purposes, with various kinds of data, endpoints and restrictions.</p><p id="51d108d4-8aeb-4125-919d-bc6ada0e026b" class="">Even if you have the capacity and are willing to do it, it&#x27;s still damn hard.</p><p id="bed0ec77-7a71-4831-9379-8ef99cb68472" class="">You&#x27;re gonna have to deal with the following problems:</p><p id="39936ef0-190d-4b31-aa2e-cda63f3e5b70" class="">That&#x27;s where it all starts with and it&#x27;s a mess.</p><ul id="470c11ff-2c21-4625-a829-62232f0b09ee" class="bulleted-list"><li>easiest scenario: the service lets you generate an API token from its settings and you can just use it. Example: <a href="https://pinboard.in/">pinboard</a></li></ul><ul id="9bbff167-bd03-4109-97a5-f0cad427f89b" class="bulleted-list"><li>typical scenario: you need to do the whole <a href="https://aaronparecki.com/oauth-2-simplified">Oauth</a> thing.   <p id="27db64d7-168a-4fdf-bddb-de4de8d21eb8" class="">That involves creating a client app, getting client id, dealing with scopes and redirect urls, etc. Pretty tedious, and you certainly can&#x27;t expect a <strong>nonprogrammer</strong> to be able to follow these steps.</p><p id="7305d034-8d0b-47c3-b815-6b2566ae48e1" class="">Examples: almost every service with an API out there: Twitter/Instapaper/Pocket/Github/etc.</p></li></ul><ul id="430dce24-133b-4fd1-b0f8-bdadfb655bee" class="bulleted-list"><li>worst case scenario: the service doesn&#x27;t even offer a public API. That also has different grades of horrible:   <ul id="9f5412b1-6240-4d5f-86a2-e5183d71af3e" class="bulleted-list"><li>best worst: service uses a private API and you can spy on the token web app is using in browser dev tools.   <p id="78eba8ca-b3fa-41e5-970e-094d26274ba8" class="">Not too bad, but a bit dubious.</p><p id="1a002b73-e686-44a3-bf21-6380d1a989bf" class="">Example: Pocket API doesn&#x27;t give you away highlights unless you <a href="https://github.com/karlicoss/pockexport#setting-up">mess with it</a>.</p></li></ul><ul id="b307787f-f8c4-49dd-bdec-eb8e935c0fc6" class="bulleted-list"><li>typical worst: no private API, so you need to scrape the data. Sometimes you can grab the cookies from browser dev tools and use them to access your data.   <p id="2dbc2653-e64b-4baf-8bbd-912725f95d27" class="">Scraping is orders of magnitude flakier, involves nasty parsing and obviously fragile. Some services might even actively prevent you from doing so by banning unusual user agents.</p></li></ul><ul id="b5734b8a-55cc-4d0a-9c5a-babc0321e392" class="bulleted-list"><li>worst worst: you need to scrape the data and cookies don&#x27;t work or expire often.    <p id="a9607e8b-4ebb-47fa-9833-b91e47c2a0e8" class="">Basically means you need to use your username/password. Bonus points if there is 2-factor auth involved.</p><p id="dcf35bc8-4fc1-483d-8e58-e99e43785e1e" class="">Potentially means you&#x27;re going to store your password somewhere which is way less secure than using a token.</p><p id="9721fd06-0f9b-4d34-80ad-54c3e1b77b33" class="">Example: <a href="https://takeout.google.com/">Google Takeout</a> exports are not only asynchronous, but also don&#x27;t have an API so you have to login in order to export.</p></li></ul><p id="10bf7ed1-9efe-4b6f-a3ca-667cbc51bd26" class="">All the &#x27;worst&#x27; scenarios are extremely flaky and basically impossible for nonprogrammers to use.</p></li></ul><p id="9a4cbb6b-2906-4d9f-81d6-03e8df63d396" class="">Whether you&#x27;re using API or not, typically you&#x27;ll have to retrieve multiple chunks of data and merge them after.</p><p id="360dc2bf-90c9-4f04-9b06-5e56e426393f" class="">In principle, it&#x27;s not hard to implement it on a one off basis, but unclear how to do it in some universal way because there is no common standard.</p><p id="015b946d-d590-4c60-b113-49cbed87739c" class="">Pages might be addressed by page numbers and counts, offsets from start/end of data, before or after with respect to ids or timestamps, etc.</p><p id="8820bdba-074b-44b9-b7c2-a905de4f76fa" class="">It&#x27;s quite error prone: content might change under your feet, and if the API developers or you are not careful, you might end up with missing data or even some logical corruption.</p><p id="b1040d56-4c14-4d08-9248-0285fa466e0f" class="">If you simply start fetching a json and writing to disk, you&#x27;d very quickly end up with a corrupt file on the first network failure. You&#x27;ve gotta be really careful and ensure atomic writing and updating.</p><p id="2193e6a4-efcb-40e6-b9e3-967f9dfddff0" class="">Even if you work around the atomicity issues, chances are you won&#x27;t be able to guarantee atomic snapshotting as you&#x27;re fetching your data within multiple requests, and the data is changing as you retrieve it.</p><p id="9751394a-4e63-4faf-86af-9f0da8457530" class="">Authorization, network, serializing, parsing, storing, synchronizing. There are among the most common error sources (as in, actual unrecoverable errors, not necessarily bugs) in software engineering. Generally, getting it right is required for reliably retrieving your data.</p><p id="2089ebce-2c8c-4dae-8dac-30ec2e537ce9" class="">In addition, you want to be somewhat <strong>semi-defensive</strong>, and this is the hardest kind of error handling:</p><ul id="0fe34730-9789-4fb4-a25d-4e84bb4639d5" class="bulleted-list"><li>you want to progress slowly but surely</li></ul><ul id="f826096b-e6d7-463a-8978-6b888751d4ba" class="bulleted-list"><li>you want to make sure it only fails in completely unrecoverable scenarios, otherwise it&#x27;s going to require constant tending</li></ul><ul id="c0f48838-7f5f-4cd9-b803-1364be016f32" class="bulleted-list"><li>and you want to somehow let user know of problems/suspicious data</li></ul><p id="911ca20b-5ab2-40c5-a657-adb5c0fe2067" class="">If you want <strong>all</strong> your data, you have to look carefully through all the documentation and make sure you&#x27;ve got it all covered.</p><p id="5ccbdbf6-17db-49d8-a39e-c477b30f106d" class="">If the service adds some new endpoints, you might never find out.</p><p id="3fb451dd-9bf5-405e-9d5d-e3dba9f4f639" class="">Sometimes you have no way to access your data at all:</p><ul id="631fff1b-aeb6-4e41-996a-a8ecbfb5e10d" class="bulleted-list"><li>you are offline: nuff said</li></ul><ul id="ffae5e4d-1690-4797-9e9b-e84029421388" class="bulleted-list"><li>app data on your phone   <p id="789cca9f-e9ad-4bce-acac-0ed943f7e68b" class="">Very few apps support data exports; even fewer support it in an automatic and regular way. Normally, internally, apps keep their data in sqlite databases which is even more convenient than plaintext/csv export.</p><p id="2e6c5ac2-44da-44b2-9e7c-29e3568f0b0a" class="">However, there are caveats: e.g. on Android, app data is in <code>/data/data/</code> directory, which by default <strong>isn&#x27;t accessible unless you rooted the phone</strong>.</p></li></ul><ul id="d7d24115-cd12-41e8-9d8b-62a22674db95" class="bulleted-list"><li>devices that have no means of synchronizing<ul id="8e5a09a2-115d-4e94-b4f3-5808d5343d2e" class="bulleted-list"><li>Kobo <strong>doesn&#x27;t seem to support cloud sync for annotations</strong>. I was considering syncing the database wirelessly, as <a href="https://github.com/dropmeaword/kobo-aura-remote">there are</a> some SSH modules for its firmware, but people report it <a href="https://github.com/dropmeaword/kobo-aura-remote/issues/1">may break wifi</a> on it.</li></ul></li></ul><ul id="8fb216a9-efee-4d51-9c9c-e6a5ce5e306b" class="bulleted-list"><li>Some devices/apps and formats are <a href="https://en.wikipedia.org/wiki/Vendor_lock-in">vendor locked</a></li></ul><p id="45acf202-1bdf-498d-ac55-d551305d0800" class="">Now, remember when I said it was tedious for programmers? Constant boilerplate, shitty APIs (you&#x27;re lucky if the service offers one at all), latency, flakiness, having to code defensively, etc.</p><p id="0a86cb8c-55cb-4ecb-a274-3fef56bc469a" class="">Now think about ordinary people who have no clue what &#x27;API&#x27; is. They deserve to use their data too.</p><p id="a6692f73-369e-4ac5-b872-b7afea105680" class="">The way I see it, ideally the service you&#x27;re using provides you with:</p><ul id="4f605712-636f-4752-9b4c-ecad3ea45e27" class="bulleted-list"><li>a <strong>data mirror</strong> app        <p id="8eedb1a9-fe93-4433-b1fa-b65867a6e66e" class="">Best case scenario is if the service is <a href="https://www.inkandswitch.com/local-first.html">local-first</a> in the first place. However, this may be a long way ahead and there are certain technical difficulties associated with such designs.</p><p id="4de72fba-b4af-4688-b0cb-377f38cd5fc7" class="">I&#x27;m suggesting a data mirror app which merely runs in background on the client side and continuously/regularly sucks in and synchronizes backend data to the latest state.</p><p id="87d58e67-1242-4b75-8b3a-e5ef29bb5244" class="">Ideally this would be exactly the same state the backend uses, although in practice it would be hard from efficiency considerations (e.g. it&#x27;s faster for the backend to keep data in the same database instead of separate databases for each user).</p><p id="df7bfd6e-b866-44ca-8ccb-98006e0c5e2d" class="">It shouldn&#x27;t be too resource demanding for the backend, e.g. data sync via push notifications basically already does that, but in an even less efficient way.</p><p id="6287287d-e8f0-4532-b8ff-1481ac8eeced" class="">Data mirror app should dump data into an open machine-friendly format like json/sqlite database/etc.</p><p id="69508410-f7c9-490c-b65e-320c892ec3e6" class="">This solves:</p><ul id="71e9148b-d9fc-4e77-9f09-caefe08f18e5" class="bulleted-list"><li>authorization: however tedious it&#x27;s to implement, can be handled by the service&#x27;s developers.  <p id="e4ba0ec9-5dd3-4875-8a11-c0839d82b2d0" class="">They can make it as secure as necessary (e.g. 2FA/etc), and it&#x27;s okay as long as you have to log onto it only once.</p></li></ul><ul id="2077c28e-9a9d-4d7b-8811-7698c72ff361" class="bulleted-list"><li>pagination/consistency/rate limiting: non-problems, considering it&#x27;s easier for the service&#x27;s developers to correctly implement incremental data fetching</li></ul><ul id="6e739c83-7f7f-4777-bf4a-ee45bc4f192f" class="bulleted-list"><li>error handling: also the developers&#x27; responsibility. They would be better aware of which situations are programming bugs and which have to be handled carefully</li></ul><ul id="8c24b37b-977c-4219-b40c-763674e45bf2" class="bulleted-list"><li>documentation and discovery: hopefully developers are better suited to keep their internal representations and exports consistent (even incentivised as it allows for less code to be written)</li></ul><ul id="0fe6debd-4a76-4ed4-89f3-b12213e789e9" class="bulleted-list"><li>backups: will still have to be done by external means, but the task is massively simplified: you just need to point your backup tool at your data storage</li></ul></li></ul><ul id="4c141d56-8b0b-40b5-9389-f80e6de2b48e" class="bulleted-list"><li>minimalistic <strong>data bindings</strong> in some reasonable programming language that represent all of this data.    <p id="b4ef4e40-9bd9-4fe9-a3dc-ccb106a15609" class="">Hopefully, specific language doesn&#x27;t matter, it&#x27;s a simple task to map data from one programming language to another.</p><p id="8932506e-7678-4aec-994a-eaeb10fbb03f" class="">This solves:</p><ul id="c4caf1af-99c2-4c14-9b77-e443e6ae70cf" class="bulleted-list"><li>parsing: developers know better how to get it right; in addition the code can potentially be shared with the backend</li></ul><ul id="4ab3ab0d-308b-4e23-951d-2611738f0da2" class="bulleted-list"><li>abstract representation: would massively lower the barrier for integrating and interacting with data</li></ul><ul id="8c54e429-e678-4652-bd39-b2eadd457412" class="bulleted-list"><li>offline: if you have all data locally you&#x27;ve got efficient access without latency and need for extra error handling</li></ul></li></ul><p id="deca0f75-329c-48c3-8db1-3ba14425c0d4" class="">That&#x27;s perhaps a naive and oversimplified view. But to be honest, we&#x27;re so far away from that that even some small steps towards would be quite a progress.</p><p id="6d118bb0-49e3-443b-a4a9-7e3311fe2d0b" class="">These suggestions would <strong>decouple data from the UI</strong> and let the community develop better tools for consuming and working with it.</p><ul id="c6ec38bc-0c97-4d22-945f-48dd894ff3f8" class="bulleted-list"><li>this might be <strong>hard to support</strong> for everyone    <p id="36846c62-2b9d-4152-aa14-b4b97857909e" class="">On the other hand, service developers would have more control on data access patterns, so in a way it might work better.</p><p id="1296b5f5-0b1a-4017-9cb2-ecd62ca3741a" class="">It would definitely be more efficient than third parties writing kludgy tools to export and backup data.</p><p id="7148bbe8-9882-466b-99d6-6a7c422d8098" class="">In addition, for some services and scenarios, it would give better data locality and lower latencies.</p></li></ul><ul id="12d74332-9bf1-4c5b-b75a-6fb760fd0499" class="bulleted-list"><li>&#x27;average&#x27; users often are <strong>not motivated enough</strong> to demand such things   <p id="51ae91e9-7776-450b-b358-97d581b0c3cc" class="">In particular, not everyone has or willing to set up necessary infrastructure to run all these things.</p><p id="f31c33e5-ba07-4980-af48-c83f93f83a33" class="">However, if implemented properly, there is absolutely nothing preventing running a data mirror on your laptop or even phone. It really doesn&#x27;t require much CPU or bandwidth if you support incremental updates.</p></li></ul><ul id="37910bbe-5478-4359-9422-bc4a1bd2d422" class="bulleted-list"><li>services have little motivation to promote this, <strong>silos benefit them</strong>   <p id="7d915a4d-0b0b-4c4d-a820-4b6c73f15d05" class="">Having a monopoly on the client interface (e.g. web UI) keeps users on your platform even if you suck.</p><p id="d94796f5-70c2-46d6-b58d-d5c21571e17e" class="">If anyone can implement a better interface, there would be little opportunity for stuff like ads, and the only way for the service to make money would be to collect a fee for data collection and hosting. (which I personally would be happy to pay)</p></li></ul><p id="3cc839cf-0fdd-4e0c-af32-2290775b2577" class="">Hopefully all of these issues would be solved by distributed/federated services, but we&#x27;re pretty far from it.</p><ul id="8b819c63-049c-4d7f-a90c-fc4bd616ed45" class="bulleted-list"><li>  <p id="bc909844-85e0-4261-81a9-77d38a993f4f" class="">E.g. imagine you liked someone&#x27;s post on Facebook, it got mirrored locally, and then the author removed the post.</p><p id="890dd152-dd8e-4573-9b87-e49c911e2959" class="">What&#x27;s the right thing to do for the data mirror app? Should it erase just the post you liked from your data mirror? Should it keep the fact that you liked it at all?</p><p id="357cc2b5-fef4-4a72-b182-7b0180e84be5" class="">You may disagree with the way such a policy is imposed by the service, hence implement additional logic to keep more data, and at that point it seems like a matter for legal debate.</p></li></ul><ul id="6efb0ccd-96d6-4421-ad79-0b4ea9d96d06" class="bulleted-list"><li> <p id="073db33f-8699-4667-80ec-4cee24a791ed" class="">If you want to access data from multiple devices, you either have to run multiple mirrors, which would be a bit of a hassle, or use some continuous sync service like Dropbox or <a href="https://syncthing.net/">Syncthing</a>.</p><p id="9fad8e40-62fc-4a1f-a03d-c6ebdfdd98f4" class="">That however might not be so atomic, depending on the way data is kept on the disk, since files might be pulled in random or lexicographic order, depending on sync configuration.</p></li></ul><ul id="6ce8bbd0-0f66-4e8f-93d5-abacbef3798d" class="bulleted-list"><li><p id="ed2ac24a-8983-4064-a615-a9e61f9e3342" class="">Even if you don&#x27;t trust your average startup at securing your data, it might be even less safe on average user&#x27;s disk.</p></li></ul><ul id="9a589a02-f175-40cd-be23-df81f3645bf3" class="bulleted-list"><li>it&#x27;s assumed that these tools/integrations are open source and running on computers you own.   <p id="97566b2e-4106-4d4c-a9b1-c8975cbba3e4" class="">Realistically, closed source tools do exist and it&#x27;s understandable when people want money for their efforts.</p><p id="d382f1cc-de50-401b-b71e-3cf76af92e95" class="">From a user&#x27;s perspective not everyone wants the hassle of running things locally either and many people are happy with online services for the most part.</p></li></ul><p id="46ee437d-25d4-42b5-a226-22d710743460" class="">Of course, I&#x27;m not expecting someone to come and implement all of this for me. I could start some sort of movement to demand it from services and platforms, but I hardly see myself as a good fit for that role.</p><p id="c3ea84e9-f6d7-4ae6-84dd-0e9dae05dfb8" class="">Instead I&#x27;ve put effort into exporting, integrating and utilizing my data on my own according to the suggestions I formulated. Putting this in writing helped me motivate and summarize many technical and infrastructural decisions.</p><p id="a6fbfa2b-e984-4a3e-bd78-220f41b10080" class="">I&#x27;ll be describing my setup in more detail in future posts, however here are some bits and pieces:</p><p id="f1492664-e33c-4e52-9e14-1b0a283795d8" class="">This corresponds to the &#x27;data mirror&#x27; bit.</p><p id="8fcc0cf5-41f9-4320-8e6f-d7800c649566" class="">I <a href="https://beepb00p.xyz/my-data.html">exported/scraped/reverse engineered</a> pretty much my entire digital trace and figured out automation and infrastructure which works for me.</p><p id="d1a4efa5-cce1-4676-8f41-564e90863a2e" class="">I&#x27;ve shared <a href="https://github.com/search?type=Repositories&amp;q=user%3Akarlicoss+++topic%3Aexport">some</a> of my personal export scripts and tools.</p><p id="767f1a3c-4632-4747-99d6-6f4f280078d5" class="">I also have some helper scripts to keep individual exporter&#x27;s code as clean as possible while ensuring exports are reliable.</p><p id="a355b625-2aee-40e8-97f7-184fac54f91f" class="">As I mentioned, I&#x27;ll share all of this later in a separate post.</p><p id="9a3c3bd3-3475-4e85-8dbe-b5770e97922f" class="">Each data exporter comes with minimal bindings that merely map json/sqlite export into simple datatypes and data classes.</p><p id="6eeaed12-acf1-464a-8629-5d65854ffcc6" class="">That way anyone who wishes to use data can kick off some reasonable representation, which is not overfitted to my specific needs.</p><p id="d04fec12-20cd-4870-9978-ffc337820dc5" class="">Higher level querying and access, specific to myself is implemented in <a href="https://beepb00p.xyz/hpi.html">my.</a> package (note that this post is still in draft stage).</p><p id="f2afc55f-fbf5-4149-a126-c7d73d63f2da" class=""><a href="https://github.com/karlicoss/my"><code>my.</code></a> package allows me to query my data from anywhere, enabling me to use familiar data processing, analysis and visualization tools, and various integrations.</p><p id="6dab9564-8b6c-4ebf-b1ca-34af5b780e58" class="">As a nice byproduct I&#x27;ve also finally figured out a reliable and elegant way to deal with <a href="https://beepb00p.xyz/mypy-error-handling.html">error handling in Python</a>.</p><p id="4cc63401-c7a6-46e5-9a56-58a91c32f00b" class="">Finally, some tools and scripts I&#x27;ve implemented to make possible the interactions <a href="https://beepb00p.xyz/sad-infra.html">that I want</a>:</p><ul id="4dd57808-b90a-4d42-9746-ef2ae0149659" class="bulleted-list"><li>A <a href="https://beepb00p.xyz/pkm-search.html">personal search engine</a> for quick incremental search of my data and digital trace</li></ul><ul id="6433223b-39a7-4738-97d2-0deecc95cdd8" class="bulleted-list"><li><a href="https://beepb00p.xyz/grasp.html">grasp</a>, browser extension to clip links straight into my org-mode notes</li></ul><ul id="eb11e778-b2c0-4cce-af03-f76cbadf86f8" class="bulleted-list"><li><a href="https://github.com/karlicoss/promnesia">promnesia</a>, a browser extension to escape silos by unifying annotations and browsing history from different data sources (still somewhat WIP and needs final touches, but planning to release soon)</li></ul><ul id="ea5551e6-724f-44cc-87e5-5de155ddde3f" class="bulleted-list"><li>personal health, sleep and exercise dashboard, built from various data sources. I&#x27;m in the process of making it public, you can see some screenshots <a href="https://www.reddit.com/r/QuantifiedSelf/comments/cokt4f/what_do_you_all_do_with_your_data/ewmucgk">here</a></li></ul><p id="eb2f5ded-2427-4425-bfc1-6486a25d8abc" class="">I wrote how each specific data source I export contributes to my personal infrastructure <a href="https://beepb00p.xyz/my-data.html">here</a>.</p><p id="34fcbc1e-5268-4ba7-9824-8cd745edb8db" class="">Attempts of resolving this sad state:</p><ul id="950fc297-8678-485f-8e18-e712d8c2e6c3" class="bulleted-list"><li><a href="https://en.wikipedia.org/wiki/Solid_(web_decentralization_project)">Solid</a>, web decentralization project by Tim Berners-Lee, WWW pioneer and the director of W3C  <blockquote id="72854251-24bd-4a11-bad8-65396dec548d" class="">The project &quot;aims to radically change the way Web applications work today, resulting in true data ownership as well as improved privacy&quot; by developing a platform for linked-data applications that are completely decentralized and fully under users&#x27; control rather than controlled by other entities.</blockquote></li></ul><p id="b1e48daa-f37a-4c74-80cb-0dc465b305c0" class="">I&#x27;d be interested to know your opinion or questions, whether on my motivation, or particularities of my suggestions or implementation.</p><p id="6711c465-61bc-4fd2-882c-613b9e09fdb5" class="">Let me know if you can think of any other data integrations you are missing and perhaps we can think of something together!</p></div></article></body></html>

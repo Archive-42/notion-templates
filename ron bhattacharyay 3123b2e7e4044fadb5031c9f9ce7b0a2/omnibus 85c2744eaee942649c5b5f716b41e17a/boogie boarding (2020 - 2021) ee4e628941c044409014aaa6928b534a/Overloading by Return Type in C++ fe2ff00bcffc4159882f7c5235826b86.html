@@ -1,0 +1,839 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Overloading by Return Type in C++</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="fe2ff00b-cffc-4159-882f-7c5235826b86" class="page sans"><header><h1 class="page-title">Overloading by Return Type in C++</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://artificial-mind.net/blog/2020/10/10/return-type-overloading" class="url-value">https://artificial-mind.net/blog/2020/10/10/return-type-overloading</a></td></tr></tbody></table></header><div class="page-body"><figure id="e880feea-7b03-4b7d-bcc6-e54fe19927d6" class="image"><a href="Overloading%20by%20Return%20Type%20in%20C++%20fe2ff00bcffc4159882f7c5235826b86/overload.jpg"><img style="width:700px" src="Overloading%20by%20Return%20Type%20in%20C++%20fe2ff00bcffc4159882f7c5235826b86/overload.jpg"/></a></figure><pre id="a0357372-cc31-4502-bcae-b37b90daa6a8" class="code"><code>// this is OK
+std::string to_string(int i);
+std::string to_string(bool b);
+
+std::string si = to_string(0);
+std::string sb = to_string(true);
+
+// this is not OK
+int from_string(std::string_view s);
+bool from_string(std::string_view s);
+
+int i = from_string(&quot;7&quot;);
+bool b = from_string(&quot;false&quot;);
+</code></pre><p id="76f8973f-bc77-4a00-9853-26633156ddac" class="">Overloading by argument types is a pretty straightforward feature of many imperative languages. However, most of them don’t support overloading by return types. In particular, C++ does not. For example, <a href="https://godbolt.org/z/ddWcE8">clang complains</a>:</p><pre id="3eae77d0-e2b8-49b7-a0b8-4dca1dca173a" class="code"><code>&lt;source&gt;:4:6: error: functions that differ only in their return type cannot be overloaded
+bool from_string(std::string_view s);
+~~~~ ^
+
+&lt;source&gt;:3:5: note: previous declaration is here
+int from_string(std::string_view s);
+~~~ ^
+</code></pre><p id="e5efc740-c6ff-485a-bbd4-edc6508b55a3" class="">So… what if I told you we actually <em>can</em> overload by return type in C++?</p><p id="696b610c-1564-470a-9402-496fa463dd54" class="">By a slight misuse of user-defined conversion operators.</p><h2 id="6bf47c98-6feb-4ba9-9128-b79785b06e9b" class="">A Proof-of-Concept</h2><p id="f4ed9243-e726-4230-8407-43860e710fef" class=""><a href="https://en.cppreference.com/w/cpp/language/cast_operator">Conversion operators can be user-defined</a> in C++. They allow us to add custom implicit or explicit conversion to our types. These conversions themselves can also be overloaded, which leads us to a simple prototype:</p><pre id="51a5788e-80ed-4d26-987b-89563ab67b0e" class="code"><code>struct to_string_t
+{
+    std::string_view s;
+
+    operator int() const;  // int  from_string(std::string_view s);
+    operator bool() const; // bool from_string(std::string_view s);
+};
+
+int i = to_string_t{&quot;7&quot;};
+bool b = to_string_t{&quot;true&quot;};
+</code></pre><p id="3b8d0c6c-bbac-4b66-8eb5-1e6ce64636e2" class=""><a href="https://godbolt.org/z/f3chze">Looking at godbolt</a>, this compiles and calls the desired conversion operators. An important point to note here is that the compiler needs to know the <em>target</em> type for the conversion. Thus, <code>auto i = to_string_t{&quot;7&quot;};</code> does not work as intended. <code>i</code> will be of type <code>to_string_t</code> and not <code>int</code>.</p><h2 id="fabd4fdc-35c3-48d0-a319-117c527221d6" class="">Packaging and Usage</h2><p id="4bee425a-8ffe-4469-b916-db0e64183bba" class="">We can achieve the original goal of an overloaded function by simply returning <code>to_string_t</code>:</p><pre id="a9cfd6ee-160e-4149-b04d-4ae60199b4a3" class="code"><code>to_string_t from_string(std::string_view s) { return to_string_t{s}; }
+
+int i = from_string(&quot;7&quot;);
+bool b = from_string(&quot;true&quot;);
+</code></pre><p id="8e14396e-dc2e-4f35-80ad-137deadf8ff5" class="">Alternatively, one can adhere to <a href="https://herbsutter.com/2013/08/12/gotw-94-solution-aaa-style-almost-always-auto/">almost always auto</a> and write:</p><pre id="285ceda6-bf97-4647-9a62-053a2f5de43e" class="code"><code>auto i = int(from_string(&quot;7&quot;));
+auto b = bool(from_string(&quot;true&quot;));
+</code></pre><p id="3c0cb6a2-03a8-4ab8-aa80-e729ac1f13e5" class="">This technique also works when calling other functions:</p><pre id="db444d82-b04b-48e7-8e00-e849d48c626d" class="code"><code>void foo(bool b, int i);
+
+foo(from_string(&quot;false&quot;), from_string(&quot;0&quot;));
+</code></pre><p id="cd7b9e1f-da6e-4fe5-8df6-722c69ff3143" class="">And even interacts properly with more complex, potentially templated objects:</p><pre id="380e1f46-eb61-4349-bbeb-a5d570bf1b42" class="code"><code>std::vector&lt;int&gt; vec;
+std::map&lt;int, bool&gt; map;
+
+vec.push_back(from_string(&quot;11&quot;));
+map[from_string(&quot;3&quot;)] = from_string(&quot;true&quot;);
+vec.emplace_back(from_string(&quot;5&quot;));
+</code></pre><p id="e99141ba-1e52-4f49-a042-93a2a0acb0e5" class="">Note how <a href="https://en.cppreference.com/w/cpp/container/vector/emplace_back"><code>emplace_back</code></a><a href="https://en.cppreference.com/w/cpp/container/vector/emplace_back"> is templated</a> and internally constructs an <code>int</code> from our <code>to_string_t</code>.</p><p id="850ac518-aa35-4016-9728-458ff5e88db8" class="">Finally, <code>if (cond)</code> tries to convert <code>cond</code> to <code>bool</code> and thus also works:</p><pre id="a2be9602-0542-4c6b-8691-2edfb279d460" class="code"><code>if (from_string(&quot;true&quot;))
+    on_true();
+else
+    on_false();
+</code></pre><p id="6a525e69-089c-459f-99af-3d4e6cc0c1be" class="">These examples can be seen in action <a href="https://godbolt.org/z/1x5de4">at godbolt</a>.</p><h2 id="ceabffd0-521b-44f1-b1a1-298e8b9a901a" class="">Where It Doesn’t Work</h2><p id="d799cb1d-7241-407a-8b9f-8fe6e5db8162" class="">While we can achieve overloading by return type in many cases using the conversion operator technique, it doesn’t always apply. As previously mentioned, the compiler needs to know the target type to choose the proper conversion operator and will not convert unless forced to. We already saw the simplest case where no conversion is applied:</p><pre id="5ca888f7-66b2-437c-ae06-ca033790d282" class="code"><code>auto i = to_string(&quot;7&quot;);
+// decltype(i) is to_string_t, not int
+</code></pre><p id="bb234f23-0d48-424a-80c6-89c061fbdd0e" class="">Another problematic case arises when paired with normal overloading that leads to ambiguities:</p><pre id="7d5118b0-4437-4024-b706-17e7422f80ff" class="code"><code>void bar(int);
+void bar(bool);
+
+bar(from_string(&quot;true&quot;));
+</code></pre><p id="046a1ed2-6c32-485d-b987-91036695e4e0" class="">Which results in:</p><pre id="fbaacf4a-3e26-4262-b226-fd5e60c456f6" class="code"><code>error: call to &#x27;bar&#x27; is ambiguous
+bar(from_string(&quot;true&quot;));
+^~~
+&lt;source&gt;:41:6: note: candidate function
+void bar(int);
+     ^
+&lt;source&gt;:42:6: note: candidate function
+void bar(bool);
+     ^
+</code></pre><p id="1bf87210-9693-4032-959c-6255765ebf90" class="">Similarly, this means that <code>std::cout &lt;&lt; from_string(&quot;2&quot;) &lt;&lt; std::endl;</code> does not work. (The error message for that is slightly ghastly as we have at least 16 candidate overloads.)</p><p id="e3d5fc2d-b2df-473d-bba4-71863d16d784" class="">Finally, only one user-defined conversion can be applied implicitly, so the following <a href="https://godbolt.org/z/Gxq1rb">doesn’t work</a>:</p><pre id="d100d04f-50dd-45b5-9c9b-0cf881e0eb2d" class="code"><code>struct bar 
+{
+    bar(int i);
+};
+
+void test_bar(bar b);
+
+test_bar(from_string(&quot;3&quot;));
+</code></pre><p id="85769d31-2885-4889-84c4-cebb987d6b64" class="">The compiler only tries to directly convert <code>to_string_t</code> to <code>bar</code>:</p><pre id="ea6c4780-8dde-484d-bd20-77f9d0bb81eb" class="code"><code>&lt;source&gt;:22:5: error: no matching function for call to &#x27;test_bar&#x27;
+    test_bar(from_string(&quot;3&quot;));
+    ^~~~~~~~
+&lt;source&gt;:18:6: note: candidate function not viable: no known conversion from &#x27;to_string_t&#x27; to &#x27;bar&#x27; for 1st argument
+void test_bar(bar b);
+     ^
+</code></pre><p id="9de057af-02b9-4ca2-b7a9-d01898e77860" class="">All these cases can be resolved by explicitly adding a cast to the desired type, e.g. <code>int(to_string(&quot;10&quot;))</code>.</p><h2 id="ee7a8878-2e4c-465b-a66c-c3c85281f4b3" class="">Extensibility</h2><p id="bc2620d4-7406-4bc7-8f08-bfe5890c4a3b" class="">One important aspect of normal function overloading in C++ is the extensibility of the overload set. Independent authors and libraries can add to the same overload set simply by providing a function with the proper name in the same namespace. We might also add to the overload set via <a href="https://en.cppreference.com/w/cpp/language/adl">argument-dependent lookup</a>, though if this should be considered feature or bug is slightly controversial.</p><p id="c8dc7456-c20b-430c-bd14-1c22c415ef3b" class="">In its base form, our conversion operator approach is not extensible. User-defined conversion functions must be member functions and we cannot add members to other classes post-hoc. Thus, if our library defines</p><pre id="9bdb111a-ac0b-4856-a0ef-7ac7b90929de" class="code"><code>struct to_string_t
+{
+    std::string_view s;
+
+    operator int() const;  // int  from_string(std::string_view s);
+    operator bool() const; // bool from_string(std::string_view s);
+};
+</code></pre><p id="185c380f-03eb-4e5e-a7ac-1e4e0a9d0248" class="">Then this means “overload for return types <code>int</code> and <code>bool</code>” and other libraries / files cannot add to that.</p><p id="3bd10263-a193-492c-a285-bcb192afb9fc" class="">There is a way to fix this and add extensibility. This will add some implementation complexity and for more specialized use cases, extensibility might not actually be desired. However, I would argue that <code>from_string</code> should be designed with extensibility in mind.</p><blockquote id="b497cec8-95d1-4612-8e3e-35a82d23da81" class="">Note: the rest of this section focuses more on metaprogramming and API design than the return-type overloading. You can skip to the next section to see the final version.</blockquote><p id="cc53f632-03e1-4bad-980e-820cf642fb0e" class="">The solution here is that conversion functions can be templated. We will use that to delegate the conversion to a template specialization, which is then properly extensible:</p><pre id="4e5a27f4-0762-4ae3-8df8-f3fbff902eab" class="code"><code>template &lt;class T&gt;
+struct to_string_impl 
+{
+    static_assert(always_false&lt;T&gt;, &quot;conversion to T not supported&quot;);
+};
+
+struct to_string_t
+{
+    std::string_view s;
+
+    template &lt;class T&gt;
+    operator T() const { return to_string_impl&lt;T&gt;::from_string(s); }
+};
+
+to_string_t from_string(std::string_view s) { return to_string_t{s}; }
+</code></pre><p id="c27dd2a8-6fb3-49ef-a377-759fc8328ed1" class="">The conversion in <code>to_string_t</code> is now templated and always calls <code>to_string_impl&lt;T&gt;::from_string(s)</code>. <code>to_string_impl&lt;T&gt;</code> is a class template that is specialized for all supported conversions. Should a non-supported conversion be called, the <a href="https://artificial-mind.net/blog/2020/10/03/always-false"><code>always_false&lt;T&gt;</code></a><a href="https://artificial-mind.net/blog/2020/10/03/always-false"> produces a nice(-ish) error message</a>. We can now add our supported conversions via:</p><pre id="a5718e50-e3d4-4c0e-8222-b03b2024845d" class="code"><code>template &lt;&gt;
+struct to_string_impl&lt;int&gt;
+{
+    static int from_string(std::string_view s);
+};
+
+template &lt;&gt;
+struct to_string_impl&lt;bool&gt;
+{
+    static bool from_string(std::string_view s);
+};
+</code></pre><p id="c56b935a-d700-44ae-b880-bd8d5acb8658" class="">And similarly, other authors or the end user can add conversions for custom types. Sometimes, it is useful to conditionally add conversions. For example <code>my_range&lt;T&gt;</code> might only be supported if <code>T</code> itself supports <code>from_string</code>. Thus, it is customary to add a second template argument to the base template:</p><pre id="2dfe37f4-91e5-4789-8be7-8aa33730daa7" class="code"><code>template &lt;class T, class = void&gt;
+struct to_string_impl 
+{
+    static_assert(always_false&lt;T&gt;, &quot;conversion to T not supported&quot;);
+};
+</code></pre><p id="dc800da7-c1b7-4d2e-92b5-54b026ede6dc" class="">This enables our imaginary end user to write:</p><pre id="e3262e34-c602-41dd-9847-8b2a11d0ae04" class="code"><code>template &lt;class T&gt;
+struct to_string_impl&lt;my_range&lt;T&gt;, std::enable_if_t&lt;has_from_string&lt;T&gt;&gt;&gt;
+{
+    static my_range&lt;T&gt; from_string(std::string_view s); // e.g. &quot;[1, 2, 3]&quot;
+};
+</code></pre><p id="b3a17f50-5906-4202-8a69-a4576f4a8227" class="">The partial specialization is only “active”, if <code>T</code> itself satisfies <code>has_from_string&lt;T&gt;</code>. (This, of course, is an example of <a href="https://en.cppreference.com/w/cpp/language/sfinae">SFINAE</a>).</p><p id="5d7db63e-7ed2-492a-82c2-08f956e75b1d" class="">Such a <code>has_from_string&lt;T&gt;</code> might look like this:</p><pre id="9800c03f-6f28-4bf3-ba9b-5c2c8adaf2df" class="code"><code>template &lt;class T&gt;
+auto impl_has_from_string(int) -&gt; decltype(
+    to_string_impl&lt;T&gt;::from_string(std::declval&lt;std::string_view&gt;()), 
+    std::true_type{});
+
+template &lt;class T&gt;
+std::false_type impl_has_from_string(char);
+
+template &lt;class T&gt;
+constexpr bool has_from_string = decltype(impl_has_from_string&lt;T&gt;(0))::value;
+</code></pre><p id="cd5d3b4d-2077-479f-b22b-892a93f2abda" class="">Here, we use <a href="https://en.cppreference.com/w/cpp/language/sfinae#Expression_SFINAE">Expression SFINAE</a> to disable the first <code>impl_has_from_string</code> overload if <code>to_string_impl&lt;T&gt;::from_string</code> does not exist. <code>impl_has_from_string</code> itself is overloaded on <code>int</code> and <code>char</code> and called via <code>impl_has_from_string&lt;T&gt;(0)</code>. This is a cheap way to say “try the <code>int</code> overload first and if it doesn’t apply, take the <code>char</code> overload”. However, if we try to check <code>has_from_string&lt;T&gt;</code> for some type that has no <code>from_string</code>, we trigger the <code>static_assert(always_false&lt;T&gt;);</code> in the base template. Thus, we move the <code>static_assert</code> to <code>to_string_t::operator T()</code> (see next section).</p><p id="e121e424-5195-44b3-94d6-ebb5b2f069bd" class="">Note that the templated <code>to_string_impl</code> class is not the only option. We could also use <a href="https://arne-mertz.de/2016/10/tag-dispatch/">tag dispatch</a> or even normal overloading, e.g. by delegating to (a user-extensible) <code>void convert_to(std::string_view s, T&amp; v)</code> that is overloaded on the second parameter.</p><h2 id="cc41a1e6-2b53-4c39-9b86-946cf6b2998c" class="">Final Version</h2><p id="86c77dea-37c5-4fc6-b340-1a8ecd0d50bc" class="">For reference, our extensible and checkable version of return-type overloading in C++:</p><pre id="7f0e2cb9-22db-43be-b52d-53befea2fecc" class="code"><code>// base template, specialize and provide a static from_string method
+template &lt;class T, class = void&gt;
+struct to_string_impl 
+{
+};
+
+namespace detail // hide impl detail
+{
+template &lt;class T&gt;
+auto has_from_string(int) -&gt; decltype(
+    to_string_impl&lt;T&gt;::from_string(std::declval&lt;std::string_view&gt;()), 
+    std::true_type{});
+
+template &lt;class T&gt;
+std::false_type has_from_string(char);
+}
+
+// check if T has a from_string
+template &lt;class T&gt;
+constexpr bool has_from_string = decltype(detail::has_from_string&lt;T&gt;(0))::value;
+
+// return-type overload mechanism
+struct to_string_t
+{
+    std::string_view s;
+
+    template &lt;class T&gt;
+    operator T() const 
+    {
+        static_assert(has_from_string&lt;T&gt;, &quot;conversion to T not supported&quot;);
+        return to_string_impl&lt;T&gt;::from_string(s); 
+    }
+};
+
+// convenience wrapper to provide a &quot;return-type overloaded function&quot;
+to_string_t from_string(std::string_view s) { return to_string_t{s}; }
+</code></pre><p id="ce2a7409-a44b-414f-b867-f88939d235f9" class="">Anyone can register new types, optionally using SFINAE to conditionally support them:</p><pre id="03431560-7442-490a-aab1-47ca9b9fa20f" class="code"><code>template &lt;&gt;
+struct to_string_impl&lt;int&gt;
+{
+    static int from_string(std::string_view s);
+};
+
+template &lt;&gt;
+struct to_string_impl&lt;bool&gt;
+{
+    static bool from_string(std::string_view s);
+};
+
+template &lt;class T&gt;
+struct my_range { /* ... */ };
+
+template &lt;class T&gt;
+struct to_string_impl&lt;my_range&lt;T&gt;, std::enable_if_t&lt;has_from_string&lt;T&gt;&gt;&gt;
+{
+    static my_range&lt;T&gt; from_string(std::string_view s);
+};
+</code></pre><p id="d1a9ce91-6f68-45f9-b026-3da74af7e0b3" class=""><code>has_from_string&lt;T&gt;</code> can be used to test (at compile time) if a <code>from_string</code> is available for a certain type:</p><pre id="8ba45985-0e38-4377-9bf5-5f85f6954a5c" class="code"><code>static_assert(has_from_string&lt;int&gt;);
+static_assert(!has_from_string&lt;char&gt;);
+static_assert(has_from_string&lt;my_range&lt;int&gt;&gt;);
+static_assert(!has_from_string&lt;my_range&lt;float&gt;&gt;);
+</code></pre><p id="e1d182bd-9a2a-4fc0-b0bb-8b02c315afef" class="">Finally, we still retain the original usage that looks like a return-type overloaded function:</p><pre id="0ef0da46-1d1e-4c87-a931-eedba3f1114a" class="code"><code>int i = from_string(&quot;7&quot;);
+bool b = from_string(&quot;true&quot;);
+my_range&lt;int&gt; r = from_string(&quot;[0, 1, 2]&quot;);
+</code></pre><p id="5513b280-6718-49ae-bece-7c50f16b3322" class="">As always, <a href="https://godbolt.org/z/chfGa1">a godbolt link to back up my claims</a>.</p><h2 id="2df49ed4-e1b8-41fd-a279-d5d1994ec306" class="">Summary</h2><p id="bd724f5e-6e43-407a-93e3-6138e2126b3a" class="">Overloading by argument types is ubiquitous in modern imperative languages but overloading by return type is usually not supported. However, we can emulate it in C++ by (mis)using <a href="https://en.cppreference.com/w/cpp/language/cast_operator">user-defined conversion operators</a>. As long as the target type is known, the proper “overload” is selected. The basic version is simple:</p><pre id="94fd66f7-bf1c-4f59-8007-d540fcee0bf4" class="code"><code>struct to_string_t
+{
+    std::string_view s;
+
+    operator int() const;  // int  from_string(std::string_view s);
+    operator bool() const; // bool from_string(std::string_view s);
+};
+
+to_string_t from_string(std::string_view s) { return to_string_t{s}; }
+</code></pre><p id="b8e58215-8521-403a-a528-836646f47c41" class="">By default, this solution does not have the extensibility of normal by-argument-type overloading. However, we can restore it via a templated conversion operator that delegates to a templated class that can be specialized. In the process, we can also define a <code>has_from_string&lt;T&gt;</code> to help with diagnostics or SFINAE.</p></div></article></body></html>

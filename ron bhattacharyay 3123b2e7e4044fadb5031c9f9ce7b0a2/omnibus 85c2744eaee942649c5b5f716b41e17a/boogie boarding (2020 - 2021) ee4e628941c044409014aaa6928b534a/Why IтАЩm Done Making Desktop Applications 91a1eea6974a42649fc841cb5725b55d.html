@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why I’m Done Making Desktop Applications</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="91a1eea6-974a-4264-9fc8-41cb5725b55d" class="page sans"><header><h1 class="page-title">Why I’m Done Making Desktop Applications</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.kalzumeus.com/2009/09/05/desktop-aps-versus-web-apps/" class="url-value">https://www.kalzumeus.com/2009/09/05/desktop-aps-versus-web-apps/</a></td></tr></tbody></table></header><div class="page-body"><p id="1ce2b9d0-7fb5-49da-8c70-c5638dec8805" class="">[Editor’s note: now available in <a href="http://www.fatcow.com/edu/desktop-aps-versus-web-apps-be/">Belorussian translation</a>.]</p><p id="ea2e3851-421b-42d7-9d1e-8307135ad74c" class="">Breaking up has always been difficult for me. I tend to fall in love with being in love, and continue a relationship well past the point of futility. And so it is with my oldest love, writing desktop software.</p><p id="72705b7f-db8f-4721-947b-f5ff115d8dee" class="">I’m sorry, desktop apps. We just don’t have a future together anymore. Its not you, its me.</p><p id="195a2a38-0ccd-4062-93d4-81bed2141e70" class="">A bit of background: for the last three years I’ve sold <a href="http://www.bingocardcreator.com/">Bingo Card Creator</a>, a desktop app which pretty much does what it says on the tin. It has gone from being a passing fancy to a rather lucrative hobby to, well, a bit more than that over the years. As I gradually became more invested in the business of writing desktop software, I got more and more snippy about the periodic desktop versus webapp flamewars, and defended the ascendancy of desktop software.</p><h2 id="a6953546-71fb-4d48-961b-96e7f7ab2823" class="">What Changed My Mind</h2><p id="0e81bc7c-b227-43c2-ae26-65b7cbba7c6d" class="">Over roughly the same period my day job has changed and transitioned me from writing thick clients in Swing to big freaking enterprise web apps. I’ve learned SQL, Rails, etc and used them to fairly decent effect in selling Bingo Card Creator, which is a Swing app (if all you have is a hammer…). This summer, I decided to try stepping my web programming skills up a notch, and released a web version of Bingo Card Creator. It has <strong>exceeded all my expectations</strong>: in ease of writing, in features, in sales, in support burden, in marketability, etc. In game theory terms, it <em>strictly dominates</em> the desktop version, when seen from the eyes of the developer at any rate.</p><p id="98aa8dee-bab4-4700-bc0e-b3d2589457da" class="">If I were starting out today, I would, without a shadow of a doubt, write a web app instead of a desktop app, for these reasons:</p><h2 id="57b35abf-5c33-40b0-9383-4957cae2fcec" class="">The Shareware Funnel Is Lethal</h2><p id="be2d8757-23bc-4b9b-ba14-5a2f5f4b4a02" class="">I have never used the word “shareware” to describe Bingo Card Creator, because I think that it is an anacronism that my customers do not understand, but among fellow technically inclined people it describes the business model succinctly. Someone visits your website, downloads your trial, and hopefully purchases your program. That process is called a funnel, and if you break it down into concrete steps, the shareware funnel is <strong>long and arduous</strong> for the consumer:</p><ol type="1" id="bdc0462d-d680-4868-a23f-b8f429e7a4b1" class="numbered-list" start="1"><li>Start your web session on Google, like everyone does these days.</li></ol><ol type="1" id="0547b517-d6b8-49cf-bce1-c8e1c4478c07" class="numbered-list" start="2"><li>Google your pain point.</li></ol><ol type="1" id="7e24da26-e909-4306-9748-95d9ec2a3598" class="numbered-list" start="3"><li>Click on the search result to the shareware site.</li></ol><ol type="1" id="1192a335-859a-4cf8-8270-ca7fca4f04c2" class="numbered-list" start="4"><li>Read a little, realize they have software that solves your problem.</li></ol><ol type="1" id="0156888d-23c8-4936-bffe-3fdaf2cd8d30" class="numbered-list" start="5"><li>Mentally evaluate whether the software works on your system.</li></ol><ol type="1" id="76eca0c2-904f-4d6c-b04b-c3c0e3b8e516" class="numbered-list" start="6"><li>Click on the download button.</li></ol><ol type="1" id="5af90c86-3169-42fa-bb66-ca213078d03a" class="numbered-list" start="7"><li>Wait while it downloads.</li></ol><ol type="1" id="b918afd7-759b-4148-aeab-e8e5233b57e1" class="numbered-list" start="8"><li>Close your browser.</li></ol><ol type="1" id="75baa25a-6f03-4a79-a69b-9f47913cf8cb" class="numbered-list" start="9"><li>Try to find the file on your hard disk.</li></ol><ol type="1" id="c3eac3e4-5878-43e4-af5a-eeee39ad4df0" class="numbered-list" start="10"><li>Execute the installer.</li></ol><ol type="1" id="7b24336c-8247-4ebb-a520-86687a1eae89" class="numbered-list" start="11"><li>Click through six screens that no one in the history of man has ever read.</li></ol><ol type="1" id="483d7558-3b6b-4c5b-bc78-a8e72d38b6fc" class="numbered-list" start="12"><li>Execute the program.</li></ol><ol type="1" id="c52fb70c-1394-49b8-b0ea-cb3bd7f067b8" class="numbered-list" start="13"><li>Get dumped at the main screen.</li></ol><ol type="1" id="e0a53c98-e780-43fd-8748-1081f652202f" class="numbered-list" start="14"><li>Play around, fall in love.</li></ol><ol type="1" id="15b597df-2122-48cb-999a-669d5c8db336" class="numbered-list" start="15"><li><em>Potentially weeks pass</em>.</li></ol><ol type="1" id="7eab1565-a7bf-445f-a588-1f590d78c487" class="numbered-list" start="16"><li>Find your way back to the shareware site. Check out price.</li></ol><ol type="1" id="bea9b02f-65a1-4179-8aa6-c507631bc764" class="numbered-list" start="17"><li>Type in your credit card details. Hit Checkout.</li></ol><p id="4a4f0e10-0b75-4263-b2b3-ac5aa25608a6" class="">I could go into more detail if I wanted, but that is <strong>seventeen different opportunities for the shareware developer to fail</strong>. If you don’t catch the download in the 30 seconds people give your website, <em>no sale</em>. If your customer can’t find the file after they download it, <em>no sale</em>. If it requires a JRE upgrade and after restarting their computer they’ve forgotten what they were working on, <em>no sale</em>. If they play around with it, close it, and can’t remember how to open it again, <em>no sale</em>. If they get to the sales page and can’t operate your shopping cart, <em>no sale</em>.</p><p id="d5990964-5fec-4527-931a-7c71e5f615b5" class="">Is it any wonder why shareware has typical conversion ratios of <a href="http://successfulsoftware.net/2009/04/23/the-truth-about-conversion-ratios-for-software/">1% or less</a>?</p><h2 id="bb9ac5db-a054-4e86-bf1c-bc9c86623ff0" class="">Web Applications Convert Better</h2><p id="29418d4c-a373-4150-88d0-3a090775e11b" class="">A web application doesn’t have to be downloaded or installed, never requires a restart, and never requires a contextual change just to open up a purchasing page. As a result, the conversion ratio is higher. <em>Much</em> higher. Here are the actual stats from Bingo Card Creator. I’m looking at conversions from my best performing AdWords campaign only, because that minimizes sources of variation like, e.g., the different types of traffic I’ve gotten in the last 2 months (while the webapp was available) versus in the last three years.</p><p id="7de0d3c5-a78d-414c-89bf-453a94a290dc" class="">Visitor to Free Trial:</p><ul id="02eb92e6-f2b2-4344-beef-2d71bf281df9" class="bulleted-list"><li>Downloaded: 18 ~ 22%</li></ul><ul id="d647ce39-6ea5-498d-a63d-acc0cd69068a" class="bulleted-list"><li>Web App: 22% ~ 26%</li></ul><p id="9b7fbc14-f719-4392-97b9-693e93bf2cc0" class="">Trial to Purchase:</p><ul id="ddf7e3cc-5fca-48c8-98a5-47a6b768dad3" class="bulleted-list"><li>Downloaded: 1.35%</li></ul><ul id="3d05f6c3-c752-455a-848e-53bad653e055" class="bulleted-list"><li>Web App: 2.32%</li></ul><p id="8583a3ed-2fff-4370-a700-810d4a8e9767" class="">This is <strong>essentially the same application</strong>. If anything, the online version has <em>less</em> features, and it has 2 months of development whereas the downloadable application has had 3 years of improvements made to it. Yet <strong>the online version outsells my desktop application almost two to one</strong>.</p><h2 id="4d292c42-f3a8-431d-9662-4c6f4aa51d44" class="">Your AdWords Strategy Is Very Sensitive To Conversion Rates</h2><p id="db407139-2056-4f0d-b7f8-6d2e647364e9" class="">A portion the numerical disparity is because I have started to react to, e.g., the difference in conversion rates of advertising and promote accordingly. A sale of either nets me the same amount of money, about $28. However, if you break out the math on how much AdWords costs per sale (cost per click divided by conversion rate to trial divided by conversion rate to purchase):</p><ul id="fe2b2174-8211-4d40-a1e8-2b74112b7663" class="bulleted-list"><li>Downloadable version: $20 AdWords CPA</li></ul><ul id="bb179e41-cd85-4727-8402-e94a4123dbf8" class="bulleted-list"><li>Web App: $9 AdWords CPA</li></ul><p id="e6b96290-11f6-49b2-8391-f916abfd4379" class="">(You’re welcome, Google.)</p><p id="c00819ac-5c01-4add-9014-73b50d6a4315" class="">This doesn’t just save me money, it <strong>helps me trounce my competitors</strong>. For example, if my competitors are selling downloadable software, and they are equally as skilled as I am about writing AdWords ads and optimizing their websites, then it should also cost them about $20 a sale to advertise on AdWords. (This explains why I never see ads for the competitors who try to gain volume by undercutting my price — if you’re going to price at $23.95, you’d better be a crackerjack SEO because you simply cannot afford to outbid me in AdWords.)</p><p id="66aab949-2440-4be3-85d7-ddc954e4fdfb" class="">Decreasing my cost of customer acquisition by over half lets me bid more for my AdWords to gain additional volume. For example, for the longest time my AdWords strategy was more or less monetizing traffic other people couldn’t be bothered with, while larger brands producing e.g. printed bingo supplies went after the head terms like [bingo cards]. With vastly improved conversion rates, I might be able to advertise profitably on those terms, increasing my volume and making me very, very happy. As it is, I have walked up bids a bit and am getting 25% more inventory than I usually do.</p><h2 id="42404267-a78b-4545-aa08-496f1dbd04da" class="">Web Applications Are Easier To Support</h2><p id="c9f5fda4-3441-4f09-89d7-351dd669f340" class="">Many desktop developers hate customer support with a burning passion in their soul. I actually enjoy it, but I enjoy making it unnecessary even more, as <strong>there is no customer support experience so good as avoiding the problem in the first place</strong>.</p><p id="592a7ab5-952a-48a1-a9bd-d3f405592ebd" class="">Support requests from last 50 customers:</p><ul id="dbcac291-61ae-452e-a548-aa0844381440" class="bulleted-list"><li>Desktop Application: 15</li></ul><ul id="c31ae1fe-ab7c-4815-b454-2d18c699a899" class="bulleted-list"><li>Web Application: 3</li></ul><p id="6c6cad3a-a78f-4f1e-bbfa-6084b4a9776a" class="">I’ve had three years to streamline the website, purchasing process, and application for my desktop app, and that has helped me greatly reduce the number of inquiries I get. Even after all that work, the main culprits are pretty much the same as ever: installation issues, lost registration keys, and bugs present in old versions of the software that are still floating around download sites.</p><p id="f22e5abf-8c3b-4871-afee-20081a412b48" class="">Web apps, by comparison:</p><ul id="6d1ad073-5cf9-40c3-a4e0-acd60f9df0db" class="bulleted-list"><li>Have no installation issues, because there is no installation.</li></ul><ul id="c7db37ea-b6fd-4689-adb1-2bafb26fe0ce" class="bulleted-list"><li>Do not require registration keys. (Technically, because I allow users to use both the desktop and web application, I issue them one — but it is immediately applied to their account via creative abuse of <a href="http://www.e-junkie.com/">e-junkie </a>and cookies. Most customers get to use their software immediately without actually reading the bit in the email sent to them — or failing to read it, as happens quite often.)</li></ul><ul id="008cee17-7ac9-44be-b6d4-686b2adbbf95" class="bulleted-list"><li>Never have an accessible version of the software older than the most recent one. By comparison, if you were to Google [<a href="http://www.google.com/#hl=en&amp;q=bingo+card+creator+version+1.04">bingo card creator version 1.04</a>] (which hasn’t been distributed in, hmm, two years or so), you’d find it on hundreds of download sites.</li></ul><h2 id="8e708d56-6248-4676-a8cc-2fcbad44c1b0" class="">The Age Of The Pirates Is Coming An End, Jack</h2><p id="926acd18-8094-4eaa-90c0-52e06a3bd42f" class="">I’m famously lackadaisical about software piracy, preferring to concentrate on <a href="https://www.kalzumeus.com/2006/09/05/everything-you-need-to-know-about-registration-systems/">satisfying paying customers</a> rather than harming their experience with anti-piracy methods. However, the existence of pirates is a stitch in my craw, particularly when any schoolmarm typing the name of my software into Google is prompted to try stealing it instead:</p><p id="4e3766fc-454d-4f81-8240-741e102bad85" class="">You want to take a quick stab at how many pirates have circumvented the copy protection on the online version? <strong>Bwa. Hah. Hah</strong>.</p><p id="0f84c137-2c1b-45e2-be49-ef44df2f8e22" class="">I once <a href="http://news.ycombinator.com/item?id=503959">remarked to Paul Graham</a> that the future of software was with pervasive integration with the server simply because that means that downloading the client doesn’t let you pirate the software any more than downloading Firefox lets you pirate Basecamp. (Ironically, I made that point in a defense of desktop software as a business model. Mea maxima culpa! <strong>Theoretical utility of desktop software is one thing, but I can’t ignore what my numbers are telling me.</strong>)</p><h2 id="8c24d522-1c91-463e-adb5-cf690606570d" class="">Phone Home vs. Google Analytics</h2><p id="9e13eb8a-7216-4f1e-acd0-7d13d08a06f2" class="">One of the curious traits among software developers is that, speaking as a group, we feel something like “I own what happens on my machine and nothing should happen without my say-so”. This generally leads to a severe reluctance to “phone home” from the application to the developer’s server — even reports on very innocuous data like “Did I steal this software or not?” is often tarred with the label spyware.</p><p id="40b153b7-9fdf-4fde-9c30-c4477900af0d" class="">On the Internet, privacy expectations have evolved a bit in the last few years. The overwhelming majority of the public has been told that they’re being tracked via cookies and <strong>could not care less</strong>. If you write a privacy policy, they won’t even bother reading it. Which means that you can disclose in your privacy policy that you track non-personally identifying information, which is <em>very</em> valuable as a software developer.</p><ul id="7fd5525f-e61f-48fb-afe2-5f0a4aaaf483" class="bulleted-list"><li>What features of your software are being used?</li></ul><ul id="bd2196cf-d406-4953-ae12-8a8517cb9eb3" class="bulleted-list"><li>What features of your software are being ignored?</li></ul><ul id="d5df766c-095b-4d96-9c36-95fb22966ee9" class="bulleted-list"><li>What features are used by people who go on to pay?</li></ul><ul id="a3bc81be-68b5-43a0-91bf-d9108a57e8e9" class="bulleted-list"><li>What combination of settings is most common?</li></ul><ul id="1e025cc2-a7a6-4436-a400-69a5aa73d174" class="bulleted-list"><li>What separates the power users from the one-try-and-quit users?</li></ul><p id="76e4e231-d2ca-474f-9615-8f7ae41c594d" class="">Tracking all of these is very possible with modern analytics software like, e.g., <a href="http://www.mixpanel.com/">Mixpanel</a>. You can even wrestle the information out of Google Analytics if you’re prepared to do some extra work. You can do it in a way which respects your users’ privacy while still maximizing your ability to give them what they want.</p><p id="024a713e-d62d-40f9-af02-b8bb0bb4373d" class="">Some people may be under the impression that users will <em>tell</em> you what they want. Nope — most of them will assume you are like every other business they have ever dealt with, where their opinion doesn’t matter, and the software is offered take-it-or-leave-it. And they just left it!</p><p id="b4acceef-e2db-4614-b426-64e6936b2074" class="">Things I learned about Bingo Card Creator customers which I never knew before I had an online app:</p><ul id="d3d8bc45-4dc6-456a-8791-a26a7a5a1642" class="bulleted-list"><li>The most common word used in bingo cards is — ready for it — “baby”. I completely underestimated the demand for <a href="http://www.bingocardcreator.com/bingo-cards/parties-and-events/baby-shower">Baby Shower bingo cards</a>, and avoided making an official set for <em>years</em>. As soon as I had the top ten word list (which was <em>all</em> baby shower words) I fixed that.</li></ul><ul id="0fe55ad7-bc25-46e6-b0fa-bce7cfda2d3c" class="bulleted-list"><li>The more features I add to the software, <a href="http://www.bingocardcreator.com/articles/tracking-with-mixpanel.htm#results">the worse it sells</a>. (This is, needless to say, <em>highly unintuitive</em> to most software developers.)</li></ul><ul id="c3fee8b2-6b9c-46fc-9162-317981ebaacf" class="bulleted-list"><li>Most customers purchase <em>within two hours of signup</em>, so it is absolutely imperative that their first use of the software exceed all their expectations.</li></ul><h2 id="49f756f6-4647-4367-bed3-47aa8bdeb4af" class="">Web Apps Can Be Customized Per User</h2><p id="63b2fa68-4010-4742-9a42-34250bb060bd" class="">Downloadable software pretty much has to treat every user identically by default. There are very limited ways to segment users, and no way to report the results of experiments. For web apps, however, if you have a halfway decent A/B testing library (like, say, <a href="http://www.bingocardcreator.com/abingo/">the free one I wrote for Rails developers</a>), you can experiment with having multiple versions of the application available concurrently, and see which one performs best.</p><p id="bc9fc26d-5df3-4d5c-b14c-736f57eead34" class="">The data collected by A/B testing has helped me:</p><ul id="3822ff84-7f39-4d71-b980-7c41ed0896f9" class="bulleted-list"><li>simplify my options screens to avoid confusing users</li></ul><ul id="81164f41-a09e-4af2-a56e-61a2cd50e689" class="bulleted-list"><li>improve the first-run experience</li></ul><ul id="fd18c862-1612-4304-9520-2706573e2bfb" class="bulleted-list"><li>write instructions such that they’re easier to follow</li></ul><p id="4a8fd292-c951-4091-a3ac-774a1525a5d2" class="">In addition to changing program behavior randomly, you can segment your users. I have only scratched the surface of how powerful this is, and it is already producing solid results for me:</p><p id="1deea539-3354-440e-ad13-8068c5dfc9a4" class=""><strong>Don’t treat your newbies like you treat your power-users.</strong> You have a database. It records all their actions since the dawn of time. <em>Use it</em>. I have a couple very simple heuristics for “is probably still getting used to the software” and, if you are, the software treats you with kid gloves. For example, it hides complex, seldom used options by default. It gives you instructions to a degree that a power-user might find insulting. (I don’t have the artistic skills to draw a little animated paperclip but I would if I could! <em>It looks like you’re trying to make a bingo card. Need help?</em>)</p><p id="e5866eef-c622-4bd7-84f5-a73b1e83d377" class=""><strong>Give your customers a “credit” score</strong>. I have a particular heuristic which segments users into four buckets. It isn’t exactly FICO, but it does successfully predict conversion rates: they range from 10% in bucket A to 0.01% in bucket D. Bucket C is interesting, though — they convert some of the time, but don’t seem to be getting quite the value out of Bingo Card Creator that Bucket A does.</p><p id="ee775388-9e45-4326-ad40-102e4da8bba1" class="">I wonder if Bucket C would feel differently if they got a $5 coupon in the email.</p><p id="bb2a093a-f255-4c8d-8b89-fc1ee4c1a104" class="">Meanwhile, it looks like Bucket D isn’t very interested in paying me money under any circumstances, but if I had a scratch-my-back-to-get-it-free option, I could place it prominently on their dashboards.</p><h2 id="05bdbda9-7e72-4368-a1bf-0eff93604d76" class="">Long Cycles Mean Low Innovation. Short Cycles Mean Fast Innovation.</h2><p id="130251b6-071f-4ba4-94c1-fd22157b59b9" class="">This sort of thing is very difficult to do with desktop apps, because you can’t reliably collect data on what approaches work, and you have the build/test/deploy/distribute cycle to worry about. It takes months for a new version of the desktop application to hit more than half of my users, and I give out upgrades for free.</p><p id="6cec8d7f-49ef-4600-8e89-c91840ecd936" class="">By comparison, I can <em>literally</em> have an A/B test coded, tested, and deployed globally in under a minute, for ones which are fairly low impact. Relocating a button, for example, requires two lines of code, a SVN commit, and a quick server restart. I start getting data <em>immediately</em>. By comparison, doing that on my desktop app would require 15 minutes of building, then waiting weeks while the new trials percolated from my website to the various download sites, and probably unforseen issues on Mac OS X 10.4 because apparently in a past life I must have stepped on Pharaoh Jobs’ cat.</p><p id="a3508b00-c402-4f1d-9110-bda773b751ad" class="">Recently, a desktop developer’s mailing list that I’m on commented that a release weekly development cycle is unsustainable, bordering on suicide. As a desktop developer, I agree, it would break me. As a web application developer — I have released 67 updates to Bingo Card Creator in the past 7 weeks, and <em>this isn’t even my day job</em>. A button here, some textual edits there, seven A/B tests, etc etc, and pretty soon you’re looking at the magic of compounding 1% improvements.</p><h2 id="66f86cd9-1213-415f-ac61-6e18655a28c7" class="">Speaking of Magic</h2><p id="6caa3129-e6ca-4793-a28f-c8d3b99de5d9" class="">I <em>love</em> desktop applications. I prefer them to web apps almost any chance I get. You can keep your Google Docs, Excel is superior in almost every way.</p><p id="dc580671-9ec4-44aa-9a9f-fa80c02b18e8" class="">As a developer, I love getting permanent presence right in front of the user (on their desktop, naturally).</p><p id="1f0c1953-c397-4c1c-a1b5-ec0b642af456" class="">My customers love desktop applications. They love the “physicality”. They love the perceived security (the number of people who purchased backup CDs and then proceeded to only use the webapp is <em>downright distressing</em> to me). They love that the application has first-class OS support, feels native, copies and pastes right, works with double clicking files, etc etc.</p><p id="30feaa24-ef29-4444-8755-82dbbff00783" class="">But at the end of the day, I’m an engineer. I follow the numbers where they lead me. The numbers say that <a href="http://www.bingocardcreator.com/stats/sales-by-month">sales in this August were 60% over those of last August</a>, despite a major blowup with Google that should have cost me dearly. All of my attempts to distill wisdom from the statistics have lead to one conclusion: the cumulative advantages of the web application, in my advertising, in my on-site experience, within the application, within my development process, and within my purchase funnel are just stupendously superior to the desktop app.</p><p id="f6858790-a214-4777-87e6-83bc05fe7659" class="">I’m sorry, desktop apps. We had good times together, but we’re through.</p><p id="40d07ff1-9f8e-43c0-8112-eb05c2ba7298" class="">[Edit to add: I’m going to continue supporting all customers of Bingo Card Creator, regardless of how they choose to get it. The next major release will almost certainly be its last. The webapp, and my future webapps, seem to be much better investments.]</p><p id="8f3af258-d996-4665-831c-bf5c0af77711" class="">Patrick McKenzie (patio11) ran four small software businesses. He writes about software, marketing, sales, and general business topics. Opinions here are his own.</p><p id="1d896cef-1c4d-45dd-ba5d-9179515d6d98" class="">Thanks to the <a href="http://weblog.rubyonrails.org/2009/9/2/a-month-in-rails">Ruby on Rails site</a>, <a href="http://www.railsinside.com/plugins/303-abingo-an-ab-testing-plugin-for-rails.html">Rails Inside</a>, and everyone else who has so generously written about <a href="http://www.bingocardcreator.com/abingo/">A/Bingo</a>, the Ruby on Rails split testing framework. Memo to self: next time, incorporating a pun into the name is fine, but incorporating a pun more limiting than the actual feature set is perhaps not a good idea.</p></div></article></body></html>

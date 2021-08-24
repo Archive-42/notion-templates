@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>An Opinionated Guide to ML Research</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="78920177-dab6-478e-b0ec-6472d73f7746" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚨</span></div><h1 class="page-title">An Opinionated Guide to ML Research</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-blue">Research</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="http://joschu.net/blog/opinionated-guide-ml-research.html" class="url-value">http://joschu.net/blog/opinionated-guide-ml-research.html</a></td></tr></tbody></table></header><div class="page-body"><p id="2be49f65-c264-43fa-9139-9fd3b5383802" class=""><a href="http://joschu.net/blog.html">← back to blog index</a></p><p id="a4ee60dd-6897-4d47-8e9d-6efd643839ff" class=""><em>I originally wrote this guide in back in December 2017 for the </em><a href="https://openai.com/blog/openai-fellows/"><em>OpenAI Fellows program</em></a></p><p id="df8c99c4-623b-48e4-97f1-ea436c63b06e" class="">In this essay, I provide some advice to up-and-coming researchers in machine learning (ML), based on my experience doing research and advising others. The advice covers how to choose problems and organize your time. I also recommend the following prior essays on similar topics:</p><p id="fcee8b8f-1b52-4f93-977d-1683bc497ed3" class="">My essay will cover similar ground, but it’s more tuned to the peculiar features of ML.</p><p id="47329bb4-8aed-427d-9e1d-8ef9def74810" class="">The keys to success are working on the right problems, making continual progress on them, and achieving continual personal growth. This essay is comprised of three sections, each covering one of these topics.</p><p id="898754ba-78cc-4e09-9713-511f5ded52be" class=""><strong>Exercise</strong>. Before continuing, it’s useful to spend a few minutes about which findings and achievements in ML have been most interesting and informative to you. Think about what makes each one stand out—whether it&#x27;s a groundbreaking result that changed your perspective on some problem; or an algorithmic idea that&#x27;s reusable; or a deep insight about some recurring questions. You should aspire to produce results, algorithms, and insights of this caliber.</p><h3 id="e242b562-123b-4e41-8022-7dd21646936e" class="">Choosing Problems</h3><h3 id="7b8de937-fc0a-47c4-a57a-fae2fefec016" class="">Honing Your Taste</h3><p id="65575821-20c0-438c-93c7-604bfc2140d8" class="">Your ability to choose the right problems to work on is even more important than your raw technical skill. This taste in problems is something you’ll develop over time by watching which ideas prosper and which ones are forgotten. You’ll see which ones serve as building blocks for new ideas and results, and which ones are ignored because they are too complicated or too fragile, or because the incremental improvement is too small.</p><p id="2a37f8f2-d676-4612-b1b2-1f0e76d3a822" class="">You might be wondering if there’s a way to speed up the process of developing a good taste for what problems to work on. In fact, there are several good ways.</p><ol type="1" id="25287d16-588c-4d0c-a330-473b6c887937" class="numbered-list" start="1"><li>Read a lot of papers, and assess them critically. If possible, discuss them with others who have a deeper knowledge of the subject.</li></ol><ol type="1" id="1a3d8a66-2132-4a84-82c7-2b8603aaf04a" class="numbered-list" start="2"><li>Work in a research group with other people working on similar topics. That way you can absorb their experiences as well as your own.</li></ol><ol type="1" id="8551dda8-20ad-4457-9f55-f4b86352e720" class="numbered-list" start="3"><li>Seek advice from experienced researchers on what to work on. There’s no shame in working on ideas suggested by other people. Ideas are cheap, and there are lots of them in the air. Your skill comes in when you decide which one to work on, and how well you execute on it.</li></ol><ol type="1" id="7810b68d-70b4-4642-806a-aaaf2126f735" class="numbered-list" start="4"><li>Spend time reflecting on what research is useful and fruitful. Think about questions like<ol type="a" id="db85d54f-3caa-4da4-956e-81ccea076c69" class="numbered-list" start="1"><li>When is theory useful?</li></ol><ol type="a" id="bc13e7e0-2555-4132-bd66-88e5927c23bd" class="numbered-list" start="2"><li>When are empirical results transferable?</li></ol><ol type="a" id="301caf3e-b538-4c7c-8546-4e4c58361d13" class="numbered-list" start="3"><li>What causes some ideas to get wide uptake, whereas others are forgotten?</li></ol><ol type="a" id="e6634f75-7203-4762-b652-e17e3559265e" class="numbered-list" start="4"><li>What are the trends in your field? Which lines of work will make the other ones obsolete?</li></ol></li></ol><p id="efe8ae37-67dc-4ffe-8f39-a93144dddf94" class="">Items 1-3 relate to optimizing your environment and getting input from other researchers, whereas item 4 is something you do alone. As empirical evidence for the importance of 1-3, consider how the biggests bursts of impactful work tend to be tightly clustered in a small number of research groups and institutions. That’s not because these people are dramatically smarter than everyone else, it’s because they have a higher density of expertise and perspective, which puts them a little ahead of the rest of the community, and thus they dominate in generating new results. If you’re not fortunate enough to be in an environment with high density of relevant expertise, don’t despair. You’ll just have to work extra-hard to get ahead of the pack, and it’s extra-important to specialize and develop your own unique perspective.</p><h3 id="9c82c1df-72c3-49f3-a003-7094b3810821" class="">Idea-Driven vs Goal-Driven Research</h3><p id="380b3536-cdf4-4e2e-9bae-8df217116e82" class="">Roughly speaking, there are two different ways that you might go about deciding what to work on next.</p><ol type="1" id="06bd17e0-1511-4ee7-bb52-edbdc30e988f" class="numbered-list" start="1"><li>Idea-driven. Follow some sector of the literature. As you read a paper showing how to do X, you have an idea of how to do X even better. Then you embark on a project to test your idea.</li></ol><ol type="1" id="2926c471-9186-45dc-83d3-a5d59e06cd7b" class="numbered-list" start="2"><li>Goal-driven. Develop a vision of some new AI capabilities you’d like to achieve, and solve problems that bring you closer to that goal. (Below, I give a couple case studies from my own research, including the goal of using reinforcement learning for 3D humanoid locomotion.) In your experimentation, you test a variety of existing methods from the literature, and then you develop your own methods that improve on them.</li></ol><p id="5f1aa941-9de5-461a-ba7a-a4701bfc0217" class="">Of course, these two approaches are not mutually exclusive. Any given subfield ML is concerned with some goals (e.g., object detection). Any “idea-driven” project will represent progress towards the subfield’s goals, and thus in a sense, it’s an instance of goal-driven research. But here, I’ll take goal-driven research to mean that your goal is more specific than your whole subfield’s goal, and it’s more like <em>make X work for the first time</em> than <em>make X work better</em>.</p><p id="fab9181c-a539-4256-b7fd-f40417f06cb3" class="">I personally recommend goal-driven research for most people, and I’ve mostly followed this strategy myself.</p><p id="ab4100e8-b659-4248-93ea-75a7c150579e" class="">One major downside of idea-driven research is that there’s a high risk of getting scooped or duplicating the work of others. Researchers around the world are reading the same literature, which leads them to similar ideas. To make breakthroughs with idea-driven research, you need to develop an exceptionally deep understanding of your subject, and a perspective that diverges from the rest of the community—some can do it, but it’s difficult.</p><p id="32099154-616d-4406-b19f-676f2845b7b6" class="">On the other hand, with goal-driven research, your goal will give you a perspective that’s differentiated from the rest of the community. It will lead you to ask questions that no one else is asking, enabling you to make larger leaps of progress. Goal driven research can also be much more motivating. You can wake up every morning and imagine achieving your goal—what the result would look like and how you would feel. That makes it easier to stick to a long-running research program with ups and downs. Goals also make it possible for a team of researchers to work together and attack different aspects of the problem, whereas idea-driven research is most effectively carried out by “teams” of 1-2 people.</p><p id="82f9defe-8e75-46ee-9101-b27e8ce2a0d2" class="">Case Study of Goal-Driven Research: My Work During Graduate School</p><p id="8ce0de57-a23f-421e-8864-076125cbbf1e" class="">For the first half of my PhD, my goal was to enable robots to manipulate deformable objects—including surgical robots tying knots, and household robots folding clothes. While this goal was determined by my advisor, Pieter Abbeel, as the main goal for his lab, I developed my own opinion on how to achieve this goal—my approach was based on learning from human demonstrations, and I was going to start with the problem of getting the PR2 to tie knots in rope. Various unexpected subproblems arose, one of which was trajectory optimization, and my work on that subproblem ended up being the most influential product of the knot-tying project.</p><p id="4543469b-143b-4d22-88b8-588f3e8de56a" class="">For the second half of my PhD, I became interested in reinforcement learning. While there are many problem domains in which reinforcement learning can be applied, I decided to focus on robotic locomotion, since the goal was concrete and the end result was exciting to me. Specifically, my goal was to get a 3D robot to learn how to run from scratch using reinforcement learning. After some initial exploration, I decided to focus on policy gradient methods, since they seemed most amenable to understanding and mathematical analysis, and I could leverage my strength in optimization. During this period, I developed TRPO and GAE and eventually achieved the original goal of 3D humanoid locomotion.</p><p id="9389bee5-6fe0-49cc-8f5d-5c78590b928b" class="">While I was working on locomotion and starting to get my first results with policy gradient methods, the DeepMind team presented the results using DQN on Atari. After this result, many people jumped on the bandwagon and tried to develop better versions of Q-learning and apply them to the Atari domain. However, I had already explored Q-learning and concluded that it wasn’t a good approach for the locomotion tasks I was working on, so I continued working on policy gradient methods, which led to TRPO, GAE, and later PPO—now my best known pieces of work. This example illustrates how choosing a different problem from the rest of the community can lead you to explore different ideas.</p><p id="d3b5cd14-f084-41f3-a066-34c01957c497" class="">Goal Driven Research: Restrict Yourself to General Solutions</p><p id="e1e3ef38-da1b-44a1-8bae-0aa583eecde4" class="">One pitfall of goal-driven research is taking your goal too literally. If you have a specific capability in mind, there’s probably some way to achieve it in an uninteresting way that doesn’t advance the field of machine learning. You should constrain your search to solutions that seem general and can be applied to other problems.</p><p id="6b524042-6895-4b46-8a35-ea283f3a88dd" class="">For example, while working on robotic locomotion, I avoided incorporating domain information into the solution—the goal was to achieve locomotion in simulation, <em>in a way that was general and could be applied to other problems</em>. I did a bit of feature engineering and reward shaping in order to see the first signs of life, but I was careful to keep my changes simple and not let them affect the algorithm I was developing. Now that I am using videogames as a testbed, I make sure that my algorithmic ideas are not specific to this setting—that they equally well could be applied to robotics.</p><h3 id="1f5b5b37-24a8-45f3-985c-d22b977e3622" class="">Aim High, and Climb Incrementally Towards High Goals</h3><p id="c9c87071-63ba-4975-b8f7-192459364b6f" class="">Sometimes, people who are both exceptionally smart and hard-working fail to do great research. In my view, the main reason for this failure is that they work on unimportant problems. When you embark on a research project, you should ask yourself: how large is the potential upside? Will this be a 10% improvement or a 10X improvement? I often see researchers take on projects that seem sensible but could only possibly yield a small improvement to some metric.</p><p id="a67578da-9178-4ac1-a249-a9064fb73bf8" class="">Incremental work (those 10% improvements) are most useful in the context of a larger goal that you are trying to achieve. For example, the seminal paper on ImageNet classification using convolutional neural networks (Krizhevsky, Sutskever, &amp; Hinton, 2012) does not contain any radically new algorithmic components, rather, it stacks up a large number of small improvements to achieve an unprecedented result that was surprising to almost everyone at the time (though we take it for granted now). During your day-to-day work, you’ll make incremental improvements in performance and in understanding. But these small steps should be moving you towards a larger goal that represents a non-incremental advance.</p><p id="4bb33380-008d-456b-8d74-cfd4005986bd" class="">If you are working on incremental ideas, be aware that their usefulness depends on their complexity. A method that slightly improves on the baseline better be very simple, otherwise no one will bother using it—not even you. If it gives a 10% improvement, it better be 2 lines of code, whereas if it&#x27;s a 50% improvement, it can add 10 lines of code, etc. (I’m just giving these numbers for illustration, the actual numbers will obviously depend on the domain.)</p><p id="e859e78b-0dbb-4908-b98e-d570256d9ef3" class="">Go back and look at the list of machine learning achievements you admire the most. Does your long-term research plan have the potential to reach the level of those achievements? If you can’t see a path to something that you’d be proud of, then you should revise your plan so it does have that potential.</p><h3 id="90b36cd5-7be4-44f6-809b-bf250c353de6" class="">Making Continual Progress</h3><p id="682556d8-102c-4330-825e-1edf9213131b" class="">To develop new algorithms and insights in machine learning, you need to concentrate your efforts on a problem for a long period of time. This section is about developing effective habits for this long-term problem solving process, enabling you to continually build towards great results.</p><h3 id="aa49f409-874a-42ca-bd49-eda373f2cbfc" class="">Keep a Notebook, and Review It</h3><p id="08f746b7-6386-43fc-87b6-e191bdf7a623" class="">I strongly advise you to keep a notebook, where you record your daily ideas and experiments. I have done this through 5 years of grad school and 2 years at OpenAI, and I feel that it has been tremendously helpful.</p><p id="ca19f88a-6892-4eec-85bd-88593b108b39" class="">I create an entry for each day. In this entry, I write down what I’m doing, ideas I have, and experimental results (pasting in plots and tables). Every 1 or 2 weeks, I do a review, where I read all of my daily entries and I condense the information into a summary. Usually my review contains sections for <em>experimental findings</em>, <em>insights</em> (which might come from me, my colleagues, or things I read), <em>code progress</em> (what did I implement), and <em>next steps / future work</em>. After I do my week in review, I often look at the previous week to see if I followed up on everything I thought of that week. Also, while doing this review, I sometimes transfer information into other sources of notes. (For example, I keep a list of backburner ideas and projects, separate from my notebook.)</p><p id="2c9ecd40-d4e6-43f2-93a1-f6c9dbf8d4d5" class="">What’s the value in keeping this notebook and doing the regular reviews?</p><p id="c019db2f-9bef-4ced-bbb5-b41a96057449" class="">First, the notebook is a good place to write down ideas as soon as you have them, so you can revisit them later. Often, when I revisit my journal entries during the week in review, I’ll fill in a missing piece in a puzzle, which didn’t occur to me at the time.</p><p id="015c3f64-8c16-4702-adaa-dca1d7f364e0" class="">Second, the notebook helps you keep your experimental results in a unified place, so you can easily find the results later. It’s easy to forget about your conclusions, e.g., which hyperparameters made a difference, and you’ll want to revisit your old notebook entries.</p><p id="8dc878a6-aad0-4cdd-9d27-6d0da0539a66" class="">Third, the notebook lets you monitor your use of time. You might wonder “where did last week go?”, and the notebook will help you answer that question. You might be disappointed with your throughput and realize you need to work on your time management. You also might look back at several months and realize that you’ve been jumping around between ideas too much—that you have a few half-finished projects but you didn’t follow any of these threads long enough to yield a notable result.</p><h3 id="c97886d7-0dc8-45ac-a390-926bb54babca" class="">When to Switch Problems</h3><p id="27857e49-d9fd-40b8-88e2-c6825b11387d" class="">To solve a challenging problem, you need to spend a sufficient amount of time on it. But in empirical machine learning research, it’s hard to know if you’ve tried an idea hard enough. Sometimes the idea has the potential to work, but if you get one detail wrong, you’ll see no signs of life. But other ideas are simply doomed to fail no matter how hard you work on them.</p><p id="4bd951a7-2bcc-47ad-8b35-2c27f98aa7d0" class="">In my experience, switching problems too frequently (and giving up on promising ideas) is a more common failure mode than not switching enough. Often, while you’re engaged in the long slog towards getting your current idea to work, another promising idea will come along, and you’ll want to jump to that idea. If your idea is quick to try and the potential upside is large, then go ahead and do it. But more commonly, your initial results on the new idea will be disappointing, and it’ll take a more sustained effort to yield significant results.</p><p id="b3b956ba-aea4-4bfc-be9e-08416bd9ef0c" class="">As a rule of thumb, when you look back at which projects you’ve been looking at over a period of months, you should find that there have been lots of small dead ends, but the majority of your time has been directed towards projects that yielded a deliverable such as a paper or a blog post. If you look back at your time and see that a substantial fraction was spent on half-finished projects—which were not definite failures, but which you abandoned in favor of some newer idea—then you should make a stronger effort towards consistency and follow-through in the future.</p><p id="6d26bbd6-6052-4a01-8a88-251515862ddb" class="">One strategy, which I haven’t tried personally but makes a lot of sense upon reflection, is to devote some fixed time budget to trying out new ideas that diverge from your main line of work. Say, spend one day per week on something totally different from your main project. This would constitute a kind of epsilon-greedy exploration, and it would also help to broaden your knowledge.</p><h3 id="6fecd926-f2eb-4898-822f-fbe7b684165b" class="">Personal Development</h3><p id="b0359038-c9bf-4011-834f-cc27d42302aa" class="">No matter how you allocate your time during your research journey, you are bound to learn a lot. Each project will present new challenges, and you can pick up the background material and skills as you go along. However, you can significantly improve your chances to do great work in the long term by regularly setting aside time for your personal development. Specifically, you should allocate some fraction of your time towards improving your general knowledge of ML as opposed to working on your current project. If you don’t allocate this time, then your knowledge is likely to plateau after you learn the basics that you need for your day-to-day work. It’s easy to settle into a comfort zone of methods you understand well—you may need to expend active effort to expand this zone.</p><p id="2cbc5002-a050-4c2b-8b4b-145d073c6e39" class="">The main ways to build your knowledge of ML are to read textbooks, theses and papers; and to reimplement algorithms from these sources. Early on in your career, I recommend splitting your time about evenly between textbooks and papers. You should choose a small set of relevant textbooks and theses to gradually work through, and you should also reimplement the models and algorithms from your favorite papers.</p><p id="bfee69cb-af39-46fb-9317-a53545f366b1" class="">Most students of machine learning don’t spend time reading textbooks after they finish their school courses. I think this is a mistake, since textbooks are a much more dense way to absorb knowledge than papers. Each conference paper typically contains one main new idea, along with a background section that’s too concise to learn anything from. There’s a lot of overhead, since you typically need to spend more time understanding the notation and terminology than the idea itself. On the other hand, good textbooks collect decades of ideas and present them in the proper order with the same notation. Besides reading the introductory machine learning textbooks, read other books in your areas of interest. A couple of my favorites were <em>Numerical Optimization</em> by Nocedal &amp; Wright, and <em>Elements of Information Theory</em> by Cover &amp; Thomas.</p><p id="b45d6ae7-935c-4177-bace-c2911b7b9ace" class="">Besides textbooks, I recommend reading PhD theses of researchers whose work interests you. PhD theses in ML usually are ordered as follows: (1) introductory and background material, (2) several papers that were previously published at conferences (it’s said that you just have to “staple together” your papers to write your thesis), and (3) a conclusion and outlook. You’re likely to benefit most from parts (1) and (3), since they contain a unifying view of the past and future of the field, written by an expert. Recent theses are often the best place to find a literature review of an active field, but older theses also often contain valuable gems of insight.</p><p id="e0d225d8-64fd-4f8f-b998-a0e2c253ca24" class="">Textbooks and theses are good for building up your foundational knowledge, but you’ll also need to read a lot of papers to bring your knowledge up to the frontier. When you are just starting your research career, I recommend spending a lot of time reimplementing ideas from papers, and comparing your results to the published ones. First of all, this gives you a much deeper understanding of the topic than you’d get by passively reading. Second, you’ll gain experience running experiments, and you’ll get much quicker feedback by reimplementing existing work (where the desired level of performance is known) than by doing original research. Once you can easily reproduce the state-of-the-art, you’ll be ready to go beyond it.</p><p id="faa53394-a8cd-4a17-9a89-645fcd058ec8" class="">Besides reading seminal papers and reimplementing them, you should also keep track of the less exceptional papers being published in your field. Reading and skimming the incoming papers with a critical eye helps you notice the trends in your field (perhaps you notice that a lot of papers are using some new technique and getting good results—maybe you should investigate it). It also helps you build up your taste by observing the dependency graph of ideas—which ideas become widely used and open the door to other ideas.</p><p id="3f7af674-d299-4432-bb37-1464de7dd023" class="">Go forth and do great research!</p></div></article></body></html>

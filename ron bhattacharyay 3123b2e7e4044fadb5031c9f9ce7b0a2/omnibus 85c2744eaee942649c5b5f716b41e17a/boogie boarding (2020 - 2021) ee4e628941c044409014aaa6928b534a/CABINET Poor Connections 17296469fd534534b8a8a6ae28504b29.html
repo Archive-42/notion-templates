@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CABINET / Poor Connections</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="17296469-fd53-4534-b8a8-a6ae28504b29" class="page sans"><header><h1 class="page-title">CABINET / Poor Connections</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php" class="url-value">http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php</a></td></tr></tbody></table></header><div class="page-body"><p id="9a62d1f8-47cf-41cc-ad92-7063c4bd802f" class="">Video conferencing becomes popular in times of crisis. During the early 1990s Gulf War and especially in the aftermath of 9/11, when executives temporarily lost trust in air travel, the use of this communication technology became more common as a business tool. This winter, the immobility and social distancing necessitated by the global spread of COVID-19 triggered again an urgent need for video conferencing technology. Almost overnight, companies, schools, and universities needed reliable livestreams; as a query in Google Trends demonstrates, searches for such tools increased exponentially in the second week of March, coinciding with the lockdown policy in Europe.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">1</a> This was the first time that videotelephony became widely used by large groups.</p><p id="f21af414-f7c0-4c84-9289-a60ecb6e3898" class="">Though technology of this kind may seem a recent innovation, its development has in fact taken nearly a hundred years to reach this moment—with many iterations, public demonstrations, and market failures along the way. Developers tried to couple telephony with image transmission technology, and later computers and the internet, from the very moment these technologies became available. The social use of videotelephony was advertised by AT&amp;T and Bell Labs in the 1970s, as a promotional film demonstrates, but really only took off in the aughts with the launch of Skype as a way for transnational families to keep in touch.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">2</a></p><p id="c1871e42-e34d-42de-90af-211fc1a2eab3" class="">Following its 2011 acquisition of Skype, a company that had been founded only eight years earlier, Microsoft further developed the software to make it a more stable platform for conducting job or research interviews, which both saved on travel and also enabled conversations that otherwise might not have taken place at all. Before long, it was also being used to transmit art performances and lectures.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">3</a> Skype still uses a skeuomorphic ringtone while the caller is waiting to be connected and its glitchy audio and video feel like a nostalgic resumption of an old pre-COVID digital practice that had been superseded by mobile applications like Apple’s FaceTime even before the advent of the new generation of Silicon Valley multi-user teleconferencing tools popularized during the pandemic, when many white-collar workers had to virtually meet with socially distant others. Skype supposedly could have had a brighter future, an article in <em>The Verge</em> suggests, were it not for Microsoft’s decision to promote Teams, their cloud-based videoconferencing software.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">4</a></p><p id="bb857f10-44c1-4c8f-a2f1-3453f57ce6cc" class="">In actuality, the conditions necessary for videotelephony to become ubiquitous had never converged until this moment. First, the service needs to be free of charge; the ability to meet in real life has to be unfeasible or restricted; there has to be a necessity for real-time communication; and users must have reliable broadband coverage. At the beginning of the coronavirus crisis, the number of Zoom users increased dramatically, from ten million in January to two hundred million in early April to three hundred million by the end of that month.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">5</a> The software first won accolades for being the most convenient and reliable. It was free to use for a duration of forty minutes, though the company for a short time decided to allow unlimited free calls as a promotional deal. It later turned out that Zoom is also malware-prone and privacy-challenged. Never one to miss a lucrative opportunity, Facebook—still frequented by many despite torrents of criticism—hurriedly launched a messenger room capable of fifty simultaneous video streams. Google Meet, much like the company’s previous attempts at social apps, is less popular (as of April 2020, they had only a third of the number of users that Zoom did), and so the company is offering free access until September and an AI that they promise will cancel ambient noise. Having joined the party late, Google is hoping to seduce users with such extras, even though most video conferences take place behind closed doors with little extraneous noise to cancel.</p><p id="958a7a1d-29d3-4137-85ae-2818d99ab3ef" class="">Will video conferencing stay with us as a platform for business and teaching after the pandemic is over, or will license agreements be terminated and the applications deleted shortly thereafter? Will people instead long to have meetings in real life and to once again enjoy chance encounters, as they used to? Face-to-face conversations enable eye contact and the possibility of reading the other’s micro-expressions, whereas online meetings, with their video glitches, audio delays, and the occasional distorted ghostly voices, often feel dissociated. Those technical effects can appear uncanny and funny at the same time, as the medium reminds its users of media history itself, when, for example, humans performed as mediums, receiving messages from the beyond through hypnosis and telepathy. “Media always already provide the appearances of specters,” Friedrich Kittler writes in <em>Gramophone, Film, Typewriter</em>.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">6</a></p><p id="5a622607-b70c-470f-a252-eaefb8e248eb" class="">The Social Toll of Data LeaksBecause none of the commercially available applications currently provide end-to-end encryption, the IT staff at the university where I teach demanded that we use BigBlueButton, a Linux-based, open-source conference software. The decision was further validated by Germany’s federal commissioner for data protection, who in a press release explicitly advised against using Zoom since the latter doesn’t comply with the country’s data security standards.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">7</a> This means that public institutions are all the more obliged not to use Zoom, if possible.</p><p id="34c03a9f-eed0-498f-89a3-f77556a3d8ca" class="">The irritating thing about the BigBlueButton experience is that you talk most of the time to a more or less blank screen. Due to a lack of server power, the university asked in the first couple of weeks that students be muted and invisible whenever the teacher was talking. What began as a technical requirement developed into habitual black-screen anonymity, as students aimed to avoid what they describe as an unusual and mostly unwelcome invasion of their personal spaces. Onscreen, all I could see were the usernames of invisible, muted students hiding during classes. Some students feel their privacy is violated when contributing with the microphone on because unwanted background noises in a shared flat might make it into the virtual seminar space. The software’s benefits are features such as a whiteboard, recording options, so-called breakout rooms (a function that splits the group into separate audio streams for a defined amount of time), and integrability with the school’s own cumbersome learning platform. Still, for those who think critically about data-greedy surveillance capitalism, its key advantage is that it runs locally on the university’s servers.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">8</a></p><p id="8b3154fe-769a-4971-bd71-233844a6e61c" class="">On the social level, streaming less data could be considered an act of solidarity with fellow students, since some join the virtual “room” with older computers, shared routers, and lower bandwidths.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">9</a> But this mode also turns out to be a less tiring form of co-presence since there’s no need to worry about one’s self-presentation. One might think that this upside would be undercut by the fact that we can no longer see others’ gestures and facial expressions, but in fact signs of agreement, incomprehension, or disagreement are almost impossible to convey in video conferences, unless you signal emphatically using an emoji, or mime like an actress in a silent movie. In addition, one might want to argue—given that the technological convergence of originally discrete devices has been a feature of the evolution of videotelephony across the twentieth century—that this is a moment to resist being subsumed into the massive consolidation of multiple media, even if this refusal comes at one’s own expense in the form of poor user experience. This is in no small part because the strategic erosion of privacy that is fundamental to the business model of Silicon Valley corporations is abetted by all media usage ending up on one device. And one final argument in favor of those absent faces, this too unrelated to sociality: our ecological footprint is much smaller without video streaming, which is why Tom Holert suggested at an early stage of the lockdown that cultural institutions reduce their electricity consumption by limiting livestreaming, which should be reserved only for medical and educational contexts.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">10</a></p><p id="c136c48c-18c7-445a-a811-d89791377851" class="">The Many Beginnings of Videotelephony Telling a linear history of videophone technology seems impossible, since there have been different instances of its emergence, and many dead ends. The history of viable teleconferencing actually begins back in the 1920s. In 1924, Max Dieckmann, a German high-frequency engineer—who twenty years earlier, as the twenty-three-year-old assistant to the physicist Ferdinand Braun, had begun using the Braun tube, or CRT, for pioneering television experiments, a research field Braun considered unscientific—filed a patent for “ein Verfahren zur elektrischen Fernsichtbarmachung bewegter Bilder” (a method for the electrical remote display of moving images).<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">11</a> The first-ever patent for the wireless transmission of images, Dieckmann’s technology was capable of sending simple moving shadow-images of fifty lines. About the same time in laboratories elsewhere, John Logie Baird in the United Kingdom, Charles Francis Jenkins and Vladimir Kosma Zworykin in the United States, Boris L. Rosing in the USSR, and Kenjiro Takayanagi in Japan were experimenting with television prototypes.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">12</a> Within a decade, television had turned into a hot field for both research and investment.</p><p id="eefa9f9f-9a2f-4824-95ca-b97f099fdeff" class="">At that time there were two directions of development for television—wireless broadcasting and wired transmission over telephone lines—and the research field was crowded. In 1927, AT&amp;T—apparently with no knowledge of the work of Dieckmann or other engineers in the German-speaking tech bubble—successfully demonstrated the possibility of using the emergent technology of television to transmit an image-signal over phone lines. The demonstration essentially amounted to a one-way TV signal, sent via wire, that transmitted images of Herbert Hoover, then US secretary of commerce, in Washington to the president of AT&amp;T, Walter Gifford, who was at the company’s headquarters in New York. (This was followed by a blackface skit to demonstrate “live” television.) The two men could speak to each other, and the visual signal from the camera trained on Hoover was also sent “over phone lines at the rate of eighteen frames per second,” which resulted in a poor image.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">13</a> By 1930, AT&amp;T had established a system capable of making two-way videophone connections between its Bell Laboratories and its headquarters, both in New York City; christened the Iconophone, the setup “sutured the audio and the visual into a single communicative space.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">14</a></p><p id="9bcc5ebc-d8ca-4c25-a570-72a73cf9396b" class="">At the same time as AT&amp;T was conducting its experiments, Fernseh AG—a partnership established by a number of pioneering radio and film equipment companies such as Bosch, Zeiss Ikon, D. S. Loewe, and Baird Television—and the Deutsche Reichspostzentralamt (the German national postal service) were developing their own research.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">15</a> They presented an early prototype of a “television-telephone” service to the public in 1929, first at the 6th Great German Radio Exhibition in Berlin and then at the Deutsches Museum in Munich. Masterminded by a German engineer named Günther Krawinkel, the technology involved separating the image into thirty lines and recomposing it on a screen. A television-telephone had had a fantasy cameo in the technology-driven urban future modeled in Fritz Lang’s <em>Metropolis</em> (1927).</p><p id="80a2c087-28dd-4060-a3bd-7eab896e92d9" class="">The scene in which the imaginary communication system is shown had to be filmed with a special-effects technique called “synchronized projection.” And even earlier, it had been popularized in stories by Jules Verne, which might have served as the inspiration for Lang.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">16</a></p><p id="78e7cc29-1844-4400-8fc5-534d39ee3add" class="">At the 1928 edition of the annual German Radio Exhibition, mechanical engineer Dénes von Mihály, who had moved from Budapest to Berlin four years earlier, presented his publicly funded research on televisual transmission. His television receiver prototype, named the Telehor, and a device developed for Telefunken by August Karolus, were the first receivers with tiny screens presented to the general public. But Milhály intended his television research not only for public broadcasting, but rather for military and police use. He even advocated equipping airplanes with the new technology for espionage and monitoring department stores via cameras and screens.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">17</a> In these early years of laboratory trial and error, before receivers entered living rooms, it was world exhibitions, post offices, and specially arranged press events—as in the case of Hoover and Gifford—that offered occasions for public demonstrations. In February 1928, Mihály, who was said to be particularly good at gathering journalists in his Berlin laboratory to spark publicity and garner political support, had demonstrated at one such event the successful transmission of a still image via a telephone line.</p><p id="25ec78c2-9db6-4759-87ba-5abab4427aea" class="">The technology’s early adoption as a tool for surveillance and forensics is evidenced in <em>Wer fuhr IIA 2992?,</em> a propaganda film that the Nazis produced for the 1939 Postal Union Congress in Buenos Aires.</p><p id="d67459bd-4c47-416d-9846-a6257c3d4507" class="">The film, whose title means “Who was driving the vehicle with license plate IIA 2992?,” is the story of a fictional hit-and-run case in which a gas station attendant is asked to identify the driver in a virtual lineup. In the film—which its writer conceived after seeing a television appeal for the public’s help in solving a real murder case—the attendant notices that a car that pulls into his station has been damaged in an accident. That same evening, an announcement is made on TV that police are trying to identify the driver of a hit-and-run vehicle. The attendant remembers the license plate of the damaged car and informs the police. He is then asked to remotely identify the driver by means of a kind of television intercom. But it turns out that the owner of the car brought in for identification was not the driver. Instead, the gas station attendant later recognizes the guilty man when he sees him by chance in the audience of a horse race being shown on the television in the investigating commissioner’s office. Since the publication of George Orwell’s <em>1984</em>, there has been an intense and ongoing scrutiny of the connection between communication technologies and surveillance, but what is surprising is that almost as soon as television went on air, it was being pressed into service as a tool for forensics.</p><figure id="d793e6d0-9f73-49c8-a039-f48dba1461ce" class="image"><a href="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_002.jpg"><img style="width:700px" src="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_002.jpg"/></a></figure><p id="ea21d440-f558-47fc-b7c9-d3d88c3fadc4" class="">The first public videotelephony station in the world, launched by the German post office in 1936. Photo Bundesarchiv.</p><p id="87dcf021-ef21-48e0-9c45-0d61416460c2" class="">In 1936, the year of the Berlin Olympics, selected post offices in German cities offered customers a new service in the form of TV-based viewphones. In contrast to the wireless technology being used by the German state broadcasting corporation, the postal service decided to use a completely new system for the transmission of video and audio signals, namely a modern coaxial cable. That year, Fernkabel 501, the world’s first broadband cable for videotelephony and television, connected Berlin and Leipzig to mark the opening of the Leipzig Trade Fair, transmitting videophone conversations, television programs, and telephone calls simultaneously. Part of the very expensive infrastructure (just like 5G today) was a manned amplification point every thirty-five kilometers; in these repeater stations, television technicians could follow the calls and television broadcasts on control monitors. The analytical shift from apparatuses and devices to transmission and nodes, from figure to ground, was conceptualized by Geoffrey Bowker as “infrastructural inversion” to describe the fact that historical changes, often attributed to the spectacular product of an era, are often more the result of the infrastructure that enabled the development of the product in question.</p><p id="90697ffb-cb95-4197-a868-34cccd591f86" class="">As it turned out, the videophone, technically a television-telephone, failed as a user technology. In his study of television under fascism, however, media scholar Erwin Reiss argues that the costly technology was never meant for the consumer, but was instead always primarily intended for commercial and military applications; at its core, it was a new means of circulation for capital and a new means of administration for its state. Four years later, the “coffins”—as people called the dark video call booths in the post office—disappeared. After World War II, the Allies took down the entire infrastructure.</p><p id="cb3ab3ae-5fe1-420a-b170-ad791400d284" class="">Despite these early breakthroughs in wired videotelephony, it turned out that people either felt discomfort with the video call environments—as was the case in Germany, for example—or in fact felt no desire or need for such technology. It was too expensive, and too bureaucratic. A similar story was playing out in the United States. In 1930, AT&amp;T had demonstrated the Iconophone, its two-way visual telephone, but it would not be until 1956 before the company would try again, but its Picturephone test system was limited to transmitting a picture every two seconds, rather than moving images. When the company finally debuted its Picturephone at the 1964 World’s Fair in New York, every second person who had tried the Picturephone in one of the seven calling stations at the Bell System Pavilion reported that they had felt uneasy on seeing their conversation partner represented in a vertical black-and-white picture. A similar setup would soon be tried out at Disneyland in California, and AT&amp;T later installed family-type booths designed like private living rooms in service centers in major American cities.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">18</a> Despite these efforts, the commercial service had little success.</p><figure id="83fbc179-c6cd-4091-bfdb-3d149e983352" class="image"><a href="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_004.jpg"><img style="width:700px" src="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_004.jpg"/></a></figure><p id="a432c425-f1e7-4895-a23c-c3938ba508c3" class="">“Someday you’ll be a star!” Advertisement from Western Electric, AT&amp;T’s manufacturing subsidiary, touting the forthcoming Picturephone Model II, 1968.</p><p id="d75eed4a-3eb9-4eec-8e43-5bd3565ce5cf" class="">In 1970, AT&amp;T tried again with improved technology. The Picturephone Model II service was launched at eight companies in Pittsburgh, chosen because it had the first commercial radio station in the United States. In a public demo arranged for the occasion in an auditorium at the company’s Pittsburgh offices, the city’s mayor, Pete Flaherty, called John Harper, the Chairman of Alcoa, sitting a block away. The Model II had a larger screen and featured a camera with a zoom lens, a full-motion black-and-white picture with a 250-line resolution, a plug for a computer mainframe to share documents on the screen, a privacy mode that blacked out the visuals, and some graphic functions. Three pairs of copper wires were required for this phone to operate, one for the audio, and two to carry the video. Despite these improvements, the product remained unpopular, in part because the technology was perceived as intrusive. The model also failed due to insufficient resolution and extremely high prices, costing between $16 and $27 (that’s $105 to $178 when adjusted for inflation) for just three minutes of teleconferencing.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">19</a> A postmortem study conducted by AT&amp;T in 1974 concluded there was little demand for mediated face-to-face communication, especially in the midst of a recession.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">20</a></p><p id="25e01ed0-4cad-4770-87ae-304fa0537cef" class="">The technology was consistently plagued by the same problems, chief among them what Stewart Brand pinpointed in 1987: “The bandwidth bottleneck is the eternal bugaboo of communications technology: it governs the amount of data a medium can transmit per second. The reason we don’t have wonderful cheap picturephones is that you can’t squeeze all the information needed for good picture and sound through the ‘twisted-pair’ copper wires of conventional telephone lines.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">21</a></p><figure id="5be6f758-219e-4ed2-9c5e-30adb1681f79" class="image"><a href="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_003.jpg"><img style="width:700px" src="CABINET%20Poor%20Connections%2017296469fd534534b8a8a6ae28504b29/cabinet_kiosk_1_september_2020_tollmann_vera_003.jpg"/></a></figure><p id="d51a05f1-b861-4943-bbe1-df969c8553a2" class="">A German AEG video telephony system capable of running on fiber-optic cable, ca. 1980. Photo Museumstiftung Post und Telekommunikation.</p><p id="78880762-71f3-473f-ab9e-56e3b35f3c51" class="">Some of these issues finally began to be addressed in the 1990s, a pioneering decade for internet video conferencing as a result of the development of new codecs for data compression and the dotcom boom. In 1994, the eyeball-shaped QuickCam became the first consumer-grade webcam, retailing for $99. Several studies at the time concluded that an assemblage of media such as video, chat, and slides in a “universal system” was most productive in business settings and also fostered a sense of community between employees. It was also a time when researchers suggested testing stereoscopic video conferencing, which would allow algorithmically calculated eye contact between participants.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">22</a> But the stereoscopic vision initiatives never took off, and viable video conferencing remained a fantasy through the low-fi mid-1990s. (Simulating the eye contact we experience in face-to-face conversations is still a primary focus of research and development; researchers at Intel, for example, are working on a neural network solution to this problem.)<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">23</a></p><p id="0b65a1df-b4d9-48f5-ac83-4bb7651c79fb" class="">As late as 1997, German Telekom could introduce an ISDN picturephone, the T-View, and advertise it as the technology of the future. The phone, equipped with a video screen the size of a Kodak photo, was discontinued in January 2001 because by then, equipping a computer with software, a camera, and a headset cost only one-fifth of the price of the T-View. One-on-one video meetings would soon become commonplace, though group video conferencing was to remain a product of the future.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">24</a> Until now.</p><p id="767877e6-5239-45e7-a2cc-84df3384e3ef" class="">Six weeks into the period of intense video conferencing due to the pandemic, researchers studying workplace scenarios coined the term “Zoom fatigue” to describe symptoms caused by the stress of self-presentation, the usually smaller “control-picture” or mirror, and the tiresome microsecond lag between the audio and video signals that becomes particularly evident in the absence of a moderator directing the speakers.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">25</a> (With the camera off, the lack of perspective in the two-dimensional placeholder image is itself enervating.) The viewer is confronted with a set of discrete video frames, which, paradoxically, makes it impossible to notice all individuals at a glance, the way one would in a shared physical space. There is no unifying perspective, no spatial montage, which Lev Manovich defined as a crucial feature of the language of new media, and no <em>windowing</em> (to use Alexander Galloway’s poetic formulation for Manovich’s cinematic form of montage through overlapping windows). Instead, one is resigned to looking at neatly ordered grids of separate frames. Rather than a digital solution, the researchers suggest an analogue workaround: positioning your laptop diagonally so that “it makes you feel like you’re in an adjoining room” might be less tiring. It seems that “virtual place” metaphors, originally introduced in the early days of these technologies to accustom users to the concept, have worn out. Whereas the notion of cyberspace these days only generates lukewarm enthusiasm or petty annoyance, back then, it evoked both powerful enthusiasm and trenchant critique. Advocates declared themselves ready to dwell inside computer networks, while critics pointed out the entanglement of such networks with military and capitalist technologies of surveillance, domination, and control.Some students explicitly cite their discomfort with their screened self-image as a reason for opting out of webcam livestreams. Being uncomfortable with the way one presents on screen is not a new thing. We need more “High-Definition Masking,” David Foster Wallace pleaded imaginatively when describing the future of videophones in his 1996 book <em>Infinite Jest</em>. The face-altering options of Snapchat’s augmented reality are not offered yet as a feature for video conferencing. How else to hide in plain view of the webcam, if there is no back row to sit in, no virtual makeup to apply, and no virtual background to disappear into? One option is to follow my friend, who mentioned that his webcam, smudged by traces of his pre-virus masking tape, captures only a blurred image. Wallace went further with his defensive fantasies about future video calls, envisioning “the more inexpensive and byte-economical option of (using the exact same cosmetic-and-FBI software)” to actually cast “the enhanced facial image in a form-fitting polybutylene-resin mask.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">26</a></p><p id="82c2345a-b346-49bc-95ea-46cad1ef02da" class="">One of the students in the department where I teach started a petition against the use of Zoom for university classes because he does not wish to participate in a corporately sponsored classroom watched over by surveillance capitalism.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">27</a> In a thoughtful blog post, Simon Strick expanded on this idea, arguing that teachers are in danger of losing the crucial element of “presence” when their classrooms have to meet in “environments built around projects, corporations, positivism, monitoring, and—crucially—loneliness and absence.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">28</a> He has a point. But is refusal the way to go? What would we lose in doing so? Is “embracing rather than rejecting this chaos,” in front of and behind the camera, an option for both private and public gatherings?<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">29</a> So far, the digital commons have made the experience an abstract one. Or rather, as Doreen Mende has astutely pointed out, we need to discuss the techno-politics of live-streaming; at stake is the question of who has a stable connection, the latest equipment, and, therefore, smooth output, and who does not.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">30</a> We need to be attendant to these “networked vulnerabilities,” to use Wendy Chun’s phrase.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">31</a></p><p id="6832986b-ffcd-4a63-9fe7-4f084c010ef5" class="">The other week my nephew and I met via Zoom. He was my guide for how to inhabit virtual space. Choosing a virtual background for your video space turns it immediately into an interactive environment. You can use the two-dimensional representation of a virtual game simulation as your backdrop. For example, calling my nephew, I used an image from the game scene in <em>Westworld</em>, the TV series where artificial minds, androids, and humans mix to a degree of indistinguishability in a complicated narrative that takes place in theme park settings. In the series, characters play VR games, and so my nephew and I found ourselves in a simulation within the simulation, which is what the television series is about. He directed me, guiding me through the virtual background: move left, to the back, higher up. The face and movement recognition software embeds anyone it recognizes in front of the camera into the virtual backdrop. In a virtual-background scenario, a real solid wooden door appears flat and paper-like when transmitted via a compressed codec and a low-fi camera, the “real background” appearing intermittently through occasional glitches. The two modes of representation do not mix smoothly and without loss of data. Similar to VR environments, where real-space coordinates effect the virtual-image space, here too seeing and moving are mutually dependent—just a small movement, and suddenly your arm looks cut off. What used to be real turns into code, which, in turn, morphs into a stuttering visual form. Perspectives collapse into cubistic impressions of space.</p><p id="5897b1f9-5e23-4f68-aa03-e0856a1e9395" class="">After running out of pre-uploaded backgrounds, my nephew ponders what’s next. He asks for some background noise, the sound that would come with the depicted scene: the sizzling of a steaming pot, the noise of a coffee maker, cars on a street, a conversation, the breath of a giraffe. The tiniest home turns into a green screen and anything becomes possible, like traveling the world—or perhaps, traveling among the TV products you have consumed. In times of self-quarantine, these mediated spaces become alternate hangouts. We can think of them in terms of the “no-place” of the screen, to use the phrase Kris Paulsen has suggested to describe the spatial experience of telepresence.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">32</a> Or, are they the epitome of the “non-places” that Marc Augé had in mind when writing about shopping malls, airports, and hotel lobbies as places without windows to the outside? Or, perhaps they are embodiments of “AirSpace,” a term Kyle Chayka has coined as a description of the generic style of environments such as coworking spaces or apartments featured on home-sharing platforms.</p><p id="3803e531-3fd4-4d94-9376-e41955796a2a" class="">At the end of a recent forty-five-minute student exam via Zoom, a colleague ironically told me, “This worked well. And finally, I could see where you live.” For a moment I felt embarrassed; I had not shared a revelatory view of my home, not even the notorious bookshelf.<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">33</a> I had not spent time on the <em>mise en scène</em> of the webcam perspective; instead, I had offered a boring blank white wall as my background.</p><p id="34660874-78e6-4cac-abf1-9fb6c4594228" class="">The Power of Protocols The internet’s protocol-logical condition will not go away. As Alexander Galloway writes, “Computer protocols govern how specific technologies are agreed to, adopted, implemented, and ultimately used by people around the world.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">34</a> This is part of the dilemma, that “following the robustness principle, network technology will tend to standardize rather than diversify.”<a href="http://www.cabinetmagazine.org/kiosk/tollmann_vera_1_september_2020.php">35</a> The problem with an open-source solution is that there is little server capacity for webcams, which is why I found myself talking to a void, a list of usernames with their mics muted and sporadically typing away in the public chat. I cannot imagine continuing like this until the end of the pandemic, so I am currently discussing other options with the university. (How much fun I had with my nephew on Zoom, immersing ourselves in a wealth of virtual backgrounds!) I had not expected a platform as low-fi as BigBlueButton; maybe I was just not prepared.</p><p id="99ec7f40-2521-4a30-9201-c058646d64ca" class="">A speaker at the Chaos Computer Club was recently quoted in a tech blog saying that the problem with apps like these is that they are often released very quickly; there are still gaps in the software, which means the users are also its beta testers. Then there is the question of tracking, data extractivism, and security bugs. Are we then doomed to soliloquize into BigBlueButton’s big black void? Perhaps we can be encouraged by the fact that Zoom has responded to criticism and changed its code? I think it’s more of an ongoing process and there are no clear choices between good (open source) or bad (surveillance capitalists), if you also take into consideration the question of the user experience. And that’s what it’s all about: striking a balance between what works and is tolerable, and what is alienating. This needs to be considered when expanding the digital commons. Instead of refusal, which results in less interactivity, demanding trustworthy data handling and a comforting interface might set in motion transformative change. Until then, the low-definition video conferencing experience will continue to feel like time travel back to the 1990s, when the digital present was defined by text chats and pixelated images. If we want a virtual sociality that everyone can participate in, for now this seems to be the best that is on offer.</p><p id="25fe7bc8-14d6-4da8-bf74-16451b7e923d" class=""><a href="http://www.cabinetmagazine.org/contributors/tollmann_vera.php">Vera Tollmann</a> is a Berlin-based writer and a teacher in digital media theory at the University of Hildesheim. Recent writing includes “Wow, that’s so postcard!” in <em>Planet Earth</em> (Humboldt Books, 2019) and “Proxies” (co-written with Wendy Hui Kyong Chun and Boaz Levin) in <em>Uncertain Archives</em>, forthcoming from the MIT Press. She is co-curator of the exhibition “Sensing Scale,” which will be on view at Kunsthalle Münster in 2021.</p></div></article></body></html>

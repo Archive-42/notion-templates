@@ -1,0 +1,637 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Euler’s Identity. The Most Beautiful Mathematical Formula</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d5cbbc52-42af-4592-8bef-40899082cb69" class="page sans"><header><h1 class="page-title">Euler’s Identity. The Most Beautiful Mathematical Formula</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/swlh/eulers-identity-990b52f0d8fc" class="url-value">https://medium.com/swlh/eulers-identity-990b52f0d8fc</a></td></tr></tbody></table></header><div class="page-body"><h2 id="a58bb41e-0d72-4938-8bc4-24f80c1751a6" class="">The Most Beautiful Mathematical Formula</h2><figure id="6f870023-d1a7-4c5e-a3f9-e8a301d2fdd8" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1cy7BsTfD1IwUUfOTzLtyBA.png"><img style="width:473px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1cy7BsTfD1IwUUfOTzLtyBA.png"/></a></figure><p id="496e2798-84ff-4703-a452-c4b9d2b68293" class="">Euler’s Identify formula.</p><p id="0a5b5c6c-b4b3-4ce9-9b24-b24ac5f82316" class=""><em>Euler’s equation has it all to be the most beautiful mathematical formula to date. Its simple, elegant, it gathers some of the most important mathematical constants, and it has curious mathematical and physical interpretations.</em></p><p id="574b9431-6b80-4d36-abd5-b8685bcf523b" class=""><em>Lets examine it closely.</em></p><h1 id="ce4bff6e-b91f-446a-a8e6-a329c44635c3" class="">The Formula</h1><p id="46e5957d-ac3f-4180-a00f-ff7875a0b9f4" class="">Euler’s Identify formula is the one displayed at the heading of this article. Lets take a look at it here again:</p><p id="d3b0a262-8821-4b63-bc9d-78f4285bca0f" class="">Euler’s Identity. <a href="https://www.codecogs.com/latex/eqneditor.php">Source</a>.</p><p id="4277a6de-b9cb-4493-9171-9e18262925f5" class="">This three-term formula has amazed mathematicians all over the world since it was coined because the amazing connection it establishes between the different elements involved in it and its different interpretations.</p><p id="7ffa6aad-1407-491f-b7b2-c05e877cda5b" class=""><em>In this post, we will try to remove the magic veil from Euler’s identity, and expose its wonders.</em></p><p id="a3b0b28a-4740-4c0e-bf4f-593c2f7bc418" class="">Before that, let&#x27;s see where this formula comes from.</p><h2 id="3b6acfd8-e856-4425-9606-bb4400c230ab" class="">The History of Euler’s Identity</h2><p id="d83fbee4-ec6e-4fa7-b3c7-d32d556e3176" class="">In the year 1714 British physicist and mathematician <em><strong>Roger Cotes</strong></em> established in one formula the relationship between logarithms, trigonometrical functions and imaginary numbers.</p><p id="cb123b58-21d0-4678-a15e-8a089775a2e2" class="">Twenty years later, <em><strong>Leonhard Euler</strong></em> reached the same formula but using exponential functions instead of logarithms. Both formulas, and how to go from one to another are illustrated in the following figure.</p><figure id="cd5a20a7-2be0-4531-b358-0e2beb63350b" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1gjBUD175Pg__lXWFi6Olqw.png"><img style="width:700px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1gjBUD175Pg__lXWFi6Olqw.png"/></a></figure><p id="08ec2821-ab76-47b8-a917-5d915d7ae877" class="">Roger’s Cotes equation from 1714 (Top), Euler’s formula from 1748 (Bottom)</p><p id="ec2035d0-f560-46c8-9151-849a63b491ea" class="">It is interesting to note that none of the authors saw the geometrical connotation of their formulas, which we will discuss later.</p><p id="38a56de3-e85e-4cd1-9b03-0c199c4a292f" class="">Now, if we particularize Euler’s formula to the value of <em><strong>x = π, </strong></em>we get the famous Euler’s Identity.</p><figure id="b41f831f-b2f9-4ac2-aafa-f335286b6483" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1h5vPuCripbAUKyNO1VJ7NA.png"><img style="width:700px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1h5vPuCripbAUKyNO1VJ7NA.png"/></a></figure><p id="e9943975-af52-41d0-a157-21cf9ff7cd56" class="">By substituting x for π in Euler’s formula we get Euler’s identity</p><p id="a21f601f-f1a0-47ed-95ef-edf03d49d253" class="">Let&#x27;s examine individually the different elements involved in this formula.</p><h1 id="d8b6e7c8-7718-45be-825e-f2e44ae1d7b1" class="">The Actors</h1><p id="80480a51-832e-41b6-a21f-7d79088c4aa2" class="">The first and most important actor is the man whose portrait is shown in Figure just below these lines: Leonhard Euler. His contributions to the world of math and physics range from and graph and number theory to fluid mechanics.</p><figure id="4c6d7c8c-8d1e-4946-a317-0af7a6f54f49" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/0nwbLj5yTrn3suSat.jpg"><img style="width:220px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/0nwbLj5yTrn3suSat.jpg"/></a></figure><p id="8bb1c199-f4d1-46e3-a7e6-bf83cbda9e08" class="">Euler — Source: <a href="https://es.wikipedia.org/wiki/Leonhard_Euler">Wikipedia</a>.</p><p id="0efddd63-2327-48b9-be2b-bc0c3322d23c" class="">Now, let&#x27;s get to the formula and its different terms.</p><ul id="5b938370-8a06-46e8-a338-824a4decd459" class="bulleted-list"><li>First, we have <em><strong>the exponential function: e. </strong></em>This function is very special for various reasons: first of all, it is its own derivative.</li></ul><p id="c8dbac1f-e174-4851-ab25-4968778cad34" class="">The derivative of e^x with respect to x</p><p id="93bb1507-63b1-4ac0-b338-b1ec001cde40" class="">If you see f(x) = e^x as position, and its derivative as position, this means that the speed is always equal to the position. If we are in the position e², then the speed is also e². If we move further away, to e³, then the speed at that point has also changed to e³. Cool right?</p><p id="065c1112-8ad6-4f9d-8b0d-8d5d88dc5106" class="">Also, if we change the function a little bit, like so, with <em><strong>b</strong></em> being a real number:</p><p id="2a6da502-ee89-4df6-a058-e8c4e4137099" class="">The derivative of e^bx with respect to x</p><p id="2328b0b8-f7f7-4f46-9b87-f69f73d3cec6" class="">Then we get that the velocity is proportional to the speed. Following the same example as before, if <em>b = 2</em> we would get that at the point where <em>x = 2</em>, we would get e⁴ as position and 2 e⁴ as velocity. The velocity would be twice the speed.</p><p id="9ef8e9da-e3ca-453f-b12b-9cae0eded816" class="">What happens then, if instead of a real number, we plug in an imaginary number, like so:</p><p id="c6037d21-8d8e-4ac0-bef1-1602cfb42eff" class="">Derivative of e^ix with respect to x</p><p id="71240237-2783-4dfa-9f8e-641f657031f1" class="">Following the narrative of the previous examples, let&#x27;s see what this means for the relationship between position and velocity. For this, we have to go further than our real number perception and expand onto the complex plane. Here is what this looks like:</p><figure id="7c5989af-b398-44c1-bcd8-5fc7aacec573" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/0RA5oBkP0XKqPV3jc.png"><img style="width:448px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/0RA5oBkP0XKqPV3jc.png"/></a></figure><p id="ea2462fa-d217-43e7-98e2-5b8485714d19" class="">The complex plane. <a href="https://briandbuckley.com/2012/04/17/understanding-fractals-part-2/">Source.</a></p><p id="c08f61fe-9774-45c2-a339-b7b3c6e3a5f5" class="">Multiplying a real number by<em> i</em>, in the complex plane, means rotating by 90 degrees from the real axis to the imaginary axis. More on this later.</p><p id="6514ac04-69eb-4703-80c2-2b781e489041" class="">To finish off with <em>e</em>, it is also present in a wide range of physical phenomena, and a key element of radioactivity, electronics, and population growth.</p><ul id="364f4716-949a-4376-9ca2-70826924bf37" class="bulleted-list"><li><em><strong>Imaginary numbers: i.</strong></em> Initially, numbers were invented to keep track of the count of entire objects. This is how <em>natural numbers</em> were born. Then, a mechanism was needed to keep track of when somebody owed someone else an entire object. <em>Integer numbers</em> were born, which were an extension of the previous natural numbers to the negative side.</li></ul><p id="ed2efbcb-04e4-40f4-9935-dbca11fead68" class="">After this, the need to keep track of fractions, or parts of entire objects arose, giving birth to the <em>rational numbers</em>. Finally, numbers that describe fractions whose decimals go on forever (like π) were found in mathematics, and thus <em>irrational numbers</em> were born. All of the previous kind of numbers fall under the category of<em><strong> real numbers</strong></em>.</p><h2 id="ac9f5fef-e590-4f08-a505-e0cfc2592e33" class=""><em><strong>Imaginary numbers are something of another nature.</strong></em></h2><p id="ca225284-494c-46ae-be2d-fa49649f6705" class="">At their birth, imaginary numbers were conceived as a mathematical tool for being able to operate with squared roots of negative numbers, and the term ‘<em>imaginary</em>’ was kind of derogatory. <em><strong>i</strong></em>, the letter denoting imaginary numbers, is equivalent to the square root of -1.</p><p id="c780ea24-7b08-436b-ab16-0a6e9794497f" class="">Value of the imaginary number i</p><p id="47395767-7e39-486a-a025-2b2468542bca" class="">It wasn’t until our beloved Euler showed up, that the square root of -1 was given this letter as a representation, and started being considered useful. After this, it naturally appeared in all kinds of problems from physics like the laws of electricity and magnetism, or wave dynamics.</p><ul id="4c324296-f3e3-4899-bb0d-e5d1951df3a2" class="bulleted-list"><li><em><strong>The ratio of the diameter to the circumference of a circle: Pi or π . </strong></em>No introduction is needed for this magic irrational number. It shows up everywhere in maths, and its appearance here, along with the previously introduced actors, and the ones left to describe, is just magnificent.</li></ul><ul id="7900bedd-05c9-45d6-a991-6c20a29c0744" class="bulleted-list"><li><strong>Lastly, we have 0 and 1</strong>. The numbers where all the others are derived from. Using these two, you can obtain ANY existing number. Absence and presence. A couple to end this perfect group of ingredients.</li></ul><p id="af2c0d5d-37e9-474e-bb3c-ade053766042" class="">Now, let&#x27;s see how they all fit so beautifully together after a quick demonstration of Euler’s formula.</p><h1 id="9bbef9ea-3a06-4b8f-8087-35cd0b85edc3" class="">The Demonstration</h1><p id="8d98c79e-8db8-481b-9fd7-93bfc0ecdb6a" class="">Before we see the wonderful interpretations of Euler’s formula, let&#x27;s demonstrate that it’s true, and give some insight into how we can obtain it mathematically.</p><p id="904bbb5f-3c6c-4f7c-a5e4-16f5d5dcd664" class="">The tool to do this is the famous <em><strong>Series of Taylor</strong></em>. For those of you who have never heard of them, don’t fear, they are just polynomial approximations of complex functions like the exponential, trigonometrical, logarithmic functions, etc…</p><figure id="180151a9-3bdf-441c-b756-f5100dd508c0" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1UPFFGN6IdZB29yDWN8AYww.png"><img style="width:566px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1UPFFGN6IdZB29yDWN8AYww.png"/></a></figure><p id="04932edc-6c2c-4169-80a0-a0c41c2c7c53" class="">Table of the Series of Taylor for different functions</p><p id="ce21fa78-620e-4c21-b1c6-fef798e0c622" class="">You don’t need to know these off by heart, they are just <em>polynomial functions </em>(on the right of the table) that have a similar value to the complex functions that they approximate (on the left of the table).</p><p id="f59bd454-28bb-40f0-a24f-7b876f20b80c" class="">Now, there is only three that bother us here, the exponential, the cosine and the sine.</p><figure id="db607289-323d-4c22-8848-c914f5c736c5" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1NxGto0XkAmlhfJYFiueC6g.png"><img style="width:469px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1NxGto0XkAmlhfJYFiueC6g.png"/></a></figure><p id="cc27a088-5deb-4a2c-a642-bc660c76068a" class="">Series of Taylor of the exponential and two trigonometrical functions</p><p id="c6b0b25e-9ba2-4246-8d33-07127e502b5b" class="">Take a close look at these. They look similar, right? Like the exponential is some sort of combination of the cosine and the sine with different signs. How do they all come together to form Euler’s formula? First, let&#x27;s see how the series for the exponential function turns out if we invite our friend <em><strong>i</strong></em> to the party.</p><figure id="1e855418-db4f-4630-8bcd-883ff37c5ec2" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1LPsxUHF8n3ZWd17CE4yJ9w.png"><img style="width:700px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1LPsxUHF8n3ZWd17CE4yJ9w.png"/></a></figure><p id="e92f48c3-ecef-4291-8580-05ab929c01ca" class="">Series of Taylor for the exponential function with ix in the exponent</p><p id="1b993a8a-537c-4d58-a2e2-805ad543b211" class="">Notice how depending on the term and its polynomial value, we get <em>i, -i, 1</em> or <em>-1</em>, according to the following sequence:</p><figure id="ab9acc00-4c31-4be3-95ff-b652bb810a9c" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1UGbJ3cD6Iycw5gx4wLvpdQ.png"><img style="width:700px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1UGbJ3cD6Iycw5gx4wLvpdQ.png"/></a></figure><p id="b104231c-81dc-4fb2-a80f-7ef1464d96ef" class="">Values of i for different polynomial exponents</p><p id="7e7ed3e8-4216-4af8-9589-dcd2ad57a4aa" class="">Now, lets examine closely the series of <em><strong>e^ix</strong></em>.</p><figure id="a4e151b2-ab85-460e-bf43-089800803153" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1thm72t4aKPBlENtN0eIR4g.png"><img style="width:700px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1thm72t4aKPBlENtN0eIR4g.png"/></a></figure><p id="9332f341-6cd9-45fa-a96b-d8bc4f432c1a" class="">Series of Taylor of the e^ix as a combination of cos(x) and i*sin(x)</p><p id="c0605ca2-59fb-4b4b-8d45-67016c3f897e" class="">If we look at the alternate terms, we can see that the ones in orange form the series of Taylor for<em><strong> cos(x) </strong></em>and the ones in blue are the series of Taylor for <em><strong>sin(x) multiplied by i</strong></em>. Therefore:</p><p id="614a734b-5613-4977-8472-9ebce1a74d64" class="">Euler’s Formula.</p><p id="fd400c8a-ad4b-4945-9e85-9593398fdbc8" class="">Euler’s formula demonstrated! Alright, sorry for the heavy math, now, let&#x27;s see its interpretation.</p><h1 id="9b48f2c0-d775-49b1-be72-8868c4bf5cd6" class="">The and Geometrical interpretation of Euler’s Formula</h1><p id="7ab207ef-b32c-4343-a614-71743873de57" class="">To understand the interpretations of this formula, we have to recover the complex plane.</p><figure id="603f88e3-37ef-4d21-8982-a9a6fcf21532" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1jm-b28WD3R6ClwLl0LxisQ.png"><img style="width:421px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1jm-b28WD3R6ClwLl0LxisQ.png"/></a></figure><p id="ab9d47be-5ce3-47f6-a318-24fffe0964a2" class="">Figure of the complex plane</p><p id="66f2ee99-0978-4179-8b1f-4b6b8cda4af1" class="">By looking at this figure, we can see that every angle <strong>α </strong>gives us a point of a circumference of radius 1:<strong> </strong><em><strong>(cos(α), sin(α)). </strong></em>We can also see that<em> cos(α) </em>represents the real part of this point, while <em>sin(α)</em> represents the imaginary part<em>. These kinds</em> of coordinates, defined by a point on a plane with two values from orthogonal directions are called <em><strong>Cartesian coordinates</strong></em><em>.</em></p><p id="a691af26-221e-4e8f-a69a-b075f95a0f6d" class="">How does this relate to Euler’s equation? Let&#x27;s view it using <strong>α.</strong></p><p id="ce63ab3f-d9a7-4311-ba91-0f80d27f6de7" class="">Euler’s equation defined for α</p><p id="9226e594-ed91-4e7c-84da-1d1573e68d04" class="">What this is telling us, is that if we take any number of radians, and plug it into α, what we get is rotation around this circumference of radius
+ 1 of α radians, which in turn would mean we are in the point <em><strong>(cos(α), sin(α))</strong></em> in Cartesian coordinates.</p><p id="5fe936ae-d89c-4da0-adad-a5cb29ddaaf4" class="">Euler’s formula allows us to express complex numbers in a more compact way using the exponential. That’s all? Really? Of course not.</p><p id="9195cbcd-5523-43dd-945b-b5e80016346a" class="">The magical thing about the exponential (<em>e</em>) being here, is that if we think of elevating a number to an imaginary exponent as turning <em>α</em> radians around this circumference of radius 1, if we take ANY other number except <em>e </em>and we do this, we will have travelled a certain distance around the circumference like shown in the following figure:</p><figure id="f5327113-1a5b-4ee3-9dbf-600cb5a32c08" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1MWPNEcTCaXcbZ0t52DFLqQ.png"><img style="width:410px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1MWPNEcTCaXcbZ0t52DFLqQ.png"/></a></figure><p id="afd94266-a471-40b0-aa46-bef4bce39151" class="">Complex plane with different rotations</p><p id="e078ca4c-0a11-4576-944a-314ed8891365" class="">Let me explain. When we take the number 2 and elevate it to <em>iα, if α = 1 radian, </em>we would be on the orange point, thus having travelled a distance along the circumference from the grey ‘<em>start</em>’ point to the orange point, along the yellow line of 0,693.</p><p id="3d0a117f-46ed-4273-b652-8ee57a7ffe04" class="">If we do this for the number 5, we would have travelled a distance from the grey point to the green point of 1,609. However, if we use the magical number <em>e </em>the distance we would have travelled is 1, exactly the same as the value we have given α<em>. Woah.</em></p><p id="0f30f03c-8868-4dd9-8178-180ae1d6795a" class="">But hold on, it does not end here. If we start at the point (1,0) of the real axis, and we give <em>α the value </em><em><strong>π, </strong></em>we would have turned π radians (half of the circumference), we would have completed a distance along this circumference of π, and Euler’s equation would have its identity form:</p><figure id="512270ad-aea1-4290-a93a-1c33fb146a23" class="image"><a href="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1lH32VMWTK9eC4JMdYi-Jpw.png"><img style="width:608px" src="Euler%E2%80%99s%20Identity%20The%20Most%20Beautiful%20Mathematical%20F%20d5cbbc5242af45928bef40899082cb69/1lH32VMWTK9eC4JMdYi-Jpw.png"/></a></figure><p id="7332f154-ce7f-4609-a271-0b0ec912847c" class="">Another aspect of Euler’s Identity</p><p id="155ad9a0-9362-4061-bd1c-0be9ccb4acaf" class="">Now, if we take the 1 to the other side, we can see another shape for the identity. I’ll let you discover why this is so awesome with the following question: <em>What point on the plane would we be located at after this rotation?</em></p><h1 id="41710f3d-75e8-4304-b4f3-bbae106081db" class="">Conclusion</h1><p id="4ca6cb2f-ce8e-4b77-87b4-6d9f0f7d59ae" class=""><em>Euler’s Identity is one of the most beautiful formulas of our days. Gauss, the famous mathematician is reported to have commented that if this formula were not immediately obvious to someone reading it, he would never be a first-class mathematician.</em></p><p id="3b45eca4-7cf2-4671-8d22-0a09cb79f0ef" class=""><em>On the opposite side, in 1800, another mathematician, Benjamin Price, said about Euler’s Identity:</em></p><blockquote id="d0ac9f3f-3e3d-43d1-b2cf-5d2bc5682510" class="">It is absolutely paradoxical; we cannot understand it, and we don’t know what it means, but we have proved it, and therefore we know it must be the truth.</blockquote><p id="d56f983d-855e-46c4-82a8-3710d6d52231" class="">It is a wonderful formula for how it combines together all the different elements, and for its meaning. However, not everything that there is to Euler’s formula has been explained in this article.</p><p id="93191844-1219-490d-89e8-ad269ea310db" class="">For example, how does it fit with the concept of exponentiation that we have of repeatedly multiplying a number? Isn’t 2⁵ meant to be 2 multiplied 5 times by itself? What is all this nonsense of rotating?</p><p id="6f63228e-d01c-4344-9984-0883ede88a17" class="">2 to the n</p><p id="f7d7a965-ef80-41f8-8080-41e4e714788e" class="">In the next post, we will see a more intuitive form of thinking about this, along with further insights into Euler’s formula.</p><p id="bfb72bb9-1878-421b-862f-639f6c5778fa" class=""><strong>Update: </strong><em>You can find the following article, on Euler’s Formula here:</em></p></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>The Observer Effect – Daniel Ek</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5422c612-a020-4a90-9033-1183968cdcc2" class="page sans"><header><h1 class="page-title">The Observer Effect – Daniel Ek</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.theobservereffect.org/daniel.html" class="url-value">https://www.theobservereffect.org/daniel.html</a></td></tr></tbody></table></header><div class="page-body"><figure id="d56c5988-4dd0-4a25-a006-54dab105d6d8" class="image"><a href="The%20Observer%20Effect%20%E2%80%93%20Daniel%20Ek%205422c612a0204a9090331183968cdcc2/daniel.jpg"><img style="width:700px" src="The%20Observer%20Effect%20%E2%80%93%20Daniel%20Ek%205422c612a0204a9090331183968cdcc2/daniel.jpg"/></a></figure><p id="2581ac14-cf1d-4f5b-b8f3-680a6e42d383" class="">Subscribe to get an email for every new interview we publish.</p><p id="3e8278af-06ed-4344-af5e-91a88848039d" class=""><em>Welcome to the second interview on &#x27;The Observer Effect&#x27;. We are lucky to have one of the most influential founders/CEOs in technology and media - Daniel Ek, Founder and CEO of Spotify.</em></p><p id="0a7272c2-2144-49d3-a38a-fd9ba3749392" class=""><em>Daniel does things very differently from other business leaders and was generous to go deep with us on his leadership style, time management, decision making, Spotify&#x27;s impact on the world and much, much more. Enjoy!</em></p><p id="2d22f690-acbb-42d7-a11c-232f97c622df" class=""><a href="https://sriramk.com/"><strong>Sriram Krishan</strong></a><em><strong>Let’s start with the basics. Walk me through a typical day in the life of Daniel Ek.</strong></em></p><h2 id="65962022-1ce3-4d2f-a2c7-fb6e8f2cb10d" class="">On a Typical Day</h2><p id="b793ac3d-93bc-4489-a0ec-c12ff45ac8da" class=""><strong>Daniel Ek</strong> So, this will sound incredibly lazy compared to some leaders. I wake up at around 6:30 in the morning and spend some time with my kids and wife. At 7:30, I go work out. At 8:30, I go for a walk – even in the winter. I’ve found this is often where I do my best thinking. At 9:30, I read for thirty minutes to an hour. Sometimes I read the news, but you’ll also find an ever-rotating stack of books in my office, next to my bed, on tables around the house. Books on history, leadership, biographies. It’s a pretty eclectic mix – much like my taste in music. Finally, my “work” day really starts at 10:30.</p><p id="07326418-292e-4367-8a5c-48108fbc08fb" class="">Many people make big decisions early on in the day, I make them later in the day--at least later in the day here in Europe. Ironically, it&#x27;s not actually because I&#x27;m more productive then, rather because we have so many of our staff in the US, and as a result, I&#x27;ve kind of primed myself to work that way.</p><p id="133f0173-5e02-4ecc-8152-4263694effa5" class="">So the earlier part of my day is focused on coaching, one-on-ones, and planning. Then, I typically tackle one topic a day which takes a lot of my time. That&#x27;s my big thing for the day. Before we go into a live team discussion on that particular topic, I invest time to prepare beforehand – reading and talking to members of the team who are either part of the decision-making process or who have insights and context. I sometimes even get external perspectives.</p><p id="e38b18e5-b2d3-402f-bd77-f3e595c566b5" class="">I also think about what my role is at that meeting. Sometimes I&#x27;m the approver. Other times, I&#x27;m supposed to come with a thoughtful perspective on whether an initiative makes sense or not.</p><p id="738267a0-b886-4221-90b3-07ffe7ae8535" class="">I’ve found that creating this clarity of role for myself is critical. It’s something I challenge my direct reports to think about as they engage with their own teams. I remind them that all meetings are not the same. Even when we are meeting to discuss really, really complicated topics I always ask myself: “What am I going to do in this meeting? What does my involvement really need to be?”</p><p id="28c9fcb9-828f-4776-a5a1-ffae895e25b3" class="">The truth is: it&#x27;s entirely contextual. I find it crucial to be upfront about everyone’s role in different meetings, I think this is super, super important. Often that&#x27;s my number one thing: to make sure I know what role I&#x27;m playing.</p><figure id="89c25735-51b5-430d-9c21-4c9962cfad70" class="image"><a href="The%20Observer%20Effect%20%E2%80%93%20Daniel%20Ek%205422c612a0204a9090331183968cdcc2/daniel-office.png"><img style="width:512px" src="The%20Observer%20Effect%20%E2%80%93%20Daniel%20Ek%205422c612a0204a9090331183968cdcc2/daniel-office.png"/></a></figure><p id="1d6f186a-bd6b-4863-87e3-25bc83314c34" class=""><em>Illustration courtesy Spotify</em> </p><h2 id="eb500853-6984-49e7-acd7-7499f5dee952" class=""><strong>On Good Meetings</strong></h2><p id="d9168d5b-1659-4a66-ae98-e689d490823f" class=""><strong>Wow, okay, there are multiple things in there ranging from how you choose to spend your time to how you handle meetings. To work backwards, what makes a good meeting in your mind?</strong></p><p id="8c9c9f4c-981b-459e-959f-935f9e5c69d8" class="">A great meeting has three key elements: the desired outcome of the meeting is clear ahead of time; the various options are clear, ideally ahead of time; and the roles of the participants are clear at the time.</p><p id="12f5fcd7-78c5-421f-a78a-e5b459dbc1ee" class="">I often find that meetings lack one of those elements. Sometimes they lack all those, which is when you have to say, “This is a horrible meeting, let&#x27;s end it and regroup so it can be more effective for everyone.”</p><p id="cdc7569d-cde8-4579-a8d8-cf0a06d0776f" class="">To clarify outcomes, options, and roles ahead of time, we sometimes rely upon a preread. Prereads are a great way to share context so that attendees can quickly get into the meat of the issue and not waste time getting everyone up to speed. What I find is when you use a tool like a Google Doc, you can take in a great deal of information by reading comments, assessing options, and understanding how opinions have evolved over time. With this uniform background and context, attendees can focus on discussing the matter at hand versus getting on the same page. When the latter happens, the meeting becomes an incredible waste of time.</p><p id="8c485ccf-54bd-421b-a9ee-da910c2f93a8" class="">I think that&#x27;s the single largest source of optimization for a company: the makeup of their meetings. To be clear, it&#x27;s not about fewer meetings because meetings serve a purpose. Rather, it’s key to improve the meetings, themselves. A lot of my efforts focus on teaching people this framework. Ironically, I find that most people are just challenged by that stuff.</p><h2 id="d94facd7-5450-46e2-ac8e-b8f87f24d845" class=""><strong>On Being Intentional with Time</strong></h2><p id="57f971a3-d01e-4e59-8169-89fd8f15be2f" class="">Candidly, that’s my role as leader: to coach others on how best to make use of their limited time. Not only is time the most precious resource the company has, it’s also the most precious resource they have! It’s crucial that they approach the use of their time with a holistic perspective. By way of example, I had a recent call with one of my directors who had not taken a vacation in six months. Our conversation delved into why this person thought that they could not be away for two weeks, and me arguing for why the person had to take two weeks to recharge!</p><p id="b63203f6-9a13-469d-bf92-c3c6b8de8803" class="">There is never enough time – for work, for family and friends – and it takes work to make the best use of it. It&#x27;s all about fostering a holistic perspective in life.</p><h2 id="20affbbf-f9cb-48b9-a1e7-a8092897976e" class=""><strong>On Common Mistakes with Personal Time Management</strong></h2><p id="eabf94d2-7038-4959-b473-6fbdf68ec27b" class=""><strong>That’s fascinating. Let’s turn to your team. Your direct reports are highly accomplished people; what are the common mistakes you see executives at that level make when it comes to personal time management?  </strong></p><p id="b7c1d812-4409-4e3e-8c88-7bb7f6cc0402" class=""><strong>I don’t think most executives dedicate enough time to thinking. They spend too much time in meetings. By the way, I will say as a caveat, I do know people who are incredibly organized and succeed with a lot of “do time.” Shishir Mehrotra [Co-founder and CEO of Coda] is a great example. If you&#x27;ve seen the docs on how he organizes his time... Oh yeah, he has a lot of very well-organized docs! [laughs]</strong></p><p id="feb97f56-6aed-4c78-8929-dab8b9957371" class=""><strong>He is a source of inspiration. For a while, I tried to mimic his style because I was so impressed with his thinking behind it. But in the end, it just wasn’t for me. It actually drove me nuts. [Sriram laughs] But I respect him. I would say he&#x27;s a highly effective executive. His system works for him. It&#x27;s not one size fits all. Some of my direct reports thrive on lots of meetings. But, in general, I would say the largest mistake is that they conflate meetings with productivity. Often fewer meetings and better decisions drive the business forward.</strong></p><p id="0902761e-b7ae-4aff-94f1-419a31601b99" class=""><strong>On Creating an Open Calendar This dovetails nicely with something that fascinates many of your colleagues: how do you have so much open time on your calendar? This drastically differs from your typical “successful CEO” who is booked from 8:30am to 6pm. Walk us through your calendar and how you manage to create this open space.  My friends know me well! I do keep a lot of open time. I understand this comes from a place of privilege and I’m very lucky to have this flexibility. I feel like synchronous time is very costly; asynchronous time is better. I know there are some leaders who prefer to have all executive decisions travel through them. But then, you have to wait until the leader has availability to review things. Sometimes you run into delays in that process. I typically don&#x27;t have more than really three or four meetings per day. There are exceptions; when I travel, I book in a lot more and I don&#x27;t keep to my normal schedule. That said, most of the time it&#x27;s three or four meetings a day. My way is to plan long term and do so ahead of time so that people better understand the direction in which they&#x27;re going. You have to be incredibly crisp and clear when doing that. For instance, right now we&#x27;re finalizing our five year plans and long range planning. These are actual, real targets fueled by real insights. They are made up of lots of super-detailed quarterly and annual goals. I don’t spend much time on the quarterly goals and instead focus on our so-called “big rocks.” On Company Bets At Spotify, we have something called “Company Bets.” These are large-scale initiatives that we believe will have a significant impact on the business within a relatively short period of time. I find that these bets are a much better use of my time. Our Company Bets typically update every six months, so I&#x27;m not needed that much in between. This way, I can constantly be thinking: “Where are we headed in the next six months?” Right now, I am thinking more about H2 2021. From a timeline perspective, that&#x27;s the earliest place where I focus most of my time. It’s also my role to think far beyond that. For instance, I’m immersing myself in our 2025 plans. I trust my team to manage the day-to-day, shorter-term initiatives and iterate as needed based on data and insights. They’re the best at that and I appreciate that this then frees me up to think about the long term. On Delegated Decision Making  Your system reminds me of Jack [Dorsey] at Twitter a little. To make this work, you must have created scaffolding that enables delegation and trust in your leadership. How do you think about building infrastructure, so that you can actually say, “Hey, I&#x27;m just gonna think about the long term and I trust you folks to worry about the tactical pieces.”?  I think you&#x27;re entirely right. The part that I didn&#x27;t mention...though I spend most of my time on the long term, I devote most of my dedicated free time to be available on an ad hoc basis. This is the controversial piece. So, take Dustee [Jenkins, our global head of communications and PR, also on the call] as an example. [Daniel addresses Dustee] I talk to you, Dustee, like ten times a week, maybe sometimes? [Dustee replies, “Yes”] Though you and I don&#x27;t have any formal one-on-ones, I talk to you ten times a week and some weeks I talk to you even more. Sometimes less, but very rarely. I play this role for probably twenty to thirty people in the company. Maybe we don’t meet as often as ten times a week, but it’s still pretty frequent. I do this because I want my leadership team to feel empowered, and not need to run things past me to review and approve. I trust them and the analytical way they look at things. When they do run things past me, it’s because they truly want my advice. I want them to know I&#x27;m here for them, and, if they’re running into an issue, I am here to help. Sometimes I will take a strong stand and say, “No, we&#x27;re not going that direction.” But I intentionally free up my time so that I can be more available to the people that are actually doing the work to be helpful to them. I think that&#x27;s an important part of a leader’s role. I’m incredibly fortunate. I have a stable team made up of people who have been around me for a very, very long time. We trust one another and help each other out. Nine times out of ten, they don&#x27;t really need me, they need each other. And they typically bounce things off one another. In short, very few things--despite what I just mentioned, which is typically five or six things a day where people want my time--make their way up to me. One interesting story which came up when I was conversing with your reports is how much you care about working in flow. I’ve heard you tell people, “Hey, if you have an idea, or if you&#x27;re thinking about something, call me in the moment. Let&#x27;s work through that while you&#x27;re in the zone.” The typical way other companies handle this is someone talks to an exec assistant and sets up a review a week or two out. This differs drastically from: “Call me right now when you&#x27;re in the moment.” Walk me through your thinking there.  The basic gist is we all have our moments when we&#x27;re the most inspired, right? Whether that’s when we&#x27;re driving our car, whether it&#x27;s showering, or whether we&#x27;re listening to something and we get an idea. For me, as I said, that often happens on my walks. I find those moments to be the most valuable ones. I will say, nine times out of ten nothing comes of them, because the idea turns out not to be that great. But that one time where it is great, it truly changes business. In the early days of the startup, when everyone sat next to each other and had all the context, when everyone could talk to everyone about any idea, the ideas were flowing. How do you get that vibe and retain it when you&#x27;re a large company? I think you need to create a space where ideas can flourish and risks can be taken – where serendipity can take place. You have to remove all the barriers to this. I call people when I&#x27;m inspired by something and throw out lots of different ideas. Again, nine times out of ten what I say is completely worth shit. But every now and then, I come up with something that&#x27;s super relevant for someone; something that changes how they look at an issue. This can lead to super interesting breakthroughs. Most of our large strategic breakthroughs have been exactly that: either because I came up with something or someone came up with something and bounced that idea off me in that moment. On Learning  Let’s zoom out a little bit to the company level. One thing which comes up constantly when talking to Bing Gordon, Shishir [Mehrotra], and others who know you well, is your focus on learning and absorbing new information. For example, Spotify is a company that bears no resemblance to the startup you founded years ago. How do you approach learning as a personal habit? If you could delve into a specific area where you learn, I would love to hear about that too. I&#x27;ve always been a really, really insatiable, curious person. It really starts with that. It started when I was a five year-old kid getting my first computer when my family couldn&#x27;t really afford that kind of purchase. It broke down and I didn&#x27;t know what to do with it. So, I decided to try to fix it myself. For a while, I couldn&#x27;t figure it out. When I finally did figure it out, the liberation and the empowerment I felt was incredible. I remember it vividly. It&#x27;s been one of those things that has stuck with me throughout my life. I realized at a young age that even for problems that are messy and complicated, if you put enough direction, energy, and focus into solving them, it’s very possible to figure them out. Today, I don&#x27;t think so much about the process of learning. What I do think about is spending time thinking about what is important for me to try to learn in the first place: What are things that could be helpful skills for myself to understand better, to be more empathetic? What are things that could be just tangential, interesting areas that have no bearing on what I&#x27;m doing today, but, over time, [will] make me a more interesting person, make me a better husband, make me a better father? One time, I listened to this </strong><a href="https://www.youtube.com/watch?v=NV3sBlRgzTI"><strong>interview</strong></a><strong> with Elon Musk. Everyone walked away with the reasoning from first principles. That&#x27;s not the mental model that I took away from what he said.  ..learning resembles a tree: you see the trunk, you see the branches, and you see the leaves...  I actually took away the mental model where learning resembles a tree: you see the trunk, you see the branches, and you see the leaves. When I set out to tackle something – to solve some problem or create something new – in the beginning, it just seems insurmountable. When you enter a new field, you don&#x27;t know anything; you don&#x27;t even know what people are talking about! It sounds like it&#x27;s a foreign language that people are speaking. But, I know from my experiences – going back to my five year-old self – that if I just persevere, if I keep going in this direction, eventually I&#x27;ll start seeing what resembles a branch or a trunk, and then a leaf or two, and then I can start putting them together. Eventually, I&#x27;ll see the whole tree. I just know that&#x27;s the process. I try to repeat it often enough so it becomes a habit. There are some useful tools and approaches you can use in order to get through this process. One that works for me is trying to extrapolate all the way to being able to answer the question: “What is the essence of the idea that this single topic is trying to get at?” If you can argue a counterbelief to that idea, you really know you understand that area. On Founders For instance, take venture capital. Right now, the essence of the idea is, “Hey, it&#x27;s a really great time in the world because we have all these founders and it&#x27;s our job to back them because they really have these mythical powers....” Well, the flipside to that argument would be, “Maybe founders aren&#x27;t really that mythical.” There’s no doubt that there are certainly amazingly talented founders. That said, I have heard people argue: is Jeff Bezos amazing because he&#x27;s Jeff Bezos or is he amazing because he&#x27;s been the CEO of Amazon for twenty years and he’s gained experience growing one of the largest companies in the world? I would say that yes, he&#x27;s amazing, but this is due, in part, to that experience. If you&#x27;ve been at the top of a company that has seen so much growth, has seen so many talented people impact it, maybe the lessons learned along the way arewhat makes you who you are. The ability to say you’ve persevered and learned from that process is really something. I can relate to that personally. On Spotify and Content Acquisition  Let’s apply the idea of learning to Spotify in particular. Spotify has picked up so many new strengths over the years. One example is your expansion into content. How did you approach content acquisition for Spotify with no real background in that area?  It was hard-fought learning and it wasn&#x27;t a straight learning curve either. If you go back, you can see that there were a lot of ups and downs in that journey, even though from the outside it may have looked like a straight line; where one day we just decided we wanted to learn about content and then we easily did. That wasn’t the case at all. We made a lot of attempts and tried many different things. We tried a video service, which didn’t seem to work for us. We tried to acquire some podcasts just to see if that would work. It didn&#x27;t, et cetera. To take a step back, I&#x27;ve always been fascinated with seeking out many different viewpoints. Actually, I probably spend more time with other business leaders outside of technology. I love learning about others’ creative processes. As a hobby musician and as someone who loves music, I’m fascinated by this. On Creative Process For example, when Beyoncé records an album, one of the things that she does, which is just remarkable, is she keeps almost four or five different studios running at the same time in a city. [Sriram: Fascinating]  </strong><em><strong>...when Beyoncé records an album, one of the things that she does, which is just remarkable, is she keeps almost four or five different studios running at the same time in a city....</strong></em><strong>  She uses different musicians, different producers and she actually goes from room to room: brainstorming ideas, trying different things, working on different songs. Whenever the moment leaves, she will go to the next studio and do the same thing. I&#x27;m not sure if it&#x27;s a predetermined schedule or if it&#x27;s more spontaneous, like when she&#x27;s in a vibe, but the process is essentially not a singular thing. It&#x27;s something that she does in multiple parts. That creative process has been super interesting for me to try to understand. Obviously, I love the media industry for that reason: how it&#x27;s both a business on the one side and it&#x27;s nurturing incredibly creative and talented individuals on the other. To bring this back to Spotify and content, it was a long journey. But, in the end, it&#x27;s about cultural fit. I don&#x27;t think we could have recruited and assimilated someone who came entirely from a Hollywood-only mindset with no experience in digital. Not only that, we needed someone who was team-first and not individual-first. Many of these individuals are larger than life, which probably wouldn&#x27;t go well with the Swedish philosophy of “No one can can be seen as more than the other person is.” We knew we needed to find the right leader for that. I got incredibly lucky that I found Dawn Ostroff [Spotify’s Chief Content Officer] to make that transition. We had a great head of content before, but that person came from the music industry, and the music business side, not the creative side. I knew we needed to nail that. I found an executive who could skillfully do both. I also knew we needed velocity, which was an unorthodox thing. On Acquisitions Starting something from scratch wouldn&#x27;t have made sense for us to do, which is why we kind of jump-started our </strong><a href="https://newsroom.spotify.com/2019-02-06/audio-first/"><strong>Audio-First</strong></a><strong> strategy with acquisitions. We went all in on day one. This is important when you need to simulate new capabilities. If you have ten people in a company of five thousand that have a certain skill, the skill will not be valued. It will be rejected. But, interestingly enough, if you acquire a company where now three, four-hundred people are proficient in a skill or area, all of the sudden you can say, “Oh, I guess we&#x27;re going to learn how to do this too. Okay, welcome, let&#x27;s join forces and work on this together.”  </strong><em><strong>...how do we as a large company learn how to add a new capability? It sounds crazy, but sometimes it is about mass and velocity... </strong></em><strong>  That was an interesting insight into that process: namely, how do we as a large company learn how to add a new capability? It sounds crazy, but sometimes it is about mass and velocity. The combination of those two things is what led us to say, “Okay, well shit I guess we&#x27;re gonna have to learn how to do this.” Before we had all these debates: “Should we learn how to do it? Should we not do that?” All that really changed when we dove right in. That’s an interesting point. Often you recruit a star executive and you give them some empty headcount in order to figure out a new capability or business unit and they fail because they aren’t plugged into the company culture and they don&#x27;t have a scaffold upon which to lean.  On Shadowing Other CEOs Coming back to learning, I have heard that you shadowed and spent time with Mark [Zuckerberg] and other founders. What have you learned from shadowing other CEOs?  Well, you have to back up and ask: “Why am I spending time doing this?” I think it&#x27;s important to understand that: one, I&#x27;ve never run a company of this size before and, two, even at a tenth of this size, I&#x27;ve never seen anything like Spotify! So I basically only know what I know, right? I&#x27;m lucky enough to have all of these executives around me that have been a part of many companies and cultures before. They give me terrific input, however, I don&#x27;t know what I don&#x27;t know. What I found when talking to other founders – when discussing something very specific – they&#x27;ll give you the details of how they solved it, but you personally want to understand the mechanics of it. You want to understand what&#x27;s truly driving that behavior. What I learned is that for a lot of these CEOs, this behavior is second nature. They have never had to question themselves or analyze why they behave the way that they do. So I wondered what the best way was for me, and I started by almost saying, “You know, what if I could be an intern at some of these places, so I can observe the culture and how decisions get made?” To have that insight would be pretty cool! One day, I was talking to Shishir [Mehrotra] about the idea. He told me about the concept of shadowing and how they did it at YouTube. I was like, “Well, holy shit, I should see if I can do this. Not just within the same company, but across the industry.” I was lucky enough to have a few people say yes, because I think they were intrigued by what I would say about their leadership style. In that way, it was a two-way street. I went in and learned a bunch, but I also wrote up my own observations. And obviously, there&#x27;s nothing at this high level where I would say like, “Well, I really disagree with how you&#x27;re doing it.” It&#x27;s more like, “Oh, that&#x27;s interesting. I probably wouldn&#x27;t have thought about it that way. But I&#x27;m curious and here&#x27;s why.” On his Personal Leadership Style It took me a lot of time to really decode and understand my leadership style. It&#x27;s been fascinating to see some leaders lead one-to-one; they&#x27;re the tentpole and everyone goes right to them for certain decisions. That’s not really my style or how I do things, but it&#x27;s highly effective for some. Because, again, with a singular vision you can accomplish great things. Elon Musk comes to mind. Evan Spiegel actually comes to mind too. Leaders that fit that mold are very consistent and they can move very fast when making big decisions. Collaborative decision-making is the other end of the spectrum. I have seen some amazing companies operate that way…though I haven&#x27;t been able to scale group meetings. Facebook is able to have meetings with twenty, thirty people that are still quite effective. I could never do that with reasonably high degrees of throughput and depth in the meeting. My prior thinking has been: the larger the meeting is, often you have to get the lowest common denominator of the person in the room in terms of the context. So the depth goes down but I know that’s not the case from talking to others at Facebook. And I personally love their Friday meetings...  Oh yes, that&#x27;s one of the things I tell people to steal from Mark [Zuckerberg] and Facebook: the Friday Q&amp;As.  Yeah, I love it. </strong><em><strong> I love, love – and have stolen straightaway – the part where they celebrate the Faceversaries and actually have people come and tell their stories</strong></em><strong> I love the frequency with which they doing this. I love, love – and have stolen straightaway – the part where they celebrate the Faceversaries and actually have people come and tell their stories. It shows people that you can make a career within the company. That&#x27;s super important: showing people that there&#x27;s a path. Alternatively, you can look at someone like Reed Hastings. That&#x27;s another end of the spectrum. I learned a lot about how his leadership style has been designed around pushing decisions down in the organization. He, for instance, doesn&#x27;t meet his executive team very often. I don&#x27;t know about these days, but he used to meet them only once a month. If you look at the Mark [Zuckerberg] end of the spectrum, he meets with his executive team once a week...So, how would it work if you only did that once a month? The way Reed Hastings does quarterly business reviews [QBRs] is also super interesting. He puts together these long strategic outlines with lots of people commenting back and forth. He is very open. Those are definitely something worth learning from as well. I have also learned from Facebook to include the board in key meetings. Reed [Hastings] actually allows the board to sit in on the QBRs. I&#x27;ve now started doing the same. On Handling a Board This is another question I was going to ask. Many founders have different styles of handling their board. They do everything from, “I never want to hear from you so I will give you the least amount of information possible.” Spotify is at the opposite end of this spectrum. Your board members are actively involved: they have Spotify.com email addresses, they work with your team, they work on company projects. Walk me through your thinking here.  I view it like this: you can have two types of boards. You can have a corporate governance-type of board, which basically checks all the marks or you can try to have a more inclusive board with highly relevant expertise. I&#x27;ve chosen to have a board which is filled with operators. Almost every member of the board has operated at a very high level role before. You have Padmasree [Warrior], a great CTO. Shishir [Mehrotra] is another great example, and then you have Ted [Sarandos], who&#x27;s now the Co-CEO of Netflix. You have Tom Staggs, the former COO of Disney. You have Christina [Stenbeck] who was the chairman of Kinnevik, an investment company who operated with 64,000 employees. You have Heidi O&#x27;Neill, who was the President of Nike...so it is filled with operators. I&#x27;m incredibly fortunate to draw on their experience, though I don&#x27;t think that they&#x27;re there only for me. I think that they&#x27;re there for my extended executive team: my direct reports and their direct reports. I will often pose strategic questions to the board, “Hey, I&#x27;m really struggling with this.” Rather than having them interact solely with me, I actually ask them to go figure out problems with the people directly involved in that project. This comes back to how you view your role as a leader. My job is to try to be value-add. If you think about a pyramid, there&#x27;s a fellow Swede who ran SAS, Scandinavian Airlines, who said the right way to think about leadership is you&#x27;re not at the top of the pyramid. You should invert the pyramid and envision yourself as the guy at the bottom. You are there to enable all the work being done. That&#x27;s my mental image of what I&#x27;m here to do at Spotify. I think about the board the same way. Sure, they have a corporate governance role, but they&#x27;re also there in fiduciary roles to help the company. I&#x27;m not saying as employees, but as experts to help the company make the right strategic decisions. How can you do that if all you&#x27;re getting is a polished version of the world? How much does being a Swedish company, having a Stockholm-influenced company culture, influence Spotify? Oh, a lot. Swedes, in general, are focused on balance. Work is not everything. So you try to find a sustainable path for all stakeholders. The moment that&#x27;s now happening in American capitalism has already occurred in Sweden. This is true when you look at how Swedish companies historically thought about their employees and their obligations to society. The laws in Sweden are much stricter about corporate sustainability; they focus on transparency and impact. For example, it’s a requirement that Swedish boards file an annual sustainability report that includes detailed information about not only environmental initiatives and impact, but also diversity. You are also required to present the diversity report publicly. I would say the Swedish influence brings a focus on stakeholder capitalism and the need to think long-term about your impact on all these stakeholders. The downside is it tends to be a consensus-driven culture where, ideally, everyone should agree about everything. This means it&#x27;s slow. It&#x27;s not “bold” enough. </strong><em><strong> ...the Swedish influence brings a focus on stakeholder capitalism and the need to think long-term about your impact on all these stakeholders...</strong></em><strong> We try to marry that with the American culture, which I love too. Everyone&#x27;s so good at debating things and looking for clarity. Leadership is so important and it&#x27;s celebrated along with innovation and accomplishments. And the combination is actually very nice – having a company where you can move fast because it&#x27;s not about consensus, it’s about consent. You try to get people to agree, but if you can&#x27;t, then they feel empowered to make a decision. There&#x27;s nothing bad with hierarchy. There&#x27;s nothing wrong with someone saying okay, “Well you know, for this context, I&#x27;m in charge and I&#x27;ll make the decision. I&#x27;ll try to make an inclusive decision, but I&#x27;ll make it and I’ll move fast.” I also love the American clarity of communication. Swedes are notoriously vague in communication. I love how some – I&#x27;m not saying every American – but the best ones communicate succinctly via the written and spoken word. We don&#x27;t have debate classes in Sweden. I wish we did because it&#x27;s such an imperative skill. I love that Americans have that as an example. Spotify is kind of a marriage between the two. It&#x27;s not always friction-free, I have to say that. I find many times it takes the average American at least a year to be productive within Spotify’s culture. Its ambiguity is just so foreign to them. When Americans typically say, “Well, I thought you, Daniel, were supposed to make the decision.” And I&#x27;m like, “No, I mean, you can make it if you want to.” Some people don&#x27;t like that ambiguity; that&#x27;s not for them. They think it&#x27;s slower and it is. But the flipside is, even if we do take longer to agree on some things, once we&#x27;ve decided, we move with a lot of velocity and magnitude. Because everyone&#x27;s bought in. On Algorithms Let’s turn to the future. One thing I think about is the role of algorithms in shaping culture. What Spotify does with algorithms really shapes culture. Talk to me about how you conceive of the responsibility, the trade-offs, the challenges. The responsibility is huge. You have to acknowledge and see the fact that our ambition is to reach more than a billion people in the world and to be their audio service of choice. For all forms of audio, we want to become a one-stop destination for all the music and podcasts people love. Audio today roughly consumes the same amount of time for users as video, just with shorter content. Take a single music track, which runs an average of three to four minutes – obviously, you can consume a lot of music content in the span of an hour compared to just one show or episode. This gives us huge insight into what people listen to both musically and culturally. Our algorithms can be that much more effective in creating a highly personalized experience. And now with podcasts and news, our listeners can be exposed to documentaries, educational content, entertainment – a whole range of material. </strong><em><strong>...Internally we call this “algotorial.” We think that it&#x27;s actually quite beautiful to marry both...</strong></em><strong> We have taken a slightly different approach to how we do this. It’s a tension to talk about editorial versus algorithms. Internally we call this “algotorial.” We think that it&#x27;s actually quite beautiful to marry both. The best example is algorithms in their current incarnation – I know we can debate about where this will go – but my simple, layman&#x27;s way of saying it: algorithms are very good at optimizing anything that you want to optimize. They are not very good at coming up with a creative solution when it&#x27;s not clear how to express the problem. Culture often fits that. That&#x27;s normal. Like if you&#x27;ve never seen something before, and you don&#x27;t know what it is, how can an algorithm optimize it? We try to be thoughtful about how we program content for the listener. We don&#x27;t have the data to determine the signals to measure sentiment, as an example, on a mass scale. This can only be determined by how we see culture reflected on our platform via users creating their own playlists or saving songs. A concrete example is the Black Lives Matter movement. How can an algorithm detect that momentum and figure out the most culturally appropriate way to create playlists celebrating Black Culture? The simple answer is: it can’t. At Spotify, that&#x27;s an editorial decision. Now, the algorithmic decision is: who sees the content? Is that the right content fit for everyone globally? Is it appropriate that someone who doesn&#x27;t even speak English, but lives in America is served this content? We typically come up with human-driven, culturally-driven hypotheses of things we think may fit in the world even if the algorithm might say otherwise. This is the beauty of editorial and algorithms working together; we as a company want to always ensure that we are not only shaping culture, but also reflecting it. We view our creators the same way. We curate some of these content hypotheses, but a lot of our creators come up with innovative hypotheses, and then it&#x27;s our job to try to test them, and have our algorithms optimize them. This leads to a very, very different outcome than what you see in many other parts of technology, which is we – sure we have some self-reinforcing feedback loops – but I really do think that when I read and see the good part of Spotify’s algorithm there is still a lot of serendipity. People don&#x27;t really only see the things that they expect to hear. Discover Weekly is a great example of this. Part of this is because we focus so much on not creating these feedback loops by using “algotorial.” On Moonshots You recently made an announcement on investing in moonshots in Europe over the next decade. Tell us more about that. This is something I&#x27;ve been thinking about for awhile. The success of companies out of Silicon Valley is well documented but the same cannot be said for Europe despite the incredible talent and ideas coming out of the region. Europe needs more super companies for the ecosystem to develop and thrive. There are many things we can point to that have held Europe back but one of the greatest challenges to date for the growth of successful European companies is access to capital. And this is why I’m devoting one billion euro of my personal resources to enable the ecosystem of builders who can build a new European Dream. I’ll be looking to fund so-called moonshots — focusing on the deep technology necessary to make a significant positive dent and work with scientists, entrepreneurs, investors and governments to do so. There’s a lot of incredible talent in Europe and I want to do my part so that more great companies can be built here. </strong><em><strong>... There’s a lot of incredible talent in Europe and I want to do my part so that more great companies can be built here...</strong></em><strong> Lastly, let’s talk about your family. When you started Spotify, you were in your 20s. Now you’re a father. Talk to me about becoming a father and having two daughters. How has it changed you as a leader and how you think about Spotify’s role in the world?  I think a lot has changed, and I think the world has changed too. I&#x27;m not sure how much it&#x27;s just me and how much it’s the world. Remember, I was a 22 year-old kid. And like many others, I only saw the potential possibilities of technology: of the world being different and all the amazing things that could come from technology, in general, and Spotify, in particular. Obviously, like many others, I have now seen that technology can be a double-edged sword. All that change, while I would still mostly say it&#x27;s good, also leads to a lot of second-order consequences. A lot of people, perhaps rightly so, are worried about the impact technology is having on the world. The combination of being older and being a father to two daughters has certainly made me aware of how hard it is for women. And, by the way, minorities and other groups too. My oldest daughter recently told me that she wanted to be a firefighter. Then one day, she went to school and she came back and said, “I don&#x27;t want to be a firefighter anymore.” I said, “Well, why not?” “Well, you know, girls can&#x27;t be firefighters.” And I&#x27;m like, “What? Why are you saying that?” “No, no, the boys at school told me there are no girls that could be that.” It was incredibly disheartening. She&#x27;s five, but already at age five, there are limitations to what she can do, what she can dream. The flipside of the story is that I actually shared this internally and it turned out that there were quite a few Spotifiers that were married to female firefighters. They all offered to talk to my daughter, which was super cool. She actually talked to a female firefighter who told her she could absolutely become one and she went back to the boys with confidence. Lastly, let’s talk about your family. When you started Spotify, you were in your 20s. Now you’re a father. Talk to me about becoming a father and having two daughters. How has it changed you as a leader and how you think about Spotify’s role in the world?  [Sriram: I love that story] My point is a lot of these personal experiences have clearly opened up my eyes. I&#x27;m a white kid. Sure, I didn&#x27;t grow up in a wealthy neighborhood, but I had none of the hardship that others had. As a Swede, I thought the US was great because they have so many immigrants and they celebrate how people have come from all over the world. It seemed fantastic. I did not realize that there was so much systematic racism. It&#x27;s been another lesson learned. You just start seeing the world in a very different light and you start seeing that you have a huge amount of responsibility because you&#x27;re incredibly privileged. Now, you sit on this platform that attracts hundreds of millions of people. You also have millions of creators, some of the most influential people in the world. They want to tell their stories, they want to exchange ideas. This is how we&#x27;ve always told stories throughout culture. So you have an enormous responsibility. I feel like this is part of the reason why I dedicate time to learning; I feel like I have to learn in order to be more empathetic, to understand, to be able to help those stories be told, to make better decisions, because Spotify has a lot of influence. It&#x27;s about trying to do our very, very best by as many of our stakeholders as we can to create a better journey for all of us. When I was 22/23 it was all about, “Hey, this is a cool thing to do. I love music. That&#x27;s pretty cool. Wouldn’t it be cool if this worked to benefit artists?” It was way simpler. Now you&#x27;re here with more than six million artists on the platform. Some of them are struggling, some of them are doing incredibly well; it’s both ends of the spectrum. Being empathetic is critical. Coming back to prioritizing time, I want to make sure I&#x27;m a present father for my daughters, and I think I&#x27;ve been able to be more effective because of that. Long answer, but I think it&#x27;s important. I love that. That’s the perfect note on which to close this out. Daniel, thank you so much! </strong><em><strong> Thank you for reading the The Observer Effect. You can </strong></em><a href="https://www.theobservereffect.org/daniel.html"><em><strong>subscribe here</strong></em></a><em><strong> and get an email for every new interview (which should be about every few weeks). Send any thoughts/comments/questions by </strong></em><a href="mailto:sriram@sriramk.com"><em><strong>email</strong></em></a><em><strong> or via </strong></em><a href="https://twitter.com/ObserverOrg"><em><strong>Twitter</strong></em></a><em><strong>. </strong></em><strong> </strong></p></div></article></body></html>

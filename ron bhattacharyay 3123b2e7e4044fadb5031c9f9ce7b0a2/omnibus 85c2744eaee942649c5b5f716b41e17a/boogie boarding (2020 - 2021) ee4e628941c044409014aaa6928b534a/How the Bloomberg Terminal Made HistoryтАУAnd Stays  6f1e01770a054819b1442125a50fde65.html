@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How the Bloomberg Terminal Made History–And Stays Ever Relevant</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6f1e0177-0a05-4819-b144-2125a50fde65" class="page sans"><header><h1 class="page-title">How the Bloomberg Terminal Made History–And Stays Ever Relevant</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.fastcompany.com/3051883/the-bloomberg-terminal" class="url-value">https://www.fastcompany.com/3051883/the-bloomberg-terminal</a></td></tr></tbody></table></header><div class="page-body"><figure id="643c83fb-10c1-4653-bc13-b43e840cc0e6" class="image"><a href="How%20the%20Bloomberg%20Terminal%20Made%20History%E2%80%93And%20Stays%20%206f1e01770a054819b1442125a50fde65/3051883-poster-p-1-the-bloomberg-terminal.jpg"><img style="width:700px" src="How%20the%20Bloomberg%20Terminal%20Made%20History%E2%80%93And%20Stays%20%206f1e01770a054819b1442125a50fde65/3051883-poster-p-1-the-bloomberg-terminal.jpg"/></a></figure><p id="dd4dace2-9fb0-4ee6-a6c2-1e3cfbf4ef71" class="">By definition, any computing platform invented in the first half of the 1980s that has survived until 2015–and is an enormous business–has accomplished something remarkable. There’s the Windows PC, which traces its heritage back to <a href="http://www.pcworld.com/article/126671/article.html">the original IBM PC announced in August 1981</a>. There’s the Mac, which <a href="http://time.com/1847/steve-jobs-mac/">famously debuted in January 1984</a>.</p><p id="c89c96e6-1918-4140-9f3a-e43ff1e8e176" class="">And then there’s the Bloomberg Terminal, which hit the market in December 1982.</p><p id="eb188531-b6c0-4aec-97ea-8ad80f61f493" class="">Bloomberg Terminal TimelineBloomberg Terminal TimelineVolume 90%Press shift question mark to access a list of keyboard shortcutsKeyboard ShortcutsPlay/PauseSPACEIncrease Volume↑Decrease Volume↓Seek Forward→Seek Backward←Captions On/OffcFullscreen/Exit FullscreenfMute/UnmutemSeek %0-9Next Up3 things that will make you a better home cook03:5900:0001:5901:59More Videos03:593 things that will make you a better home cook03:41Design forward solutions for families in lockdown03:04Microsoft&#x27;s TikTok brand boost versus Twitter&#x27;s FTC faux pas—brand hit and miss of the week02:52Has COVID-19 killed the low-carb diet?01:49A return to normalcy could start with plastic bubble suits02:17How to prepare for the future of workClose</p><figure id="29bf1dca-e16f-4331-8a56-cb876c6f942e" class="image"><a href="How%20the%20Bloomberg%20Terminal%20Made%20History%E2%80%93And%20Stays%20%206f1e01770a054819b1442125a50fde65/5658306"><img style="width:2px" src="How%20the%20Bloomberg%20Terminal%20Made%20History%E2%80%93And%20Stays%20%206f1e01770a054819b1442125a50fde65/5658306"/></a></figure><p id="a41f1940-5346-4a98-8aa2-145bfa808e15" class="">Unlike the PC or the Mac, the Terminal has always catered to a niche–investors and other finance professionals–which is why most people have never seen one in person. But it’s one of the industry’s few truly enduring successes. It’s mattered so much that a current Bloomberg Terminal setup is one of a handful of artifacts in “Tools of the Trade,” a new display at Silicon Valley’s Computer History Museum that traces the history of financial technology, beginning with the <a href="http://it.stlawu.edu/%7Edmelvill/mesomath/tokens.html">tokens</a> used by ancient Sumerians to track the trading of items such as sheep, which eventually led to the invention of the clay tablet.</p><p id="6569186e-154c-4038-998d-5b390cde7784" class="">“We start the story 10,000 years ago, which is why we have the clay tokens,” says Computer History Museum Curator Dag Spicer. “There’s a reason we put them right beside the Bloomberg Terminal, to give you the alpha and omega of trading. Trading, as a human activity, is something that’s been with human civilization since the beginning.”</p><p id="0d7345d9-e440-4472-b634-bd8e59f89bb3" class="">This is the Bloomberg Terminal’s second museum appearance this year: The Smithsonian’s National Museum of American History <a href="http://www.bloomberg.com/news/articles/2015-05-29/gross-s-terminal-keyboard-to-be-displayed-at-smithsonian">included two Terminal keyboards</a> in an exhibit on American enterprise, including one that belonged to legendary bond trader Bill Gross.</p><p id="f8b709b0-eb07-4439-b4cd-f4e00b5f7283" class="">Bloomberg’s current dual-monitor system and specialized keyboard</p><h3 id="73539c61-b92b-4e8c-9630-4c752f02b838" class="">Good Timing</h3><p id="94080aa2-924b-4b01-b6ff-77ec752095d6" class="">The Bloomberg Terminal of today–which, speaking more precisely, is a service known as Bloomberg Professional–provides more than 325,000 subscribers with everything from an array of information on financial matters to a chat system to the ability to actually execute trades. It processes 60 billion pieces of information from the market a day. Yet it’s still recognizable as a descendant of its 1982 progenitor, just as a 2015 MacBook retains the DNA of the 128K model from 1984.</p><p id="fec9e331-2c4e-4452-9e98-277309da6596" class="">The tale of its creation is one of a scrappy little company engaging in technological innovation, but it’s not the classic born-in-a-garage startup story. Michael Bloomberg had been a general partner at investment bank Salomon Brothers, where he was forced into a job heading IT development and then pushed out of the company altogether. In 1981, at the age of 39, he took his $10 million severance and started a company called Innovative Market Systems, later to become Bloomberg LP. IMS called its product Market Master at first, and the 20 original units went into service at Merrill Lynch at the end of 1982.</p><p id="f167a3f9-3de6-407a-8f72-0828a152a307" class="">What a dual-monitor Bloomberg setup looked like in 1997, as demoed by Mike Bloomberg himself</p><p id="bde16e75-ce99-4148-a943-1d8156038077" class="">Technology companies had been working on bringing automation to the stock market for years, with gadgetry such as the <a href="http://www.computerhistory.org/collections/catalog/102716113">Telequote III</a> dating to the late 1960s. But Bloomberg’s timing was fortuitous, even though the company got going during a raging recession. In the 1980s, stock exchanges from New York to Tokyo were going electronic, a prerequisite for a truly sophisticated online service for traders. It’s what enabled not only the Terminal but other devices such as <a href="https://books.google.com/books?id=lgAAAAAAMBAJ&amp;pg=PA70&amp;lpg=PA70&amp;dq=dataspeed+quotrek&amp;source=bl&amp;ots=o969ax87n9&amp;sig=nqiZaxrELqu48Kgg4OzURmz6lIo&amp;hl=en&amp;sa=X&amp;ved=0CCAQ6AEwAGoVChMIwP2P0uOryAIVAjOICh1IrwCS#v=onepage&amp;q&amp;f=false">1984’s way-before-its-time QuoTrek</a>, a wireless handheld gizmo for investors.</p><p id="2c8e73ee-08aa-439e-8122-143907b85f58" class="">Big companies such as Dow Jones and Reuters were eager to take advantage of this revolution in financial information, too. But just like today, being small, focused, and unburdened by legacy concerns was an advantage. “Bloomberg was this new startup that was nimble, that was experimenting, that was battling against the Goliaths of the time,” says Marguerite Gong Hancock, executive director of the Computer History Museum’s Center for Entrepreneurs.</p><p id="0c159ebd-0a24-424a-b0ff-6566ed3c3574" class="">Michael Bloomberg himself talked like the startup guys of later decades when the <em>New York Times</em> interviewed him for <a href="http://www.nytimes.com/1982/05/08/business/for-new-business-during-recession-start-must-be-lean.html">a May 1982 article</a> about launching companies during an economic downturn. “This is an interesting time,” he said. ”You can’t go out and start a steel mill, but the position of the business cycle and the rate of technological change are such that people can go and start small companies when they have a few people with good ideas.”</p><p id="42e73d8c-8103-4220-bba1-977b2d132069" class="">A Bloomberg Terminal keyboard circa 1990, with trackball and built-in voice-chat features</p><p id="2739a765-5643-4106-abca-a808a543feee" class="">As Bloomberg’s 1997 memoir <em>Bloomberg on Bloomberg</em> notes, Merrill Lynch owned 30% of his company in the early years and benefited from an exclusivity agreement that prevented Bloomberg from selling Terminals to Merrill Lynch’s major rivals. In the late 1980s, Bloomberg successfully lobbied Merrill Lynch to end this restriction, whereupon it began to grow by 25% to 30% a year. It also upgraded the Terminal on an ongoing basis with new technologies: color, for instance, in 1991, and flat-panel displays five years later.</p><h3 id="4b669fec-a7db-4d1c-8177-5b6c014bb546" class="">The Terminal, Evolved</h3><p id="b403b9c7-e35a-4bd3-bc84-bd3bb8649d9d" class="">One of the odd things about the moniker “Bloomberg Terminal” is that it’s a nickname rather than an official brand. (“People often refer to the ‘Bloomberg Terminal’ when speaking about the Bloomberg Professional service,” explains the Bloomberg website, which doesn’t have any choice but to confront the issue.) And enduring though the nickname is, it’s a wildly insufficient way to describe what the company offers today.</p><p id="8592d1cc-8b95-4b86-8886-a3424f171221" class="">A Bloomberg Professional screen, dense with information</p><p id="030c336d-37c1-4208-9f15-18fc5741dc0d" class="">A terminal, after all, is a piece of dedicated, all-in-one hardware for connecting to a network. That’s what Bloomberg once sold. But 20 years ago, it began to let subscribers access the service from a PC. Today, the hardware aspect of the service is a suite of accessories–a custom keyboard with keys such as EQUITY, GOVT, and NEWS, the credit card-sized <a href="https://www.quora.com/How-does-Bloomberg-B-Unit-work">B-Unit fingerprint scanner</a>, a slick, optional dual-screen display–that customize Windows PCs for use with Bloomberg Professional.</p><p id="49723a68-6233-445b-902c-bb9fcb8b83fd" class="">The B-Unit fingerprint scanner</p><p id="d20773fd-8fc4-4a5a-9df8-f4ec7793c2c0" class="">Still, there’s something . . . well, terminal-like about Bloomberg Professional’s interface. In 2015 as in 1982, the investment pros who use the service like to gorge on data, so screens are dense with text, much of it in tabular form, complemented with charts where appropriate. The default is still amber characters on a black background, a color scheme that was commonplace in the early days of computing–and that remains easy on the eyes even though it was long ago supplanted almost elsewhere else by black text on a white backdrop.</p><p id="da88bebc-b8fe-4e96-a682-a3a6de77d53b" class="">This is an area where milliseconds count.</p><p id="1ac0d649-2369-4674-9d48-4340794ea9e8" class="">Bloomberg Professional does get quite graphical in spots: For instance, it offers a feature that lets you track ships carrying commodities as they travel around a map, a bit of intelligence that can be very valuable to a trader. It’s still about data: “You can see the position of every ship in the world,” says Zach Haehn, head of R&amp;D for Bloomberg’s San Francisco operation. “What they’re carrying, how fast they’re going, where they’re going.” (Four hundred years ago, Dutch merchants used telescopes to gaze at distant ships for the same reason–a fact noted in the Computer History Museum’s “Tools of the Trade” exhibit.)</p><p id="8105600a-c74b-4065-86e2-921b0347dbcc" class="">Though it’s now possible to use the service on any Internet-connected PC–as well as on wireless devices such as smartphones and tablets–the fact that Bloomberg operates its own private network, isolated from the flaky, insecure Internet, remains core to the concept. “When it started out, [the Bloomberg service] was basically a time-sharing system, with terminals,” says Computer History Museum curator Marc Weber. “It was in the ’90s that it became truly networked. Most of the private networks have disappeared. This is one of the few [that remains], and finance is clearly one of the areas where people value the privacy, security, and speed. This is an area where milliseconds count.”</p><p id="628b47f6-0cf7-4979-9130-52033c66a7d7" class="">“Our network is really about control,” says Shawn Edwards, Bloomberg’s CTO. “It’s about being able to manage our own system and have fine grain control. It’s expensive, but it’s worth it to us.”</p><p id="7bb4187b-7c98-4e71-8b58-02e28aabc3b3" class="">A Bloomberg screen monitoring tankers transporting liquefied petroleum gas (LPG) between the Gulf Coast and the U.K.</p><p id="cf447aca-3d69-4184-9ca3-4ee652595d53" class="">When Haehn gave me a demo of Bloomberg Professional, the biggest surprise wasn’t what the service could do, but how fast it did it. Screens crammed with information popped into place with such alacrity that it almost felt like a mocked-up simulation. But it was real live data being streamed over Bloomberg’s private network.</p><p id="00d97914-a228-4f7e-abd7-375c58414896" class="">As an engineering challenge, the need for speed isn’t just about introducing new features without performance degradation. “It’s getting worse,” says Vlad Kliatchko, Bloomberg’s head of R&amp;D. “The volume is going up. The crazy speed requirements are going up. We used to put data in front of humans, and only needed to do it so fast. Now many of our systems are connected to customers’ computers, which like to see things faster than humans.”</p><h3 id="feefe9d5-3ae3-45fa-bce8-8072956afc8f" class="">Going West</h3><p id="b390db67-9a1a-495e-a1b3-ae23feb76864" class="">Bloomberg has 4,000 engineers and makes tweaks to its service on a daily basis. But in some respects, it must make them without it being too painfully obvious that anything’s different. “We have an incredibly loyal user base,” says Edwards. “They’re very motivated in what they’re doing with the terminal. It can be a challenge even changing a font ever so slightly. People will notice it and complain. At the same time, if we don’t change and evolve, we’ll fall behind. It’s a really interesting balancing act.”</p><p id="df6b8771-0d0e-4daa-b367-d818f8017e0e" class="">Keeping up with users’ expectations requires the company to take advantage of the latest trends impacting software engineering. For example, it’s been aggressively adopting open technologies such as the Hadoop big-data framework and Solr search platform. Just as important, it wants to have a shot at hiring world-class developers–the type of folks who, if they weren’t helping to shape the future of the Bloomberg service, might be working at Google, Facebook, or some red-hot startup.</p><p id="a35fc603-cdde-4463-b866-6e1a14648e3b" class="">How Bloomberg engineers the Terminal</p><p id="e90ac623-6db4-4df8-b3ea-ed5b8d1a30ec" class="">With this in mind, the company <a href="http://www.bloomberg.com/company/announcements/west-coast-tech-hub-open-business/">opened a West Coast Technology Hub</a> last May in San Francisco’s South of Market neighborhood, on two floors of the <a href="http://sf.curbed.com/archives/2014/03/12/60m_conversion_of_art_deco_gem_140_new_montgomery.php">Pacific Telephone &amp; Telephone Building</a>, a 1925 Art Deco gem that was the city’s first skyscraper. The presence lets the company hire engineers from a rich talent pool and generally strengthen its ties with the Bay Area tech community.</p><p id="dc7d2b5e-1b90-454d-86ac-609d927b69bc" class="">For Bloomberg, insinuating itself into a geeky culture 3,000 miles from its New York home base is an ongoing effort. “Most [job candidates] don’t know a lot about us,” explains Haehn. “They know about us from a TV perspective, a media perspective, a news perspective. They might have been to our website or our iPhone app. And they don’t even do their homework before the interview, which tells you a lot about the way the developer market is right now. They’re just like, ‘Whatever.&#x27;”</p><p id="b028f698-ba04-4975-b98c-2d4839229d58" class="">“But every once in awhile, I meet [someone] at a hardware company or a networking company,” he says. “And they know <em>everything</em> about us. They’re like, ‘Oh yeah, you guys have pushed us to the limit.’ They’re impressed.”</p></div></article></body></html>

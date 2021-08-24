@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>How to Write Technical Posts (so people will read them)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="04f8908f-97ba-4734-a95a-ef22c7b74f98" class="page sans"><header><h1 class="page-title">How to Write Technical Posts (so people will read them)</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://reasonablypolymorphic.com/blog/writing-technical-posts/" class="url-value">https://reasonablypolymorphic.com/blog/writing-technical-posts/</a></td></tr></tbody></table></header><div class="page-body"><p id="47669a9f-a306-4c89-8470-a1d3bb65e021" class="">One of today’s best bloggers in the functional programming space is <a href="https://chrispenner.ca/">Chris Penner</a>. Despite this, Chris is criminally underrated—nobody I talk to seems to know of his work. Go check him out as soon as you finish reading this post!</p><p id="1de7b092-5ff2-4f59-a762-74ac6bf95ee6" class="">This is reasonably pervasive phenomenon in our subculture; there’s lots of fantastic work being produced, but for one reason or another, it falls between the cracks. I’d propose the biggest obstacle is that most FP writing <em>isn’t optimized to be read.</em></p><p id="c1f0853d-1bd0-4a2f-9b0e-b10f6e26770b" class="">So I’d like to take some time today and talk about common failure modes in technical writing. If you don’t have a checklist you run through before publishing a post, you’ll probably get a lot of benefit from internalizing this advice.</p><p id="d9a96ce7-f1ed-4c36-bc37-42f4e40932bf" class="">The value? You’ll make it easier for people to understand what you’re trying to tell them. Which is why you’re writing in the first place, right? The good news is that none of this is magic—just some simple guidelines for structuring your content.</p><h2 id="3861fb21-858c-4dbb-94fe-439b14776c68" class="">The Guiding Principle</h2><p id="d7cb5cee-fb2c-4e1c-ac82-f779666b84bf" class="">Here’s the biggest thing to keep in mind: your reader doesn’t really care what you have to say. You get maybe four sentences to convince them that your essay is worth their time. If you haven’t made your case by then, you’ve probably lost them to the next tab they binge-opened.</p><p id="e51b1415-6091-4e38-84ba-ab58c80b3a94" class="">Even after you’ve convinced them that it’s a valuable read, you need to continue assuring them that you’re not wasting their time. If you take too long to get to the point, or if you make the information too hard to find on a quick skim, you’ve lost them again.</p><p id="5fe003b1-a411-48fd-85a6-24913e722190" class="">As a result, alongside your technical content, you have two primary goals to focus on:</p><ul id="7bea7235-be9b-41b3-9308-48de7591b407" class="bulleted-list"><li>Provide strong, concise motivations for everything you want to talk about.</li></ul><ul id="b6c51439-d6d3-4852-9b3f-06147de1b356" class="bulleted-list"><li>Make it easy to skim.</li></ul><p id="459ade5c-982b-4b8b-b793-a6f99f17a173" class="">If you can do these two things, you’re already most of the way to better engagement.</p><h2 id="f5f1cc0c-1b32-4b76-8dc2-5f5e92ca9899" class="">Writing Strong Motivations</h2><p id="d76e1a58-3a86-4f0b-b52a-14b8d377b89c" class="">People care about solutions to problems they have, or expect to have one day. They care about other things too, but it’s not really relevant to us today.</p><p id="74e4a4e4-81ff-421a-b5c4-5bce85f230ef" class="">With this in mind, you want to tailor your motivations in terms of <em>solutions to problems.</em></p><p id="88712a00-77f7-41fe-8f85-77b5c2aa43a2" class="">Here are some good examples of problems that you’ve probably run into (and links to their solutions for you to read later):</p><ul id="4332094e-2c9e-40e6-81a5-0ac73a9bb322" class="bulleted-list"><li><a href="https://chrispenner.ca/posts/adjunction-battleship">Ed Kmett writes shitty documentation</a></li></ul><ul id="29c61a11-3d38-4c33-9eea-845f3efdf580" class="bulleted-list"><li><a href="https://reasonablypolymorphic.com/blog/higher-kinded-data/">I have lots of types that need to evolve at the same time</a></li></ul><p id="b5899575-4dc3-4518-9adf-3cf5a18846d9" class="">Bad examples of motivating documents are things that assume you care <em>simply because they exist.</em> This is <a href="http://hackage.haskell.org/package/pipes-4.3.9/docs/Pipes-Tutorial.html">pretty</a> <a href="http://yannesposito.com/Scratch/en/blog/Yesod-tutorial-for-newbies/">common</a> of libraries’ tutorials. The same document that convinces you to use a technology should also show you how.</p><p id="cf713cfd-f0f0-43c4-b688-843c294f6e57" class="">As a more general rule, focusing on <em>why</em> is going to be more valuable than on <em>how.</em></p><p id="15e04272-87d5-4c8b-b4ec-4b2b4ebd20a2" class="">Why should someone care, and why your solution is a good one.</p><p id="1aa37e0a-6f58-4947-8a1e-569e31623405" class="">“How” without a “why” suggests a contrived solution to a made-up problem. In other words, it’s easily read as “who cares?”</p><h2 id="10351794-d469-454e-9221-af806a1a951b" class="">Understanding How People Read</h2><p id="63d7211f-1263-45c9-af67-aac121c77dc2" class="">People who spend lots of time reading have good heuristics for skipping lots of text. If you understand these heuristics, you can make it easy for people to find what they’re looking for. And remember: they’re looking for reasons to continue reading.</p><p id="3e394317-a793-461d-9e5b-c8a929cc2b42" class="">There are two behaviors here. The first is what I call “skimming for concepts”—which is that people will attempt to determine what text is about at a high-level. They’re looking for <em>what you’re trying to tell them</em>, as opposed to <em>what you’re actually saying.</em></p><p id="652d132d-3457-4f19-97ed-dc4441fc571d" class="">When skimming, people are likely to read only the headings and the first two sentences of a paragraph. If they’re convinced they know what you have to say, they’ll skip to the next paragraph. If several paragraphs in a row don’t seem relevant, they’ll skip to the next heading.</p><p id="5b5db903-1e47-4771-9662-e9bd2f37562b" class="">If the next heading also fails to grab their attention, they’ll probably give up.</p><p id="db61102c-ffed-4c53-89c7-067e6ebf498f" class="">The solution is to structure your argument as a tree. Headings must provide enough information to let someone know whether or not they care about the following prose.</p><p id="8b8aa27f-f0a7-4fec-afa7-6b5f30502a4b" class="">This also means that the first sentence of each paragraph should be sufficient to understand the rest of the paragraph. The remaining sentences are only allowed to reinforce or give details of the first sentence. One paragraph equals one idea.</p><p id="968dfb70-f4b0-4f9c-8d48-898bd6dee486" class="">Roughly speaking, the hierarchy of your document should look like this:</p><ul id="64ac7551-5043-4ab3-b87b-709ea9531dbd" class="bulleted-list"><li>Document<ul id="ac9a6efa-f727-481b-a21e-a25a7bdc0915" class="bulleted-list"><li>Heading<ul id="5aa272e9-bec4-47a7-a92d-7bd5a8cc9503" class="bulleted-list"><li>First sentence<ul id="a238e8be-2cce-4b8f-8d17-0179f3ea1df6" class="bulleted-list"><li>Rest of paragraph</li></ul></li></ul></li></ul></li></ul><p id="9711b843-57c0-41e4-b01b-db21fa5a2e19" class="">Maybe you feel like it’s hard to know how much knowledge to assume your readership knows. Understanding how people read makes this a non-issue. Present as much information as is necessary to understand your point, but make it easy to skip if people already know it. Those who don’t yet know will learn, those who do can skip past, and both camps will appreciate it.</p><p id="197d8aaf-ad57-4211-9180-c7dfbad96c0b" class="">After you’ve convinced your reader that they care what you have to say, they’re more willing to read what you <em>actually have to say.</em> When the reader is ready to dive in, that’s when you can make the finer points of your argument.</p><p id="18e33db4-9020-4a7a-9796-14b2bb13411f" class="">It’s unlikely that anyone is going to read every word of your essay. It’s even less likely that they’ll read them all in order.</p><h2 id="b13bad7c-a22a-4293-8619-a3e351332a94" class="">Stumbling Blocks</h2><p id="5b77da21-07fa-4ab1-a718-5dc64a564ec2" class="">Now that you’ve got people ready to listen to you, it’s important to keep them on the same page as you. You really need to stay on top of anything that might break their focus.</p><p id="71ba7186-d18f-4619-85b6-23f70acb5180" class="">Use short sentences. If it’s too hard to parse, people won’t.</p><p id="c0a9ebb4-9c1b-45c2-a9b6-ef5a0ac4d526" class="">Make sure your spelling and grammar have no egregious problems. You don’t need to have perfect command of the language, but you need to be able to signal that you’re trustworthy-enough to listen to. Don’t underestimate how much credibility you’ll lose from blatantly bad spelling and grammar.</p><p id="e5758094-5e2a-473f-9471-f09887473bbd" class="">This stuff is relatively common-sense.</p><p id="6020acb5-ebda-4acb-a63d-853ccbdc1408" class="">What might be less so is that you also need to stay on top of conceptual stumbling blocks. If your argument makes a jump that feels poorly motivated or references something potentially unfamiliar, expect that your reader will experience vertigo.</p><p id="37b2e3d3-580d-4a87-bd75-c9a93edb2cce" class="">Most of the ideas we talk about in functional programming <em>are not easy,</em> and it doesn’t do anyone any favors to pretend this isn’t so. Expect that your readers will be pretty similar to you; if you had a problem understanding a piece of your topic, <em>call that out.</em> Point out the obstacle. Point out what they might be thinking, and then very explicitly show them what they should be thinking instead.</p><p id="77e5be5d-35be-4082-baa2-31f2e9964371" class="">For example, if your code sample uses a <a href="https://en.wikipedia.org/wiki/Functional_dependency">functional dependency</a>, it might be worth a short sentence saying “that funny bar thing is a functional dependency.” Give a tiny summary of its purpose, and provide a link for them to learn more if they need to.</p><p id="d670af73-ec6e-4efd-a1b0-de03c594a00c" class="">Another illustration: if <em>you</em> originally got confused that an “algebra in recursion schemes” is not the same thing as the algebra you learned in high-school, your readers probably will too. The first time you say “algebra” in the new context, say “this is a misleading term. This has nothing to do with solving equations like you did in high-school.”</p><p id="699dc9f3-3889-4b45-b3aa-e34764be488f" class="">More important than what you’re saying is what you’re <em>not saying.</em> If you’re giving examples of something that fits a pattern, make sure you give examples of things that <em>do not</em> fit the pattern. A concept that is applicable everywhere is useful nowhere.</p><p id="508b467d-d37b-4b90-bc2e-bf2ab776f0a7" class="">Give lots of examples. Nobody I know learns via mathematical statements, nor do they learn via long, wordy, abstract prose. People learn by seeing lots of examples, and being told explicitly how these examples relate to one another. The mathematical statements are only useful <em>after</em> you have the intuition, so save them for an appropriate time.</p><h2 id="f700029d-5de7-4d05-9800-ee78ebfc11e2" class="">Conclusion</h2><p id="fcd2e295-49ef-40b5-9c2f-0229509db343" class="">The takeaway advice from this essay is that <em>if you want lots of readers, you must make it easy for them to read.</em></p><p id="6a0a718d-60e5-47c6-9fd0-3cd2ce446eff" class="">To that end, pay lots of attention to motivation. Why should people care what you have to say? What value does it give <em>them?</em></p><p id="05280f6f-8a8e-47e9-bdad-32a74b2614bc" class="">Focus your energy on the beginnings—both of the essay as a whole, and of each paragraph. People who are unconvinced by your essay’s value will skim their way through it, and they will do that by reading only the beginnings of things.</p><p id="73fedcdc-ef2e-4bf1-949f-5d19c25591d3" class="">Make your information easy to find. Structure your argument in a tree, and make sure it supports random-access. Nobody is going to read the whole thing from start to finish. Instead they’re going to jump around, ignoring the pieces they already know, and looking for the bits they don’t.</p><p id="e9f044fe-ec3e-47a5-80bf-205d88955b3a" class="">Use lots of short paragraphs. A paragraph should correspond to a single idea.</p><p id="714db856-58c1-4485-a9e0-d9aaee14ef00" class="">Anticipate which parts of your argument will be difficult for your readers, and be proactive in trying to assuage those difficulties. Give lots of examples of what you’re talking about, and more importantly, what you’re not talking about.</p><p id="2caf387a-538d-42b2-a5ed-b9587ace1f0d" class="">Point out where you went into the weeds while learning this stuff. Steer readers away from common mistakes and misconceptions.</p><p id="c0c96e79-edf2-451c-85df-c8fab91613e9" class="">And finally, end on a high note. Leave people with a good feeling, and it will incentivize them to get to the bottom of your next piece. Inspirational calls to action are a good way to go out.</p><blockquote id="81fd1eb4-f80d-490b-8802-8eedc0486f5a" class="">Tell them what you’re going to tell them. Then tell them. Finally, tell them what you told them. -Unknown</blockquote><p id="344d1ee9-a667-425f-a33b-4bea2782da31" class="">Funny and poignant quotes are too.</p></div></article></body></html>

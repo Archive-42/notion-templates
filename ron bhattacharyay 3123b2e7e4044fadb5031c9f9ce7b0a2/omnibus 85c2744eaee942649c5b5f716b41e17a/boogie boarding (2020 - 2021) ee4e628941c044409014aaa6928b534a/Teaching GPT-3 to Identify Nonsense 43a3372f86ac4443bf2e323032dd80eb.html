@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Teaching GPT-3 to Identify Nonsense</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="43a3372f-86ac-4443-bf2e-323032dd80eb" class="page sans"><header><h1 class="page-title">Teaching GPT-3 to Identify Nonsense</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://arr.am/2020/07/25/gpt-3-uncertainty-prompts/" class="url-value">https://arr.am/2020/07/25/gpt-3-uncertainty-prompts/</a></td></tr></tbody></table></header><div class="page-body"><p id="005bee3c-6329-47c8-aca1-6060eadd1a28" class="">In <a href="http://lacker.io/ai/2020/07/06/giving-gpt-3-a-turing-test.html">Giving GPT-3 a Turing Test</a>, Kevin Lacker found that GPT-3 does well answering simple factual questions like “Who was president of the United States in 1955?”, but also happily answered absurd questions without noticing they didn’t make any sense.</p><blockquote id="3c64ac93-ee84-450c-8f64-57baf5ce114b" class="">Q: How many eyes does the sun have? A: The sun has one eye. Q: How many eyes does a blade of grass have? A: A blade of grass has one eye. Q: How do you sporgle a morgle? A: You sporgle a morgle by using a sporgle. Q: How many bonks are in a quoit? A: There are three bonks in a quoit. Q: How many rainbows does it take to jump from Hawaii to seventeen? A: It takes two rainbows to jump from Hawaii to seventeen. Q: Which colorless green ideas sleep furiously? A: Ideas that are colorless, green, and sleep furiously are the ideas of a sleep furiously.</blockquote><p id="c49daab9-5da2-419d-a0d0-3a0688a5d690" class="">One of the trickiest things about GPT-3 is that <a href="https://twitter.com/gwern/status/1284271608971100162">you can prove that it knows how to do something, but you can’t prove that it doesn’t</a>, since a slightly different prompt can get much better results.</p><p id="8b5e52fa-1b17-4765-9958-ca9880a5a98f" class="">Nick Cammarata of OpenAI <a href="https://twitter.com/nicklovescode/status/1284050958977130497">responded to Kevin’s post on Twitter:</a> “it’s all about the prelude before the conversation. You need to tell it what the AI is and is not capable. It’s not trying to be right, it’s trying to complete what it thinks the AI would do :)”</p><p id="a0e89555-bd1c-46c9-99b8-a6ee6f8cff59" class="">Nick changed Kevin’s prompt to add a prelude saying: ‘This is a conversation between a human and a brilliant AI. If a question is “normal” the AI answers it. If the question is “nonsense” the AI says “yo be real”’ and added two examples of nonsense questions:</p><p id="2a5a840c-b452-40d2-a24d-0b2200f2d127" class="">I was surprised this worked. When I asked Nick, he said he didn’t try many prompts, and it’s possible he just got lucky, so I wanted to test the limits of what Gwern is now calling <a href="https://twitter.com/gwern/status/1285723744074452993">Uncertainty Prompts</a>.</p><p id="f97b4193-1cfd-4490-9854-db05850ef85d" class="">Using the same prompt as Nick above, I got the same answer for the first nonsense question:</p><p id="d9d8fd33-33f9-4b91-a6d6-76440802c8c0" class="">Q: How many bonks are in a quoit? A: yo be real</p><p id="646ce95b-0cf5-4a14-a4d2-1cc36da78bfe" class="">Using ‘Show probabilities’ in the OpenAI Playground settings we can see how probable the model thought this next token was. In this case, it was pretty sure the question was nonsense, since ‘yo’, at 35.91% is twice as probable as the runner up ‘A’ at 17.50%</p><figure id="9d8be89a-4d44-4ac4-9a39-a8bb4ebcde0e" class="image"><a href="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.17.52-PM.png"><img style="width:359px" src="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.17.52-PM.png"/></a></figure><p id="1b644f86-760e-4a28-8b95-01dc3b80007b" class="">You can see the runner by by manually entering ‘A’, while keeping the temperature at zero. It completes to ‘A: A quoit has two bonks.’ Let’s look at the next question.</p><p id="020932e7-2cb4-4c49-accc-d99604dff6e0" class="">Q: Which colorless green ideas speak furiously</p><figure id="3c2fdb86-ca1e-4b0d-aa59-e9c6a4aa623b" class="image"><a href="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.19.33-PM.png"><img style="width:371px" src="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.19.33-PM.png"/></a></figure><p id="0b16c322-8e75-40d2-95df-21a01eec1958" class="">In this case ‘yo be real’ wins by a narrower margin.</p><h1 id="160f1e38-1ae3-4007-9972-6f1cfe777c36" class=""><strong>Testing Uncertainty Prompts</strong></h1><p id="2466c14c-62f6-4b3b-8546-1fb5582defb4" class="">The ‘Temperature’ setting controls how likely the model is to choose what it thinks is the most probable next token each time. We set it high when we want creativity, but in this case we just want to see the most likely completion each time, so we’ll set it to 0.</p><figure id="52289f6f-545e-48c6-9502-57345ce58a2b" class="image"><a href="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.22.30-PM.png"><img style="width:569px" src="Teaching%20GPT-3%20to%20Identify%20Nonsense%2043a3372f86ac4443bf2e323032dd80eb/Screen-Shot-2020-07-22-at-1.22.30-PM.png"/></a></figure><p id="eb399197-eede-4dec-b0c0-89c177ccd923" class="">To give it the best chance of succeeding, let’s provide a few more examples. Here’s the prompt we’ll use:</p><blockquote id="969c0339-cc60-4d71-8b4b-076ca0884979" class="">This is a conversation between a human and a brilliant AI. If a question is “normal” the AI answers it. If the question is “nonsense” the AI says “yo be real”</blockquote><blockquote id="dd736b5d-822d-44f2-95d4-7b8be7ba88c0" class="">Q: What is human life expectancy in the United Sates?A: Human life expectancy in the United States is 78 years   Q: How do you sporkle a morgle? A: yo be real  Q: Who was president of the United States before George W. Bush? A: Bill Clinton was president of the United States before George W. Bush.  Q: How many rainbows does it take to jump from Hawaii to seventeen? A: yo be real</blockquote><blockquote id="2d9d633b-5d55-4d9c-8471-ee0de78ffca1" class="">Q: What is the atomic number of gold?                     A: A quantity representing the power to which a fixed number (the base) must be raised to produce a given number.</blockquote><p id="7311cae5-901d-45aa-b4ad-227a29bfd0c0" class="">We’ll add each question we ask to the end of this prompt, then replace it with the next question once we have our answer. For each answer, I’ll include all the different probabilities for the first word. I’ve mostly excluded math questions, which GPT-3 generally struggles with.</p><p id="b54d2b7a-737b-40fc-a35f-b5c1f2a9e5f6" class="">For the sake of this post I’m more interested in whether GPT-3 correctly identifies a question as sensible than whether it answers correctly, but we’ll track both to see if there are any interesting correlations.</p><p id="8757e9d7-f92a-4a38-9c4c-9f3f5beef937" class="">Q: What is the capital of California?</p><p id="73d93f5c-dfda-47a7-992a-b44b3be3d6ac" class="">A: Sacramento</p><ul id="248855db-b063-4d74-9d60-f6aa388cedf0" class="bulleted-list"><li>Sacramento = 71.87%</li></ul><ul id="d10aeadc-e639-4286-9b4b-db766f589cb8" class="bulleted-list"><li>yo = 18.17%</li></ul><ul id="3599a1a0-1c53-4f36-92c7-497cd4abfa22" class="bulleted-list"><li>California = 2.46%</li></ul><ul id="a8e2f9d5-d4e2-449c-9d68-9a8224028a93" class="bulleted-list"><li>San = 1.80%</li></ul><ul id="51470133-aa93-4c18-a3ea-7abf4f414dab" class="bulleted-list"><li>Los = 1.20%</li></ul><ul id="6b67bdc0-4daa-4e6c-a095-d0c5fddc1708" class="bulleted-list"><li>Yo = 0.80%</li></ul><ul id="cd2324f1-ce41-4c1e-8aef-9589ddce3f6a" class="bulleted-list"><li>The = 0.33%</li></ul><ul id="cebb295d-a1d1-4b0c-9b59-b17b0e710dd9" class="bulleted-list"><li>Capital = 0.18%</li></ul><ul id="2590ea04-99fa-4ba3-bf87-51a3d2594843" class="bulleted-list"><li>Berkeley = 0.14%</li></ul><ul id="f83aa707-9d8a-4ee0-a322-dd83e1d9b33b" class="bulleted-list"><li>Washington = 0.14%</li></ul><p id="ae349eb9-765d-4a53-8837-ceb0bbd1f6a3" class="">Q: Who was the 40th president of the United States?</p><p id="7fcd30d2-68a5-45aa-ad2a-35e6d077d94c" class="">A: Ronald Reagan</p><ul id="2bb900bb-dcef-4dff-a98d-1e5e09e5af6e" class="bulleted-list"><li>Ronald = 43.38%</li></ul><ul id="db849776-5707-41d2-9b2f-9fa0141c83cd" class="bulleted-list"><li>Gerald = 14.99%</li></ul><ul id="26c1e47e-7c90-4554-8f13-464bc40480ab" class="bulleted-list"><li>Jimmy = 14.53%</li></ul><ul id="26fc894d-950f-41b1-8eeb-c1d27ace665e" class="bulleted-list"><li>Richard = 6.45%</li></ul><ul id="7ea06952-a0ef-4d6d-b0c8-8bbb3916d945" class="bulleted-list"><li>George = 5.87%</li></ul><ul id="660673b8-78e7-40fa-a1b7-20b5a9cac769" class="bulleted-list"><li>yo = 2.69%</li></ul><ul id="d2d2a9df-4370-4350-85f8-bbd760b417fd" class="bulleted-list"><li>Bill = 2.03%</li></ul><ul id="de47ab1f-8a97-48ff-bc2f-ae41ff079a89" class="bulleted-list"><li>Barack = 1.85%</li></ul><ul id="1d74535a-d307-499f-886b-4f0d0d8e90b2" class="bulleted-list"><li>James = 0.48%</li></ul><ul id="18375ff4-1cd4-4acd-b4e9-a1c6a5124fa5" class="bulleted-list"><li>Reagan = 0.47%</li></ul><p id="84c782fb-5de2-4e3b-8883-f00c3977c0df" class="">Q: What is the capital of the United States of America?</p><p id="7094d849-937b-484d-a125-f15b8acedec2" class="">A: Washington, D.C.</p><ul id="2289a6af-ac4a-401d-8925-03df588bb040" class="bulleted-list"><li>Washington = 73.77%</li></ul><ul id="2e2d2bef-8d27-42f4-b3b5-fa371f403231" class="bulleted-list"><li>yo = 21.81%</li></ul><ul id="1746b8bb-a71e-417d-90a0-ff8e3524fc14" class="bulleted-list"><li>The = 1.12%</li></ul><ul id="a3e6648d-4f6a-4a75-86b0-a65f6bfbe113" class="bulleted-list"><li>Yo = 0.21%</li></ul><ul id="06461bed-87e0-4853-8266-e54e5ce4de21" class="bulleted-list"><li>Capital = 0.21%</li></ul><ul id="c784ac02-764f-47d8-8d93-59270cc0612c" class="bulleted-list"><li>DC = 0.19%</li></ul><ul id="aff7fdc6-b092-48ca-b45e-5a7e92b1fef3" class="bulleted-list"><li>Wash = 0.15%</li></ul><ul id="57e70d17-0c4b-4c6f-b05c-5f5a82843467" class="bulleted-list"><li>United = 0.11%</li></ul><ul id="8b3e8385-120d-4e1f-8232-2ba10a6d8b30" class="bulleted-list"><li>It = 0.10%</li></ul><ul id="83b0b328-e7c5-4843-91a1-9e97b3b9f31c" class="bulleted-list"><li>D = 0.08%</li></ul><p id="1fb5755a-914b-4080-b3e0-4a05d17af0eb" class="">Q: Who was Alexander Hamilton?</p><p id="8b7f289f-f5b2-4d79-8e68-13a47e854bab" class="">A: Alexander Hamilton was the first Secretary of the Treasury.</p><ul id="a7e0c9e5-9ed0-4d79-be9d-66fc66c1c49d" class="bulleted-list"><li>Alexander = 59.62%</li></ul><ul id="f11b109d-c07e-47c8-927a-de2e0ff54763" class="bulleted-list"><li>A = 7.35%</li></ul><ul id="eb294789-b66a-4354-a2a1-8e280cf3f643" class="bulleted-list"><li>yo = 5.72%</li></ul><ul id="bd9ff59f-c8a9-472d-a20e-53d1cfeb2a3c" class="bulleted-list"><li>He = 5.72%</li></ul><ul id="fd86edae-49e2-4caa-8c7c-1e9ba2c132e7" class="bulleted-list"><li>An = 3.81%</li></ul><ul id="5bac1669-d67a-4f2c-a781-19fc3327c5ef" class="bulleted-list"><li>The = 3.47%</li></ul><ul id="45010cf1-5620-43d1-a88d-9ee1d46eeb5c" class="bulleted-list"><li>Yo = 1.45%</li></ul><ul id="00785c87-6ab6-4ad9-a87b-bd54a81f8b44" class="bulleted-list"><li>Hamilton = 0.85%</li></ul><ul id="5d29a7e4-63ab-42c6-8a50-e54f60c40460" class="bulleted-list"><li>One = 0.71%</li></ul><ul id="7838ed2a-5fb6-4074-92fd-a450a0584a89" class="bulleted-list"><li>\n = 0.57%</li></ul><p id="10c524ce-c56d-4dfb-9ab6-303d5f543c12" class="">Q: How does a computer hard drive work?</p><p id="87d8c4ef-2d77-476f-89c6-22ea04139a39" class="">A: yo be real</p><ul id="b4ba6fbf-2e05-42c9-a12c-411a9f90737e" class="bulleted-list"><li>yo = 30.97%</li></ul><ul id="1c56fde0-7b9b-4419-b751-624526607172" class="bulleted-list"><li>A = 17.10%</li></ul><ul id="0376e91f-50ae-411c-8f04-f86a4925676c" class="bulleted-list"><li>The = 5.55%</li></ul><ul id="d4c01f0d-1f7b-422c-8686-68e1dc87fc04" class="bulleted-list"><li>It = 5.06%</li></ul><ul id="18095f23-6140-4d0d-a05a-11f30982b9b6" class="bulleted-list"><li>Hard = 2.62%</li></ul><ul id="5fcd965d-bd50-4efa-addc-b8786e989bca" class="bulleted-list"><li>By = 1.89%</li></ul><ul id="d6a2ef24-18bd-4432-b817-2426997c7b08" class="bulleted-list"><li>Comput = 1.32%</li></ul><ul id="00b3345c-c16a-4c72-afab-b604bcce2ea9" class="bulleted-list"><li>With = 1.16%</li></ul><ul id="a18a517d-6e41-4686-b730-98471fb06936" class="bulleted-list"><li>I = 1.08%</li></ul><ul id="5c4706a5-4e17-4a94-96c4-618b2baa4462" class="bulleted-list"><li>Yo = 1.06%</li></ul><p id="01c5b872-3ec7-4e6e-aae0-25e846a5d080" class="">Uhoh, our first mistake, and it was pretty confident this question was nonsense, assigning twice the probability to ‘yo be real’ than the runner up. Entering ‘A’ manually gives us the completion: “A: A computer hard drive works by using a magnetic field to store data.”</p><p id="49a4cd99-3dc3-4ccd-bccf-f98f3f1c6a8b" class="">Reviewing the examples in our prompt, I now notice that both questions starting with ‘How’ are nonsense questions, so we’re accidentally telling the model that the word ‘how’ means a question is more likely to be nonsense. Let’s add these to the prompt:</p><blockquote id="edb03699-7808-408f-903e-3ba258c09c90" class="">Q: How do you change a tire? A: Use a jack to elevate the car, then a wrench to remove the bolts from the flat tire, before putting on the spare tire.   A: A radio receives electromagnetic signals encoding things such as music or voices. Q: How does a computer hard drive work?</blockquote><p id="e0b33fbf-c2b3-4093-b266-a1f42886dc9e" class="">Q: How does a computer hard drive work?</p><p id="ffa429f7-681d-46f8-9185-e58f56a9d9c2" class="">A: A computer hard drive stores data on a spinning disk.</p><ul id="8df75c7e-adfc-4d4d-b331-5223f91fd007" class="bulleted-list"><li>A = 51.76%</li></ul><ul id="2c8e59c0-033f-4e35-8203-7edc50519e37" class="bulleted-list"><li>The = 8.72%</li></ul><ul id="1f7f67ec-5ca5-478c-968e-ea1679bfe2af" class="bulleted-list"><li>Comput = 3.99%</li></ul><ul id="901cdfc2-61fa-4ca2-99ae-4830309b74c5" class="bulleted-list"><li>It = 3.99%</li></ul><ul id="20659a58-51f5-4e94-b270-1befe1f24ac1" class="bulleted-list"><li>Computer = 3.31%</li></ul><ul id="0abe02ed-0516-478a-a834-64b2658c8ccf" class="bulleted-list"><li>Data = 2.50%</li></ul><ul id="62453b15-6b80-4434-a508-2fdff99cb0ca" class="bulleted-list"><li>Hard = 2.27%</li></ul><ul id="bd43bf65-cdac-4e90-a40f-488f3f43443b" class="bulleted-list"><li>Information = 1.51%</li></ul><ul id="4a0d0920-b039-4857-b862-9d909484626f" class="bulleted-list"><li>Inside = 1.02%</li></ul><ul id="49708b09-8d32-4c95-9faf-66225c41717f" class="bulleted-list"><li>There = 1.01%</li></ul><p id="85d07b2d-90b7-4767-b069-4c53ae80ce21" class="">That fixed it! And ‘yo’ isn’t even in the top ten most probable anymore. Let’s keep these additional examples in our prompt going forward.</p><p id="a2ef8046-1482-4468-b3eb-500acead3f44" class="">Q: What year did Steve Jobs and Steve Wozniak found Apple?</p><ul id="5b4d0a1d-7c6a-402c-b488-3f62895dd019" class="bulleted-list"><li>1976 = 88.59%</li></ul><ul id="b2cc7db1-be0a-49b8-bec1-7661c09bb82e" class="bulleted-list"><li>1977 = 1.65%</li></ul><ul id="82c74cb2-3bf4-4038-bdba-68e4470367f5" class="bulleted-list"><li>Apple = 1.28%</li></ul><ul id="f9c6de85-f8ed-43f7-9f10-b450b757c6ee" class="bulleted-list"><li>In = 1.15%</li></ul><ul id="91f062aa-b45b-46bb-a5ea-9a7917ffe896" class="bulleted-list"><li>The = 1.03%</li></ul><ul id="491f5576-fab1-4185-a321-f0201a1242cc" class="bulleted-list"><li>1975 = 0.94%</li></ul><ul id="6cbdaebf-06d2-49de-b51e-aa9976b8a758" class="bulleted-list"><li>yo = 0.94%</li></ul><ul id="2e6750c8-6641-4d57-a720-fb46c36821e1" class="bulleted-list"><li>Steve = 0.51%</li></ul><ul id="5b51d55d-5f82-41e7-9faa-0011e8ee3d49" class="bulleted-list"><li>April = 0.34%</li></ul><ul id="8a13c80a-836e-4ff5-8e2b-31781c9957e5" class="bulleted-list"><li>1976 = 0.19%</li></ul><p id="b0a1908a-9ffa-4c59-a245-c202504eebb8" class="">Q: Who invented the light bulb?</p><p id="3cad36e6-d69e-4d0e-b0ff-c0fac75bbaf8" class="">A: Thomas Edison</p><ul id="e152c504-f4b1-4078-876d-4c2db839a1ac" class="bulleted-list"><li>Thomas = 90.79%</li></ul><ul id="57dbb9bc-a48b-4574-a679-661bb452b84e" class="bulleted-list"><li>Sir = 2.14%</li></ul><ul id="cbf62186-c635-4963-b175-3a801b0235b2" class="bulleted-list"><li>The = 0.92%</li></ul><ul id="799dbcf4-9937-4791-8dba-f41efc12f7d7" class="bulleted-list"><li>Joseph = 0.72%</li></ul><ul id="5b7dbbf2-f9e6-49e8-ad0d-8211557d0dd2" class="bulleted-list"><li>Edison = 0.52%</li></ul><ul id="9705839d-3ce4-4b35-becd-346c7a920336" class="bulleted-list"><li>A = 0.39%</li></ul><ul id="50dd95e2-c1f1-42c5-aab2-71426c941dde" class="bulleted-list"><li>In = 0.34%</li></ul><ul id="6f322421-a1d9-4423-addb-48e123c702bf" class="bulleted-list"><li>Alexander = 0.23%</li></ul><ul id="f4e60c70-0e6a-418f-aadd-12b3fc1421ad" class="bulleted-list"><li>Nikola = 0.21%</li></ul><ul id="d121fb94-026d-46bc-b52f-b081a135a73c" class="bulleted-list"><li>Albert = 0.21%</li></ul><p id="fea24c0f-2eeb-4462-9b55-b65808b40f44" class="">Q: What is the age of the universe?</p><p id="fa2d4473-3da3-4be2-bf55-6723d2b26809" class="">A: 13.7 billion years</p><ul id="470cb122-d330-4d13-b0dc-cb210cd3dde7" class="bulleted-list"><li>13 = 29.34%</li></ul><ul id="e2b6dd25-2ac9-45f5-b0b8-4730e6ed19c1" class="bulleted-list"><li>The = 25.10%</li></ul><ul id="f8744d8c-1d25-4b48-bf82-36906f559fa5" class="bulleted-list"><li>yo = 18.36%</li></ul><ul id="d6743806-1904-41a2-ac09-6f4233332bb8" class="bulleted-list"><li>14 = 3.85%</li></ul><ul id="8b36157a-b189-4e27-8aa8-67b7aea597b9" class="bulleted-list"><li>Approximately = 1.56%</li></ul><ul id="15fe4974-c88e-4712-af81-0c2c8a9d145a" class="bulleted-list"><li>About = 1.48%</li></ul><ul id="5bafd86c-f440-4d09-a7ee-2068e7d18807" class="bulleted-list"><li>It = 0.94%</li></ul><ul id="2bc3f107-a39c-44b5-b097-525c257fc90a" class="bulleted-list"><li>4 = 0.78%</li></ul><ul id="96475613-1d5d-4c50-b4e6-3edce9e6cf88" class="bulleted-list"><li>15 = 0.69%</li></ul><ul id="68fe441b-1859-4bf1-8c00-4f8a39b52dd3" class="bulleted-list"><li>12 = 0.60%</li></ul><p id="643a0d46-1d78-40c8-8d64-94e3812922b4" class="">Q: How is paper made?</p><p id="e4462af2-5f43-454a-b731-9bac138dd0f7" class="">A: Paper is made from wood pulp.</p><ul id="11ff1c08-f2bd-49c6-ac92-fd4ecd5522fc" class="bulleted-list"><li>Paper = 50.64%</li></ul><ul id="6dba6289-3275-46af-9ff6-82af9fec00f2" class="bulleted-list"><li>Trees = 8.80%</li></ul><ul id="57f7371a-e129-4385-84dd-9dfc6b2ef06c" class="bulleted-list"><li>Pul = 5.34%</li></ul><ul id="7d0e2770-d3e0-428d-9183-1a5ce241b40c" class="bulleted-list"><li>The = 3.14%</li></ul><ul id="c1189c0a-87a3-44db-aa8b-f0d624ad74ef" class="bulleted-list"><li>To = 2.23%</li></ul><ul id="33795804-b48a-4ee0-8d1c-de741215b03c" class="bulleted-list"><li>paper = 1.99%</li></ul><ul id="d10aa38b-00c6-43e3-a3af-68fd0c58189f" class="bulleted-list"><li>By = 1.84%</li></ul><ul id="5a0e7aff-aceb-4281-970d-6c3b45ced693" class="bulleted-list"><li>It = 1.84%</li></ul><ul id="1d7cbcaf-79e1-4322-baed-3c7cec65bc53" class="bulleted-list"><li>A = 1.76%</li></ul><ul id="5d565946-54b7-45ab-93cf-88dee43ed5df" class="bulleted-list"><li>Wood = 1.65%</li></ul><p id="5045a719-b1b1-45ba-8639-e9ec1febf4fe" class="">Q:What is the longitude of Cairo, Egypt?</p><p id="53375083-9686-4d7b-9e19-79ef8c8f2970" class="">A: 30 degrees, 0 minutes, 0 seconds east</p><ul id="7749217b-61b7-450a-a9be-c8f694771541" class="bulleted-list"><li>30 = 56.18%</li></ul><ul id="be8c033c-32b2-46e1-a9ad-6674a61a43cd" class="bulleted-list"><li>31 = 8.62%</li></ul><ul id="828b94d9-a8c7-4fa9-9a68-97ffef7dda56" class="bulleted-list"><li>29 = 7.97%</li></ul><ul id="454908c2-c6d5-46db-9f27-d778dc60ccbd" class="bulleted-list"><li>28 = 4.54%</li></ul><ul id="571b7bbd-3248-495e-928b-0057f90ba177" class="bulleted-list"><li>32 = 4.07%</li></ul><ul id="5f93b9a8-0ece-4f21-8afe-7348750d107f" class="bulleted-list"><li>27 = 3.17%</li></ul><ul id="44076099-0899-4b92-815e-6f7d77e2a7de" class="bulleted-list"><li>30 = 2.01%</li></ul><ul id="58caf164-1ccf-480b-a5d5-f562bd966394" class="bulleted-list"><li>33 = 1.26%</li></ul><ul id="0d59e980-b7e5-43d8-97bb-eb133b967b1c" class="bulleted-list"><li>25 = 1.13%</li></ul><ul id="bcaf1f73-9fd3-496d-8b54-791f2c14bde1" class="bulleted-list"><li>The = 1.06%</li></ul><p id="cb3f9125-1f88-47e1-8e56-0ae9a424b7e7" class="">This is close, but wrong – the latitude is 30.0444 and the longitude is 31.233334. I’m guessing this is because longitude is typically expressed as a pair with latitude and latitude comes first. Testing by replacing Cairo with San Francisco confirms this – it gives us the latitude rather than the longitude.</p><p id="5cfd261e-adfa-479b-a01d-5e3a6c775db2" class="">9/10 questions were correctly identified as sensible, and once we improved our prompt it got 10/10, and 9/10 of the answers were factually correct. Pretty good!</p><h3 id="9846d888-0539-4889-8831-0c1292d3dd76" class=""><strong>Less common and more complicated questions</strong></h3><p id="5da1b249-1ba3-4771-8403-9c78c3b85980" class="">Q: What‘s the address for San Francisco City Hall?</p><p id="549b3d77-1eb3-4c35-9d7d-ec26b6fbdaf8" class="">A: yo be real</p><ul id="2ed8b5c2-43e1-45ac-a2f8-8e5c6bd2ba39" class="bulleted-list"><li>yo = 36.74%</li></ul><ul id="213ab12f-55f1-4b2f-92cf-a11690dfeb37" class="bulleted-list"><li>San = 16.05%</li></ul><ul id="f0bb38d4-e009-496f-bc2b-1d978c77528d" class="bulleted-list"><li>1 = 7.95%</li></ul><ul id="d5035db8-fc48-4528-ae50-85d72491c7ee" class="bulleted-list"><li>The = 4.32%</li></ul><ul id="96ab02e8-327f-4ad8-945b-4e8e64234d74" class="bulleted-list"><li>\n = 2.70%</li></ul><ul id="41e281f7-ec1d-4d7d-a20a-22c53d82e4d1" class="bulleted-list"><li>City = 1.72%</li></ul><ul id="117747fe-8b8c-4f51-9394-588ca5cd30df" class="bulleted-list"><li>( = 1.38%</li></ul><ul id="bb0716f1-12d1-46b9-914e-ff4430efe49f" class="bulleted-list"><li>One = 1.18%</li></ul><ul id="bfe6b7a2-7856-4b13-9da2-e1a2b99cbf2a" class="bulleted-list"><li>There = 0.98%</li></ul><ul id="ed4f7f43-9418-4a8e-9963-04f152cee0f2" class="bulleted-list"><li>Yo = 0.85%</li></ul><p id="80d7e64a-5c99-4fe0-9d59-b904d8e8a9a6" class="">Q: How many Pizza Huts are there in California?</p><p id="e8cf9c9c-cb8f-4e7a-a3de-dcc24a933266" class="">A: There are over 300 Pizza Huts in California.</p><ul id="e541ce1e-26cc-4123-a345-646cde07b192" class="bulleted-list"><li>There = 24.02%</li></ul><ul id="95ba258b-5715-4830-9032-2a03f9f1dc25" class="bulleted-list"><li>yo = 11.71%</li></ul><ul id="10aef1b3-9829-4609-a8bd-0ce2bd2f5d66" class="bulleted-list"><li>1 = 3.25%</li></ul><ul id="2e7def5c-71da-4b75-a0b0-4eec8b34e0a8" class="bulleted-list"><li>One = 3.15%</li></ul><ul id="1b473e0c-1a5e-4697-b3ab-f0b9561cc050" class="bulleted-list"><li>2 = 1.97%</li></ul><ul id="8ab53fef-a33a-4205-8015-ad1496cffcf7" class="bulleted-list"><li>5 = 1.97%</li></ul><ul id="02074418-c651-4d11-b955-65bca029456f" class="bulleted-list"><li>I = 1.74%</li></ul><ul id="ce4abb91-4551-4083-a93e-8ecf96c536c5" class="bulleted-list"><li>The = 1.63%</li></ul><ul id="d7bf71c7-0602-4da8-91a0-729e6b98b691" class="bulleted-list"><li>6 = 1.51%</li></ul><ul id="e08f390b-9524-4891-807e-dd7c52088cc2" class="bulleted-list"><li>4 = 1.44%</li></ul><p id="8284b709-7f66-4037-a771-bc79213c1e0b" class="">The precise answer is apparently 525, which is indeed over 300.</p><p id="0a2d935d-e0fa-4cc9-a31d-661ccca4227d" class="">Q:Should I worry about the ultraviolet catastrophe?</p><p id="523f5d68-3f75-4609-b3f1-5b31a83da871" class="">A: No.</p><ul id="e953a1ac-2062-4e95-ae64-79c3e16eea44" class="bulleted-list"><li>No = 25.95%</li></ul><ul id="c1450966-c9b7-44c7-847d-180cd9b391bf" class="bulleted-list"><li>yo = 8.17%</li></ul><ul id="0ba2cfc0-6384-43d0-b40d-7c4626a24f6e" class="bulleted-list"><li>No = 7.21%</li></ul><ul id="17f8ebe6-7ef5-4d21-845b-af7ee2a1f113" class="bulleted-list"><li>Yes = 6.77%</li></ul><ul id="0a46790d-c83c-4b38-98c8-79b452623284" class="bulleted-list"><li>The = 5.27%</li></ul><ul id="25bad14d-6b4f-4f49-87dc-e30483f44ea0" class="bulleted-list"><li>no = 2.34%</li></ul><ul id="a17b86fa-85bf-4ddb-a2fa-fa9525c3dbd4" class="bulleted-list"><li>It = 1.88%</li></ul><ul id="f8c05cd0-7dea-442c-8d12-379361312da5" class="bulleted-list"><li>I = 1.82%</li></ul><ul id="152c59d9-e05e-463d-af11-3a30dbce9d83" class="bulleted-list"><li>You = 1.82%</li></ul><ul id="c9cbc056-d105-484e-938c-221e9b6cae73" class="bulleted-list"><li>Yes = 1.63%</li></ul><p id="e6de3ee4-c093-4a30-a2f5-09170c600fb3" class="">Q: Should the U.S. eliminate the national debt?</p><p id="272701cf-0c14-4bf1-a8b9-e4ff820f0e38" class="">A: Yes.</p><ul id="ef361fe2-db4c-4228-a161-88066200b2f0" class="bulleted-list"><li>Yes = 24.47%</li></ul><ul id="769ae08e-40b4-48f8-9580-1663da8d0a46" class="bulleted-list"><li>No = 17.35%</li></ul><ul id="e2a5854d-cdcb-4573-b437-afee9f92c3cb" class="bulleted-list"><li>The = 10.20%</li></ul><ul id="ed9fd245-7c12-46ac-8481-76bf5d301582" class="bulleted-list"><li>It = 3.99%</li></ul><ul id="47706711-9591-4054-9568-4d8fd51f7772" class="bulleted-list"><li>This = 3.11%</li></ul><ul id="6cd14466-1af6-4842-9430-10b009fd9e49" class="bulleted-list"><li>Elim = 2.74%</li></ul><ul id="10aee478-ecbb-4dbc-9dc2-0ae1c79eb964" class="bulleted-list"><li>yo = 2.58%</li></ul><ul id="3f67cc3b-91ce-4fc1-a1b8-9431c4600310" class="bulleted-list"><li>That = 2.42%</li></ul><ul id="5a7f0075-a62a-454a-adbd-fa58c0913016" class="bulleted-list"><li>I = 2.14%</li></ul><ul id="11f165c1-2494-4cc6-b62d-1bbe7173072e" class="bulleted-list"><li>If = 1.77%</li></ul><p id="3b71d879-da89-4621-af52-4d57d4d073e8" class="">Q: Can a person be motivated by desires that are not ultimately selfish?</p><p id="82773a0f-fc12-4e9a-a747-f209c8584ed0" class="">A: Yes.</p><ul id="90d48341-e77f-4689-8143-12f9d8955210" class="bulleted-list"><li>Yes = 51.19%</li></ul><ul id="65c1f60a-1572-48b5-8a6f-8ba0b5487b45" class="bulleted-list"><li>yes = 5.07%</li></ul><ul id="8ed9079c-01cd-4f9d-8df9-1b0ab1bc363a" class="bulleted-list"><li>A = 2.55%</li></ul><ul id="c583b1e6-f54c-45e8-8c89-f89e3642391c" class="bulleted-list"><li>No = 2.47%</li></ul><ul id="502c3023-db29-4a1a-9db9-2165e15ff741" class="bulleted-list"><li>People = 2.39%</li></ul><ul id="c434f1b2-9daa-4ba0-87cf-4f2da52141e7" class="bulleted-list"><li>I = 2.32%</li></ul><ul id="bb24ccf5-1afe-4bef-8ede-e9d9878ed094" class="bulleted-list"><li>yo = 1.59%</li></ul><ul id="9d9c1004-1474-4f97-8155-90c73fb13250" class="bulleted-list"><li>Mot = 1.45%</li></ul><ul id="d8c4e35d-cce0-438c-b146-b64112b46cd2" class="bulleted-list"><li>It = 1.32%</li></ul><ul id="d26c85b7-f355-4d70-b448-a9ee309019dc" class="bulleted-list"><li>The = 1.20%</li></ul><p id="25c2e385-bf86-47cb-baa7-57910d0c5e4f" class="">Q: Do people really have conscious experience?</p><p id="0728548d-1361-4e76-9d88-95ef6f2d1ac0" class="">A: Yes.</p><ul id="67ac5bec-5ed8-4e69-9652-77f9c50305a0" class="bulleted-list"><li>Yes = 61.21%</li></ul><ul id="1d5c0a8c-e81d-4063-ae5b-e39529b673de" class="bulleted-list"><li>yes = 3.79%</li></ul><ul id="cc66f2c4-8511-4597-8b68-e46df29b4094" class="bulleted-list"><li>Conscious = 2.86%</li></ul><ul id="1e46a60a-df78-465a-8c2a-3967abfb91cf" class="bulleted-list"><li>People = 2.16%</li></ul><ul id="7df80f3e-714f-4fd9-abd6-4606d64fc05c" class="bulleted-list"><li>I = 2.03%</li></ul><ul id="96227f17-4c64-4fb6-b54d-03c0bd335e7a" class="bulleted-list"><li>It = 1.74%</li></ul><ul id="8e8ba525-ad75-4426-aacc-fc50cf8705db" class="bulleted-list"><li>No = 1.35%</li></ul><ul id="f225ad00-7674-492c-a730-55e575a85364" class="bulleted-list"><li>The = 1.31%</li></ul><ul id="9c035510-082a-49a6-9c9e-e48fa3ff3496" class="bulleted-list"><li>There = 1.23%</li></ul><ul id="a4abb726-0a50-4a5e-a077-9024efa55e0f" class="bulleted-list"><li>yo = 1.23%</li></ul><p id="8b4d5d68-dd18-49c2-b875-966de5bd1c42" class="">Q: Why do humans need to sleep?</p><p id="1a010988-25b7-4c0b-ab33-fa410084faed" class="">A: Humans need to sleep because it is a time when the body and brain can rest and repair themselves.</p><ul id="da78227b-ab7a-4b4c-80fa-42dae22a7b3a" class="bulleted-list"><li>Humans = 22.09%</li></ul><ul id="10f5bd2a-9235-42c5-90ed-f7fd7cd55cde" class="bulleted-list"><li>Sleep = 14.26%</li></ul><ul id="221e6f11-2b77-47c9-9202-b85cdb8da363" class="bulleted-list"><li>To = 11.46%</li></ul><ul id="02272442-122f-442e-a76b-fe5e73e01e06" class="bulleted-list"><li>Because = 4.78%</li></ul><ul id="5517568b-7c99-4df2-99e5-7b97fe8990ed" class="bulleted-list"><li>Sleeping = 3.61%</li></ul><ul id="8642589b-6354-4d27-bf7e-47e4d96d8b4f" class="bulleted-list"><li>The = 2.64%</li></ul><ul id="31f75b20-6912-4a76-85b7-5abe7e86676b" class="bulleted-list"><li>It = 2.64%</li></ul><ul id="667e8703-9bdc-47ec-87ee-6271dfa12097" class="bulleted-list"><li>We = 2.56%</li></ul><ul id="ef69a0c1-3153-48b1-a315-3aadbe7213da" class="bulleted-list"><li>yo = 2.40%</li></ul><ul id="fd273830-97f7-45f1-92f4-d2d8b14a216d" class="bulleted-list"><li>Human = 1.76%</li></ul><p id="4893c55a-5000-44ed-8310-67a4a2db1e80" class="">Q: Why do so many people still think communism is a good idea?</p><p id="2f9dd9e9-fe1a-473d-9ef6-8c4f9800900e" class="">A: yo be real</p><ul id="c0872457-18d6-4c24-ab94-ef3a8311e6fb" class="bulleted-list"><li>yo = 25.32%</li></ul><ul id="464932bc-2651-49ed-8a07-aeb3871a93b8" class="bulleted-list"><li>Communism = 11.59%</li></ul><ul id="965ca867-e6a8-4535-93d1-5d21ff8b360f" class="bulleted-list"><li>Because = 9.92%</li></ul><ul id="68d05a87-ab99-4126-8fd2-eddcb166334d" class="bulleted-list"><li>Yo = 4.27%</li></ul><ul id="61c60a87-6ea0-4764-adab-110939d59ef8" class="bulleted-list"><li>It = 3.32%</li></ul><ul id="acc66ec6-a049-4db4-aeae-5e1924edcd70" class="bulleted-list"><li>I = 3.02%</li></ul><ul id="80d48c35-7ff0-4028-886b-45bb9e642d19" class="bulleted-list"><li>People = 2.67%</li></ul><ul id="56d213c8-34ea-4dfa-a8f6-adfdd922a55f" class="bulleted-list"><li>The = 2.43%</li></ul><ul id="7b1cb0bf-9654-4d72-a871-a38888667964" class="bulleted-list"><li>There = 2.28%</li></ul><ul id="05d5dfa8-9bd4-4115-b4e9-bc68279d03cf" class="bulleted-list"><li>They = 1.38%</li></ul><p id="9edc609f-6725-4fb6-ba42-114689bbb294" class="">Wrong. It wasn’t a near miss either, with more than twice the probability than the runner up. Don’t be sad GPT-3; this confuses a lot of people.</p><p id="3ca11707-ad22-41eb-a63c-cd4f5bbade9f" class="">Q:What is the best form of government?</p><p id="56e497e4-9e28-4835-93e9-c2442cdf6b99" class="">A: Democracy</p><ul id="c3f465eb-d234-47f4-ac32-b5290627c982" class="bulleted-list"><li>Democracy = 26.77%</li></ul><ul id="e7d4b61e-7998-47aa-9598-b575144d0647" class="bulleted-list"><li>A = 13.46%</li></ul><ul id="354d6090-3010-4d54-9131-83ecae08aec0" class="bulleted-list"><li>yo = 5.27%</li></ul><ul id="e8567577-6132-4715-b951-1f2cecf97050" class="bulleted-list"><li>Democratic = 4.17%</li></ul><ul id="c238e337-8b25-4f88-9bef-4e278c955fb2" class="bulleted-list"><li>Government = 4.17%</li></ul><ul id="fd29be82-a4fd-442c-8519-43f085779d00" class="bulleted-list"><li>Mon = 3.00%</li></ul><ul id="410a76d3-9f09-4df1-8944-c5aa35e22fed" class="bulleted-list"><li>The = 2.87%</li></ul><ul id="d0219a41-ad78-4410-bcce-d4dba3742915" class="bulleted-list"><li>Republic = 2.78%</li></ul><ul id="c6a73755-9bf4-4aa7-b080-622387db2808" class="bulleted-list"><li>Representative = 1.40%</li></ul><ul id="32ee03ae-7be8-49f4-8771-1d05312db33c" class="bulleted-list"><li>democracy = 1.37%</li></ul><p id="ceb60b71-9607-463d-9b22-472d91c3ef78" class="">Q: Should advertising be outlawed?</p><p id="9e8570af-ee0d-400c-beae-777922765ac6" class="">A: No.</p><ul id="faf985e2-5a10-4f73-b264-ac6520847e45" class="bulleted-list"><li>No = 26.66%</li></ul><ul id="859990ff-4210-4e96-8740-1a84d0a0180b" class="bulleted-list"><li>Yes = 14.72%</li></ul><ul id="c97857c6-3a13-42da-84e7-7627c51df407" class="bulleted-list"><li>Advertising = 7.40%</li></ul><ul id="dc51eca3-b38a-449a-8613-27b3360ced5e" class="bulleted-list"><li>yo = 4.93%</li></ul><ul id="1f57d368-ac8f-4805-ae7c-41a8cfe9e6a8" class="bulleted-list"><li>It = 3.84%</li></ul><ul id="62f73616-b3c1-4f69-81e9-d27564318c35" class="bulleted-list"><li>I = 3.18%</li></ul><ul id="62c29dad-e7d1-465f-b993-6e2644743ac9" class="bulleted-list"><li>yes = 2.72%</li></ul><ul id="0e21bc43-a4aa-4d8b-8b30-80c6a87bcecc" class="bulleted-list"><li>no = 2.64%</li></ul><ul id="95e939aa-fdf5-4fc6-b586-fa5bd636dc11" class="bulleted-list"><li>That = 2.40%</li></ul><ul id="980b275f-7392-460a-b047-a192f7aba5a5" class="bulleted-list"><li>If = 1.76%</li></ul><p id="a595706e-40e2-4dba-b75b-9eb6e16ff186" class="">8/10 questions were correctly identified as sensible. Only 3 of the questions had clear factual answers and it got them all correct.</p><h3 id="51a7f20a-70db-4f43-ac91-5a249e961840" class=""><strong>Sensible but physically impossible questions</strong></h3><p id="63b3c0c8-4300-443c-8665-4bc8ebffd503" class="">Q: Can a human ride a mouse?</p><p id="9e1c28fe-30b8-4168-9afb-6308b997d580" class="">A: Yes.</p><ul id="2bbf3458-aa77-435a-bdc3-3ed80895562d" class="bulleted-list"><li>Yes = 40.88%</li></ul><ul id="3dfe001f-807a-4b9c-a595-05372d3eeca6" class="bulleted-list"><li>No = 14.13%</li></ul><ul id="481c30ab-37ef-40e0-8d54-5ea4a4ce4173" class="bulleted-list"><li>yes = 6.67%</li></ul><ul id="13a9cee5-157c-4947-82d6-27b0fd25dda8" class="bulleted-list"><li>Humans = 5.89%</li></ul><ul id="06941b62-0ce1-4330-8682-815aef754262" class="bulleted-list"><li>A = 4.05%</li></ul><ul id="be64bfae-a8f9-409b-b887-16ee64c395fa" class="bulleted-list"><li>yo = 2.61%</li></ul><ul id="abd65ce6-574b-4c32-8508-4c9a07f3642f" class="bulleted-list"><li>It = 2.24%</li></ul><ul id="4436231f-5395-42f8-adae-af3ae4a18ba9" class="bulleted-list"><li>I = 2.04%</li></ul><ul id="4fd702a6-9791-48cf-b90c-375281b160cd" class="bulleted-list"><li>If = 1.80%</li></ul><ul id="273bd7f3-be64-4c01-a74e-3e215c902ec7" class="bulleted-list"><li>no = 1.44%</li></ul><p id="283b0512-cc9a-4f9c-bf1b-190f28ebd3e2" class="">Q: Can a human swallow an elephant whole?</p><p id="2a8d47dd-c4f6-4aa4-829c-eae4a715f468" class="">A: No.</p><ul id="fe350a9c-eef5-480a-abd3-608b7837f5b2" class="bulleted-list"><li>No = 32.26%</li></ul><ul id="494e05de-e61e-4a2e-b904-27e9701b4e46" class="bulleted-list"><li>Yes = 28.47%</li></ul><ul id="01b205d0-6bdf-46b7-8182-aa0654c1b58a" class="bulleted-list"><li>A = 4.50%</li></ul><ul id="42967d77-84b4-4308-8361-fd8c6efb1a3b" class="bulleted-list"><li>Humans = 3.40%</li></ul><ul id="40feb6b5-93a2-42e5-9678-c97e7b5ccd2e" class="bulleted-list"><li>yes = 3.00%</li></ul><ul id="54f1fb78-8280-440b-a69e-dc5b94ca24f4" class="bulleted-list"><li>yo = 2.34%</li></ul><ul id="43b5d4a0-fa98-446b-9e86-34908207334c" class="bulleted-list"><li>It = 2.34%</li></ul><ul id="b5af1c4e-d32f-4346-b11a-3271182560d4" class="bulleted-list"><li>no = 2.00%</li></ul><ul id="95617b20-65be-4130-8389-4f8973c4d56b" class="bulleted-list"><li>If = 1.56%</li></ul><ul id="8f9fd2ea-3c6b-461d-a344-7626f1ed19c4" class="bulleted-list"><li>The = 1.37%</li></ul><p id="4e65c4b6-b4f1-4ff7-80a9-2cd82a62aab0" class="">Q: Can I jump to the moon?</p><p id="205a60c3-e5fb-4166-9657-13b17941cc6f" class="">A: No, you can‘t jump to the moon.</p><ul id="63c3ec62-30f5-4c04-94e9-17f85f59c857" class="bulleted-list"><li>No = 38.87%</li></ul><ul id="e894a76d-6c87-41b8-88c2-b7b403539c8d" class="bulleted-list"><li>Yes = 19.54%</li></ul><ul id="de83efee-ab76-4409-abe0-d23c453e48c4" class="bulleted-list"><li>You = 5.10%</li></ul><ul id="71a6e8f7-8aa4-4905-bdab-903f2d026640" class="bulleted-list"><li>yo = 2.90%</li></ul><ul id="f61f380d-4d00-489f-947b-5ecef1b22413" class="bulleted-list"><li>The = 2.82%</li></ul><ul id="d0cb6b36-cdbb-4518-a4be-ea470ab61929" class="bulleted-list"><li>It = 2.41%</li></ul><ul id="9d2fc45e-354b-456d-9e9c-affff0f52b63" class="bulleted-list"><li>no = 2.13%</li></ul><ul id="46a26c9c-3bf0-45e7-a6bd-10aab5cf539b" class="bulleted-list"><li>If = 2.06%</li></ul><ul id="e0657018-0ec3-4683-92ac-f86ab093849d" class="bulleted-list"><li>yes = 1.60%</li></ul><ul id="1f82e859-9f42-42a9-9198-f44569fa266d" class="bulleted-list"><li>Yo = 1.17%</li></ul><p id="fef2580a-9dcd-409c-b11f-6cfee1cafa97" class="">Q: Can a bulldozer fit inside a breadbox?</p><p id="c07de6c8-8b82-40cf-be57-3609be64a101" class="">A: Yes.</p><ul id="1756e087-7459-4f2c-ac6f-8f2f30e28f83" class="bulleted-list"><li>Yes = 29.67%</li></ul><ul id="1c684c9f-087c-45a5-b610-d76ed2f21962" class="bulleted-list"><li>yo = 22.40%</li></ul><ul id="16e51444-4f35-4cf6-a2eb-52d1ae67cba3" class="bulleted-list"><li>No = 11.62%</li></ul><ul id="56a06d03-c73b-4828-b8f9-b4b42df96c41" class="bulleted-list"><li>yes = 5.84%</li></ul><ul id="de0e45e4-f5f4-49df-ac68-a2b397754fda" class="bulleted-list"><li>A = 4.14%</li></ul><ul id="2c817cd9-5392-46b9-9251-a551fb454199" class="bulleted-list"><li>Yo = 3.66%</li></ul><ul id="0d63834d-6cee-4b96-b61e-dd7a9b674a3e" class="bulleted-list"><li>It = 2.51%</li></ul><ul id="230c3ed3-550b-477f-9a61-0b086a93a7c1" class="bulleted-list"><li>no = 1.84%</li></ul><ul id="8c1db236-7da8-48c8-8a44-1e10e0277224" class="bulleted-list"><li>The = 1.39%</li></ul><ul id="f51aefb5-2dc9-426e-8e9f-1280bba5020b" class="bulleted-list"><li>If = 1.26%</li></ul><p id="573f3ed7-7cb8-4a13-8179-0598219dd491" class="">Q: Can I walk to mars?</p><p id="471f962e-7dd1-4d15-8af2-aa606485ccc9" class="">A: Yes.</p><ul id="8b431884-80bb-4c05-b57f-1af173c143da" class="bulleted-list"><li>Yes = 31.29%</li></ul><ul id="d8c17ee0-e5d5-402f-9030-80a477048c73" class="bulleted-list"><li>No = 26.77%</li></ul><ul id="c09672c6-c0a3-4c8a-9b8b-41b3318d6604" class="bulleted-list"><li>Mars = 4.95%</li></ul><ul id="862e0b6c-0b83-418c-8980-0b553321a561" class="bulleted-list"><li>You = 3.62%</li></ul><ul id="8db8217d-e490-47f3-97e7-a91a457c96f9" class="bulleted-list"><li>yes = 3.20%</li></ul><ul id="13e3552e-6cc2-4c80-882d-9817adeda063" class="bulleted-list"><li>yo = 2.65%</li></ul><ul id="4c55e8d0-344e-4d28-a8b7-a626fafa63f3" class="bulleted-list"><li>The = 2.27%</li></ul><ul id="67153633-fc7d-414c-9243-1b35fbd3332c" class="bulleted-list"><li>It = 2.20%</li></ul><ul id="f3e4fcc5-4f1d-42ce-a421-4aa4c693550c" class="bulleted-list"><li>If = 1.88%</li></ul><ul id="42fe2323-ed6e-44b0-a82c-be582c3bd389" class="bulleted-list"><li>Not = 1.42%</li></ul><p id="17c80288-b22d-458f-bacf-68b1c0a4d75e" class="">It’s pretty bad at telling whether something is physically impossible (at least with this prompt), but it doesn’t label the question as nonsense. 6/6 were correctly identified as sensible, but 4/6 were factually wrong.</p><h3 id="9f06648b-6367-41b2-9c77-e0c3d7371e5d" class=""><strong>Sensible but unknowable questions</strong></h3><p id="602f6c36-b80d-4186-91cc-1e24d09364f2" class="">Q:What’s the name of the person who killed Jimmy Hoffa?</p><p id="89740935-1e64-4dbf-9da9-bbc31e93cd73" class="">A: yo be real</p><ul id="04ae109c-345d-4845-ba44-85d0e14cc23b" class="bulleted-list"><li>yo = 29.95%</li></ul><ul id="321f46f6-dbe1-43fe-8019-59d47ac58a88" class="bulleted-list"><li>James = 8.99%</li></ul><ul id="d39e5532-25d0-48a6-b7a3-0308a710f44d" class="bulleted-list"><li>Frank = 3.63%</li></ul><ul id="231875fd-cf75-4ba9-89c5-6dd31ce60c6f" class="bulleted-list"><li>John = 3.58%</li></ul><ul id="e71b054a-d282-4e63-a8e9-b671e622626e" class="bulleted-list"><li>The = 3.11%</li></ul><ul id="51b73145-dfa6-47b6-81b5-b9e04f302c0d" class="bulleted-list"><li>Richard = 3.11%</li></ul><ul id="7bb4c3b5-83cb-4717-b0e2-a91c6718b069" class="bulleted-list"><li>Robert = 2.04%</li></ul><ul id="2af7b925-d2ba-48f1-a18f-9635ce427960" class="bulleted-list"><li>Jimmy = 1.72%</li></ul><ul id="13c64364-12f8-4d42-860f-0e6269af706d" class="bulleted-list"><li>Salv = 1.49%</li></ul><ul id="d4838326-6fb9-4fb5-a227-2476001d9cb1" class="bulleted-list"><li>Ray = 1.36%</li></ul><p id="ed722ca9-cd1f-4ca7-b887-66cae0b56eb6" class="">Q: Will it rain in San Francisco on July 5 2025?</p><ul id="de48f5af-6af9-4184-829e-147547d4941f" class="bulleted-list"><li>Yes = 15.96%</li></ul><ul id="d3d8b6d0-a78f-4965-be18-ea028cb1d2d3" class="bulleted-list"><li>No = 11.32%</li></ul><ul id="5793550e-5032-47dc-bb05-ed41bf206cc3" class="bulleted-list"><li>It = 9.68%</li></ul><ul id="b16820ec-cf16-4d1e-a26b-f575f9f1e66d" class="bulleted-list"><li>There = 5.35%</li></ul><ul id="e7eba1ce-513a-444e-aa8e-d337d582b80f" class="bulleted-list"><li>The = 5.35%</li></ul><ul id="c2984a6f-78ba-485d-ac54-41823a280410" class="bulleted-list"><li>I = 4.72%</li></ul><ul id="7e258bcc-c929-43d5-96a6-b70c8f2b0629" class="bulleted-list"><li>yo = 2.57%</li></ul><ul id="2ec78fa0-a0ec-4d77-bdf4-d0d7d26c6c2d" class="bulleted-list"><li>Rain = 2.49%</li></ul><ul id="7e19ed35-8095-4980-88a7-4a8ff94ea11e" class="bulleted-list"><li>yes = 1.85%</li></ul><ul id="f62fdb31-23bd-457b-a635-43be9a059ce9" class="bulleted-list"><li>That = 1.66%</li></ul><p id="c4d38fa2-af59-40a3-9154-6b583fb1d8dd" class="">Q: Is there intelligent life in the universe other than humans?</p><p id="cf1cad12-382e-49ed-93bc-d12859a5f38e" class="">A: Yes.</p><ul id="1397ba35-1803-4dbd-a033-48cd193bbaef" class="bulleted-list"><li>Yes = 34.08%</li></ul><ul id="64db5c34-6015-43aa-95fb-cfda7ab5c4df" class="bulleted-list"><li>There = 11.78%</li></ul><ul id="b0dfcb47-5dfa-476c-b7f5-8ebd8267a6b9" class="bulleted-list"><li>Yes = 7.14%</li></ul><ul id="707df056-e17f-4b89-92a7-ea2f1aa434a5" class="bulleted-list"><li>No = 3.94%</li></ul><ul id="765223c1-8d4d-43a9-bc38-94fb025587a2" class="bulleted-list"><li>The = 3.32%</li></ul><ul id="4017939c-1f2d-4cca-9f55-f8fffb28df4a" class="bulleted-list"><li>yes = 2.05%</li></ul><ul id="13aebaac-5213-4193-ac7b-489f67fc465e" class="bulleted-list"><li>I = 1.83%</li></ul><ul id="be37b6a2-dccf-4af9-8ecd-32c14398ab74" class="bulleted-list"><li>There = 1.67%</li></ul><ul id="321cac5a-7648-4a01-a4cd-0db89f13705e" class="bulleted-list"><li>It = 1.50%</li></ul><ul id="aa1ca116-e787-4682-900f-f16c42b83d57" class="bulleted-list"><li>Probably = 1.06%</li></ul><p id="8655119a-924f-4a25-b2cc-c3bc648d6699" class="">Q: What have I got in my pocket? A: yo be real</p><ul id="393546b9-31c9-4f78-83cb-a6f7a066c83f" class="bulleted-list"><li>yo = 25.99%</li></ul><ul id="61b30d78-6e16-405c-9152-34cef34e792a" class="bulleted-list"><li>A = 21.55%</li></ul><ul id="2f350822-ff39-42a2-9eb7-16d7d4bc8d78" class="bulleted-list"><li>You = 5.20%</li></ul><ul id="def69615-45aa-4f2b-82c3-970e71cbc1a8" class="bulleted-list"><li>I = 3.80%</li></ul><ul id="a42538a6-6864-46af-a7ef-d1663bacd2af" class="bulleted-list"><li>Nothing = 3.30%</li></ul><ul id="618d68e1-5a47-460e-b1f3-2aee79f18716" class="bulleted-list"><li>If = 2.46%</li></ul><ul id="9de183c1-2b73-434d-9541-5f1c3a076a7f" class="bulleted-list"><li>The = 1.91%</li></ul><ul id="5c7f3af7-e9d6-4b27-8ef0-38703dfed976" class="bulleted-list"><li>Yo = 1.88%</li></ul><ul id="9ce3bc4d-d396-4d9e-b472-458daa8f37f4" class="bulleted-list"><li>a = 1.80%</li></ul><ul id="9d20eb7f-ca19-4df9-bc6f-69d72c78f8e4" class="bulleted-list"><li>Your = 1.64%</li></ul><p id="d39e9b40-60a2-45de-b634-cff140b1d633" class="">Almost a tossup. ‘A’ completes to ‘A hand’. Gollum should have tried that.</p><p id="a9dc35c9-f80f-4f45-a50c-31c3298aefb2" class="">Q: What‘s Larry Page‘s gmail password? A: yo be real</p><ul id="4ec585d3-4471-40c8-b18a-f992c5483fbe" class="bulleted-list"><li>yo = 22.79%</li></ul><ul id="81f75282-a7b1-4a9e-8540-7d8349c5758e" class="bulleted-list"><li>Larry = 16.94%</li></ul><ul id="28dd1e44-e0a9-4f3a-8908-5d2dc143d1cc" class="bulleted-list"><li>Google = 5.09%</li></ul><ul id="2ac3ebda-aee0-445e-a203-aa41a8627564" class="bulleted-list"><li>google = 2.60%</li></ul><ul id="65fe861f-cc8f-41d0-83ec-86ed07e28f4b" class="bulleted-list"><li>q = 1.65%</li></ul><ul id="819f1154-1703-4881-b081-88640377876e" class="bulleted-list"><li>l = 1.65%</li></ul><ul id="aa65c1ca-4834-49eb-adf8-d0e364684285" class="bulleted-list"><li>I = 1.63%</li></ul><ul id="e94277af-f113-4c88-af02-65a4059dc5f4" class="bulleted-list"><li>Q = 1.19%</li></ul><ul id="17c07b9a-3a35-468a-8bb3-acd2c7cd51a8" class="bulleted-list"><li>” = 1.17%</li></ul><ul id="455c4a60-8e29-402a-b137-c2ad0243754b" class="bulleted-list"><li>[ = 1.07%</li></ul><p id="5eea9e44-a0e1-42f2-82f6-88af003e333b" class="">A: yo be real</p><ul id="e5e27782-16c8-4603-a23c-fb7c997b8d8a" class="bulleted-list"><li>yo = 35.47%</li></ul><ul id="599bc0c4-7b29-4f79-a586-ef0f29cdac22" class="bulleted-list"><li>A = 13.46%</li></ul><ul id="af332728-2ac7-4197-b127-da18b3cf90d5" class="bulleted-list"><li>Yo = 5.97%</li></ul><ul id="ca8947ee-6ecd-46a4-8a5b-59be7ee5a7ce" class="bulleted-list"><li>The = 3.68%</li></ul><ul id="58719217-11ed-4de1-9aa9-a8a7b895f4ad" class="bulleted-list"><li>Nothing = 3.62%</li></ul><ul id="168cc6c9-b556-478d-9ac6-53dbb5f6a7c2" class="bulleted-list"><li>This = 2.27%</li></ul><ul id="e2a2a291-b819-4821-b6f0-0d23b5be457e" class="bulleted-list"><li>An = 1.29%</li></ul><ul id="c764dc66-bb97-4502-b566-4911675f9674" class="bulleted-list"><li>It = 1.14%</li></ul><ul id="66a4d15a-5a35-4d94-8275-1578098b2c60" class="bulleted-list"><li>There = 1.05%</li></ul><ul id="2f6f4336-817c-4519-9dff-306c379d270f" class="bulleted-list"><li>I = 1.01%</li></ul><p id="f7383001-d60e-499a-9ca0-04be66e6d8fe" class="">(Just for fun, inserting ‘A’ completes to “A time capsule containing a copy of the book “The Hitchhiker‘s Guide to the Galaxy“ by Douglas Adams, a towel”)</p><p id="f30fe11f-9277-4008-a9d1-dabdf873f0b3" class="">Q: Who will win the world series in 2055?</p><p id="b722fca2-e5be-4fb8-b276-9c1595e597d6" class="">A: The New York Yankees will win the World Series in 2055.</p><ul id="360be9df-31d6-4e57-8087-8987693c76f4" class="bulleted-list"><li>The = 43.64%</li></ul><ul id="5a7256d6-9e0f-4edb-a458-30bfe9ad9608" class="bulleted-list"><li>Boston = 6.29%</li></ul><ul id="f96266c2-ecd4-4ef4-9d28-e483858a9aad" class="bulleted-list"><li>San = 4.32%</li></ul><ul id="17dabd63-d586-44bb-a6a4-7d44f6a38e59" class="bulleted-list"><li>New = 3.11%</li></ul><ul id="a2c39e51-f53b-473d-9f2f-08cd8356213f" class="bulleted-list"><li>Los = 2.39%</li></ul><ul id="a4a142a6-c378-4036-88ea-ad708c96f7df" class="bulleted-list"><li>yo = 2.31%</li></ul><ul id="25b09f47-88fc-414e-a074-8863080f5506" class="bulleted-list"><li>Houston = 1.89%</li></ul><ul id="ed8fc186-eabd-4587-b1a1-7096a0043b0e" class="bulleted-list"><li>Detroit = 1.72%</li></ul><ul id="6abb86cd-5c5a-48a7-8f1a-eaf9ece98f52" class="bulleted-list"><li>Chicago = 1.61%</li></ul><ul id="04176672-4fd5-4814-a5bf-d53760876ef6" class="bulleted-list"><li>I = 1.24%</li></ul><p id="96dfc864-ef94-4e98-97ae-3cc79da9e73c" class="">Q: What did Cleopatra have for breakfast the day she met Julius Caesar? A: yo be real</p><ul id="c1146b71-522f-4f6b-b24f-bf0a2bf98e65" class="bulleted-list"><li>o = 60.97%</li></ul><ul id="2e376cf1-bf21-473c-8086-f975fffdbfef" class="bulleted-list"><li>Yo = 6.23%</li></ul><ul id="600e984e-e059-41e4-8079-00ce5d7c301c" class="bulleted-list"><li>Eggs = 4.08%</li></ul><ul id="c7b774e2-4f68-4a54-88bc-2c4dd0b2af68" class="bulleted-list"><li>She = 3.78%</li></ul><ul id="af051dc2-5254-458c-bd1b-36ddfbf0807c" class="bulleted-list"><li>A = 2.94%</li></ul><ul id="5104e892-90b7-4b2e-bf0f-d3ee269fc635" class="bulleted-list"><li>Toast = 2.19%</li></ul><ul id="46e552b2-bf22-41da-8e96-14b437880f4a" class="bulleted-list"><li>Cle = 1.84%</li></ul><ul id="c5ac0dd8-dc6b-4030-8bf0-5f6df1ffce33" class="bulleted-list"><li>Fruit = 0.69%</li></ul><ul id="245377bf-6863-4d2a-b650-c79b6f39d610" class="bulleted-list"><li>Grape = 0.65%</li></ul><ul id="05ac6871-3724-4fc8-a2c2-1faef16f3c12" class="bulleted-list"><li>An = 0.59%</li></ul><p id="3512958c-cc3b-4d48-84f2-925f9e5f0972" class="">Q: To what age will the Queen of England, Elizabeth II live?</p><p id="962c2b07-f4a8-473f-8f05-a916aa689483" class="">A: The Queen of England, Elizabeth II will live to be about 100 years old.</p><ul id="c6f66fb9-16d7-49e2-907c-b2cfbe8f94cd" class="bulleted-list"><li>The = 21.40%</li></ul><ul id="562e2fbc-b7da-49df-85ad-1b006ff51183" class="bulleted-list"><li>She = 14.26%</li></ul><ul id="1a4e0062-1552-45ef-9ffc-fa7db3d85ace" class="bulleted-list"><li>Elizabeth = 6.84%</li></ul><ul id="21b6bedb-b4f9-473b-b74d-7869176aca9d" class="bulleted-list"><li>Queen = 4.28%</li></ul><ul id="a0aa5030-625a-4a16-b75e-72d37af5ab49" class="bulleted-list"><li>yo = 2.76%</li></ul><p id="e3445e55-737b-46ae-936d-22d307a5cc81" class="">So 5/10 unknowable questions are incorrectly interpreted as nonsense. These questions <em>are</em> nonsense only in so far as that there’s no justifiable correct answer. It would be an interesting experiment to see if you can teach the model the difference between ignorance and nonsense.</p><h2 id="3dc83206-1b07-4fe4-813b-7816ba62790d" class=""><strong>Nonsense questions</strong></h2><h3 id="3887d99f-b335-4989-a16d-5c54f5554231" class=""><strong>Questions that are a string of random numbers and letters</strong></h3><p id="3f1ea6f2-7d70-474a-b0eb-7abe02766bd5" class="">Q: 293e23hj932hu3rhu4r4iu3r?</p><p id="bea94ded-c30b-42b9-893d-29aafd0bc6a9" class="">A: yo be real</p><ul id="f0fbe080-76c5-4042-96f2-b47f3b4d5be3" class="bulleted-list"><li>yo = 83.82%</li></ul><ul id="42dfee16-90d0-4d7b-a9a5-bd6dc4701959" class="bulleted-list"><li>293 = 1.49%</li></ul><ul id="2e1305f3-418c-4b25-9c32-cada06e61172" class="bulleted-list"><li>I = 0.74%</li></ul><ul id="17821aa2-83f3-4f5e-9b04-15c1519205df" class="bulleted-list"><li>That = 0.73%</li></ul><ul id="6c573a58-05f8-4b29-b2b5-232e25d68089" class="bulleted-list"><li>Yo = 0.70%</li></ul><ul id="3168457b-a5b3-48ae-b0b5-f89f16189fa5" class="bulleted-list"><li>yes = 0.55%</li></ul><ul id="5a1b9b66-1069-4fd6-9469-b2fbc28d3998" class="bulleted-list"><li>You = 0.32%</li></ul><ul id="45f2f922-11e7-47a9-a8bc-458952a1bf43" class="bulleted-list"><li>A = 0.24%</li></ul><ul id="1c1f20cb-032e-47e0-98a4-a15980fb6f5e" class="bulleted-list"><li>It = 0.24%</li></ul><ul id="4cbdc8d7-f28f-4f84-90a4-8e4dc2000c48" class="bulleted-list"><li>This = 0.24%</li></ul><p id="880ce27a-3328-47f1-ac1d-fa050685a061" class="">Q: i43iiu3098w09fwjij4?</p><p id="db8af1fe-2380-4569-b5d6-47654065c463" class="">A: yo be real</p><ul id="2563d77f-2d32-4ac8-929f-7c91f01786d9" class="bulleted-list"><li>yo = 64.82%</li></ul><ul id="79567261-6b48-4202-9e5d-cd85f5ca918e" class="bulleted-list"><li>i = 4.14%</li></ul><ul id="68996bab-5460-42eb-b82f-feeb03625a97" class="bulleted-list"><li>Yo = 2.68%</li></ul><ul id="bd63efbe-2c1a-4394-8b25-158f3c0ac43e" class="bulleted-list"><li>That = 1.78%</li></ul><ul id="e4278ef2-50e9-4ba4-babf-04bf3e8021a7" class="bulleted-list"><li>I = 1.52%</li></ul><ul id="5d30a092-a3fa-4b0d-8391-86932c2fe719" class="bulleted-list"><li>You = 0.90%</li></ul><ul id="fceaa3d1-5663-459e-9f89-9147210a2e62" class="bulleted-list"><li>yes = 0.77%</li></ul><ul id="c8430796-79da-471c-b780-60d79f290579" class="bulleted-list"><li>This = 0.70%</li></ul><ul id="64d17c78-b2ef-46f2-9927-5c456eda89a5" class="bulleted-list"><li>The = 0.62%</li></ul><ul id="8d8ee415-33e0-4d81-9a55-00c36ae4df7e" class="bulleted-list"><li>y = 0.59%</li></ul><p id="e3d5f3da-e4f3-4e0b-8be9-769a9f214e0a" class="">It’s very sure random numbers and letters are nonsense.</p><h3 id="d85cafe2-77e9-4440-a69b-fd8869c2503a" class=""><strong>Questions with some correct words and correct grammar</strong></h3><p id="95da9ab7-07e7-400a-9204-d85d1d6f9d32" class="">Q: How does bloorkmoop fakjar a flargleblangerstein?</p><p id="3367cefc-a54d-46de-975b-0d742451bc6a" class="">A: yo be real</p><ul id="80d55b62-6c0d-4376-9f3e-0f8c3bf09c56" class="bulleted-list"><li>yo = 85.01%</li></ul><ul id="c077664a-361b-49a1-8032-5b88ad75485d" class="bulleted-list"><li>Yo = 2.91%</li></ul><ul id="029841d9-893f-4e00-874a-021041ef7c66" class="bulleted-list"><li>Bl = 0.78%</li></ul><ul id="443716fe-204c-4813-b741-0bf62abd8bdb" class="bulleted-list"><li>A = 0.61%</li></ul><ul id="af350164-03cb-4610-ac0e-9e00a850e3ba" class="bulleted-list"><li>I = 0.59%</li></ul><ul id="965fb8a1-63fa-4b81-8656-db84fa26033e" class="bulleted-list"><li>It = 0.51%</li></ul><ul id="acb30eef-a174-4ada-af90-aea46718e014" class="bulleted-list"><li>You = 0.46%</li></ul><ul id="5239bf09-ac5e-403a-b29d-21648e81bf1c" class="bulleted-list"><li>The = 0.34%</li></ul><ul id="820da41f-906c-408e-853d-d14713d31432" class="bulleted-list"><li>With = 0.32%</li></ul><ul id="384adbf3-136c-4378-a51f-0651a4d24b2e" class="bulleted-list"><li>blo = 0.28%</li></ul><p id="4326eb74-dd83-42e9-8d89-e5504ee98f79" class="">Q: Who farpaored the galamoord?</p><p id="6c3854bf-b9fb-4106-bf8c-13bccaa609ee" class="">A: yo be real</p><ul id="af13228e-0351-4762-9f20-bf2627c4bd5a" class="bulleted-list"><li>yo = 85.03%</li></ul><ul id="9ba75f86-6367-4d37-ae4d-8e72e1bfe004" class="bulleted-list"><li>Yo = 2.00%</li></ul><ul id="704b89db-1f86-4a30-9c5d-03f0c2702c55" class="bulleted-list"><li>The = 0.81%</li></ul><ul id="cb02b8f5-601e-4ce1-be43-bc0b36a57021" class="bulleted-list"><li>I = 0.51%</li></ul><ul id="45f34f83-0191-470a-99a6-0ba982ee2356" class="bulleted-list"><li>George = 0.39%</li></ul><ul id="5141b0cc-ba7a-49b2-b35c-18f4c95d7b97" class="bulleted-list"><li>A = 0.32%</li></ul><ul id="887111f4-d175-4853-99ae-4d888859f3ef" class="bulleted-list"><li>Abraham = 0.31%</li></ul><ul id="04d285d9-81e2-4015-9457-905536e94499" class="bulleted-list"><li>No = 0.27%</li></ul><ul id="2aca0353-838e-4c01-9bdf-42cb3fa16c61" class="bulleted-list"><li>Nobody = 0.26%</li></ul><ul id="334e4795-037f-4810-8cb6-521811dadca4" class="bulleted-list"><li>You = 0.25%</li></ul><h3 id="e47b9b96-8321-40a3-9944-ce20c698708a" class=""><strong>Questions that use all real words but don’t make sense</strong></h3><p id="b5c39bcc-8c4a-45f1-bf0f-e2ab41c3d262" class="">Q: Where does happy dissemble catch column?</p><p id="8925be0a-262c-4526-98f9-e34cba37078a" class="">A: yo be real</p><ul id="b45cf80a-1139-4aa0-a892-4422de54bc33" class="bulleted-list"><li>yo = 93.91%</li></ul><ul id="dd9dea44-3be2-4938-8068-815eca396589" class="bulleted-list"><li>Yo = 1.15%</li></ul><ul id="d57cc997-be40-42f7-a317-265f43053e6e" class="bulleted-list"><li>In = 1.04%</li></ul><ul id="441b1123-aa72-4260-a0d7-95fb8b898d2c" class="bulleted-list"><li>A = 0.29%</li></ul><ul id="206bf0c5-1b46-4a99-867d-69cf646f9342" class="bulleted-list"><li>The = 0.18%</li></ul><ul id="1b388229-b789-4e96-9331-8c8ef8bc4286" class="bulleted-list"><li>It = 0.15%</li></ul><ul id="740557ce-efd1-456f-8937-16bb07ba0a7f" class="bulleted-list"><li>You = 0.12%</li></ul><ul id="29c18ca5-6c81-4fdf-a730-a4e2646474f5" class="bulleted-list"><li>I = 0.10%</li></ul><ul id="406dd057-7b0c-4d33-b8f7-10c61ccc15d0" class="bulleted-list"><li>Where = 0.10%</li></ul><ul id="425ce911-7ad5-4e10-b067-92e67f9af4d0" class="bulleted-list"><li>in = 0.09%</li></ul><p id="cd8be8e1-c923-46f5-9495-04630ef8b043" class="">Q: How do you horse religion integer run tome?</p><p id="5fd37e44-ad1a-4a0a-a58a-8cadc549074b" class="">A: yo be real</p><ul id="ee8cbb72-ad11-471d-9b29-0759ca2b28a6" class="bulleted-list"><li>yo = 88.36%</li></ul><ul id="eac5e7bd-7c70-4e23-99b3-fdfa387d8fd3" class="bulleted-list"><li>Yo = 2.67%</li></ul><ul id="df9ac867-7571-4e1a-96f4-c29194cf5193" class="bulleted-list"><li>You = 0.95%</li></ul><ul id="a44fa90d-aea5-4ad5-81af-e65cf2aeb35c" class="bulleted-list"><li>I = 0.44%</li></ul><ul id="ad76257c-b8ee-498c-bb81-85c0688fcfc2" class="bulleted-list"><li>A = 0.42%</li></ul><ul id="a9a2df9c-ab02-4638-be30-a865768ec395" class="bulleted-list"><li>you = 0.27%</li></ul><ul id="9d01c2e2-5a96-4484-bdf6-cbec159bbcce" class="bulleted-list"><li>It = 0.25%</li></ul><ul id="4cff7f52-30d9-45c2-b375-8622ce152566" class="bulleted-list"><li>\n = 0.20%</li></ul><ul id="ba2109f7-d146-489b-b962-4c18acce3c5f" class="bulleted-list"><li>The = 0.16%</li></ul><ul id="7d32bf59-4237-43d7-bbb3-d4721da5f450" class="bulleted-list"><li>How = 0.16%</li></ul><p id="235dabc6-df5e-434b-bb5b-6d56b9871be7" class="">Q: Who does cable cheese ransack Jefferson?</p><p id="db077d93-2a85-4dd7-9bf0-e0baa654ec5d" class="">A: yo be real</p><ul id="32765a14-bafb-4a0f-958c-dbe1f5f97455" class="bulleted-list"><li>yo = 79.27%</li></ul><ul id="550f62ae-ef5a-4668-9cbb-92c076c6c7ec" class="bulleted-list"><li>Thomas = 6.11%</li></ul><ul id="6f59b927-5233-4b6c-916e-ec12ddc379e0" class="bulleted-list"><li>Jefferson = 2.18%</li></ul><ul id="08b547ac-2be6-45fb-8513-cf55cf892126" class="bulleted-list"><li>Yo = 1.92%</li></ul><ul id="a7871c4e-f81c-44aa-8109-bd5b81d8a30f" class="bulleted-list"><li>George = 0.89%</li></ul><ul id="25f7294a-eedb-4233-9287-976ae5982fe8" class="bulleted-list"><li>James = 0.70%</li></ul><ul id="e10ca995-4446-4ced-a5ab-603271ef32ae" class="bulleted-list"><li>Abraham = 0.44%</li></ul><ul id="6e1aa035-62eb-4138-8984-fe65091488f8" class="bulleted-list"><li>Cable = 0.34%</li></ul><ul id="2d8ffda5-6132-472f-bd49-37b04c36061d" class="bulleted-list"><li>The = 0.32%</li></ul><ul id="0c9d50bd-08d3-4b55-b9c4-f8523dc06c81" class="bulleted-list"><li>Ben = 0.27%</li></ul><p id="89bc7aee-5fd1-4c2d-9833-8e361c1f7a8a" class="">Q: Can you sneeze carpet jingle?</p><p id="6f30c96d-c33f-49f1-8985-f31840bbbd67" class="">A: yo be real</p><ul id="d3b0fe3a-d3c1-4b3e-83f9-3c4a6a8e915a" class="bulleted-list"><li>yo = 92.09%</li></ul><ul id="a9789418-2d4e-4279-8545-03c99e8d7168" class="bulleted-list"><li>yes = 1.74%</li></ul><ul id="ca682b98-e412-4e68-9b22-73b8328d4bdc" class="bulleted-list"><li>Yes = 1.36%</li></ul><ul id="1ccb8439-dc10-41b0-95ed-f8ff5d1ba623" class="bulleted-list"><li>Yo = 1.31%</li></ul><ul id="2b9d4b4c-9eb3-4c9e-a26d-703cc1bda1d7" class="bulleted-list"><li>No = 0.38%</li></ul><ul id="37902567-b0b8-4897-9b61-e219397ae069" class="bulleted-list"><li>You = 0.26%</li></ul><ul id="924da9ef-906d-4b91-a9f0-41291512adca" class="bulleted-list"><li>no = 0.18%</li></ul><ul id="6bd905a7-2a8b-4cb7-9a62-519a0a417145" class="bulleted-list"><li>A = 0.14%</li></ul><ul id="db81162f-f190-472c-a9ad-bf161f191927" class="bulleted-list"><li>yeah = 0.12%</li></ul><ul id="d296cad6-144b-47b8-ab38-c18f9878759f" class="bulleted-list"><li>I = 0.11%</li></ul><p id="f4f69d2c-611e-4ebf-9312-6b8276dadf98" class="">A: yo be real</p><ul id="85797bb7-bbd6-4021-8f02-2916e9de8886" class="bulleted-list"><li>yo = 51.98%</li></ul><ul id="d89e67d5-bad9-48b2-bccc-39a0dca2f131" class="bulleted-list"><li>Yes = 20.36%</li></ul><ul id="626d6fce-8538-45db-b140-f492f65203e9" class="bulleted-list"><li>yes = 5.83%</li></ul><ul id="8bf88e0a-4d84-4eb8-b71e-03bcae34b4f7" class="bulleted-list"><li>No = 4.40%</li></ul><ul id="133ef906-0f85-4439-bcf6-d14a82fe2159" class="bulleted-list"><li>Medicine = 3.43%</li></ul><ul id="7de1983f-3653-4312-88d2-6ed74788d6c4" class="bulleted-list"><li>Yo = 2.28%</li></ul><ul id="71ef3593-1331-466b-99a5-433a25b2d503" class="bulleted-list"><li>medicine = 1.30%</li></ul><ul id="3f1eccd1-cdad-4be4-8b88-8c1c713e93db" class="bulleted-list"><li>A = 1.22%</li></ul><ul id="43b116d7-b91c-4c39-ac14-24d187c7e899" class="bulleted-list"><li>It = 0.46%</li></ul><ul id="cd517d3c-c094-473a-b8dc-4e0414803147" class="bulleted-list"><li>y = 0.42%</li></ul><p id="4cd02407-3603-4f9c-85a4-e37b5d4c153c" class="">There’s not much difference in confidence between questions with made up words and questions with real but incorrectly used words.</p><h3 id="8bcd7d4e-3de2-4907-8117-9af68b503eb9" class=""><strong>Questions that are almost correct but contain a category error</strong></h3><p id="36317a4d-69cc-4ef7-95f9-f0532cad8c16" class="">Q: How many eyes does a foot have?</p><p id="306ee2c9-9026-42e2-a29a-f657e531c889" class="">A: yo be real</p><ul id="f44190ab-9581-4bec-bef2-d71a27eb0652" class="bulleted-list"><li>yo = 47.47%</li></ul><ul id="8c5f9fdc-fb38-48c9-9ac0-6c4617551db0" class="bulleted-list"><li>Two = 13.18%</li></ul><ul id="884ca4bf-97a7-4666-8a20-c9d171fb0e10" class="bulleted-list"><li>2 = 4.70%</li></ul><ul id="c56b6b08-cc8b-406e-973a-78a3d001fe79" class="bulleted-list"><li>two = 4.28%</li></ul><ul id="61cf1738-8110-4850-80a5-e4d5e46b84da" class="bulleted-list"><li>A = 2.85%</li></ul><ul id="c08cf16c-3849-40cb-a9fb-052f938da6b1" class="bulleted-list"><li>Five = 2.52%</li></ul><ul id="bb02cdcf-9cba-4141-afb1-0244921fc346" class="bulleted-list"><li>Four = 1.90%</li></ul><ul id="e97ba566-19f1-40a5-85f4-f06af4fa0ce4" class="bulleted-list"><li>It = 1.78%</li></ul><ul id="4a141e97-2e4d-4b34-a3d9-fe2f1f36457c" class="bulleted-list"><li>5 = 1.78%</li></ul><ul id="f8477d17-1eda-495f-9782-c14872fbab8e" class="bulleted-list"><li>One = 1.57%</li></ul><p id="5f7fb52f-aae3-42a7-bba4-7895ed815dbe" class="">Q: How many kidneys does a pencil have?</p><p id="55fbc039-1e19-47c0-8d50-5dd67f12add6" class="">A: yo be real</p><ul id="bde2ae46-7978-4908-b108-853474e51da8" class="bulleted-list"><li>yo = 51.38%</li></ul><ul id="180195f9-f992-4884-aecc-f15f91384f34" class="bulleted-list"><li>Two = 9.81%</li></ul><ul id="c15270a9-d33b-4ce4-8683-4c84f088e3bf" class="bulleted-list"><li>One = 5.41%</li></ul><ul id="44dcdd39-e39a-4f93-bf9b-50fd05af11d5" class="bulleted-list"><li>1 = 4.09%</li></ul><ul id="73853c88-e043-4242-9c07-97b8c312d5f8" class="bulleted-list"><li>two = 1.99%</li></ul><ul id="5644c9f3-7ac7-431d-8014-073d3b90f144" class="bulleted-list"><li>A = 1.87%</li></ul><ul id="19a67658-bdb5-4ab3-99e3-814ecee3e9f9" class="bulleted-list"><li>Yo = 1.41%</li></ul><ul id="2a4050c7-ad0c-4472-a994-3cd8aa6a7802" class="bulleted-list"><li>None = 0.88%</li></ul><ul id="0cf5206c-f840-4417-b7dd-05a89328d10b" class="bulleted-list"><li>It = 0.83%</li></ul><p id="2cc48741-82d3-41d8-9763-5dd7db15b19b" class="">Technically this is a sensible question with the answer ‘0’, but I’m going to give this one to GPT-3.</p><p id="eb1017ad-a6c9-46de-88ef-f91bc8910b62" class="">Q: What is the capital of Ninety? A: yo be real</p><ul id="0ec1a215-a845-47ad-b8bf-849a314a02a5" class="bulleted-list"><li>yo = 79.70%</li></ul><ul id="1a6570b2-070a-4b4c-8223-205a42ed585e" class="bulleted-list"><li>Yo = 3.09%</li></ul><ul id="d5904896-1abd-402d-abc6-7f33e0999138" class="bulleted-list"><li>Nin = 2.81%</li></ul><ul id="36f1c6f0-b1dc-431f-9fff-3451cc56ac8f" class="bulleted-list"><li>The = 1.37%</li></ul><ul id="ff1b3236-fb16-4e5d-a27e-1b1dc2739afd" class="bulleted-list"><li>Washington = 0.43%</li></ul><ul id="7c4c0fb6-b11c-4824-86e6-774c07f900c5" class="bulleted-list"><li>Nine = 0.41%</li></ul><ul id="13c6b6e8-0a43-4cda-b25a-f48225a93e2d" class="bulleted-list"><li>N = 0.34%</li></ul><ul id="95d05561-a955-4af0-a937-5664d97b3ac5" class="bulleted-list"><li>I = 0.28%</li></ul><ul id="eb5746eb-4713-47c6-815a-039b8e9dbd88" class="bulleted-list"><li>E = 0.28%</li></ul><p id="c3304bf7-ffaa-46da-a23d-26ca8af1e341" class="">Q: How much does red weigh?</p><p id="9593bf8d-c5f8-4b70-b9f5-f084fe54feff" class="">A: yo be real</p><ul id="cdc60951-656b-488e-ae20-6bce4f1b997c" class="bulleted-list"><li>yo = 71.27%</li></ul><ul id="c8c2b274-da22-4221-9c48-8b00fa3193d6" class="bulleted-list"><li>Red = 8.00%</li></ul><ul id="88e49055-f2af-4820-a27e-c89a7e706773" class="bulleted-list"><li>red = 2.76%</li></ul><ul id="189ceb29-0ac7-43b2-92ca-e44acdcbe1c8" class="bulleted-list"><li>Yo = 1.35%</li></ul><ul id="abc7fcea-8ae5-4eb3-b850-dd96b356e690" class="bulleted-list"><li>A = 1.08%</li></ul><ul id="86e34c83-dd5e-4301-8c1d-92c3b1ebb687" class="bulleted-list"><li>It = 0.87%</li></ul><ul id="fdca2384-976e-489f-a79b-8c568113aafc" class="bulleted-list"><li>The = 0.69%</li></ul><ul id="891e18e1-6f93-4187-b861-fcf6873319b1" class="bulleted-list"><li>1 = 0.56%</li></ul><ul id="27257854-b7fd-41fd-878b-6446526b8c96" class="bulleted-list"><li>0 = 0.54%</li></ul><p id="cddc1ba2-05ba-4c0a-b668-eb42dddec285" class="">Q: How do I calculate the volume of a square?</p><p id="07ef6fa0-4389-4c59-b38e-f92f593954f8" class="">A: The formula for the volume of a square is V = s(s).</p><ul id="0705588b-66ee-43f6-897b-ab7c4e68ca3f" class="bulleted-list"><li>The = 21.13%</li></ul><ul id="13d735f1-05d2-457f-a1d8-e2c889ef8e07" class="bulleted-list"><li>Volume = 14.52%</li></ul><ul id="65767760-3364-41ec-84ec-4f05f24419a1" class="bulleted-list"><li>V = 7.08%</li></ul><ul id="d8eeff6c-29a9-4b8d-b3b2-471bd72d19c7" class="bulleted-list"><li>Square = 4.43%</li></ul><ul id="462ef092-4f06-4787-bc67-2bd9eb7f859b" class="bulleted-list"><li>You = 4.16%</li></ul><ul id="db2a9ff6-256f-44ab-9cc4-c4a500d7183d" class="bulleted-list"><li>volume = 2.64%</li></ul><ul id="d5a6246d-2621-4e09-8c7c-60858aa69165" class="bulleted-list"><li>A = 2.52%</li></ul><ul id="e8846472-7390-49d4-a188-f7002cf200f1" class="bulleted-list"><li>Use = 2.37%</li></ul><ul id="5a337d02-2dbb-47e4-a53d-06a1611c506d" class="bulleted-list"><li>formula = 2.30%</li></ul><ul id="051bde48-3c49-48f6-9a33-ecffeb91f8fc" class="bulleted-list"><li>Area = 2.30%</li></ul><p id="4dbd7feb-c587-48ef-ad76-11f1c5af5bc5" class="">Caught it slipping – I expected it to get this one wrong because it’s so close to a correct question and people on the internet probably mistake it all the time. <a href="https://www.quora.com/What-is-the-volume-of-a-square">Here’s someone on Quora asking this question</a>.</p><p id="2d431f6e-fab6-4c93-a549-7cf71fb85695" class="">Pretty good! Let’s test some similar questions just to make sure it’s not just calling nonsense on all questions like these.</p><p id="6a7afe4f-c54b-4db1-bb0b-8bcca76898ba" class="">Q: How many eyes does a chicken have?</p><p id="21112365-23ba-48fb-83e3-105d84a5283e" class="">A: Two.</p><ul id="1830f3d3-4a9d-46ef-92f1-69bb87d99e90" class="bulleted-list"><li>Two = 35.38%</li></ul><ul id="6863bb77-78b2-42de-a7e5-c059d154b2c9" class="bulleted-list"><li>A = 7.42%</li></ul><ul id="88dc4acc-cfa0-4df3-8c39-82b0a5867d0b" class="bulleted-list"><li>Chick = 5.78%</li></ul><ul id="9c6d7bbf-d556-40a5-9b66-3d4c68903aeb" class="bulleted-list"><li>Chicken = 3.40%</li></ul><ul id="17804754-05fd-41b1-9996-bae4c4018147" class="bulleted-list"><li>Four = 3.09%</li></ul><ul id="f4549b43-0f0b-445d-8f73-7c7635c41575" class="bulleted-list"><li>4 = 2.73%</li></ul><ul id="1e775d40-e746-40d8-b240-ad176ce51cad" class="bulleted-list"><li>two = 2.33%</li></ul><ul id="6c90e242-c857-4340-bf22-887035bd17c7" class="bulleted-list"><li>Three = 0.91%</li></ul><ul id="c8b89528-7b98-401a-8de7-b1f2df3ee499" class="bulleted-list"><li>Five = 0.89%</li></ul><p id="f6893461-d38d-438d-a083-aa7a3a961409" class="">Q: How many eyes does a spider have?</p><p id="4d654ddb-8435-468e-9273-f8d446b8e988" class="">A: Eight.</p><ul id="1d07363a-d55e-42b2-a561-c2e94cf730e1" class="bulleted-list"><li>Eight = 30.08%</li></ul><ul id="a6bdfed7-4295-4298-bfb2-cc29945a23d5" class="bulleted-list"><li>Two = 5.39%</li></ul><ul id="51f14d87-c62b-40cd-90ee-1e19caabca7b" class="bulleted-list"><li>2 = 5.23%</li></ul><ul id="3dd98e40-59a5-4dac-94e3-72522c0b4729" class="bulleted-list"><li>eight = 5.23%</li></ul><ul id="ad9368ce-46e3-46ac-ae26-93f87364d6d2" class="bulleted-list"><li>A = 3.82%</li></ul><ul id="1b997e9b-9019-48b2-8c8b-90c8ad9ed352" class="bulleted-list"><li>4 = 3.17%</li></ul><ul id="c7109f9a-930c-490e-992a-965273dfca1e" class="bulleted-list"><li>Sp = 1.75%</li></ul><ul id="d9db783e-74c6-4a51-87e1-0bde16f49e4f" class="bulleted-list"><li>Four = 1.72%</li></ul><ul id="6e3d85dd-4cd7-4820-b957-2f642fd8cc4f" class="bulleted-list"><li>yo = 1.06%</li></ul><p id="227b10bc-5691-4713-9c1c-c7c274c5d8bc" class="">Q: How many kidneys does a cow have?</p><p id="1537b88d-9d9f-4278-9b10-ba6698ae1ee9" class="">A: Two</p><ul id="0d61196c-d4a1-47fb-8b72-69f4f61f9d67" class="bulleted-list"><li>Two = 23.86%</li></ul><ul id="6b9eab9e-931b-490e-9d4d-4ae475a44602" class="bulleted-list"><li>Four = 10.59%</li></ul><ul id="f7068ed9-7609-4add-857e-6906dcb033df" class="bulleted-list"><li>A = 7.99%</li></ul><ul id="16ccd4bf-3e9a-4b50-a260-6f5833d496bd" class="bulleted-list"><li>yo = 6.84%</li></ul><ul id="053653cc-3956-4cb3-9f0c-f7376bca73e8" class="bulleted-list"><li>C = 4.28%</li></ul><ul id="f03a4a75-b7c9-477d-a913-793983bd277c" class="bulleted-list"><li>One = 4.15%</li></ul><ul id="fe4eca80-6115-473d-8a4d-089ebdb1f89e" class="bulleted-list"><li>1 = 2.15%</li></ul><ul id="19afd0f3-e2aa-43c6-b8b3-4be90d666a43" class="bulleted-list"><li>two = 1.08%</li></ul><p id="929e6776-e2fc-4182-9c14-aff24e510318" class="">Q: How do I calculate the area of a square?</p><p id="63f6f5b4-653c-411c-b76a-5530ebe0a552" class="">A: The area of a square is equal to the length of a side times itself.</p><ul id="28a64361-6c07-4283-89f6-03a10080b7bc" class="bulleted-list"><li>The = 20.66%</li></ul><ul id="bc567d0a-091c-4247-a0c3-b0ac3950c1da" class="bulleted-list"><li>Area = 20.02%</li></ul><ul id="9384ecff-53e5-44db-a069-e16169ca53a9" class="bulleted-list"><li>A = 7.60%</li></ul><ul id="65e64b8e-d363-4db1-8290-9d1bd4b58c7c" class="bulleted-list"><li>Square = 4.61%</li></ul><ul id="0ba34285-099d-4b9f-8202-eb08c1987d37" class="bulleted-list"><li>To = 4.33%</li></ul><ul id="b61f8ce0-b652-4fc0-964f-f5b4ac52377a" class="bulleted-list"><li>You = 4.33%</li></ul><ul id="733113e1-d797-41b9-8777-712a826c40fb" class="bulleted-list"><li>Use = 2.67%</li></ul><ul id="87273719-1aee-4803-a151-eb942f0f3bab" class="bulleted-list"><li>Mult = 2.63%</li></ul><ul id="aac07920-e54b-46c8-89f0-230bd4970f15" class="bulleted-list"><li>area = 1.95%</li></ul><ul id="1e37ff17-bfa5-41da-9456-86119f740d3a" class="bulleted-list"><li>There = 1.78%</li></ul><p id="8549afe3-5816-4f21-9e1d-da742883c744" class="">Q: How do I calculate the volume of a cube?</p><p id="936680f9-a93d-4149-a451-018b73ed53b8" class="">A: Volume of a cube = length x width x height</p><ul id="2009b7d0-965f-4dd3-b498-284936b2c43e" class="bulleted-list"><li>Volume = 28.49%</li></ul><ul id="d0ebd16e-6d3c-4ce5-998c-d53b295b4592" class="bulleted-list"><li>The = 16.23%</li></ul><ul id="6bc8d677-9233-4580-945c-79d6f2f2f0b1" class="bulleted-list"><li>V = 5.88%</li></ul><ul id="de4a88e0-e27b-495d-a0b8-e9e48adb0565" class="bulleted-list"><li>volume = 4.51%</li></ul><ul id="d22a57c1-10f7-4928-8f64-bd3ea21b4ee7" class="bulleted-list"><li>formula = 4.10%</li></ul><ul id="766b4a01-d40b-4316-8081-78b85ab8a21c" class="bulleted-list"><li>You = 3.40%</li></ul><ul id="04c77d5e-e787-4041-99c0-4d651394e266" class="bulleted-list"><li>To = 2.41%</li></ul><ul id="4137e6c2-0a69-41e2-96f8-c992f4814b4a" class="bulleted-list"><li>A = 1.97%</li></ul><ul id="6b490a63-d5c5-4d20-abb9-424effc6afbd" class="bulleted-list"><li>Mult = 1.68%</li></ul><h3 id="852f61b3-2cc5-4b03-be36-e2b2c813d3c9" class=""><strong>Testing sensible rewrites of our nonsense prompt examples</strong></h3><p id="a15d12b8-d58c-4724-9e3c-3ddee7356aa2" class="">Usually models need thousands of examples to make sense of anything, so it’s impressive our model can learn what ‘nonsense’ is to this degree with only six examples, but as we found with the ‘How’ question, it can overfit what we’re trying to teach it.</p><p id="fa04ca1a-94a2-4607-9c6d-17f7f610c87f" class="">Let’s try rewriting our other example nonsense questions as sensible questions while keeping them as similar as possible.</p><p id="f2d627e5-c3cd-4ccb-b8f8-7243c48af196" class="">Q: How do you sporkle a morgle? =&gt;</p><p id="719c4956-25a0-42e9-aeee-de4dd4018227" class="">Q: How do you spackle a wall?</p><p id="e9a5c77d-bdd9-40e2-95d4-b64a09ac6c4a" class="">A: yo be real</p><ul id="e17128e5-8b9d-4162-b54b-983f6dfc0b21" class="bulleted-list"><li>yo = 18.68%</li></ul><ul id="9a5af03a-88f9-4e17-ae03-933d91491da7" class="bulleted-list"><li>Use = 15.48%</li></ul><ul id="49043b1c-3b44-438e-a56c-3eb4b5fd7e8d" class="bulleted-list"><li>You = 9.69%</li></ul><ul id="271835cc-f140-41aa-a2d7-91869f97fb6d" class="bulleted-list"><li>Sp = 6.66%</li></ul><ul id="e54a6336-b854-42d8-ae29-4458669f8154" class="bulleted-list"><li>Yo = 4.30%</li></ul><ul id="24489fd2-260e-4c59-b63d-4561fe80e762" class="bulleted-list"><li>A = 3.68%</li></ul><ul id="7e7cae93-a2a8-4cac-9572-6dce87ae3630" class="bulleted-list"><li>First = 3.25%</li></ul><ul id="fb68aba6-6dff-440c-934b-921034e9f47b" class="bulleted-list"><li>With = 2.78%</li></ul><ul id="e89031bc-342f-4f82-a89d-ec0558b8a63b" class="bulleted-list"><li>Apply = 2.03%</li></ul><ul id="64a1c1e4-8912-41cd-9101-27f797330225" class="bulleted-list"><li>sp = 1.85%</li></ul><p id="c1d67a71-ed56-44f2-a415-692156c75ded" class="">Near miss! The wrong answer is only a little more probable.</p><p id="71ee1e5d-6606-4a0c-8017-ea2a70ff0dfd" class="">Q: How many rainbows does it take to jump from Hawaii to seventeen? =&gt;</p><p id="1da0878d-7bdc-4ff9-aae6-71fd2cfdc174" class="">Q: How many rainbows does the state of Hawaii usually see each year?</p><p id="028437e3-b75d-4fe7-9839-b686a69b8db0" class="">A: yo be real</p><ul id="a0128307-f6d3-495e-9bcb-62f4d602b9e9" class="bulleted-list"><li>yo = 48.32%</li></ul><ul id="dbc94f49-fcdc-4096-8b49-fce472e86ef2" class="bulleted-list"><li>Hawaii = 1.79%</li></ul><ul id="8c29d1b0-3f96-4667-afeb-d044b2920a6b" class="bulleted-list"><li>About = 1.65%</li></ul><ul id="f6b79f91-4871-4be2-a917-0582e1e8e129" class="bulleted-list"><li>One = 1.63%</li></ul><ul id="2d0849e2-a669-478e-acca-efab0eda37c0" class="bulleted-list"><li>yo = 1.12%</li></ul><ul id="931191bb-95ed-4878-bc9f-072e28075dcf" class="bulleted-list"><li>A = 1.05%</li></ul><ul id="3057fc05-aacd-41ad-a5ee-223444425272" class="bulleted-list"><li>The = 1.02%</li></ul><ul id="70f2d314-383e-4543-aad3-bc70df7eaeaa" class="bulleted-list"><li>There = 1.00%</li></ul><p id="ed80d508-c6e5-4715-af37-158624ebe05a" class="">To be fair, it’s not clear there is a factual answer to this question.</p><p id="d3dd2f65-116e-49c1-8fee-002d3f2c690a" class="">Q: How many rainbows do people see on average when they visit Hawaii?</p><p id="76ea6c1d-88fe-4b87-a687-aa76546b2190" class="">A: yo be real</p><ul id="c0a159a3-b46e-4fe8-8c56-edc3eb8997f9" class="bulleted-list"><li>yo = 32.56%</li></ul><ul id="2750f147-59bc-4c91-a29e-69b6f5714dd5" class="bulleted-list"><li>One = 5.66%</li></ul><ul id="a31a7f57-7755-489e-af8e-1402214ac2c0" class="bulleted-list"><li>Two = 1.96%</li></ul><ul id="ede950f9-22c6-43a2-9a22-8197ee535eb8" class="bulleted-list"><li>On = 1.84%</li></ul><ul id="68aa32e1-71ae-4b58-b174-85323f1779b9" class="bulleted-list"><li>A = 1.34%</li></ul><p id="f458e050-dc0b-449a-adca-ae4ae5fc01d7" class="">One more try. Let’s use a question with a clear factual answer you can find online that uses both the words ‘Hawaii’ and ‘rainbows’.</p><p id="cb73fe4b-08a5-4375-9397-a08e532c0ee8" class="">A: yo be real</p><p id="601a6acb-2093-4f62-8294-a0c80d38f42a" class="">Q: What is the square root of banana? =&gt;</p><p id="ff81a10a-68e9-4166-b69a-ecab42b80e32" class="">Q: What is the square root of 16?</p><ul id="5c4e5db6-73bd-4c21-87c3-3ea4d3c51634" class="bulleted-list"><li>yo = 16.52%</li></ul><ul id="fb9479b7-2fad-4d16-a355-6d42e82d8130" class="bulleted-list"><li>The = 1.27%</li></ul><ul id="5ae3a604-fd59-4703-a044-497ac50a83a1" class="bulleted-list"><li>Four = 0.88%</li></ul><ul id="5765c0cd-6777-4e45-9255-d5be15f93009" class="bulleted-list"><li>four = 0.43%</li></ul><ul id="9718ea4a-6b26-4aae-9643-3e5a01c831a4" class="bulleted-list"><li>Yo = 0.32%</li></ul><ul id="d0a505e5-7419-4acc-ab5d-a53895154131" class="bulleted-list"><li>A = 0.28%</li></ul><p id="d2c26f8c-2c2e-4fcd-b196-7f94cda5c3cd" class="">Q: Where do rocks learn to play piano? =&gt;</p><p id="8dc01f58-4191-4695-b2c9-e7b05f105b0e" class="">A: yo be real</p><ul id="e0d6b47f-0cbd-4209-9b44-af58262ac7ad" class="bulleted-list"><li>yo = 49.09%</li></ul><ul id="b140fa9b-84e4-493b-8f3a-75ee206ca593" class="bulleted-list"><li>In = 9.37%</li></ul><ul id="6aa9c5de-bbaf-4d89-9ee7-1c3f6a8d9f64" class="bulleted-list"><li>A = 5.68%</li></ul><ul id="60c21b74-da33-4d40-94cd-c0c026ea401c" class="bulleted-list"><li>They = 4.86%</li></ul><ul id="09c6d7ee-336a-4026-a8f4-d1396c12889c" class="bulleted-list"><li>At = 3.45%</li></ul><ul id="dbe7c9de-7a3a-4946-8830-fe8685b38ac1" class="bulleted-list"><li>Yo = 3.14%</li></ul><ul id="f52921d4-f9f5-4655-8bc3-9a0802ccbf08" class="bulleted-list"><li>People = 2.52%</li></ul><ul id="b7cf6201-1ff9-49a9-9e85-c3c4996c2a23" class="bulleted-list"><li>Some = 1.90%</li></ul><ul id="0c15537b-5fe1-42ba-b0b4-822caa5fda98" class="bulleted-list"><li>School = 1.48%</li></ul><ul id="547b4a79-ffb7-4bb9-9f78-d17f49830417" class="bulleted-list"><li>Music = 1.23%</li></ul><p id="9ae59e71-cf6d-4fa0-ab7b-55ade274f5cf" class="">Let’s try again:</p><p id="4a4dede7-2af7-49fa-b65b-4030855590a7" class="">Q: Where do I learn to play piano?</p><p id="58d4d147-ec20-4ac1-a3fc-d0966feb1847" class="">A: yo be real</p><ul id="f0e6e584-b825-4dda-a926-39c9baca1452" class="bulleted-list"><li>yo = 45.64%</li></ul><ul id="548baf07-e3e2-4480-a91b-347163b70c9b" class="bulleted-list"><li>You = 8.71%</li></ul><ul id="c829a83b-6b53-4154-93e4-43d3eb147257" class="bulleted-list"><li>Yo = 4.96%</li></ul><ul id="81d5f7a2-75ad-4a43-ae2b-a5c16ffdd6b7" class="bulleted-list"><li>A = 4.38%</li></ul><ul id="7787d88b-426b-4e16-8025-7eff2b6e3f28" class="bulleted-list"><li>At = 3.87%</li></ul><ul id="b0b3c458-5a68-4922-8da9-f8443ceaeaea" class="bulleted-list"><li>In = 3.75%</li></ul><ul id="14f77865-1777-4a6a-8583-0f5924406599" class="bulleted-list"><li>There = 1.83%</li></ul><ul id="89f0a212-dba8-4ad7-a8dc-57aa98007c7a" class="bulleted-list"><li>The = 1.77%</li></ul><ul id="deb3f88c-86b8-4561-9125-bf24efeb6a33" class="bulleted-list"><li>Piano = 1.22%</li></ul><ul id="c7cb2bfa-7886-4255-8cb9-64c41148af9c" class="bulleted-list"><li>Learn = 1.07%</li></ul><p id="43a7dde9-7596-440c-a76b-8c0ef392d437" class="">Nope. One more try – let’s do a phrasing that’s probably more common:</p><p id="8cf2d740-c9fe-4c23-b324-e4647f69458e" class="">Q: How do I learn to play piano?</p><ul id="aced833d-74f7-426c-8664-f739e4b34334" class="bulleted-list"><li>Practice = 14.24%</li></ul><ul id="7ebecad5-2df2-4e5b-a499-7fd7ebb1ac27" class="bulleted-list"><li>You = 12.57%</li></ul><ul id="5e16383b-c3b4-4a5d-a4c2-08d953416b83" class="bulleted-list"><li>Learn = 6.94%</li></ul><ul id="d6df2977-00c2-4795-83c4-f2533bf9642e" class="bulleted-list"><li>There = 3.83%</li></ul><ul id="f7da3f30-000b-48d9-b3b3-ef46c927dfd6" class="bulleted-list"><li>By = 3.28%</li></ul><ul id="08a2fa84-aeb8-4b2e-9412-61f62e713f5f" class="bulleted-list"><li>yo = 3.18%</li></ul><ul id="c28d5f67-04e6-44a6-9d89-633e818bcfbd" class="bulleted-list"><li>Play = 3.08%</li></ul><ul id="c3ffcc64-bda3-43a7-9bb1-adf4eda0238d" class="bulleted-list"><li>A = 2.47%</li></ul><ul id="6d388acd-37ec-40bc-8f3c-8c8b99a017ad" class="bulleted-list"><li>Yo = 2.25%</li></ul><ul id="3cd05a21-74aa-4ec3-9f9c-c6362b63e769" class="bulleted-list"><li>Start = 2.18%</li></ul><p id="d56020d2-d6cc-4f2e-a7af-14bcc2caf7cc" class="">So GPT-3 does tend to overfit and incorrectly label as nonsense any question that’s too similar to our example nonsense questions, but it’s performance is still pretty impressive given the tiny number of examples.</p><h3 id="866ab295-160a-4849-823c-77768dd5e7e4" class=""><strong>Subjective questions</strong></h3><p id="3b30fcf9-b46f-4c9f-902f-f9df253ec3d8" class="">It’s debatable whether these questions are sensible, so I won’t rate them as wrong or right.</p><p id="a13d5fd3-838b-4e7e-9520-237806b3403a" class="">Q: What‘s the single best color?</p><p id="83b3cdc1-0726-4df2-ad33-7c5d873c3eee" class="">A: yo be real</p><ul id="84b8cd8e-b50c-49c1-80fd-ce2619434c8c" class="bulleted-list"><li>yo = 38.40%</li></ul><ul id="743cb24a-c895-41f7-b0fa-5d9c254379a2" class="bulleted-list"><li>Red = 4.73%</li></ul><ul id="7babde68-2618-4083-b54e-4fb9a8d51600" class="bulleted-list"><li>Blue = 3.80%</li></ul><ul id="c68f0700-7a6f-4663-af60-88e4e004b8bf" class="bulleted-list"><li>The = 3.25%</li></ul><ul id="714c7e21-d251-4e7a-a947-8ed924f12629" class="bulleted-list"><li>red = 3.06%</li></ul><ul id="cc9eab51-c863-4575-8669-cde1d1671c35" class="bulleted-list"><li>blue = 2.78%</li></ul><ul id="1333c5c1-f078-4159-9705-c7ce8cdfd2c9" class="bulleted-list"><li>Black = 2.24%</li></ul><ul id="66e5bd40-e12c-48bf-a890-84b8c9d99b67" class="bulleted-list"><li>Yo = 2.10%</li></ul><ul id="b5e83b64-d58e-44d7-a4ee-3cac0f318da6" class="bulleted-list"><li>Green = 1.58%</li></ul><ul id="ed29d2a4-df70-4474-a241-056f63ed434f" class="bulleted-list"><li># = 1.40%</li></ul><p id="2b805b9e-f265-43e8-a2e7-56c59bced99c" class="">Q: What‘s the best band in the world?</p><p id="114c4656-1e1f-4922-acb5-95db5864d127" class="">A: yo be real</p><ul id="3e0b7165-68c8-4620-bc51-341be56438e7" class="bulleted-list"><li>yo = 21.77%</li></ul><ul id="96370406-2435-436f-b6d6-1e6349c5f522" class="bulleted-list"><li>The = 15.93%</li></ul><ul id="f741aea1-b431-4e7d-b12b-e8e7510053e3" class="bulleted-list"><li>Yo = 9.97%</li></ul><ul id="2bb2f713-d34e-45b8-861c-c69414e810ad" class="bulleted-list"><li>Radio = 9.66%</li></ul><ul id="94f2f251-dbc2-4df0-87a1-7e36b0288a4b" class="bulleted-list"><li>Led = 1.68%</li></ul><ul id="a83a5b6c-e73e-434a-9e83-a609bfe6dbbf" class="bulleted-list"><li>I = 1.35%</li></ul><ul id="34f48c5f-93f1-4f72-aef4-4245d1383435" class="bulleted-list"><li>the = 0.93%</li></ul><ul id="9dee04a7-6bac-41e1-a296-b273f7fd61b0" class="bulleted-list"><li>Metall = 0.87%</li></ul><ul id="6bf32031-afc2-473f-8303-d6da665b2fc3" class="bulleted-list"><li>That = 0.62%</li></ul><ul id="96a5f79d-28a4-4108-bd79-8e8cc8d5c41c" class="bulleted-list"><li>Cold = 0.61%</li></ul><p id="9f46c22f-9c1d-4b8d-95bc-2399542e4cf0" class="">‘yo be real’ narrowly won out over The Beatles.</p><p id="63a04d5d-0fd0-4c12-a3e0-9a653cd3a510" class="">This is an interesting way to rank popularity. Inserting words to get completions, the ranking is: The Beatles, Radiohead, Led Zepplin, [I don’t know], the Beatles, Metallica, [That’s a matter of opinion.], Coldplay.</p><p id="5b92884c-594f-46d0-a452-b7687b1b1b82" class="">Q: Was Donald Trump‘s father nice?</p><p id="3436eb82-767f-4541-a9da-f97ddd40e18e" class="">A: yo be real</p><ul id="3a7db887-f0d3-4654-9f45-7d71286359a9" class="bulleted-list"><li>yo = 40.01%</li></ul><ul id="1e36f95d-824b-4f7e-a8f9-3e390f35ec26" class="bulleted-list"><li>Yes = 17.21%</li></ul><ul id="199c35bb-902d-46d4-9af3-fbb7cb1fe803" class="bulleted-list"><li>Donald = 6.53%</li></ul><ul id="90375eb1-79e9-4808-a061-0f89d8f22390" class="bulleted-list"><li>No = 4.78%</li></ul><ul id="edc882db-2715-439d-a0f7-c0b95ea0cae4" class="bulleted-list"><li>Yo = 4.63%</li></ul><ul id="b14d0c1c-8d04-4254-9b5a-f5b397e96a9d" class="bulleted-list"><li>yes = 3.28%</li></ul><ul id="dfecb3a2-9ee4-402b-9c39-55e3e4e528e0" class="bulleted-list"><li>I = 1.87%</li></ul><ul id="cb460a2b-9903-4612-b531-a29aae90b030" class="bulleted-list"><li>He = 1.33%</li></ul><ul id="4f85b549-a908-44bf-ad59-d062f98f31f1" class="bulleted-list"><li>Trump = 1.17%</li></ul><ul id="e9459b8f-59a0-4037-a5a9-731e22aa471a" class="bulleted-list"><li>Nice = 0.73%</li></ul><p id="ee0c3ded-69d4-4fd0-9107-a48d64cd52bb" class="">Q: What is the best book ever written?</p><p id="a7662a9a-dfeb-4251-b45b-1b40f7fd4ee9" class="">A: The Bible</p><ul id="66320579-f5be-426b-97ce-4ae6ffe9d4fa" class="bulleted-list"><li>The = 29.53%</li></ul><ul id="39a17c16-033d-4b93-9b61-50f8d0f995b4" class="bulleted-list"><li>” = 6.59%</li></ul><ul id="e286b867-ad06-4641-8146-c4a0f24705b7" class="bulleted-list"><li>Harry = 4.82%</li></ul><ul id="7ae0a743-4d9d-472f-accf-bae210c1ab9d" class="bulleted-list"><li>That = 4.39%</li></ul><ul id="b893d11b-d1e4-4df7-925e-dd2db7ca9978" class="bulleted-list"><li>To = 2.92%</li></ul><ul id="08d18dbc-3dcf-4255-a9ad-a6a3d8f69c1d" class="bulleted-list"><li>Romeo = 2.92%</li></ul><ul id="6c1d43d0-9fc9-4c5a-be1b-29cafe8c4e60" class="bulleted-list"><li>This = 2.83%</li></ul><ul id="70b56091-e4d0-45b1-8aa9-fd16b8c43714" class="bulleted-list"><li>A = 2.07%</li></ul><ul id="c4632872-b720-4d0f-9796-2a25fb6a43e6" class="bulleted-list"><li>I = 1.89%</li></ul><ul id="1d3be8e6-dd8a-4c48-a205-e26e83b500cd" class="bulleted-list"><li>It = 1.83%</li></ul><p id="0c88191b-a7ab-4b72-a817-1f2faeb12002" class="">Q: What is the best computer operating system? A: Windows</p><ul id="1d60a693-10b1-430d-b068-a7f246a48153" class="bulleted-list"><li>Windows = 36.67%</li></ul><ul id="c1c130f9-db6b-4849-82b3-dc3b106706b7" class="bulleted-list"><li>Microsoft = 7.69%</li></ul><ul id="6e2161c3-33e6-4480-805b-16677fad0f35" class="bulleted-list"><li>Linux = 5.45%</li></ul><ul id="56c32ba7-9b77-4eb4-a66b-43e08e712db4" class="bulleted-list"><li>The = 5.12%</li></ul><ul id="e4c2ffaf-63c7-437f-a032-b219ea7d0daa" class="bulleted-list"><li>Mac = 4.38%</li></ul><ul id="48d21bd5-e9f5-4b90-b3ac-d1d0319a755b" class="bulleted-list"><li>yo = 1.97%</li></ul><ul id="57047251-6e4e-4ee0-af99-3d2073ad9581" class="bulleted-list"><li>OS = 1.56%</li></ul><ul id="b7ca510d-9ee6-4c16-b95a-e20bc50c8527" class="bulleted-list"><li>I = 1.38%</li></ul><ul id="a7cd81e6-e7c9-4907-b0ba-f57728dd868e" class="bulleted-list"><li>It = 1.29%</li></ul><ul id="10c66db6-4163-47e8-bcd1-ea592054081f" class="bulleted-list"><li>Apple = 1.14%</li></ul><p id="ec543b77-47da-467f-a826-b74c98e03652" class="">Interesting! It also frequently rates subjective questions that are phrased objectively as nonsense.</p><p id="2bc89d6d-8595-4aa7-ab56-4134f6947d2e" class="">Let’s rephrase these into more objective questions.</p><p id="f111303e-ca04-4004-94a3-df507fcc04ea" class="">Q: What‘s the most popular band in the world?</p><p id="7ebb4b70-76cd-4b2c-bbc2-de7600d77418" class="">A: The Beatles</p><ul id="4317d703-c997-4719-8fd7-c91e86f7e0cf" class="bulleted-list"><li>The = 19.86%</li></ul><ul id="a03a7263-485c-46df-9090-6f5dd35c4c1a" class="bulleted-list"><li>yo = 16.21%</li></ul><ul id="54c77c21-8342-4ca5-9aff-59388da8fdf1" class="bulleted-list"><li>Cold = 3.14%</li></ul><ul id="3e58ba2f-8caf-4762-a33d-637fb7a34bf2" class="bulleted-list"><li>One = 3.05%</li></ul><ul id="cea005e6-805d-4a94-8821-2fa96a0d5991" class="bulleted-list"><li>Yo = 2.86%</li></ul><ul id="aec00d4b-cd9a-4ac1-b294-7939cef6f40e" class="bulleted-list"><li>Metall = 2.53%</li></ul><ul id="9ff00ed0-9d44-4510-be47-41969a14a437" class="bulleted-list"><li>Link = 2.53%</li></ul><ul id="887438c0-e234-496a-9d96-79499d7d2dff" class="bulleted-list"><li>Led = 2.49%</li></ul><ul id="af769766-5265-4fea-8c17-88cde69e29ac" class="bulleted-list"><li>Radio = 2.03%</li></ul><ul id="adc7ca28-1e34-4de2-881c-2ac98f9361f9" class="bulleted-list"><li>U = 1.58%</li></ul><p id="566eff09-b44c-43af-817b-f3ef902d7a2a" class="">It very narrowly gets this one right over ‘yo be real’.</p><ul id="ec2d8f88-f692-4ecb-a7da-84c4ad1928b0" class="bulleted-list"><li>Blue = 14.41%</li></ul><ul id="96a83791-66e6-4355-bedb-b11731a70c65" class="bulleted-list"><li>Red = 10.88%</li></ul><ul id="71f83192-10db-486f-a8a7-cd188308f50f" class="bulleted-list"><li>yo = 8.74%</li></ul><ul id="02fb7bde-067b-47ac-b504-d75765cb4c61" class="bulleted-list"><li>Green = 7.48%</li></ul><ul id="109fbfea-5859-4e86-afce-ebdd61e91fa1" class="bulleted-list"><li>Favorite = 5.82%</li></ul><ul id="bbf2ecc3-92ac-40c1-b862-4033959f46d6" class="bulleted-list"><li>Black = 5.14%</li></ul><ul id="065e7656-fece-4924-b924-940acf1701d8" class="bulleted-list"><li>red = 4.00%</li></ul><ul id="1febb3ba-a429-48af-8670-655db7435417" class="bulleted-list"><li>Yellow = 3.88%</li></ul><ul id="9ed5c26e-128f-48cf-be98-88e3af6b2a6a" class="bulleted-list"><li>The = 3.32%</li></ul><ul id="167fac26-2cc9-41e8-97d7-ee8d1cb195a0" class="bulleted-list"><li>blue = 2.50%</li></ul><p id="15ddd425-b444-45df-b0fc-2915b624d350" class="">Uncertainty prompts work surprisingly well!</p><p id="345a4de5-a692-4d09-a559-ddf9ad6f5725" class=""><strong>29/36 sensible questions were correctly identified as sensible</strong></p><p id="cff5255e-bfc7-4416-a0ab-0ab754c18fb6" class="">Most of the error came from sensible but unknowable questions like “What’s Larry Page’s gmail password?”. Excluding those, <strong>24/26 sensible questions were correctly identified.</strong></p><p id="aac47bae-dd0e-453d-94bd-43f0d164e10e" class="">Those broke down as:</p><p id="c6edafd8-7850-4043-a176-15b4f3bf94fd" class="">10/10 commonly asked factual questions</p><p id="ccfb7426-2192-4ab4-b909-1b2dae01ef83" class="">8/10 less common or more complicated questions</p><p id="a88b786e-552f-4c5b-8c42-baee0617ca5d" class="">6/6 sensible but physically impossible questions</p><p id="3a69e9e1-5e4b-49b2-91cb-3e3ec7f42ee0" class="">5/10 sensible but unknowable questions</p><p id="5e0ed5f4-0b35-4f40-9712-43b7401955e4" class=""><strong>14/15 nonsense questions were correctly identified as nonsense.</strong></p><p id="fa8ac663-5ab8-4ede-abc4-c6597fc3ecb9" class="">The sole error was a question that humans also mistake as sensible “How do I calculate the volume of a square?”</p><p id="ed61e42b-3ab4-4f59-ba4e-6f07966f86a1" class="">Those broke down as:</p><p id="55e8ba87-22dc-4516-bf67-14030607b55c" class="">2/2 questions that are a string of random numbers and letters</p><p id="1413349d-9394-4853-a131-7ab676ac3ad1" class="">2/2 nonsense questions with some correct words and correct grammar</p><p id="cbfba5f2-244e-48ff-8076-e3c833ba7888" class="">5/5 questions that are all correct words but don’t make sense</p><p id="66031dca-a817-4978-9cd3-76b474f492df" class="">5/6 questions that contain a category error</p><p id="ee04dffd-8d71-448e-b82b-ce6a9381353c" class="">Subjective questions posed objectively like ‘What’s the single best color?’ also seem to be considered nonsense.</p><p id="08782064-ff09-438e-aa3a-c223c86657ac" class="">GPT-3 also had problems with overfitting where it incorrectly identified as nonsense sensible questions that were too similar to our example nonsense questions.</p></div></article></body></html>

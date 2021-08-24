@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Starting your fundraising pitch deck</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7c938669-72ae-4b24-8823-d5df2b3082f5" class="page sans"><header><h1 class="page-title">Starting your fundraising pitch deck</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-brown">Fundraising</span><span class="selected-value select-value-color-brown">Tech Strategy</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://stripe.com/atlas/guides/pitchdeck?utm_medium=email&amp;utm_campaign=Atlas%20pitch%20deck%20guide&amp;utm_content=Atlas%20pitch%20deck%20guide+CID_6b1199a4be219567e5e6b9e8742110d5&amp;utm_source=&amp;utm_term=Take%20me%20to%20the%20guide" class="url-value">https://stripe.com/atlas/guides/pitchdeck?utm_medium=email&amp;utm_campaign=Atlas%20pitch%20deck%20guide&amp;utm_content=Atlas%20pitch%20deck%20guide+CID_6b1199a4be219567e5e6b9e8742110d5&amp;utm_source=&amp;utm_term=Take%20me%20to%20the%20guide</a></td></tr></tbody></table></header><div class="page-body"><p id="307780c0-cf00-4454-98b0-0966cc10174c" class="">Nobody starts a company because they love fundraising. But for many companies, accelerating a venture-scale business requires millions—or billions—of dollars worth of capital.</p><p id="c8c70b38-7fd1-47f8-a72d-534793d4c0f2" class="">Unfortunately, building fundraising decks and pitching investors are not skills that founders develop before starting a company; they’re learned by doing. So first-time entrepreneurs often struggle to craft a story—<em>their</em> story—that will end in a term sheet.</p><p id="98eb7b09-c61c-4979-a241-6da4dab565e6" class="">While it’s true that every company is unique, it’s also true that every pitch has the same goal: to assure venture investors that your company has the potential to achieve a valuation over a billion dollars. Your startup may not yet generate revenue, but it must generate conviction.</p><p id="267cbf3f-73d3-4d8f-b8b8-6fd00ce7131d" class="">This is no small feat. It requires a leap of both reason and faith, which means that an effective pitch must instill confidence and inspire belief. An investor needs to see you are an expert in your space, a master of your own data, and the kind of storyteller who can convince customers, employees, and the next round of investors to join you on an improbable journey. Early-stage founder, this is for you. It draws from six years of building pitches that have led to $4.5B in raised capital. As you embark on raising your seed or Series A round, you’ll need to tell a story with a mix of vision and execution appropriate to your company stage. This resource will help you articulate why your company should exist—and give investors the best chance at squinting and seeing that billion-dollar outcome. Let’s begin.</p><figure id="2428b768-e80c-48cb-bb1e-46950e8e9047" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/vision-execution.png"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/vision-execution.png"/></a></figure><p id="e3aaae47-2643-41e8-a32c-430f7881f779" class="">The startup world has a lot of lore—and deep archives—on pitching. There’s commentary on early decks of now-famous companies, pattern-matching posts on pitching from venture capitalists, and presentation templates galore.</p><p id="ed1a0051-c764-4c4d-83a1-2d2ecea09780" class="">Instead of thinking in terms of slides, we recommend that you separate your pitch into three basic “acts” and work through each of them one-by-one. These three acts represent the essential movements of every pitch and give founders a clear sense of <em>what</em> needs to be proven at each stage and <em>how</em> to prove it.</p><p id="8842cb0d-6235-4052-bce8-390b002a7eb1" class="">The three acts are as follows:</p><ul id="15ef9401-548b-47e7-b487-7d2a2ad96a89" class="bulleted-list"><li><strong>Act I: Make your case.</strong> What are you building? What can it become? Why now? Why you?</li></ul><ul id="0d158fc4-07c0-49ec-be72-88c8f4841035" class="bulleted-list"><li><strong>Act II: De-risk your approach.</strong> What have you done to increase your odds of success?</li></ul><ul id="1a846c54-3ba2-46b2-aa7e-d71bb19be469" class="bulleted-list"><li><strong>Act III: Broaden your case.</strong> What does success mean to you, your investors, and the world?</li></ul><figure id="c0978acd-0e88-4773-8cbd-731c08df20f8" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3-acts.png"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3-acts.png"/></a></figure><p id="afebe3a0-4eea-4bb0-907a-b4480a26c0ab" class="">In this guide, we’ll focus on the first act. This is where founders set the tone of the pitch and the framing for everything that follows, whereas second and third acts lean into company-specific proof points. The first act is where we dedicate most of our time with founders—we find that we spend over half of our time crafting and refining the first few slides of the pitch. It’s that important.</p><p id="f9927ed0-5904-4847-a930-356715290fdd" class=""><strong>The first act and its pitch plots</strong></p><p id="0e19a597-480c-44b0-ae1a-53ddc92ace95" class="">Your deck’s first act—or first few slides—must hook an investor. There’s a misconception that you must follow a strict sequence of slides to make a compelling case. In fact, the first act of a pitch can contain any combination of slides, as long as it communicates your:</p><ul id="27d41083-d194-45c2-ae21-a7e832d8e316" class="bulleted-list"><li>unique understanding of your market</li></ul><ul id="112cb2e6-362f-4a53-8602-fc0cb2a32a24" class="bulleted-list"><li>key insight into that market</li></ul><ul id="87114d0a-36a6-4604-873f-2058798aeb18" class="bulleted-list"><li>unique product or service</li></ul><ul id="c1258fe5-e494-467e-8f43-91e4bdb7496b" class="bulleted-list"><li>signal that your approach is working</li></ul><p id="19f1eb2d-a71e-40fa-beac-d04d55261018" class="">That’s a lot of impression to make and information to convey over your opening slides, let alone an entire deck. The first act does the heavy lifting, and it must do so efficiently. Over the years, we’ve noticed some recurring narratives when producing strong first acts. We call these “pitch plots”—or frameworks to organize your story. Choosing the right pitch plot is a critical first step.</p><p id="b7651e6d-ca85-4747-b11a-90052e79b343" class="">Most early-stage startups map to one of five pitch plots. Each has a similar structure:</p><ul id="672c3023-f42d-4ac2-9f74-f8c65f51fe02" class="bulleted-list"><li><strong>The beats</strong> are the parts of a story that build on each other to form a plot. A good rule of thumb is to allocate one slide—and a minute or less of speaking—per beat.</li></ul><ul id="a24b2119-4a0b-441f-8c38-392600e23c67" class="bulleted-list"><li><strong>The sample deck</strong> in each section illustrates how the beats connect, and how each pitch plot might look in the wild.</li></ul><ul id="60160f56-fe5b-4d82-8367-f5027b1be0ff" class="bulleted-list"><li><strong>The field notes</strong> are our top observations on each pitch plot—namely where they’ve worked best and fallen short for founders and companies.</li></ul><p id="58669a1c-7420-4711-b566-8e73abf1b716" class="">A final, important note: there is not one plot that works best—they’ve all worked with investors. Before you pitch, experiment with different pitch plots to find the one that allows you to authentically explain the best, most resonant case for your opportunity.</p><p id="51c08d7e-148b-49ff-80af-700e13278dac" class="">Many investors like to make bold bets—few wagers are more daring than re-inventing a market from the ground up. Think <a href="https://www.tesla.com/">Tesla</a> or <a href="https://www.ethoslife.com/about/">Ethos</a>. Or perhaps economist Joseph Schumpeter, as this plot unleashes the “gale of creative destruction” through which an industry evolves by leveling and recreating itself.</p><h3 id="c6580eca-ce46-49e0-9b15-729069bb0598" class="">The beats</h3><h3 id="2ad70088-615d-404e-bd07-8003f8ab334b" class="">“This is the mess that is our market today…”</h3><p id="ac7fcc22-9ad1-4faa-bd02-e0504a8a1816" class="">The idea here is to paint a picture of a market, an industry, or a workflow that is stuck in the past. Maybe it’s <em>still</em> mired in paperwork. It might involve hours of manual work that could be completed in seconds with automation. Maybe the software hasn’t gotten better since 1980. Or it simply hasn’t taken off. Your goal is to make the audience <em>feel</em> this criminal level of inertia—whether it’s with statistics, images, or a powerful anecdote.</p><h3 id="9ecbe3c4-784a-4630-998f-a5afaa1e2963" class="">“Here is how it got there…”</h3><p id="db6ea488-6398-4692-9905-e0f35e75865b" class="">Educate your audience. Help them to understand <em>why</em> the market looks the way it does. Is it dominated by incumbents with no incentive—or ability—to innovate? Is there a historical reason why it <em>had</em> to be the way it is, but no longer does? Has there been a big technological challenge that is yet to be solved? Whatever the answer, it should neatly set the stage for the key insight you’re about to unveil.</p><h3 id="c95c2072-398e-4275-89ed-2da1bd2a034f" class="">“What if we could start over from scratch?”</h3><p id="2410fc3c-5b3d-41a5-8344-ee02e6e1c1b4" class="">Wipe the slate clean and show how your company has a distinct advantage precisely because you are a new entrant. Show the investor how this market might be rebuilt if a founder didn’t have the baggage of being an incumbent, the burden of history, or lack of available technology. Make the solution seem simple, straightforward, and inevitable.</p><h3 id="d61c8d61-686b-4b42-9a9f-efdd68031866" class="">“That’s what we’ve done…”</h3><p id="1d65b749-430f-4571-be10-918509aee6fa" class="">Contrast your solution to the mess you described earlier. Walk your audience through how your product works, with a focus on the tangible differences that result from starting from scratch: is it faster, cheaper, more delightful, less onerous, or simply better than what’s out there?</p><h3 id="5695da4a-1b41-4384-9052-a20209dcd7d4" class="">The sample deck</h3><figure id="024548ca-b78c-4cb0-9b0d-c32866b813f4" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4.jpg"/></a></figure><figure id="74a1be69-e545-46f3-8894-0748c1d1b1b2" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3.jpg"/></a></figure><figure id="c18629cf-9f5d-4822-83a7-179653d03dd3" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2.jpg"/></a></figure><figure id="d44036c9-799e-4eac-8933-573b026f47a2" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1.jpg"/></a></figure><h3 id="e2708ee1-1f52-4267-97e2-d9e598fbd8db" class="">The field notes</h3><p id="a2af3e16-f0c7-4dd1-b1dd-337f21355580" class=""><strong>When it works.</strong> This plot works best if you are educating investors on a market that’s unfamiliar to them. It allows you to demonstrate expertise and gives your investors the freedom to evaluate your business in a vacuum. If you can convince an investor that your company is the <em>only</em> one taking your approach, then you are the only founder who matters.</p><p id="ea3c5962-df8d-4994-86d7-90a453dc5aa0" class=""><strong>Use caution.</strong> Avoid “educating” an investor with a story they already know. If you don’t know what an interested observer of your field definitely knows, you don’t know your field. And worse yet, it’s a negative signal. For example, don’t hinge your pitch to fintech investors on the challenges of the unbanked. They’ve almost certainly heard (and probably have funded) that pitch. The last thing you want is to get caught in a ten-minute debate on the first slide—or worse yet generate knowing nods and blank stares. It’s also important to consider what it is about your approach that makes it unique. For example, if what sets you apart is your marketing strategy—as opposed to something more defensible—it might be hard to argue that you are fundamentally reimagining your market, and your pitch might seem like an overreach.</p><h2 id="e1993ee3-7c7f-44b7-b5f5-b40c3706be2f" class=""><a href="https://stripe.com/atlas/guides/pitchdeck?utm_medium=email&amp;utm_campaign=Atlas%20pitch%20deck%20guide&amp;utm_content=Atlas%20pitch%20deck%20guide+CID_6b1199a4be219567e5e6b9e8742110d5&amp;utm_source=&amp;utm_term=Take%20me%20to%20the%20guide">⬇️ Doing that over here</a></h2><p id="61eea96d-b018-428f-838a-9651938776b8" class="">A precise and powerful analogy goes a long way, especially when your analogs are valued in the $1B+ range. Early-stage versions of <a href="https://www.catch.co/">Catch</a> (“Gusto for freelancers”) or <a href="https://www.ballertv.com/">BallerTV</a> (“ESPN for amateur sports”) would’ve been good candidates for this plot. This is a particularly useful choice when your investors are not already intimately familiar with your market:</p><h3 id="2d795981-67c9-4688-897a-0ca1899e7140" class="">The beats</h3><h3 id="354b3d35-2561-4a09-9bc0-379a3647c114" class="">“Look at <em>this</em> other market (or <em>these</em> other markets) that have evolved…”</h3><p id="57934375-3735-4272-b857-5a1432ab7e55" class="">Big waves move all boats, so if you see other major markets transformed by a trend, plausibly that trend will arrive in your market soon. In the past, these forces might have been mobility, the cloud, or the internet of things. Today, they’re more likely to be artificial intelligence, real-time decisioning, or any number of trends that are reshaping markets. These examples are powerful because they prime your approach before you introduce it.</p><h3 id="f4332b7c-7b8a-4c1e-9ffd-2df9744aaa7b" class="">“Our market has been left behind..”</h3><p id="1f4d41bc-c351-4368-9248-a2774abe2782" class="">Next, draw a sharp contrast between these markets and yours by explaining how your market works today. Focus on the pain points created by these forces <em>not</em> being reflected. If done well, you’ll create a sense of inevitability. Nature abhors a vacuum.</p><h3 id="cf4cea4f-8f35-440a-afd9-6b30d487d856" class="">“It would look like this…”</h3><p id="37898a63-3fc8-4f1c-8251-da4278dc9d59" class="">This is your chance to pay off the analogy. Paint a picture of what your market <em>would</em> look like if it met the modern standard. Take your audience step-by-step through a transformed experience and its implications for users, for your industry, and for the company that can deliver that experience.</p><h3 id="3d4af76d-7b0b-4546-a42a-c5d3480eeab9" class="">“This is exactly what we are building…”</h3><p id="69e8dd8d-e427-48e6-86d7-aa721b653fc7" class="">Present your company as the agent of change between where the market is today and the perfect world that you’ve just laid out. Explain what you’ve already accomplished to put you on that path and what remains to be done. The idea is to show, simply and clearly, that you are on course to realize that vision.</p><h3 id="5474a667-172c-45b9-9565-e75a8e9a110e" class="">The sample deck</h3><figure id="44f99255-3373-4ead-99d5-43f486f061f2" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%201.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%201.jpg"/></a></figure><figure id="7db3f7bd-f3ba-493b-9de0-371eae5041b5" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%201.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%201.jpg"/></a></figure><figure id="3fcc0ebd-c144-49a4-b824-6651f5d8e74f" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%201.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%201.jpg"/></a></figure><figure id="ec548049-7692-44cd-8e0c-64ab96bdb049" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%201.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%201.jpg"/></a></figure><h3 id="54c9e849-428a-4b70-9d71-c518bd31afb0" class="">The field notes</h3><p id="00d16757-f5a4-400c-b366-70086a8474b6" class=""><strong>When it works.</strong> This plot is entirely dependent on the size of the gap between where your market is and what it should, would, or could be with the right technology. It is also particularly effective if you can distill what makes you unique down to a single technology or business model (e.g. artificial intelligence, SaaS, etc.) so that the link to other markets is extremely clear.</p><p id="b8245e9b-2b0d-4b89-8f67-1ac211328f57" class=""><strong>Use caution.</strong> Pressure test every aspect of the analogy to make sure it’s airtight. If there is any inconsistency between your market and its analog, investors will start poking holes. The fewer variables between the two markets, the better. The last thing you want to do is to get dragged into an argument about a market that you don’t even operate in. Plus, there’s a good chance investors have spent time—and capital—getting smart on your analog markets.</p><h2 id="a1c24ffd-6b76-4f49-810c-d0f3f3ce3452" class=""><a href="https://stripe.com/atlas/guides/pitchdeck?utm_medium=email&amp;utm_campaign=Atlas%20pitch%20deck%20guide&amp;utm_content=Atlas%20pitch%20deck%20guide+CID_6b1199a4be219567e5e6b9e8742110d5&amp;utm_source=&amp;utm_term=Take%20me%20to%20the%20guide">💡 But here’s the thing…</a></h2><p id="0cc2b711-dd3d-4478-8ffc-c63223e78384" class="">This is less of a plot than it is a rhetorical device, but it can be an incredibly effective way to open a pitch. If your goal is to convince an investor that you are the <em>best</em> person to solve a problem, then the best thing you can do is demonstrate that you understand the problem better than anyone else. For example, this plot might be a nice fit for <a href="https://twitter.com/rahulvohra">Rahul Vohra</a> of email service <a href="https://superhuman.com/">Superhuman</a>. He has spent over a decade reimagining email as a founder (Rapportive, Superhuman), investor (sendwithus), and advisor (InboxVudu).</p><h3 id="c910d4f3-0044-488f-a67d-9904cab43a18" class="">The beats</h3><h3 id="1e800967-f245-4578-b023-dcf36ee74886" class="">“Insiders in our market know that…”</h3><p id="ffceeac6-2781-437d-a9a3-906686ea16cf" class="">Open with an interesting fact or statistic that an investor doesn’t already know and likely wouldn’t find in her cursory research before your meeting. Ideally, this statistic is unexpected, counterintuitive, or just plain interesting. But, most importantly, it should set up the next beat of your story.</p><h3 id="edbe39f5-72f8-4597-8e44-4278410530d1" class="">“But here’s the thing…”</h3><p id="276c92da-a32e-4dd7-80eb-7f26e35f2edb" class="">Introduce your unique insight here. If it’s an observation that insiders know, then your insight should offer a perspective that is exclusively yours. The idea is to go one level deeper than your opening fact or statistic to reveal a hidden truth about your market. For example, if your interesting fact is that your market is growing incredibly quickly, then your insight might be that the market is still significantly <em>smaller</em> than it should be.</p><h3 id="e4313b3f-7f5f-4af3-8b66-40826a9834d7" class="">“This opens the door to a massive opportunity…”</h3><p id="59896d00-c29d-4fb6-a5de-fc9d9b79a1d1" class="">The next step is to connect your unique insight to the business opportunity in front of you. The implication is that, armed with your unique insight, you can build a specific kind of company that is unlike anything else in the market. For example, if your market is massively underpenetrated, you might focus on the fact that you’re building a product that won’t immediately compete with incumbents, because it serves a hidden market that is adjacent to the current market.</p><h3 id="6d05b8e6-f704-4b3b-9a8a-40846d17c787" class="">“We are built for this…”</h3><p id="b24b3a6c-476f-4128-8bc7-89248466a4b5" class="">Introduce your business in this context. Explain clearly how everything about your company—from the product to the go-to-market—has been designed to exploit this unique insight.</p><h3 id="a8ffee8d-039a-456f-8dad-d2d15c3fca6a" class="">The sample deck</h3><figure id="411e28da-de60-4731-bee3-a25f1ce01285" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%202.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%202.jpg"/></a></figure><figure id="d30986ce-405b-4f15-9a67-575601c8ab44" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%202.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%202.jpg"/></a></figure><figure id="db7a1f9c-de09-4c25-9461-c20c94be4164" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%202.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%202.jpg"/></a></figure><figure id="e86fc4df-a3cd-4f77-8262-3a33554a39d5" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%202.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%202.jpg"/></a></figure><h3 id="ffc68fb7-a1f5-4914-9ad3-fe6fac685015" class="">The field notes</h3><p id="ceecccab-5a73-4886-8692-b2b341d3bae1" class=""><strong>When it works.</strong> This is a challenging plot to pull off because it requires you to present both (1) a fact or statistic that your audience doesn’t already know <em>and</em> (2) an insight that feels fresh and original. As a result, this tactic works best when you have a significant information advantage over the investor, which means that founders who have worked in the industry and establish credibility often have the most success.</p><p id="94c5dfab-04ad-4f2e-8623-1d647e00002e" class=""><strong>Use caution.</strong> If either your “interesting fact” or your “unique insight” are already familiar to your audience—or if they are intuitive to most people—this opening falls flat and your rigor or credibility may be in question. Once you’ve settled on the stats and insights that you plan to share, first validate that they’re truly unique. Run them by colleagues, industry insiders, and friendly investors. If you’re not impressing them with your originality, you likely won’t impress investors either.</p><p id="d8b6e4d1-4ece-489c-8633-9a6a374d9f9f" class="">One of the biggest challenges in any pitch is demonstrating differentiation. To do so, show how your offering is sparking undeniably new customer behavior, or uniquely benefitting from it. This plot might be the first choice for an earlier-stage <a href="https://github.com/">Github</a> or <a href="https://www.figma.com/">Figma</a>.</p><h3 id="da7156c5-e9f7-4374-b043-cf7e32ac2375" class="">The beats</h3><h3 id="bccd0d9c-af31-45ee-9f73-c95e75196c5d" class="">“There is a big shift in behavior underway…”</h3><p id="b68c4bce-c881-40dc-84e6-af166fa1621e" class="">This plot opens with an underlying trend that sets the foundation for your company. But not the trends you see in every other pitch. You need to give a sense that you have <em>uncovered</em> a trend, not just read about it. So avoid Gartner studies and consumer surveys and look for data or anecdotes that reveal a trend that is hidden in plain sight. Imagine Airbnb in its earliest days pointing to the emergence of temporary housing listings on sites like Craigslist as evidence that people were interested in non-hotel accommodations.</p><h3 id="0cf6e366-8e0e-44ea-9ef9-61e200bc3099" class="">“The incumbents aren’t ready for it…”</h3><p id="4bf91535-1a72-44ef-ae35-90b6b054d4ea" class="">If you’ve effectively demonstrated that a trend is real, then your next task is to show that the incumbents either don’t see it or can’t move fast enough to respond to it. Illustrate the clash between the expectations of the user and what the incumbents offer.</p><h3 id="2515328a-b85e-4b83-8578-735261c4c451" class="">“We saw it coming…”</h3><p id="17010b09-e5a3-4169-ae29-28087d8aae4f" class="">Leverage your origin story to illustrate founder/market fit. Show that you’re at the cusp of the opportunity that you’ve prepared for for years, not because of an accident but because you’ve been planning it. Show how your company was built with a deep understanding of this trend, and how this has translated to your approach to product development, go to market, team building, and more.</p><h3 id="59ae7df9-7fb4-4f1f-9765-e020d3919506" class="">“We built a company for this new world…”</h3><p id="38bb8210-423e-4beb-a943-27e3278af7f2" class="">Provide early evidence that you are benefiting from this trend. This could be early traction, customer testimonials, or any other indication that you are resonating with early adopters. Give investors a sense that you’ve discovered the inevitable.</p><h3 id="75bd836a-dff4-49e1-970e-33b25a848ea4" class="">The sample deck</h3><figure id="7e5f98e0-e91b-4e03-948b-998da1a6b2ae" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%203.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%203.jpg"/></a></figure><figure id="f14db12e-ab4f-4b58-8501-b353dd7c31a0" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%203.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%203.jpg"/></a></figure><figure id="95e456a6-ab93-4133-bac0-17abf273dd31" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%203.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%203.jpg"/></a></figure><figure id="c4253f36-e07f-4679-bf0e-034908de3557" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%203.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%203.jpg"/></a></figure><h3 id="255a4bfe-fddb-4f52-8000-be65d7c28c9f" class="">The field notes</h3><p id="e12cef00-5d5d-413c-b16a-67d83c5d9af6" class=""><strong>When it works.</strong> If your company is on the forefront of an emerging trend that others are not yet seeing, this can be a powerful plot. The Airbnb example is an instructive one. Ideally, the trend you’re identifying can only be found if you look <em>deep</em> inside the data. It should be something that only you were looking for—and found. Epoch-making insights are probably not available via a Google search; show you <em>won</em> the knowledge.</p><p id="c0956459-0a97-4039-8d34-2296915d08d0" class=""><strong>Use caution.</strong> Investors are looking for long-term trends that transform markets, not temporary blips. In recent months, we’ve seen pitch after pitch leverage COVID-19 as the tipping point for their market or their product. But is the change you’re seeing likely to outlast the pandemic? And, if so, how can you make that clear to an investor?</p><h2 id="670a9862-d38a-441a-ab67-fdb1ef49f93e" class=""><a href="https://stripe.com/atlas/guides/pitchdeck?utm_medium=email&amp;utm_campaign=Atlas%20pitch%20deck%20guide&amp;utm_content=Atlas%20pitch%20deck%20guide+CID_6b1199a4be219567e5e6b9e8742110d5&amp;utm_source=&amp;utm_term=Take%20me%20to%20the%20guide">✋ I took it personally</a></h2><p id="40b3678e-71e3-4a93-9e26-09cff34af023" class="">Investors are looking for founders who dedicate their lives to solving a problem, which means it’s incredibly powerful if you can speak to how that problem has impacted you personally. For example, this plot could have been used by <a href="https://www.linkedin.com/in/john-f-crowley-540aa49/">John Crowley</a>. When two of his kids were diagnosed with Pompe disease, Crowley left a career in finance to develop treatments for people with rare diseases and few options. Driven to help his children, he’s spent decades working at and founding biotech and pharma companies. He now leads <a href="https://www.amicusrx.com/">Amicus Therapeutics</a>, which discovers, develops and delivers medicine for people living with rare metabolic diseases.</p><h3 id="4ec97906-3d87-463d-a583-fa1d42eb21be" class="">The beats</h3><h3 id="c3382884-1c06-46f2-bf07-a8a64ed15584" class="">“Let me tell you about a time when I tried/had to…”</h3><p id="60345f0a-4430-4efa-b067-f6cddfe1de48" class="">Share your personal story of struggle. This can be a “fish out of water” story in which you—as an outsider—try something for the first time (e.g. applying for a mortgage). Or it can be an “inside baseball” story in which you struggled with a problem that has long plagued members of your community of practice (e.g. manually reviewing mortgage applications).</p><h3 id="a289b7e0-07fe-4ae9-9a8a-478171fc1862" class="">“It was an awful experience…”</h3><p id="49ccf9f0-18ea-4789-94df-181e31c9a37e" class="">Summarize the story by distilling the two to three fundamental barriers that stood in the way of making this process as seamless, intuitive, simple, or effective as it could be. This is where you set up the problems that you had to <em>believe</em> you could solve before starting your company.</p><h3 id="8f44e055-6f4b-4ce2-beae-1a1d2e05a695" class="">“I did my research…”</h3><p id="fa9d1dc7-4f55-4a6b-83b6-0f5b3aa52094" class="">Walk through the steps you took to better understand this problem. Who did you talk to? What did you learn about the size and scope of this problem? How long did you spend iterating on your idea? Who were you able to recruit to help you take on this challenge? These are the stories that resonate with investors and give them the confidence that you are committed to solving the problem in front of you.</p><h3 id="9d8fdd80-b7eb-49bd-9228-8c74d4618f0e" class="">“I built the solution that I would want…”</h3><p id="32727501-ab57-410f-afab-90f11c07e7f6" class="">Illustrate how your product solves the problem that you were facing. But quickly transition to the value that your product can bring to the market at large. This is your chance to demonstrate that, in solving a problem for yourself, you uncovered a massive business opportunity.</p><h3 id="d526c1c4-7b89-49ba-8c81-ce4df2e0e760" class="">The sample deck</h3><figure id="425db056-ee45-4c8d-b91f-248186bc7e4b" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%204.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/4%204.jpg"/></a></figure><figure id="2e57e17e-e59a-4406-9f94-93d7bd6ecf9e" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%204.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/3%204.jpg"/></a></figure><figure id="2c535ca8-0ac5-4175-9cce-05e9995aae33" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%204.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/2%204.jpg"/></a></figure><figure id="c62d30c1-9dd8-4bf1-8df5-176908033223" class="image"><a href="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%204.jpg"><img style="width:700px" src="Starting%20your%20fundraising%20pitch%20deck%207c93866972ae4b248823d5df2b3082f5/1%204.jpg"/></a></figure><h3 id="1b3d9942-e64b-4c10-b850-b1f6a06da9a2" class="">The field notes</h3><p id="122cc27f-1489-4416-815b-5381e6e58954" class=""><strong>When it works.</strong> We only recommend this plot to founders with an authentic story to tell. Investors are bored to tears of founders forcing themselves in as the hero of the story. But if your origin story is core to the narrative you share with customers or employees, it’s a good indication that it will resonate with investors, as well.</p><p id="180decc1-9e48-4213-8781-fab6ea62a9f3" class=""><strong>Use caution.</strong> Even if your story is authentic, it only works if it’s relatable. It’s not necessary for investors to have experienced the problem themselves, but they should be able to put themselves in your shoes. If a problem is complex or esoteric—or feels like a “nice to have” versus a “must have”—a personal story can not only lose its momentum, but also its currency.</p><p id="1d828334-e433-4a36-8b43-92f32bb50178" class="">Once you’ve chosen your pitch plot, you’ve taken a significant step in defining your fundraising presentation. There’s much <a href="https://stripe.com/atlas/guides/pitching">more to consider around pitching</a>, but stay the course on your deck and build out the second and third act of your pitch.</p><p id="755e13b9-b330-4527-acbe-7e30fefeba00" class="">Stripe will host the <a href="http://4thandking.com/">4th &amp; King</a> team for an online AMA about crafting, designing, and delivering fundraising presentations. Bring all your questions about story structure, the rules of thumb for appendices, and design themes. <a href="http://stripe.events/pitchdeckAMA/ag">Register here</a> for the live session on August 19, 2020.</p><p id="b59bd7ce-1f45-4d51-9ba6-c7adca6dca65" class=""><a href="https://stripe.com/atlas/guides">Return to guides</a></p></div></article></body></html>

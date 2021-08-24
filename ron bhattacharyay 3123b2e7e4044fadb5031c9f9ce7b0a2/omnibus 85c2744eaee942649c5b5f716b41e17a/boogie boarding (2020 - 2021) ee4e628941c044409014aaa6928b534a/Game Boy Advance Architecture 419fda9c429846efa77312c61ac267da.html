@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Game Boy Advance Architecture</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="419fda9c-4298-46ef-a773-12c61ac267da" class="page sans"><header><h1 class="page-title">Game Boy Advance Architecture</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.copetti.org/writings/consoles/game-boy-advance/" class="url-value">https://www.copetti.org/writings/consoles/game-boy-advance/</a></td></tr></tbody></table></header><div class="page-body"><figure id="546ed7b2-4f7c-45ef-a109-7368f88a2f90" class="image"><a href="Game%20Boy%20Advance%20Architecture%20419fda9c429846efa77312c61ac267da/diagram.png"><img style="width:700px" src="Game%20Boy%20Advance%20Architecture%20419fda9c429846efa77312c61ac267da/diagram.png"/></a></figure><p id="79dd7c8d-d6e5-4014-82e0-bbbc80ba54ca" class="">This article welcomes anyone that wants to help with <a href="https://github.com/flipacholas/Architecture-of-consoles">translations or contributions</a>.</p><p id="d3f01bab-225f-4fc5-8a26-f45389b990b3" class="">The original Game Boy Advance. Released on 21/03/2001 in Japan, 11/06/2001 in America and 22/06/2001 in Europe</p><h2 id="6acc7a78-4284-4ec2-9be7-6cc1a42bcf4c" class="">A quick introduction</h2><p id="38943b99-5266-4974-be71-11d041072793" class="">The internal design of the Game Boy Advance is quite impressive for a portable console that runs on two AA batteries.</p><p id="45d16ac2-5df7-4089-ba24-d9d67c3a1bd6" class="">This console will carry on using Nintendo’s <em>signature</em> GPU. Additionally, it will introduce a relatively new CPU from a UK company that will surge in popularity in years to come.</p><h2 id="4a251b13-9b77-48a9-a7d1-d35b4d86cc78" class="">CPU</h2><p id="de8a46c7-5cc6-42b3-9b64-b440e96604ea" class="">Most of the components are combined into a single package called <strong>CPU AGB</strong>. This package contains two completely different CPUs:</p><ul id="4dac5276-e817-4291-bcb2-c67c0adec2b6" class="bulleted-list"><li>A <strong>Sharp LR35902</strong> running at either 8.4 or 4.2 MHz: <em>If it isn’t the same CPU found on the Game Boy!</em> It’s effectively used to run Game Boy (<strong>DMG</strong>) and Game Boy Color (<strong>CGB</strong>) games. Here’s <a href="https://www.copetti.org/writings/consoles/game-boy/">my previous article</a> if you want to know more about it.</li></ul><ul id="66233bf7-7421-476b-b9a1-5386d051cda1" class="bulleted-list"><li>An <strong>ARM7TDMI</strong> running at 16.78 MHz: This is the new processor we’ll focus on, it most certainly runs Game Boy Advance games.</li></ul><p id="8e3432ea-6039-432b-ba93-8e8afb6f8c63" class="">Note that both CPUs will <strong>never run at the same time</strong> or do any fancy co-processing. The <strong>only</strong> reason for including the <em>very</em> old Sharp is for <strong>backwards compatibility</strong>.</p><h3 id="4a334a22-e5bc-4f6f-a5c6-8dd446922f9c" class="">What’s new?</h3><p id="9edf4df1-c8be-4606-9e3a-a79962fd905c" class="">Before ARM Holdings (currently “Arm”) became incredibly popular in the smartphone world, they licensed their CPU designs to power Acorn’s computers, Apple’s Newton, Nokia’s phones and the Panasonic 3DO. Nintendo’s chosen CPU, the ARM7TDMI, is based on the earlier ARM710 design, and includes:</p><ul id="46f26047-b2ab-4747-bbd1-328bbc57a338" class="bulleted-list"><li><strong>ARM v4</strong> ISA: The 4th version of the 32-bit ARM instruction set.</li></ul><ul id="b548ec9f-efd7-46b9-affa-083d08af94a5" class="bulleted-list"><li><strong>Three-stage pipeline</strong>: Execution of instructions are divided into three steps or <em>stages</em>. The CPU will fetch, decode and execute up to three instructions concurrently. This enables maximum use of the CPU’s resources (which reduces idle silicon) while also increasing the amount of instructions executed per unit of time.</li></ul><ul id="3bbdbb82-05bb-4403-b589-e58a95a74600" class="bulleted-list"><li><strong>32-bit ALU</strong>: Can operate 32-bit numbers without consuming extra cycles.</li></ul><p id="3e1f077c-522a-4824-8ca9-f66dc651c679" class="">Moreover, this core contains some extensions referenced in its name (<em>TDMI</em>):</p><ul id="8f8245a6-96d5-4e52-beef-44e4a76621be" class="bulleted-list"><li><strong>T</strong> → <strong>Thumb</strong>: A subset of the ARM instruction set whose instructions are encoded into 16-bit words.<ul id="c1102232-f961-404a-9136-95dca940667c" class="bulleted-list"><li>Being 16-bit, Thumb instructions require half the bus width and occupy half the memory. However, since Thumb instructions offer only a functional subset of ARM you may have to write more instructions to achieve the same effect.</li></ul><ul id="ee0abc57-3ec0-4055-b7de-a486949671b6" class="bulleted-list"><li>Thumb only offers conditional execution on branches, its data processing ops use a two-address format, rather than three-address, and it only has access to the bottom half of the register file.</li></ul><ul id="d94a4c64-8005-4b5d-b7c6-55000d0472f1" class="bulleted-list"><li>In practice Thumb uses 70% of the space of ARM code. For 16-bit wide memory Thumb runs <em>faster</em> than ARM.</li></ul><ul id="aeaa9a0f-c1a1-4e43-871c-e59954afdb8f" class="bulleted-list"><li>If required, ARM and Thumb instructions can be mixed in the same program (called <em>interworking</em>) so developers can choose when and where to use each mode.</li></ul></li></ul><ul id="b794c6b0-40c4-465e-87b3-3b5cca97e744" class="bulleted-list"><li><strong>D</strong> → <strong>Debug Extensions</strong>: Provide JTAG debugging.</li></ul><ul id="99b26cd7-a9c0-4a3f-afdc-22f936738c8d" class="bulleted-list"><li><strong>M</strong> → <strong>Enhanced Multiplier</strong>: Previous ARM cores required multiple cycles to compute full 32-bit multiplications, this enhancement reduces it to just a few.</li></ul><ul id="59f73451-b97d-48a8-81ee-728fb1e1960f" class="bulleted-list"><li><strong>I</strong> → <strong>EmbeddedICE macrocell</strong>: Debug module that allows hardware breakpoints, watchpoints and allows the system to be halted while debugging.</li></ul><h3 id="0548c7f2-354b-4eec-981e-36dc18cd7d16" class="">Memory locations</h3><p id="ec941b16-6415-41b7-9b6d-f20e537797f1" class="">The inclusion of Thumb in particular had a strong influence on the final design of this console. Nintendo mixed 16-bit and 32-bit buses between its different modules to reduce costs while providing programmers with the necessary resources to optimise their code. Usable memory is distributed across the following locations:</p><ul id="36a8f280-72b8-4cce-9fa2-665ab475934b" class="bulleted-list"><li><strong>IWRAM</strong> (Internal WRAM) → 32-bit with 32 KB: Useful for storing ARM instructions and data in big chunks.</li></ul><ul id="0289a69b-669c-4330-a027-c16f47be0be2" class="bulleted-list"><li><strong>EWRAM</strong> (External WRAM) → 16-bit with 256 KB: Optimised for storing Thumb-only instructions and data in small chunks.</li></ul><ul id="041b28e5-c980-4ac2-97a9-3d50f42e7d39" class="bulleted-list"><li><strong>PAK ROM</strong> -&gt; 16-bit with variable size: This is the place where the cartridge ROM is accessed.</li></ul><ul id="c7ec898c-8223-419d-b1d1-cb3c667c8d89" class="bulleted-list"><li><strong>Cart RAM</strong> -&gt; 16-bit with variable size: This is the place where the cartridge RAM is accessed.</li></ul><p id="bb36c94f-2df7-4e6e-b4b5-76abd7c68088" class="">Although this console was marketed as a 32-bit system, the majority of its memory is only accessible through a 16-bit bus, meaning games will mostly use the Thumb instruction set to avoid spending two cycles per instruction fetch. Only critical sections should use the ARM instruction set.</p><h3 id="cacb3d87-33ad-4e7d-a07f-96ea8b51ab4b" class="">How do they maintain compatibility?</h3><p id="e64ef3b0-107f-4856-81c9-63e2d4cb6091" class="">You’ll be surprised that there is no software implemented to detect whether the cartridge inserted is a GB or GBA one. Instead, the console relies on hardware switches: A <strong>shape detector</strong> effectively identifies the type of cartridge and then only passes power through the required bus.</p><h2 id="c52d38e6-2189-45b0-a5db-ac835919b82f" class="">Graphics</h2><p id="6b95531f-808a-40fb-8f4b-26ae69a9d7ed" class="">Before we begin, you’ll find the system a mix between the <a href="https://www.copetti.org/writings/consoles/super-nintendo/#graphics">SNES</a> and the <a href="https://www.copetti.org/writings/consoles/game-boy/#graphics">Game Boy</a>, the graphics core is still the well-known 2D engine called <strong>PPU</strong>. I recommend reading those articles before continuing since I’ll be revisiting lots of previously-explained concepts.</p><p id="a1a802c5-7f6f-4b6d-996b-d2831f699ed9" class="">Compared to previous Game Boys we now have a colour LCD screen that can display up to 32,768 colours (15-bit). It has a resolution of 240x160 pixels and a refresh rate of ~60Hz.</p><h3 id="c66d55d6-8e55-4249-bc3d-19c9fb043e40" class="">Organising the content</h3><p id="d232c8d0-ab22-4b3e-a2b1-397dfb9ef486" class="">We have the following regions of memory in which to distribute our graphics:</p><ul id="abc8f4b6-33d5-4407-a15f-120beac2463d" class="bulleted-list"><li>96 KB 16-bit <strong>VRAM</strong> (Video RAM): Where 64 KB store background graphics and 32 KB store sprite graphics.</li></ul><ul id="7347138f-24e8-40d5-bd58-316c31366333" class="bulleted-list"><li>1 KB 32-bit <strong>OAM</strong> (Object Attribute Memory): Stores up to 128 sprite entries (not the graphics, just the indices and attributes). Its bus is optimised for fast rendering.</li></ul><ul id="8a576dbe-6d5b-41cd-aaa8-ca237c024904" class="bulleted-list"><li>1 KB 16-bit <strong>PAL RAM</strong> (Palette RAM): Stores two palettes, one for backgrounds and the other for sprites. Each palette contains 256 entries of 15-bit colours each, colour ‘0’ being <em>transparent</em>.</li></ul><h3 id="f3064299-b835-48fa-995b-b53e55ad8ad5" class="">Constructing the frame</h3><p id="23b4bb6e-d0eb-41cb-8233-9ec66eaa83f1" class="">If you’ve read the previous articles you’ll find the GBA familiar, although there is additional functionality that may surprise you, and don’t forget that this console runs on two AA batteries.</p><p id="be978bc4-3142-4bb3-a0cd-081cf96a936c" class="">I’m going to borrow the graphics of Sega’s <em>Sonic Advance 3</em> to show how a frame is composed.</p><h3 id="95e6d9c8-2642-4e17-b768-c511f804ed0e" class="">Beyond Tiles</h3><p id="3acc3683-06f0-46ca-a525-c85f31551162" class="">Sometimes we may want to compose a background from which the tile engine won’t be able to draw all required graphics. Now, modern consoles addressed this by implementing a <strong>frame-buffer</strong> architecture but this is not possible when there’s very little RAM… Well, the GBA happens to have 96 KB of VRAM which is enough to allocate a <strong>bitmap</strong> with the dimensions of our LCD screen.</p><p id="c03ee119-3c80-4d54-b4ba-db6bf8fd91b2" class="">Good news is that the PPU actually implemented this functionality by including three extra modes, these are called <strong>bitmap modes</strong>:</p><ul id="58391eef-5367-49ad-88e6-36fb76a833fd" class="bulleted-list"><li><strong>Mode 3</strong>: Allocates a single fully-coloured (8bpp) frame.</li></ul><ul id="6bc4ab1a-cda9-47aa-95fd-55a787469bb0" class="bulleted-list"><li><strong>Mode 4</strong>: Provides two frames with half the colours (4bpp) each.</li></ul><ul id="5b7ca5c9-41f9-488f-ac61-ed3797681486" class="bulleted-list"><li><strong>Mode 5</strong>: There’s two fully-coloured frames with half the size each (160x128 pixels).</li></ul><p id="41355d22-6fc7-4f0e-90f8-a6c5c56510c2" class="">The reason for having two bitmaps is to enable <strong>page flipping</strong>: Drawing over a displayed bitmap can expose some weird artefacts during the process. If instead we manipulate another one then none of the glitches will be shown to the user. Once the second bitmap is finished the PPU can be updated to point to the second one, effectively swapping the displayed frame.</p><p id="9cbd61bf-b9fd-46da-b549-7ae54b259f6b" class="">For this reason, these modes are used exceptionally, such as for playing motion video (<strong>Game Boy Advance Video</strong> completely relied on this) or rendering <strong>3D geometry</strong> with the CPU.</p><h2 id="4d6514fa-6719-4aec-b0f4-a83afd690034" class="">Audio</h2><p id="24c8d5af-8749-44fb-a9cf-528b8b715fa5" class="">The GBA features a <strong>2-channel sample player</strong> which works in combination with the legacy Game Boy sound system.</p><p id="05bdb4ff-59f7-45b2-8b61-75e6100d653e" class="">Here is a breakdown of each audio component using <em>Sonic Advance 2</em> as example:</p><p id="d991dd10-4c0d-4784-83af-fc15df1cd6cc" class="">No support for video.</p><p id="55c9264f-5247-4663-a241-4c9e8111c65b" class="">No support for video.</p><p id="0f2b1d1a-7e20-486e-9820-1562080d3c8b" class="">No support for video.</p><h3 id="c36438c7-9d34-4328-915b-e789348b235c" class="">Best of both worlds</h3><p id="ae870a63-4926-4c4f-9550-f33279fcad03" class="">Some games took the PCM-PSG duality further and ‘alternated’ the leading chip depending on the context.</p><p id="cf674ac2-e7c7-4d6c-ab9c-971fa2ccea29" class="">In this game (<em>Mother 3</em>), the player can enter two different rooms, one <em>relatively normal</em> and the other with a <em>nostalgic</em> setting. Depending on the room the character is in, the same score will sound <em>modern-ish</em> or <em>8bit-ish</em>.</p><p id="1d9ed148-c7bf-4e40-8e32-7a1f253e494a" class="">No support for video.</p><p id="c8f2af83-f49a-4cf2-b1bc-a9b3ec244cee" class="">No support for video.</p><h2 id="3825477b-956d-4621-a47e-d9c68573f3a7" class="">Games</h2><p id="f3505bc6-409b-40c4-bda4-398c9f1758ee" class="">Programming for the GBA was similar to the SNES with the addition of all the advantages of developing games in the early 2000s: Standardised high-level languages, better compilers, faster RISC CPUs, non-proprietary computers for development, comparatively better documentation and… Internet access!</p><p id="67ec99d9-d2a1-4d01-9bb4-c589e568dc50" class="">Games are mostly written in C with critical sections in assembly (ARM and Thumb) to save cycles. Nintendo provided a SDK with libraries and compilers. BIOS calls were available to simplify I/O access and reduce cartridge size.</p><p id="202595aa-07e4-48c0-912d-066937297379" class="">Game data is stored inside a new proprietary cartridge called <strong>GamePak</strong>.</p><h3 id="0063ae06-7402-41f0-9617-5706c87fcc93" class="">Accessing cartridge data</h3><p id="54efeb8a-fe87-4a02-befb-0f0eeec9d7e0" class="">While the ARM7 has a 32-bit address bus, there are only 24 address lines connected to the cartridge. This should mean that up to 16 MB can be accessed on the cartridge without needing a mapper, however, the official docs state that <strong>32 MB of cartridge data are mapped in memory</strong>. So what’s happening here? The truth is, the Gamepak uses <strong>25-bit addresses</strong> (which explains that 32 MB block) but its bottommost bit is fixed at zero, so the only 24 remaining bits are set. This is how Gamepak addressing works.</p><p id="00278781-9f7e-4ab6-b774-8004a3a6fab0" class="">Now, does this mean that data located at odd addresses (with its least significant bit at ‘1’) will be inaccessible? No, because the data bus is 16-bit: For every transfer, the CPU/DMA will fetch the located byte plus the next one, allowing to read both even and odd addresses. As you can see, this is just another work of engineering that makes full use of hardware capabilities while reducing costs.</p><h3 id="2c3b5a37-bfa6-4cb3-ae6c-86a951433387" class="">Cartridge space</h3><p id="597b5eb5-f954-4dcf-b554-351e78e5a7a5" class="">In order to hold saves, Game Paks could either include:</p><ul id="cc6e9953-aef3-4fff-9e5f-815b22d0e613" class="bulleted-list"><li><strong>SRAM</strong>: These need a battery to keep its content and can size up to 64 KB. It’s accessed through the GBA’s memory map.</li></ul><ul id="48440dd8-eb03-430d-845e-0a0255e61641" class="bulleted-list"><li><strong>Flash ROM</strong>: Similar to SRAM without the need of a battery, can size up to 128 KB.</li></ul><ul id="990abf30-ce83-4292-9ffd-3d0fc34e4801" class="bulleted-list"><li><strong>EEPROM</strong>: These require a serial connection and can theoretically size up to anything (often found up to 8 KB).</li></ul><h3 id="d56012f7-2749-4691-b256-7042f83cee1b" class="">Accessories</h3><p id="bbf43569-d1d7-456c-af90-0715b557bcef" class="">The famous <strong>Game Boy Link Cable</strong> provided multi-playing capabilities. Additionally, the cable has a special feature internally known as <strong>Multi-boot</strong>: Another console (either GBA or GameCube) can send a functional game to the receiver’s EWRAM, then the latter would boot from there (instead of needing a cartridge).</p><h2 id="e12940f1-e1aa-49ac-9e4d-768e8c68674c" class="">Anti-Piracy &amp; Homebrew</h2><p id="893bf545-149c-44aa-89a2-ac0e9f76e483" class="">In general terms, the usage of proprietary cartridges was a big barrier compared to the constant cat-and-mouse game that other console manufacturers had to battle while using the CD-ROM.</p><p id="9382b05e-94de-4453-abfe-52f77094115d" class="">To combat against <em>bootleg</em> cartridges (unauthorised reproductions), the GBA’s BIOS incorporated <a href="https://www.copetti.org/writings/consoles/game-boy/#anti-piracy">the same boot process</a> found in the original Game Boy.</p><h3 id="92d46ad3-bae9-4920-be0e-73b49e99ede5" class="">Flashcards</h3><p id="e66e0a8c-f59e-4d29-82f4-0c565ef7120e" class="">As solid state storage became more affordable, a new type of cartridge appeared on the market. <strong>Flashcards</strong> looked like ordinary Game Paks but had the addition of a card slot (SD, MiniSD, MicroSD or whatever) which enabled to run game ROMs. The concept is not new actually, developers have internally used similar tools in order to test their games on a real console (and manufacturers provided the hardware to enable this).</p><p id="f0692e2f-42dd-4d1d-b5b4-d39215f9e208" class="">However, commercial availability of these cards proved to be a <strong>grey area</strong>: Nintendo condemned its usage due to enabling piracy where as some users defended that it was the only method for running <strong>Homebrew</strong> (programs made outside game studios and consequently without the approval of Nintendo). After Nintendo’s legal attempts, these cartridges were banned in some countries (like in the UK) nonetheless they still persisted worldwide.</p><h2 id="851cb331-62e5-4f35-8134-593a3cf78140" class="">That’s all folks</h2><h2 id="92b9d91d-0d3d-4d8b-83a5-fbeeab836a0d" class="">Sources / Keep Reading</h2><h3 id="2f690aa1-dcdd-4208-9a23-f2625045ac60" class="">General</h3><ul id="77f66398-4021-454b-820f-416c9089335d" class="bulleted-list"><li><strong>Official AGB Programming Manual</strong></li></ul><ul id="5aad067f-9464-40be-9070-4f71620bc280" class="bulleted-list"><li><a href="https://www.coranac.com/tonc/text/toc.htm"><strong>Tonc’s programming tutorials</strong></a></li></ul><h3 id="5043a8b6-c1d6-45c9-bdac-b7ffeb9e1d96" class="">CPU</h3><ul id="722e2efa-c617-4140-9783-9475b50074bb" class="bulleted-list"><li><a href="http://www.davespace.co.uk/arm/introduction-to-arm/"><strong>Quick and concise introduction to ARM</strong></a></li></ul><ul id="817dd272-ac3e-455b-bb18-698dce244325" class="bulleted-list"><li><a href="http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.faqs/kiYeupZKxTQnvx.html"><strong>ARM7TDMI official docs</strong></a></li></ul><h3 id="1b4f305d-4c7a-4522-8366-fe75ca91bdac" class="">Graphics</h3><h3 id="820923bd-0ce8-46c5-b9ec-35a2b9b8cc7e" class="">Audio</h3><ul id="53769820-e848-425c-afc2-d6afbe70cdcc" class="bulleted-list"><li><a href="https://www.gamedev.net/articles/programming/general-and-gameplay-programming/audio-programming-on-the-gameboy-advance-part-1-r1823/"><strong>GBA Audio programming</strong></a></li></ul><h3 id="486fa930-d14c-490b-83d3-0da307c8bd60" class="">Games</h3><ul id="8f90ae95-b777-4668-9fba-524c12f45882" class="bulleted-list"><li><a href="http://reinerziegler.de.mirrors.gg8.se/GBA/gba.htm"><strong>Cartridge interface in detail</strong></a></li></ul><h3 id="6927dedf-dd7a-495e-91df-6fd0fecc9c3e" class="">Anti-Piracy</h3><ul id="244d92c0-54fd-442e-a786-b478a7c65935" class="bulleted-list"><li><a href="https://mgba.io/2014/12/28/classic-nes/"><strong>Classic NES titles exploiting ARM’s unique features</strong></a></li></ul><h3 id="1b4dd943-7513-4cd9-9d82-0f9ff06bf301" class="">Photography</h3><ul id="605ba281-f80a-43a5-b260-ec15aa1fbdc2" class="bulleted-list"><li>Console: <a href="https://commons.wikimedia.org/wiki/User:Evan-Amos"><strong>Evan Amos Gallery</strong></a></li></ul><ul id="545c7f89-599a-481b-9adf-4823a1d27162" class="bulleted-list"><li>Motherboard: <a href="https://gbhwdb.gekkio.fi/consoles/agb/"><strong>Game Boy hardware database</strong></a></li></ul><ul id="d42527a3-b27e-46a1-8c4b-ec48c13d4cf6" class="bulleted-list"><li>Non-studio photos, game screenshots and diagrams: <strong>Me</strong></li></ul><h3 id="f9c9ccbb-f8dd-41c0-b449-4dcf98c9c158" class="">Contributing</h3><p id="b2740c2c-f59f-419c-a676-3e67bc6b5815" class="">This article is part of the <a href="https://www.copetti.org/writings/consoles/">Architecture of Consoles</a> series. If you found it interesting please consider donating, your contribution will be used to get more tools and resources that will help to improve the quality of current articles and upcoming ones.</p><p id="b8a3efbf-fe13-4829-ba0e-950b7e130d32" class="">A list of desirable tools and latest acquisitions for this article are tracked in here:</p><p id="b12fd549-c808-4b80-89d4-45d69f48fd32" class="">Alternatively, you can help out by <a href="https://github.com/flipacholas/Architecture-of-consoles">suggesting changes</a> and/or <a href="https://github.com/flipacholas/Architecture-of-consoles">adding translations</a>.</p><h3 id="eda7c89b-68d3-4388-9c41-3a3cbe513d21" class="">Changelog</h3><p id="347e993e-c242-4367-b56d-2418ff579f1e" class="">Always nice to keep a record of changes.</p></div></article></body></html>

@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Positioning</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6510b5e6-3b57-4147-87e2-0a3782d76306" class="page sans"><header><h1 class="page-title">Positioning</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.lennysnewsletter.com/p/positioning" class="url-value">https://www.lennysnewsletter.com/p/positioning</a></td></tr></tbody></table></header><div class="page-body"><p id="33ccdcdf-3da9-44af-953b-40b8b86677f9" class=""><em>👋 Hello, I’m </em><a href="https://twitter.com/lennysan"><em>Lenny</em></a><em> and welcome to a ✨ </em><em><strong>once-a-month-free-edition </strong></em><em>✨ of my newsletter. Each week I humbly tackle reader questions about product, growth, working with humans, and anything else that’s stressing you out at the office.</em></p><p id="a4b0a518-f865-415a-9932-9addfa993e04" class=""><em>If you’re not a paid subscriber, here’s what you missed this month:</em></p><ol type="1" id="820cd2b4-5d06-4f58-9189-81b4d90237e2" class="numbered-list" start="1"><li><a href="https://www.lennyrachitsky.com/p/the-most-important-consumer-subscription"><em>The most important consumer subscription metrics to track</em></a></li></ol><ol type="1" id="d4c19285-109e-4e41-8079-aefe44291d0f" class="numbered-list" start="2"><li><a href="https://www.lennysnewsletter.com/p/become-a-product-manager"><em>Should you become a product manager</em></a></li></ol><p id="3dc683e3-2654-4e3f-845f-a4d8f3b0b487" class=""><strong>This week’s newsletter is brought to you by…</strong></p><figure id="faad8d04-6cff-410c-9b1f-53eb9be19880" class="image"><a href="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F7707dc53-4ae8-4de2-9156-0c498e8725b8_1600x400.png"><img style="width:700px" src="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F7707dc53-4ae8-4de2-9156-0c498e8725b8_1600x400.png"/></a></figure><p id="e5fa99be-c69e-4b8e-a2eb-50c90bc4b6b5" class="">You know that tingling feeling you get when you’re reading a great book? Imagine that feeling delivered to you daily. That’s The Browser. Each day Robert Cottrell reads hundreds of articles, selects his five favorite timeless pieces of writing, and sends them to you in a brief email. It’ll brighten your day, and I couldn’t recommend it more highly. <a href="https://thebrowser.com/?via=lenny">Readers of Lenny&#x27;s Newsletter get a special 20% off their first year with code LENNY20</a>.</p><h2 id="2ffea274-431f-4740-a9a8-51a5c06b937c" class="">Q: I keep hearing that I need to improve my product’s positioning, but I’m not sure what that means, and how to do this. Where do I start?</h2><p id="b475a522-2e0c-4f89-8354-14bb64a8fc43" class="">When I think positioning, I immediately think of one person: <a href="https://twitter.com/aprildunford">April Dunford</a>. April is the author of the best-selling book “<a href="https://www.amazon.com/Obviously-Awesome-Product-Positioning-Customers/dp/1999023005/">Obviously Awesome</a>” (which to me is the definitive book on positioning) and spends her days working with companies of all shapes and sizes helping them nail their positioning.</p><p id="55a22700-496b-4520-96ee-f0e884ee4671" class="">When I received this question, I cold DM’d April to see if she’d be interested in tackling it, and thankfully she agreed 🎉</p><p id="58432d64-5f6d-4b56-aadb-fac2b8209058" class="">Below, you’ll find what I believe is the most succinct and practical guide to nailing your product’s positioning. Let’s dive in!</p><p id="ae1330af-411e-4d68-ac5f-bf453cde020c" class=""><em>For more from April, check out her </em><a href="https://twitter.com/aprildunford"><em>Twitter</em></a><em>, </em><a href="https://www.aprildunford.com/"><em>website</em></a><em>, and </em><a href="https://www.amazon.com/Obviously-Awesome-Product-Positioning-Customers/dp/1999023005/ref=tmm_pap_swatch_0?_encoding=UTF8&amp;qid=&amp;sr="><em>book</em></a><em>.</em></p><figure id="fa44b5e5-b85f-4011-b33e-fef62c993276" class="image"><a href="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F2b74e4ff-5023-4068-9ef7-ea7bf0713ea8_5467x3657.jpeg"><img style="width:700px" src="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F2b74e4ff-5023-4068-9ef7-ea7bf0713ea8_5467x3657.jpeg"/></a></figure><p id="b690bde3-087d-427b-afd5-f7dd67efc0a9" class="">My first job out of school 20 years ago was as a product marketer at a startup. I was assigned to work on a product that had been conceived as a “Microsoft Access killer” that supported SQL and could run on people’s desktops. Back then, SQL databases only ran on big servers. But after a significant marketing effort, we had barely sold 200 copies. We knew it was time to wind it down, but before we did, we decided to check in with buyers to see how upset they would be when we did. Being the new gal, I got the job to make the calls.</p><p id="17356064-9cb5-4c16-85f2-5039d5e63183" class="">The first 20 conversations I had were exactly the same:</p><blockquote id="1c41d8cf-d70b-45c9-bb69-e0e2a160e106" class="">Me: Hi, I&#x27;m calling to find out how you&#x27;re using our product. Customer: Sorry, lady, we don&#x27;t have that.Me: Um, well, my records show you paid $100 for it on Jan 22nd?Customer: Oh, THAT thing - yeah, we tried it, we don&#x27;t use it now.</blockquote><p id="08b9a51d-98be-44da-8fae-4ed6b662574d" class="">Our decision to kill the product was going to be easy.</p><p id="c441de1f-a4bc-4659-8085-380e0b683d88" class="">But then I did call 21. “Your product made me the hero of the sales team!” the customer shouted. At his company, sales folks traveled to their customer, took orders on paper, and then returned to the office to enter them in the order system. Orders were often incomplete or full of errors. Our product was installed on laptops with the order system, allowing sales to take orders in the field and then sync with the SQL database back in the office. “We&#x27;re doubling sales! That SQL feature was a game-changer for us!” he ranted. I thanked him and carried on with my calls.</p><p id="81054d1f-0722-47c3-8ff5-ae6bff8cf112" class="">I had 20 more conversations with 20 more customers that barely remembered purchasing before I hit another fan. His story was similar – he used our product on mobile devices for field service agents who could update their system in the field, then sync with the database at headquarters. “We&#x27;ve increased service capacity by 60%. Your product is a game-changer!” he raved.</p><p id="ddfaee13-eb71-4b71-b6ac-4156d12f603d" class="">In the end, I talked to 100 customers. 94 didn&#x27;t even know they had it. 6 had transformed their business with it. We didn&#x27;t exactly have product-market fit <a href="https://pmfsurvey.com/">in the Sean Ellis sense</a>.</p><p id="e0132f69-270c-4c5f-8d08-f8d01627c399" class="">I relayed my findings back to the exec team. Instead of killing the product straight away, they decided to take a shot at repositioning our “Microsoft Access-killer” as an “<strong>Embeddable Database for Mobile Devices</strong>.” The product took off.</p><p id="f9b53d4a-82ef-4176-943d-e939696de416" class="">A year of massive growth later, we were acquired by a big database company, where the product spawned a product family that generated hundreds of million in revenue. Over 20 years later, this “failed” product <a href="https://www.sap.com/products/sql-anywhere.html">still runs</a> on mobile devices all over the world.</p><h3 id="9eb12cb6-2d8e-47b9-b39f-ce1c0d0ed647" class=""><strong>Positioning isn&#x27;t new – but it&#x27;s deeply misunderstood</strong></h3><p id="0e663412-3440-4b2a-b6b3-8b05701fe460" class="">This experience sparked my life-long obsession with positioning. How could we have known in advance that our product was simply mispositioned? Was there a way for us to figure out what really set our product apart, what our value for customers really was, and what customers we should be targeting?</p><p id="8a7948f5-4c4d-4070-a82a-59b796a14187" class="">Positioning is not as well understood as you might think. If I put a dozen senior marketers in a room together and asked them to define positioning, I&#x27;d get a dozen different answers. When I talk about positioning at conferences, I sometimes start by defining what positioning is NOT: Positioning is not equivalent to messaging. It isn&#x27;t a tagline. It&#x27;s not your <a href="https://www.aprildunford.com/post/storytelling-vs-positioning">brand story</a>, nor is it your vision or your &quot;why.&quot; It is not, as one CEO attempted to convince me, &quot;Everything you marketers cook up over there.&quot;</p><p id="22b295db-7bf8-4287-8004-012cba663057" class="">So what is it, and more importantly, how do we DO it?</p><h3 id="9321a703-afaa-4d30-b2dc-3f76fb2cf9f2" class=""><strong>Defining Positioning</strong></h3><p id="9b49a5d2-ce2d-4c1c-aeff-52aa27cd81bc" class="">Here&#x27;s how I define positioning:</p><blockquote id="bc95bd4c-c9ea-4be7-a533-54d212824c64" class="">‍”Positioning defines how your product is a leader at delivering something that a well-defined set of customers cares a lot about.”</blockquote><p id="c013ece2-7876-4610-84a5-894e02ca27d0" class="">Yeah, that sounds a bit complex, but positioning is made up of a distinct set of components. Those components and their relationship to each other is where the magic happens. We will get to that in a minute.</p><h3 id="0b3c6040-7f5f-4845-8987-07f10c5e7ff3" class=""><strong>Positioning as Context Setting</strong></h3><p id="8003cd8b-f311-4d7b-a4bb-3cea6ae0565c" class="">Positioning is like <a href="https://www.aprildunford.com/post/how-to-transform-your-product-by-giving-it-context">context-setting</a> for products. It’s a bit like the opening scene of a movie. The opening scene gets us oriented. It answers the big questions: Where are we? What year is this? What’s happening? How should I feel? Who are these people? Once we have established some context, we can settle in and pay attention to the story&#x27;s finer details.</p><p id="93bb3208-7ecf-4c8f-98be-bd3c5e037ca6" class="">Let’s take the opening scene of Apocalypse Now. We see a grove of peaceful palm trees swaying the breeze and maybe you’re thinking “Hey maybe it’s not apocalypse right now,” but then you notice some smoke and a helicopter quickly flies past. Suddenly the palm trees burst into flames as Jim Morrison screams “This is the end, my friend!!”</p><figure id="d415aff1-ad17-4f68-b439-564c388014d4" class="image"><a href="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F96da736e-421d-40ef-9e4c-f60615895aef_478x200.gif"><img style="width:478px" src="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F96da736e-421d-40ef-9e4c-f60615895aef_478x200.gif"/></a></figure><p id="1952acc7-6cf5-4407-8299-8c7878758fcf" class="">We realize we are in the middle of the Vietnam war and it’s the Apocalypse right now alright. Then slowly the scene shifts and we see Martin Sheen’s face. He’s drinking and smoking, his hotel room is a total mess and he’s clearly in psychological distress. He walks over to the window and we get the first line of dialog of the movie: “Saigon. Shit. I’m still only in Saigon. Every time I think I’m gonna wake up back in the jungle.”</p><p id="328c7969-282b-4a58-b7bf-4bceaea02a08" class="">We are exactly 4 minutes and 45 seconds into the movie but we know a lot about what’s happening. We are in the middle of the Vietnam war, and in Saigon specifically. Our lead character has been there before and has some pretty bad PTSD as a result. We also get the tone of the movie and we know it’s going to be an intense couple of hours. The opening scene positions the movie by answering our big questions about who, what, where, and why so that we can settle in and focus on the details of the story within that context.</p><p id="c05ac33a-46f8-4139-a4d0-f6e4fd9e84ad" class=""><strong>Similarly, positioning your product in a market orients the customers and conveys a lot of valuable information.</strong> Your positioning context sets off a really powerful set of assumptions about who your product competes with, what features your product should have, who the product is intended for, and even things like what the product should cost.</p><p id="c0033c22-fd3e-4100-9e17-55dddf9c180c" class="">Suppose I pitch you my product, and all I tell you is that it’s a “CRM” and that’s it. What assumptions would you make about my product before I got to page two of my pitch? You would assume my competition is Salesforce – they are the leader in that market. You would assume I sell to the head of sales. You would assume my product has a set of features - tracking deals and accounts, for example. You would even make pricing assumptions. Salesforce is the leader in the market, so you would assume my product costs less than that.</p><blockquote id="da905d0f-afa3-45d8-aede-985932d98e53" class="">Good positioning sets off a set of assumptions about my product that are true. Bad positioning sets off a set of assumptions about my product that aren&#x27;t true - leaving your sales and marketing teams to do the work of undoing the damage your positioning has already done.</blockquote><p id="911c98aa-0ec8-4163-939a-72f7af8f1ce7" class="">If I were to tell you my product was “email,” you would have a very different set of assumptions than if I positioned it as “chat.” There is a large overlap in features between the two, but as buyers, we expect email to filter spam, allow us to organize and store conversations, and integrate with a calendar. Our expectations for chat are different. We expect instant delivery, a way to see if someone has received or viewed our message, etc. A new product could be positioned in either market, but great chat is lousy email and vice versa. <strong>A shift in positioning can completely transform how we perceive a product and can mean the difference between success and failure.</strong></p><h3 id="be50de86-4022-4a5f-bb56-1886683896c0" class=""><strong>A Positioning Statement Can&#x27;t Help You</strong></h3><p id="2c49b815-7a13-4b5e-8931-165ebb31ca4f" class="">So if positioning is so important, how do we do it. Let’s start with what not to do.</p><p id="1ba53e42-3644-4c08-b9d8-b8e66392ca57" class="">For many people, positioning was taught to them in school using &quot;The Positioning Statement.&quot; It&#x27;s a sort of &quot;Mad Libs&quot; fill in the blanks exercise. The blanks are things like market category, value, competitors, etc. Typically it looks something like this:</p><figure id="1e784fb7-7d1f-4e16-b002-3262a1a356bd" class="image"><a href="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb4cc5dc0-db9c-49e1-a6db-bf61bdcfcde0_1830x566.png"><img style="width:700px" src="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fb4cc5dc0-db9c-49e1-a6db-bf61bdcfcde0_1830x566.png"/></a></figure><p id="b787bbf0-6684-49fd-9d50-e13ee042e746" class=""><strong>‍I believe this exercise is not only pointless but potentially dangerous</strong>. The exercise assumes that there is only one answer for each of the blanks, and you simply “know” what it is. However, most products could easily be positioned in multiple different market categories, with different competitors, providing a different value for different kinds of customers. How would this exercise help me understand that my “Microsoft Access Killer” was really an “Embeddable Database for Mobile Devices?” The answer is that it simply would not.</p><h3 id="5179a094-1e02-4300-b70e-fae9a3dba719" class=""><strong>The 5 Components of Positioning</strong></h3><p id="ee6b5de1-7280-4856-ba8b-53136ca69904" class="">So how do we find the best positioning for our offerings? This question vexed me as a marketing executive across seven successful startups (and the six big companies that acquired them). I read books! I took courses! Everyone agreed that positioning was the marketing bedrock we built our entire go-to-market strategy around, and yet, there didn&#x27;t seem to be a methodology for actually getting it done. I decided to figure it out.</p><p id="e6863921-bb44-4422-8471-0678cf4d10f9" class="">I started with an engineering mindset. I decided we could break positioning up into its component pieces, find the best answer for each piece, bring the pieces back together, and voila – great positioning.</p><p id="80c1fcb8-7320-43c0-a7c6-f93950971cdb" class="">Breaking positioning up isn’t hard because we generally agree on the components. These are, in essence, the blanks in the positioning statement. The components are:</p><blockquote id="3b357012-6b37-4a63-a25b-9a04a5adf104" class="">Competitive AlternativesDifferentiated “Features” or “Capabilities”Value for customersTarget Customer SegmentationMarket Category</blockquote><p id="1fbf677e-72a1-498e-985a-d85aa49d1f81" class="">Easy. Now, all we have to do is figure out how to get the best answer for each component. Here’s where things get a little tricky.</p><h3 id="14a6e8ac-dab3-4344-b2ec-1370a8991f90" class=""><strong>Each Component Depends on the Others</strong></h3><p id="bba3a791-c569-42ab-a678-4abefc9643a3" class="">If you look at the pieces, you quickly understand that each component has a relationship with the others. For example, the unique value that you can provide to customers is completely dependent on your differentiated features. Your differentiated features are only “differentiated” when you compare them to competitive alternatives. Your best-fit target customers are customers that really care a lot about your unique value. And lastly, your best market category is the context you position your product in such that your unique value is obvious to your target customers. So, if every piece has a relationship with every other piece, where do we start?</p><p id="3404be2c-173d-4451-9b1c-a2fd50289cb1" class="">For two years, I didn&#x27;t think there was a starting point. I attempted to find the best positioning for my products by picking an arbitrary starting point (for example, differentiated features) and then working my way through the others to get a “candidate positioning.” I would then test it on prospects, and if it worked, we ran with it. If it didn’t, I tossed it out and repeated the process to get another candidate to test.</p><p id="fbf4faa6-4447-41ac-adf0-a31d2d9233af" class="">The drawbacks to this method are obvious to anyone who’s worked in a startup: it just took too long!! While I was out testing candidate after candidate, the sales, marketing, and product teams were stuck in a holding pattern waiting.</p><h3 id="5f597ce4-a6da-403d-aeb5-817e6024cffe" class=""><strong>A Customer-Centric Methodology</strong></h3><p id="c1a1dedb-338c-4f18-8bd9-52e583b3e612" class="">Eventually, Clayton Christensen solved this problem for me. I was reading everything I could get my hands on about Jobs To Be Done theory, and I had the realization that the starting point had to be competitive alternatives. If it wasn’t, what we ended up with was positioning that sounded good in the office, but it didn’t work with customers because it wasn’t differentiated. The flow has to look like this:</p><figure id="334a552a-d6f6-49c4-b044-47e6b8feac52" class="image"><a href="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fdc597ea0-acf1-4a8b-b18e-30c59d2f9616_1593x912.png"><img style="width:700px" src="Positioning%206510b5e63b57414787e20a3782d76306/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fdc597ea0-acf1-4a8b-b18e-30c59d2f9616_1593x912.png"/></a></figure><p id="701ccfcd-fb7d-46d5-8b5d-d77cd71730f7" class="">We start with <strong>Competitive Alternatives</strong>, or what would customers do if our solution didn’t exist. Once we have that, we can ask ourselves, “What do we have that the alternatives do not?” That gives us a list of Differentiated features or <strong>Key Unique Attributes</strong>. We can then go down that list and ask ourselves, “<em>So what</em> for customers?” Put another way, what is the <strong>Value</strong> those capabilities enable for our buyers? Once we understand what our differentiated value is, then we can move to customer segmentation, or who are the <strong>Customers that Care</strong> a lot about our value. There is likely a wide range of buyers that care about that value, but certain customers care a lot more than others. What are the characteristics of a customer that makes them care a lot about your differentiated value? That gives us an idea of who our best-fit customers are. Lastly, we move to Market Category. Our best market category is the context we position our product in such that our value is obvious to our target customers. Put another way, it is the definition of the <strong>Market we Intend to Win</strong>.</p><p id="3d3d0b0a-a7b8-4d93-925c-983eb6c7506e" class=""><strong>An Example: Janna Systems</strong></p><p id="58a96809-1a66-4549-a4fe-4f0931af6a53" class="">Let’s walk through an example of how this works. Early in my career, I ran marketing for a company that positioned its product as an Enterprise CRM. This was ages ago when Salesforce was still focused on SMBs and the gorilla in the enterprise CRM market at the time was Siebel Systems. Unsurprisingly every time we got a meeting with a customer we got the question “So how are you better than Siebel?” That was a bad question for us because, by almost every measure, they were better than we were. They had 8000 employees and we had a couple dozen. They had $2B in revenue, we did less than $2M. They had 400 customers and we had 6. We did however have 2 differentiators.</p><p id="2443931c-228f-4594-844c-44c37c456529" class="">The first was a feature that they couldn’t match. Specifically, we could model relationships in a different way. Most CRM’s model the relationship between people and an organization. Our CRM let you model relationships between people, independent of their organization. An example would be we could show that two people sat on a board together even though they work for separate companies. No CRM then (or even today for that matter) could do that. The problem was that for the most part, we didn’t do a good job of articulating the value of that. We showed the feature in every demo and when customers asked us what they would do what that feature, our reply was “Anything you want!”</p><p id="f6b8d133-27e4-46a0-90e9-5f89e87e5ea7" class="">Coming back to the process I laid out in the previous section – our competitor was obvious, it was Siebel. Our differentiator was the ability to model relationships in a different way. What we hadn’t figured out was what the value of that feature was and what types of customers cared a lot about it.</p><p id="3aedc17b-4b7a-484b-872b-48b2a6b66ca1" class="">Eventually, we landed a deal with an investment bank. Working with that customer helped us understand that the value of our feature was that companies could get insight into interpersonal relationships which sales teams could use to start new sales conversations and understand who might have influence over a deal in process. For companies that relied heavily on personal relationships (e.g. investment banking, private client services) our product was a game-changer.</p><p id="e6b3fd7e-321d-45ec-a8a6-03ad64dbf44d" class="">Going back to the positioning process, we could now fill in <strong>Value</strong> and <strong>Customers that Care</strong>. This was super-important for our go-to-market strategy. We shifted our sales and marketing efforts on selling to investment banks, where we had a distinct advantage over Siebel.</p><p id="3d9fddde-eb21-4792-8a25-69d6606827ea" class="">Lastly, we decided to make a change to the market category. Clearly, we couldn’t win “Enterprise CRM” but we could win CRM for Investment Banks. Positioning ourselves that way helped banks find us and helped us clearly differentiate from Siebel. This shift in positioning allowed us to grow very quickly over the next 18 months from under $2M to close to $80M. Our plan was to shift the positioning to CRM for Financial Services as we expanded to retail banks and insurance companies. We didn’t get the chance to test that positioning evolution however – Siebel acquired us for $1.3B.</p><h3 id="791a83f6-ed85-4aaa-864f-388cfc8903f9" class=""><strong>Common Mistakes</strong></h3><p id="a4efee3e-c196-481b-b60d-30ad1ef397f8" class="">Once you understand the flow, conceptually, it&#x27;s pretty easy. But that doesn&#x27;t mean there aren&#x27;t a lot of ways you can mess this process up. Here are the three most common traps:</p><p id="380d71a0-ec1e-4c80-a631-b1aa783a03cf" class=""><strong>Trap 1: Defining competitive alternatives as any possible competitor</strong></p><p id="401d1298-733a-48e8-b91a-7aae0a9ec67c" class="">The most common mistake I see startups make is in how they define the competitive alternatives in the first step. A better way to think about competitive alternatives is to ask yourself, “What would a customer do if your offering didn’t exist?” Sometimes the answer to that question is “Do nothing.” What that really means is the customer would stick with their current way of solving the problem. That could mean using a spreadsheet, using a manual process, or hiring an intern to do it. In enterprise software, we typically lose 25% of deals to “no decision.” Your positioning needs to position you against the status quo if you want to convince customers to act.</p><p id="bb47739a-6d0b-427f-90f1-fcae37dbe0d6" class=""><strong>Trap 2: Creating “phantom competitors”</strong></p><p id="2b9a73bf-c456-4984-af51-0665248faec4" class="">Next, I see companies listing what I would call “phantom competitors” in step 1. <a href="https://twitter.com/aprildunford/status/1334143529573081089?s=20">Phantom competitors</a> are companies that theoretically could compete with you; you just never actually see them or lose to them in deals. Until you do, you are watering down your positioning by trying to position against them. Step 1 in the positioning process is to identify what your customers see as alternatives. This isn’t a test of your internet research skills, and just because a company could compete with you doesn&#x27;t mean they ever will. The product team might want to keep an eye on them as a future competitive threat, and if you do start to see them in deals, you can adjust your positioning at that time. Until then, you will weaken your positioning by trying to position against competitors your customers never even consider.</p><p id="d3fbc2d0-98e2-4516-a568-de6bb0f5f5d8" class=""><strong>Trap 3: Assuming that you have to create a new market category to grow</strong></p><p id="242d700b-c34b-4384-ba61-564b2780998f" class="">When selecting a market category, you can either choose to position your product in an existing market category or attempt to create a new category in customers’ minds and then position your product as the leader in it.</p><p id="24b5cfb9-02c5-4209-8c17-10089cac8597" class="">The first option allows you to use what customers already know and understand about a market to help them understand but what your product is and what makes it uniquely special. If I tell you my product is an “embeddable database for mobile devices” you have the benefit of understanding what a database is. “Embeddable” and “for mobile devices” narrows down the field of alternatives to a market niche where this product is not only different from the leaders in the more generic “database” market category, but much better for a particular kind of buyer.</p><p id="26aebd41-261e-4f0c-a63e-635c61d3cc44" class="">Creating a new market category, on the other hand, is where you invent a new frame of reference for customers. The obvious downside to this strategy is that you first have to make the category mean something in the customer’s mind before it can serve as a meaningful context. So instead of being an “embeddable database for mobile devices,” you choose to be a fluflommer. Yep, a fluflommer. Customers have no idea what that is because you’ve just invented it, so be prepared to spend a significant amount of time and effort making that term mean what you want it to mean.</p><p id="1c2675c7-9bef-4f61-ba04-c1b565928099" class="">There is an assumption that the payoff for creating a new market category is that you will dominate the market as it grows. <a href="https://www.amazon.com/Obviously-Awesome-Product-Positioning-Customers/dp/1999023005/">In my book</a>, I tell the story of Eloqua and how founder Mark Organ created the Marketing Automation category and did exactly that.</p><blockquote id="70761254-0363-479a-b6d9-a28349b59e8f" class="">Unfortunately, history teaches us that companies that create market categories often lose in the long run to companies that gained a market foothold after the hard work of creating the category was already done.</blockquote><p id="d93ede85-c338-416a-92c4-f4bcc61e3513" class="">This is why we use Google and not Ask Jeeves. This is why we use Facebook and not Myspace. In fact, 90% of tech companies that have gone public over the past five years have been positioned in existing markets rather than creating new ones. Many of the examples of category creators started out positioning themselves in existing markets before they later stretched the boundaries of that category. Salesforce was a niche play in the CRM space until it had hundreds of millions of revenue. Gainsight was in the survey software market until it had hundreds of millions of revenue. It’s much more common for startups to start out positioning themselves in an existing category until they have the money and momentum required to re-draw the lines around that category.</p><h3 id="251e5711-aa8a-472b-a929-cf49404884fc" class=""><strong>Positioning – you’ve got this!</strong></h3><p id="d0999ffb-c881-4d14-95dd-264ed3ccfcdd" class="">Positioning is a misunderstood concept but I believe that if you master it, it can be the most powerful strategic tool you have at your disposal. If you are interested in learning more, I go deeper on this topic in my <a href="https://www.amazon.com/Obviously-Awesome-Product-Positioning-Customers/dp/1999023005/">book</a> and I’ve got a set of <a href="https://www.aprildunford.com/obviously-awesome">templates</a> to go with it that you might find helpful.</p><h2 id="ecaeb9d7-2742-4a5d-8d42-9b918e937df9" class=""><strong>🔥 Job opening of the week: Airtable</strong></h2><blockquote id="2fa7b560-b374-43f6-a584-dea0e257c124" class="">✨ Airtable is hiring for a Full-Stack Engineer and an Engineering Manager ✨</blockquote><p id="b5fa5737-781a-4757-90c8-eb5f1a400e17" class=""><strong>Additional opportunities:</strong></p><ol type="1" id="7d4f4d15-1fa2-4e6e-bd8d-fc5f0176cb15" class="numbered-list" start="1"><li><strong>Engineering manager</strong>: <a href="https://boards.greenhouse.io/cerebral/jobs/4076598003">Cerebral</a></li></ol><ol type="1" id="5e2f64ac-3d00-4d98-a107-084b212bcd87" class="numbered-list" start="2"><li><strong>Frontend engineer</strong>: <a href="https://www.notion.so/Join-Levels-Developer-Remote-58454f0db7e3466692f7b75db6237ddf">Levels</a>, <a href="https://www.notion.so/929e1933b9b4432a851043adbb7bff04">Practice</a>, <a href="https://www.linkedin.com/jobs/view/2323962506/">Tome</a></li></ol><ol type="1" id="b8aac81b-385e-4568-b6c8-0c0aed5cfd36" class="numbered-list" start="3"><li><strong>iOS engineer</strong>: <a href="https://www.notion.so/Senior-Software-Engineer-iOS-San-Francisco-CA-87f0fd3ee3dc4c3f8d0419c07fcdd434">Primer</a>, <a href="https://www.notion.so/d3bf38604aaa4a238e28dad20957be44">Stytch</a></li></ol><p id="93de8478-be50-4d71-96c2-c0d2751ac6b2" class=""><strong>If you’re finding this newsletter valuable, consider </strong><a href="https://www.lennyrachitsky.com/"><strong>sharing it with friends</strong></a><strong>, or subscribing if you aren’t already.</strong></p><p id="c2b06621-4667-4e0a-bb38-b6218920651c" class="">Sincerely,</p><p id="4488e8af-fb39-49e6-8833-50166a7506fc" class="">Lenny 👋</p></div></article></body></html>

@@ -1,0 +1,782 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>From Rust to TypeScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="21a25a1e-33bd-42e5-a50c-08851feae0ae" class="page sans"><header><h1 class="page-title">From Rust to TypeScript</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://valand.dev/blog/post/from-rust-to-typescript" class="url-value">https://valand.dev/blog/post/from-rust-to-typescript</a></td></tr></tbody></table></header><div class="page-body"><p id="a9b78f9d-ac27-492d-a30e-ed4b77e6042a" class="">I was introduced to Rust in 2018 and has been enamored since. Rust is a system programming language, much like C++. Unlike C++ though, being relatively new, its language design is more modern and sophisticated. Writing with can feel more like writing TypeScript or Haskell. Not surprising since, despite being a language with a very minimum runtime and no GC, it derives many principles of functional programming such as immutability, type inference, higher-order functions, pattern-matching, etc. Over the course of tinkering things with Rust, I realized that writing Rust code makes me a better coder in other languages. This article will describe how my attempt to push the best in Rust&#x27;s language design into TypeScript, my main language, without altering the language itself.</p><h2 id="22ee8fc9-4b60-44c7-9602-35994cd83a5f" class="">Getting Rid of Exceptions</h2><p id="e506ebdb-1c5b-4d80-8111-efcbaa758bbe" class="">The first thing that strikes me the first time I learnt Rust is that there are no straightforward to write exception-like code in Rust. For someone used to exceptions after using many languages like C++, Java, JavaScript and TypeScript, this seems like an incomplete language. But Rust&#x27;s lack of straightforward exception-like is actually thought out in advance.</p><p id="339811a0-2ed5-4ef1-be11-2ee516bbf294" class="">Exceptions feel neat the first time you understand it. A thrown exception skips code execution into the <code>catch</code> block. By doing that you can ignore the rest of code in the function. The rest of the code in the function represents positive case, which may seem irrelevant when an error happens. Here&#x27;s a piece of code:</p><pre id="b5b4b292-fe8b-422a-9960-e491f0151e0c" class="code"><code>function foo(someNumber: number) {
+  if (someNumber === 0) {
+    throw new Error(&quot;Error: foo&quot;);
+  }
+  return number + 1;
+}
+function bar(someNumber: number) {
+  return foo(someNumber) + 1;
+}
+function baz(someNumber: number) {
+  return bar(someNumber) + bar;
+}
+baz();</code></pre><p id="d0794369-7006-41fe-b53b-e9fbee4541a5" class="">When <code>baz</code> is called it will throw an uncaught exception. By reading the code you know that <code>foo</code> throws an Error. Debugging this snippet is a piece of cake, right?</p><p id="c4cf0f7d-9fc6-4081-a050-07f4c037128c" class="">Now let&#x27;s see another snippet. In the snippet below you are importing a function that can throw exception.</p><pre id="7e2b6dac-307c-497a-8fc3-8b6fd5c7402c" class="code"><code>import { callMe } from &quot;somePackage&quot;;
+
+try {
+  // This line may throws an error  callMe();
+} catch (exception) {
+  // This line may unexpectedly throws an error again  // if error turns out a nullish value  // Uncaught TypeError: Cannot read property &#x27;message&#x27; of undefined  console.error(exception.message);
+}</code></pre><p id="6762bd95-6e07-4c33-9bc3-666dc61172d9" class="">Compared to the first snippet, this one is harder to debug. It seems so because 1.) You don&#x27;t know that <code>callMe</code> will throw an error or not. 2.) If it throws an exception you will not know what is the type of the exception. The more modular your code is, the harder it is to debug exceptions.</p><p id="1a4754c3-3014-4738-bdd4-330effec3f0d" class="">Why is that? If you noticed, in the first snippet, you know which function is throwing what because the <code>throw</code> and the caller are in one file. You don&#x27;t need to switch files or even scroll that far to see what&#x27;s wrong. Furthermore, unlike in other language like java, TypeScript exceptions are not typed. Because of that, unlike return values, the compiler could not deduce if a function will throw an exception or not, and that&#x27;s bad. Combined with the fact that an exception propagates up until they are caught. That means exception can be n-level deep. The deeper it is from, the harder it is to debug it.</p><p id="de5f0590-178a-4758-9867-5b24551469be" class="">If you&#x27;re familiar with statically-typed language, deferring what&#x27;s supposed to be done in compile-time to run-time is bad. It hands over problems from the compiler to the user.</p><p id="7f47ac4b-c064-40c1-b27b-698753d79e63" class="">There are best practices for writing <code>try/throw/catch</code>, such as developers should throw <code>Error</code> objects instead of nullish values. But pushing everyone to apply best practice is not enough. You cannot assert control toward what is being written in external dependencies. There are not many points introducing law when enforcers are nowhere to be found.</p><p id="8ef5a306-93cc-4c0d-90dc-6e1b677b15e2" class="">Only when you have dealt with complex codebase you will understand why <a href="https://wiki.c2.com/?DontUseExceptionsForFlowControl">we should not use exception for flow control</a>.</p><p id="03a6fcf1-0544-4270-be47-cacf447234d5" class="">So how Rust does this? Rust encourages us to return errors instead of throwing it by providing a data type called <code>Result</code>. It is a tagged union which can either be <code>Ok(IdealData)</code> or <code>Err(NonIdealData)</code>. With this, a function can communicate the situation of a a call to its caller. For example:</p><pre id="1cfc0aa5-837c-4923-80fc-0ac8f59e16b9" class="code"><code>fn main () {    let number: Result&lt;u8, _&gt; = &quot;1&quot;.parse();    let non_number: Result&lt;u8, _&gt; = &quot;a&quot;.parse();    println!(&quot;{:?}&quot;, &amp;number);      // Ok(1)    println!(&quot;{:?}&quot;, &amp;non_number);  // Err(ParseIntError { kind: InvalidDigit })}</code></pre><p id="77f4c8ba-139a-4a1f-827d-11780618301d" class="">The function <code>.parse()</code> converts a <code>string</code> into <code>u8</code>. There are scenarios where parsing a <code>string</code> into a <code>u8</code> can result in failure, one is if the parsed string is not a numeric string. Because <code>.parse()</code> has a negative case, it returns <code>Result&lt;u8, _&gt;</code>.</p><p id="ac8a9158-1f1e-4f40-a471-92cb36bdd917" class="">In Rust, <code>Err</code> does not jump like exceptions. Regardless the result is <code>Ok</code> or <code>Err</code>, the program will simply execute the next line. To handle the error the programmer has to check the return value is <code>Ok</code> or <code>Err</code>. Early return is encouraged instead of throw. Rust has the <code>?</code> syntax which help making early returns more concise to write and read.</p><p id="3f6e60b8-209d-4871-80df-2fd77a5588c1" class="">To adopt this feature to TypeScript, these are the important things:</p><ol type="1" id="09b6a6e6-8df5-42f5-b932-ebae9cb38f35" class="numbered-list" start="1"><li>Errors are returned instead of thrown</li></ol><ol type="1" id="b8b8e32f-dd6a-4b5f-8f50-354bd6bc39f0" class="numbered-list" start="2"><li>Errors types are known</li></ol><p id="859e91ff-7fd8-45dc-9ea9-3da00bfb1174" class="">To simulate this behavior I am going to use tagged union too. I found this helpful library, <a href="https://github.com/gcanti/io-ts">fp-ts</a>. It covers a great deal of functional programming experience by leveraging TypeScript&#x27;s type system, but I will only use a small portion of it.</p><p id="627f306c-d15d-465d-9e7e-ad5c293c9cb0" class=""><code>fp-ts</code> has <code>Either&lt;Left, Right&gt;</code> data type. It is like Rust&#x27;s <code>Result</code> but more flexible. <code>Either</code> is a tagged union value container. <code>Either</code> is <code>Left</code> or <code>Right</code>, usually <code>Right</code> represents the ideal case and <code>Left</code> represents the non-ideal case but both can be used with any types. Below is the type definition of <code>Either</code>.</p><pre id="73067d59-1427-4e63-be05-cdf21602968e" class="code"><code>type Either&lt;L, R&gt; = Left&lt;L&gt; | Right&lt;R&gt;;
+type Left&lt;L&gt; = { _tag: &quot;left&quot;; left: L };
+type Right&lt;R&gt; = { _tag: &quot;right&quot;; right: R };</code></pre><p id="da87b077-90f5-425d-ab43-f16ce7b19a28" class="">What&#x27;s cool about <code>Either</code> is that TypeScript actually supports deducing tagged union from its tag. For example inside this block <code>if (someEither._tag === &quot;left&quot;) { }</code> TypeScript knows that <code>someEither</code> is a <code>Left</code>. If there&#x27;s a <code>return</code> in that block, TypeScript will deduce that for the rest of the function block, <code>someEither</code> data type is <code>Right</code> and not <code>Either</code> anymore.</p><p id="977871c7-4e4e-421b-a8ae-0060dee579a3" class="">Let&#x27;s make a called <code>tryCatch</code>. It is used to wrap a function into Either. <code>fp-ts</code> actually provides this function, but let&#x27;s write it so that we know what&#x27;s under the hood.</p><pre id="1c665a43-f213-4a52-aaad-aef5a1b1e431" class="code"><code>const tryCatch = &lt;T, E&gt;(fn: () =&gt; T, onError: (error: unknown) =&gt; E) =&gt; {
+  try {
+    // right() wraps value as Right    return right(fn());
+  } catch (error) {
+    // left() wraps value as Left    return left(onError(error));
+  }
+};</code></pre><p id="7a5ca2e1-81c7-4bee-aaf8-0ae95dc4e0a6" class="">With our newly created <code>tryCatch</code>, creating a URL from string for example can be done like this.</p><pre id="a98aafd0-ba0d-48b7-b158-e8a5968aac82" class="code"><code>export class InvalidURLError extends Error {}
+const makeURLFromString = (str: string) =&gt;  tryCatch(
+    () =&gt; new URL(str),
+    () =&gt; new InvalidURLError()
+  );</code></pre><p id="488e514f-35cb-40ba-adc0-395448a7ee54" class="">Calling the function will look like this. The following snippet receives a string called <code>maybeUrl</code>. If <code>maybeUrl</code> is not a valid URL it returns an error. If the URL is not calling &quot;example.com&quot; it returns an error. Otherwise, it returns a promise from the <code>fetch</code> call.</p><pre id="be798f6c-286d-42c0-b5d7-ad812a1479ad" class="code"><code>export class NotExampleDotComError extends Error {}
+const callThisMaybeUrlIfItIncludesExampleDotCom = (
+  maybeUrl: string
+): Either&lt;InvalidURLError | NotExampleDotComError, Promise&lt;any&gt;&gt; =&gt; {
+  const urlResult = makeURLFromString(maybeUrl);
+  // Early return the error  if (isLeft(urlResult)) return urlResult.left;
+
+  const url = urlResult.right;
+  if (url.origin !== &quot;example.com&quot;) return left(new NotExampleDotComError());
+
+  return right(fetch(urlResult));
+};</code></pre><p id="3e977ffd-f168-476f-9e35-08d2fe8aafdc" class="">There&#x27;s a bit more line of codes here, but it is great that the TypeScript compiler now can deduce the error type and you have more control over the flow. You can even deduce if the variable <code>error</code> is <code>instanceof</code> <code>NotExampleDotComError</code> or <code>InvalidURLError</code> for cases like printing different errors.</p><h2 id="98f28f85-62aa-47cb-835c-5454c0b8553d" class="">Safe TypeScript</h2><p id="9fc0fbdf-ce14-4688-99f3-bffc216cb1ad" class="">If you have played an early 2000s FPS games and tried to cheat, usually you will find the <code>noclip</code> command. It makes your avatar fly through walls and grounds. Sometimes, though, you take a shortcut and triggers the wrong script. When that happens, you can&#x27;t finish your level and must restart to make it work again.</p><p id="c706e66e-e6ea-4229-8089-3a920997b9f1" class="">That&#x27;s how I see Rust&#x27;s <code>unsafe</code> and TypeScript&#x27;s <code>any</code>.</p><p id="cf388193-3279-40cc-ab90-f6dfbf061518" class="">These two features solve a similar problem. In Rust&#x27;s case, it enables developers to temporarily unlock the power of handling raw pointer in case someone needs it. In TypeScript&#x27;s case, someone might need to escape into the free-typed JavaScript world. And in both, it is the programmer&#x27;s responsibility to make sure everything is fine before the program goes back to the safe system.</p><p id="ae1c6e72-b350-4f64-a60f-0ee225fad6b1" class="">Unsafe to safe Rust is like <code>any</code> type to typed TypeScript. Unlike Rust, TypeScript&#x27;s type only works until you compile it to JavaScript code. Rust has <a href="https://doc.rust-lang.org/beta/rust-by-example/conversion/try_from_try_into.html">TryInto/TryFrom</a> trait to convert raw data into a data type. But in TypeScript&#x27;s case, if you inject a value that does not match TypeScript&#x27;s type annotation, TypeScript can&#x27;t do anything. This comes from TypeScript team&#x27;s decision to make it only a thin layer on top of JavaScript. They thought it is best if for people to write TypeScript like JavaScript and the compilation result to look almost the same as the source code.</p><p id="fa41b798-5429-42b8-a651-03b158e04775" class="">My approach for this would be securing all external hole of my application, which are:</p><ul id="fe9e524f-a038-4cd9-9e7a-eaa9f51ea93e" class="bulleted-list"><li>WebAPIs, which consist of DOM, deserializable user inputs, fetch API, etc.</li></ul><ul id="01917027-2290-4289-a9c7-cb8452eda929" class="bulleted-list"><li>External Dependencies which returns <code>any</code></li></ul><p id="c9563d26-c667-4d7a-bb55-d18a17dc9d06" class="">When I was trying this approach, I was lucky to find <a href="https://github.com/gcanti/io-ts">io-ts</a>, created by the same author as <code>fp-ts</code>. This library helps me create a runtime type checker, or &quot;codec&quot; as the library&#x27;s author calls it. Instead of writing:</p><pre id="e83e8d5f-a83b-4cf8-b62f-8d1507126537" class="code"><code>type User = { username: string; userId: string };</code></pre><p id="92f70b44-7e06-47cb-8efe-c8c2eb90c6ba" class="">I wrote the codec for User:</p><pre id="b5e60a02-9a55-4162-92e0-8990b798ad98" class="code"><code>const UserCodec = ioTs.type({ username: ioTs.string, userId: ioTs.string });
+type User = ioTs.TypeOf&lt;typeof UserCodec&gt;;</code></pre><p id="afe12889-c13e-4d07-9677-87ba988c9761" class="">Again, this is longer, but this is very useful if we want to secure those holes.</p><pre id="01005ead-d17c-4fc3-825d-46d84d59c9f8" class="code"><code>export class InvalidTypeError extends Error {}
+export class Fetch4xxError extends Error {}
+export class Fetch5xxError extends Error {}
+export class FetchUnknownError extends Error {}
+export class FetchNetworkError extends Error {}
+
+const fetchCurrentUser = (): Promise&lt;  Either&lt;    | InvalidTypeError    | Fetch4xxError    | Fetch5xxError    | FetchUnknownError    | FetchNetworkError,
+    User  &gt;&gt; =&gt;  fetch(&quot;https://some/url/to/fetch/current/user&quot;)
+    .then(async (res) =&gt; {
+      if (res.status &gt;= 200 &amp;&amp; res.status &lt;= 299) {
+        const maybeJSON = await tryCatchAsync(
+          () =&gt; res.json(),
+          () =&gt; null        );
+        if (!isLeft(maybeJSON)) return left(new InvalidTypeError()); // Not JSON, Left&lt;InvalidTypeErorr&gt;        const maybeUser = maybeJSON.right;
+        if (!UserCodec.is(maybeUser)) return left(new InvalidTypeError()); // Not User, Left&lt;InvalidTypeErorr&gt;        return right(maybeUser); // Right&lt;User&gt;      }
+      if (res.status &gt;= 400 &amp;&amp; res.status &lt;= 499)
+        return left(new Fetch4xxError()); // Left&lt;Fetch4xxError&gt;      if (res.status &gt;= 500 &amp;&amp; res.status &lt;= 599)
+        return left(new Fetch5xxError()); // Left&lt;Fetch5xxError&gt;      return left(new FetchUnknownError()); // Left&lt;FetchUnknownError&gt;    })
+    .catch(() =&gt; left(new FetchNetworkError())); // Left&lt;FetchNetworkError&gt;</code></pre><p id="c6f7bbae-efdf-4d90-b30b-4e70748a8e3d" class="">The code above already includes error checks for 4xx, 5xx, non-JSON string, network error, any other error we are not specifying, not-user error, and the positive case. With only 15 lines of code, these function already covered exhaustive cases. You don&#x27;t need to worry about undefined behaviors.</p><p id="0c9db276-3cbe-413b-b080-f864682d73a9" class="">Furthermore, you can use these abundant information to show the user many things. For example, in React we can write it like this:</p><pre id="5fe3ee10-ad44-43da-b8f8-19fb28114320" class="code"><code>render() {
+  const { userResult } = this.state;
+  return (
+  	&lt;&gt;      { isRight(userResult) &amp;&amp; &lt;UserDisplay user={userResult.right} /&gt; }
+      { isLeft(userResult) &amp;&amp; (userResult.left instanceof Fetch5xxError) &amp;&amp; &lt;span&gt;There&#x27;s a mistake in our side. Contact our administrator.&lt;/span&gt; }
+	  { isLeft(userResult) &amp;&amp; (userResult.left instanceof InvalidTypeError) &amp;&amp; &lt;span&gt;Cannot find user. Did you click the right link?&lt;/span&gt; }
+	  // and so on    &lt;/&gt;  )
+}</code></pre><p id="240decd3-8704-4dde-bde9-01c158d93d4c" class="">There&#x27;s another value gained from adopting both <code>Result</code> and the type safety. If you notice, the <code>fetchCurrentUser</code> function almost looks like it is declarative and/or functional. Writing this way gives a semantic value, a more concise but readable function that returns more information.</p><h2 id="4605aa27-73ca-434c-b4a1-79b5d2f4599e" class="">Types as Business Objects</h2><p id="5e55903f-e85a-48d5-9d08-16207377d3e3" class="">Types are considered hard to manage for those coming from a dynamic-typed language like JS. Adopting TypeScript has its hurdles and most of the time types are the cause of the hurdles. Compilers can be pretty hard to deal with, spewing errors on compilation. But if done correctly, types can be a great ally in safe-guarding business objects and logics, leveraging the compiler to do logic checks instead of being burdened by it.</p><p id="7c5070d8-e3a3-44c6-a848-070293dc1da9" class="">This method, &quot;Types as business objects&quot;, is inspired by Rust&#x27;s struct <a href="https://doc.rust-lang.org/book/ch06-00-enums.html">enum and pattern matching</a>. Enum and pattern matching provide an easy way to write a polymorphic object and methods for it. Both are from FP influence.</p><p id="31e01651-ca45-4d74-9e07-27844c587bb9" class="">Below is a snippet of polymorphic enum shape which can be Rectangle, Triangle, or Circle.</p><pre id="9a6d56e2-4d17-402f-8415-7b9e180de874" class="code"><code>enum Shape {	Rectangle { width: f64, height: f64 },    Triangle { base: f64, height: f64 },    Circle { radius: f64 }}</code></pre><p id="ffeabd37-0d19-455c-8ead-f3b3366057eb" class="">A function to find the area and circumference of a shape can be written as</p><pre id="e6e24194-c348-467c-85b9-0f00c4903ceb" class="code"><code>impl Shape {    fn get_area(self: &amp;Self) -&gt; f64 {        match self {            Shape::Rectangle { width, height } =&gt; width * height,            Shape::Triangle { base, height } =&gt; base * height / 2f64,            Shape::Circle { radius } =&gt; std::f64::consts::PI * radius * radius,        }    }}</code></pre><p id="5f369788-7cdc-4a31-b9e1-86037a0fad9a" class="">As you can expect from FP features, enum and pattern matching can make calculation looks declarative.</p><p id="4eac12d3-d6d0-4abe-b7b8-d4c9cc4cdc7f" class="">As explained above, in TypeScript we can use tagged union to simulate Rust&#x27;s enum. It turns out that tagged union are really good in describing an application&#x27;s state. I will use an example that uses React.</p><p id="fc42d104-8c30-4854-8c4e-646ab80fd715" class="">An example: Interactive login page. An interactive login page has 3 states, IDLE, LOGGING<em>IN, LOGIN</em>SUCCESSFUL. A common practice would be using TypeScript&#x27;s string enum to describe the states. I utilize type system a little bit more.</p><pre id="b15623b5-95cf-4b6a-b16c-22c248a7e936" class="code"><code>// Instead of thisenum StateEnum {
+  IDLE,
+  LOGGING_IN,
+  LOGIN_SUCCESSFUL,
+}
+type PageState = {
+  state: StateEnum;
+  lastError: Error;
+  username: string;
+  password: string;
+};
+
+// I write it like thistype PageInput = { username: string; password: string };
+type PageState =  | ({ kind: &quot;IDLE&quot;; error: Error } &amp; PageInput)
+  | ({ kind: &quot;LOGGING_IN&quot; } &amp; PageInput)
+  | { kind: &quot;LOGIN_SUCCESSFUL&quot; };</code></pre><p id="2963862b-a3d9-4362-81e5-b14ba109587a" class="">Having states with the correct types you will be able to write pattern-matching-like <code>render()</code> function.</p><pre id="61c8fb1a-ce5a-464f-99f7-8e49187500e0" class="code"><code>class LoginPage extends Component {
+  // rest of the code  render() {
+    return (
+      {state.kind === &quot;IDLE&quot; &amp;&amp; state.error &amp;&amp; &lt;ErrorComp error={state.error} /&gt;}
+      {state.kind === &quot;IDLE&quot; &amp;&amp; &lt;SubmitButton /&gt;}
+      {state.kind === &quot;LOGGING_IN&quot; &amp;&amp; &lt;SubmitButton disabled={true} /&gt;}
+      {state.kind === &quot;LOGIN_SUCCESSFUL&quot; &amp;&amp; &lt;SuccessNotice /&gt;}
+    );
+  }
+}</code></pre><p id="b9ae1e59-1ca5-4396-a141-59a319db4d0d" class="">Having states with the correct types also lets your compiler remind you to not stray from your business logic. For example, you are not allowed to accidentally write...</p><pre id="df11c945-a6e1-4998-a778-d291af96f509" class="code"><code>{ state.kind === &quot;LOGGING_IN&quot; &amp;&amp; &lt;ErrorSection error={state.error} /&gt; }</code></pre><p id="bbcec399-cc05-4578-9363-6ec128ebf2c5" class="">...because the compiler knows that when <code>LOGGING_IN</code>, Login Page cannot have error.</p><p id="132f5962-3246-4493-9e0d-b71928916e4c" class="">Also, it is easier to write a critical section of the page with partial pattern-matching-like code.</p><pre id="b24b2c2b-5490-42bc-b8e3-8b8dd1c56829" class="code"><code>class LoginPage extends React {
+    // the rest of the code    attemptLogin = async () =&gt; {
+        const pageState = this.state.pageState;
+        if (pageState.kind !== &quot;IDLE&quot;) return;
+        await attemptLogin(username, password)
+			.then(res =&gt; {
+            	if(isRight(res)) return this.setState({ kind: &quot;LOGIN_SUCCESSFUL&quot; });
+            	return this.setState({ pageState: { ...pageState, error: res.left } });
+            })
+    }
+
+    // the rest of the code
+}</code></pre><p id="6522ade6-ba02-4ea2-81aa-297095d8ff87" class="">This pattern effectively turns compilers, editors, IDE, anything that scans ASTs into guards for your business logic.</p><h2 id="1122df5e-b17f-4488-ae01-f25f25f72a3d" class="">Block as a Story</h2><p id="1d3d1924-69cd-445e-a0df-551244a80446" class="">In Rust, blocks have a special relationship with memory allocation. In other languages, a block only serve as a place for sequential code to exists. In Rust, variables that are allocated in a block will be dropped when a block ends.</p><pre id="f5454178-aaa8-47ba-aa5c-3417d5a6b23c" class="code"><code>{    let some_variable = get_some_value();    // ... do stuff    // here some_variable will be dropped/deleted}</code></pre><p id="5d4b3a7c-e715-4be9-999d-7045ac79a518" class="">Moving data outside of the current block cannot be done easily. You have to instruct Rust to either 1.) <a href="https://www.reddit.com/r/rust/comments/idwlqu/rust_memory_container_cheatsheet_publish_on_github/">let the variable be a reference in the first place</a>, or 2.) move the variable out and render it unusable in the lines below. For people coming from TypeScript/JavaScript, in which every non-primitive values are actually references, this behavior is very restrictive for people coming from TypeScript/JavaScript. But this is actually a good pattern to use in TypeScript and JavaScript because you have the whole story in a block and you are sure that if a block is at its end, the variables inside will be GC&#x27;ed.</p><p id="771cbc46-3319-46aa-afc4-ae8c10ba9729" class="">Before I am conditioned into that pattern, this is how I write a callback in React App</p><pre id="b5cf5e6b-bf05-4b5d-ae60-e8054cc8c953" class="code"><code>class SomeComponent extends Component {
+
+  validate(){
+      // do some validation      this.setState({ validation });
+  }
+
+  submit(){
+      const { data } = state;
+      fetch(someUrl, {
+          body: somehowConvertToFormData(data)
+      })
+  }
+
+  onHandleSubmit(){
+      this.validate();
+      this.submit();
+  }
+
+  // render  render() {
+    return (
+      &lt;form onClick={this.onHandleSubmit}&gt;      	// ...      &lt;/form&gt;    );
+  }
+}</code></pre><p id="7f38f8ac-afdd-4e61-ba2b-5c79924a1dcb" class="">After I am conditioned into the pattern, this is how I write a callback in React App</p><pre id="2969c8d7-608d-4edf-8fa2-a375fd11e2e6" class="code"><code>class SomeComponent extends Component {
+    async submitImpl() {
+      // data starts here      const { data } = this.state;
+      // data should be passed as parameter by validate()      // validate doesn&#x27;t need access to this      // therefore it does not need to be class method      const validation = validate(data);
+      if(validation.isValid()){
+          await fetch(someUrl, { body: data });
+      }
+      this.setState({ validation })
+      // data ends here  }
+
+  async submit() {
+  	if (this.state.isSubmitting) return;
+      // Critical Section      this.setState({ isSubmitting: true });
+  	this.submitImpl();
+      this.setState({ isSubmitting: false });
+  }
+
+  // render  render() {
+    return (
+      &lt;form onClick={this.submit()}&gt;        // ...      &lt;/form&gt;    );
+  }
+}</code></pre><p id="3bf6bf10-fd77-4ebe-b385-af508590ead3" class="">You can see the whole submission scenario in the <code>submitImpl</code>. The source of data is single, from the beginning of <code>submitImpl</code>. Validation function receives data and produce validation object instead of creating side-effect. Developers reading this would read it like sequential narration. They don&#x27;t have to jump between functions to know what it is doing.</p><h2 id="5d1ee34b-76a8-4d13-97f1-f7e3b1ad8ea2" class="">Others</h2><ul id="7a0eac43-6d31-4078-aff8-ad24a6033736" class="bulleted-list"><li>TryFrom and TryInto that I mentioned earlier are very convenient for business objects serialization and deserialization. I use that pattern all the time making TS based CLI, script, app logic, etc.</li></ul><ul id="b29b7aa6-8e48-4d5c-ab0f-0be01f73a096" class="bulleted-list"><li>I use type and functions to replace class. Class is good for scoping variables and allowing methods to use those. But other than that, for example if you only need a simple data structure, use type. Type is intuitive to write. The type declaration <code>{ username: string, password: string }</code> looks almost similar as the instantiation <code>{ username: &quot;someusername&quot;, password: &quot;somepassword&quot; }</code> . Writing class takes a lot of effort. You have to write the constructor, default value, and instantiating it. It takes quite an effort to make the instantiation looks like its declaration. You can imagine how the constructor looks if you instantiate it like this <code>new User({ username: &quot;someusername&quot;, password: &quot;somepassword&quot; })</code>.</li></ul><h2 id="5f3c1fc6-64f4-4617-8f1c-22595c56c26b" class="">Adoption Is Not Perfect</h2><p id="c47e9ed2-ed70-4dc7-8d49-4b39f586a1ea" class="">Beauties do not come without a price. There are always things to be sacrificed. Most of the snippet above requires more code to be written, worse it compiles to bigger code in the case of Codecs and <code>tryCatch</code>. Changes in paradigm need time and software developers&#x27; times are precious. This is because those beauties are inherent traits of Rust. It is obvious that writing Rust code in the Rust way is a lot cheaper than writing TypeScript in the Rust way. In spite of that, I choose to pay the price, especially in big projects. Big projects tend to scale fast and it&#x27;s better to pay the price early and reap the benefits later. That&#x27;s a cheap price to pay to convert your compiler into your logic reviewer and communicate business objects to your peers.</p><p id="5415273a-aa7d-4b88-9b03-27680d36386d" class="">And then there is <a href="https://doc.rust-lang.org/reference/macros-by-example.html">Rust&#x27;s macro</a>, one of its best features. There&#x27;s no such thing as adopting macro for TypeScript. Whenever I write codecs and then having to write the type for the codecs, I&#x27;m frustrated why TypeScript doesn&#x27;t have macro. Whenever I see JS code that creates functions dynamically at initialization time, it&#x27;s macro again in my mind. I have experimented with it, making a code generator for TypeScript, but it&#x27;s not the same.</p><p id="33ea5251-d502-46ea-8f4b-1f1057f77c49" class="">I am both happy and sad that TypeScript&#x27;s team chose to write TypeScript as a thin layer on top of JavaScript. It makes it easy for JavaScript developers to adopt TypeScript. That way TypeScript sets out a path for JS developers to understand how static types is more useful than it is restricting. However, I wish TypeScript were a 99%-sound language, without those non-essential part of JS like <code>class</code> or the near-misleading part like <code>exception</code>. Instead, I wish runtime type checks, <code>Either</code> data type, and macros were parts of the language.</p></div></article></body></html>

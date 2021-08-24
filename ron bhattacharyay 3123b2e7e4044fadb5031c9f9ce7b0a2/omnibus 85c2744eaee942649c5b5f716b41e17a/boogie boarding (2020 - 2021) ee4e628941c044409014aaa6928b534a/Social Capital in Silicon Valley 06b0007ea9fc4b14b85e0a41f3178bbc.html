@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Social Capital in Silicon Valley</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="06b0007e-a9fc-4b14-b85e-0a41f3178bbc" class="page sans"><header><h1 class="page-title">Social Capital in Silicon Valley</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://alexdanco.com/2020/01/23/social-capital-in-silicon-valley/" class="url-value">https://alexdanco.com/2020/01/23/social-capital-in-silicon-valley/</a></td></tr></tbody></table></header><div class="page-body"><p id="0e44eaea-0573-4160-b4ff-a34921514211" class="">It’s January 2020. And if you’re a founder just starting out, trying to create something out of nothing, one of the best investments you can make is still a plane ticket to San Francisco.</p><p id="7d1496e7-242a-4f1d-b995-cf26118f586e" class="">A lot of people, including me, got this wrong when we looked forward to what the 20s would be like. All of the downsides of San Francisco and Silicon Valley as a global tech hub have more or less come true. It’s outrageously expensive; runways are shorter; there’s more competition for talent, narrative and oxygen. There’s no shortage of problems to work on, people to hire, or money in other cities.</p><p id="8274f34e-abd1-49fc-9bfd-d862fd6fe604" class="">But Silicon Valley still has this unbeatable advantage, available in abundance like nowhere else, that helps startups get off the ground: <em>social capital</em>. (I mean the general term “social capital” here, not the specific company Social Capital where I used to work.)</p><p id="4707e827-5630-4d2e-8188-0dfbde494e9f" class="">I’m continually surprised at how status and social capital in tech are simultaneously something we love to talk about, but also never want to talk about. We love to talk about individual examples of people acquiring influence creatively, or trendy virtue signalling that’s in fashion. But we don’t talk as much about the deep, systemic ways in which social capital makes the current tech industry possible in its current form at all.</p><p id="dd633100-2ee8-434c-996b-8e867894c9aa" class="">When I wrote about <a href="https://alexdanco.com/2019/11/27/the-social-subsidy-of-angel-investing/">angel investing and social status</a> a couple months ago, it was interesting how much of the discussion was around, “this is right, but it’s not something we really talk about.” So let’s keep talking about it.</p><p id="0ec28574-d938-46f2-a8a9-b910db31fc09" class=""><strong>Social capital flows freely in Silicon Valley – if you ask for it the right way</strong></p><p id="04c5ae06-3ec7-4c81-8da8-498b3891a58d" class="">Social capital is one of those terms I see people use generically to mean “community” or “status” or “good vibes”, but it has a specific meaning that’s worth understanding. It’s called social <em>capital</em> for a reason, because like other forms of capital, it works as a production factor. Just like a piece of capital equipment has value because it reduces friction, expense, or human labor of some kind, so do established norms, trust and relationships.</p><p id="145fb583-974b-4b26-bb04-b124d8c75659" class="">I got introduced to the concept of social capital from Robert Putnam’s book Bowling Alone. Social capital, as he presents it, is a form of wealth that can compound and throw off real dividends when it’s cultivated, or wither and die when it’s drawn down or neglected. Having access to social capital is a privilege. In the business world, social capital is earned over decades, and doled out carefully by those who have it: you can’t just give that stuff away.</p><p id="9e16d686-ef59-42c8-8745-08d943ebdcf3" class="">Social capital is especially important if you’re trying to build something out of nothing, and need credibility and momentum in order to open doors and be taken seriously. Building startups outside of an established tech ecosystem is hard: there’s so much inertia and friction you have to fight that without existing momentum to draw from. You face a prohibitively steep climb out the gate.</p><figure id="829469f9-a3ff-468c-912b-25cc87c0d956" class="image"><a href="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F34d6d2b1-2bd3-4801-b824-2f31058a7496_1080x794.png"><img style="width:700px" src="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F34d6d2b1-2bd3-4801-b824-2f31058a7496_1080x794.png"/></a></figure><p id="1b7fbaca-90df-47d2-b55f-a51101697cba" class="">Meanwhile, it can be surprisingly easy for newcomers to tap into the social fabric of Silicon Valley and acquire that first bit of momentum, if you know how to ask for it. Those inertial barriers just aren’t there in the same way. People actually answer cold emails; people readily help out and make introductions; people will take you seriously. It’s a part of the culture. To some degree, people pay it forward because someone paid it forward to them. But it’s not just people being nice. Newcomers have real currency here. What, though?</p><p id="83c34ab9-f477-44c8-943d-2bfff1d9ff9a" class="">Social capital is readily available to anyone, <em>if</em>, and this is a huge if, <em>you know how to ask for it the right way.</em> The magic password is simply asking, using the right language and demonstrating that you’re socially clued in to what’s going on: “Can I be in the group? I’m like you, <em>almost</em>.”</p><p id="8dfcafcf-f0e4-463b-8795-ea525c345a1d" class="">The Silicon Valley tech ecosystem is a world of pattern matching amidst uncertainty. We pattern match ideas, we pattern match companies, but most of all we pattern match people. If you are new, and you already speak the language and look the part well enough to be able to fit the pattern, but have just enough novelty and freshness to you that you don’t fit the pattern <em>exactly,</em> then people will be interested in you.</p><p id="e0f540c7-70fa-4ce6-97a3-ace03a39b7ad" class="">If you’re too different, you won’t fit the pattern at all, so people will ignore you. (Did I mention tech has diversity issues?) And if you’ve been in tech too long, you’ll fit the pattern too well, so people will also ignore you. But if you’re a newcomer who speaks the language? Then you’re interesting. You have “Goldilocks novelty”: a valuable form of social capital, which you can cash in immediately. You’re different enough to have unique potential, but similar enough to fluently use all of the leverage that the tech ecosystem offers you.</p><p id="a50cd478-98bf-4354-9870-5f11a7953229" class="">How else can you boost your social capital in Silicon Valley? Being a founder is obviously one way. Growth is also good at bestowing status – if you work at a fast-growing startup, even if it’s small or you’re not the founder, you’ll be in demand. Old fashioned charisma, being good at Twitter, or knowing good gossip obviously counts for something. You can also <a href="https://alexdanco.com/2019/11/27/the-social-subsidy-of-angel-investing/">buy your way in by angel investing</a> – so long as you do it the right way. Looking the part sure doesn’t hurt.</p><p id="83e2dac7-848e-414c-b078-3f5845a5dfcd" class="">But really it’s about the basics: knowing the words for things; having some situational awareness about what people in tech have opinions about this week. Knowing what the pattens are, and how you fit. It sounds basic but it’s an essential part of signalling: I’d like to join the group, and I have something to offer.</p><p id="34b62b45-18e8-48da-ae6b-301f28a03311" class="">The minute you acquire “in-group” status and establish a bit of social capital in Silicon Valley, everything about your career becomes easier. Introductions, advice, credibility and seed funding flow freely, hesitation and friction around new ideas goes away. It becomes easier to bootstrap something out of nothing, because you’re not starting with nothing anymore.</p><p id="fb3efe4c-3ea7-49c1-a850-87ac368dad34" class=""><strong>Social capital is distributed differently than conventional power</strong></p><p id="336a4f61-79de-441b-b420-93d20226b3f5" class="">There’s a famous passage in <em>War and Peace</em> where a young lieutenant, Boris Dubretskoi, learns to navigate the “real system”, which supersedes the official system of influence and power in both the army and in society back at home:</p><p id="0fc0232c-b77e-431a-928a-ae5cdfe2f4ab" class=""><em>When Boris entered the room, Prince Andrei was listening to an old general, wearing his decorations, who was reporting something to Prince Andrei, with an expression of soldierly servility on his purple face. “Alright. Please wait!” he said to the general, speaking in Russian with the French accent which he used when he spoke with contempt. The moment he noticed Boris he stopped listening to the general who trotted imploringly after him and begged to be heard, while Prince Andrei turned to Boris with a cheerful smile and a nod of the head.</em></p><p id="29d4ac55-e51a-4666-90d1-bf8aad8ba2de" class=""><em>Boris now clearly understood—what he had already guessed—that side by side with the system of discipline and subordination which were laid down in the Army Regulations, there existed a different and more real system—the system which compelled a tightly laced general with a purple face to wait respectfully for his turn while a mere captain like Prince Andrei chatted with a mere second lieutenant like Boris.</em></p><p id="5191a1c8-d9b3-473d-bc32-6a29e15886ed" class=""><em>Boris decided at once that he would be guided not by the official system but by this other unwritten system.</em></p><p id="c4ded72d-49aa-416b-955d-a2fbf688b4e7" class="">You can imagine an identical scene playing out in San Francisco today. Substitute the purple-faced general with a Fortune 500 CEO, Prince Andrei with a VC, and Boris with a young founder with a small but fast-growing startup. In terms of actual real-world power and influence, it’s clear that the CEO has the most power, the VC significantly less, and the founder virtually none. But not in the unwritten system. In Silicon Valley society, you can easily imagine a scenario where the founder might have the most social capital in the room, and the CEO the least.</p><p id="2be666ba-86fe-4bda-b7a9-a0b3cca5b5eb" class="">Social capital does not overlap exactly with conventional power or official status. If it did, then it wouldn’t be that useful. Social capital is interesting when it opens doors for people who don’t have power yet. It’s actually much more interesting than conventional power, because one is typically a leading indicator of success whereas the other is a lagging indicator. Potential value is far more interesting than value fully realized. Startups exploit that potential.</p><p id="8b2c5629-d425-40ba-8a4e-c4f4c31a3148" class="">When working correctly, social capital helps resolve the chicken-and-egg problem of building something new. For a young founder in Silicon Valley, your social status is the most valuable thing you have: not only because it can open doors for you, but also because using your social status effectively is like a dress rehearsal for raising money and making deals. If you can demonstrate to early prospects and investors that you’re successfully able to promote hyped-up equity in your own reputation, it’s a good sign that you’ll be able to successfully sell hyped-up equity in your startup too. This is that special sort of magic quality that hangs around some founders like a halo. You instinctively know what they’re capable of, because at a social level, you’ve already seen them do it.</p><p id="d3d4179f-0d60-4698-bf54-3459e127f70c" class="">What’s interesting about this special quality, this “halo” of status and social capital, is that it’s not zero sum. It’s not like you’re born with it and either you have it or you don’t. Confidence is contagious. The more social capital there is in the community, the more status and credibility you can acquire as a newcomer, and the more you’ll want to bestow it on other people when it’s their turn. That’s the special feeling you get in Silicon Valley: it’s a place where social capital has compounded, uninterrupted, year after year, summer batch after winter batch.</p><p id="9bc06f0a-d406-4835-bd68-06cb9cf00d64" class="">After enough compounding, a paradox emerges: as people join the group who are all similar, but slightly different, the group accumulates more new ideas, and yet at the same time becomes increasingly self-similar. The tech scene becomes this growing, shifting mass of peers, all similar enough to one other that they reinforce and validate each others choices, and similar enough that everyone feels overwhelming pressure to perform: competition is everywhere.</p><p id="4dbcc253-ee94-4556-9532-602cd34b2203" class="">The renewable energy source at the core of Silicon Valley, which drives everyone to work hard, comes from <a href="https://alexdanco.com/2019/04/28/secrets-about-people-a-short-and-dangerous-introduction-to-rene-girard/">this tension</a>: “I love you for being just like me, because it validates me. And I hate you for being just like me, because it makes us rivals.” The more you’ve bought into the group and benefited from its social capital, the more confidence you’ll feel for what you’re doing, but also the more pressure you’ll feel to not let your peers down.</p><p id="914a1b64-f2b4-428b-b71a-83a8b113ee9d" class="">Over time, social capital and conventional capital tend to converge. There is a controversial but widely practiced maxim in Silicon Valley that the original founding team and first few employees should be as similar to one another as possible: first, because you’re so fragile at that stage, any unnecessary friction will derail you; second, because what you’re doing is hard, and you need that peer-group tension to push through the early days.</p><p id="d39a24c5-f358-4ecb-9ff0-8a7a8e3f25ba" class="">These early founding and hiring decisions, where social capital matters more than anywhere else, make their lasting imprint through stock options. The wealth generated by a successful startup, which accrues disproportionately to its early members as opposed to its later ones, explicitly trickles down along social lines.</p><p id="0014f976-0d29-4dad-a232-0c74dfcb86fa" class=""><strong>Social capital is antifragile: it’s either chaotic and growing, or orderly and shrinking</strong></p><p id="c52c0074-dc75-4a3e-8ad9-969a9a6c82dd" class="">One of the big themes of <em>War and Peace</em> (which is the best book on social capital I’ve ever read, by a mile) is a phenomenon I don’t think there’s a name for, so I’m going to give it one: “Social Fog of War”.</p><p id="5a53a60b-a23a-478c-85cd-94985a5f6171" class="">Social Fog of War is a counterintuitive concept: in order for status- and social capital- driven social systems to work optimally, <em>they must be opaque</em>. You can have a sense for who’s at the top and who’s near the bottom; but the exact position and relative rank of anyone’s social status in the community should never be precisely knowable. Social Fog of War means you should never actually know, at any given moment, who is above or below whom.</p><p id="e1deaa34-3a44-4250-b87e-af1c8954cd27" class="">Why is this so important? You can understand it intuitively with a little thought experiment, courtesy of <a href="https://www.ribbonfarm.com/2010/10/14/the-gervais-principle-iv-wonderful-human-beings/">Venkatesh Rao’s famous series </a><a href="https://www.ribbonfarm.com/2010/10/14/the-gervais-principle-iv-wonderful-human-beings/"><em>The Gervais Principle</em></a>. Imagine you’re in a group of ten people, and group membership is cool and desirable. You might have a sense of who’s the alpha of the group, who sets the tone for why the group is high-status. You might also have a sense of who’s at the bottom, and lucky to be there. But for everyone in the middle, their relative status is <em>illegible</em>: hard to say whether Alice is cooler than Bob, or whether they’re above or below average status.</p><p id="00e216fe-35d7-4bcf-af0d-ce0cc78a2571" class="">If everyone suddenly became aware each other’s relative status, it’d be a social disaster: the group would collapse. The people on the bottom half will be made aware of their inferiority: they’ll feel self-conscious, like impostors. And the people in the top half will become aware of their superiority – they’ll feel pressure to break off from the group, which is obviously bringing them down. Ignorance was bliss.</p><p id="e0723473-a3e8-44b1-811b-4b571d1bb75b" class="">The illegibility and opacity of intra-group status was doing something really important – it created space where everyone could belong. The light of day poisons the magic. It’s a delightful paradox: a group that exists to confer social status will fall apart the minute that relative status within the group is made explicit. There’s real social value in the ambiguity: the more there is, the more people can plausibly join, before it fractures into subgroups.</p><p id="6409b3c1-26b9-46f3-9ca3-aa666dc81ae9" class="">Silicon Valley is full of this sort of useful ambiguity. Things change so quickly, and status can get established and reassigned so unexpectedly, that Social Fog of War is thicker than normal. The big status-establishing moves, like building a unicorn or landing VC carry, take a long time – there’s a lag between what you’re doing and when it pays off, and all the while, your status will be indeterminate.</p><p id="9641a709-5e8e-415b-b0ca-3ee068426d9a" class="">This embrace of ambiguity is best expressed in the tool that founders use to raise their first round: the convertible note. Part of the appeal of convertible notes is that, unlike a priced round, you only have to agree to a valuation cap. It lets your startup’s implied value sit comfortably and illegibly in a fuzzy range, rather than explicitly “higher than this comparable, but lower than that comparable.”</p><p id="21063599-dac9-4bd8-914f-98da2a516528" class="">It works the other way, too. When the pref stack wipes out all the common in an acquisition, a lot of employees keep the halo of having worked for a company that exited for 500 million dollars. There are a lot of people walking around San Francisco right now whose peers believe they’re a lot richer than they really are. If the curtain suddenly got pulled back on a lot of these non-fortunes, it’d be a big problem! Social fog of war keeps things opaque, for the collective benefit.</p><p id="8b3f78a1-e812-4836-9ae6-92e6beabe6d4" class="">Sar Haribhakti <a href="https://sarharibhakti.substack.com/p/some-more-reflections-on-silicon">wrote a thoughtful blog post last year</a> that pointed out something else: the brand name credentials in Silicon Valley rotate more quickly than they do elsewhere. On the east coast, it takes a decade for the default high-status credential to shift from working at an investment bank to working in management consulting to working for a fund. In SF, credential rotation happens much faster – every 2 years or so, instead of every 10. At face value, this is useful because it helps rotate out defaults at a healthier clip. But it’s helpful from a social fog of war perspective too. It’s useful that no one knows whose stock will rise next year.</p><p id="55fd25b4-0ffd-41a5-8feb-3e6a5f9c0043" class="">This is a really good thing! It’s a lot harder to segregate people according to their credentials when the credentials themselves are constantly in flux, delayed by years, or otherwise uncertain. And when status is indeterminate, there’s more room for you to belong. <strong>Social Fog of War allows social capital and “in-group status” to scale to larger numbers of people.</strong> Silicon Valley is a place where status is a giant mystery box, and <em>precisely because of that,</em> it’s a place where social capital is available to the community in larger and more powerful quantities than elsewhere.</p><p id="2c2b08cb-2805-48e5-aa44-d92e8f21e1f7" class="">I don’t want to go <a href="https://twitter.com/nntaleb/status/1172498222079709188">full Taleb</a> on this, but his concept of <em>Antifragility</em> is really applicable here. Social capital is antifragile: it thrives under conditions of disorder, and it suffers at rest. (This is a big lesson in War and Peace, by the way.) If it’s growing happily and chaotically, a group can continually accommodate new members without diluting the social capital of the group, <em>so long as opacity is maintained</em>. More disorder – in the form of rotating credentials, status illegibility, and a continual influx of new people – makes for more social capital, more collective confidence, and more communal benefits for those who share it. The thicker the Social Fog of War, the longer social capital will be able to compound uninterrupted, before splinter groups start breaking off.</p><p id="5e873c2c-08c2-4591-9c2a-5725b6d9007e" class="">But when status becomes more codified and explicit, then the social capital of the entire group gets threatened. Clarity and order tilt the game theory away from the communal group and towards less productive posturing and gatekeeping. This is why so many startup incubator programs, mentorship programs, and support networks fail so abysmally. The formal roles, titles and milestones that they impose, even if individually sensible, break the illegibility and inclusion.</p><p id="501e5af9-ee45-4b34-ba09-49b8e2528390" class=""><strong>The Golden Rule of Silicon Valley</strong></p><p id="d378dd92-a101-4615-9e9a-56064a89f8ea" class="">You’ve heard me repeat this over and over, but I’m not going to stop: Silicon Valley works the way it does, as successfully as it does, because it has a rich social contract that governs everyone’s behaviour. Without that social contract, Silicon Valley tech becomes just another industry, or just another bubble.</p><p id="b316af94-658b-4c2e-b4de-2de17172ca71" class="">One of the most important parts of the Silicon Valley social contract is the code of conduct around how you interact with people above or below your status level. There’s a kind of “Golden Rule” that’s in place if you participate in tech: “Treat others as if they might be the next great founder.” Status illegibility is a virtue.</p><p id="5e20e387-4898-4141-9918-05a7bd9fbf7e" class="">This is where I really agree with what <a href="https://www.youtube.com/watch?v=oAEZoAp2_zY">Michael Seibel was saying the other month</a> (which prompted the <a href="https://alexdanco.com/2019/11/27/the-social-subsidy-of-angel-investing/">angel investing and social status post</a>) – the Bay Area is different because many more people have experienced upside regret. Hang around for enough time in the Bay Area, and at some point you will meet someone – although you won’t know it at the time – who goes on to do something wildly successful. If you brush them off, it’ll come back to haunt you. This will really make you pause, every time you meet with someone new for the first time, because this new person might be a special founder too. Since there’s a chance they might already be on a status rocket ship, you’d better treat them with that possibility in mind.</p><p id="7e52a5e4-77fb-443f-bcce-459c3c67c5e0" class="">One overarching theme I’ve noticed over the past year or two is that explicit, codified status is coming to Silicon Valley. It’s not barging in and making a big fuss; it’s creeping in quietly. And it makes me a bit worried.</p><p id="b385b399-3cc0-4600-b3df-dbcc030c4978" class="">One way that explicit status is showing up these days is in the incessant virtue signalling, which used to be a harmless distraction but feels like something more than that now. It’s like members of the in-group, conscious that it’s getting crowded in here, feel the need to impose a bit of a tax, or a bit of a purity test, to see who exactly is “virtuous enough” to be really considered in the in group. Oh, you did 6 angel investments this year? That’ll score you some points. Resting heart rate below 50? Wrote some blog posts that hit all the right notes? Great. You can stay in. So long as you keep up the effort. Oh, you can’t make it 3x per week to the boxing gym? Sorry, no room for you in our group.</p><figure id="879cbe0c-fcd9-4eda-829c-dbf7a515233e" class="image"><a href="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/semil.png"><img style="width:700px" src="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/semil.png"/></a></figure><p id="fcd70d4e-f231-452f-9379-252e12095104" class="">Another trend that’s a lot more explicit is the supposed rise in private group chats, where people say what they “really think”. Listen, I’m in some of these chats, and I promise you, they are not a new invention. They’re just exclusion, gossip, and pseudo-intellectual circle jerking. They are the opposite of punk. But they convey something worrisome, which is the idea that if you’re not in these invite-only chats, then you’re missing out on the real scene. (Sometimes I feel like the main point of these group chats is being able to announce, on Twitter, that you’re participating in them.) There’s nothing wrong with private conversations, but escalating social pressure to be “in” these conversations is another story.</p><figure id="ce6de3a9-0286-4ce0-8489-cb5f08a45051" class="image"><a href="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/image.png"><img style="width:700px" src="Social%20Capital%20in%20Silicon%20Valley%2006b0007ea9fc4b14b85e0a41f3178bbc/image.png"/></a></figure><p id="604f6bc3-072f-4e69-a62b-202741b906aa" class="">Another trend that’s better intentioned but still suspicious to me is the increasing interest in “curation”, especially for people, that’s propping up everywhere in response to, “There are so many people in tech now and so many ideas; how can we make sure the best ideas and the best people can get discovered?” That’s a good goal, and to the extent that it actually promotes talented people who otherwise wouldn’t get recognized, then that’s great. But the other side of curation is exclusion, and the common basis for both of them is <em>legibility</em>: clearing out the fog, and shining the light of day on what’s out there. I can see why you might want this, but be careful what you wish for.</p><p id="c9bf7276-8fa7-44a2-903b-67fd0e122b5e" class="">That being said, there’s also plenty of evidence that the state of social capital in Silicon Valley is stronger than ever. The recent <a href="https://t.co/3vccslWoAs?amp=1">Front Series C</a> led by a bunch of individual enterprise software founders, for example, is just absolutely awesome. What a triumph of social capital in the ecosystem that individual people are willing to write cheques like this!</p><p id="d5d6e544-a36d-4def-aade-0ef130f9355f" class="">Expect to see a <em>lot</em> more of this, by the way. Startup founders and employees who are sitting on huge social capital reserves and paper stock option gains <a href="https://twitter.com/HarveyMultani/status/1220023539429933061">now have more options to reinvest their wealth</a> back into the community immediately. People are figuring out that swapping their non-liquid equity for other founders’ non-liquid equity is a doubly good deal: it <a href="https://alexdanco.com/2019/12/06/stone-soup-diversification-and-the-alchemy-of-venture/">lets them diversify</a>, and it multiplies their social capital with every reinvestment.</p><p id="6ec4a911-9837-43ab-9a6c-fe9b680852b4" class="">If this plays out the way it could, it could compound into yet another massive advantage for the Bay Area over other startup ecosystems, simply because you need a critical mass of people and social capital in one geographical location for it to work. The 20s will see San Francisco face down some really big problems, and we’ll see if the city makes it out better or worse. But the wealth of social capital they’ve compounded will remain an undeniable asset to the tech community for a long time.</p><p id="586e8313-a8e7-4175-8ecd-02cfd52daadb" class=""><em>Like this post? </em><a href="http://danco.substack.com/"><em>Get it in your inbox every week</em></a><em> with Two Truths and a Take, my weekly newsletter enjoyed by thousands.</em></p></div></article></body></html>

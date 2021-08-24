@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>enterprise, explained</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="06121aec-cab4-4019-bddb-98a6a71a2e66" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚔️</span></div><h1 class="page-title">enterprise, explained</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/inside-figma-enterprise-explained/" class="url-value">https://www.figma.com/blog/inside-figma-enterprise-explained/</a></td></tr></tbody></table></header><div class="page-body"><p id="fcc2f4e1-c4ba-4772-8d18-ce573e097323" class=""><em>Since </em><a href="https://www.figma.com/blog/figma-organization/"><em>Figma Organization first launched</em></a><em> just over a year and a half ago, we’ve been committed to building a tool that supports companies of all sizes. Engineer Aashima Garg shares an inside look at Figma’s enterprise team and the work they do, spotlighting a recent project to improve the Organization admin experience. She dives into how they understand complex users, build partnerships with cross-functional teams, and why Figma’s approach to enterprise is a little different.</em></p><p id="8304ce36-b58d-44c4-b4fd-d974a797d78a" class="">“Enterprise” means so many different things at different companies. A common misconception I often hear is that enterprise product roadmaps are always dictated top-down: customers request something, and we build it. In reality, developing a product that scales well, supports a wide range of customers, and delivers a delightful experience is so much more complex (and interesting!) than just shipping the most recent request.</p><p id="8e673657-e320-4f95-bd8c-1b1011c7f23e" class="">Figma’s enterprise product team develops tooling that helps Organization admins manage their accounts and ensure that designers, developers, and collaborators have the access they need. Day to day, that involves joining sales calls with prospective clients to learn about their needs, meeting with existing customers to gather feedback, and partnering with stakeholders across marketing, engineering, and design to build cohesive solutions.</p><p id="5d6e1bc1-59a9-4676-ae22-859cf3edec74" class="">Since launching <a href="https://www.figma.com/organization/">Figma Organization</a> in early 2019, Figma’s usage within our existing customers has grown immensely. Especially in our new remote world, it’s more important than ever for everyone involved in the product development process to be on the same page, and we often see that happening in Figma. But as more and more collaborators join Figma to participate and contribute to their company’s design process, the scope of an Organization admin’s work in Figma broadens.</p><p id="86346396-8071-4f83-a094-05de697a7fe1" class="">Figma’s original Admin Settings console was designed before we knew what tooling would be most valuable to admins. Now, over a year into the product’s life, we’ve learned a lot more about who our customers are and what they need. Through conversations with customers, support, and sales, we started to understand what worked well, what didn’t, and what admins need to efficiently do their jobs. It became clear that our customers had outgrown the Admin Settings&#x27; original design.</p><p id="988e7384-d5ce-41db-a0d7-a88165f4fd65" class="">So, we set out to redesign it.</p><p id="fa5599f2-554d-4a69-8bed-45294ee0351f" class="">We knew that Figma worked well for designers, but for admins who manage their team’s day-to-day operation, there was room for improvement. We decided to reimagine Figma for our admin users, optimize their member management workflows, highlight existing functionality, and leave room to allow us to more easily build new features in the future.</p><p id="1f60e12c-2a6d-479a-b590-3abc247b22a7" class="">With those goals in mind, we decided to run a brainstorm with the team, categorizing ideas into “Do now,” “Worth considering,” and “Wild &amp; crazy.” We invited the working group: PM <a href="https://twitter.com/benstern0?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">Ben Stern</a>, engineering manager <a href="https://www.linkedin.com/in/twright0/">Thomas Wright</a>, designer <a href="https://www.linkedin.com/in/jordanhsu/">Jordan Hsu</a>, engineers <a href="https://www.linkedin.com/in/joshtabak/">Josh Tabak</a> and <a href="https://twitter.com/stanhuan">Stanley Huang</a>, in addition to many other cross-functional partners from the research, data, support, marketing, and sales teams.</p><p id="4988a7ae-cd72-49e6-a64e-110ee1a59987" class="">Marketing offered design ideas, product shared feedback on research, and engineers wrote suggestions for UX. We couldn’t have generated such a diverse list of ideas without everyone on board, and even though everyone came from a different perspective, we were excited to see common themes emerge. To synthesize input, we grouped related ideas into those main themes. Then, Ben mapped suggestions to the user feedback that we received, and derived a shortlist of priorities.</p><p id="851cb5ba-1022-451c-8bc0-3b4ac788ee69" class=""><a href="https://images.ctfassets.net/1khq4uysbvty/4Qd3devWArH4qjEp8FDUoe/5d8c9793ca4d4d15fe70eeb2206d4278/admin-refresh-blog-1.png">The enterprise team’s initial brainstorm session in Figma</a></p><figure id="d2716a11-5c03-40d3-8e61-090a500e00a7" class="image"><a href="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-1.png"><img style="width:700px" src="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-1.png"/></a></figure><p id="93077f20-1bf3-43ad-9052-efaaf9a37280" class="">After the brainstorm, we wondered how to scope this project. Should it be a simple UI update or a larger overhaul? Initially, we thought we might be able to layer different views and options onto our existing Admin Settings. But when we partnered with the sales team to better understand points of friction, we heard that admins didn’t have enough information to make good decisions at true-up, weren’t aware of the features most relevant to them, and were exporting information manually.</p><p id="b8c85a50-5221-436e-b09f-46dc0724ca72" class="">The design of the Admin Settings view was limiting the value any individual feature could provide; redesigning it to optimize for certain key workflows would allow us to not only add new features easily, but also make better use of the features we had previously built. Instead of just addressing the symptom, Ben advocated for turning this workstream into a full product update.</p><p id="ae8fc04b-b9a6-490c-afb3-7fe4f1e96fa5" class="">Unlike enterprise companies that are enterprise-only (and often only build for companies with a certain number of employees or functions), Figma supports organizations of all sizes. Beyond providing a better user experience for admins and end users alike, developing a tool that scales well is central to what we do. To us, that means creating a strong foundation that also gives us the flexibility to add and update features as user needs evolve.</p><p id="1f5a9686-382c-4ae5-8e8d-d876ea6dc2cc" class="">While all product development requires a deep understanding of buyers, stakeholders, and end users, enterprise work demands insights into not just individuals and their challenges, but also broader organizational dynamics. Figma needs to flex to fit teams of 5 or 5,000—one person might play many roles that span admin responsibilities, design ops, and individual design work at smaller organizations, whereas enterprise companies often dedicate entire teams to each function.</p><p id="58c5ed9b-e5ea-462b-9f54-c79e0e80ec2c" class="">For example, a VP-level budget-holder needs to understand the value of the product across their organization; someone from design ops needs to ensure teams have the necessary permissions and access to resources; security teams need peace of mind that their organization&#x27;s data is secure. On top of that, each individual user has unique requirements, motivations, and challenges for using the product every day.</p><p id="66255b18-9288-413f-adcb-0c8cd1177df0" class="">To end users, an organization’s admin tooling is likely an afterthought. But for admins, settings are central to their day-to-day work; it’s where they get crucial visibility over account usage, access security controls, and manage team members. We realized that some of the confusion came from non-admins accessing information that they didn’t need. Similarly, admins were seeing prompts to create files and view designs in teams and projects, which were more tailored to non-admin workflows.</p><p id="a105bda0-c473-4723-bb35-6fc89f0cd961" class=""><a href="https://images.ctfassets.net/1khq4uysbvty/5fg5QKxU5d8uDWq1lwAl41/d46ca0e79440a4968c8692e93b949efd/admin-refresh-blog-2.png">Before the redesign: anyone in the organization could access a list of all the members</a></p><figure id="c1dce6b8-9567-4862-b20e-064db0781cd2" class="image"><a href="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-2.png"><img style="width:700px" src="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-2.png"/></a></figure><p id="9dfe4af2-edd9-4bfe-8041-279d70ea723b" class="">So, we decided to remove admin-only pages for non-admins and build a new top-level navigation option that separates the Admin Settings view from the broader Organization page—which any Organization member can see—and paths to design creation and consumption (like drafts and teams). In doing so, we provide a direct entry point for large companies whose admins mostly interact with the settings view, while also supporting smaller teams whose admins juggle design and management responsibilities.</p><p id="e8dc98aa-62dc-4475-8903-61172a9e784c" class=""><a href="https://images.ctfassets.net/1khq4uysbvty/2UkUlNyqZMJeVGy1b6UOAW/4d0fbaacd2d69d3edb164ad42d8c949e/admin-refresh-blog-3.png">After the redesign: only admins can navigate to the sidebar and access the new Admin Settings</a></p><figure id="af2b2fd9-31f7-4b89-a5cf-93d9d5cb1e86" class="image"><a href="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-3.png"><img style="width:700px" src="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin-refresh-blog-3.png"/></a></figure><p id="5eecb838-592c-42f4-b620-4153784b5dff" class="">After deciding to surface the Admin Settings entry point to a top-level navigation section, we turned our focus to user management workflows. Aside from more clear and robust filters and sorting mechanisms to help admins manage members, admins frequently request an intuitive shift+click behavior to quickly select many members at once. This behavior would allow them to more easily perform bulk actions like copying emails for a subset of members, or modifying many users’ permissions at once. We knew we wanted to incorporate this into the Admin Settings refresh.</p><p id="6811a354-eaf5-46be-8a71-7a381fc04434" class="">Once we decided what to build, Jordan got to work on a design spec and shared his early thinking with the team. At many companies, a design spec will tell you exactly what to implement, and a high fidelity prototype oftentimes matches the exact user experience we want to achieve. While Jordan’s designs were nothing short of incredible, they left room for discussion rather than specifying implementation decisions to a tee. On the enterprise product team—and this is true of work across Figma—we like to invite early feedback. Instead of work feeling like a handoff from one person to the next, we approach it more as an open discussion.</p><p id="24603e41-2802-4d3e-bb99-18fd4a9a36e2" class="">Jordan’s designs specified polished click-targets and selection and hover states, but functionalities like how users actually select many rows, add to their selections, and deselect were left undefined. While Josh and Stanley were ultimately responsible for development on this project, they took the initiative to conduct informal research to see how other tools support bulk selection. In looking at Asana, Gmail, and other tools, they found that multi-selection and deselection using shift+click could be implemented in a variety of ways. They aggregated their research and came up with a proposal for what they wanted to implement, optimizing not only for feasibility and reusability, but also for an intuitive, enjoyable user experience. They received great feedback from our team (and more importantly, our users!), and we shipped it.</p><p id="caf2ba77-a947-4760-a51b-795d1f917e04" class=""><a href="https://images.ctfassets.net/1khq4uysbvty/xC46a6NIEsRs8a02QStdL/86ff7e3219a149c5158d75f5ca280d7f/admin_refresh.png">Feedback on an early prototype of how multi-selection would work in the redesigned Admin Settings</a></p><figure id="ae839483-f361-49d8-a554-6f39af317191" class="image"><a href="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin_refresh.png"><img style="width:700px" src="enterprise,%20explained%2006121aeccab44019bddb98a6a71a2e66/admin_refresh.png"/></a></figure><p id="c8b3f07b-2ce6-4c90-9508-c4442d097414" class="">This is just one example of how people at Figma are given the opportunity and encouraged to take on different roles and help make product decisions beyond their formal job description. We also offer anyone at the company the chance to contribute feedback on designs and product roadmaps through dedicated Slack channels and open access to files, where you can see designs changing in real time as designers incorporate feedback. We genuinely believe that hearing everyone’s input and representing their opinions results in more thoughtfully-designed products, so we encourage collaboration at all stages of the development process.</p><p id="b0166f18-4f95-4e64-82e2-bb6d0dc5b5f8" class="">The new Admin Settings is now available for Organization admins. Admins, I hope you find our added features and functionality easy to use and enjoyable! Looking back to my first few days at Figma, I wasn’t sure how I’d feel working on an enterprise team. I thought my work might be laid out for me by customer requests, leaving little room for creativity and ownership. However, I’ve been pleasantly surprised by the amount of ownership, collaboration, and decision-making involved in enterprise work at Figma. The Admin Settings refresh project was just one of many opportunities to work closely with and build for our users, and I’m so excited to come to work every day to learn about new user needs and brainstorm sustainable solutions.</p><p id="1c82e697-22f1-4420-aa25-f42381681b05" class="">As we continue onboarding more organizations (with varying sizes, structures, and use cases) to Figma, our team needs more hands on deck. In addition to growing our current team in San Francisco (<a href="https://www.figma.com/blog/how-work-is-changing-at-figma/">and now, remote</a>!), we’re hiring for a new in-person, enterprise workstream in New York, that will open when it becomes safe to do so. If you’re interested, learn more about Figma and our <a href="https://www.figma.com/careers/">open roles here</a>.</p><p id="be1724bc-c832-499d-b0ed-058dca628b4c" class=""><a href="https://www.figma.com/blog/deep-search/">We recently rolled out deep search to help you find the right file even faster. Here, the team who built it gives you a behind-the-scenes look at the technical challenges they faced and the tradeoffs they made along the way.</a></p><h2 id="b08e68f9-1940-4342-b2af-e25dec0ff081" class="">Try Figma for free.</h2></div></article></body></html>

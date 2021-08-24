@@ -1,0 +1,751 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Why Figma Wins</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="3fb52e5c-dd89-4413-97fa-4bc25c89fb9d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎡</span></div><h1 class="page-title">Why Figma Wins</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-brown">Tech Strategy</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://kwokchain.com/2020/06/19/why-figma-wins/" class="url-value">https://kwokchain.com/2020/06/19/why-figma-wins/</a></td></tr></tbody></table></header><div class="page-body"><p id="8b274322-3406-4751-81e1-66e067aee3a3" class="">Companies are a sequencing of loops. While it’s possible to stumble into an initial core loop that works, the companies that are successful in the long term are the ones that can repeatedly find the next loop. However, this evolution is poorly understood relative to its existential impact on a company’s trajectory. <a href="http://figma.com/">Figma</a> is a prime example of sequencing loops. They’re now widely viewed as successful, but the key factors in their success and what bets they must make to get to the next level are less widely understood.</p><figure id="00fd6dae-97e4-40d3-844e-ae24d944041a" class="image"><a href="Why%20Figma%20Wins%203fb52e5cdd89441397fa4bc25c89fb9d/fast.gif"><img style="width:700px" src="Why%20Figma%20Wins%203fb52e5cdd89441397fa4bc25c89fb9d/fast.gif"/></a></figure><p id="6db78bef-e572-48d8-976b-404a90e999d8" class="">bet you didn’t know I could make gifs</p><p id="a25300cc-e63e-462e-bb0b-03abd22486af" class="">
+</p><p id="e8f88eab-6868-4815-8e69-ba4c211649ef" class="">The core insight of Figma is that design is larger than just designers. Design is all of the conversations between designers and PMs about what to build. It is the mocks and prototypes and the feedback on them. It is the handoff of specs and assets to engineers and how easy it is for them to implement them. Building for this entire process doesn’t take away the importance of designers—it gives them a seat at the table for the core decisions a company makes.
+</p><p id="7515fa95-25b6-4551-a218-25b51d2c9dbb" class="">Building for everyone in the design process and not <em>just</em> designers is also the foundation of Figma’s core loop, which drives their growth and compounding scale. That network effect is made possible by Figma’s key early choices like:</p><ul id="cf105190-d94c-4e0e-8812-0a164768ce20" class="bulleted-list"><li>Architecting Figma to be truly browser-first, instead of just having storage be in the cloud</li></ul><ul id="a5e099ee-abc6-4894-960c-8ad79d9d9030" class="bulleted-list"><li>Their head start in new technologies like WebGL and CRDTs that made this browser-first approach possible</li></ul><ul id="8f28302b-3131-498a-9f1b-cbd86dd2ba22" class="bulleted-list"><li>Focusing on a product purpose built for those designing vector based digital products</li></ul><p id="38ec4bb6-c049-45e9-afe8-d6606c39c8e9" class="">
+</p><p id="9ed06ee5-4525-4415-be9d-f7f8af8bcf1c" class="">Figma’s compounding growth is not only due to product market fit, but is also driven by the alignment between their product and distribution. There are limits to Figma’s success if it remains only valued and spread within companies. In order to break through that asymptote, Figma must build a global network effect across the ecosystem. Figma’s value to new users should compound as Figma’s adoption grows, even for solo users outside of organizations. Figma has begun making its bets on how it will become a platform—namely centered around communities and plugins. While it’s still early, these bets can be unpacked and understood.</p><p id="22964273-b549-4c47-979d-84ae1763180b" class="">
+</p><p id="3a24405b-529f-42df-a116-ce05c1c3a6e2" class="">Many companies are now at this inflection point. They have found success with their core product and are trying to push themselves to the next level of value to customers and scale. Our understanding of building platforms and sequencing towards them is still nascent. From how to shift the allocation of resources between a company’s core business and its potential future expansions to how to structure a platform to catalyze its growth and more. Until the playbook is well understood, it is more art than science. There are many decisions to make, including which layers should be centralized, whether the ecosystem should be driven by open source contributors or profit-seeking enterprises, how broad in scope to allow the ecosystem to grow and where to not let it grow, and more.</p><p id="db3526aa-c9fc-4d40-9cd4-4677b86f653e" class="">
+</p><p id="09031633-6f03-4deb-8da9-9076bb703676" class="">Whether they can catalyze compounding productivity in design is a core question for the coming years. Engineering is one field that has exhibited significant compounding progress over time. Whether Figma’s bets in building out global network effects will be able to push this level of progress in design will be an important question to watch.</p><p id="4ddd8157-ade1-4fb7-a333-0c1869b59dc4" class="">
+</p><h2 id="3b19f29e-ae78-4f98-bab8-3d8dcf9e329e" class="">The Arc of Collaboration</h2><p id="f9c8a455-9068-4885-a39c-c2bfba334725" class="">When Figma first launched, its value proposition was primarily around making design collaborative. If design could happen in the browser, then designers could work together on the same projects. In fact, they could even work on a design at the same time.</p><p id="d2923fa5-a56a-4e49-91dc-9b57320aa0cb" class="">
+</p><p id="b0836fdc-faf7-4587-a8e0-88f09efb69b0" class="">In 2014 as I helped diligence Figma <em>(disclaimer: I worked on Greylock’s investment in Figma, but I don’t have a personal stake in Figma. sadly.)</em>, I used to sit with designers at startups and watch them work. The top right corner of their screens were always a nonstop cycle of Dropbox notifications. Because design teams saved all their files in a shared folder like Dropbox, every time a coworker made a revision they would get a notification. And often there were complex naming conventions to make sure that people were using the right versions.</p><p id="3d365134-f468-493b-957a-8bfca153cabb" class="">
+</p><p id="c0978d03-ecd2-4344-91d2-5c4b896147e9" class="">Figma solved this problem. Designs in Figma are not just stored in the cloud; they are edited in the cloud, too. This means that Figma users are always working on the same design. With Dropbox, this isn’t true. The files may be stored in the cloud, but the editing happens locally—imagine the difference between sharing Word files in Dropbox vs. editing in Google Docs.</p><p id="2ba34bb4-43ee-47a4-96b3-a534db499682" class="">
+</p><p id="b35838c3-ebee-410b-890d-448b49776852" class="">Any time a user edits a design, they are in effect checking out a temporary copy. This is why two users editing a file simultaneously creates issues. When designs are edited with Figma, there are no conflicts. And since revisions are a first party feature of each design in Figma, there’s no need to have complex files with names like “profile_design_v23_final_draft2”. Similarly, designers can comment directly in each other’s files, instead of sending emails with feedback.</p><p id="93da039a-8e30-4dc9-bc77-f7ac36f53571" class="">
+</p><p id="431ff0f7-7dda-4070-8fcb-2422c411df1c" class="">the one with less loops is better. I know, it’s the first time I’ve ever said that</p><p id="93709789-803d-4d9c-8800-4d5522f09c31" class="">
+</p><p id="acd9a72a-459a-4de1-86ba-d21b3f7be0e5" class="">I used to be confused by the Figma’s team consistent framing of Figma as browser-first. What was the distinction between this and cloud-first? Over time I’ve come to see how important this distinction has been. When many creative tools companies talk about the cloud, they seem to view it as an amorphous place that they store files. But the fundamental user experience of creating in their products is done via a standalone app on the desktop. Figma is browser-first, which was made possible (and more importantly performant) by their understanding and usage of new technologies like WebGL, Operational Transforms, and CRDTs.</p><p id="127d03e4-d634-4f3b-a2f1-0f014d7dd7a1" class="">
+</p><p id="b8a6ad44-da77-4a74-992a-3262536cce5a" class="">From a user’s perspective, there are no files and no syncing that needs to be done with others editing a design. The actual *experience* of designing in Figma is native to the internet. Even today, competitors often talk about cloud, but are torn over how *much* of the experience to port over to the internet. Hint: “all of it” is the correct answer that they all eventually will converge on.</p><p id="e2c3f038-09bd-47d0-9448-927d37944577" class="">
+</p><p id="db01f891-acc3-4e53-92bd-181314361e67" class="">Designers loved Figma and this drew initial distribution. And with features like team libraries, designers have incentive to pull in other designers on their team into Figma. But a tool designers love, while a prerequisite for success, does not fully capture the root of Figma’s traction so far. While Figma has been building the ideal tool for designers, they’ve actually built something more important: a way for non-designers to be involved in the design process.</p><p id="9d7d5557-1cb7-4b82-a299-b13910725b00" class="">
+</p><p id="ef156c74-3c36-406c-ae14-c9d4dee3a65c" class="">having to slide into the DMs is bad</p><p id="824b054a-1c75-4b36-8181-792bf0b3acb4" class="">
+</p><h3 id="11bbfaf9-e4e9-4b86-aee3-6d05cd586495" class="">Tools for Design, not just Designers</h3><p id="34db6644-1d9d-4f55-836e-4563960eea2f" class="">While Figma was building better tools for designers, their browser-first approach had a much more radical and significant impact on non-designers.</p><p id="51a6d3cd-4918-4457-831b-830ad48fa868" class="">
+</p><p id="956014d5-c4ef-47d9-b796-0a5e98528b9e" class="">We often forget that the purpose of the tools we use at work isn’t to increase our individual productivity, but the entire team’s productivity. Companies themselves often forget this.</p><p id="d4db597e-fbec-40ed-9867-cac1c9b8c336" class="">
+</p><p id="be89e7cf-34c6-4158-ac47-031166e67fdf" class="">The best tool for individuals may <em>also</em> be the best for the entire team. But it’s the latter that matters. And beyond some level of enhancing individual productivity, it’s the team aspects that increasingly matter. Word processing is a good example of this. There used to be lots of experimentation and customization around individual features like typesetting. But once this was good enough, the focus has shifted towards collaboration. And for most use cases, few care about typesetting today. Increasingly our tools must understand and align with how we collaborate. This was less important when collaboration was logistically difficult and prohibitively costly, but as collaboration becomes easier its importance has risen. People’s work is less siloed—and their tools must reflect this.</p><p id="574dbdd0-6d32-4824-a4d8-ce4269503483" class="">
+</p><p id="ed954144-e634-4969-85e8-0b8a214ef5ea" class="">The best tools enable collaboration that was previously unthinkable.</p><p id="0c9af23a-5063-417c-8885-bc5d88edbaae" class="">
+</p><p id="0e5d2219-3b3e-4fe5-85e6-23cce4077aa5" class="">Historically it has been very difficult for non-designers to be involved *during* the design process. If PMs, engineers, or even the CEO wanted to be involved, there were many logistical frictions. If they wanted the full designs, the designer would need to send them the current file. They’d then need to not only download it, but also make sure they had the right Adobe product or Sketch installed on their computer—costly tools that were hard to justify for those who didn’t design regularly. And these tools were large, slow, specialized programs that were unwieldy for those not familiar with using them. It was hard to navigate a project without a designer to walk you through it. Comments were done out of band in separate emails. Even worse, if a designer made an update before viewers had finished looking at the file, the file would be out of date—without the viewer being aware.</p><p id="3be90c5d-5f43-41ce-bf8a-17c74dc094d8" class="">
+</p><p id="9707dc11-d17a-4ab0-bb7b-b31abfb849de" class="">The experience was just as bad for designers. Even if they wanted their PMs and engineers to give feedback, they’d need to handhold them through the process. Designers would have to export the designs into images, send the screenshot, and later figure out how to translate the feedback into changes in the actual design. The feedback loop was so slow that they’d need to pause their process while waiting for feedback.</p><p id="88069b1b-71e2-4c9c-a409-c2336eabcf5f" class="">
+</p><p id="b8fdf6fd-7672-4e97-9b3a-97dd90ea3670" class="">Of course, what really happened is that most of the time non-designers just didn’t engage as much with the design process. The pain of reviewing designs wasn’t the primary problem, but there was enough friction that reviewing often never happened.</p><p id="09002246-009b-4da4-b62c-79f191d2c446" class="">
+</p><p id="0b16252b-7c21-44d8-8242-6019da05eb46" class="">Figma fixed this.</p><p id="f9f2b491-c722-4eed-9f5c-813b0bf096cf" class="">
+</p><p id="c6adb989-77ea-46e9-8a95-1f78a149292b" class="">Sharing designs with Figma is as easy as sending a link. Anyone can open it directly in their browser. It’s as easy as going to a website, because…well…it literally is going to a website.</p><p id="bece275e-e512-425d-9054-84cf612e98cf" class="">
+</p><p id="d734e56a-fd0e-461c-bcb6-55778f3580f5" class="">Once they have the link, non-designers will always have the latest design. They can comment directly in the designs, without disrupting the flow of designers. And with collaborative editing, they can talk through changes in a meeting and watch as they are implemented in real time.</p><p id="13aaa045-0f9d-48c0-b48c-dd8f5e14529a" class="">
+</p><p id="b3d45120-ddae-4b92-87cd-26978048a39d" class="">These technical changes are kindling for a far more important social norm shift. Figma makes it possible for non-designers to be part of the process earlier and throughout it all.</p><p id="2154d629-99a7-48fa-af76-8b38cf87f827" class="">
+</p><p id="22b57b66-e771-4c06-8359-c59f3e94cab8" class="">Figma made companies realize that non-designers should and could be more involved in the design process and how crazy it is that other design tools aren’t built with the experience of and interactions with non-designers in mind.</p><p id="4281d4f6-a1e9-42eb-a3ff-55c4992bd22d" class="">
+</p><h3 id="d0bbe0b6-f6b5-4a36-b9a6-ab46f30ad6e3" class="">Tightening the Feedback Loop</h3><p id="947c4003-bee7-44fc-a490-b197f4d39441" class="">Figma allows closer collaboration between designers and non-designers, but the second order impact of this on the social norms of teams is far more impactful. Historically, there has been so much friction in the design process that design is brought in <em>after</em> most decisions have been made. And conversely, there is a limited set of changes non-designers can push for once the design is set.</p><p id="14e4fba4-3a76-418a-a8af-f4f27d940633" class="">
+Tightening the feedback loop of collaboration allows for non-linear returns on the process. Design can be drafted <em>simultaneously</em> with the product, allowing feedback to flow in both directions throughout the process. Aligning the assets used by design and engineering allow more seamless handoffs, and allows for more lossless and iterative exchange.</p><p id="8e831736-9a8e-4720-a150-7c49cd6eefae" class="">
+</p><p id="c5c71f2d-2f95-45f9-977b-cd675c2db206" class="">it’s Figmas all the way down</p><p id="cad0f98c-3f66-4e70-a656-b9e019e90435" class="">
+</p><p id="45ae47ef-098b-4b6e-8405-c2a62ecb83f5" class="">Designers can get feedback continuously from engineers or PMs on their team. Some will have sensitivities about non-designers sticking their nose too deep into the design process. In some cases they might be right, but this cost pales in comparison to the benefit to designers.</p><p id="5ba85b63-cb37-4930-b689-e15ed87f03c3" class="">
+</p><p id="ebc97e8d-a4f6-4254-8266-b4089944b455" class=""><strong>Bringing non-designers into the process is what gives designers a seat at the table of product and business decisions.</strong></p><p id="61f6b654-d68f-41d5-ab24-d210ecde464d" class="">For too long we’ve systematically siloed functional areas like design, sales, and customer service. But modern companies are internalizing that if their core loops are truly an iterative process, then functions like design must themselves be part of the feedback loop of the company. Design decisions cannot be entirely abstracted from the rest of a business—they are as intertwined as the decisions made in product and engineering.</p><p id="0f9f8b65-82ec-471f-ba78-1e5bad49b2ef" class="">
+</p><p id="5025a86d-4e65-4883-8fe0-6b40d4093682" class="">Historically, design has been opaque as a business unit due to the logistical and technical difficulties of making the design process legible to others. But as these hurdles are increasingly solved by companies like Figma, we’re seeing teams navigate how to best integrate design with the rest of a company’s processes. This should be no surprise, as we have seen the same arc play out in engineering over the last few decades.</p><p id="0352cfe3-c027-4a0f-88c7-40519a486dc2" class="">
+</p><h2 id="9aa25a12-f405-4f48-92c0-071d134e363f" class="">Means of Ascent</h2><p id="196ffa5e-30aa-40fb-836b-21365ed05e5f" class="">Much of Figma’s current success is driven by its ability to spread within companies. Figma becomes more useful as more people within a company use it, driving advantaged speed and scale of penetration within companies.</p><p id="48d42fdd-f47b-44cc-8647-c8c95a6de187" class="">
+</p><p id="9d4da4b8-32db-4ab4-a4ca-59558bb4371a" class="">Figma was quick to recognize that the constraints on design at companies is often not a problem of pixels, but of people.</p><p id="6e87d855-4c3f-4aae-8ae2-5bf2d3ffefbc" class="">
+</p><p id="5db4d8ee-9a99-480f-bfc6-de5d9275d557" class="">Many of Figma’s competitors are great tools for designers. But that’s who they are for—designers.</p><p id="b37f7671-333e-48d2-94ca-a8ab4df37beb" class="">
+</p><p id="ad5c685f-da2e-47bb-909d-adafcb562424" class="">Figma is a tool for teams to design. Not for designers alone.</p><p id="4e9c7bd5-af11-4bd0-bfda-d36302d38cab" class="">
+</p><p id="3beb8bf2-e5cd-4d83-80f3-7650b52679c9" class="">now you’re all stuck inside the orange box with me</p><p id="99f7ce0c-5302-4b2d-af71-96284073a6db" class="">
+</p><p id="46f1c907-0d15-4c55-8c82-4f151ae6edd4" class="">By bringing both designers and non-designers alike into Figma, they create a cross-side network effect. In a direct network effect, a homogenous group gets more value from a product as more of them join. In contrast, a cross-side network effect involves two (or more) distinct groups that grow in size and value as the other group does, too.</p><p id="d15b5bd7-f033-44b1-a6ba-ba3099c62b79" class="">
+</p><p id="59c57cd9-d208-45e3-b314-a0a11cd6164d" class="">Figma’s cross-side network effect between designers and non-designers is one of the primary and under-appreciated sources of their compounding success over the last few years.</p><p id="d706f504-a18e-4a36-8b4d-fdfc36c017b0" class="">
+</p><p id="2a115bac-b326-4428-9204-c9c24f0c4b22" class="">As more designers use Figma, they pull in the non-designers they work with. Similarly, as these non-designers use Figma, they encourage the other designers they work with to use Figma. It’s a virtuous circle and a powerful compounding loop.</p><p id="9c43529a-96c6-4641-b718-89a8bdd7da63" class="">
+</p><h3 id="09683722-17f9-4572-8436-22129335c6d3" class="">Cross-side Network Effects</h3><p id="ddd02bf1-ad43-4cb0-8700-c3ff99a319bd" class="">Cross-side network effects often get less attention than direct network effects—partially because our vocabulary around network effects is less robust than it should be, but primarily because they are typically viewed as being specific to marketplaces. While it’s true that cross-side network effects are most commonly seen in marketplaces, it’s wrong to think that they <em>only</em> exist in marketplaces. Supply and demand is the most famous of cross-side network effects, but not the sole source.</p><p id="654fc272-32c2-4e11-8b31-d5d7966d4bfb" class="">
+</p><p id="5a6ae38f-c983-42c3-b94f-8ae2b3080d0e" class="">Figma’s direct network effect among designers helped it grow early on, but has limits on its ability to help Figma spread. The set of designers that a designer works with directly is a limited set—and unlikely to change often. While they may spread it via word of mouth and social referral to many other designers, the network effect has an asymptote on distribution.</p><p id="d60621b8-cb3d-46a2-a04d-d57faf130add" class="">
+</p><p id="3dc4338d-a3fa-4b28-8ce0-3f96df5750f0" class="">Figma’s cross-side network effect offers an additional vector. Designers who use Figma share their designs with engineers and PMs, introducing them to Figma. As these non-designers learn to appreciate Figma, they then evangelize it to other teams of designers they work with on different projects. These cross-side network effects jump across teams and help Figma metastasize throughout entire organizations.</p><p id="d39c37cd-e09d-41d9-a4a0-77dbf4f39c51" class="">
+</p><p id="2c7fd04d-26fe-4c19-af4a-48c321e38e9b" class="">more loops is better. Phew, all is right with the world</p><p id="de6638c5-6dfd-4b49-95a1-348554a884a9" class="">
+</p><p id="aa8934f3-f070-4bb0-9c3d-cc31683e092a" class="">This impacts monetization and purchasing at companies. Paying for a new design tool because it has new features for designers may not be a top priority. But if product managers, engineers, or even the CEO herself think it matters for the business as a whole—that has much higher priority and pricing leverage.</p><p id="0b280178-2e1d-4968-b9f8-60ccadac199e" class="">
+</p><h3 id="7fa0c00f-c7ce-479a-9450-09c62ac64899" class="">Product-Distribution Fit</h3><p id="c4048958-c426-4184-8f9d-00296b15a539" class="">It’s this cross-side network effect that has most shaped Figma’s growth. Like planting seeds, Figma can start small with a scattering of individuals using it at each company—but each of them can lead to serious expansion throughout their companies. Once Figma is adopted by a few designers, all their colleagues across departments get exposed to the product and especially its collaborative features and see how much better the experience is for them. They then encourage its usage and adoption across their other teams and projects and so on.</p><p id="cbb2a167-8a0b-4dbe-8a67-71b40e7a6388" class="">
+</p><p id="812502d8-e904-4cee-a48f-35f3cd86fe09" class="">This is what gives Figma the compounding growth rate it has. While it took Figma some time to ramp up its growth, there is now a predictability and compounding that is impressive.</p><p id="1f5b47e4-dfc5-4840-b311-870f7661eb17" class="">
+</p><p id="cd041341-bcf7-4f7d-9ed1-76bc216acf56" class="">The core of Figma’s product <em>is</em> the core of its distribution loop. That is incredibly rare and powerful. True alignment between product and core distribution loops is what’s needed to catalyze outlier ability to compound in growth.</p><p id="5f5fd8b3-67a7-4e53-8f26-047904eccfd6" class="">
+</p><p id="2b14dcab-8fad-4d54-af76-753ddf307bc0" class="">Like many of their peers in this generation of companies, Figma has developed a two-step sales motion: landing and expanding via a bottom-up, product-driven approach, then doing top-down sales once usage of the product has metastasized. Preparing for this entails a whole slew of enterprise features, building up the sales machine, and much more. Over the last few years Figma has begun to build these out, though there is still a lot of work for them to do here.</p><p id="776f5f37-8940-49af-9328-961bd47f8e48" class="">
+</p><p id="211fb199-beaa-46b0-99d8-c53cca0c4c93" class="">yo dawg, I heard you liked loops…</p><p id="fb588c7e-b5d3-432f-b10e-713fecf66759" class="">
+</p><p id="65f6670d-e81d-4152-986e-03217df6c58d" class="">This new type of enterprise companies is a mix of both product and growth-driven consumer and sales-driven enterprise. We are still early when it comes to companies understanding how to re-architect their org structure, GTM motion, pricing model, and more to best fit this model. And like SaaS before it, this bottom-up to top-down model will mature from art to science over the coming years. Though Figma has significant work to do to make their traditional enterprise sales process robust, it would be disappointing if they stopped at simply recreating the traditional enterprise sales process. Practitioners are starting to understand that these sales loops can be understood in the same way growth loops have been and that there are ways to drive significantly advantaged sales velocity and scale via product and ops. Figma is one of the companies on the frontier of this, and there is an entirely different series of essays to be written about the maturation of this nascent field.*</p><p id="47851c60-c114-4aab-b090-b2122073f15d" class="">
+</p><h2 id="593269ea-d9e0-4d3b-9a2e-fa052be6240a" class="">Building an Ecosystem</h2><p id="0e405ab2-f23a-4b8e-873f-1b4d71890c35" class="">Where does Figma go next?</p><p id="1ed55f19-0db0-4485-894c-d54c1fd44928" class="">
+</p><p id="294315b8-bd26-49d0-bf9c-a904057a05a4" class="">There is always more to improve in the core product. But there comes a time when companies need to start thinking about the next sequence of their growth.</p><p id="f00520bc-f9d9-4e00-bbc2-408b1a6dee93" class="">
+</p><p id="8b718b26-5887-4667-9eba-25145f06e5b5" class="">up and to the right!</p><p id="2ee4a5ec-5eee-4949-8f97-a6e4a414ef48" class="">
+</p><p id="9d528400-c261-4d4d-ac99-dbc6f5c1d0bd" class="">The competitive landscape has also matured. Competitors are beginning to copy and encroach on Figma’s core strengths. As they converge on Figma’s views on the space, they pressure Figma to push forward. Sketch, for example, has shifted its pricing model to subscription and oriented around teams and has focused on moving more of the product into Sketch Cloud. In the last year, they’ve gone from being entirely bootstrapped to raising a venture round from Benchmark. This capital and support has fueled a more aggressive move in Figma’s direction with a strong focus on collaboration, especially bringing Sketch to the browser and building team collaboration.</p><p id="220fc596-8e08-491b-9f58-8a63ef440301" class="">
+</p><p id="35550651-4e57-419b-990b-910870f4580d" class="">Adobe has made similar moves. Though powerful and widely used, Photoshop and Illustrator were not particularly specialized products for designers of digital products. In 2019, they launched Adobe XD as a direct competitor to Sketch and Figma.</p><p id="b659cdb2-222e-429a-87d8-461b6724bd82" class="">
+</p><p id="0b9c622c-42ff-42f8-976d-edfd19a19cde" class="">Figma has been focused for the last few years on its value and spread <em>within</em> companies. Figma’s next challenge is to improve its value and spread <em>across</em> companies in the ecosystem at large.</p><p id="9a1294fe-6393-478c-b30a-22a1daa0da7e" class="">
+</p><h3 id="102608ae-eaf5-4f03-96ff-5ec0aeb446db" class="">Global Network Effects</h3><p id="8509af12-98cb-426d-b68c-3eafed7edc13" class="">There are cross-side network effects that drive compounding value within companies using Figma. But how does it spread to new companies?</p><p id="a5c4bafb-25bb-4042-b46f-b6fee3ec6beb" class="">
+</p><p id="982a6017-313d-4048-9067-3765e5b0f114" class="">Given Figma’s growth rate, it clearly does, but in less consciously compounding ways. Many people work across companies, especially agencies, and spread Figma to their clients. Similarly, when people leave their jobs and join new companies, they bring Figma with them. And of course, word of mouth helps spread it. These are all effective and amplified by Figma’s intrinsic collaborative benefits, but they operate on their own natural cadence.</p><p id="684441a6-96a6-455a-ae23-dbd282a70f64" class="">
+</p><p id="d635142e-dc55-46ae-8437-45991e4251d7" class="">Thanks to Figma’s hard work, the value in signing up is much higher for someone whose company already uses Figma. There are already teammates to collaborate with. There are assets and design libraries specific to their company. There are components that their team has built that they can reuse.</p><p id="168c9358-6adc-40c4-b069-d65e630f5689" class="">
+</p><p id="d96f39b9-7c52-49d9-a72a-d56b2d192a5c" class="">But for users who don’t have co-workers using Figma, none of this value exists. They have the single-player benefits, but no direct increased value from the hard work Figma has done to add so many new users over the years.</p><p id="bb844e27-8199-45e4-b10d-a58ca6b5b541" class="">
+</p><p id="03cd749a-66b5-4be5-9bdb-a46dcd91c42d" class="">life is just an endless pursuit of trying to draw charts that go up and to the right</p><p id="b9d68bc6-57ce-4963-9994-6320973b4953" class="">
+</p><p id="2dbf5010-2541-489d-b71f-d6da80a60942" class="">Figma’s challenge is to create not just local network effects within companies, but global network effects that make Figma more useful to all users as it grows in scale. There are many directions Figma could expand its scope*, but our focus in this piece will be on the directions they have already begun to take.</p><p id="a63f1f6a-7a50-4b70-904e-6f0b25dbbf9e" class="">
+</p><p id="09c9ccdd-064b-47d9-adc8-b57b19a1dcf3" class="">say it together now: more loops is better!</p><p id="af2b5a20-f4de-44e9-b959-e6de69df35de" class="">
+</p><p id="c8c25d5f-1834-4e8d-bc26-5c32eae408cb" class="">In 2019, Figma began to plant the seeds for what their ecosystem loops across companies will be. With their launch of Figma Plugins last August and Communities more recently, they are starting to push the frontier of collaboration and productivity across companies.</p><p id="0b137132-a95b-454a-a1dc-8502c29379f5" class="">
+</p><p id="65016efe-31c2-418a-a6e6-c88d11d58189" class="">this is my best graphic. It’s all down and to the right from here</p><h3 id="b60e4405-bbb6-45ef-8f4e-b7fadcbca4e9" class="">Empowering Creativity through Communities</h3><p id="0ee4ba56-0eb4-4537-9907-e9c9830ddcde" class="">Communities push their network orientation further by allowing users and companies to publicly share their designs.</p><p id="692619ed-5d6b-4359-be41-6eb97bd0c376" class="">
+</p><p id="84300ce8-416b-4e26-93c0-a71158dc2b92" class="">Historically, when sharing designs on sites like Dribbble, it’s often only the output image file that’s shared. It’s hard for others to see and use the full design themselves, including the layers and components that went into it. Even if the actual design is shared, the friction of opening it in whichever program and resolving any dependencies is non-trivial.</p><p id="25727513-0399-46e9-acb9-d72ca6880a22" class="">
+</p><p id="b9524b2e-4378-4dc4-b3a5-acf7d883d30b" class="">Sharing Figma designs removes this friction. Anyone can instantly open a design and start using it for their own projects. This enables users to frictionlessly become creators too, not just consumers.</p><p id="d0233681-f1c6-4d1c-bf44-6cf1ba5b27a6" class="">
+</p><p id="0f211afc-5a1b-4503-8b59-84e260fccc28" class="">Some designers have shared their UI kits, components, and design systems using Github. This has the right idea, but Github isn’t meant for design. Forking a repo may be frictionless in engineering—but it is not for designs. The designs must still be downloaded and loaded into your app. For design, Github is more akin to a hosting site for downloading files. In many ways Figma’s Communities are a reflection of Github’s philosophy and intent, but built with design in mind. Duplicate a shared design, and a copy is instantly saved to your workspace and ready to be edited.</p><p id="295c57f9-de71-4081-949c-147b2c5c83bc" class="">
+</p><p id="60ea1f53-2711-433b-a694-7b19fdd9f089" class="">This frictionless process makes it easy for people to share and build upon each other’s designs. But perhaps more importantly, including the entire design is a better abstraction layer that allows for new benefits.</p><p id="12caebd4-f90b-4c3c-a4ed-d34c0cb6a64f" class="">
+</p><p id="2171a850-d6eb-4d41-a8ae-18a6cc8e6e7a" class="">context is king</p><p id="1db238cb-ad01-4e34-80c1-18aa81886da3" class="">
+</p><p id="d30ae75d-6927-44f0-89d1-82dec89ed83f" class="">Instead of just receiving the final output, recipients can see both the underlying components and assets within a design as well as more complex interactions and animations around designs. A great example is <a href="https://www.figma.com/community/file/812143143597260055">this design</a> shared by Figma’s design director, Noah Levin, of smart animations within Figma. By sharing the entire design with the community, others can not just see the animations—but play with and tweak the actual designs and animations directly. This makes it easier for them to learn how to use smart animations, or even just copy parts of Levin’s demo into their designs.</p><p id="ce51bd5e-cc01-4adc-801f-97e500037521" class="">
+</p><h3 id="26e4771f-5233-43a3-8376-e902a96c1273" class="">The Promise of Plugins</h3><p id="f0e4959a-0c78-4a96-b06e-3962694a34ce" class="">I’ve been using Figma to create very niche memes to send friends. Figma is great, but as I’ve gotten more particular I’ve begun to add colored rectangles (with rounded corners because I’m not a barbarian) behind any text to make it more readable. This is a small but annoyingly rote series of tasks to do. Recently, I discovered the plugin <a href="https://www.figma.com/community/plugin/739517744595900126">Substrate for Text</a> which simplifies this exact process. Now I can just select the text, activate the plugin and this text background gets auto-generated instantly. This plugin is made by a designer, <a href="https://www.figma.com/@Andreslav">Andreslav Kozlov</a>, who lives in Russia. On the other side of the world, Andreslav had felt the same problem I had, built a plugin to solve it, and shared it with the internet. And that improved the power of Figma for me, making it far easier for me to immediately spin up memes mid-conversation with friends.</p><p id="4f98d42a-7aff-48f5-9e3a-b38d4e64b1fb" class="">
+</p><p id="2ee07473-0b9a-473c-8150-2244b183948d" class="">though maybe he should also be blamed for the increased speed with which I can troll my friends now</p><p id="d3abb3b4-0f6e-4821-974a-db4d3bb7d4db" class="">
+</p><p id="04d553a1-dcf9-43b1-8837-c1bd9fbf8ced" class="">this isn’t how this meme is meant to be used either</p><p id="ce518369-5ee2-41ee-90cc-2e2359988cf5" class="">
+</p><p id="66dae1fe-ce87-458c-a9af-57c3ef168ea8" class="">This is a small example of the promise of plugins. Figma’s plugins make it extensible so designers can augment their workflows, be empowered with new abilities otherwise impossible, and easily share them with others.</p><p id="2709e956-ac44-4bb6-b04a-e7cd26a5d602" class="">
+</p><p id="ff5aa622-9564-4534-8a79-6cee5aecf0a3" class="">i hope you appreciate the precision of my squiggles in the productivity curve</p><p id="edf2eb37-5eb2-4eee-9f32-06a133a3ca2c" class="">
+</p><p id="fa4e9603-b14e-4460-b659-58c86f396bf4" class="">Most Figma plugins today simplify tasks that would otherwise be very repetitive or painstaking. Today, companies can build private plugins to address their specific needs. For example, companies have built plugins that automatically generate dark mode designs, pull in external data and lint for common design errors, or make it easy to generate design assets in the right orientation. These plugins level up their entire teams.</p><p id="b6b6e8a6-49a7-4c74-bfe6-38d2ce4a4f5f" class="">
+</p><p id="59396273-b105-4c3c-8931-af1b4292d4e8" class="">The real power of plugins, however, is in making them publicly available across the ecosystem. Plugins are collective progress available to all users. Whether creating <a href="https://www.figma.com/community/plugin/731451122947612104/Charts">charts</a>, <a href="https://www.figma.com/community/plugin/736458162635847353/Mapsicle">custom maps</a>, <a href="https://www.figma.com/community/plugin/731627216655469013/Content-Reel">pulling data into your designs</a>, <a href="https://www.figma.com/community/plugin/781354942292031141/Redlines">redlining for engineering handoff</a>, or <a href="https://www.figma.com/community/plugin/739208439270091369/Blobs">random blobs</a>, plugins leverage up designers’ productivity. And plugins like <a href="https://www.figma.com/community/plugin/742073255743594050/Figma-Chat">Figma Chat</a> show that the frontier can be pushed out even further by enabling entirely new abilities for designers.</p><p id="c85da828-b517-49ba-a99f-3dbe9c0acbc7" class="">
+</p><p id="9d2e8572-c8c7-4cef-a5f2-7ddd18d4acdd" class="">As companies scale, it becomes harder to sustain consistently increasing value to customers. With more customers, it becomes harder for one company to address all the unique use cases and needs. Companies must also increasingly service less ideal customers as they expand beyond their core audience. This is especially true for users who don’t have all the compounding benefits of working with a team that all use Figma.</p><p id="8e1aae52-8996-4196-bf59-6ffc61897a91" class="">
+</p><p id="e59fdfd5-8b5c-423d-af79-4f82ce3e163f" class="">your local and global utility curves should look like synchronized divers. That’s what everyone says right?</p><p id="5edaa266-30b5-4ed6-96dc-bec0d60f2b34" class="">
+</p><p id="03a7d9ca-e7c0-42be-9e65-ebee2ccaecd4" class="">Plugins help Figma fight this drag. As they scale in users, more plugins will be created, making the product better for new users and spurring more designs to be created.</p><p id="35fa4de0-2894-4df5-8aac-714493618092" class="">
+</p><h3 id="28b51400-6a76-4025-96dd-e5cb8b9ce976" class="">Architecting a Platform</h3><p id="c4f56c01-144f-474d-a58f-31e49a854ef0" class="">Companies like Sketch have shown the importance of a robust plugin ecosystem (and of course, Adobe before them has a long track record of encouraging plugins). It’s impossible for a single company to build all the features and tools needed by each user. Platforms are needed most when the diversity and scale of use cases is larger than can be built—or often even understood—by the company. Sketch’s plugins allow the value to Sketch customers to grow at a faster pace than Sketch can ship new features. Figma will also likely stay focused on a generalized and core set of features, leaving a huge surface area of user workflows for plugins to address.</p><p id="5e01da58-8d51-44c1-a1ae-89114ec33411" class="">
+</p><p id="b5d29b6c-7f0c-4c5e-becd-d2863a59a559" class="">this graphic will probably get its own essay</p><p id="af3fa8a3-e6f2-4807-b662-1c1ec91df4ff" class="">
+</p><p id="4149b524-db05-4b01-bc5a-9379910ca821" class="">Companies are still early on in understanding the nuances of becoming platforms. More and more companies are reaching the scale and dynamic range where this is a priority, but for the most part, they are individually recreating the wheel. In a decade, there will be clear frameworks, metrics, and supporting ecosystems for building platforms; today there are few. This is a natural maturation, and one that all business models go through, such as SaaS and subscription over the last decade.</p><p id="72a67e64-9deb-449b-8fbe-f3e6febf77b0" class="">
+</p><p id="bcc7b61f-c142-4f68-b6c9-20b3c0ff7d8b" class="">they grow up so fast.</p><p id="44bed2d4-b5c6-40e7-86d9-5319feda84d8" class="">
+</p><p id="4b1306fe-c3c1-4cfc-8542-d1931a06c995" class="">Because of our lack of shared vocabulary around building platforms, it’s hard for many to understand the subtle but important delineations between the approaches of different companies. It’s easy to assume, for example, that all plugin systems are built the same, but this impulse is often incorrect.</p><p id="1b08cd81-11ac-4552-94ca-f15945dadaeb" class="">
+</p><h3 id="912ae7f8-9d4c-4e20-b394-6744d19db2dd" class="">Sketch: a Case Study</h3><p id="f486e314-1608-4caa-aa94-fe088f07e518" class="">Take Sketch’s plugin ecosystem. The API is well documented and the plugin coverage is high. However, plugins are outside the scope of the core product. Users installing a plugin are most commonly directed to the Github page of the plugin, which they must manually download and install. This is another example of the gradients of what it means to put your product in the cloud. Even if Sketch is in the cloud, its plugins are local files. There is friction in downloading and installing them. This is compounded in a work setting as teams must manually make sure employees are using the same plugins if needed.</p><p id="191a1e5a-81db-4312-8c93-d50977faf086" class="">
+</p><p id="ad55b4bc-0bd3-4d8e-9efc-88b5ae813fca" class="">Because plugins are not first-class citizens in the Sketch product and handled out of its scope, plugin management is very decentralized. Plugins can register to be listed on Sketch’s site and enable automatic updates, but otherwise Sketch is very hands-off. There is no official Sketch source for how popular a plugin is, nor do they have to approve plugins. Instead, users must rely on Github stars or reviews on third party sites. There is no oversight on plugins causing performance or stability issues.</p><p id="b1dcdec5-2183-4849-86dd-b8fee97bce1a" class="">
+</p><p id="cd33b947-1b90-4e93-950a-70f89e704f68" class="">This shouldn’t be mistaken for criticism. The weaknesses in Sketch’s plugin architecture show only because of how successful they have been at encouraging a robust community of plugins around Sketch.</p><p id="0bea22f4-6ed8-4030-b888-001f39068560" class="">
+</p><p id="425fa6a4-b8f8-4f51-b26e-4992673b70a5" class="">Platforms are emergent ecosystems, more akin to building a consumer social network than a traditional enterprise sales company. This is one of the core dilemmas of building platforms. They are complex organic systems that have to be carefully cultivated (gardening vs. engineering mindset) and it’s hard to predict beforehand what direction they will go and the scale they will achieve.</p><p id="2ce33fea-f8f6-4bcf-b89f-9daf5d75b8b6" class="">
+</p><p id="9900508a-1f72-435e-a3f3-bf9e5c3f4c43" class="">Sketch cannot be faulted. To this day it’s still unclear how ambitious plugins can and should be. By defaulting to a relative hands-off approach, they allowed the community to flourish unhindered by them. And it’s by seeing Sketch’s success with plugins, as well as their struggles, that others like Figma and Adobe XD have been able to have increased confidence in the importance, potential, and levers of a plugin ecosystem.</p><p id="4a71a79a-2ef3-40c9-bc34-f7315f78ae93" class="">
+</p><p id="11ad4619-ef17-42ab-b1fc-b291829c22c4" class="">But while Sketch cannot be faulted, their choices have stunted the full potential of plugins built around them. Sketch understands this. They are rearchitecting their plugin system right now to be fully in the cloud, which is a necessary step in the right direction.</p><p id="febd176a-5860-4d59-bb9e-a229d2153b0b" class="">
+</p><p id="e33689f7-0867-490e-9239-5be7948370a1" class="">Complex systems do not absolve companies of their need to make clear choices about the architecture, policy, and norms of their platforms. If anything, they magnify its importance. The structural choices made by companies ripple forward as the ecosystem emerges around them. And the direction and scale of the resulting platform are a function of the physics set by their initial conditions. We shape our abstractions, and thereafter they shape us.</p><p id="19d224c5-db8a-4501-ad6b-6e49a1ffe221" class="">
+</p><h3 id="acb11d24-f885-435e-9a3e-5919b45de947" class="">Figma: Forming Foundations</h3><p id="6c621923-d539-4bd9-a519-dc8f958ad8f4" class="">Figma’s plugins are very early, but promising. Natively built in and browser-first, when you click to install a plugin, it’s available instantly. There’s nothing to install after all, just access privileges to activate. That’s magical.</p><p id="b4aa1037-1800-4c57-be57-decf879aab50" class="">
+</p><p id="c690a225-d5f3-4ef8-ab77-2a07cfc45865" class="">stick figures included for scale</p><p id="11541d1f-5ade-486c-bdf9-924f7cfae24d" class="">
+</p><p id="dda83f0d-a062-438f-8092-90782ce208c4" class="">Like all good magic, the work to make this feel effortless is quite arduous. Figma’s plugins must be secure, performant, and stable, especially since they are creating a plugin ecosystem for a browser-first system. Users should be able to trust that using plugins won’t expose them to security risk or hurt Figma’s performance. And both developers and users should feel confident that the APIs the plugins depend on won’t be suddenly deprecated or broken. Without these preconditions, plugins will always be at best a small aspect of Figma. This trust and stability is the bedrock of a strong ecosystem.</p><p id="444b8e7c-14fe-4a51-ad87-3fafd330c352" class="">
+</p><p id="aebea5f2-c880-4ad5-9140-735fb00caa47" class="">i think the takeaway is that plugins are like rainbow cake?</p><p id="165b5e8e-3b91-4963-9a33-b11be5a2ec2e" class="">
+</p><p id="e583dab9-8508-43f7-a7cc-5f0de61df741" class="">This difficulty is best seen in Figma’s engineering blog posts on building their plugin system. Within a month of <a href="https://www.figma.com/blog/how-we-built-the-figma-plugin-system/">their post</a> on how they decided the architecture for plugins, they <a href="https://www.figma.com/blog/an-update-on-plugin-security/">learned of vulnerabilities</a> in their approach and had to switch it out.</p><p id="07cfe68d-71ba-4bb2-a562-ea6439824d5b" class="">
+</p><p id="87330350-7a74-43cf-ad00-b033bc926ee1" class="">Ensuring the platform can be trusted is not just a matter of technical architecture. Figma doesn’t just host plugins, they also have a centralized <a href="https://help.figma.com/hc/en-us/articles/360039958914-Plugin-Review-Guidelines">approval process</a>, more similar to Apple’s app store than to Sketch’s approach. Plugins that want to be listed must pass Figma’s policies around safety, business, usability, and legal.</p><p id="56473bf4-4bf3-478d-96d2-aa73d0a6ab47" class="">
+</p><h3 id="521ab2ff-0eaa-4d99-ad19-2b54194ab995" class="">The Path to Platforms</h3><p id="9052fa8b-1290-4ff8-a481-43e689351768" class="">The business policies are worth noting in particular. While safety, usability, and legal are about maintaining the integrity and trust of the platform, Figma’s business policies are about shaping what they think the plugin ecosystem <em>should</em> look like. For example, they allow monetization but prefer plugins be accessible to all users. Choices like how much to encourage an ecosystem of plugin businesses vs. a more open source community are important ones. There is no obviously correct answer, and it can and often needs to change over the life of a platform. One need only look at the makeup of Uber drivers, WordPress plugins, or Airbnb hosts over time to see this.</p><p id="b9c3d815-703a-4a07-a707-58831dc184f9" class="">
+</p><p id="66f3644f-6cf2-44c1-8670-cad7f2cc3924" class="">this will also be its own essay haha</p><p id="85c6e9c7-57dd-4cc3-b2f4-f84dc813e282" class="">
+</p><p id="9d15ccea-c34b-4f20-9fc1-324845e8f3c7" class="">Building platforms requires many hard choices like these. How should you balance encouraging growth today and building towards the ideal long term vision? To what degree should platforms influence which plugins get built or even which they should build themselves in the early days? How should you decide which features actually should be part of the platform itself vs. standalone plugins? How wide is the scope for what plugins can build? These are only a few of the core questions.</p><p id="3ebaa433-5208-4e59-9fd1-435e12f3c17c" class="">
+</p><p id="6777a6ef-2765-464a-91b2-c24d64e1fe2d" class="">Perhaps Figma’s most interesting choice is the heavy focus on ease of plugin creation. Figma’s plugin system is explicitly designed to turn designers into developers by enabling them to create plugins for their own workflows. In most platforms and marketplaces, the ecosystem tends to split and professionalize over time. This is the natural gravitational pull of ecosystems*. To bet that a significant amount of the platform’s leverage will come from individuals improving their own workflows is a bold one. It’s a bet on induced demand, which is always the most interesting type of bet.</p><p id="0e58670b-8b0a-4cdf-8de7-c6c8e496caba" class="">
+</p><p id="0a8c20e6-5b93-4720-b30f-c7077d921b37" class="">Figma’s plugin ecosystem is very nascent. From their <a href="https://www.figma.com/plugin-docs/whats-supported/">list of supported features</a> and what’s to come, it’s clear that there is still a long way to go to open up their platform to more advanced plugins. And choosing the right abstraction layers for the plugin ecosystem is crucial. So far they have adopted a very strong stance on what the core technical decisions and promises around safety, performance, and stability need to be, but have been very hands-off on what plugins are built. This is to be expected early on. When it’s unclear what should be built, it’s not a bad policy to see where the creativity of the community leads. It often brings really amazing stuff, like this <a href="https://twitter.com/eminsinani/status/1263883853283950592">demo</a> of a plugin. Over time, however, we should expect to see more focus. Right now their <a href="https://www.figma.com/community/plugin/all">plugin page</a> is unsorted other than popularity and some that are featured. This works when the number of plugins is low enough, but eventually they will have to decide how to categorize plugins and what they want discovery to look like.</p><p id="2affc410-bf11-4e26-87ca-4a5b51a170ad" class="">
+</p><p id="3b46d53b-64b6-490d-ad5b-23dfa01f76ad" class="">As plugin categories begin to crystallize, Figma will need to form crisp views on which areas should be absorbed into their core product, what they want each category to look like as it matures, what essential plugins don’t yet exist that they must help catalyze, and what new APIs they should allow plugins to address. The choice of how much to encourage monetization of the plugin ecosystem, as discussed above, is a perfect example of the kind of key decisions Figma will need to make (repeatedly) as they build out their plugin platform. Perhaps most importantly, Figma must decide the meta-framework by which to make these decisions intentionally rather than capriciously.</p><p id="3c2b5be8-7a0f-433c-87d8-334306f90d7b" class="">
+</p><h2 id="e7a01e65-b3cb-4d6a-a823-84aa3153fd9e" class="">Pushing Progress</h2><p id="2ff19efd-2701-43d1-8da1-6eb35f26b7d6" class="">Has design been improving? Are we getting better at designing, not as an art, but as a functional practice?</p><p id="d5022c81-6cb5-4c53-b5ae-5dec03f82408" class="">
+</p><p id="070f14b4-99fe-4439-af17-0908df996651" class="">The answer is certainly yes. We have tools that would have been unfathomable a decade ago, much less pre-computer. It is easier to design. It is easier to begin designing. Design is more scalable.</p><p id="28964104-2277-4565-a3d4-e36616a19c4f" class="">
+</p><p id="f5e7579f-e8e5-4835-bd08-face4fdeecd5" class="">But how does design’s rate of improvement compare to the rate at which engineering has been improving as a process? Design as a meta-process is less impressive by this benchmark.</p><p id="84cac005-734a-46c6-9ece-1e501db82f0a" class="">
+</p><p id="ee84aebd-65df-43e6-adcb-1dc3c5cd92a7" class="">Engineering is almost unparalleled in the rate at which it commoditizes itself and pushes the frontier of progress out. The best practices in frameworks, languages, and infrastructure are always rapidly—and sometimes tumultuously—evolving. What used to take entire teams to build before, requires fewer and fewer people every year.</p><p id="488e8db3-89f4-4712-8f75-25b632f33d28" class="">
+</p><p id="16f70657-63d5-4976-a398-cb23520d2e2c" class="">this is the true up and to the right curve. and the one that needs to be figured out for every discipline</p><p id="4fca7f3d-02b2-4ce8-8932-77bb48456911" class="">
+</p><p id="1c7b7c85-642b-411f-a708-978594a22832" class="">As disciplines evolve, they figure out the social norms needed to operate better, build tools that can be shared across the industry, and invent abstractions that allow offloading more and more of the workload. They learn how to collaborate better, not just with each other but with all the other functions as well. Disciplines are not an end to themselves; the degree to which they contribute to the larger organizations and ecosystems they are part of is the final measure of their progress.</p><p id="628b54ed-67e9-43e3-8cc3-37038eb4e351" class="">
+</p><p id="a357a34f-18f6-44c2-a6ff-a336981e82b1" class="">Design appears to be inflecting in the direction of engineering. Figma is in pole position to drive this evolution. As a tool, it makes designers both more efficient and more collaborative by breaking down the walls between design and the other teams they work with.</p><p id="027616f0-b101-427e-9910-053d4144bbe8" class="">the dream</p><p id="c92447b3-9c17-4aaa-a74b-e0148fd13643" class="">
+</p><p id="cd0440b1-5eec-4b23-8461-627846234c49" class="">But Figma’s true potential is if it can make the transition to becoming a platform. If Figma can, they’ll push progress in design as a <em>discipline</em>.</p><p id="4a4e08ed-1f8d-46ab-89b5-e3ef87a19c8f" class="">
+</p><p id="4eadee01-9a13-4ef5-9d88-2c3dc268b55d" class="">Which companies are successful in a field is decided by many factors, not the least of which is a good measure of luck. But when disciplines undergo tectonic shifts, the companies that thrive have outsized influence. The choices they make in abstraction layers, social norms, architecture, and more have large ripples for a generation. This is even more true for platforms, whose loops become core to their ecosystems. Like wet clay, the choices they make eventually set and become the underlying substrate that defines how the entire ecosystem grows. That is both a tremendous opportunity and responsibility for the companies, like Figma, that take on this mantle.</p><h2 id="eab8866f-9b92-42d8-bd01-b68148a5b661" class="">Acknowledgements</h2><p id="8b6d93f4-8b31-4ccd-ad2d-3b9b3c51c712" class="">Many thanks to <a href="https://twitter.com/keilafong">Keila Fong</a>, for the many discussions about this topic and help with this piece. As well as unceasing pressure to publish it.</p><p id="fd40089c-4399-4134-b5af-2395c88a4ef8" class="">Additionally, thanks to <a href="https://twitter.com/maxbulger">Max Bulger</a>, <a href="https://twitter.com/mhdempsey">Michael Dempsey</a>, <a href="https://twitter.com/kane">Kane Hsieh</a>, <a href="https://twitter.com/borisjabes">Boris Jabes</a>, <a href="https://twitter.com/typesfaster">Dave Petersen</a>, <a href="https://twitter.com/typesfast">Ryan Petersen</a>, <a href="https://twitter.com/KevinSimler">Kevin Simler</a>, and <a href="https://twitter.com/eugenewei">Eugene Wei</a> for their discussions, edits, and help with this piece.</p><p id="d9f68ea6-7b88-4f8e-8ace-57545c3a0ded" class="">All graphics in this piece were created with <a href="https://procreate.art/">Procreate</a> and <a href="https://www.figma.com/">Figma</a>. Procreate is a fantastic drawing app for iPad. If you have made it all the way through this essay and don’t know what Figma is then I don’t know what to tell you. An integration between these two might have a target audience of only me. But I would love it.</p><p id="76ee6147-e290-435b-a68d-9ddf5315a1a7" class="">* Further pieces to be written on these subjects</p></div></article></body></html>

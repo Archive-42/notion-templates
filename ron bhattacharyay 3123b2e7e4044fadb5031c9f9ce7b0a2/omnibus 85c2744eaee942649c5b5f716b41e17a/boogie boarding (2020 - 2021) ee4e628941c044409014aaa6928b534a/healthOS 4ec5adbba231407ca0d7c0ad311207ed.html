@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>healthOS</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4ec5adbb-a231-407c-a0d7-c0ad311207ed" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⚕️</span></div><h1 class="page-title">healthOS</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-brown">Tech Strategy</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://divinations.substack.com/p/healthos" class="url-value">https://divinations.substack.com/p/healthos</a></td></tr></tbody></table></header><div class="page-body"><p id="e2d24a6c-b28b-42d2-8d8a-0eb0c01ca654" class=""><em>This essay was co-authored by </em><a href="https://twitter.com/robbylit"><em>Rob Litterst</em></a><em> and </em><a href="https://twitter.com/nbashaw"><em>Nathan Baschez</em></a></p><h2 id="553039ac-66ec-4382-9083-185916d612a7" class=""><strong>1</strong></h2><p id="0d294639-5909-4003-89fb-cb00cbad029f" class="">“What do we do with Apple,” Jim Cramer barked, sleeves rolled above his elbows, “now that it&#x27;s become one of the most <em>hated</em> stocks around?”</p><p id="a3ca6cf5-bd8e-4b95-a735-67ab748c8825" class="">It was January 2019, and AAPL was in <a href="https://www.cnbc.com/2019/01/08/apple-ceo-tim-cook-interview-cnbc-jim-cramer-transcript.html">free fall</a>. The main concern was the iPhone. Growth seemed to be slowing, and investors were panicked.</p><p id="161b176a-2f28-4236-8939-a3b5de61bb82" class="">Shares cost just $150 — 35% down from the all-time high they hit a few months prior. Things were so bad that Ben Thompson published an article that week titled “<a href="https://stratechery.com/2019/apples-errors/">Apple’s Errors</a>” and led with this chart:</p><figure id="258f9bf1-c631-4b7d-ab1e-1bb39140ffb7" class="image"><a href="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F173d9f73-c683-43d5-a086-b6a7399942a7_1300x618.png"><img style="width:700px" src="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F173d9f73-c683-43d5-a086-b6a7399942a7_1300x618.png"/></a></figure><p id="687babaf-ef7a-41af-96df-ae4723ad3dc5" class="">“Now, we&#x27;ve heard a lot of theories about what might be going wrong here at Apple” Jim Cramer continued. “But, you know what, I prefer to go straight to the source. So earlier today we snuck out to Cupertino for a long meeting with Apple&#x27;s CEO Tim Cook.”</p><p id="d06f7673-1f46-4730-929a-499dd2f130c3" class="">Cut to Jim and Tim perched on stools in the middle of a crowded Apple store, customers awkwardly shuffling around in the background, sneaking glances at the camera.</p><p id="40eb50d0-dac4-44ed-9d89-ba749f950bdf" class="">Jim got straight down to business:</p><p id="a0efee62-7e27-4cf2-83cf-1e3941ccabd4" class="">“You know I always say, ‘Own it, don’t trade it.’ But right now, people are saying, ‘Jim, give me the investment case for <em>buying</em> the stock.’”</p><p id="6b49a6ff-cb4e-4348-94b6-a1b04c9c3970" class="">This was Tim’s moment. Traders throughout the nation sat, transfixed in agony, fingers hovering millimeters above the “sell” button.</p><p id="e62c5e27-3bc2-4a61-be2e-1dfe0d5e778b" class="">“Well, you know, I never try to sell a stock. I try to sell a product. However, let me tell you the way I look at it: we manage the company for the <em>long term</em>.” He then went on about all the stuff you’d expect — Apple’s culture of innovation, huge install base, high customer satisfaction, etc.</p><p id="1b0d3895-629e-4a0c-82a8-ef0fd1c8934e" class="">But towards the end, Tim said something important that many may have missed. Something that wasn’t built into the traders’ financial models, but nevertheless may hold the key to sustaining Apple’s growth once the iPhone matures:</p><p id="37b0f601-c6cb-4e99-9178-6ad78be2489a" class="">“If you zoom out into the future, and you look back, and ask the question, ‘What was Apple’s greatest contribution to mankind?’ <strong>It will be about health.</strong>”</p><p id="3c93c303-dac3-4a4e-88b7-53898609cfd9" class=""><em>Health?!</em></p><h2 id="e835cab5-0b6f-40a1-95b8-868cdda16c68" class=""><strong>2</strong></h2><p id="d4609a94-009c-415c-bac4-07dda65431df" class="">When people think about <em>Apple</em> and <em>health</em>, the first thing that comes to mind is the Watch.</p><p id="c6f48404-0a04-4780-b7e1-2cf59f23203d" class="">But the real lynchpin of Apple’s health strategy is this humble app:</p><figure id="0c50406e-a559-40bf-b12a-d1b953c24b2f" class="image"><a href="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fe8a1ab44-514a-4d7c-8ded-9c95caf708c8_1282x1322.png"><img style="width:700px" src="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2Fe8a1ab44-514a-4d7c-8ded-9c95caf708c8_1282x1322.png"/></a></figure><p id="18fb0865-2bcd-4dec-970b-4bda2c872565" class="">Apple is building it into the OS for Health.</p><p id="a94076db-27c2-4375-9512-19d2cc8e8c16" class="">Specifically, they’re building a system to aggregate data from modern connected devices (like watches, scales, fitness equipment, mattresses, etc) and integrate it with traditional health records (lab results, conditions, medications, procedures) in order to unlock a new, comprehensive view of your body’s health.</p><p id="80311d8f-665c-4d63-983e-fb055256011a" class="">Traditionally, these data sets have lived in silos. But what could happen if it all was aggregated safely in one place?</p><figure id="f580c218-ee81-4829-81ce-3548a26ad0f6" class="image"><a href="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F4968fe3c-59ac-4e59-b41f-a54e7b8db029_1600x800.png"><img style="width:700px" src="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F4968fe3c-59ac-4e59-b41f-a54e7b8db029_1600x800.png"/></a></figure><p id="d9056c4c-c343-4e70-bd48-94e6de1459f2" class="">The impact on your health, and on the healthcare system more broadly, would be enormous.</p><p id="4975d5a0-4d23-4b00-8921-350080ef8946" class="">For example:</p><ul id="d2f8388f-dc5b-4c3f-9cb4-4a6e1e132db2" class="bulleted-list"><li>Imagine when you sign up for a new gym, you can connect Apple Health. Data can now flow in both directions. So your trainer could know you had a herniated disk, and your doctor will have access to your workout history.</li></ul><ul id="853c1be5-82c3-4ce5-86ad-7c0379c659cb" class="bulleted-list"><li>Imagine a smart toilet that can sample your stool and send the data to Apple Health. Imagine this triggers an automatic analysis by an algorithm developed by your healthcare provider, which takes into account the context of all your other health data (e.g. weight, heart rate, sleep, DNA), in order to proactively suggest you schedule an appointment if any anomalous patterns are detected.</li></ul><ul id="eccd7ae9-cc15-473b-be45-7f3871e59f91" class="bulleted-list"><li>Imagine the healthcare system was able to operate 10x more efficiently, because continuous background data collection and analysis eliminated unnecessary visits, reduced misdiagnoses, and caught most issues early enough to be solved with simple procedures.</li></ul><p id="45ea88d3-6470-42db-89b9-7e360c8863a6" class="">Of course, these stories are still just imaginary. The technology has a long way to go, healthcare is a notoriously distorted market, and Apple isn’t the only tech giant interested in becoming an aggregator of health data.</p><p id="ac203aef-9745-4ec2-8ed5-0c0ddba5d4a6" class="">But if they do manage to pull it off, it’ll be a major strategic coup, and a huge departure from Apple’s usual way of doing things.</p><p id="4d7d3661-0c66-4907-895b-5b977ab8c46d" class="">In other words, it could be Tim Cook’s iPhone.</p><h2 id="09d704a5-4337-4f84-8dce-7ddc9e84b22c" class=""><strong>3</strong></h2><p id="23c19a06-b10d-4404-bd0c-9656b9ee0208" class="">Apple’s normal play is to build high-end hardware and integrate it with high-end software created both in house, and by third-party developers. The basic goal is to sell you more devices, and get you to pay more for each device, by making it a premium, differentiated experience.</p><p id="3a440c98-2213-47ed-9715-9c9513ac692b" class="">Their strategy in healthcare couldn’t be more different.</p><p id="606b2c8e-fa74-4aff-8115-2f59f8367d02" class="">Sure, they have the watch, which measures your heart rate. But they’re leaving the majority of the possible device space to others, such as Peloton, WHOOP, and Eight Sleep. Apple doesn&#x27;t want to go down the path of making health-related hardware devices. These have high fixed R&amp;D and manufacturing costs to make them, and each device tends to only fill a small niche — so it&#x27;s a tough business to be in. Apple considers these devices accessories/subcomponents.</p><p id="879de0c4-a2f7-4ff9-9a66-30d5fa915876" class="">The problem is, sometimes a thing that starts out as an accessory ends up usurping power from the “main thing.” For example, the web started out as a complement to PCs, but as it gained mindshare, the web decreased the importance of Windows and it made it much easier for consumers to switch to a Mac.</p><p id="f5877977-ad10-4119-b299-5ad42fb8d68d" class="">Thus the infamous Marc Andreessen prediction that Netscape would reduce Windows to a “poorly debugged set of device drivers.”</p><p id="c5d22ae0-a491-449e-8732-92f7efd6d5eb" class="">He was <em>almost</em> right. Netscape didn’t do it, but the web did.</p><p id="0c360d98-4fb4-4bbc-90f4-68e1779b0ed0" class="">Tim Cook’s worst fear is that this happens to the iPhone. The more value grows outside Apple’s ecosystem, the easier it is for consumers to switch to some other type of phone, the less pricing power Apple has, the more embarrassing <em>Mad Money</em> interviews Tim has to do.</p><p id="45fb1495-34ce-4fd5-83ab-7395ba25c2cb" class="">So… what to do about all these health devices?</p><h2 id="8dd9273e-606b-4488-a94d-8415a8a0c380" class=""><strong>4</strong></h2><p id="80fe712f-403b-49b9-8e31-86e88d557e6a" class="">Let’s first describe the world that Apple has stepped into.</p><p id="47cf8f5b-b6cd-40fb-9df7-6a519ec5ac03" class="">On one hand, we’re seeing a proliferation of health sensors that will only continue to accelerate. Today we have connected mattresses tracking our sleep and connected watches tracking our heart rate. Tomorrow we could have the aforementioned connected toilet measuring our gut health.</p><p id="b9b58dfa-63df-4bbd-887d-ee0214400cce" class="">On the other hand, we have a healthcare system that isn’t making use of any of this data and isn’t exposing any of the data they generate in any sort of structured or portable way.</p><p id="386e5d25-48cd-4433-8750-397100ed8c50" class="">Apple’s goal is to connect these dots by becoming a trusted broker that stands in the middle.</p><p id="583a4035-b846-4953-86fd-726ccecc8a7b" class="">In order to get to this position, Apple has had to gain the trust of the healthcare industry and the government. The first step to this new healthcare reality is integrating medical records into Apple Health. To be clear, getting to this point has not been a walk in the park. Behind the scenes, Apple has done a ton of blocking and tackling with key healthcare players to make it happen, including vendors, hospitals, and government agencies. Anyone who knows about HIPAA knows this stuff is ~<em>complicated</em>~.</p><p id="d0981308-6cb9-4250-b9a2-1f9d1b788b8e" class="">Digitized patient health data is generally known as Electronic Health Records (EHR). These records contain things like medical history, lab results, diagnoses, and progress notes that doctors keep on file.</p><p id="858a5561-f64d-448f-bb0b-b229902f3145" class="">Before Apple Health came along this data was closely guarded by healthcare vendors that have restrictive privacy needs. Further, healthcare companies have historically shut down attempts to integrate EHR into mobile devices, partially because it’s complicated, but also because they have a big disincentive to allow a new data layer to form that allows patients to switch between providers more easily. This would Both Google and Microsoft have tried in the past, and both got shut down. So why Apple?</p><p id="7b51febd-bd3c-47bf-9443-6588f0264982" class="">Put simply, it’s the combination of scale and privacy. Apple’s focus on privacy got them in the door with healthcare companies, and their scale allows healthcare providers to tap into their customer base for large scale research studies that make the relationship mutually beneficial.</p><figure id="a7d72cc5-8d25-4e04-bae3-af22351d67bb" class="image"><a href="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F0d206ce8-2b5f-4834-b2e3-8b512a5db831_1600x538.png"><img style="width:700px" src="healthOS%204ec5adbba231407ca0d7c0ad311207ed/https3A2F2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com2Fpublic2Fimages2F0d206ce8-2b5f-4834-b2e3-8b512a5db831_1600x538.png"/></a></figure><p id="b8f444db-2f90-4bdf-8b13-f65a917c38a3" class="">This relationship creates a feedback loop: the more users Apple can get in their Health ecosystem, the more likely new healthcare companies are to partner with them. The more healthcare companies partner with them, the more compelling Apple’s health ecosystem becomes for users who aren’t on it. Growing each side of this marketplace deepens the trenches of Apple’s health data moat, and since this moat is so uniquely theirs, it’s become their biggest priority.</p><p id="50fb6504-5e49-4104-941a-14bdbb4708cc" class="">The goal is to become a non-negotiable integration point everyone can rely on.</p><h2 id="ecad675d-04e8-4070-a23e-38b0791c72ad" class=""><strong>5</strong></h2><p id="ad6526df-f41a-4e45-ad3e-6212f582f755" class="">Once you understand Apple’s goals for its Health app, all their decisions make a lot more sense. Just look at the Apple Watch. Rather than hyper-focus on a particular pillar of health, Apple has decided to go after the broadest swath of the population possible.</p><p id="47e00126-6984-49e5-a558-e0d1fc803c62" class="">Case in point, while earlier editions focused on heart rate and fitness functionality, the Apple Watch 4.0 added the ability to detect falls, and an emergency SOS function — clearly targeting the elderly. The Apple Watch 5.0 added the ability to track menstrual cycles and detect loud noises. While these developments may seem scatterbrained, they actually all tie back to the same singular focus on scale.</p><p id="d6aad243-f25c-476b-94f2-ca3ffabd2719" class="">Apple has made some real <a href="https://divinations.substack.com/p/trade-offs-are-your-friend">trade-offs</a> to pursue this strategy. Because the Apple Health app acts as a repository for all health data, Apple hasn’t developed many apps of their own, opting to allow third-party developers to build on their Healthkit API. They’ve taken a similar route with sensors. While companies like WHOOP, Oura, and Eight Sleep have pushed sensor technology to their limits, Apple has accepted the trade-off of being “good enough”, while they deepen their data moat.</p><p id="179359eb-5d44-46c6-a187-b3244691a743" class="">Strategically, accepting “good enough” in both of these areas makes sense, because neither applications nor sensors are unique strengths for Apple to the same extent as their ability to integrate healthcare data. And as we mentioned before, niche health devices can be challenging businesses, requiring high of R&amp;D and manufacturing fixed costs, but with a small customer base to spread those costs across.</p><p id="67b248d9-038d-413a-b75f-2a1b1d3d8b60" class="">Plus, as long as companies creating third-party sensors and apps feed their data into Apple Health anyway, why compete with them?</p><h2 id="145f855d-b5be-4088-b063-18df0fdb7d2f" class=""><strong>6</strong></h2><p id="ae0cc956-d405-4725-96a9-07892061d92f" class="">Ironically, Apple’s strategy with Health today is reminiscent of Microsoft’s strategy with Windows in the 90s.</p><p id="43a67539-9691-4e7f-912b-8fa08591ccdb" class="">Instead of making all the hardware, Apple wants to create the OS for health, and own the critical chokepoint that all players must integrate with in order to get distribution. This feels like a distinctly Tim Cook contribution, a definite break from the past.</p><p id="241abb88-ee77-49e8-a72a-8f61aba4b504" class="">In order to judge whether it’ll work, it’s important to always return to the basics from the “<a href="https://divinations.substack.com/p/finding-power">Finding Power</a>” framework: what is the job to be done? What’s not good enough? In other words, what is the basis of competition? What layers of the value chain do you need to control in order to win?</p><p id="4b9b11bd-c789-4c1b-a33f-50e25a0d8f66" class="">In healthcare, the job is to keep people alive and healthy. But it costs too much, is way too complicated, and lacks critical information. It’s as if you were trying to operate a car without any gauges or indicators, and only went into the shop when something broke down so badly that you noticed it while driving. Whoever builds the system that aggregates this data will unlock massive improvements in the quality and efficiency of healthcare.</p><p id="10a207a5-f4bb-4c86-a337-e6b1cb49216d" class="">Apple is working furiously to make sure it’s them.</p><h2 id="5f2db3f8-46de-4106-a5b2-94a247bc02f1" class=""><strong>7</strong></h2><p id="49f4bd06-b340-4788-b9b8-80523eb44e4c" class="">When Tim Cook told Jim Cramer that he thought Apple would be remembered mostly for its contribution to health, we should take him seriously and literally.</p><p id="7562a826-f1cb-499b-9648-6fd03bfaafcb" class="">Public company CEOs have a lot of limits on what they can say. There are huge disincentives to divulge details about specific plans, and plus, Apple is already well known to be an especially secretive company. So the only thing we have to go by is broad statements.</p><p id="de1dad3c-60ef-414e-b247-0f865ea340cd" class="">Are we extrapolating too much? Maybe. But a <a href="https://en.wikipedia.org/wiki/Persecution_and_the_Art_of_Writing">Straussian</a> reading is the only possible reading in a situation like this. And this one feels right to us.</p><p id="d62a75bf-b6f4-4783-ab5b-5fb1e4d36332" class="">It’s impossible to know how the future will play out, but we expect to see Apple continue to integrate with more healthcare providers and connected devices. Some forward-thinking providers like One Medical, Forward, and Q.bio will make better use of the data from Apple’s ecosystem to offer differentiated primary care. Patients will come to expect it and value it. Perhaps Barry’s or Equinox will integrate with Apple Health to create a better customer experience.</p><p id="5f38c96e-169e-4d71-a9dd-19ad9ca987e8" class="">And gradually the world we’re imagining will come into being.</p><p id="02a24a02-90c1-42f2-83b0-cd29b7bea293" class="">It’s an exciting vision, but we’re left wondering what will happen to people who can’t afford all this stuff. Depending on the results of this year’s election, we could see huge changes sweep through the system. It’s hard to predict what effect that could have.</p><p id="675553f2-a7d3-4c70-b031-7ae15079cb6a" class="">The important thing is to keep working for progress, and to work to ensure that progress is distributed as equitably as possible.</p><p id="75b3e312-3593-4d12-bb67-b2734065236d" class="">...</p><p id="ed273de2-0da5-488b-a664-66d05ea53228" class=""><a href="https://twitter.com/robbylit"><em>Rob Litterst</em></a><em> works on subscription pricing at ProfitWell. His newsletter, </em><a href="https://goodbetterbest.substack.com/"><em>Good Better Best</em></a><em>, covers digital packaging strategy.</em></p><p id="d429755d-4a25-40dc-bddb-a31c3283af9d" class=""><a href="https://www.twitter.com/nbashaw"><em>Nathan Baschez</em></a><em> is the author of </em><a href="https://divinations.substack.com/"><em>Divinations</em></a><em>.</em></p><h2 id="cfae2071-9ecf-4190-958f-1be740ac455f" class="">Enjoy this?</h2><p id="ff093a09-794f-4047-9362-acdf870c7ecc" class="">There are a few things to do:</p><ol type="1" id="48b439cf-29a7-4366-985a-0b00f0564917" class="numbered-list" start="1"><li>Hit the “like” button (so I know to do more posts like this)</li></ol><ol type="1" id="941070ec-62d2-4011-8f05-6ce26adda81b" class="numbered-list" start="2"><li>Read “<a href="https://divinations.substack.com/p/finding-power">Finding Power</a>” to understand more of the theory that helped us generate this analysis.</li></ol><ol type="1" id="82cce566-205b-4e44-938e-10aa3ef26f76" class="numbered-list" start="3"><li>Become a subscriber!</li></ol><h2 id="ae96ca18-27aa-47ad-a77f-87a5b49d647c" class="">Become a subscriber</h2><p id="0d1ac57a-55e4-4789-b0ab-0224af30d8c4" class=""><em>Divinations </em>is supported by readers. About half of the content is free, and half is paid. The paid posts explain theories of business strategy in great detail (Michael Porter, Clay Christensen, Hamilton Helmer, etc) and form the foundation of the analysis of specific companies that I do in the free posts.</p><p id="b25b7ce8-26b0-48cc-b98f-607cbbda9739" class="">There’s one other cool thing: when you subscribe to Divinations you <em>also</em> get access to <a href="https://superorganizers.substack.com/">Superorganizers</a> and <a href="https://praxis.substack.com/">Praxis</a>. They are two of the smartest newsletters on productivity you’ll encounter on the internet. It’s one big bundle. You can read more about it <a href="https://everything.substack.com/about">here</a>.</p></div></article></body></html>

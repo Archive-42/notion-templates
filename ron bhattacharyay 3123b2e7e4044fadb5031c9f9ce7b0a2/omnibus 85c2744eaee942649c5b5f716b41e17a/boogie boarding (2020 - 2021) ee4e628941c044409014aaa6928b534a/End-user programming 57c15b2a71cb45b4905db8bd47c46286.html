@@ -1,0 +1,678 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>End-user programming</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="57c15b2a-71cb-45b4-905d-b8bd47c46286" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🖇️</span></div><h1 class="page-title">End-user programming</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-blue">Tech History</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.inkandswitch.com/end-user-programming.html" class="url-value">https://www.inkandswitch.com/end-user-programming.html</a></td></tr></tbody></table></header><div class="page-body"><p id="11dce40f-4fd9-49cc-be69-1e1f3aa6b162" class="">Today’s software apps are like appliances: we can only use the capabilities exactly as programmed by the developer. What if we, and all computer users, could reach in and modify our favorite apps? Or even create new apps on the fly according to our needs in the moment?</p><p id="82220135-028a-41ce-9744-aaf226781fc5" class="">
+</p><p id="580bfeb5-9a45-4bb6-8fea-365d6fed9af6" class="">This is end-user programming, a vision for empowered computing pursued by bright-eyed computer science visionaries. Its rich history reaches back to the 1960s with programming environments like Smalltalk and Logo. Notable successes since then include Unix, the spreadsheet, Hypercard, and HTML. And today, newcomers like Zapier, Coda, and Siri Shortcuts are trying their own approaches to automation and dynamic modeling.</p><p id="77b50794-da42-4a0b-923b-e349472c179e" class="">
+</p><p id="570ffa96-3ecc-46eb-948b-d33ce8ad1317" class="">But despite forty years of commercial products, open source, and deep academic work, we have yet to reach an end-user programming utopia. In fact, the opposite: today our computing devices are less programmable and less customizable than ever before.</p><p id="7b383bc8-dfea-4195-9931-034db2f1ff68" class="">
+</p><p id="bdb0eb7d-e6c6-424c-81d1-004e6ba347b2" class="">This article tackles the question of why this is so. We&#x27;ll start by describing three qualities we think are important for end-user programming: embodiment, living systems, and in-place toolchains. We’ll survey the prior art and try to illuminate what has made this problem so immensely difficult. Then we will document the experiments we’ve done at the <a href="https://www.inkandswitch.com/">Ink &amp; Switch research lab</a> in adding automation and customization capabilities to a digital sketchbook application.</p><p id="c6125fa3-bb45-4296-bf69-f60d4bbb33c7" class="">
+</p><p id="2d817d21-54f5-44ca-af84-e8d029b11171" class="">We believe in a computing future where programming is within the grasp of everyone and hope this article can inspire and challenge our industry. We welcome your feedback: <a href="https://twitter.com/inkandswitch">@inkandswitch</a> or <a href="mailto:hello@inkandswitch.com">hello@inkandswitch.com</a></p><h2 id="a064492c-9b98-4bc6-a3d8-72711a8b7757" class="">Contents</h2><ul id="7c53d52a-e0f9-4736-9bd8-8aa6cea6874c" class="bulleted-list"><li><a href="https://www.inkandswitch.com/end-user-programming.html">Conclusion</a></li></ul><h1 id="10cbd257-c6a7-4181-90bd-80d822eb3115" class="">Why end-user programming?</h1><h2 id="4f8be81f-701b-40bf-b9c5-39b3972307a4" class="">Empowered computing</h2><p id="9c1c63d6-beeb-42ef-95ce-0a65dd5ae221" class="">In their computing lives, power users often want simple extensibility. For example: <a href="https://greasyfork.org/en/scripts/14755-instagram-reloaded">adding download capability to Instagram</a>, setting up <a href="https://medium.com/@suzhinton/my-twitch-live-coding-setup-b2516672fb21#43f0">windows for a live-stream session</a>, generating <a href="https://taravancil.com/blog/organizing-my-kitchen-with-airtable/">recipes and shopping lists for a home kitchen inventory</a>, or automatically <a href="https://www.notion.so/82b78d790fc61a687a06b4e17d9c50f1">keeping timestamp-named backups of</a> Illustrator documents.</p><p id="2c81da86-fda7-4da8-a597-9f3761248ae7" class="">
+</p><p id="88aa91cc-2bc6-40b3-8808-de2cc275d73c" class="">Desktop programs, web apps, and smartphone apps are to various degrees like appliances with a hermetic seal to keep users out of their interior. If there is not already a button for a given function, the only option for users is to petition the developer.</p><p id="b8b15e96-2119-4930-b7d9-355942562922" class="">
+</p><p id="74ac1418-d64d-4d86-af9e-d7eb62b0ac5d" class="">Some tools have a history of extensibility, such as <a href="https://www.vim.org/">vim</a> and <a href="https://www.gnu.org/software/emacs/">emacs</a> which allow the user to record and replay macros, configure keybindings, and write plugins that run within the editor context. But most apps offer no such capabilities — and if they do, it’s usually by exposing programmatic API made for developers.</p><p id="3f11419c-66e4-46fd-9893-bb144df15c86" class="">
+</p><p id="1c273386-2600-48f0-bf87-0a4f931ca6f2" class="">Modifying your own software is part of the rallying cry of <a href="https://www.gnu.org/philosophy/free-sw.html.en">FOSS</a>. We love open source and everything it stands for. But in practice, the effort needed to rebuild an application from source doesn’t lend itself to the casual access we’re seeking here.</p><p id="8d84e5f3-135a-456d-b1de-472c0e5721eb" class="">
+</p><p id="2b66c845-39f3-4665-874f-b6f18f0a3f1f" class="">There’s an abyss to cross between using an app and modifying it with code by calling APIs. The user has to switch to a whole other paradigm including setting up a development environment. Consequently, few users take the step from using a tool to customizing or making their own tools.</p><p id="a2313f3d-bd45-417f-9388-2ac41f2903d0" class="">
+</p><p id="7d1435a9-b46f-4ff0-a976-6c01f709f996" class="">At Ink &amp; Switch, we believe that software should be extensible in an easy, everyday manner. We believe users want to automate, customize, or even make their own tools without much ceremony. History offers us some great examples.</p><p id="2a32f7df-33e7-4d26-8182-70e01bad1e23" class="">
+</p><h2 id="5f561238-f1c3-4055-ba32-5f5fe5e688a3" class="">Success stories</h2><figure id="c73506cf-d717-433b-8b6e-206456671e0c" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/unix-pipes.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/unix-pipes.png"/></a></figure><p id="3570b87e-9f13-4234-82cc-8f2ab9c35110" class=""><a href="https://blog.jessfraz.com/post/for-the-love-of-pipes/">Unix pipes</a> allows the user to chain together simple commands to make an ad-hoc program.</p><p id="73d6837d-b90e-46db-b4d9-8d37a1868901" class="">
+</p><p id="316459ac-839a-40a2-9bf8-c67b45e9edbb" class=""><a href="http://www.ee.surrey.ac.uk/Teaching/Unix/unixintro.html">The UNIX command line</a> is the quintessential end-user programming environment. An operating system built from small tools, with a command-line interface where the user is writing an ad-hoc program with every interaction. If you want to create a file automatically named with the timestamp, the touch and date programs can be combined in a matter of seconds.</p><p id="5fd39316-581c-49ee-b3f6-92826d7ba73c" class="">
+</p><figure id="4f264b28-c748-4e96-b741-af333521e82c"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/visicalc.mp4">https://www.inkandswitch.com/media/end-user-programming/visicalc.mp4</a></div></figure><figure id="d061383e-bf6e-49f1-b134-3d624ec3c4a1" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/play.svg"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/play.svg"/></a></figure><p id="a49207fb-fefb-4d54-9afe-d19f25289d9f" class=""><a href="https://archive.org/details/VisiCalc_1979_SoftwareArts">VisiCalc</a>, the first digital spreadsheet, was released in 1979.</p><p id="6d12b3f2-515f-4c75-84c5-48fe5577cf4a" class="">
+</p><p id="ef90205b-7123-4668-a5fb-02eb71fa2365" class="">Perhaps equally as pervasive as Unix is <a href="https://www.wired.com/2014/10/a-spreadsheet-way-of-knowledge/">the spreadsheet</a>. Spreadsheets are many people’s first encounter with writing simple computer code (such as <code>SUM(A1:A10)</code>) with concepts like variables and iteration. Spreadsheets serve as ad-hoc databases for project management, contact management, shipping and receiving, and form generation for many small businesses. And typically the people creating these relatively complex programs inside the spreadsheet environment are domain experts rather than professional software engineers.</p><p id="0a6c1faf-60e6-422d-9973-dc02155b93ff" class="">
+</p><figure id="47ad9bba-84c0-4fdb-b2ad-c59828bcff7f" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/hypercard.jpg"><img style="width:600px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/hypercard.jpg"/></a></figure><p id="043fcbb0-fd49-48ab-b54c-eaf6b5161ac1" class="">Hypercard <a href="http://wiki.c2.com/?WikiWikiHypercard">helped give birth to the first wiki</a> which in turn led us to Wikipedia.</p><p id="439953b2-b7e6-4c3b-9e66-50ca3d2f3a4b" class="">
+</p><p id="fa6a35b5-b50f-43e8-9b31-ac7acefeccca" class="">A beloved but less commercially-successful example than either of the first two examples is <a href="https://blog.archive.org/2017/08/11/hypercard-on-the-archive-celebrating-30-years-of-hypercard/">Hypercard</a>. From <a href="https://medium.com/the-nextographer/the-hypercard-legacy-e5b9eb273b6a">The Hypercard Legacy</a>:</p><blockquote id="646f7abd-3126-466b-96e1-b9b67209c42d" class="">“HyperCard was a tool for making tools – Mac users could use Hypercard to build their own mini-programs to balance their taxes, manage sports statistics, make music – all kinds of individualized software that would be useful (or fun) for individual users. These little programs were called stacks, and were built as a system of cards that could be hyperlinked together.”</blockquote><figure id="2f33c183-8035-4e73-8fbf-4d1f854d3eb3" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/winscp.png"><img style="width:550px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/winscp.png"/></a></figure><p id="c63d1842-4d9a-470f-a004-0ef481b586b5" class="">The combination of a simple text editor like Notepad++, an FTP client (here, WinSCP), and a low-cost shared hosting provider with PHP preinstalled remains one of the most accessible ways to get started with software development. Image from <a href="https://www.elated.com/articles/winscp-tutorial/">Elated’s How to Upload Your Site with WinSCP</a></p><p id="3771ca27-ff56-47f7-98f9-39ec20fd8cfc" class="">
+</p><p id="3ecbdc0d-63d0-4446-8c5b-9a264787a80c" class="">A final success story is the web: specifically, HTML and some companion technologies like CSS, PHP, and Javascript. Combined with low-cost FTP shared hosts, Wordpress, Geocities, and Squarespace, this method of software creation has proven incredibly accessible.</p><h2 id="4afd3f34-060e-4a6e-bae2-a38bae6f4572" class="">Different from regular programming</h2><p id="c7b9b392-5368-4455-8e3b-a9824ce608e2" class="">Why “end-user”? We need a term to differentiate from programming done by professional software engineers who build general-purpose apps designed to be used by thousands of people.</p><p id="c1e64232-9ad5-4adf-9308-02fd659240d6" class="">
+</p><p id="f7cb610e-b738-4ed4-8409-e25ba3cb21d4" class="">Clay Shirky uses the term <a href="http://shirky.com/writings/herecomeseverybody/situated_software.html">“situated software”</a> to describe apps written for one person or just a small group of people.</p><p id="6d0774aa-1a37-4af8-b99d-eb34303b7095" class="">
+</p><p id="104dac81-f3ab-4310-b9e4-cc01786c26f3" class="">End-user programming is done by a motivated power user who may or may not be a professional programmer, modifying or creating small ad-hoc tools for their own use or perhaps to share with a handful of colleagues.</p><p id="d199e6af-041d-45e9-b33f-9f4abae9bc6e" class="">
+</p><p id="8d7de648-94c0-4a07-b93e-399628498ce5" class="">There shouldn’t be a chasm that the user has to cross in order to customize the behavior of their software. Going from using to inspecting to modifying the system should be a gradual process where each of the steps is small enough to be easily discoverable. The user should not need to switch to “programmer mindset” but instead stay within the context of the application. They can stay close to their work and their ideas.</p><p id="234b80a1-02be-4fdb-bde1-6fc8e99a03a6" class="">
+</p><p id="73056875-4845-4fef-a5c7-3500cf4dbec6" class="">There is a moral imperative for end-user programming: to avoid a digital divide. A world where only a tiny elite of high priests (aka “programmers”) have control over what happens in our computing lives is concerning. This is the well from which programming literacy advocates such as <a href="https://code.org/">Code.org</a> draw their vigor.</p><p id="1d1f6605-d742-45d3-823a-9bef0c020a43" class="">
+</p><p id="2627e129-1a95-4a3c-bacf-5e2790b3b387" class="">Annette Vee documents the history of programming literacy advocacy dating back to the early 1960s in <a href="http://www.licsjournal.org/OJS/index.php/LiCS/article/download/24/26">Understanding Computer Programming as Literacy</a>.</p><p id="db9d0a7c-c0d2-4782-83bd-ad94477d1504" class="">
+</p><p id="bfb943e5-778d-4af6-9bed-f2758e25017b" class="">More practically, the business case for end-user programming is substantial. In enterprise software, end-user programmers are sometimes referred to as <a href="https://www.gartner.com/it-glossary/citizen-developer/">“citizen developers”</a>. Businesses of all sizes run their daily processes on tools built by non-programmer domain experts with enterprise-oriented tools like <a href="https://www.filemaker.com/">Filemaker</a>, <a href="https://products.office.com/en/access">Microsoft Access</a>, <a href="https://www.salesforce.com/products/platform/products/force/?d=70130000000f27V&amp;internal=true">Force.com</a>, and <a href="https://www.quickbase.com/">Quick Base</a>.</p><h1 id="8d536666-638f-48fd-9abd-fbe217d464e0" class="">Prior art and three qualities</h1><p id="a6e200aa-ed3f-4c06-b945-027338abc502" class="">Given that end-user programming is desirable and potentially achievable, what are some ways to make tools that support this goal? We suggest three qualities of tools that support end-user programming: embodiment, living systems, and in-place toolchains.</p><p id="5d282472-6dbc-4734-bc80-3e0df189252c" class="">
+</p><p id="be967b26-0504-419d-a73d-dffff6b68d7b" class="">Let’s look at each quality and survey its prior art from academic research and commercial products.</p><h2 id="c49d1897-61d1-407a-92ab-2c455195c7ff" class="">Embodiment</h2><p id="aa153634-6b1e-4085-b180-2975c80974ee" class="">One of the hardest parts about making software is that it requires the programmer hold many abstractions in their mind. The programmer must mentally model the data structures and flow of the program, then translate those into a symbolic representation, aka code.</p><p id="790adcc7-bf24-4e87-a297-115f67b67f57" class="">
+</p><p id="74880e50-efee-40ce-b9a7-50d23a447e7f" class="">Professional software engineers are often drawn to the field because of their innate capability with abstract reasoning. They train their whole lives to improve this capability and even then they require large, uninterrupted blocks of time to concentrate in order to successfully write software.</p><p id="bec754d2-da97-4796-ae15-d3dcd599912a" class="">
+</p><figure id="0eec6f79-9eaa-4aa1-a00a-50af019747de" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/excel.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/excel.png"/></a></figure><p id="b857b48c-68fe-421c-a42d-2be61df603a0" class="">Excel’s formula language editor provides a visual helper for the range of cells. The flow of logic from cell to cell is still invisible and requires abstract reasoning on the part of the spreadsheet creator.</p><p id="c31332ec-0235-48f7-be83-d5c85a2927ae" class="">
+</p><p id="a0ad4aa0-a8cc-464e-ac1d-d3b2d151ae48" class="">Such a deep investment isn’t viable for the more casual user, who is typically devoting their time and brainpower to being an expert in another domain outside of programming. We need ways to require less abstract reasoning and less of the user’s mental bandwidth to be given to the mechanics of modeling their program and data, leaving more space for them to think about the domain of their application.</p><p id="2c36cfab-5c89-46ad-8177-a5e7431bbcc6" class="">
+</p><p id="53522821-ca2a-4c94-a781-925ddb4e2046" class="">One way to do this is embodiment. This is where a tool makes the elements of a working program concrete, usually via visual representations onscreen, to the user.</p><p id="30d2c4bd-cd88-4714-a625-49a41c96d202" class="">
+</p><figure id="c94cc3be-fd9f-46e7-b614-7373a86c9cc6" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/scratch.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/scratch.png"/></a></figure><p id="14095069-0123-454b-b568-2401e75dd711" class=""><a href="https://scratch.mit.edu/">Scratch</a> offers a way to edit programs by snapping compatible blocks together.</p><p id="9316ad96-00db-4d08-8e46-13b46ceaf8ae" class="">
+</p><p id="eb43617d-943a-4fb7-96ca-616ec07c41a7" class="">Embodying the program syntax and flow can be found in “visual programming” tools such as Scratch, a block-based learn-to-program environment, or realtime audio/visual environments like <a href="https://cycling74.com/products/max/">MaxMSP</a> or <a href="http://repmus.ircam.fr/openmusic/home">OpenMusic</a>.</p><figure id="085cfc52-1fac-4c57-9a5e-102f47c39ebc" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/maxmsp.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/maxmsp.png"/></a></figure><p id="1f4b7fa9-8757-45d0-9c5e-50660ec45c76" class="">MaxMSP is an environment for electronic music and visual effects production. Program execution flows visually through nodes connected by lines, with each input or filter displaying its contribution live.</p><p id="44dad76c-342a-4f71-ab21-118910a26b1c" class="">
+</p><p id="a9d5538d-9d23-4d0f-81ad-2cb893bc0bbe" class="">But a graphical syntax is only one form of embodiment. One can also use a traditional code-based programming language such as Javascript or Swift while providing embodiment of the output as a <a href="https://harc.github.io/seymour-live2017/">micro-visualization</a>.</p><figure id="6bff9521-f9ec-434d-8bcb-020a55f1b0c5" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/learnable-programming.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/learnable-programming.png"/></a></figure><p id="8c58f451-be67-4e69-a625-e1d18d277c7a" class="">Bret Victor’s concept for visualizing iterations and output in <a href="http://worrydream.com/LearnableProgramming/">Learnable Programming</a>.</p><p id="d8fd244d-c416-4055-943f-bbac2e4d3480" class="">
+</p><p id="21c7677f-d5ad-440e-8b81-313fd7d56c99" class="">Embodiment means, broadly, making elements of the programming experience more concrete and visual. Spreadsheets do this for the source data; Scratch does this for syntactic program elements including how they can connect together; MaxMSP does this for execution flows; <a href="https://developer.apple.com/videos/play/wwdc2018/402/">Swift Playgrounds</a> does this for results of each line of imperative code.</p><p id="833dc986-3317-4f82-9c3b-52d43a17a895" class="">
+</p><p id="62d7b30b-f0c3-4583-9518-81a55c49f9a5" class="">Figuring out the right things to embody, and how, is one of the key challenges of end-user programming.</p><h2 id="81c28b80-7e5a-4e9f-8b39-78fa3615ff79" class="">Living system</h2><p id="f4d9be3d-bca2-4abb-a7fc-788be915d341" class="">A second quality that we propose for end-user programming is interaction with a living system.</p><p id="abe59dbe-bbe4-4f7d-8f6d-7ba935779d00" class="">
+</p><p id="8a10fbab-c6e6-4f33-bf3a-3e13e2525348" class="">In the classic software development model, engineers perform a save/build/run cycle that can take seconds, minutes, or <a href="https://xkcd.com/303/">longer</a>. But end-user programmers need something with more immediacy. That means shortening the save/build/run loop, ideally until it collapses to nothing.</p><p id="d6dc5eb0-4784-4347-9c61-2a69773d4a33" class="">
+</p><p id="48192ce7-0e07-4789-a71d-25532ec926b9" class="">Spreadsheets show their pioneering approach here. A spreadsheet author “runs” the sheet by entering a formula into a cell and pressing enter. The entire sheet is recalculated without any additional steps, and for most sheets on modern computers, this happens instantly.</p><p id="7e62ac09-a207-4007-9f71-eaf7d6d583dc" class="">
+</p><p id="34539c87-19ca-44a5-87d3-a32af562d201" class="">This liveness is visible in another end-user programming success story: <a href="https://www.khanacademy.org/computing/computer-programming/sql">SQL</a>, a language for interacting with databases. Business analysts, product managers, and other non-engineering but motivated power-user roles in organizations often teach themselves a bit of SQL and use it to interact with their company’s production database (or a copy of it).</p><figure id="5460bcfe-5996-4194-bedd-aa7811da6f53" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/phpmyadmin.png"><img style="width:658px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/phpmyadmin.png"/></a></figure><p id="7d521a6d-5122-411d-8105-87d37cd32dbe" class=""><a href="https://www.phpmyadmin.net/">phpMyAdmin</a> offers an end-user accessible interface for interacting with the living system of a production database. The image here shows querying a Wordpress install, from <a href="https://wpshout.com/mysql-basics-writing-custom-select-statements-phpmyadmin/">MySQL Basics</a></p><p id="1a2a7278-e014-4497-b2da-0dd8befc234f" class="">
+</p><p id="a7f26b25-fd77-436d-9b01-9467832f2f46" class="">In spreadsheets and SQL, the user gets their immediate results after pressing enter. Taking this idea further, there is a whole academic community around “live coding.”</p><p id="f0894658-a0e4-4ead-8bed-04ce4b27a4c2" class="">
+</p><p id="013c03ff-1941-446f-8752-c8f8e9964437" class="">For example, the <a href="https://2018.splashcon.org/track/live-2018-papers">LIVE track at Splashcon</a> describes it this way:</p><blockquote id="0d1aedfe-ac3e-406c-89bb-a01defae0dce" class="">“Live programming gives the programmer immediate feedback on the behavior of a program as it is edited, replacing the edit compile-debug cycle with a fluid programming experience.“</blockquote><figure id="6c4862a8-b832-4295-9107-8461e214505e"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/livebook.mp4">https://www.inkandswitch.com/media/end-user-programming/livebook.mp4</a></div></figure><p id="14718962-8ec9-4b56-8158-77c6addb6f36" class="">Ink &amp; Switch explored the topic of live coding for scientific notebooks with the <a href="https://github.com/inkandswitch/livebook#readme">Livebook</a> project. The user gets immediate feedback as to the validity of their syntax but also sees context-sensitive help about the variable under the cursor and the results in the connected cell below as they type.</p><p id="fc73e48c-e49e-4ce5-9d00-ba67ca731143" class="">
+</p><p id="6d297559-3f31-4bbc-ae58-3e0749720828" class="">Adding live coding to programming tools is a huge technical and design challenge. Microsoft Research has <a href="https://www.microsoft.com/en-us/research/project/live-programming/">explored this space in depth</a> including creating several ground-up <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/onward011-mcdirmid.pdf">programming languages</a> and <a href="https://www.youtube.com/watch?v=YLrdhFEAiqo">IDEs</a> that support live coding.</p><p id="57a56ca5-c6c5-47e2-acee-f14242110e37" class="">
+</p><p id="89479375-e752-40cd-ad90-058c2c2b2be3" class="">But the “living systems” quality of end-user programming is broader than the fast feedback loops of live coding. It also includes the ability for the system to change itself from within, giving the end-user programmer a feeling of open-ended possibility and complete ownership over their tools.</p><p id="19d742cd-492e-4aa0-b7e1-510741289c1d" class="">
+</p><p id="c3541739-531a-41db-8e80-d69c8eafe2b0" class="">A small example here is is the developer tools console available in most desktop web browsers. Here the user can grab any element on the page and change it: its color, its size, whether it appears at all.</p><figure id="1fe43703-85a3-44fe-a369-dabdfd41c6a6" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/browser-dev-tools.jpg"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/browser-dev-tools.jpg"/></a></figure><p id="9d046186-47f3-464f-b496-9d3840094e45" class="">Browser Dev Tools console editing the background color of the Facebook homepage. Interaction with a living system can feel empowering.</p><p id="a31dc4bc-29b8-4668-80d5-f291c822b56d" class="">
+</p><p id="e2e52d49-6026-4cff-9db0-497653cc77eb" class="">The lineage of <a href="https://en.wikipedia.org/wiki/Smalltalk">Smalltalk</a>, <a href="https://squeak.de/">Squeak</a>, and <a href="https://pharo.org/">Pharo</a> takes this idea to its furthest: if a system is fully written in itself (sometimes called <a href="https://en.wikipedia.org/wiki/Self-hosting">“self-hosted”</a>), the user can change absolutely anything about the system. Unlike a traditional operating system, where deeper changes require <a href="https://www.kernel.org/doc/html/v4.16/process/howto.html">a reboot</a> or even <a href="https://developer.apple.com/xcode/">a separate development device</a>, self-hosted systems can inspect and change anything on the fly. They are living systems.</p><figure id="68d43ea5-93a8-42ff-a815-7422bbae19dd" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/dynamicland.jpg"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/dynamicland.jpg"/></a></figure><p id="c9044570-398c-44f6-9f08-b9ad1517eaa8" class=""><a href="https://dynamicland.org/">Dynamicland</a> is a modern take on a highly-interactive living system. Users can manipulate the system by moving paper under a set of computer-vision scanners; and they can program the system live by typing into wireless keyboards. Image from <a href="https://rsnous.com/posts/notes-from-dynamicland-geokit/">Notes from Dynamicland: Geokit</a> by Omar Rizwan</p><h2 id="5bae0161-ee81-43a1-8cdd-70c51f5cdd3d" class="">In-place toolchain</h2><p id="372b3aa2-d9e5-48ee-ae03-c54a18474ffa" class="">A third quality that we think is necessary for end-user programming is an in-place toolchain. The user should be able to edit their programs without installing additional tools or programs. Further, they should be able to use an interface and set of abstractions that is as close as possible to the ones they use for their regular daily work.</p><p id="3cfdc624-822e-4c9c-9d28-c1f6d7561fdd" class="">
+</p><p id="69f45812-9e21-4552-8ce8-b83937300e0e" class="">On the iOS platform, for example, creating an app requires not only a separate toolchain, but an entirely different platform (macOS). This creates the widest possible chasm between end users and software developers.</p><figure id="4e359b14-356d-4339-8e7f-356e9a847402" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/ios-shortcuts.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/ios-shortcuts.png"/></a></figure><p id="1653847b-f4f8-412d-9598-36a1d7d456a9" class=""><a href="https://itunes.apple.com/us/app/shortcuts/id915249334?mt%3D8">Shortcuts</a> (originally <a href="https://workflow.is/">Workflow</a>) is Apple’s attempt to bring automation to their mobile platform. Image from <a href="https://www.macstories.net/stories/ios-12-the-macstories-review/">iOS 12: the MacStories Review</a></p><p id="5bba3eb1-c5f9-4a0c-90fd-c8ac175cdaa9" class="">In-place toolchains are not just about pre-installed tools. The truly hard part of this is allowing the user to apply the concepts and interface paradigms that they have already learned in their daily use of the application.</p><figure id="17987e9d-dfea-4bd7-94fc-f92dd073380f" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/google-docs-script-editor.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/google-docs-script-editor.png"/></a></figure><p id="b37cfbd6-54cb-4c43-be7b-e109a464107e" class="">The <a href="https://developers.google.com/apps-script/overview">Google Docs script editor</a> is available to any user from the Tools menu inside all Gsuite apps. Shown here is <a href="https://github.com/mangini/gdocs2md/blob/master/converttomarkdown.gapps">a script to export a Google Doc to Markdown format</a>.</p><p id="29d09d05-b11c-4036-a311-c5ee1c97b065" class="">Compare to Unix, for example. A user of a Unix system learns to type commands, edit text files, and copy/move/delete files and directories as part of their regular use. And when they are ready to write a program, they can continue using the same concepts and interface, because a Unix shell script is just a series of commands saved into a text file. That text file can be copied, moved around, edited, and deleted just like any other file.</p><p id="3f84a8e3-a399-4533-beed-2c3f8c60d2e3" class="">“A humane-interface principle is that the system itself should be built out of the same kind of pieces with which you are familiar from your everyday use of the system.” — <a href="https://www.academia.edu/2148659/The_humane_interface_new_directions_for_designing_interactive_systems">The Humane Interface</a>, chapter 5</p><p id="9c9c6f72-6b52-4d03-934f-6ce00ea6ed01" class=""><a href="https://zapier.com/">Zapier</a> and <a href="https://ifttt.com/">IFTTT</a> offer tantalizing glimpses of end-user accessible automation for the web and cloud APIs. But by the full measure of the in-place toolchain idea, these fail because, for example, the act of automating your smarthome components with IFTTT requires a completely different interface and set of concepts from using those components day-to-day.</p><figure id="c2deefb7-601b-4ac6-8bc3-887edac43fa9" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/ifttt.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/ifttt.png"/></a></figure><p id="bd8c4471-c056-4a5a-8568-ab58d6da8068" class="">Automating a <a href="https://www.belkin.com/us/Products/smarthome-iot/c/wemo/">WeMo</a> smart plug to turn on a light each night with IFTTT.</p><p id="5f69d01f-50c0-4f5f-afb7-6ee6c5678b52" class="">A similar problem of “tool in its own standalone universe” exists in academic examples of end-user programming. <a href="http://witheve.com/">Eve</a>, <a href="https://ravichugh.github.io/sketch-n-sketch/">Sketch-n-Sketch</a>, and Pharo are technical design marvels. But they require the user to enter an entire new world of tooling and concepts, leaving behind everything they already know about using computers. They have to be motivated to want to program to begin with, rather than having it there waiting for them in an environment they are already using, such as their word processor, their web browser, or their photo editor.</p><figure id="6a28488a-faf9-4d72-8b2f-16781fef2d71" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/coda.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/coda.png"/></a></figure><p id="e9261321-9030-4566-965c-fecbbffa2dab" class=""><a href="https://coda.io/welcome">Coda</a> gets high marks for creating a document editor that can be enhanced with calculations and automation. In theory, a user might want to use this as an alternative to Google Docs, Microsoft Word, or Dropbox Paper to author a document without programming and then add those capabilities later.</p><figure id="46b595be-9295-4e8d-ab33-cb847ac2bc48" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/airtable.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/airtable.png"/></a></figure><p id="f437c9cf-aafc-4d56-8e32-5e631f8eeb16" class="">In-place toolchains are one of the greatest obstacles to widely-used end-user programming.</p><p id="0abf71f4-e426-4939-b565-c6dc6069b92c" class="">With the context of those three qualities and what has come before, our research lab set out to do some end-user programming experiments. Our testbed was a tablet thinking tool called <a href="https://www.inkandswitch.com/capstone-manuscript.html">Capstone</a>.</p><figure id="8d1803e9-75a1-4ad9-8e16-3710b0868914" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/capstone.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/capstone.png"/></a></figure><p id="f9e7c48c-4f0f-472f-8bca-3ffcd3d42024" class="">Capstone is a prototype by Ink &amp; Switch which offers mixed-media cards and freeform inking on a shared canvas. It’s intended as a place for creative professionals to develop their ideas through research collection, sketching, and mood boards.</p><p id="4c909f22-f78e-4f41-b5bc-4f1f842c3b83" class="">If we assume that a creative professional is using Capstone on a regular basis for their notes, clippings, and research, what programming or automation capabilities can we offer that would give them more power, flexibility, and customization within that context?</p><p id="9d55ec17-5787-4b72-87e4-5c98f23cbc41" class="">We ran five experiments to try applying embodiment, living systems, and in-place toolchains to Capstone.</p><h2 id="6a5cf1eb-a8f8-4f2b-be9e-959bac1a7ef9" class="">Edit card source</h2><p id="1b225d4b-6123-4e53-bdda-0195c5e6628a" class="">The Capstone user interface consists of cards on a canvas. As a simple starting place, we built an editor inside the Capstone system that allows the user to edit the underlying code of a given card. Think of this as similar to the web browser’s “View Source” option, but with write capability.</p><figure id="a68c989a-8fef-42d7-9944-715aab648744" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/exp1-edit-card-source.png"><img style="width:700px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/exp1-edit-card-source.png"/></a></figure><p id="1d0dbc61-26e6-4906-9808-80b79dce994f" class="">Text card on the left, slide-out Javascript/React editor on the right. Here, the user makes small customizations to the color of the card.</p><p id="aa05f45d-3fcc-499a-9d12-82277ed0a193" class="">On the surface, this seems to fulfill the in-place toolchain goal: the user needs nothing additional to start editing the code of their chosen card. It’s a live coding environment where every keystroke re-renders the card so that users see the results of their work right away.</p><p id="e2b94ddc-e38c-4fa5-9d54-7372fd24a92b" class="">However, we found the actual use of this approach uninspiring. It felt obvious, not a bold new direction that hasn’t been tried before. From the user’s standpoint, it felt editable but not inviting to the user. The jump from cards-on-a-canvas in a touch/stylus interface to a cryptic code editor with Javascript and React code was incongruous.</p><h2 id="b222b6f1-9531-4718-a7bc-11d22e3369bf" class="">Data pipelines</h2><p id="0219dbd1-0e5a-4646-9b17-0904b802f30d" class="">For our next experiment, we wanted to embrace the cards+canvas model and touch interface of Capstone, while also borrowing some ideas from Unix pipes.</p><p id="7048f5f5-2768-4172-bec7-c7580a96e01c" class="">What would this look like for a more visual environment like that of Capstone’s cards-on-canvas? Our approach was to allow each card within Capstone to take input and provide output, allowing the user to chain them together with the visual equivalent of a pipe operator.</p><figure id="0946eea5-6fa1-4080-8884-af9576c0ad58" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/yahoo-pipes.png"><img style="width:630px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/yahoo-pipes.png"/></a></figure><p id="0f97305f-3527-4a76-8062-5048b9528763" class="">The now-defunct <a href="https://venturebeat.com/2015/06/21/6-reasons-killing-off-yahoo-pipes-was-a-bad-idea/">Yahoo Pipes</a> allowed users to pull data from websites and APIs to produce outputs in a visual environment.</p><p id="b8acd727-248f-4f9e-ac84-aba66c3294bb" class="">We added fields to each card: uses and exposes. Like the names suggest, cards could now wait for some input, and expose some output. Those inputs and outputs were <a href="https://en.wikipedia.org/wiki/Strong_and_weak_typing">strongly typed</a> to allow for exchange of richer datatypes like arrays and objects.</p><p id="0d24292c-b37a-4355-a312-fde4837ee461" class="">In the examples below, we’ve borrowed a use case from <a href="https://www.offerzen.com/blog/literate-programming-empower-your-writing-with-emacs-org-mode">this Emacs literate programming example</a>. Here, a teacher begins with a table (spreadsheet or CSV) of student grades and wishes to create an ad-hoc dashboard showing pass/fail for each student.</p><figure id="2cb516b8-6cf8-4dc8-8132-30ab952d9b12"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp2-table.mp4">https://www.inkandswitch.com/media/end-user-programming/exp2-table.mp4</a></div></figure><p id="a52bdff9-2742-4e53-abc5-4ca7b1fbf9d1" class="">A card contains a CSV that exposes raw text. Another card consumes that text and turns it into a table. Colors give cues as to which cards can be connected or are currently connected.</p><p id="9592ebd2-cd92-41de-b49e-51f2fa1537b6" class="">By dragging the “exposes” label from one card onto another card’s “uses” label, the user creates connections between cards. Connected cards are color-coded, inspired by spreadsheet cell-and-range color coding. Based on user feedback, we found that users wanted to keep cards in a pipeline physically near each other.</p><figure id="fbf63573-ba66-4cbe-a09b-787965478543"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp2-filtering.mp4">https://www.inkandswitch.com/media/end-user-programming/exp2-filtering.mp4</a></div></figure><p id="0722dbbe-97e0-4071-ab1f-f66b33f589ea" class="">A &quot;grep&quot; card type filters input.</p><p id="b2dce6db-1e64-4175-ab2d-6fb76dfb8419" class="">By combining multiple simple cards users could build data-processing pipelines. Further enhancements included multiple inputs/outputs and renaming inputs or outputs.</p><figure id="ce4f1ae5-3633-4fd4-ab84-c9477167baf8" class="image"><a href="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/exp2-grades.png"><img style="width:650px" src="End-user%20programming%2057c15b2a71cb45b4905db8bd47c46286/exp2-grades.png"/></a></figure><p id="f195b3c5-0734-4f98-8fd9-15cad356a3c6" class="">A multi-step pipeline including multi-input cards and named inputs/outputs.</p><p id="d0986035-eaee-4a0b-b49b-da74640c33d0" class="">Many attempts at more accessible programming languages are weakly typed, under the hypothesis that types are unforgiving to newcomers. Our team’s instinct is the opposite: strong typing, with the right interface, can be friendlier for newcomers by making program components “snap” together like building blocks. If the blocks fit, the program will probably work. See the previously mentioned Scratch; <a href="https://guide.elm-lang.org/types/">Elm’s strong typing for eliminating runtime errors</a>; and <a href="http://hazel.org/">Hazel’s “typed holes” live programming environment</a>.</p><figure id="beca5a99-1c9f-4ca3-b28a-a3f3c691cb7f"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp2-typing.mp4">https://www.inkandswitch.com/media/end-user-programming/exp2-typing.mp4</a></div></figure><p id="7a34b204-fb5b-4c9a-92a7-37c5785755b3" class="">Strong typing prevents the user from connecting cards that don&#x27;t fit.</p><p id="ba4d7e4e-6aeb-4164-b0b4-c7a57ead87d6" class=""><a href="https://github.com/inkandswitch/eup-experiment-pipes">This standalone prototype is available here.</a></p><p id="e3d62a27-b4bb-46d3-9bc2-d149fe46658c" class="">Unix pipelines continue to be the reigning champion for composability — something not yet replicated in GUI environments. We feel that this CSV pipeline experiment produced positive findings supporting the value of strong typing (here as uses/exposes), and showed a potential interface for in-place toolchains that don’t break out of the touchscreen interface.</p><p id="1afea013-fab5-411a-864a-e219da67674a" class="">On the other hand, visual embodiment of the data pipeline created some problems. It adds visual clutter (a problem with many/most visual programming systems). Furthermore we found a tradeoff between grouping cards together in a way that makes the program flow clear (e.g. pipeline goes top-to-bottom or left-to-right) versus grouping cards in a way that reflects how the user wants to think about their content more generally.</p><p id="04335204-7bf2-478f-ae21-c7b3d699cb84" class="">For our third experiment, we decided to relax the constraint of an in-place toolchain in exchange for better results on other dimensions. In particular, we wanted to see if the <a href="https://en.wikipedia.org/wiki/Read%25E2%2580%2593eval%25E2%2580%2593print_loop">REPL (read-evaluate-print loop)</a> used in many programming systems would be of value.</p><p id="ebbc988e-87ee-4843-8e40-d23b65fe2741" class="">The built-in REPL for <a href="https://www.ruby-lang.org/">Ruby</a>.</p><p id="bf611253-d140-4c37-a145-d013534f91b8" class="">REPLs are traditionally built on wire protocols. That is, the user’s console sends commands to the runtime system over the network. But Capstone uses a synchronizing data model which keeps all of the visible elements stored in a live document. This allowed us to build the REPL by writing directly into the document from a session on another device.</p><p id="2a864fa4-15dd-4980-b3ec-dd20a376bf44" class="">The data layer for Capstone is based on a peer-to-peer CRDT system called <a href="https://github.com/automerge/hypermerge">Hypermerge</a>.</p><figure id="907f2f47-523e-49ab-a9c6-bd4664231e14"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp3-repl.mp4">https://www.inkandswitch.com/media/end-user-programming/exp3-repl.mp4</a></div></figure><p id="421f6313-1398-4012-9972-d9931488dd27" class="">Modifying canvas background color and moving cards via commands in the REPL.</p><p id="3390ae2b-c46c-41e9-8381-677303d8ce05" class="">We absolutely loved the resulting feel of <a href="https://github.com/inkandswitch/capstone/pull/233">this experiment</a>.</p><p id="464c0e72-b0f1-4ac6-95e5-338fbeb10923" class="">Being able to interact with a live system felt magical. Much like browser Dev Tools, the user can change appearance of anything via CSS. They can also interact with the cards data model to move cards around on the screen, move cards between boards, or absolutely anything else within the system. But unlike Dev Tools, all of these changes persist. The user has modified their workspace, customized it to their taste, via a fully programmable interface.</p><p id="6a96783f-970c-4257-8787-7419426978e4" class="">Our team was energized by this result and we instantly wanted this capability for all of our existing systems such as the desktop computers we use in our regular work lives. But we also quickly ran into what would likely be the biggest chunk of work in making a system like this real: API design.</p><p id="28619f9b-a4cc-4589-aa5d-50236914911c" class="">Typically software systems are built with an internal API used only by the professional engineers building that system. These functions are often minimally documented and have obscure names that may reflect history or even internal in-jokes, whereas a public-facing API is designed separately, well-documented, versioned, and kept more stable.</p><p id="79300339-a754-4b9f-b96f-ebf748022bb1" class="">Our finding here is that for a living system to work, the internal and external APIs need to be mostly the same.</p><p id="5a0b77ad-744d-4b28-a8a3-6b3a8437d87f" class="">We also noted that living systems produce a tension between hackabilty and the danger of user breakage. For example, the user can change a card’s background color just as easily as executing a command that would discard every card onscreen or even put the system into a crashed state or infinite loop. What to allow, how to surface errors, and how to recover are deep and challenging questions we did not explore in the course of this experiment.</p><p id="3a519bda-1337-4fe2-ac54-0a74319062fb" class="">Our next move was to extend the REPL with hooks for system events, such as the user dragging a card around the canvas.</p><p id="2d5edc96-90a4-47a5-866f-2e734d980414" class="">With a hook for card dragging, we could then build a “window manager” within the Capstone environment:</p><figure id="4125875f-b3f7-48ae-b235-f6305424d0ea"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp4-hooks.mp4">https://www.inkandswitch.com/media/end-user-programming/exp4-hooks.mp4</a></div></figure><p id="d697ee3c-742e-4b20-b33a-f71bc7462806" class="">Setting a hook on card movement to snap to a grid boundary.  Programmable window managers are an inspiring source of prior art on this. See <a href="https://xmonad.org/">xmonad</a>, <a href="https://github.com/kasper/phoenix%23readme">Phoenix</a>, and <a href="https://szymonkaliski.com/projects/hhtwm/">HHTWM</a>.</p><p id="97fa37a6-2823-40da-ac1e-e9521a142f7b" class="">Hooks bring a significant downside: the computation is no longer visible. The user’s code could do things hidden behind the curtain, which is the opposite of embodiment.</p><p id="26c062ff-8ea7-47e2-97cf-c02b1eeae4ae" class="">A parallel here is <a href="https://severalnines.com/blog/postgresql-triggers-and-stored-function-basics">triggers and stored procedures</a> in databases like <a href="https://www.postgresql.org/">PostgreSQL</a>. They also have the <a href="https://stackoverflow.com/questions/20190406/how-to-debug-postgresql-stored-procedures">downside</a> of no embodiment. Hence, while SQL is an end-user programming success story, triggers are typically reserved for professional database engineers rather than SQL console dabblers.</p><h2 id="f8e3b6b9-2374-47da-b8de-5afb8802adc1" class="">Bots</h2><p id="351e3a45-9bde-422c-9024-adc80e48130a" class="">For our final experiment we wanted to explore how the user could create long-running programs (or <a href="https://stackoverflow.com/questions/20190406/how-to-debug-postgresql-stored-procedures">daemons</a>) inside of Capstone that solved the embodiment problem of hooks.</p><p id="d31977be-1a8a-456c-b127-6c1a4a317a84" class="">Typically when we say embodiment we mean a visual element onscreen. But we took inspiration from the world of <a href="https://hubot.github.com/">chat bots</a>: what if computation was embodied as something with a bit of personality, a sense of being an actor or a collaborator in the system along with human collaborators?</p><figure id="6b987fd8-826a-4d55-910f-298f1bcc4740"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp5-autonomous.mp4">https://www.inkandswitch.com/media/end-user-programming/exp5-autonomous.mp4</a></div></figure><p id="1873c91a-fa55-42a9-98ed-bf8d5762f56b" class="">An autonomous bot uses a tiling algorithm to keep a canvas tidy as the user moves cards.</p><p id="8bde9aa4-d6e1-4dca-866c-fb9e0dd8ac52" class="">Like the REPL experiment, Capstone bots still suffer from no in-place toolchain. The end-user programmer must write the script in Javascript and then issue a command to add the card (or update an existing one) in their Capstone workspace. Technical details are available in <a href="https://github.com/inkandswitch/capstone/pull/145">the pull request</a>.</p><p id="806f80b5-3779-4e79-ac46-bb8d52823b31" class="">A subtle but important piece of the bot interface design is that a bot subscribes to all changes in the document (similar to <a href="https://gist.github.com/staltz/868e7e9bc2a7b8c1f754">reactive programming</a>). This is instead of subscribing to specific event types (similar to <a href="https://codeburst.io/event-emitters-and-listeners-in-javascript-9cf0c639fd63">event-emitter</a>) such as as moving or deleting a card.</p><p id="dd819cd4-318c-4b98-898d-eb7857aafc59" class="">Another variation on this experiment was to allow bots to expose a small UI. Since the bot’s card already has screen real estate, why not allow programming direct interactivity?</p><figure id="a3a0929b-e634-42a1-984b-6b4b7de17765"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp5-actions.mp4">https://www.inkandswitch.com/media/end-user-programming/exp5-actions.mp4</a></div></figure><p id="5d5c923d-d2e3-40f1-a306-6ed8dee2de0f" class="">A bot&#x27;s card offers buttons to trigger actions: here, creating a timestamp for a journal entry.</p><p id="5f0b291b-12ae-4252-99d7-4af942b9c6f5" class="">Although creating bot code does not satisfy the in-place toolchain goal, embodying them as cards has its own set of in-place toolchain benefits. In the same way a Unix user can manipulate a script file like any other file, a Capstone user can manipulate a bot like any other file.</p><figure id="a83022c1-47c0-4789-970d-7d16f2bba801"><div class="source"><a href="https://www.inkandswitch.com/media/end-user-programming/exp5-botbin.mp4">https://www.inkandswitch.com/media/end-user-programming/exp5-botbin.mp4</a></div></figure><p id="bca82e37-ef7f-4066-a6c2-8dd026bee55d" class="">A user&#x27;s Bot Bin, with favorite bots saved. The user uses the <a href="https://www.inkandswitch.com/capstone-manuscript.html#mirror">mirror command</a> to duplicate the bot and then bring it to the desired location.</p><p id="986cea4d-9d52-4a2a-9357-ba46f7007bde" class="">We noticed user behavior like creating a board full of their favorite bots and mirroring those cards onto the shelf to take them to the board where they wanted it. Deleting a bot is done by <a href="https://www.inkandswitch.com/capstone-manuscript.html#edges-to-create-and-delete">throwing the card off the screen</a> like any other card. All operations that worked on (for example) an image card worked on a bot card as well. Computation follows the same rules as data (it can be cloned, shared, stored, etc). This feels important.</p><p id="ace45a86-1e92-4a57-9ec1-f794225a30a4" class="">The potential for end-user programming remains largely a dream in today’s computing devices. The huge amount of work done by academia and industry indicates this is a very hard problem indeed. But in working on this problem via these experiments, our team feels that it is achievable with enough concentrated effort from our industry, and worth doing so.</p><p id="662a0850-62de-4067-8efe-929b1f139fc3" class="">Our positive findings from these experiments include the strength of combining strong typing (uses/exposes) with visual program flows; the magic feeling of interacting with a living system; and embodiment of long-running computation as bots, visually represented as cards with properties the user already knows.</p><p id="ed9b31e6-8766-451e-a02a-24bc66d31e3d" class="">Our negative findings included that our best experiment (REPL) still required an external/separate toolchain; that visual arrangement of computation cards can get messy quickly; and that API design and documentation will be a huge challenge for a powerful end-user system.</p><p id="8fd5ce5b-a80e-4ee6-b2e5-045ec5ee3816" class="">At Ink &amp; Switch we continue to believe that the end-user programming utopia is reachable. Are you working on this problem, or have thoughts on what we&#x27;ve written here? Get in touch: <a href="https://twitter.com/inkandswitch">@inkandswitch</a> or <a href="mailto:hello@inkandswitch.com">hello@inkandswitch.com</a></p><h2 id="3e145aff-3ca3-48e7-b0a8-5c90c90bb00e" class="">Appendix A: Data layer as an interface</h2><p id="02fe0842-0e07-48bc-9c1c-76070e1fbde1" class="">Three of the five Capstone end-user programming experiments used a different device for the programming interface. In both cases, we were able to build on the CRDT / Hypermerge data storage layer rather than use a traditional network connection such such as <a href="https://www.openssh.com/">ssh</a> or <a href="https://nrepl.org/nrepl/index.html">nREPL</a>.</p><p id="11734f6e-b342-42d2-a0dc-d70e24de1af3" class="">It feels like this difference is significant.</p><p id="d0f9edb6-9b60-4f54-b89a-12b2b7d75aa4" class="">We could speculate that this is the difference between imperative vs declarative code. Imperative programs say “run this function on the host.” Declarative says “update a portion of the document and let all subscribers to the document choose how to render the new state.”</p><p id="86d1948e-2a66-4d1b-b72b-e576aa6336c6" class="">Even in the case of a REPL, which is by nature imperative, simply storing the history of commands within the document gives us a scrubbable history of changes made to the system that is inspectable by anyone with access to the document.</p><p id="524b0eb1-369b-4bfd-b351-659fa450361b" class="">We are already <a href="https://github.com/inkandswitch/farm">exploring this topic in our next Ink &amp; Switch project</a>. We’re experimenting with live documents as a basis for a new programming model; realtime version control that combines the best parts of Git/Github and Google Docs; inspectable change history as a way to surface the power of CRDTs to end users; and what happens with end-user programmable environments when everyone is connected to a shared document.</p><h2 id="fa9c7440-29f9-4cf0-ba2a-3231ef0a2c60" class="">Appendix B: The web stack for sandboxing and hackability</h2><p id="d0307cf7-27cd-46fc-a067-bc262b17681b" class="">We chose <a href="https://www.inkandswitch.com/tablet-platform-showdown.html">Chrome OS as our platform for Capstone over more mature options like the iPad or Surface</a> largely because web technologies offer vastly more possibilities for end-user programming. On other platforms, we would have needed to embed a scripting language and runtime such as <a href="https://www.lua.org/">Lua</a>.</p><p id="3b2bd27d-3d96-4f69-9563-989aa384d594" class="">Some examples of apps that make great use of the web’s native extensibility:</p><p id="0864ccc8-c096-41db-9012-1be442548df4" class="">Embedding the Javascript toolchain for building and running Javascript programs in place (such as the editable cards shown in our first experiment) is straightforward. In this case we <a href="https://github.com/inkandswitch/eup-experiment-pipes/blob/master/src/App.js%23L32-L35">bundled</a> the <a href="https://babeljs.io/">Babel</a> compiler via <a href="https://babeljs.io/docs/en/next/babel-standalone.html">@babel/standalone</a> for building JSX files. As an added bonus, it bundles most popular presets and plugins.</p><p id="4f5f0004-ad83-4a4e-9708-12a56d0500af" class="">One open question is how to use external libraries. A potential solution is using a service like <a href="https://unpkg.com/%23/">unpkg</a> to provide users with a fetch and cache mechanism.</p><p id="9a7aba7e-f86b-41cc-9281-cd77e12905be" class="">Overall, the web is the only full-featured platform ever created that allows instant download and execution of a program written by a stranger (by visiting a website URL). But the perfect sandboxing of the Javascript runtime means that this action is almost completely safe. This is a truly stunning technical achievement and means that the web is a promising place for end-user programming capabilities.</p></div></article></body></html>

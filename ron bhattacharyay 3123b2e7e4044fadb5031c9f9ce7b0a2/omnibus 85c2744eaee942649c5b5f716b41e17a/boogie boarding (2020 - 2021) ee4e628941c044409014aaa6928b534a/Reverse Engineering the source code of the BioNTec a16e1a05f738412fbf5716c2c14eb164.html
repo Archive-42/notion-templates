@@ -1,0 +1,656 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Reverse Engineering the source code of the BioNTech/Pfizer SARS-CoV-2 Vaccine - Articles</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="a16e1a05-f738-412f-bf57-16c2c14eb164" class="page sans"><header><h1 class="page-title">Reverse Engineering the source code of the BioNTech/Pfizer SARS-CoV-2 Vaccine - Articles</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://berthub.eu/articles/posts/reverse-engineering-source-code-of-the-biontech-pfizer-vaccine/" class="url-value">https://berthub.eu/articles/posts/reverse-engineering-source-code-of-the-biontech-pfizer-vaccine/</a></td></tr></tbody></table></header><div class="page-body"><p id="90daac58-2afb-4e0e-8426-d5aaff275c6a" class="">Welcome! In this post, we’ll be taking a character-by-character look at the source code of the BioNTech/Pfizer SARS-CoV-2 mRNA vaccine.</p><blockquote id="d3eff433-ef43-479d-a257-b4791e9675a2" class="">I want to thank the large cast of people who spent time previewing this article for legibility and correctness. All mistakes remain mine though, but I would love to hear about them quickly at bert@hubertnet.nl or @PowerDNS_Bert</blockquote><p id="9936f2cc-9b94-4a79-bea6-442eb6bb90ab" class="">Now, these words may be somewhat jarring - the vaccine is a liquid that gets injected in your arm. How can we talk about source code?</p><p id="2f031a3b-1b95-4397-a614-f0bd6bd00055" class="">This is a good question, so let’s start off with a small part of the very source code of the BioNTech/Pfizer vaccine, also known as <a href="https://en.wikipedia.org/wiki/Tozinameran">BNT162b2</a>, also known as Tozinameran <a href="https://twitter.com/PowerDNS_Bert/status/1342109138965422083">also known as Comirnaty</a>.</p><figure id="66541bfb-11db-458d-b60a-5238c2f7a612" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/bnt162b2.png"><img style="width:602px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/bnt162b2.png"/></a></figure><p id="28059a1e-2b1c-4559-a1a6-efd4ec08897a" class="">First 500 characters of the BNT162b2 mRNA. Source:</p><p id="b4466342-4e98-4b24-ae89-925f8a4de399" class="">The BNT162b mRNA vaccine has this digital code at its heart. It is 4284 characters long, so it would fit in a bunch of tweets. At the very beginning of the vaccine production process, someone uploaded this code to a DNA printer (yes), which then converted the bytes on disk to actual DNA molecules.</p><figure id="0ee5df52-a7bb-463e-ab08-7c106961b4c7" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/bioxp-3200.jpg"><img style="width:400px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/bioxp-3200.jpg"/></a></figure><p id="15bc6ccd-4b03-468a-bb92-21b8c6b40aac" class="">A <a href="https://codexdna.com/products/bioxp-system/">Codex DNA</a> BioXp 3200 DNA printer</p><p id="2787fb72-0888-4929-950b-42451e00ac1b" class="">Out of such a machine come tiny amounts of DNA, which after a lot of biological and chemical processing end up as RNA (more about which later) in the vaccine vial. A 30 microgram dose turns out to actually contain 30 micrograms of RNA. In addition, there is a clever lipid (fatty) packaging system that gets the mRNA into our cells.</p><p id="eed4014b-dce2-43cf-8647-c21bb8daea03" class="">RNA is the volatile ‘working memory’ version of DNA. DNA is like the flash drive storage of biology. DNA is very durable, internally redundant and very reliable. But much like computers do not execute code directly from a flash drive, before something happens, code gets copied to a faster, more versatile yet far more fragile system.</p><p id="c58a9552-4e9c-47d3-a694-165664d654d2" class="">For computers, this is RAM, for biology it is RNA. The resemblance is striking. Unlike flash memory, RAM degrades very quickly unless lovingly tended to. The reason the Pfizer/BioNTech mRNA vaccine must be stored in the deepest of deep freezers is the same: RNA is a fragile flower.</p><p id="cf5d16f2-9d1b-47d9-93f0-7c0b191a3b6a" class="">Each RNA character weighs on the order of 0.53·10⁻²¹ grams, meaning there are 6·10¹⁶ characters in a single 30 microgram vaccine dose. Expressed in bytes, this is around 25 petabytes, although it must be said this consists of around 2000 billion repetitions of the same 4284 characters. The actual informational content of the vaccine is just over a kilobyte. <a href="https://www.ncbi.nlm.nih.gov/projects/sviewer/?id=NC_045512&amp;tracks=[key:sequence_track,name:Sequence,display_name:Sequence,id:STD649220238,annots:Sequence,ShowLabel:false,ColorGaps:false,shown:true,order:1][key:gene_model_track,name:Genes,display_name:Genes,id:STD3194982005,annots:Unnamed,Options:ShowAllButGenes,CDSProductFeats:true,NtRuler:true,AaRuler:true,HighlightMode:2,ShowLabel:true,shown:true,order:9]&amp;v=1:29903&amp;c=null&amp;select=null&amp;slim=0">SARS-CoV-2 itself</a> weighs in at around 7.5 kilobytes.</p><h2 id="8475d90e-b7b7-472c-9de6-3bc31bbb9788" class="">The briefest bit of background</h2><p id="790ca3dc-d872-4eb3-acc3-53c195b6a9dc" class="">DNA is a digital code. Unlike computers, which use 0 and 1, life uses A, C, G and U/T (the ‘nucleotides’, ‘nucleosides’ or ‘bases’).</p><p id="7a0def94-3e55-449c-868a-986fd5c64750" class="">In computers we store the 0 and 1 as the (ab)sence of a charge, or as a current, as a magnetic transition, or as a voltage, or as a modulation of a signal, or as a change of reflexivity. Or in short, the 0 and 1 are not some kind of abstract concept - they live as electrons and in many other physical embodiments.</p><p id="e7fd95ac-5e9e-4dda-859c-2609809c1a66" class="">In nature, A, C, G and U/T are molecules, stored as chains in DNA (or RNA).</p><p id="951e1442-72bc-4795-8139-5939b7252e47" class="">In computers, we group 8 bits into a byte, and the byte is the typical unit of data being processed.</p><p id="2f8250d5-8b21-43ac-8cb0-6b644f4827c5" class="">Nature groups 3 nucleotides into a codon, and this codon is the typical unit of processing. A codon contains 6 bits of information (2*3).</p><p id="71a30d0d-921a-4082-a595-c11663afe7a7" class="">Pretty digital so far. When in doubt, <a href="https://en.wikipedia.org/wiki/DOS_MZ_executable">head to the WHO document</a> with the digital code to see for yourself.</p><blockquote id="9a5ddd22-40ed-4b7a-85c2-bb3bcd206d28" class="">Some further reading is available here - this link (‘What is life’) might help make sense of the rest of this page.</blockquote><h2 id="48b51e95-fb94-4f24-b714-5c51cf249014" class="">So what does that code DO?</h2><p id="2b8a814a-6099-46a7-9abf-5f44a083da89" class="">The idea of a vaccine is to teach our immune system how to fight a pathogen, without us actually getting ill. Historically this has been done by injecting a weakened or incapacitated (attenuated) virus, plus an ‘adjuvant’ to scare our immune system into action. This was a decidedly analogue technique involving billions of eggs (or insects). It also required a lot of luck and loads of time. Sometimes a different (unrelated) virus was also used.</p><p id="f4ea8f65-1573-4a15-90a6-3edb6ab1c1c6" class="">An mRNA vaccine achieves the same thing (‘educate our immune system’) but in a laser like way. And I mean this in both senses - very narrow but also very powerful.</p><p id="9179d95a-24bc-46c8-a57d-e84638aa35f1" class="">So here is how it works. The injection contains volatile genetic material that describes the famous SARS-CoV-2 ‘Spike’ protein. Through clever chemical means, the vaccine manages to get this genetic material into some of our cells.</p><p id="caf9d883-7edc-4bf2-ad58-1f9b433ad86e" class="">These then dutifully start producing SARS-CoV-2 Spike proteins in large enough quantities that our immune system springs into action. Confronted with Spike proteins, and tell-tale signs that cells have been taken over, our immune system develops a powerful response against multiple aspects of the Spike protein AND the production process.</p><p id="54abbcb3-8719-401f-89a3-e13515dad51d" class="">And this is what gets us to the 95% efficient vaccine.</p><h2 id="1df4385d-bde1-4599-9768-bf488a592569" class="">The source code!</h2><p id="8660ff59-06da-4c53-bff9-0d620e47c9ad" class=""><a href="https://youtu.be/jp0opnxQ4rY?t=8">Let’s start at the very beginning, a very good place to start</a>. The WHO document has this helpful picture:</p><figure id="41882e98-9656-4730-a13c-07cce6cc977c" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/vaccine-toc.png"><img style="width:599px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/vaccine-toc.png"/></a></figure><p id="0b75dc66-76cd-4108-999f-a8d674d011a6" class="">This is a sort of table of contents. We’ll start with the ‘cap’, actually depicted as a little hat.</p><p id="44f951df-981d-45e7-ab7f-06a831ff3bca" class="">Much like you can’t just plonk opcodes in a file on a computer and run it, the biological operating system requires headers, has linkers and things like calling conventions.</p><p id="830c2208-d0b1-4817-ace6-d33282ddfab3" class="">The code of the vaccine starts with the following two nucleotides:</p><pre id="68926fec-0010-44ae-ade6-6025c05ee3c7" class="code"><code>GA
+</code></pre><p id="947f2307-e655-4d25-8e14-cda4b0317cf5" class="">This can be compared very much to every <a href="https://en.wikipedia.org/wiki/DOS_MZ_executable">DOS and Windows executable starting with MZ</a>, or UNIX scripts starting with <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)"><code>#!</code></a>. In both life and operating systems, these two characters are not executed in any way. But they have to be there because otherwise nothing happens.</p><p id="60e15289-a993-435c-9994-a17f9ddef248" class="">The mRNA ‘cap’ <a href="https://en.wikipedia.org/wiki/Five-prime_cap#Function">has a number of functions</a>. For one, it marks code as coming from the nucleus. In our case of course it doesn’t, our code comes from a vaccination. But we don’t need to tell the cell that. The cap makes our code look legit, which protects it from destruction.</p><p id="9ac28cf8-3f14-4832-9497-2c92770df387" class="">The initial two <code>GA</code> nucleotides are also chemically slightly different from the rest of the RNA. In this sense, the <code>GA</code> has some out-of-band signaling on it.</p><h2 id="51f42361-6785-4d05-b903-1ab5537958ac" class="">The “five-prime untranslated region”</h2><p id="1a88e9d7-359a-4d80-8b20-ae4e943f2dde" class="">Some lingo here. RNA molecules can only be read in one direction. Confusingly, the part where the reading begins is called the 5’ or ‘five-prime’. The reading stops at the 3’ or three-prime end.</p><p id="f22411ea-6302-48f4-85b8-65dda01d61c7" class="">Life consists of proteins (or things made by proteins). And these proteins are described in RNA. When RNA gets converted into proteins, this is called translation.</p><p id="cd8ca905-6190-4a88-a769-38d255ece0a6" class="">Here we have the 5’ untranslated region (‘UTR’), so this bit does not end up in the protein:</p><pre id="d00f541d-cd4e-4544-b7f4-c8abd69b7d86" class="code"><code>GAAΨAAACΨAGΨAΨΨCΨΨCΨGGΨCCCCACAGACΨCAGAGAGAACCCGCCACC
+</code></pre><p id="c5512fc3-d427-4113-abd1-13677c4f123d" class="">Here we encounter our first surprise. The normal RNA characters are A, C, G and U. U is also known as ’T’ in DNA. But here we find a Ψ, what is going on?</p><p id="55e89295-12e6-4595-b6f0-d913f8cf76a0" class="">This is one of the exceptionally clever bits about the vaccine. Our body runs a powerful antivirus system (“the original one”). For this reason, cells are extremely unenthusiastic about foreign RNA and try very hard to destroy it before it does anything.</p><p id="fb0d74cc-8144-4201-93f8-ec2da6b073d7" class="">This is somewhat of a problem for our vaccine - it needs to sneak past our immune system. Over many years of experimentation, it was found that if the U in RNA is replaced by a slightly modified molecule, our immune system loses interest. For real.</p><p id="98e6dff8-03eb-49a6-a51c-5072de34a3fc" class="">So in the BioNTech/Pfizer vaccine, every U has been replaced by 1-methyl-3’-pseudouridylyl, denoted by Ψ. The really clever bit is that although this replacement Ψ placates (calms) our immune system, it is accepted as a normal U by relevant parts of the cell.</p><p id="8b429a67-a7cf-4f00-ac30-21a9d60e8ad5" class="">In computer security we also know this trick - it sometimes is possible to transmit a slightly corrupted version of a message that confuses firewalls and security solutions, but that is still accepted by the backend servers - which can then get hacked.</p><p id="a1c99ae7-5e5b-4079-b4e8-d5e50cdfd0b5" class="">As with other fundamental scientific research we are now reaping the benefits of, the <a href="https://twitter.com/PennMedicine/status/1341766354232365059">discoverers</a> of this technique had to fight to get <a href="https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/">their</a> work funded and then accepted. We should all be very grateful, and I am sure the <a href="https://twitter.com/PowerDNS_Bert/status/1329861047168225281">Nobel prizes will arrive in due course</a>.</p><p id="d3a6abce-00d3-4b02-8e01-afe46ea99e18" class="">Ok, back to the 5’ UTR. What do these 51 characters do? As everything in nature, almost nothing has one clear function.</p><p id="7125fe6c-530b-470f-843d-962f56a2a326" class="">When our cells need to <em>translate</em> RNA into proteins, this is done using a machine called the ribosome. The ribosome is like a 3D printer for proteins. It ingests a strand of RNA and based on that it emits a string of amino acids, which then fold into a protein.</p><figure id="2355e57a-4d12-4ac4-a82d-ac72f12d0df9" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/Protein_translation.gif"><img style="width:250px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/Protein_translation.gif"/></a></figure><p id="edf51e6e-cb8b-4e88-ac5f-cf2df73b8cda" class="">Source: <a href="https://commons.wikimedia.org/wiki/File:Protein_translation.gif">Wikipedia user Bensaccount</a>.</p><p id="cb6178c9-cf1b-4390-91c2-2a678adf5497" class="">This is what we see happening above. The black ribbon at the bottom is RNA. The ribbon appearing in the green bit is the protein being formed.</p><p id="9d1f5328-d0bf-43df-993b-8f2db53a775e" class="">This ribosome needs to physically sit on the RNA strand for it to get to work. Once seated, it can start forming proteins based on further RNA it ingests. From this, you can imagine that it can’t yet read the parts where it lands on first. This is just one of the functions of the UTR: the ribosome landing zone. The UTR provides ‘lead-in’.</p><p id="cf09a265-5268-432f-bdde-d7365120f7cf" class="">In addition to this, the UTR also contains metadata: when should translation happen? And how much? For the vaccine, they took the most ‘right now’ UTR they could find, taken from the <a href="https://www.tandfonline.com/doi/full/10.1080/15476286.2018.1450054">alpha globin gene</a>. This gene is known to robustly produce a lot of proteins. In previous years, scientists had already found ways to optimize this UTR even further (according to the WHO document), so this is not quite the alpha globin UTR. It is better.</p><h2 id="b1c9e7c7-023c-484c-aca6-f2ca41a230f3" class="">The S glycoprotein signal peptide</h2><p id="d901cdd0-3724-4586-9a75-39d26033317e" class="">As noted, the goal of the vaccine is to get the cell to produce copious amounts of the Spike protein of SARS-CoV-2. Up to this point, we have mostly encountered metadata and “calling convention” stuff in the vaccine source code. But now we enter the actual viral protein territory.</p><p id="7f6d5bb0-c64c-4781-baf4-3f488288aff4" class="">We still have one layer of metadata to go however. Once the ribosome (from the splendid animation above) has made a protein, that protein still needs to go somewhere. This is encoded in the “S glycoprotein signal peptide (extended leader sequence)“.</p><p id="a6d70616-10a4-40d4-a596-5ea18e5b16b6" class="">The way to see this is that at the beginning of the protein there is a sort of address label - encoded as part of the protein itself. In this specific case, the signal peptide says that this protein should exit the cell via the “endoplasmic reticulum”. Even Star Trek lingo is not as fancy as this!</p><p id="fe8657b1-199f-4027-94a5-29272f9f35df" class="">The “signal peptide” is not very long, but when we look at the code, there are differences between the viral and vaccine RNA:</p><p id="429998aa-2e14-4dee-90f3-a43b0cbb4394" class="">(Note that for comparison purposes, I have replaced the fancy modified Ψ by a regular RNA U)</p><pre id="8142117a-a2b4-46ba-88d3-e4c0d8fe0766" class="code"><code>           3   3   3   3   3   3   3   3   3   3   3   3   3   3   3   3
+Virus:   AUG UUU GUU UUU CUU GUU UUA UUG CCA CUA GUC UCU AGU CAG UGU GUU
+Vaccine: AUG UUC GUG UUC CUG GUG CUG CUG CCU CUG GUG UCC AGC CAG UGU GUU
+               !   !   !   !   ! ! ! !     !   !   !   !   !            
+</code></pre><p id="edf52bdb-22cf-47f3-ac55-c2acac116730" class="">So what is going on? I have not accidentally listed the RNA in groups of 3 letters. Three RNA characters make up a codon. And every codon encodes for a specific amino acid. The signal peptide in the vaccine consists of <em>exactly</em> the same amino acids as in the virus itself.</p><p id="c6b68829-c21d-4b00-86d9-9111eb073c09" class="">So how come the RNA is different?</p><p id="53c30443-6d4f-4abc-8b6c-69368a58c571" class="">There are 4³=64 different codons, since there are 4 RNA characters, and there are three of them in a codon. Yet there are only 20 different amino acids. This means that multiple codons encode for the same amino acid.</p><p id="03cc112e-cb2d-4fd8-81b3-dddc5865997c" class="">Life uses the following nearly universal table for mapping RNA codons to amino acids:</p><figure id="96865914-c0ba-4ed1-a55a-13b8492312c9" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/rna-codon-table.png"><img style="width:647px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/rna-codon-table.png"/></a></figure><p id="d9a88680-b295-4528-85ce-77bfc6631c58" class=""><a href="https://en.wikipedia.org/wiki/DNA_and_RNA_codon_tables">The RNA codon table</a> (Wikipedia)</p><p id="5b4871d9-4f5e-4547-9ae7-254d4e1f9dc4" class="">In this table, we can see that the modifications in the vaccine (UUU -&gt; UUC) are all <em>synonymous</em>. The vaccine RNA code is different, but the same amino acids and the same protein come out.</p><p id="4829999b-2d5e-4ec9-813b-b662810e960b" class="">If we look closely, we see that the majority of the changes happen in the third codon position, noted with a ‘3’ above. And if we check the universal codon table, we see that this third position indeed often does not matter for which amino acid is produced.</p><p id="d76939af-3133-40ea-a3d8-b6c25cd492fb" class="">So, the changes are synonymous, but then why are they there? Looking closely, we see that all changes <em>except one</em> lead to more C and Gs.</p><p id="4ceca573-29f5-45a4-8854-5cd1297d8d69" class="">So why would you do that? As noted above, our immune system takes a very dim view of ‘exogenous’ RNA, RNA code coming from outside the cell. To evade detection, the ‘U’ in the RNA was already replaced by a Ψ.</p><p id="3dd39f05-52d4-4f6a-bf84-4cc6bb282806" class="">However, it turns out that RNA with <a href="https://www.nature.com/articles/nrd.2017.243">a higher amount</a> of Gs and Cs is also <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1463026/">converted more efficiently into proteins</a>,</p><p id="486835fe-9ce5-4290-bd86-fb6b413fe487" class="">And this has been achieved in the vaccine RNA by replacing many characters with Gs and Cs wherever this was possible.</p><blockquote id="8a1bb710-c311-45bc-918f-49cef674d1ca" class="">I’m slightly fascinated by the one change that did not lead to an additional C or G, the CCA -&gt; CCU modification. If anyone knows the reason, please let me know!</blockquote><h2 id="cd92f309-f5f6-43c8-bcf4-b0cb8f3ea0f5" class="">The actual Spike protein</h2><p id="a51f3828-13f1-4172-be88-3d1565e215a8" class="">The next 3777 characters of the vaccine RNA are similarly ‘codon optimized’ to add a lot of C’s and G’s. In the interest of space I won’t list all the code here, but we are going to zoom in on one exceptionally special bit. This is the bit that makes it work, the part that will actually help us return to life as normal:</p><pre id="343a15ca-b229-4d73-860f-eb6d6281785d" class="code"><code>                  *   *
+          L   D   K   V   E   A   E   V   Q   I   D   R   L   I   T   G
+Virus:   CUU GAC AAA GUU GAG GCU GAA GUG CAA AUU GAU AGG UUG AUC ACA GGC
+Vaccine: CUG GAC CCU CCU GAG GCC GAG GUG CAG AUC GAC AGA CUG AUC ACA GGC
+          L   D   P   P   E   A   E   V   Q   I   D   R   L   I   T   G
+           !     !!! !!        !   !       !   !   !   ! !              
+</code></pre><p id="562855ef-a22d-41ab-b00b-fdd8fbdf8be4" class="">Here we see the usual synonymous RNA changes. For example, in the first codon we see that CUU is changed into CUG. This adds another ‘G’ to the vaccine, which we know helps enhance protein production. Both CUU and CUG encode for the amino acid ‘L’ or Leucine, so nothing changed in the protein.</p><p id="6253f37c-a8a8-4c74-a6d2-e54efe5fdc5a" class="">When we compare the entire Spike protein in the vaccine, all changes are synonymous like this.. except for two, and this is what we see here.</p><p id="bcb0df6d-b58a-474b-a78b-fc812cd146e1" class="">The third and fourth codons above represent actual changes. The K and V amino acids there are both replaced by ‘P’ or Proline. For ‘K’ this required three changes (‘!!!’) and for ‘V’ it required only two (‘!!’).</p><p id="79a6a9eb-b2cf-4958-b026-72530ce9f0c2" class=""><strong>It turns out that these two changes enhance the vaccine efficiency enormously</strong>.</p><p id="5c5cef0d-8ad0-4401-ad25-9f643070081d" class="">So what is happening here? If you look at a real SARS-CoV-2 particle, you can see the Spike protein as, well, a bunch of spikes:</p><figure id="69ab37e0-6812-4559-b45f-4963b00a3626" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/sars-em.jpg"><img style="width:700px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/sars-em.jpg"/></a></figure><p id="4f687017-299e-4526-9414-aafcc5a59285" class="">SARS virus particles (Wikipedia)</p><p id="e81706b6-3534-4e2b-bdc0-63e6d784564c" class="">The spikes are mounted on the virus body (‘the nucleocapsid protein’). But the thing is, our vaccine is only generating the spikes itself, and we’re not mounting them on any kind of virus body.</p><p id="2e7a21ea-05ca-4e51-9ca9-c55c78d7a59c" class="">It turns out that, unmodified, freestanding Spike proteins collapse into a different structure. If injected as a vaccine, this would indeed cause our bodies to develop immunity.. but only against the collapsed spike protein.</p><p id="1c3db590-cb4e-4c50-bebe-b2e9004367dc" class="">And the real SARS-CoV-2 shows up with the spiky Spike. The vaccine would not work very well in that case.</p><p id="71f1633f-b8eb-4939-afaf-89227852442c" class="">So what to do? In <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5584442/">2017 it was described how putting a double Proline substitution in just the right place</a> would make the SARS-CoV-1 and MERS S proteins take up their ‘pre-fusion’ configuration, even without being part of the whole virus. This works because Proline is a very rigid amino acid. It acts as a kind of splint, stabilising the protein in the state we need to show to the immune system.</p><p id="058d2ec9-cce8-4fa2-82f5-2588dbdbedf8" class="">The <a href="https://twitter.com/goodwish916">people</a> that <a href="https://twitter.com/KizzyPhD">discovered</a> this should be walking around high-fiving themselves incessantly. Unbearable amounts of smugness should be emanating from them. And it would all be well deserved.</p><p id="16ad8d5c-5f14-44b6-93e6-83036f17e577" class="">(In reality, many of these scientists are tremendously humble - I simply wouldn’t know what to do with myself if I had made such an important discovery!)</p><h2 id="758a74bb-eef9-42c1-a303-74c2c40a82fe" class="">The end of the protein, next steps</h2><p id="c481811f-9862-4662-879b-606d238837c6" class="">If we scroll through the rest of the source code, we encounter some small modifications at the end of the Spike protein:</p><pre id="3f49d442-8891-4878-997b-79a66ba28951" class="code"><code>          V   L   K   G   V   K   L   H   Y   T   s             
+Virus:   GUG CUC AAA GGA GUC AAA UUA CAU UAC ACA UAA
+Vaccine: GUG CUG AAG GGC GUG AAA CUG CAC UAC ACA UGA UGA 
+          V   L   K   G   V   K   L   H   Y   T   s   s          
+               !   !   !   !     ! !   !          ! 
+</code></pre><p id="8e32fbfd-509d-4ce3-9936-e1e1fdd808fe" class="">At the end of a protein we find a ‘stop’ codon, denoted here by a lowercase ’s’. This is a polite way of saying that the protein should end here. The original virus uses the UAA stop codon, the vaccine uses two UGA stop codons, perhaps just for good measure.</p><h2 id="9f320265-9aa1-48f8-91ea-16e3d66ee586" class="">The 3’ Untranslated Region</h2><p id="d1c2e561-05cd-4233-b49b-ee08e3478d67" class="">Much like the ribosome needed some lead-in at the 5’ end, were we found the ‘five prime untranslated region’, at the end of a protein we find a similar construct called the 3’ UTR.</p><p id="946752cd-ddca-434d-9c57-2cec1a215b78" class="">Many words could be written about the 3’ UTR, but here I quote <a href="https://en.wikipedia.org/wiki/Three_prime_untranslated_region">what the Wikipedia says</a>: “The 3’-untranslated region plays a crucial role in gene expression by influencing the localization, stability, export, and translation efficiency of an mRNA .. <strong>despite our current understanding of 3’-UTRs, they are still relative mysteries</strong>”.</p><p id="dcd6219d-a6a9-41d0-93cc-c4385867a72f" class="">What we do know is that certain 3’-UTRs are very successful at promoting protein expression. According to the WHO document, the BioNTech/Pfizer vaccine 3’-UTR was picked from “the amino-terminal enhancer of split (AES) mRNA and the mitochondrial encoded 12S ribosomal RNA to confer RNA stability and high total protein expression”. To which I say, well done.</p><figure id="07cf41b6-7c3b-42b9-819d-8d4c3adbf536" class="image"><a href="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/vaccine.jpg"><img style="width:302px" src="Reverse%20Engineering%20the%20source%20code%20of%20the%20BioNTec%20a16e1a05f738412fbf5716c2c14eb164/vaccine.jpg"/></a></figure><h2 id="c30e1a44-e888-47a3-9f29-e1c1fa964df6" class="">The AAAAAAAAAAAAAAAAAAAAAA end of it all</h2><p id="d2cc2fce-753c-4e0f-977a-c60b94ac52b1" class="">The very end of mRNA is polyadenylated. This is a fancy way of saying it ends on a lot of AAAAAAAAAAAAAAAAAAA. Even mRNA has had enough of 2020 it appears.</p><p id="9e42c818-6825-44d0-b1ef-37c95dfed02d" class="">mRNA can be reused many times, but as this happens, it also loses some of the A’s at the end. Once the A’s run out, the mRNA is no longer functional and gets discarded. In this way, the ‘poly-A’ tail is protection from degradation.</p><p id="9039fc8f-2ff7-485a-b9c6-7e41883d3b2d" class="">Studies have been done to find out what the optimal number of A’s at the end is for mRNA vaccines. I read in the open literature that this peaked at 120 or so.</p><p id="a01d5859-292e-43fc-a410-d79753aa56a2" class="">The BNT162b2 vaccine ends with:</p><pre id="8c0bddc3-25d7-4e7f-a325-bc58d9af6c86" class="code"><code>                                     ****** ****
+UAGCAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAGCAUAU GACUAAAAAA AAAAAAAAAA 
+AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA AAAA
+</code></pre><p id="ea8a146d-6d5b-43b1-a9c1-f0e852747d6a" class="">This is 30 A’s, then a “10 nucleotide linker” (GCAUAUGACU), followed by another 70 A’s.</p><p id="8253f1c0-b3af-4b41-baff-0d2f8f0cceb2" class="">I suspect that what we see here is the result of further proprietary optimization to enhance protein expression even more.</p><h2 id="a56c785d-f495-426c-b331-b2fc0548f571" class="">Summarising</h2><p id="6161aacb-983a-4b82-8d1f-ed3d47d6cc7a" class="">With this, we now know the exact mRNA contents of the BNT162b2 vaccine, and for most parts we understand why they are there:</p><ul id="ab09e6df-831b-4a11-b866-2256671aa142" class="bulleted-list"><li>The CAP to make sure the RNA looks like regular mRNA</li></ul><ul id="c9027e99-93bf-422d-9ccd-71b54e1db3b2" class="bulleted-list"><li>A known successful and optimized 5’ untranslated region (UTR)</li></ul><ul id="f4aec60d-fff9-4529-814b-f65dd9451585" class="bulleted-list"><li>A codon optimized signal peptide to send the Spike protein to the right place (copied 100% from the original virus)</li></ul><ul id="58b7a22c-f434-49de-ab37-6f816020c0d9" class="bulleted-list"><li>A codon optimized version of the original spike, with two ‘Proline’ substitutions to make sure the protein appears in the right form</li></ul><ul id="d7983385-fb1b-4fb1-a839-8aa3589bcd1c" class="bulleted-list"><li>A known successful and optimized 3’ untranslated region</li></ul><ul id="8dcb0749-2bb2-41f5-bae7-fc61f131c066" class="bulleted-list"><li>A slightly mysterious poly-A tail with an unexplained ‘linker’ in there</li></ul><p id="b548301b-1892-4318-a38f-08209f84231c" class="">The codon optimization adds a lot of G and C to the mRNA. Meanwhile, using Ψ (1-methyl-3’-pseudouridylyl) instead of U helps evade our immune system, so the mRNA stays around long enough so we can actually help train the immune system.</p></div></article></body></html>

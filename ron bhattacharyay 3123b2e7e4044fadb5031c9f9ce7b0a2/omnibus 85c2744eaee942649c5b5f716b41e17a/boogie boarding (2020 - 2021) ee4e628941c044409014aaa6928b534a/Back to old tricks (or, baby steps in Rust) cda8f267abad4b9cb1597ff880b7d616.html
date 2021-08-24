@@ -1,0 +1,637 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Back to old tricks .. (or, baby steps in Rust)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="cda8f267-abad-4b9c-b159-7ff880b7d616" class="page sans"><header><h1 class="page-title">Back to old tricks .. (or, baby steps in Rust)</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://donsbot.wordpress.com/2020/07/04/back-to-old-tricks-or-baby-steps-in-rust/" class="url-value">https://donsbot.wordpress.com/2020/07/04/back-to-old-tricks-or-baby-steps-in-rust/</a></td></tr></tbody></table></header><div class="page-body"><figure id="3ed20ebe-2125-4b26-a525-f04e5a1f18f0" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-21.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-21.png"/></a></figure><p id="02ed9b44-937c-40d6-b20b-4189c3827f72" class="">I’ve been learning Rust for the past twenty days or so, working through the Blandy &amp; Orendorff book, coding up things as I go. Once I got into playing with Rust traits and closures and associated types, the similarities to programming in Haskell with typeclasses, data structures, closure passing and associated types was pretty obvious.</p><p id="a02681c7-2c62-4d28-a4d4-b5d16f99a67c" class="">As a warm up I thought I’d try porting the <a href="https://hackage.haskell.org/package/vector-0.12.1.2/docs/src/Data.Vector.Fusion.Stream.Monadic.html#Step">stream fusion core</a> from Haskell to Rust. This was code I was working on more than a decade ago. How much of it would work or even make sense in today’s Rust?</p><p id="ecc0c6e1-70d9-4848-8ea0-ee8ad4db8414" class=""><em>Footnote: this is the first code I’ve attempted to seriously write for more than 2 years, as I’m diving back into software engineering after an extended sojourn in team building and eng management. I was feeling a bit .. rusty</em>. <em>Let me know if I got anything confused.</em></p><h2 id="aa335144-8d07-40ea-ace3-11a35bc6fd3e" class="">TLDR</h2><ul id="a60ff157-2065-41f5-908a-3dc303f5ea70" class="bulleted-list"><li>Two versions of the basic stream/list/vector APIs: a data structure with boxed closure-passing and pure state</li></ul><ul id="a575a972-c1d2-4a0f-b142-551657e30825" class="bulleted-list"><li>And a more closure-avoiding trait encoding that uses types to index all the code statically</li></ul><p id="01831e13-dea5-4295-a041-622f530d4f84" class="">Fun things to discover:</p><ul id="5dc69436-edda-44ee-9442-0b38c3f2b1f3" class="bulleted-list"><li>most of the typeclass ‘way of seeing’ works pretty much the same in Rust. You index/dispatch/use similar mental model to program generically. I was able to start guessing the syntax after a couple of days</li></ul><ul id="7d156afd-c20e-42bb-ac13-c4ec6c5e20a2" class="bulleted-list"><li>it’s actually easier to get first class dictionaries and play with them</li></ul><ul id="70a31910-b464-4368-ba2d-04396116e0fd" class="bulleted-list"><li>compared to the hard work we do in GHC to make everything strict, unboxed and not heap-allocated, this is the default in Rust which makes the optimization story a lot simpler</li></ul><ul id="eb42bb3e-6afd-44ee-989c-7ba7fb9f4045" class="bulleted-list"><li>Rust has no GC , instead using a nested-region like allocation strategy by default. I have to commit to specific sharing and linear memory use up front. This feels a lot like an ST-monad-like state threading system. Borrowing and move semantics take a bit of practice to get used to.</li></ul><ul id="db23b05d-267e-4aaa-bc41-8ddeceef2dee" class="bulleted-list"><li>the trait version looks pretty similar to the core of the standard Rust iterators, and the performance in toy examples is very good for the amount of effort I put in</li></ul><ul id="a73d7f60-67c9-4883-9108-f2bb38fbcf99" class="bulleted-list"><li>Rust seems to push towards method/trait/data structure-per-generic-function programming, which is interesting. Encoding things in types does good things, just as it does in Haskell.</li></ul><ul id="dd63af56-6395-45e1-ba6c-bf71c98c16b6" class="bulleted-list"><li>Non-fancy Haskell, including type class designs, can basically be ported directly to Rust, though you now annotate allocation behavior explicitly.</li></ul><ul id="385e6867-89a7-4a52-809b-191746f73f7a" class="bulleted-list"><li>cargo is a highly polished ‘cabal’ with lots of sensible defaults and way more constraints on what is allowed. And a focus on good UX.</li></ul><p id="929c0418-03eb-414c-a6d5-53680b5a3e30" class="">As a meta point, it’s amazing to wander into a fresh programming language, 15 years after the original “<a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/assoc.pdf">associated types with class</a>” paper, and find basically all the original concepts available, and extended in some interesting ways. There’s a lot of feeling of deja vu for someone who worked on GHC optimizations/unboxing/streams when writing in Rust.</p><h2 id="2245905b-998f-4770-b05f-48c3694b4549" class="">Version 1: direct Haskell translation</h2><p id="0b6d2df3-2274-4627-8913-4355b5c4e3fa" class=""><a href="https://github.com/donsbot/experiments-rust/blob/master/stream-fusion/src/closure.rs">https://github.com/donsbot/experiments-rust/blob/master/stream-fusion/src/closure.rs</a></p><p id="f65bdb76-9c48-45c6-bf98-4bea84417f3f" class="">First, a direct port of the <a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.7401">original</a> <a href="http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.104.7401">paper</a>. A data type for stepping through elements of stream, including ‘Skip’ so we can filter things. And a struct holding the stream stepper function, and the state. Compared to the Haskell version (in the comment) there’s more rituals to declare what goes on the heap, and linking the lifetime of objects together. My reward for doing this is not needing a garbage collector. There’s quite an enjoyable serotonin reward when a borrow checking program type checks :-)</p><p id="6506f87b-f599-4634-abff-e098a540fccc" class="">You can probably infer from the syntax this will be operationally expensive: a closure boxed up onto the heap. Rust’s explicit control of where things are stored and for how long feels a lot like a type system for scripting allocators, and compared to Haskell you’re certainly exactly aware of what you’re asking the machine to do.</p><p id="79491b90-fdca-4252-b549-f9e916b6d0c8" class="">Overall, its a fairly pleasing translation and even though I’m putting the closure on the heap I’m still having it de-allocated when the stream is dropped. Look mum, closure passing without a GC.</p><figure id="aaaf491a-27c3-4920-9c32-8f933ae97652" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-2.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-2.png"/></a></figure><p id="b344a5bf-3f74-40cb-bc19-7b206e90ea55" class="">We can create empty streams, or streams with a single element in them. Remember a stream is just a function from going from one value to the next, and a state to kick it off:</p><figure id="feb969e2-2c78-4320-9bfa-8849e2dbb378" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-1.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-1.png"/></a></figure><p id="7cd5786d-3142-472d-a066-6f4fa73ea3e5" class="">The lambda syntax feels a bit heavy at first, but you get used to it. The hardest part of these definitions were:</p><ul id="bf53fe22-77ab-4d2b-b041-a5362e31a5ca" class="bulleted-list"><li>being explicit about whether my closure was going to borrow or own the lifetime of values it captures. Stuff you never think about in Haskell, with a GC to take care of all that thinking (for a price). You end up with a unique type per closure showing what is captured, which feels _very_ explicit and controlled.</li></ul><ul id="28b48bc1-71da-4358-a2cb-efefb015714b" class="bulleted-list"><li>no rank-2 type to hide the stream state type behind. The closest I could get was the ‘impl Seed’ opaque return type, but it doesn’t behave much like a proper existential type and tends to leak through the implementation. <em>I’d love to see the canonical way to hide this state value at the type level without being forced to box it up.</em></li></ul><ul id="0c3e940e-4a2b-43c8-a3e1-a1852dd35b67" class="bulleted-list"><li>a la vector ‘Prim’ types in Haskell, we use Copy to say something about when we want the values to be cheap to move (at least, that’s my early mental model)</li></ul><p id="0d59e974-ead4-4e5b-a407-59efcf892c39" class="">I can generate a stream of values, a la replicate:</p><figure id="10e108a0-0f77-459a-91b7-6f0977e6df94" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-3.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-3.png"/></a></figure><p id="42919164-4c7d-434d-8436-45785f36bd65" class="">As long as I’m careful threading lifetime parameters around I can box values and generate streams without using a GC. This is sort of amazing. (And the unique lifetime token-passing discipline feels very like the ST monad and its extensions into regions/nesting). Again , you can sort of “feel” how expensive this is going to be, with the capturing and boxing to the heap explict. That boxed closure dynamically invoked will have a cost.</p><p id="ebc0b50c-806e-4978-8dee-c6cfce712bb5" class="">Let’s consume a stream, via a fold:</p><figure id="a93acf83-d730-455d-9eee-2e5161cdb21a" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-4.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-4.png"/></a></figure><p id="fb736e17-4b00-4815-916b-7ecd629f70a5" class="">Not too bad. The lack of tail recursion shows up here, so while I’d normally write this as a ‘go’ local work function with a stack parameter, to get a loop, instead in Rust we just write a loop and peek and poke the memory directly via a ‘mut’ binding. Sigh, fine, but<em> I promise I’m still thinking in recursion.</em></p><p id="c761a028-669a-44a3-8325-78b6cbd69212" class="">Now I can do real functional programming:</p><figure id="5b8b5c38-672c-4d41-a19a-0893ea678a7d" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-6.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-6.png"/></a></figure><p id="bc012934-5dc8-4326-811a-5f130d11025f" class="">What about something a bit more generic: enumFromTo to fill a range with consecutive integer values, of any type supporting addition?</p><figure id="93cf5f80-1905-4490-a562-3ef11c711e93" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-5.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-5.png"/></a></figure><p id="370ae93a-568b-4ee1-afbc-1a87084483e5" class="">The trait parameters feel a lot like a super layered version of the Haskell Num class, where I’m really picking and choosing which methods I want to dispatch to. The numeric overloading is also a bit different (A::one()) instead of an overloaded literal. Again, is almost identical to the Haskell version, but with explicit memory annotations, and more structured type class/trait hierarchy. Other operations, like map, filter, etc all fall out fairly straight forward. Nice: starting to feel like I can definitely be productive in this language.</p><p id="224561b3-b0ad-402e-a71c-0edc2055b924" class="">Now I can even write a functional pipeline — equivalent to:</p><pre id="dd218739-7721-43d5-bb3e-b63a5bc5154d" class="code"><code>   sum . map (*2) . filter (\n -&gt; n`mod`2 == 1) $ [1..1000000::Int]
+=&gt; 500000000000</code></pre><p id="5a8dc2cf-0d45-419e-a988-838989d6a1e3" class="">As barebones Rust:</p><figure id="bd545bb9-f353-4fca-b13c-b04127b12686" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-7.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-7.png"/></a></figure><p id="86b757ce-36ff-40a4-aa6c-45662f5a5ab6" class="">It actually runs and does roughly what I’d expect, for N=1_000_000:</p><p id="5d9050b8-ea01-43e8-9461-ef152ed2198a" class=""><code>$ cargo run</code></p><p id="55c2894d-faa4-4729-b3e4-d74b960b11da" class=""><code>500000000000</code></p><p id="b603de4a-cf8e-411b-9e3c-18ee4a546317" class="">Another moment of deja vu, installing <a href="https://docs.rs/crate/criterion/0.3.3">Criterion</a> to benchmark the thing. “cargo bench” integration is pretty sweet:</p><figure id="fce5c6db-219e-422c-a658-2f0146310afb" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-19.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-19.png"/></a></figure><p id="7700d92b-d6ed-4962-b431-ea49c5c464e5" class="">So about 7 ms for four logical loops over 1M i64 elements. That’s sort of plausible and actually not to bad considering I don’t know what I’m doing.</p><figure id="b915ea08-6d64-4cb6-aca4-33a8d619f6d5" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/1558018088590.jpg"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/1558018088590.jpg"/></a></figure><p id="e908c302-d4ce-4bc8-8f71-e19794bf8ba1" class="">The overhead of the dynamic dispatch to the boxed closure is almost certainly going to dominate, and and then likely breaks inlining and arithmetic optimization, so while we do get a fused loop, we get all the steps of the loop in sequence. I fiddled a bit with the inlining the consuming loop, which shaved 1ms off, but that’s about it.</p><p id="27a2b9dc-f869-4264-9a63-7c6db6ce7f8f" class="">A quick peek at the assembly f–release mode, which I assume does good things, and yeah, this isn’t going to be fast. Tons of registers, allocs and dispatching everywhere. Urk.</p><figure id="7b54ca53-e0bb-482d-9b38-30e4954542a4" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-10.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-10.png"/></a></figure><p id="cd32502c-8950-4921-8627-443ace539a83" class="">But it works! The first thing directly translated works, and it has basically the behavior you’d expect with explict closure calls. Not bad!</p><h2 id="1be63527-ff71-4edb-91dd-16ca9b242354" class="">A trait API</h2><p id="28c0582e-903c-42c4-ace2-2ef098aa5023" class=""><a href="https://github.com/donsbot/experiments-rust/blob/master/stream-fusion/src/trait.rs">https://github.com/donsbot/experiments-rust/blob/master/stream-fusion/src/trait.rs</a></p><p id="16d625d3-814a-4888-829b-13bb67ad727f" class="">That boxed closure bothers me a bit. Dispatching to something that’s known statically. The usual trick for resolving things statically is to move the work to the type system. In this case, we want to lookup the right ‘step’ function by type. So I’ll need a type for each generator and transformer function in the stream API. We can take this approach in Rust too.</p><p id="70e2cb48-3cf5-4ded-a669-f2abf57b8af7" class="">Basic idea:</p><ul id="14c07cb6-ee5f-4c85-9420-0dc116679f7f" class="bulleted-list"><li>move the type of the ‘step’ function of streams into a Stream trait</li></ul><ul id="6c24d84d-2097-400d-b934-22e167d200be" class="bulleted-list"><li>create a data type for each generator or transformer function, then impl that for for Steam. This is the key to removing the overhead resolving the step functions</li></ul><ul id="54c33655-8874-4d74-b22c-232eff7e7f81" class="bulleted-list"><li>stream elem types can be generic parameters, or specialized associated types</li></ul><ul id="fa3d4f46-e09c-43e8-82a9-a9a2ede10fbd" class="bulleted-list"><li>the seed state can be an associated typed indexed</li></ul><p id="8448fb11-858e-4d3d-a8c9-8efab7a759b7" class="">I banged my head against this a few different ways, and settled on putting the state data into the ‘API key’ type. This actually looks really like something we already knew how to do – streams as Rust iterators – <a href="https://www.fpcomplete.com/blog/2017/07/iterators-streams-rust-haskell/">Snoyman already wrote about it 3 years ago!</a> — I’ve basically adapted his approach here after a bit of n00b trial and error.</p><p id="692ae51a-2f33-476a-9576-9ca991032fbe" class="">The ‘Step’ type is almost the same, and the polymorphic ‘Stream’ type with its existential seed becomes a trait definition:</p><figure id="7e8607d3-56da-43a0-ab39-5d693c2a8769" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-11.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-11.png"/></a></figure><p id="f981929e-49ea-495f-940d-5f8193261c66" class="">What’s a bit different now is how we’re going to resolve the function to generate each step of the stream. That’s now a trait method associated with some instance and element type.</p><p id="978e67d5-77bc-479a-abb8-62da6f265767" class="">So e.g. if I want to generate an empty stream, I need a type, and instance and a wrapper:</p><figure id="d54e8e02-3903-46ab-b57e-1dcadeea13bc" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-12.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-12.png"/></a></figure><p id="e87caf5a-26ea-444b-9f37-e70cfcdc613c" class="">Ok not too bad. My closure for stepping is not a ‘next’ method. What would have been a Stream ‘object’ with an embedded closure is now a trait instance where the ‘next’ function can be resolved statically.</p><p id="9ffbe997-75ac-4d05-b7b6-26710e15885c" class="">I can convert all the generator functions like this. E.g. to replicate a stream I need to know how many elements, and what the element is. Instead of capturing the element in a closure, it’s in an explicit data type:</p><figure id="55e689b0-5cde-4671-adba-420e2104d306" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-13.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-13.png"/></a></figure><p id="14c36e07-9dac-4428-8f37-88750bb3bb73" class="">The step function is still basically the same as in the Haskell version, but to get the nice method syntax we have it all talk to ‘self’.</p><p id="a4aaf043-b7a4-40f2-895f-a4500744e13e" class="">We also need a type for each stream transformer. E.g. a ‘map’ is now a struct with the mapper function, and an underlying stream object it operates on.</p><figure id="33bb6db8-886d-4c2f-af88-2eedf70fcef6" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-14.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-14.png"/></a></figure><p id="8a367e22-3374-4a89-b9b8-217bedb82724" class="">This part is a bit more involved — when a map is applied to a stream element, we return f(x) of the element, and lift the stream state into a Map stream state for the next step.</p><p id="3c0a53f4-f9c9-4102-9321-3a68d5f0b13c" class="">I can implement Stream-generic folds now — again, since I have no tail recursion to consume the stream I’m looping explicitly. This is our real ‘driver’ of work , the actual loop pulling on a chain of ‘stream.next()’s we’ve built up.</p><figure id="f0c697f5-2499-49b5-9b30-8bdd664675a5" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-15.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-15.png"/></a></figure><p id="5b5b128a-e685-4281-a777-ab24bf7b549f" class="">Ok so with the method syntax this looks pretty nice:</p><figure id="7818d368-cf7c-439f-bba3-1b30d3b123f1" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-16.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-16.png"/></a></figure><p id="2d02bb5e-60fd-4e4c-9dbb-6c3209d6cf3d" class="">I had to write out the types here to understand how the method resolving works. We build up a nice chain of type information about exactly what function we want to use at what type. The whole pipeline is a Map&lt;Filter&lt;Range &lt; … type&gt; , all an instance of Stream.</p><figure id="574c6ce7-fb70-430d-b340-9bbf392280d1" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-17.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-17.png"/></a></figure><p id="da41538b-c01f-4aaa-828c-43738008c15a" class="">So this should do ok right? No boxing of closures, there could be some lookups and dispatch but there’s enough type information here to know all calls staticallyI don’t have much intuition for how Rust will optimize the chain of nested Yield/Skip constructors.. but I’m hopeful.</p><figure id="32178ddd-6acb-445b-932a-045cf1e1e145" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-18.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-18.png"/></a></figure><p id="69f33959-dfd5-4df9-806e-e5fc8a0ce456" class="">288 micro seconds to collapse a 1_000_000 element stream. Or abou<strong>t 25x faster. </strong>Nice!</p><figure id="0e4b6ac9-a7b8-415b-9e37-ffd2ed92c3d9" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-21%201.png"><img style="width:700px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-21%201.png"/></a></figure><p id="b4335db8-5da6-4b4b-adc5-69f96bdf64c1" class="">So the type information and commitment to not allocating to the heap does a lot of work for us here. I ask cargo rustc –bin stream_test –release — –emit asm for fun. And this is basically what I want to see: a single loop, no allocation, a bit of math. Great.</p><figure id="9f6ef8ae-8f1b-4090-9d90-7e382e618fc3" class="image"><a href="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-22.png"><img style="width:592px" src="Back%20to%20old%20tricks%20(or,%20baby%20steps%20in%20Rust)%20cda8f267abad4b9cb1597ff880b7d616/image-22.png"/></a></figure><p id="a55a6cd8-6a7d-461f-a09c-ef23b106321a" class="">It’s converted the %2 / *2 body into adding a straight i64 addition loop with strides. I suspect with a bit of prodding it could resolve this statically to a constant but that’s just a toy anyway. All the intermediate data structures are gone.</p><p id="d28160ac-d2bf-417e-8a2d-c52a3f7eb42f" class="">So that’s a pretty satisfying result. With minimal effort I got a fusing iterator/stream API that performs well out of the box. The Rust defaults nudge code towards low overhead by default. That can feel quite satisfying.</p><p id="aa916253-f562-40c8-9c65-bf8716dda190" class="">Functional programmer, PhD in computer science, and ex-quantitative finance developer. I&#x27;ve built a lot of Haskell stuff, now trying out Rust. I&#x27;m also a software engineer at Facebook. In the past I&#x27;ve held engineering management and software dev roles in finance, tech and applied research. Views expressed are my own. <a href="https://donsbot.wordpress.com/author/dons00/"> View all posts by Don Stewart</a></p></div></article></body></html>

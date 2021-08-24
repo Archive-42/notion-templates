@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Oligarchic Tech and why we’ve well and truly fucked it</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2f4076a1-cc88-488e-8a0d-23e7dee7a185" class="page sans"><header><h1 class="page-title">Oligarchic Tech and why we’ve well and truly fucked it</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/@scott_riley/oligarchic-tech-and-why-weve-well-and-truly-fucked-it-fb996640bb21" class="url-value">https://medium.com/@scott_riley/oligarchic-tech-and-why-weve-well-and-truly-fucked-it-fb996640bb21</a></td></tr></tbody></table></header><div class="page-body"><h1 id="6a631623-d923-40f6-9ea3-61944dbe52d4" class="">Oligarchic Tech and why we’ve well and truly fucked it</h1><figure id="57392d96-a5b7-454e-b27b-c95ff4b3b17c" class="image"><a href="Oligarchic%20Tech%20and%20why%20we%E2%80%99ve%20well%20and%20truly%20fucke%202f4076a1cc88488e8a0d23e7dee7a185/0vmgfEgqzInCgGonW.jpeg"><img src="Oligarchic%20Tech%20and%20why%20we%E2%80%99ve%20well%20and%20truly%20fucke%202f4076a1cc88488e8a0d23e7dee7a185/0vmgfEgqzInCgGonW.jpeg"/></a></figure><p id="75ea9be8-8a14-47ce-8818-4ee8355f02d6" class=""><a href="https://medium.com/@scott_riley">Scott Riley ⚓</a></p><p id="15e68932-034b-4fcc-a930-b75743895c61" class="">Jan 27</p><p id="b0f0905d-d1f6-4321-8fa1-eb437f252848" class="">Housekeeping first: <a href="https://mindfuldesign.xyz/">buy my fucking book</a>.</p><p id="15048125-ef1b-40ba-85bc-713960f009c0" class="">It’s been a while since I’ve been able to write for myself, and I still think I’m gonna be shit at it, but there’s a bubbling in my head on the subject of tech’s role in the current sociopolitical shitstorm that we’re currently having to refer to as real life so here we are, words lashed at a proponent of homogenous tech thinking because I’m too fucking depressed to add a proper blog to my own website.</p><p id="dfc1bdd6-3723-44b8-b6d4-90c3c5255ccf" class="">Let’s start with a hopeful positive so I can later go on a polyparagraphic (not a word, should be) rant about our jobs: technology and the internet can play a huge role in the furthering of one of our most amazing functions as a species; that is, our ability and desire to take what’s in our brains and lash it out into our external environments. Writing/carving/painting tools, stone tablets, slates, paper, notebooks, clickbait-riddled writing websites ran by overpaid white dudes; we’re at our best when we share and distribute our knowledge and learnings of the world.</p><p id="46c011b3-0482-4872-9ecc-e80825e31318" class="">With the advent of the internet, and with tech and design’s abilities to greatly simplify, hasten, and even automate many of the processes behind publishing and consuming information, we’ve been able to produce tools that put the power of information and knowledge into more hands than ever before. That is a positive thing. Cool as heck, actually.</p><p id="bd134860-708b-4c5a-a508-d6533f425e33" class="">While some animals are known to pass information down through generations (I watched some dank as fuck Attenborough documentary once where a Nana elephant taught a Mum elephant how to stop the kid elephant being a cheeky little fuck and getting stuck in mud puddles, boss that) no other species keeps ancestral, historical and peer-based communication quite as integral to their survival. Our brains benefit profoundly from our notekeeping abilities, if you wanna explore more about how and why, then, I must insist; <a href="https://mindfuldesign.xyz/">buy my fucking book</a>.</p><p id="91df2692-d6ac-4f9d-bb20-ec49c9cb07f8" class="">Like everything else, once our writing systems and tools got to a certain point of proliferation and usefulness, shit men decided that they should have implicit ownership over them; written shit throughout history got burned, destroyed or used for propaganda, fear-mongering and control. The systems behind distribution and consumption of information have been historically hampered by the limp-dicked struggles of fat men with red faces and several wives and bad cheekbones trying to gobble up control like some tragic game of Hungry Hungry Hippos.</p><p id="860d6dae-1c17-4c8e-bb32-20e2fdbcd94d" class="">Fast-forwarding past all that, we hit a goldmine of potential democratisation with the advent and outrageous growth of the internet, the www, blogging, news sites, and social media. We invented a whole new way of consuming information, RSS was a thing for a bit, microformatting, hypertext, linked documents and all sorts of lush shit gave us new ways to describe and categorise information. We evolved a little bit, on screens, in circuits, across networks, together.</p><p id="307c7010-d6ba-4823-a97b-8a76d9ecb628" class="">For a while, it looked as though the web had us on the cusp of democratising information. Of breaking down the propaganda-driven news networks, of amplifying the voices of the oppressed and underrepresented, of dismantling, to the tiniest degree, the patriarchal, supremacist power structures that have plagued the world for millennia.</p><p id="f6eee43c-fa3a-4ce6-80ca-996a69383efd" class="">Further to this, we started making digital <em>products, </em>we made <em>UX Design </em>a <em>thing.</em> We supposedly set out to make systems, of all kinds, more accessible and more open to impact for <em>everyone</em>.</p><p id="ced1165d-13f4-45cb-af46-8162031ed1e5" class="">Yet, here we are in 2019. Capitalism is still ripping untempered through the world like a tornado full of chainsaws. A piss-stain of a clown is the actual president of the united states of fucking america. The UK is governed by an actual scarecrow tasked with finding some god forsaken list of shit that lets us fuck off from Europe and be our own little island of bigots. Elon Musk is worshipped as an American hero. Jeff Bezos doesn’t care that his most vulnerable employees have to piss in Dr Pepper bottles while he’s busy making mediocre gains in his gym. Mark Zuckerberg has somehow dodged prison even though he should have been locked up ten years ago just for looking so much like a fleshy shovel. Jack Dorsey is generally being a massive twat.</p><p id="8f031d24-67b3-450b-a770-f53d6576f775" class="">Uber is an automotive loans company and a taxi firm that’s coasted past all kinds of regulations under the guise of tech mysticism because the common person is apparently willing to overlook atrocity in the name of convenience as long as they don’t understand how easy it actually is to write the mediocre code that let’s this coasting happen. If it has an app, it’s a <em>tech</em> company, and tech companies, for some fucked reason, exist on a different plane of judgement to ‘normal’ companies.</p><p id="04d817eb-5c05-4286-960a-8ba23db2b079" class="">All of this is to say, tech has completely and utterly fucked it. Shit the bed. Pissed itself in front of the whole class. Looked over at those initial, promising, desperately fleeting moments where it looked like it could actually be a net positive for humanity and ran as fast as possible into the arms of oligarchic pieces of shit.</p><p id="9359c8b9-7659-4e75-a2e8-5308485ecac6" class="">Now, products are defined almost exclusively by their value to investors. Pesky things like morals and ethics are latched on as edge-cases or worked in as last-minute contingencies incase a governing body is actually cognisant and competent and insists that maybe, possibly, said product should adhere to some kind of standards.</p><p id="1315cdda-95d8-40c5-9e2a-cdec4e6954fb" class="">The most lauded tech products are almost exclusively things that replace upper-middle-class Californian’s parents. Cause Brent and Jack can’t get through the week without pissing the bed and getting their orange juice in their sippy cups, we have a whole bunch of apps that fix their mundane as fuck problems. They’re given millions to burn creating the digital equivalent of rubber sheets. The systems and processes we’re using all this amazing powers of ours to simplify are, by and large, fucking awful, stupid and genuinely pathetic. We’ve gone from ‘potentially democratising previously-inaccessible systems’ to ‘wow I can get my laundry done at the tap of an app’s button’. Fucked it mates.</p><p id="f46edf23-3527-459c-aff3-ee2c8c8b0bfa" class="">I believe that tech and design should democratise. That the most valuable technologies in the long run will be those that disrupt the power structures that keep people from impacting their own kind of change. We’ve gone from our information and knowledge systems being hampered by the limp-dicked struggles of fat men with red faces and several wives and bad cheekbones trying to gobble up control like some tragic game of Hungry Hungry Hippos to our technological systems being hampered by the limp-dicked struggles of spoiled white manchildren who can’t eat a single fucking yoghurt without getting covered in clumps of apricot jizz.</p><p id="e7ca4a9c-0328-4bde-b5e6-f864e35ce8df" class="">Here’s my default stance on tech: anything that doesn’t democratise a bullshit system is digital propaganda. Anything that makes life easy for the oppressive populous is an active enemy in this landscape of rampant sociopolitical oppression. Technology is not amoral, your products are not amoral, the systems you claim or wish to disrupt are going to benefit either a subset of an oligarchic Capitalistic hand-rubbing gang of ‘leading-class’ fuckheads, or they’re going to benefit a subset of the people who are fucked over by said fuckheads on a daily basis. There’s no middle ground, because there’s no room for one, because we’ve spent a decade inventing ways to take the burdens of daily life away from the already-affluent so they can continue perpetuating the technological echo-chamber of Convenience As A Service apps that genuinely do fuck all beyond extending this expensive jizzlobbing marathon even further.</p><p id="f886b56a-9947-4132-babc-a35d4dfb7204" class="">Where are all the products disrupting racism? Poverty? Homelessness? The absolute mindfuck that is the prison system? If they do exist, they’re drowning under the weight of a million Instagram-but-for-people-who-need-to-wear-bibs-so-they-don’t-get-yop-all-over-their-balenciaga-hoodies apps. The zeitgeist of tech right now decides what systems and what processes we can, as a united whole, explore and democratise. Follow the money and see what you can affect. The tragic answer is that a devastatingly disproportionate chunk of tech’s currently baffling economy points very far away from the problems encountered by vulnerable people and very much in the direction of mundane and pathetic problems ‘suffered’ by rich dickheads.</p><p id="73bcac14-fc8a-4458-978c-e80b3837443c" class="">I hate this, I cling to the hope that design and technology, through simplifying complex, monolithic systems, can democratise in the face of this homogenous shitheap that we’re currently tasked with scaling. I want to make shit that’s fuelled by compassion, that refuses to oppress, that considers social impact, that looks beyond a single, simple problem relayed to them by a CEO that’s about as far from an atomic example of a real human as you can get. This keeps me up at night. It depresses me in the day. I punish myself by thinking of the products I worked on in the past that served only to line the pockets of dickheads who look like The Ricycle Kid and grew up on Old Money.</p><p id="ceaf412d-601d-47ba-afac-3bbb159eeefc" class="">My way of not fitting in with the world is that I’m absolute piss with my mental health. It’s bad. I struggle to pay attention to one thing, I ruminate lots, I was agoraphobic, I spend far more time than a human should convincing myself that using a toaster as a bath bomb is A Bad Idea. This has made me hyper aware of how many apps just do not fucking consider mental health issues through their design process. Even with all that shit, I’m still a privileged fuck. I’m a white dude. I can pay my rent. There’s people far worse off than me who aren’t given a seat at any table. I can keep trying to provide my insight to my design work, but until we diversify our teams, until we give people the platforms to rise up and impact their own problem spaces, imbued with the pains of their own struggles, expressive of the individualities of their own cultures, we’re going to continue making shit apps for shit humans.</p><p id="33251642-be7a-4169-9846-1d617655c559" class="">I’ve got a list for how I’m trying to filter out this shit, make changes through this industry, while still paying the bills and not feeling like I’m insane every waking moment. Here it is, I hope you have the headspace to make something similar:</p><ul id="de692bbb-9b35-4cdc-87a8-67ee3dc60318" class="bulleted-list"><li>Never work with teams exclusively made up of white dudes</li></ul><ul id="23d03a37-bb9d-4df9-aeb7-83a16a354a14" class="bulleted-list"><li>Never work with people who can’t explain the social impact of their work, or those whose impact I believe to be detrimental to society or a niche</li></ul><ul id="3ecb429c-c52a-4fa6-88cd-717e098d6eb2" class="bulleted-list"><li>Stop making tragically one-dimensional user personas and make them challenge assumptions instead of doubling-down on confirmation bias</li></ul><ul id="46b72094-3bb1-459d-a8b4-3555e1e418da" class="bulleted-list"><li>Ask the people I work with and for what the real-world fail-state of their app is — how can it be used for nefarious purposes? This contextualises a problem space like nothing else, and makes an entire team aware of their real-world responsibilities. (<em>E.g. maybe let’s not make it so a whole bunch of Nazis can make and host conspiracy theory videos on our platform and if they do let’s maybe not recommend them to vulnerable young men prone to neofascist recruitment because our algorithms are Very Shite.</em>)</li></ul><ul id="76dad697-3d60-43d6-81a3-c97733d91386" class="bulleted-list"><li>Research with a wide range of humans for as long as possible before deciding on any features or making any assumptions</li></ul><ul id="f9973aa7-6812-4b4f-8b50-9980a8547645" class="bulleted-list"><li>Stop calling humans users you fucking reductionist prick</li></ul><ul id="03943234-fbac-422c-b12e-cb654ea6dcd5" class="bulleted-list"><li><em>Write a book about how fucking lush and weird the human mind is and how we can better design for people who are different (</em><a href="https://mindfuldesign.xyz/"><em>ahem….</em></a><em>)</em></li></ul><p id="a3715e8a-7079-467f-85f1-5cc40465a149" class="">This is only a subset, but I didn’t want to vomit out my entire moral compass, but this list essentially protects me from ‘bad’ projects. It means I flat-out refuse projects that I see as problematic and that I can bring my perspective into those that I do take on. It’s not a foolproof system, but it’s often able to guide my decisions if I’m feeling unsure or lost in the murky waters of freelance design work. I hope that-one day-the money, resources and coverage that are so abundant in tech are better-used to serve and to democratise, and I hope that by speaking out and changing my approach I can help that happen, even in the tiniest of ways.-</p><p id="70be0927-ad06-4491-8e54-71e372cfba1d" class="">I’m aware that this post is mostly a massive rant but I hope there’s something in here that’s made you question the shit you work on in your day-to-day. And sorry for the book promo but also buy it okay thanks xoxo</p></div></article></body></html>

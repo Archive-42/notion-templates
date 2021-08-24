@@ -1,0 +1,674 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>education</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="944d8585-882c-479b-b9ca-c12badf4cbd3" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🚕</span></div><h1 class="page-title">education</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-yellow">Life</span><span class="selected-value select-value-color-green">Tech Impact</span><span class="selected-value select-value-color-red">Tech Learn</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://nabeelqu.co/education" class="url-value">https://nabeelqu.co/education</a></td></tr></tbody></table></header><div class="page-body"><p id="62b72c3b-b4af-421a-a264-ccd8c1cb84a8" class="">My real education as a teenager was:</p><ol type="1" id="5f42f7b7-b43f-434f-879e-fb07a8e31a33" class="numbered-list" start="1"><li>Books I chose to read myself</li></ol><ol type="1" id="2c4c967c-a221-484d-8679-a9d73278c156" class="numbered-list" start="2"><li>Learning to program computers (taught myself)</li></ol><ol type="1" id="121148ed-d23c-48f1-b78b-16643ee62b47" class="numbered-list" start="3"><li>Video games (found them myself)</li></ol><ol type="1" id="3d2a7736-03dc-44ee-8c76-1420274b3d96" class="numbered-list" start="4"><li>Maths (school)</li></ol><p id="e9296cd9-7ef6-4f2b-8601-722808035734" class="">#1-3 happened despite formal schooling, not because of it, something Paul Graham says here:</p><p id="29c8171f-3873-4a37-9e4d-a6c567188c46" class="">This suggests the following conclusion:</p><p id="2ed5c6b5-c953-43c9-8526-4cbbe70137ef" class=""><strong>1. The things you learn by yourself stick; the things that are “taught” to you do not stick.</strong></p><p id="339e0a7f-30fd-47ba-bca5-0eaf1d6fe999" class="">The fundamental principle of education is to give students an environment, and tools, where they can make discoveries themselves. This requires space, and time, and autonomy.</p><p id="d13bdc2c-76f6-43da-aeba-cb43350ce73d" class="">
+</p><p id="2932d848-cce5-40a9-b0ff-b2c1b031e62d" class="">Students also need to be able to choose what they learn and how they learn it, something that modern rigid curriculums and prison-like school environments do not permit.</p><p id="6479adee-305f-4cc1-9522-74048afb3589" class="">
+</p><p id="abb504f3-eb95-4654-be71-86382390e6ad" class="">However, I would go farther than this and say:</p><p id="4eeb5c29-fbd6-47a5-87a6-c18006aa0fe4" class="">
+</p><p id="7ce12369-6bdf-48df-aced-c8d8ae94a9be" class=""><strong>2. Video games provide a much deeper understanding of most subjects than classical education does.</strong></p><p id="dc2e5169-4d6b-4fe6-9c6d-b84de810b98b" class="">
+</p><p id="270d707c-7e97-49fe-8181-21791cd8c118" class="">I play a fair amount of chess (I’m not very good) and one thing you develop after playing a lot of chess is that you start to see “lines of force” on the board, e.g. the force a bishop exerts on an enemy pawn; and start to sense “weak points” in the opponent’s structure in a very physical way, in the way that you can sense the shakiest part of a Jenga tower in the physical world.</p><p id="354a822a-6a94-46d1-8d85-ac9bfd83529d" class="">
+</p><figure id="3178ed51-b38f-419b-82a9-3e4887ff01b2" class="image"><a href="education%20944d8585882c479bb9cac12badf4cbd3/pict---scholar27s-mate.png--diagram-flowchart-example.png"><img style="width:640px" src="education%20944d8585882c479bb9cac12badf4cbd3/pict---scholar27s-mate.png--diagram-flowchart-example.png"/></a></figure><p id="e5320982-d7dd-49d7-b178-0e4dcd80c917" class="">This is the classical “scholar’s mate” position. As soon as you move your bishop to c4, you just “feel” that the black f-pawn is under pressure. The force exerted by the white bishop and Queen on the f-pawn can be felt as a weakness <strong>in the body</strong> of a good chess player.</p><p id="98175af3-9294-4e19-a55c-345d7c426b41" class="">
+</p><p id="ad3e5220-6da7-4d7d-8b14-f4e147bd75b8" class="">Developing this touch-based, proprioceptive “sense” of a thing is often key to a really deep understanding of it. When you understand something very well it’s almost as though you can play around with it using all your senses — touch, feeling, space.</p><p id="307dd28a-c4de-4241-9e18-0566384117d3" class="">
+</p><p id="f5e9f90b-2f22-4f8c-ba31-434a79e66ef8" class="">Feynman:</p><blockquote id="12775fd6-4a4c-42a3-baa6-69585617b379" class="">“If you can’t see it, it’s hard to explain why—but if you try to hold something up with a ladder, say, and you get the ladder directly under the thing, it’s easy to keep the ladder from sliding out. But if the ladder is leaning way waaaaay out, so that the far end of the ladder is only a very tiny distance from the ground, you’ll find a nearly infinite horizontal force is required to hold the thing up at a very slight angle. Now, all these things you can feel. You don’t have to feel them; you can work them out by making diagrams and calculations, but as problems get more and more difficult, and as you try to understand nature in more and more complicated situations, the more you can guess at, feel, and understand without actually calculating, the much better off you are!”</blockquote><p id="fc63e1ce-83e2-4ead-b412-27c7873ac316" class="">
+</p><p id="39cccd99-3294-4843-b465-8323df98018c" class="">There are stories of Feynman rolling around on the floor, eyes closed in concentration, simulating physical processes with his body. His biographer, James Gleick, writes:</p><p id="007cc021-c943-4081-a36a-021525321e9f" class="">
+</p><blockquote id="c8595514-ed8a-412f-83b2-de9cb063e14a" class="">Intuition was not just visual but also auditory and kinesthetic. Those who watched Feynman in moments of intense concentration came away with a strong, even disturbing sense of the physicality of the process, as thuogh his brain did not stop with the gray matter but extended through every muscle in his body. A Cornell dormitory neighbor opened Feynman’s door to find him rolling about on the floor beside his bed as he worked on a problem....In part the process of scientific visualization is a process of putting onself in nature: in an imagined beam of light, in a relativistic electron.</blockquote><p id="786c3072-f1e9-4f22-88b8-358834767159" class="">
+</p><p id="82559fc7-5e3d-4a80-bfa9-8f7e0ab7acc3" class="">There is also the famous story of Einstein at 16 imagining chasing after a beam of light, the seed of special relativity.</p><p id="7796892b-cfb6-4f3e-b504-e6ab15798155" class="">
+</p><p id="f1693387-1245-4936-8972-58427f1a46c7" class=""><strong>3. Schooling mostly fails at giving you this deep understanding. </strong> Most adults have the incredibly painful experience of realizing that after 15 years of formal schooling we still can’t answer very basic questions about everyday scientific questions (e.g. why the sky is actually blue) and have to go look them up.</p><p id="f114ea33-02b4-48bf-a937-a10cec2363ca" class="">
+</p><p id="ad94f285-44f7-4fa8-9257-59f1a2ac8793" class="">Most of the things I was “taught” at school simply didn’t stick. We were just told that an atom consisted of protons/neutrons/electrons, but we had no idea how anybody had figured this out (or, for that matter, why this was important). I have painful memories of studying the “plum pudding model” (aka Rutherford model) of atoms at school.</p><p id="12f116c3-d426-4cf6-b92e-60955a6377dc" class="">
+</p><p id="064cf360-6dfb-48a4-9c59-a598178642ee" class="">It took humans thousands of years to really figure out that reality was made of atoms, and understand why this was true. Reality has <a href="http://johnsalvatier.org/blog/2017/reality-has-a-surprising-amount-of-detail">a surprising amount of detail</a>. The deeper you get into these questions, the more you realize that nothing is simple. But school didn’t leave us room to dive deep into these questions; we had to pass exams, which meant dutifully learning to calculate molecular weights, etc, without actually understanding a thing.</p><p id="29ac46c4-c372-408e-bc01-c0937995ad8d" class="">
+</p><p id="25d01c23-ac19-4e18-85a6-0c51cc16b2dd" class="">The net result is: no understanding, years of waste.</p><p id="ba208d15-32ec-42e2-807e-76f34da6b0b1" class="">
+</p><p id="22737bbc-4c26-452c-827e-0bb42df948d6" class="">But this is <strong>entirely preventable</strong>. Consider if Pokemon had been “taught” in the usual way:</p><p id="cb1cb43d-d80a-4314-8b30-6cdc5de8da02" class="">
+</p><p id="3ee4ca4e-e362-4439-87cc-9cf0faa92ff9" class="">Playing with a simulation (i.e. the Pokemon games) gets you this deep, “bone-level” understanding very quickly.</p><p id="91acd1cb-9a2a-4e5c-9187-290e1438f812" class="">
+</p><p id="87ba173c-5217-49b0-a222-14385398f7f3" class="">Thus, I believe that:</p><p id="e84feb1a-52a7-46d9-8599-576e5830c284" class="">
+</p><p id="72cfc9c7-b21b-49c3-a839-3b9f70f9f150" class=""><strong>4. Video games will become a core component of education.</strong> </p><p id="b71c5705-2e1a-4cbc-a668-c7895c0d7ce9" class="">
+This sounds absurd, but consider that <strong>simulations are already used widely for learning:</strong></p><ul id="1de4a2aa-1779-4f50-ad59-32ab72bac42b" class="bulleted-list"><li>Kerbal Space Program is notorious for turning its players into experts on orbital mechanics</li></ul><ul id="194115c2-1567-49fc-a9d1-b2da51425b71" class="bulleted-list"><li>Flight simulators and combat simulators are used to train pilots and army personnel</li></ul><ul id="7817a0a5-b874-430f-a6b7-b945ec0ce015" class="bulleted-list"><li>The game “Factorio” teaches you about capitalism, production, and the economy</li></ul><ul id="6ea4db8e-0fb2-4c99-830b-7bab7f7cb4bc" class="bulleted-list"><li>Programming environments are simulations of the “universe” of that programming language, with fast feedback loops (write code -&gt; debug)</li></ul><figure id="74c95df1-e520-433a-8930-c288d668966a" class="image"><a href="education%20944d8585882c479bb9cac12badf4cbd3/orbital_mechanics.png"><img style="width:439px" src="education%20944d8585882c479bb9cac12badf4cbd3/orbital_mechanics.png"/></a></figure><p id="9eb285b8-004f-4d30-a686-a82815525316" class="">A video game is just:</p><p id="96e89b59-3d1d-409b-8aac-b338d76bd030" class="">
+</p><p id="952a98aa-fb5c-495a-b5f7-cc214ef37167" class="">(a) a simulation of reality
+(b) with fast feedback loops.</p><p id="a1a2dddc-92c3-41e5-b5b0-fb589176c13e" class="">
+</p><p id="69be4ca3-ffb3-4739-8421-797619f69894" class="">Learning is just the act of engaging with an external thing and performing many conjecture/criticism loops, forming conclusions, and building on them to form a body of knowledge.</p><p id="928e0c60-ce46-4a1c-9ad6-4991f26decba" class="">
+</p><p id="25cb031b-0b10-4bbe-b41b-90f13857a08a" class="">So it makes sense that video games would be the primary educational environment of the future: they are the best way we have of (a) creating simulations of reality (b) with fast feedback loops (c) accessible at low cost.</p><p id="d31e78df-2803-497d-9247-952ba950c8ff" class="">
+</p><p id="62ff3a3b-e105-4304-ab00-1e42b76234fc" class="">(By the way, this is true not just for abstract concepts such as orbital mechanics, but also for ethical traits. e.g. my understanding of heroism is to this day shaped by games like Final Fantasy and Metal Gear Solid. This also helps explain why reading fiction is valuable: you can gain “bodily knowledge” about despair by reading Dostoyevsky, about jealousy by reading Swann’s Way, etc.)</p><p id="5ce9d0e6-460c-4d31-bb2b-e65aff704384" class="">
+</p><p id="aa04683f-3434-4caf-b6ef-e744543a0be3" class=""><strong>5. Where games mostly fall short is that they’re not that transferable to the real world. The skills you learn are highly specific to that game. This will change.</strong> Most chess knowledge is specific to chess; what you learn from getting good at chess is not really transferable to real life, it instead consists of highly technical understandings of various chess positions.</p><p id="86fa2436-ec2e-4453-a033-8e918a11d7c4" class="">
+</p><p id="b72fdbb8-3ca4-4c09-b2a9-4c57b0e49aad" class="">This is because chess is not an accurate model of reality. The lessons you learn from chess are generalizable only at a high level (e.g. a bad plan is better than no plan).</p><p id="ba2e2b07-682f-4f3d-bc8e-fd26a757c7b7" class="">
+</p><p id="090e07fe-9898-4388-a0f2-c4fd5b79ae11" class="">But if you have games that are (a) fun and (b) accurate for some aspects of reality, such as KSP or Factorio, you do get learning that is real and transferable. The challenge is in making games that satisfy both constraints.</p><p id="3f37fa70-63b5-4d40-b172-e7e2352a99f4" class="">
+</p><p id="2891b6e7-eee8-4db6-a2bb-d1e770760944" class="">There are not that many examples of this just yet, but I believe there will be more in the future. So why hasn’t this happened already? I think the answer is:</p><p id="17cc1860-9f0b-4d20-9ae1-0924ed1b26ab" class="">
+</p><p id="178f5c35-f1cc-413f-ab7d-f6aa3bc45260" class=""><strong>6. It is currently too hard to make video games. Making it easier to create video games will massively increase the supply of good video games and cause a gradual revolution in education. </strong>  One thesis of the internet that always stuck with me comes from Evan Williams, who founded Twitter/Blogger/Medium. He said that the best way to create a giant internet company is to take something people want to do and make it 10x easier.</p><p id="c26fe08e-401a-4194-947d-6d180e114878" class="">
+</p><p id="5e4f2ad8-cc2d-45c3-b5ef-0e7fb3e6013d" class="">This was the core insight behind all of his companies. People already want to be creative, they want to make music, they want to make video games, they want to write (clearly!), they want to publish things online, but the barriers to entry for most of these things is currently too high.</p><p id="64af71f8-31f4-484c-a9d8-bd4d17eef6e9" class="">
+</p><blockquote id="56c24342-057e-4cc5-8983-a0e3f9edad1e" class="">&quot;We often think of the internet enables you to do new things,&quot; Williams said. &quot;But people just want to do the same things they’ve always done.&quot;  (...) &quot;Here’s the formula if you want to build a billion-dollar internet company,&quot; he said. &quot;Take a human desire, preferably one that has been around for a really long time...Identify that desire and use modern technology to take out steps.&quot; (link)</blockquote><p id="05737e7b-2cd4-4041-b28f-47ed928417d5" class="">
+</p><p id="b4eb7818-c81b-4a0d-95d7-402e370f79e3" class="">“Making things easier to create” is a mega-trend of the internet era:</p><ul id="c5f0afaf-6434-4ca9-b1e4-ee0ec7997b2e" class="bulleted-list"><li>Blogger/Medium/Wordpress make it easy for anyone to write on the internet;</li></ul><ul id="d89b4944-7d60-4eee-85ce-826a79bfe528" class="bulleted-list"><li>Substack makes it easy for people to set up newsletters;</li></ul><ul id="d9acc1f6-fa54-469e-943f-b0f2e1cbacd3" class="bulleted-list"><li>YouTube and TikTok make it easy to make videos;</li></ul><ul id="c55795ea-b1b6-4449-9f4f-11c6c1cb2f1e" class="bulleted-list"><li>Ableton makes it easier to create music; etc.</li></ul><p id="aad82270-bee1-4fa6-8a84-b1b75d6cb581" class="">
+</p><p id="afc9f16e-d44c-4892-80dc-01675df30ef6" class="">Another insight is that making things easier has nonlinear effects. Making something 10x easier can cause 1000x more of that thing to happen. Hence the explosion of online creativity you see on YouTube, with chess, Minecraft, math videos, Khan Academy, Twitchstreams, Soundcloud, etc; you remove a small bit of friction and get a large result.</p><p id="9d73e12c-8913-4e6d-9965-4667ed156a45" class="">
+</p><p id="f69db224-c904-4c50-afdf-f410ffe8fe7b" class="">This trend has a long way to go, though. Making video games is colossally hard and expensive; you need to be a crazy genius indie game developer with ultra-high risk tolerance, or else a mega-corporation like Unity or Steam or Valve, to do it. Video games haven’t yet had their “creator revolution”.</p><p id="181721b5-cc7f-490f-92a4-00d49665eda7" class="">
+</p><p id="d3eef35e-8135-4841-813b-bad8fe54bd7a" class="">This will not always be the case. Large companies will be built that make it easier for anyone to make videos, or video games, or podcasts, and so on, unleashing a ton more latent creativity. This will make the idea of video games for education seem less and less insane over time, as better games get built to help students understand important things like Newtonian mechanics, maths, chemistry, architecture etc. on an intuitive level that books and teachers rarely manage to reach.</p><p id="647ff2e9-e234-441a-be5a-c030a559940e" class="">
+</p><p id="47ebe64e-e8ec-4391-ba76-4e388d17fc60" class="">This is also why AI is important for human productivity. Most of the discourse here is about how AI will “replace” humans. I prefer the Licklider school of thought -- human-computer symbiosis. AI will make humans vastly more effective by automating tedious tasks. For example, humans can use text AI such as GPT-3 to generate ideas/boilerplate writing to get around the terror of the blank page, and then simply pick the best ones and refine/iterate on those. (AI Dril, which was based on GPT-2, was an early example of this).</p><p id="40edafa9-2727-47a3-8424-bff21e9bae74" class="">
+</p><p id="26171bf7-eca7-4937-992d-1c83471a93a7" class="">The potential energy of human creativity is vast. We just need to give people tools, and creation will follow. Onwards!</p><p id="503d39b2-89cd-4662-afcd-e43e9b05afe8" class="">
+</p><p id="45becc0e-c40e-4129-bceb-59e81ec61547" class="">Thanks for Saku P for reading a draft of this.</p><p id="6c42696f-3846-47ba-a6b7-9ff445bdeff4" class="">Follow me on Twitter: <a href="https://twitter.com/nabeelqu">https://twitter.com/nabeelqu</a></p></div></article></body></html>

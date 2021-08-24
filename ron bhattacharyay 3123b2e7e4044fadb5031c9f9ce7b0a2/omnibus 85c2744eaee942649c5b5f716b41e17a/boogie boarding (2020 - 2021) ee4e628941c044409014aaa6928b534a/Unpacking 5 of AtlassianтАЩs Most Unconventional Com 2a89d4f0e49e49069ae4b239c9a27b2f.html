@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Unpacking 5 of Atlassian’s Most Unconventional Company-Building Moves</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2a89d4f0-e49e-4906-9ae4-b239c9a27b2f" class="page sans"><header><h1 class="page-title">Unpacking 5 of Atlassian’s Most Unconventional Company-Building Moves</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 3:59 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://firstround.com/review/unpacking-5-of-atlassians-most-unconventional-company-building-moves/" class="url-value">https://firstround.com/review/unpacking-5-of-atlassians-most-unconventional-company-building-moves/</a></td></tr></tbody></table></header><div class="page-body"><p id="444adc1d-cd39-4caa-8956-b9349f8a5fc4" class="">There are plenty of young, flashy startups that seem to be overnight successes, bursting onto the scene, grabbing headlines and growing at a break-neck pace — <a href="https://www.atlassian.com/"><strong>Atlassian</strong></a> isn’t one of those stories. The company has been humming along for 18 years, quietly shifting the ground underneath traditional tech companies.</p><p id="3079fa30-d626-4a9b-9275-34953772fa9c" class="">For a large chunk of that journey, <a href="https://www.linkedin.com/in/jaysimons/"><strong>Jay Simons</strong></a> was in the center of the action. He joined Atlassian back in 2008, and under his long tenure as president, the company grew from $20 million in AAR to about $2 billion today. Now, as a partner at <a href="https://www.bondcap.com/">Bond Capital</a> and board member at <a href="https://www.hubspot.com/">Hubspot</a> and <a href="https://firstround.com/review/how-zapier-pulled-off-its-one-and-done-approach-to-fundraising/">Zapier</a>, he’s got plenty of stories to tell about the unconventional moves that positioned Atlassian to become a global leader, with a suite of software collaboration tools like Jira, Confluence and Trello.</p><p id="4c48b1ac-22b7-4042-b98e-a0f300f89c9a" class="">Most have heard about Atlassian’s storied lack of a traditional sales force. But in our conversation with Simons, we found that this wasn’t the only outlier in the company’s story. If you turn over any stone on their path to scale, you’ll likely uncover something that bucks a trend. Whether it’s the company’s genesis in Australia — far outside of Silicon Valley’s center of gravity — or the unusual dual-CEO leadership structure, or a second product launch in just their second year — it’s a growth story that doesn’t get nearly enough of the spotlight it deserves.</p><p id="30784732-14b2-44f4-a621-60a215abca9a" class="">“It was really rare for us to just do something that works somewhere else. <strong>We always began culturally with the question around, ‘Why is it done that way?</strong>’ I want to understand it first and maybe there’s room for not just incremental innovation, but real invention that can make a big difference for us,” says Simons.</p><blockquote id="fedbb38e-3632-40cd-a1b4-5d16a0243d20" class="">Constant willingness to reinvent the wheel takes a shit ton of courage and energy. It’s way easier to just rip the page out of the playbook and follow the script.</blockquote><p id="04ee1ab0-6f4d-493a-bc33-8782e7b81157" class="">Here on the Review, we’re big fans of <a href="https://firstround.com/review/what-your-startup-can-learn-from-astronauts-the-daily-show-and-the-coach-of-the-boston-celtics/">folks who can think outside the box</a> and sidestep conventional wisdom, and Simons is game to get deep in the weeds to unpack each of these atypical moves. In this exclusive interview, he gets incredibly tactical about each leg of Atlassian’s three-pronged stool: the self-service funnel, a global network of channel partners, and enterprise upselling. He also dives into why the company relied on product-led growth before anyone coined the phrase, his theory on why HipChat lost to Slack, and the flywheels that fuel and reinforce the company’s up-and-to-the-right growth. There’s plenty of spot-on advice for go-to-market and revenue leaders, but also lessons for any company-builder on architecting a product and culture that’s rooted in first-principles thinking.</p><h2 id="02fb24c6-ccd7-4b75-810e-997113a2d78e" class="">UNCONVENTIONAL MOVE #1: BUILD ON THE BACKBONE OF PRODUCT-LED GROWTH.</h2><p id="1c11b4d0-0ea4-4454-b92f-bf990ca5d97b" class="">In any conversation with Atlassian insiders, you’ll likely hear one word over and over again: flywheel. “We gravitated to that metaphor early on because a flywheel is a big, heavy device that takes lots of energy to spin. You typically can’t get it to accelerate fast because it takes so much to push it. But once you get it going, it’s going to move at a consistent pace, and there’s small things you can add to move it a bit faster,” says Simons. “Conversely, it’s hard to stop a flywheel — you can’t just grab onto it and bring it to a halt. That feeds into what we’ve always tried to architect for, which is the durability of the business as a whole.”</p><p id="c17ba092-3cc8-46a9-9f96-d22dbdedfc01" class="">For Atlassian, the core ingredient in the flywheel is product-led growth, an ethos that predates Simons. “Even before I got there, the company’s earliest mission is characterized as building remarkable products. They were really intentional with the word ‘remarkable’ because they thought, ‘We want to build a product that compels people to remark upon it,’” he says. “Atlassian believed that we’d built a product that was easy to use and that people loved, and that was going to add to the megaphone of getting the word out about who we are and what we do.”</p><blockquote id="14080f3d-943e-470d-a1cd-71a56a06fcad" class="">A lot of companies worry about how to sell a product before they build a product that can sell itself.</blockquote><p id="7e8afe4d-16ae-41ad-be83-e39ee6ca5e14" class="">But a lovable product alone isn’t enough to crack into a crowded landscape. Atlassian deployed a trio of tactics to smooth out some of the potholes customers often step into:</p><ul id="9683f840-3e81-4cae-b0e3-853a6679cb4a" class="bulleted-list"><li>Self-service</li></ul><ul id="934f58ae-7365-41f8-99a5-6fd978f1da73" class="bulleted-list"><li>Intuitive pricing</li></ul><ul id="f7534ba9-0158-43ed-845f-c19f1cdebfe3" class="bulleted-list"><li>A sales alternative</li></ul><p id="2049ab8a-5f90-4c41-9e8b-685a52c9cc83" class="">“The product and the business model are really married together, and that’s what we got right,” says Simons.</p><h3 id="b8f041bb-10f1-4194-92f4-a20c48d17116" class="">Thinking self-service first.</h3><p id="5e99f8ea-eea7-4134-8d6a-22378b639bc5" class="">The team held a strong belief that <a href="https://firstround.com/review/designing-your-sales-stack-so-that-customers-come-to-you/">customers wanted to help themselves</a>, and architected everything around that self-service model. “First you have to build a great product that people can discover on their own, begin to use on their own, onboard effectively on their own. If you can’t do those things, it’s not going to work,” he says.</p><p id="12f85b3d-c0d4-4cf9-97a0-20d82320bb7e" class="">So rather than pointing prospects to a traditional “contact us” form and a pitch from a salesperson, Atlassian prioritized an intuitive onboarding process that didn’t need a ton of explaining. In the present day, bottoms-up SaaS gets plenty of attention, but back in 2002 when launching Jira, Atlassian got its fair share of sideways looks. “We were early adopters of AdWords, and wanted to meet the customers at the point where they were looking for something to solve a problem. That was something that IBM or our free and open source competitors weren’t really doing,” he says.</p><h3 id="4acae785-7b5f-4d58-92f6-61dd73c5f669" class="">Pricing that removes friction.</h3><p id="10366cc0-616b-49ac-ba4f-ae7048cccb9b" class="">Beyond grabbing eyeballs, there were several other bumps the company needed to smooth along a prospect’s path. “We wanted to have the product guide the customer through in the same way that a human being would if they’re sitting right alongside the customer. That meant making it easy for them to transact online and buy the product. We needed a price point that didn’t require a lot of explaining or convincing,” says Simons.</p><p id="d3cc9ecd-587a-4c56-8639-5bc586660317" class="">Now, Atlassian has a tiered pricing structure which includes a free version, a standard version, a premium version, and an enterprise version. But that wasn’t the case in the earliest days. “At the time, we were so focused on reducing the cognitive load on the customer that was coming to us. And if you have four different versions at four different price points, that’s very difficult to help the customer wade through,” he says. Instead, Atlassian landed on a single price point for the product, at just above free. But that meant reducing the overhead on distribution to stay out of the red.</p><figure id="6236ffc7-74ff-42a1-89ce-2b7bec3a267f" class="image"><a href="Unpacking%205%20of%20Atlassian%E2%80%99s%20Most%20Unconventional%20Com%202a89d4f0e49e49069ae4b239c9a27b2f/VQYMOYNOTams1hxqiST9_Jay20Simons.jpg"><img style="width:700px" src="Unpacking%205%20of%20Atlassian%E2%80%99s%20Most%20Unconventional%20Com%202a89d4f0e49e49069ae4b239c9a27b2f/VQYMOYNOTams1hxqiST9_Jay20Simons.jpg"/></a></figure><p id="f9bcedbf-2ed0-45f9-863c-0772bc2e5dc6" class="">Jay Simons, former President of Atlassian, and partner at Bond Capital.</p><h3 id="5130cf33-3b5e-423c-bf7a-02dda4384996" class="">Scaling up with a different kind of sales force.</h3><p id="11c9b998-0e2c-4f14-98e0-3aa0cfb5c52e" class="">Rather than an army of salespeople, the company invested in what it called product advocates. “We would say to every customer, ‘Let us know how we can help.’ Our product advocates were absolutely focused on the success of the customer and they were there to remove whatever potholes the customer might step into. They’d answer a question on product capability, or competitive alternatives, or pricing, but with a great answer, they would then send the customer back into the self-service path,” he says.</p><p id="778b4dd5-9d99-47b0-aa24-3ebb4ebfa903" class="">The one-to-many commerce engine and emphasis on self-service meant the company’s human capital was much more cost-effective, leaving plenty of green space for scaling up.</p><blockquote id="70a84f28-168b-4b05-b187-81cdedd8d207" class="">Once you go down the track of scaling with manpower, it’s very difficult to say, “Woah, we could actually fix all these things in the product, and then we wouldn’t need as many people.” Once your train is set in motion, it’s difficult to jump to a different set of tracks.</blockquote><p id="495c9222-6bb5-4b89-a75b-7112a1ccbcc3" class="">“Atlassian now has probably close to 5,000 employees and, relative to most enterprise software companies of that size, it has a fraction of the number of quota carriers because of that flywheel approach,” says Simons.</p><p id="0287681e-a326-48a7-9762-8d22fcde5a95" class="">The company thought of this self-service funnel as a product in itself, and constantly tinkered with opportunities to optimize. “If somebody went through an evaluation of the product and said, ‘No, I’m not going to buy it,’ we would spend a bunch of time understanding what the headaches were that convinced you to go somewhere else, and look for patterns that we could smooth out,” he says.</p><blockquote id="1e9477af-25eb-4998-926a-b18c6b7cb40f" class="">The business model ends up becoming the business. It’s equally important as the market you’re going after and the product that you build.</blockquote><p id="4da15d9f-b856-44bf-a95d-c9cd4aa92c55" class="">“We created our second product, <a href="https://www.atlassian.com/software/confluence">Confluence</a>, in Atlassian’s second year, which is really unusual — especially when you’ve got a breakout product like Jira that’s growing really nicely. Conventional company-building wisdom would say not to do it — there’s still a ton of work you need to do on the first product, and it will fragment your focus once you start working on a second thing, which could be a death sentence for a young company,” says Simons.</p><p id="61b500ff-8a7e-4f28-8ed5-879cf911b41a" class="">Not only did Confluence become a cornerstone of Atlassian’s product suite, but Simons also spots plenty of less-tangible uspides. “We began to build this muscle around how you think about cross-merchandising, cross-selling, and upselling. <a href="https://firstround.com/review/its-price-before-product-period/">How do you think about pricing</a> and packaging around multiple things? How do you do product planning and prioritization and budgeting and staffing?”</p><blockquote id="0aadadfb-06e2-4aef-8bbf-02b34faf75d7" class="">At a really early age at Atlassian we began to wire our brain to think about all of those things that companies need to do as they get bigger.</blockquote><p id="0735ed30-8aba-40b4-8106-2c5d8e92af7e" class="">That’s not to say the decision to add new products is always unanimous. “There’s lots of debate and planning and thinking that goes into the trade-offs. When you’ve got a business that you’re running and there’s lots of things you need to do for existing customers, starting something new does draw away from that. It’s got a zero sum,” he says. “It all begins with listening to the market and listening to the customer, and paying attention internally at the itches that we’ve had to scratch for ourselves, and whether or not we think those are transferable to hundreds of thousands of customers.”</p><blockquote id="9eb613e1-9c42-43dd-be5f-1aef4e9c3000" class="">Every time you create something new, it’s going to take away from something that’s already here that also needs more coal in the furnace.</blockquote><p id="94b5dcb2-2ca9-4e33-9563-51515edbf9ca" class="">“Turning over all the different products Atlassian has introduced or the acquisitions we’ve done, each one of them involves a different set of debates and agreeing to disagree or disagreeing and committing,” says Simons.</p><p id="52eb90b1-9e1f-470b-9472-daafe0f17fc5" class="">While launching a second product in your company’s relative infancy has its own thicket of traps to avoid, there’s a whole new set of challenges to contend with as the company grows. “It’s harder as you get bigger too, because the product you add actually needs to be bigger. For a company like Atlassian that has individual products that are hundreds of millions of ARR, a new thing that you add has got to grow pretty quickly, and it’s got to have a big market it can grow into,” he says.</p><h3 id="61250b33-5e86-442f-8373-35b64b4d5fa5" class="">The sting of losing to a young upstart: HipChat vs. Slack.</h3><p id="5ef5c922-9bf9-40c7-bf05-7e56dba37d21" class="">But Atlassian has been on the other side of the table too, and got beat by a competitor with a singular, laser focus. “HipChat was a growing product and used by lots of companies, but at the time the market was still pretty nascent. <a href="https://firstround.com/review/From-0-to-1B-Slacks-Founder-Shares-Their-Epic-Launch-Strategy/">Slack built a great product</a> before the market was ripening to what those technologies could do, and then did everything right.”</p><p id="e2546cd2-7a22-4e05-bfb0-7a055b7d2195" class="">“History is painted with some examples like this one where you’ve got Slack just ruthlessly focused on one particular thing and moving forward and moving faster and innovating, while we were trying to do a number of things simultaneously,” says Simons.</p><p id="8c9c7da9-afe5-44b2-85d7-48a12a52feac" class="">Atlassian eventually announced in 2018 that they would divest <a href="https://slack.com/blog/news/atlassian-and-slack-partnership">HipChat to Slack</a>. “It’s hard for companies to admit that something’s not going the way that you want it to and open up a really honest conversation with both the market and its customers. <strong>It’s easier for companies to just keep chugging along, add a couple features, and mostly just ignore it</strong>,” he says.</p><blockquote id="bf2bf5ae-b1b1-49a8-8d23-452f30a0fbe0" class="">One of Atlassian’s values is “Don’t f*ck the customer.” We felt that not being honest about our feelings that we can’t win the category in the long run with HipChat and give it our full attention was going against those values.</blockquote><p id="ec27d760-35a2-4804-8e78-8cc5e6f02b19" class="">Simons now calls himself a cheerleader for Slack, and is proud that the Atlassian team made the gutsy call. “There’s an opportunity cost to not divesting, and it means less focus on the opportunities where we feel like we’ve got a better shot at winning outright,” he says.</p><h2 id="1c16ccc0-3bc1-4c6b-8f38-3e7ab8d62829" class="">UNCONVENTIONAL MOVE #3: HAND OVER THE REIGNS TO CHANNEL PARTNERS.</h2><p id="95776374-1e6d-437b-a896-651b158ae7b7" class="">When it came to building up their enterprise customer base, once again Atlassian resisted the urge to pull from others’ playbooks. “When Atlassian was really young, we would come across customers in the enterprise and they’d say, ‘I’m comparing you to IBM Rational and IBM is sending in a whole demo team and doing a dog and pony show, I want Atlassian to do the same thing.’ We chose not to invest in that directly,” says Simons. “Instead, we thought it was the perfect opportunity to build a channel partnership ecosystem, because if we wanted to make a push for the enterprise, those big companies were going to need some hand holding.”</p><p id="d906e0d6-0c2e-429f-b6f8-0cf550ef2496" class=""><a href="https://firstround.com/review/From-Zero-to-10000-clients-in-Two-Years-Using-Channel-Partners/">Channel partners</a> can seem like an intriguing solution to stop up some company gaps. But without clear swim lanes, the relationships can quickly turn sour. “What happens a lot of times is the direct sales motion can begin to cannibalize the opportunity for the channel partner,” he says. Simons walks us through the common traps: “It starts with, ‘Hey, it’d be great to have a company in Korea that represents us in resale.’ But then you get to a certain size, you’ve got your own people there, and they start to focus on the biggest opportunities,” he says. “The channel gets pushed down the value stack, and they go from being able to sell and support the largest companies to the medium ones, and eventually only the small ones. At that point, they’ll probably diversify to find additional products and companies to represent, and their attention is fractured, and then the channel is degraded.”</p><p id="e0de0f7e-7795-46b6-8ed7-9c0c1c4d86b3" class="">On the other side of the coin, <a href="https://firstround.com/review/Looking-to-Scale-Your-Sales-Seven-Bullets-to-Dodge/">building out your own internal sales force faces plenty of its own challenges</a>. “If you think about building an international business, a lot of companies will say, ‘I need my first boots on the ground in Europe.’ But it’s not just boots on the ground, because you don’t just need a salesperson, you have to think about how that person is supported with marketing,” says Simons. “Eventually, there’s going to be tax implications for paying the salaries and how they’re transacting with customers locally. There’s a bunch of other stuff that comes with planting a flag in a particular country, and it can get immensely complicated.”</p><p id="6644ed9e-0a39-4659-9957-38faef2587f5" class="">But the reason channel partnerships are tricky — and rarely executed well — is that giving up control is something most company leaders aren’t particularly fond of. “It’s hard to trust a third party outside of your company with the core part of your business — which is finding, selling, converting and making customers successful,” says Simons. “We had a really symbiotic relationship with the channel because we weren’t competing with them directly.”</p><blockquote id="424771d4-b0fd-4cbe-be7c-db40e7f7427b" class="">It’s easier to hire your own salespeople and you control them and train them. It’s hard to be represented by a third party, and it requires you to do things differently.</blockquote><p id="58baa1af-8736-4abf-946e-f1857973d983" class="">But it’s a trade-off Atlassian was willing to make for longer-term growth. “We were focused on where we could get leverage that improves our speed and velocity and efficiency of the business. We didn&#x27;t have our own sales team that was hunting for the best deals. Whenever there was a really big opportunity, we were motivated to introduce a channel partner of ours to handle the sales engagement,” he says.</p><p id="78ab8c38-8207-45d4-97db-cb4a30755ebb" class="">It’s now a core part of the company’s marketing flywheel, and created a brand-new ecosystem, with over 400 Atlassian channel partners around the world that employ many thousands of people. “If it was just us, with a team of 100 people in Germany, that approach I believe is dwarfed by the thousands of partners in Germany that get up every day, without a business card from Atlassian, but are in essence working for Atlassian,” says Simons.</p><h2 id="f89d85e9-dd34-4d92-82d6-124352bea9e8" class="">UNCONVENTIONAL MOVE #4: DEFER A PLAY FOR ENTERPRISE.</h2><p id="3cae5e32-ce32-499c-8395-cdcd51f25596" class="">What began as a single product (Jira) with a single price has since evolved into a full product suite and a more traditional tiered pricing structure. But that simple self-service remains core to the Atlassian brand — even with its largest customers. “Still today, most new customers that Atlassian acquires come through a self-service funnel,” says Simons. “Even if you’re a Fortune 10 company, you might start with Atlassian with a team of 10 or 20 or 50 or 100. And in that particular case, you could be spending less than $1000 a month, but as you begin to grow, we’ve got the advantage of having natural network effects in our products built in, because they’re collaboration software. You might start with 10 users of Jira on a team, and as your team adds an 11th or 12th person, we naturally benefit from that expansion.”</p><p id="a895b649-0881-4d8d-ba05-2634e4aa39d3" class="">Rather than prioritize signing big-ticket contracts with thousands of seats, in the earlier days, Atlassian leaned on lower-lift tactics. “We would focus on, through marketing and product nudges, highlighting the path for a customer to product B, or C or D. If you use Confluence or you use Jira, we want to point you at the other one, and often that’s as simple as a little pop-up or a little tip when you’ve pasted a Google Doc link into a Jira project that says, ‘It looks like you’re connecting content to your Jira project. Did you know there’s an easier way to do that? Click here,’” says Simons. “Every product in Atlassian’s portfolio is effectively a product that a customer could begin with or a product that they could expand to. I can start with Jira and expand to Confluence. I can start with Confluence and expand to Bitbucket. I can start with Bitbucket and expand to Trello.”</p><h3 id="3097f564-8aed-4254-ba32-1f86964161a6" class="">Putting enterprise on the back burner.</h3><p id="324af894-a6a6-48b2-b2d7-647d494f3295" class="">With the company’s “land and expand” strategy firmly in place, the company deferred any true enterprise focus, instead prioritizing something decidedly less sexy. “We were effectively rearchitecting our cloud — which serves this massive spectrum of customers from teams of two up to teams of 10,000 or more. We really needed to rebuild that so that it will be the predominant platform for Atlassian for the next 10, 20 years,” says Simons.</p><p id="9959b51e-2af2-4c0c-bc58-cdec28f64082" class="">If it sounds like an obvious trade-off, it certainly didn’t feel that way to Simons at the time. “When you think back to 2011, 2012, most of the customers in the enterprise segment at that time were using on-prem products. So we could have said, ‘Let’s go after this enterprise opportunity and defer cloud. I think that would have been the wrong choice, but that’s a very strategic choice,” he says.</p><blockquote id="cdeb70ee-62a2-4273-9705-e65109843377" class="">Atlassian chose to trade off faster short-term growth and opportunity for the long-term durability of the company, which is a trade that we would make every single day.</blockquote><p id="55e71070-0078-433a-8ddc-2437be00b729" class="">Eventually, with the long-term cloud strategy in place, the company turned to a renewed focus in enterprise, based on customer feedback. “We had lots of things that large enterprises were asking us to do. As we began to invest in them, we thought that there was a product offering here for these big, big existing customers of ours to upgrade to. Our largest customers, when they had sometimes 10,000 people running on a version of Jira, there were some things they wanted that weren’t in the product,” says Simons.</p><p id="6937f7f4-c4d8-4d86-8f63-e1261e5bc090" class="">With a larger roster of enterprise customers, the timing felt right to make a play — and the bottom line reflected that impulse. “In some cases that upgrade could move them from spending hundreds of thousands of dollars a year to potentially millions of dollars a year. At that point, it really made sense for us to be a bit more proactive with those larger customers that we had material growth opportunities with,” he says.</p><h3 id="700bc79c-d16d-4ac1-820b-9b228f9c38df" class="">Self-service from the smallest customers to the largest.</h3><p id="d012919b-092d-49a2-a223-53dc83d04604" class="">The company added its first Enterprise Advocate role in around 2013, and set off on the journey to finding product/market fit. “We had advocates contact those customers and begin to talk to them about the capabilities that we were looking to add and what the price points were. It was effectively a traditional sales job,” says Simons.</p><p id="97ba5518-11f3-41e4-afe9-2bbc34a6b681" class="">After months of conversations and the realization that they did have product/market fit, the company once again doubled-down on self service — even for this new, premium product tailored to the enterprise. “The thing that we did that again gives us leverage, is we said, ‘Great, we&#x27;ve figured out that we&#x27;ve actually got product/market fit at a price point that people are going to pay. Let&#x27;s put it on the web so people can buy it online if they want to. And then let&#x27;s incorporate automation work in the product to nudge an admin or nudge a primary sponsor of Jira towards this premium version that they could either add to their bill, or they could upgrade at an annual renewal cycle and do it on their own if they don&#x27;t want to talk to anybody,” he says.</p><p id="fcb4ec2a-9b32-48de-80e7-7d7546eb17d8" class="">With the introduction of premium, enterprise products, the company’s original single pricing structure has since evolved to a more traditional tiered system. “Now, if you look at Atlassian today, the pricing structure has gotten more complex. It’s got a pretty common menu of free, slightly above free, standard, and then premium and enterprise,” says Simons.</p><p id="99a7feed-b178-48b4-b403-e5fbb28dd563" class="">It may seem counterintuitive to Atlassian’s founding principles, but Simons sees this evolution as only possible because of that unconventional beginning. “Atlassian is more established in its market with its product brand. So the additional <a href="https://firstround.com/review/cognitive-overhead-is-your-products-overlord-topple-it-with-these-tips/">cognitive overload for new customers</a> is offset by its position in the market and its brand. Customers are probably willing to spend a little bit of time learning about the Atlassian choices because they know who Atlassian is then if it were just a company they’d never heard of before,” he says.</p><h3 id="62f28525-b91b-487b-9fdf-83638d358be9" class="">The KISS principle in action.</h3><p id="48b9fda3-a105-4e67-b3a3-987783433d3b" class="">It all goes back to those early days, when Atlassian put a premium on getting into as many companies as possible, not just the companies with the most seats. “It helped us when we were unknown and young and small because it was just so simple — <a href="https://en.wikipedia.org/wiki/KISS_principle">the KISS principle</a> actually worked in our favor, where you just came to the web and it was like, Oh, Jira’s one price. I just need to think about the number of users, I don’t need to think about, ‘Does it include this? Does it get SSO and the security stuff or no, that’s in the enterprise package. Is it worth twice as much for that stuff? There are all these questions that the customer gets bogged down into thinking about and that’s friction,” he says.</p><blockquote id="47d3c22a-ad7d-4ba0-b708-a32e51f5f742" class="">Friction can be okay in the right context with the right approach, but in our particular case, we chose not to introduce it. We were just going to make it simple. We&#x27;re going to go for high velocity volume customer acquisition, and we&#x27;re going to reserve future opportunity to have those expansion conversations with those customers.</blockquote><p id="db700ba7-765e-4bce-9c2f-45a9817b5aa6" class="">As Atlassian’s footprint grew, the tiers began falling into place. “By the time we decided to consider expanding our product tiers, guess what? They’re already hooked. They’re already deeply committed. They love the product, and it’s used by thousands of users. Now they just want some extra security features and if we want to charge them for it, it’s probably easier,” says Simons.</p><p id="d8f7df55-2996-4768-80e3-3db34452c3bc" class="">“I’m not recommending that every company follow this playbook, but I do think the ‘keep it simple’ strategy benefited a lot of other things we were investing around. It really gave us the freedom to establish a system that we were able to build and improve over time,” he says.</p><h2 id="5a8d9306-de83-45b5-ba81-6654e60cebef" class="">UNCONVENTIONAL MOVE #5: PUT A PREMIUM ON FIRST-PRINCIPLES CULTURE.</h2><p id="386f20df-95b0-42ec-a4d3-313741643319" class="">Perhaps nothing demonstrates Atlassian’s commitment to going about things its own way like the S-1 filing. “The cover photo of our IPO filing document had a picture of one of the Dr. Seuss characters with a quote from him that said, ‘You’ve got to be odd to be number one.’ We wanted to signify that we’re different and unconventional, and those things are virtuous for what we’re trying to accomplish,” says Simons.</p><p id="3614f273-c764-4715-ba24-efafb852c393" class="">In the company’s earliest days, leadership honed in on three main buckets to focus on innovating: business, product and culture. “Those were the biggest places where we invested in first principle thinking and these were the most foundational elements of the business that we’re all building to outlast us. So it really matters that we take our time to think about them and not just rip a page out of the playbook and follow a script,” says Simons.</p><p id="9a235e1e-687a-47aa-a851-c642860fef53" class="">From an <a href="https://firstround.com/review/team-health-monitors-and-why-your-startup-needs-a-check-up/">unconventional approach to performance reviews</a> to something as simple as the dreaded quarterly employee survey, leadership was wired to look for levers to try adjusting. “<strong>Not all of the approaches worked, but what’s important is we tried to do things differently. When they work, those differences matter a lot.</strong> When they didn’t work, you can always just go back to the way that 90% of the companies do performance reviews,” he says. “I’m proud that we weren’t dogmatic about it. We were just super curious and thoughtful about how we can make different things work.”</p><p id="144c4e1a-47fe-4825-9d5b-3a7d9dd7f5c7" class="">To put a finer point on it, one example from early on in Atlassian’s journey was the team decided to refuse any pricing or terms and conditions negotiations. “If there was a customer that said, ‘Listen, I need to negotiate my warranty or my indemnity clause or my payment terms,’ <strong>we basically just said no — and it’s hard to say no to someone that wants to give you money</strong>. But we basically said ‘We’re not paying for people to do that with you because we’re charging you so little for the product. We pass on those savings of not having lawyers or salespeople negotiating your discount and give you cheaper software. If it’s really important for you to negotiate your indemnity clause, probably one of our competitors will do that, but they’re going to charge you 10 times as much.’” Eventually, the company nabbed its first 50,000 customers without a single modified ULA, and was an eight-year-old business before hiring its first lawyer.</p><blockquote id="46007d6f-ddea-42a7-9afa-0e9c9bb6c465" class="">I always remind people that there’s no business where you get 100% of the customers. You’re going to lose some for various reasons. We were comfortable early on losing customers that wanted different things than what we were going to offer.</blockquote><p id="e2400774-7a37-4d4e-ba60-21b6e76c6af2" class="">Some company-builders may hear that story and cringe, but Simons is more than happy to keep taking the road less traveled. “There’s an argument that says, ‘Think about the money that you left on the table,’ and that the customers that walked away were probably the big ones,” he says. “But in the long run I think Atlassian was better off when you think about the efficiency and velocity of how the business operates now.”</p><blockquote id="836237c5-948e-4dfb-9379-6a3b4f20940f" class="">When we were at $20 million ARR people would look at us and say, “it’s cute that you guys do it that way, but there’s no way you get to $50 million without doing the thing that every company has done before you.” Then the benchmark became $100 million and then $500 million, and finally $1 billion.</blockquote><p id="7c97e8a4-fee9-40c0-a9cd-bd28e5ec7bb5" class=""><em>This article is a lightly-edited summary of the key takeaways from Jay Simons’s appearance on our new podcast, “In Depth.” If you haven’t listened to our show yet, be sure to check it out</em> <a href="https://review.firstround.com/podcast"><em>here</em></a><em>.</em></p><p id="caadfb8a-77e7-4105-b647-c54205762763" class=""><em>Cover image by Getty Images / Paper Boat Creative.</em></p></div></article></body></html>

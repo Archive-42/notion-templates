@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Spatial Interfaces</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b317c0a4-c9f4-4cc3-924a-65f3bf121360" class="page sans"><header><h1 class="page-title">Spatial Interfaces</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://darkblueheaven.com/spatialinterfaces/" class="url-value">https://darkblueheaven.com/spatialinterfaces/</a></td></tr></tbody></table></header><div class="page-body"><p id="99b9994e-0fc1-42f1-8922-72e84f6aec81" class="">Think about this: there is no app that replicates a deck of cards.</p><p id="29332d30-9f3d-46c4-8253-fc6a5cf44cd1" class="">Go ahead and look on the app store, and you&#x27;ll find a bunch of apps with bad reviews and extremely limited functionality.</p><p id="9a21ac8f-10ce-4108-833e-654e62a90b9e" class="">Why is that? A deck of cards consists of so many objects, that can be used in so many ways, amongst so many players, that there are almost infinite ways to use them. It&#x27;s so complicated to think about designing an app to replicate the full functionality of a deck of cards, that still, no one has done it.</p><p id="e808f107-e7f8-4641-a136-f90dcc73e9e9" class="">You would need to be able to shuffle the deck. You would need to be able to cut the deck. To deal cards. To stack cards in any different number of piles. To reveal cards, to all the players or just to specific players. To lay the cards down in so many different arrangements for different games. Stacks of cards facing down. Stacks where only the top card is visible. Stacks of cards that you can draw from.</p><p id="d1da6ec8-674d-4313-acf4-f68ac9cc1da2" class="">If you start designing a deck of cards app as a traditional 2D app the way we think about them today, with 2D panes and menus and buttons, it becomes painfully difficult to think about.</p><p id="9cb5de93-488e-4c19-b34d-3ca98cd2e08b" class="">But what about in 3D? It seems that the only way to build an app that replicates the full functionality a deck of cards is to build a 3D simulation or game. Model the cards in 3D and put them on a 3D table. As long as you have controls for reaching out and picking up the cards, and moving them in space, you can do anything you can do in real life.</p><p id="db840666-f44b-47ba-b91d-a4be2a578e20" class="">Preserving the higher dimensionality makes it simpler and more intuitive, not less.</p><h1 id="4ac4196c-5026-44ac-b4eb-bd0e99302a2f" class="">Spatial thinking in design</h1><p id="17cdb0b9-26ad-4c75-a3fb-4eb78510e70c" class="">Historically, it has seemed obvious that displaying things in 2D, and therefore reducing dimensionality, makes them easier to understand. We design software as flat, 2D planes, rather than showing depth in space, because it is simpler and appears on 2D screens. 3D menus and forms would be a pain, so we reduce the dimensionality.</p><p id="f53ae1a6-3862-4b2d-bcdb-53d29fd8207c" class="">And if reducing the dimensionality of a concept to 2D doesn&#x27;t lose any of the nature of the information you&#x27;re transforming, that transformation simplifies it and creates order. We can see this in examples like galleries of images, menus with buttons, forms with columns of text inputs, etc. Most of the software we use today, in fact, is two-dimensional. 2D interfaces living on 2D screens.</p><p id="06a05fb6-8427-425f-bd2c-2a10275b2cdb" class="">It turns out that there are some applications where increasing the dimensionality to 3D (or leaving them in their original 3D form, like in the deck of cards example) can make the applications more intuitive. I think this is going to be a major force in the near future of software.</p><p id="a1dc97dd-e4ce-4cbd-85ea-dfe3ba18bb48" class="">Why now? There are two main reasons.</p><p id="9e9cc9f5-ffd6-4725-bc71-23b057bf598e" class="">First, we tend to associate these concepts with gaming, and gaming is growing extremely fast. A certain kind of UX is usually conflated with &quot;gaming&quot; in our minds: spatial environments, often in 3D, populated by 3D avatars that move, interact, and relate to each other in space. But this isn&#x27;t just &quot;gaming.&quot; This is actually a kind of user experience that can be used for non-game applications. The recent popularity of gaming and e-sports will make us start paying more and more attention to the power of this kind of UX, and we&#x27;ll soon realize that we can take this kind of design outside of game applications.</p><p id="5983e01d-282b-4c0a-8cb3-9d2041db1850" class="">Second, we&#x27;re at a turning point with the ease of 3D programming, animation software, and the browser&#x27;s ability to render 3D graphics. Creators now have a variety of tools at their disposal for making spatial software: WebGL, Three JS, Unity, Unreal, etc. This is something that software designers should seriously consider.</p><h1 id="32d99c91-7626-48e5-af38-68e67f0d3d15" class="">Spatial Affordances</h1><p id="acd7c33c-773f-4e8f-830b-bbc769dac169" class="">Humans are spatial creatures. We experience most of life in relation to space. We sit in a circle with our family. We drive down the left side of the road in Ireland and try to stay in our lane. We ride scooters down a path along the water. We sculpt a human body out of stone. We follow signs to our train. We walk, through arches, or on crosswalks beside bike lanes, or to follow our brother across a bridge. We position our camera to frame the shot while our friend leans out over a balcony. We sense ourselves in space in relation to all of the other objects in our environment.</p><figure id="0cc610c1-3573-4ea7-b7e0-be24802244a0" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/collage-3b8e6796b1ed5cbbde35e39385a4a403.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/collage-3b8e6796b1ed5cbbde35e39385a4a403.png"/></a></figure><p id="43b4de59-a5e7-440d-87e4-7b8f0a023cb1" class="">And this is powerful knowledge that we&#x27;ve left out of lots of software. In fact, while most obvious in 3D, this thinking does work outside of just three-dimensional software. Almost any software can use spatial concepts to become easier to understand.</p><p id="2d4d136a-99fc-4785-a7f6-060d2589b24b" class="">In particular, some applications use spatial relationships to suggest how they should be used. Incarnations of this thinking are called spatial affordances.</p><p id="b5e6a71f-c9f0-4a73-b9de-43fea95c1946" class="">This term has typically been applied to fields like wayfinding and mapping, but it can apply to many areas of software design as well. Spatial affordances in software use our intuitive understandings of spatial relationships to make sense of what UI elements do, and are just one way to use spatial thinking to design software.</p><p id="2c3f6323-b776-4e37-94f4-ebce4d50ced6" class="">A bike lane affords a place to ride a bike. A subway sign affords walking left or right. Empty space on the iOS home screen affords a place to put another app icon.</p><figure id="bf89c3ca-c1c1-446c-baa5-0bb8ae73a155" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/homescreen-4edb159433728de806607c09cb51ac0e.png"><img style="width:640px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/homescreen-4edb159433728de806607c09cb51ac0e.png"/></a></figure><h1 id="4566c5af-fb24-4eb1-8b08-5ddd7b7fe86d" class="">Skeuomorphic Spatial Affordances</h1><p id="67cf2bf4-3e3c-4eb1-9cb7-20865eec4044" class="">Software designers already familiar with skeuomorphic design, which aims to give users affordances for what UI elements do by making them visually represent real-world counterparts. Take the iOS 6 Notes icon, for example. It looks like a real notepad, down to the pages that have been torn out.</p><figure id="ec517fb1-d60e-4dfd-8988-b0102efe8fcb" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/iosnotes-7ac68f4b73d4803537de70a862ef7a9c.png"><img style="width:256px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/iosnotes-7ac68f4b73d4803537de70a862ef7a9c.png"/></a></figure><p id="19f6b713-ff80-406e-814e-0bc248d5d677" class="">Sometimes, a spatial affordance can be an instance of skeuomorphic design. This occurs when the spatial affordance directly analogizes the real world, as in skeuomorphism.</p><p id="1aee589d-38af-4362-8bd2-ba603f8550b6" class="">If skeuomorphism is making UI elements represent their real-world counterparts, skeuomorphic spatial affordance is making UI elements represent their real-world counterparts and their spatial relationships to their surroundings.</p><figure id="68f08d3b-4bbc-4de0-8bed-7df71dee0d16" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/chess-445c77fc23fa2596d228bdc2faba89e3.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/chess-445c77fc23fa2596d228bdc2faba89e3.png"/></a></figure><p id="9407053a-5b2b-46f6-90df-435ae53b7f28" class="">Here, the concept of representing the real world in software extends beyond each UI element itself, as in skeuomorphism, and into its surrounding environment.</p><p id="a1778000-a34c-49e6-857f-d447b0aeda4e" class="">Understanding skeuomorphic spatial affordances as a user requires very little mental overhead, since they mimic the real world very closely. However, skeuomorphic spatial affordances are rare in most software today. Why? Because it&#x27;s hard to directly analogize the real, three-dimensional world in two dimensions.</p><p id="74a09a81-f150-4e97-825e-92b24a785866" class="">This will change as 3D software design moves from gaming into mainstream applications. There is much unexplored territory where skeuomorphic spatial affordances can make our lives easier, solving problems by simulating real world spaces. The deck of cards is an example where only a skeuomorphic spatial interface will do.</p><h1 id="81dde688-4647-4d2e-9f1c-a34562186f71" class="">Using spatial interfaces in design</h1><p id="53b2ec73-25b7-44ae-a9fe-c578eb080d70" class="">Spatial interfaces can go beyond just spatial affordances, and it should be noted that spatial thinking has not been completely ignored in software. Early app design increasingly moved towards spatial concepts for navigation. Today, most apps use some spatial concepts to make it easier to understand how to get back to certain screens. One example is &quot;stacking&quot; screens on top of each other as the user progresses, letting them go back to previous locations easily.</p><p id="f7527e9e-fb71-4fff-9b73-022db60fadaf" class="">Snapchat is an example of an app with completely spatial navigation. The user swipes in different directions to navigate to different screens, which are laid out beside, above, or below each other in 2D.</p><p id="033ab50e-cae2-48ca-8c3a-f7268a77407c" class="">Even in <a href="https://www.youtube.com/watch?v=ykGXIQAHLnA">this video</a> from the early days of Snapchat, Evan talks about navigation spatially. &quot;To the left of the camera there&#x27;s a list of all of your chats.&quot;</p><figure id="e759730b-b7ab-4839-970f-5354120c3831" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/evan-194f98e26f951ed59b83a5676dee262b.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/evan-194f98e26f951ed59b83a5676dee262b.png"/></a></figure><p id="8ecfb87c-da14-472b-9c5c-b87a10f328af" class="">Now some examples and ideas for spatial affordances in different software applications.</p><p id="cad08c98-13b0-4d5b-91a3-ca0896e477af" class=""><strong>Calendars</strong></p><p id="48330c97-c1cb-4251-8fd4-7110e0c11b49" class="">Suppose I work at a company and I want to find out, &quot;Who is everyone at my company meeting with right now?&quot; With only Google Calendar at my disposal, this task is a nightmare. I have to load each person&#x27;s calendar and one by one, click into their current meeting to see the list of attendees. Writing names down as I go, I click back to the calendar and then into another event, over and over, until I&#x27;ve collated all the names of who is meeting with whom.</p><p id="debd6fbd-509c-4537-90b2-479a65282e27" class="">Contrast that experience with this one. I recently used a piece of software called <a href="https://www.sococo.com/">Sococo</a>. It&#x27;s a &quot;virtual office for remote teams.&quot; It&#x27;s just a 2D floor plan of an office, with a bird&#x27;s eye view. Every employee has an avatar. You can simply place your avatar in one of the rooms with other people. The room provides text and video chat for the people inside.</p><figure id="73db5d5b-075d-4031-8c01-9c59d2b066d1" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/sococo-d16069a889547ed3544004c42a2a2c97.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/sococo-d16069a889547ed3544004c42a2a2c97.png"/></a></figure><p id="adb73687-f6c6-4327-9963-9a452c2f5e97" class="">Now try to answer the same question with this software. &quot;Who is everyone at my company meeting with right now?&quot; All of a sudden, it&#x27;s extremely easy. You just look at the rooms. At a glance, it&#x27;s immediately obvious which people are working together. The floor plan is a skeuomorphic spatial affordance, one of the few I can recall seeing. It displays rich information and makes that information easier to understand by analogizing a real-world spatial environment.</p><p id="208308ec-70be-4e30-aa09-44934de5034c" class="">I should point out that you don&#x27;t even need Sococo to get this affordance. Google Calendar could generate a visual floor plan and populate it with avatars based on all the meetings happening inside the organization.</p><p id="93d8d071-574d-4298-b674-f798e9d866d5" class=""><strong>Meetings</strong></p><p id="1cf81d55-c135-4590-89e0-15c59418cd05" class="">Video conferencing UX is broken, and there&#x27;s a lot of greenfield for spatial thinking in the space. All of the innovation in this field has been around transmitting video, or quickly generating URL&#x27;s for new meetings. But even Zoom, hailed as the best product for video calls, is limited by its interfaces.</p><p id="a23b943a-850c-414e-b9e0-e35f2606fc7b" class="">For example, there are only two ways to view a meeting: Speaker View or Gallery View. When in real life are you ever looking at a grid of faces? Never. It&#x27;s not natural.</p><p id="ec48afa1-542e-4cef-9cff-6b6daa44df30" class="">In real life, you look at people around a dinner table, or around a circle at a standup meeting, or at someone beside you as you go for a walk. Video conferencing software removes all of those spatial elements and therefore makes meetings more complicated.</p><p id="b8647c8c-7aea-46b6-bd39-178a193acdb2" class="">There could be a new video conferencing company that builds spatial interfaces for all different kinds of meetings. Take standups for example.</p><p id="9f9542a8-45ec-4d7d-8f93-c06c4ce5764b" class="">When you run a standup at a technology company, you typically go around a circle and each person gives their daily update. But in Zoom, there is no circle. You get confused about who is next. Two people start speaking at the same time. It&#x27;s awkward and confusing. Eventually, you realize that one person, probably the manager, just has to dictate who goes next, at the risk of seeming bossy.</p><p id="415eb77d-da4f-48d1-8b77-644ae38ca056" class="">Spatial thinking can make this easier. At the very least, you could show small ring of attendees&#x27; avatars to represent the circle. It doesn&#x27;t even need to be in 3D. It could just be a circle of emojis.</p><p id="8c20fb3e-7f2a-4ba9-88df-5834502ccb3d" class="">You could also design things like an interface that can pan left and right to see different people&#x27;s faces as if you were standing in a circle. Different spatial interfaces could make it easier to run all kinds of meetings.</p><p id="ec5a9d92-95b8-4fcf-8822-ad394e31a50e" class=""><strong>Messaging</strong></p><p id="2c41764e-dcbb-448b-82e9-ca05723c6733" class="">Spatial thinking can be powerful in social software by establishing a stronger feeling of closeness. In games, unlike most social software, the concept of &quot;presence&quot; is at the forefront. But again, spatial affordances don&#x27;t always need to be in 3D. Snapchat has its famous presence indicator, now in the form of Bitmoji, that lets you know when the other person is &quot;in the chat&quot; with you.</p><figure id="c73c6aa9-8bb0-4aa8-a48f-75bdd5b1c2f9" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/presence-fb1c8762ba540bd3e264d67dbe5c7049.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/presence-fb1c8762ba540bd3e264d67dbe5c7049.png"/></a></figure><p id="538d717c-37dc-494f-8906-b539f4b3a6ef" class="">Surprisingly, some software with spatial concepts built in can be used reasonably well for social interaction, even if not the intended purpose. I recently tried using Figma to hang out with friends in the evening due to its sense of presence. Live cursor positions let us all know that we were actively participating. In fact, as we did this together, we immediately began drawing bodies for ourselves, with chat bubbles to type into. This produced a much stronger feeling of togetherness and emotional connection.</p><figure id="35b3e030-5d34-4332-96ab-e29acae38f21" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/figma-7ba473d104991f218a3566be0ee2f602.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/figma-7ba473d104991f218a3566be0ee2f602.png"/></a></figure><p id="c079360a-f052-4d7d-b5a5-5a7d0bb5c210" class="">One big difference here is the inclusion of a body and the ability to arrange our characters near each other. In real life, a voice does not emanate from thin air. A voice comes from a body. Seeing this in our hangouts in Figma was powerful in some way, though not refined.</p><p id="04b9fb60-1be0-473b-a9a2-4b53eef74d08" class="">Back when I worked at Snapchat, I formulated an app idea based on the same notion: spatially representing the way speaking to someone feels in person.</p><p id="af88682e-d90e-41f7-9aa4-0d0f80e17139" class="">When we talk in real life, our words do not stack on top of each other in a scrolling list. They&#x27;re more ephemeral than that. Our words hang in the air between us until the next person speaks. I had never designed anything back then, but I downloaded Sketch and drew out this rough concept.</p><figure id="6cb5e040-c746-4cd1-841a-8cea930ec2a5" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/table-374e34a134fd4c53d34063cdb38aa867.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/table-374e34a134fd4c53d34063cdb38aa867.png"/></a></figure><p id="8edd3f55-2a99-42e5-a8db-e23a50ec07d7" class="">In this concept, the person you&#x27;re messaging with is shown &quot;across the table&quot; from you. There can only ever be one chat bubble in between you. Every time someone types some text and presses enter, the bubble is replaced with the latest message.</p><p id="2327efe7-121a-4e79-96fa-ff55cbadd2d6" class="">Throughout my time at Snapchat, I actually designed and proposed a number of features based on spatial thinking, but none of them were ever built.</p><p id="952bcd63-68b5-4384-a49d-318302d7e7c1" class=""><strong>Web browsing</strong></p><p id="48032006-cad3-4590-a5e7-0b1b34930cd0" class="">Over time there have been many different ways of thinking about navigating the Internet spatially. Surfing the web, a series of tubes, hyperlinks as portals to other pages, etc.</p><p id="78c204ff-04f4-465b-a07b-41bf1f3e3b86" class="">Well, these spatial concepts can be translated into interesting UI innovations. We already have concepts like &quot;back&quot; and &quot;forward&quot; for navigation (we also have &quot;cut&quot; and &quot;paste,&quot; terms taken from the practice of manuscript editing, where one would literally cut out a snippet from one page and paste it onto another). There&#x27;s more room for spatial concepts to become part of our web browsing experience.</p><p id="c1989f77-7b97-4eba-9eac-a61472a3043d" class="">One example is an idea I call &quot;trails.&quot; It&#x27;s based on the story of Hansel and Gretel walking through the forest and leaving a trail of breadcrumbs behind them, so that they could find their way back later. What if you could do this on the web?</p><p id="cfeda0b5-bed9-4632-b2b9-e046d9a728f4" class="">A breadcrumb in this case is a single pixel that you can place in a precise location on a webpage. Placing a breadcrumb could be as simple as Option + click. While navigating the web, you could leave breadcrumbs on different pages you find interesting over the course of a browsing session. When you&#x27;re done, that sequential &quot;trail of breadcrumbs&quot; would be saved. You could then jump back into the trail and navigate &quot;forward&quot; and &quot;backward&quot; through the things you found interesting in that browsing session. Or share the trail with a friend, and they could step through your spatial path of navigating the web.</p><figure id="0490c52d-1b5c-4d20-9d51-5b72cb613b97" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/breadcrumbs-a72f3abea1438d53861570d32cd85265.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/breadcrumbs-a72f3abea1438d53861570d32cd85265.png"/></a></figure><p id="39e59590-83b3-4f10-9f84-6c0552016c5c" class="">Another idea for spatial thinking on the Internet is creating a spatial map. We talk about &quot;Crypto Twitter&quot; or &quot;VC Twitter&quot; as concepts. But don&#x27;t they feel a bit like places? What if we had a map of the Internet? You could build a Chrome extension that acts as a little hovering map down in the bottom-right corner of any window. Like in an RPG, it could show your current location on the map and what&#x27;s nearby, with the ability to teleport to any location, or just walk around. The owners of domain names could choose where on the map their domain is placed.</p><p id="0787c4c7-70b0-44d0-a2f2-0788f628c1bb" class="">I could place my personal site on a street near the websites of my friends. We could form a little village. I could then go to my favorite sites and walk around nearby to find sites like them. This is a spatial interface that would give us a new and intuitive way for navigating the Internet and understanding how websites are related each other.</p><figure id="cd939a71-6160-42b0-8ca4-27cefb90cf6f" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/internetmap-65dac65b395a5d7f4cfcbc8a3e8626ba.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/internetmap-65dac65b395a5d7f4cfcbc8a3e8626ba.png"/></a></figure><p id="aa712340-4413-49f6-86ef-5db327480a7d" class=""><strong>Conferences</strong></p><p id="edf73d4e-ee5b-43ac-b980-c7d12a6ddbe6" class="">Some of the best parts of conferences happen outside of the scheduled programming. The magic is in the unexpected interactions with people you bump into. You could build a &quot;conference simulator,&quot; a lot like a video game, and gain the ability to run conferences remotely.</p><p id="1d16c845-37d6-4082-9063-d2d90417ff8b" class="">You would attend a conference in the game and socialize with other attendees. You&#x27;d go take your seat for the speakers. You might even strike up a conversation with the person seated next to you. The ability to run conferences this way would make them easier to attend and better for the environment. Second Life was a piece of software that understood using gaming for this kind of socialization.</p><figure id="4aaf99c0-a42f-4475-928a-2ba123a856ab" class="image"><a href="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/secondlife-347a57a02c4f7d23065bf54882878f31.png"><img style="width:700px" src="Spatial%20Interfaces%20b317c0a4c9f44cc3924a65f3bf121360/secondlife-347a57a02c4f7d23065bf54882878f31.png"/></a></figure><h1 id="d7d74d3d-a3d6-4090-8cd7-898cb1b7919c" class="">To conferences and beyond</h1><p id="49dd1a64-c01a-4cc4-be25-39a376374523" class="">While all the examples above are compelling, and lots of the software we already use can be augmented by spatial interfaces, I think there&#x27;s something bigger on the horizon. I can tell by the way these examples make me feel.</p><p id="0db1f71f-0bc0-488c-bd00-4127848f8a75" class="">Why does that final example, the conference simulator, feel different from all the others? Why does that image from Second Life make me more excited? It feels more real. Is this a skeuomorphic spatial affordance? What does skeuomorphism even mean when you can completely replicate the real world from scratch in your application?</p><p id="2fdc537a-ea5a-49e2-92a8-5f57af1d289e" class="">It&#x27;s almost like that image could fit into the collage of photographs from up above. It&#x27;s not just spatial affordances making an app more intuitive. It&#x27;s a completely new world of its own.</p><p id="cbf21fac-4eb4-407b-a1e2-547fe88ef149" class="">Until today, creating new worlds and environments in software has been a specialized field, mostly constrained to the gaming and animation industries. But with new tools at our disposal and the power of spatial interfaces becoming harder to ignore, it won&#x27;t remain this way for long. We&#x27;re already noticing the signs. People start teaching their kids at a <a href="http://go.secondlife.com/landing/education/?lang=en">school inside of Second Life</a>. Marshmello <a href="https://www.youtube.com/watch?v=NBsCzN-jfvA">plays a concert</a> to a live crowd in Fortnite. Movie theaters get converted to <a href="https://www.businessinsider.com/sandbox-vr-review-2018-6">virtual playgrounds</a>. Employees start <a href="https://medium.com/@normalvr/working-remotely-in-vr-ar-cadf467c0f39">working together in VR</a>.</p><p id="58980c3b-555e-44fe-bfcc-908f423592bb" class="">Game-like interfaces could be incredible for almost any social use-case, not just for running conferences. However, these interfaces are usually combined with a competitive objective. What if they weren&#x27;t?</p><p id="326ebc12-f070-43d9-848b-92aada7bcb81" class="">We could have games for anything. Games for attending classes, co-working, and making art. Games for work. Games for just hanging out. We&#x27;re going to make these kinds of games. But at this point, it&#x27;s time we stop thinking about them as games and start considering them part of a broader field: spatial interfaces.</p><p id="7dc31dd3-9303-4036-baa7-48f5588d0718" class=""><strong>Additional notes</strong></p><p id="ece58076-87a0-4365-af2f-d7fcb931d97c" class="">Thanks <a href="https://twitter.com/tobyshorin">Toby Shorin</a> and <a href="https://twitter.com/WilsonCusack">Wilson Cusack</a> for help editing this essay.</p><p id="f5f87a8a-4ffb-4da2-ad94-4804d976a924" class="">Are you an investor or startup doing research in this space? Reach out to talk more at johnpalmer93@gmail.com</p></div></article></body></html>

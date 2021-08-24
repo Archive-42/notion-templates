@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Being Alone</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="34407e85-4676-4525-8b5f-c5737114c04b" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧱</span></div><h1 class="page-title">Being Alone</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-yellow">Life</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.ankit.fyi/being-alone" class="url-value">https://www.ankit.fyi/being-alone</a></td></tr></tbody></table></header><div class="page-body"><figure id="287538e7-fc62-4c55-8481-58d2cb91d1bd" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/image-asset.jpeg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/image-asset.jpeg"/></a></figure><p id="3567b087-9104-41e6-bcd0-5a13fc521960" class=""><strong>0. INTRODUCTION</strong></p><p id="c1de82e7-bfb7-49a3-959f-f4ff5c19d202" class="">Now may be a great time to get to know yourself. Here’s why.</p><p id="814a0975-73c2-47e8-a535-2aa5c1d2b434" class="">Time has been blurring lately. As we continue to conduct our entire lives from the same few hundred square feet for more than 2 months, we begin to lose our context.</p><p id="b0507dc6-6381-4113-8168-a91cecca4ec2" class="">Context gives us a sense of purpose and reason.</p><p id="672cd9ef-9698-4631-8720-ee443bda9c6e" class="">What good is my humor if no one laughing? Why do I have so many clothes if I’m wearing the same 3 outfits every single day? What’s the point of me trying to do anything at all in a world that I can barely see, touch, or feel?</p><p id="428f7ff4-df3a-4942-a481-413e04d749f7" class="">I guess this is why we’re all on Zoom.</p><p id="868a17c5-98a3-4bed-9dff-7b8b31dd31a1" class="">Maybe if we can keep on having our happy hours—or dates, birthday celebrations, conferences—we’ll have a reason to tell our jokes, to wear a different shirt for once, to stay motivated to keep working. And maybe if we add on some things we would never imagine doing before—live video karaoke, video chat game nights, virtual weddings, book clubs!—we might experience some triumph of spirit. Something to remind us that we aren’t <em>just</em> surviving.</p><p id="850f50db-0e5f-4933-9c7d-23c27b11f35c" class="">But the context that Zoom gives us is weak. Diet context. Gluten-free context. It just doesn’t quite taste the same as, well, real life.</p><p id="12704e57-1946-4304-b01d-30756efb6cf5" class="">When you hit “Leave Meeting” and the stereo white noise from other people’s bedrooms cuts out, the quiet hits quick.</p><p id="c8860599-25db-4671-8fae-f6537a6d0aea" class="">You’re still in the same seat you’ve been in for weeks, breathing the same air, staring at the same wall. As much as you know that there’s a world out there—a world you were <em>just</em> seeing through the wizardry of high speed connection and built-in front facing cameras—the afterglow of that video context just doesn’t last.</p><p id="d874420e-95e8-44a9-b808-a78c681a83fe" class="">You’re alone, bored and ready for this shit to end. The impatience is real, and we’re all feeling it.</p><p id="8336ecfc-9005-4b53-9cae-af43c1e9ed0f" class="">That’s why we fill the moments between Zoom calls with puzzles, reading lists, new baking habits, virtual workout classes and endless social media scrolling.</p><p id="044e8057-2645-4aa2-8bc3-e7d9515c33d8" class="">But what if we didn’t <em>need</em> to fill those moments?</p><h3 id="ecb87142-aba8-4f70-9db8-6d92d76f1d3b" class="">About this essay</h3><p id="fa5262cf-7b2d-44de-bfda-6b9697f46bf4" class="">Besides this introduction, I originally delivered this as a TEDx talk for a group of high school students in February 2020, just before quarantine and our new normal.</p><p id="17a720b3-49cd-4d76-91a3-cebde3d4275b" class="">The way I thought about it was that when you grow up constantly connected, never needing to be bored at all, it’s easy to completely overlook the importance of building a relationship with yourself. But the more I pay attention to how “adults” are managing in this moment, the more I believe this message isn’t just for young people.</p><p id="eb2f95b8-ebc2-4ada-b8f0-47fdd266f054" class="">At the root of so much of our experience right now is a face-to-face encounter with loneliness. It’s why we’re scrambling for connection and cures to boredom.</p><p id="e97208ce-b8a2-45d2-b8dd-52d2e958345a" class="">There’s nothing wrong with these things, but I think there’s a deeper opportunity here that shouldn’t be missed—and that’s what this essay is about:</p><p id="1bce24b5-604b-40c6-b560-daf2c7c93705" class=""><strong>You can’t address your own experience of loneliness just by finding connection with the people around you. You need to find connection with yourself.</strong></p><p id="9bfacce6-fc6c-4e41-8f5c-bfabe1cfd314" class="">In the quiet of being alone, you have space to notice what it is that you’re feeling; to pay attention to how you are responding—not just to the global situation, but to the vacuum, the nothingness that has taken the place of your normal, day-to-day life.</p><p id="8d70f5b0-fcb6-4a2d-91e4-c5e9defd68eb" class="">When you run out of context to give yourself a sense of meaning and purpose—that is, when the Zoom calls are over and you’ve finished your puzzle—all that’s left is you, and, at some point, that has to be enough.</p><p id="172da24c-5bb3-4e07-a6a6-b07035525d71" class="">This might just be the best moment you’ve had to get to know who you actually are.</p><h3 id="55953ac6-9abe-4711-a202-1f6ebe85f41b" class="">Where are we going here?</h3><p id="32b778ac-2413-48b6-92b4-1f6b4532b114" class="">If this introduction strikes some chord for you, you might find something for yourself in this essay. It’s a long read, but by the end of it, I hope you’ll find yourself with a few things:</p><ol type="1" id="e859b47c-4094-4d40-a8bf-1735661c43cd" class="numbered-list" start="1"><li>Useful language to understand what it is to be and feel alone</li></ol><ol type="1" id="1eac67ba-229b-4d04-8667-dafc0520c757" class="numbered-list" start="2"><li>An understanding of what it means to have a relationship with yourself</li></ol><ol type="1" id="240029cf-105d-48b3-b844-75722603a215" class="numbered-list" start="3"><li>Confidence that you can be more comfortable in your own skin</li></ol><p id="c5ce2203-dc7a-41a8-9f95-bd5b4834921d" class="">Let’s begin.</p><p id="b2e04cdc-e6e9-41c8-b75f-702d593bdcdc" class=""><strong>The first/only interruption</strong></p><p id="55b85936-901b-4b3e-85a1-867f4d9613d6" class="">Planning to read this now?</p><p id="ebf228b0-1c0e-4847-9c99-9be0a2a3aee4" class="">Cool. Keep scrolling.</p><p id="19bede9e-44fc-40ec-992e-1a8ca58e0d22" class="">Later?</p><p id="f2a6b1a2-d5b3-444c-acac-9dff4a729cdc" class="">Great! Have some options to remember:</p><ol type="1" id="a29b485a-afab-419e-950c-d3a90b2167d8" class="numbered-list" start="1"><li><a href="https://twitter.com/intent/tweet?text=%22You%20can%E2%80%99t%20address%20your%20own%20experience%20of%20loneliness%20just%20by%20finding%20connection%20with%20the%20people%20around%20you.%20You%20need%20to%20find%20connection%20with%20yourself.%22%20%E2%80%94%20A%20stock%20quote%20from%20%40ankitshah%27s%20essay%20on%20Being%20Alone%20http%3A%2F%2Fankit.fyi%2Fbeing-alone&amp;url=">Tweet about it as if you already read it</a>, and I’ll reply and ask you what you thought (at which point, you might read it just to have an opinion).</li></ol><ol type="1" id="6cff9564-fc27-4c29-948c-f11f1b1dedb9" class="numbered-list" start="2"><li>Leave this tab open. Get around to it eventually.</li></ol><ol type="1" id="e83875ae-897e-46bf-b0e9-e726a2148670" class="numbered-list" start="3"><li>Sign up for my email list. I’ll remind you a few weeks from now when I send the first email.</li></ol><p id="a9c1684c-de46-4680-85f0-1627cfd5b1a3" class=""><strong>1a. HOW DO WE USUALLY TALK ABOUT LONELINESS?</strong></p><h2 id="8e5f259e-3459-4e66-882f-1c659a37e0bf" class="">Feeling lonely sucks.</h2><p id="cb794459-7dc2-4bc8-81ef-e2d36a5cb100" class="">Loneliness can feel gross. Suppose I asked you, in a group: “Who here has been lonely lately?” Many of you might think to yourselves, “Hm, yeah. I have,” but only a fraction would actually raise your hands, if any. (For what it’s worth, I’ve been feeling lonely all morning, and, no, I wouldn’t raise my hand.)</p><p id="f8616bc0-c7b1-4d67-a829-76b626f10113" class="">It’s understandable. Admitting you are lonely can feel like you’re admitting a fundamental flaw about yourself. There must be a reason you’re lonely. <em>I’m insignificant and unworthy of connection! </em> Surely, you don’t want other people to know that.</p><h3 id="478bf402-b2ce-4f6f-98b8-60e4818cd701" class="">We’re all afraid of being lonely.</h3><p id="54999331-c217-4300-a535-a7cf90f7216b" class="">It’s why we do so much of what we do. The dance that is our day-to-day lives is largely guided by our desire to feel connected to something. In a sense, we are always running away from loneliness. We’re occasionally successful. Much of the time, however, not so much.</p><p id="5ac69e06-9dd9-4349-99e7-44b51d1e8b7e" class="">There’s countless studies that confirm this. For example:</p><ul id="a0da0dac-c871-44a7-92d1-98e7f921d0f5" class="bulleted-list"><li>46 percent of U.S. adults report sometimes or always feeling lonely (<a href="https://www.cigna.com/newsroom/news-releases/2018/new-cigna-study-reveals-loneliness-at-epidemic-levels-in-america">CIGNA</a>)</li></ul><ul id="4a9a264f-2530-4951-874e-c190226d07bc" class="bulleted-list"><li>Generation Z is the loneliest generation, with a &quot;loneliness score&quot; of 48.3. The national average is 44. (<a href="https://www.multivu.com/players/English/8294451-cigna-us-loneliness-survey/docs/IndexReport_1524069371598-173525450.pdf">Ibid</a>)</li></ul><ul id="76234a83-beef-4529-bf75-b50047dce29c" class="bulleted-list"><li>Loneliness, living alone and poor social connections are as bad for your health as smoking 15 cigarettes a day. (<a href="https://journals.sagepub.com/doi/abs/10.1177/1745691614568352">Perspectives on Psychological Science</a>)</li></ul><p id="63315445-c787-443c-aedd-e1dde4d69eb9" class="">And my favorite:</p><ul id="3e78791d-71b0-444e-8ac8-1708689d6601" class="bulleted-list"><li>Loneliness is likely to increase your risk of death by 29%. (<a href="https://journals.sagepub.com/doi/abs/10.1177/1745691614568352">Ibid</a>)</li></ul><p id="4ca6bab6-e24c-45a6-8d07-79c2869cb7f9" class="">Spoiler alert: We’re all going to die anyway!</p><p id="cfc7ebad-fe50-4f29-9d85-c6fd6d6fd738" class="">For anyone that’s actually feeling lonely, these numbers don’t do much to alleviate the problem. Whatever the statistics or science suggests, feeling lonely sucks.</p><p id="4c70677c-902c-4291-83c0-35665cbc4380" class="">So what do we do about it?</p><p id="012bd5e6-1f08-45c1-855f-1e58c62cdf43" class=""><strong>1b. HOW DO WE USUALLY TALK ABOUT LONELINESS?</strong></p><h2 id="4576bac0-429c-4b97-8fb5-501ab6bbb009" class="">“The opposite of loneliness”</h2><p id="e4965539-4fab-4e3b-8f6b-762bcfaa7302" class="">If you do a Google search or read any literature by leading thinkers, academics or practitioners around loneliness—some of whom I’ve linked at the bottom of this essay— you’ll hear a lot of great answers to this question.</p><figure id="54ed5c29-1176-4135-a599-09e413f93a87" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/16B38AD7-4E65-41F6-AC4C-0425B2FF5EFB.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/16B38AD7-4E65-41F6-AC4C-0425B2FF5EFB.jpg"/></a></figure><figure id="9ee0fdda-b13d-4fc8-879a-e92b00f45030" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/95F43F14-795B-4833-9689-154C08286825.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/95F43F14-795B-4833-9689-154C08286825.jpg"/></a></figure><figure id="91c3c111-1f79-44e2-a8b0-d06109a7dc1a" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/2AC9BAE7-98E9-4143-82BC-0FC21CF0E3C3.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/2AC9BAE7-98E9-4143-82BC-0FC21CF0E3C3.jpg"/></a></figure><figure id="083fccf4-279f-4359-a7d7-881fe3ad0084" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/8EBDED60-B490-41E6-B7E0-A27CB3A2693F.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/8EBDED60-B490-41E6-B7E0-A27CB3A2693F.jpg"/></a></figure><figure id="05e5f414-0577-4a89-9d58-6046d27a5e89" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/800F36DC-C27D-4A8D-96B7-2044E5B79915.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/800F36DC-C27D-4A8D-96B7-2044E5B79915.jpg"/></a></figure><figure id="111820e3-94f1-4548-bdb1-f5ea383918f7" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/74D53509-8D02-4B96-8523-EC44E774F595.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/74D53509-8D02-4B96-8523-EC44E774F595.jpg"/></a></figure><figure id="a774b361-ea8b-4f71-ae23-fadcf38fbd27" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/701FC499-70D6-408D-8715-8665B84B5186.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/701FC499-70D6-408D-8715-8665B84B5186.jpg"/></a></figure><figure id="969605f5-731b-4829-80a1-b7ede3093d87" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/AED7A4D5-3EB9-4D59-892D-D225D0C62381.jpg"><img style="width:500px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/AED7A4D5-3EB9-4D59-892D-D225D0C62381.jpg"/></a></figure><p id="198c9c2f-8ded-4a15-aad8-eb7ffcf10bc5" class="">I know these are great answers because I’ve spent the last decade trying them all myself (<a href="https://www.ankit.fyi/about">seriously</a>), and in my experience, they’ve yielded a bountiful reward:</p><ol type="1" id="a6af8098-b97b-4f96-8533-453e6cb53326" class="numbered-list" start="1"><li><strong>Friendship and camaraderie. </strong>I’ve been lucky to find close friends alongside whom I’ve weathered a number of life’s storms; people I can both confide in <em>and</em> FaceTime without prior warning without it being weird.</li></ol><ol type="1" id="f905ff9c-4cb6-4071-9859-9ce91fb9308d" class="numbered-list" start="2"><li><strong>Love and companionship. </strong>I have a girlfriend who I love coming home to every day, who I can work out disagreements with, and who I want to partner with in building my future.</li></ol><ol type="1" id="6b551b6a-53d9-46ac-8edd-79072061887e" class="numbered-list" start="3"><li><strong>Community and belonging. </strong>I have found so many of “my people” in communities that satisfy so many of my random, nuanced interests and hobbies.</li></ol><p id="4cdb9132-04e6-46f8-a664-99f7e1e2d340" class="">These are often the concepts we strive for when we imagine “the opposite of loneliness,” but I don’t share this to pat myself on the back. I share this to highlight what the research and studies don’t say: these things don’t paint a full picture.</p><p id="d8f0c6e0-9866-43ab-ae01-4ba462e189f7" class="">Friendship, love and community are all meaningful. They do make me feel more rooted in the world around me. They do make me feel less lonely.</p><p id="2e2bca50-716f-4112-b7c5-98fc1990aaa6" class="">But they don’t address the full experience of loneliness.</p><p id="4613c66b-aae5-4f1d-a076-75076238475b" class=""><strong>2a. WHY DO WE FEEL LONELY EVEN WHEN WE HAVE NO REASON TO?</strong></p><h2 id="0b6d8ddd-a513-45bf-9870-c99b6107a2a7" class="">The secret of loneliness</h2><p id="a115df95-df5e-41e6-b3a1-2d0d5cbf6e18" class="">Loneliness always finds a way.</p><p id="c98dd176-f44b-4d3b-91b0-faae08275c5f" class="">Between all the things I do to feel, well, not lonely, it somehow manages to slip between the cracks, and it makes no sense when it happens.</p><figure id="3440524c-f01f-4575-928e-24c3752c1d3d" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/7C7F36B2-3891-4342-A3B5-49DCDFB10F49.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/7C7F36B2-3891-4342-A3B5-49DCDFB10F49.jpg"/></a></figure><p id="353dcb5e-d38b-48df-80c0-ea8fc3e3b717" class="">It’s this feeling of being out with friends or in a social environment that’s, for all intents and purposes, fun, but you just feel out of touch and kinda sad.</p><p id="820d4f1a-7191-4771-b4e8-e596329ed7bb" class="">It’s when you just get off a long FaceTime with someone you love, and it suddenly hits you how empty your bedroom feels.</p><p id="0020d689-b7fc-4bf4-9b79-27acf8a38c3a" class="">It’s when you come home from a dinner party full of rich conversation, and a wave of existential angst suddenly washes over you for no apparent reason.</p><p id="908c7dde-3b9b-41b1-ade4-2062c2173c89" class="">It’s when you wish you could talk to someone, but as you scroll through your phone looking for the right person to call, no one feels particularly right for whatever reason; wishing to feel connected but just not wanting to do the whole connecting thing.</p><p id="060ed6b3-a3aa-4347-b9e5-673174911bb9" class="">If you’re like most people in these situations, you probably do what most of us do:</p><h3 id="6748720e-d819-4976-b30d-a7a5c4f734ce" class="">Distract yourself! <em>(Take your phone out and find literally anything else in the world to think about.)</em></h3><p id="4017750c-3a65-4b24-bd1f-bb94edac623b" class="">Maybe you’ll post a pic or tweet something.</p><p id="4b7cc6c0-38ce-4141-93ab-e3220d3df873" class="">A bunch of people will like, comment, etc. One of those people might even be someone you especially admire or respect, and, man, feels good to get noticed.</p><p id="2a02a0cc-a5b8-45c0-a20e-ee60437d2ecf" class="">You check your phone every few minutes for that connection high until, well, the notifs stop rolling in.</p><p id="9c3fbda1-b4b3-4dc7-888a-809a685dc9a6" class="">A hollowness fills your chest.</p><p id="27741cb9-df35-4195-b751-94741142ec53" class="">You look for something new to fill it, if just for a few moments. Rinse and repeat.</p><h3 id="701dcfff-33d9-405b-ac06-dcefb2b4a721" class="">This is the secret of loneliness.</h3><p id="e7e2555a-6b37-44c6-a08b-a03c51e3eaa9" class="">And nobody talks about it—this mysterious, shadow of loneliness that lingers even when you’re “doing everything right.” The secret is that “everything” is not quite everything.</p><p id="20d68559-5174-4012-a614-ffe30e9d4a51" class=""><strong>You can’t address your own experience of loneliness just by finding connection with the people around you. You need to find connection with yourself.</strong></p><p id="219be213-d3b4-4d3b-ae61-21d72608d3c7" class="">Sure. Connect with your neighbors, your friends, your communities. Go to that meetup. Volunteer. Have meaningful conversations. Find love. Do it all.</p><p id="920023df-668d-401b-a48c-fc2790700c53" class="">But at the end of the day, all you really have is yourself.</p><figure id="086f2aa5-4ccc-4b0f-9dcf-faa4668b424c" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/E0553A6C-38BA-4A3B-B1B5-FAE165D127D828129.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/E0553A6C-38BA-4A3B-B1B5-FAE165D127D828129.jpg"/></a></figure><p id="d5f32f26-59c1-41ad-94cd-f837cc2b0a67" class="">When left in our own skin, without distraction, we don’t know what we will find. And worse, we don’t really know how to navigate because we were never taught how to look deeply inward.</p><p id="368c8697-679f-4fdb-9ef6-2dbee7c37fa5" class="">A brief or close encounter with the silence of our own thoughts can feel like jumping into the deep end of a pool before ever learning how to swim. We almost reflexively squirm and scramble, reaching for something, <em>anything</em>, more familiar, more predictable, more in our control.</p><p id="95648d32-ff90-4634-b57e-0cb88b73ffef" class="">And there’s always an option. The great promise of social media and smartphone technology. <em>“Connection at your fingertips!”</em></p><p id="1b720e51-c965-4b12-a5a6-eec4ed154bea" class=""><strong>Why be alone if you don’t have to be?</strong></p><p id="a992c72e-0b90-4967-9da9-bd4bf0dd3a83" class="">Perhaps because that hollow feeling—the one you get when you’re scrolling on your phone for too long? That doesn’t change after 5 or 10 years of scrolling. It also doesn’t change when your follower count multiplies by 2 or 10 or 50.</p><p id="1fd474d7-b7fc-4972-bf80-b7e567ce1589" class="">In other words: Never <em>being</em> alone isn’t never <em>feeling</em> alone. Being constantly connected or surrounded by people doesn’t make you any more at ease in your own skin.</p><p id="fce45dc4-74fb-4dde-ba8f-91eb50001b14" class="">If you want to feel less lonely, you need find comfort when you are alone. That means you can’t just rely on connecting with others or focusing on some distraction or another.</p><p id="b4de78d1-d3e3-4be8-9f15-fc12a850cd1c" class="">Unless you learn how to connect with yourself—until your own company becomes enough—loneliness is always around the corner.</p><p id="e397a0ce-4eca-41e9-aa82-9eba123c6c64" class=""><strong>3a. WHAT CAN CONNECTING WITH STRANGERS TEACH US ABOUT CONNECTING WITH OURSELVES?</strong></p><h2 id="9d1687e6-7856-45ba-9d0d-1019f2c22ffe" class="">Strangers to ourselves</h2><p id="0c323bb0-9441-4832-ab52-ed425980db36" class="">The experience of looking inward and connecting with yourself is intimidatingly personal. It’s sensitive to learn something new about yourself or to find out that you aren’t who you thought you were.</p><p id="6a19af3a-f8f0-4144-834a-16665707b209" class="">If you’ve ever listened to a recording of your own voice or watched a video of yourself in action—on stage, in an interview, or just standing around in a social gathering—you’ve experienced exactly this. <em>That’s really what I sound like? Is my posture actually that bad? I can’t believe I leave the house with my hair looking like </em>that<em> from the side.</em></p><p id="fd454ee5-426f-4982-8e0a-793fdb0142d6" class="">It’s the same reason why we need to brace ourselves or establish a safe space when someone is sharing honest feedback with us at work or in friendship. For example, at breakfast this morning, Charlotte, my girlfriend, told me that my eyes were glazed over while she was telling me a story. I sprang into denial. “I was totally listening! I’ll even tell you what you just told me!”</p><p id="a7b476bc-604c-45e6-bb1d-5466f4db2082" class="">It’s common for there to be a gap between who we think we are and who we actually are. Closing that gap can be scary, especially as the stories we tell ourselves grow cemented over time. In my case, I’ve clearly grown to think I’m a better listener than I appear to be.</p><p id="fda8a0e5-3397-4ebf-8210-ea6701a5a21a" class="">The truth is that in many ways, we are strangers to ourselves.</p><p id="9f070c91-71a3-454b-8c24-805c7d16ee27" class="">We may find hope, however, in consciousness. Even if we don’t know ourselves, we have the capacity to be aware of it. In a sense, we have two minds: one that determines how we operate in any given moment and a second that has the capacity to notice what the first one is doing.</p><p id="d8e7b9a6-830e-4b86-95d1-21257eca3337" class="">Getting to know yourself is effectively a conversation between these two minds. Seeing yourself outside of yourself.</p><p id="e0cb2581-c1c8-4484-885b-0840d70c81e3" class="">This can feel a little abstract. It can be more manageable (and less scary) to face the unknown when it is outside of us—when we’re connecting with actual strangers. I want to explore this for a moment, as it’ll make the experience of connecting with yourself a bit easier to digest.</p><p id="b871a08a-23bc-4f59-8fe5-57e0dfc2dfc1" class=""><strong>3b. WHAT CAN CONNECTING WITH STRANGERS TEACH US ABOUT CONNECTING WITH OURSELVES?</strong></p><h2 id="08844118-739d-4f00-aa32-1199e9d6ca30" class="">Connecting with strangers</h2><p id="02b8b5a0-de01-4e00-9a41-ec22f61a0927" class="">Since 2014, I have led a community organization called <a href="https://teawithstrangers.com/">Tea With Strangers</a>, where we bring strangers together to have meaningful conversations. These conversations often produce a deep sense of connectedness between people that otherwise have nothing to do with one another.</p><p id="1aa761f1-5e2c-43bc-9b49-c94e7f65ac7a" class="">Since its inception, Tea With Strangers has brought together over 10,000 of these conversations all around the world, and more than 50,000 strangers have participated.</p><p id="f471f396-192f-44f4-a9d2-b210badb9ddd" class="">It’s not the only way to connect with strangers, but its structure provides for an experience that consistently provides for a deep sense of connection. I’m obviously biased, but I believe it to be a good example to work with.</p><figure id="62d6029b-ab08-48c5-8b09-e8efd8568bea" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/1CB4182E-18BD-4752-8FEA-CDFBC0860755.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/1CB4182E-18BD-4752-8FEA-CDFBC0860755.jpg"/></a></figure><h3 id="b6fb3e56-342e-49dc-a0d4-22930b611eb9" class="">Two hours, five strangers and zero context.</h3><p id="ae877bae-fdde-4301-baf2-355854a74232" class="">The way Tea With Strangers conversations work is simple: A host in our community puts a time and a place up on our website. 5 strangers sign up. Nobody knows anybody who’s going to show up. Nobody knows what they’re going to talk about. They meet at a cafe. They talk for 2 hours. The host helps facilitate and guide the conversation as needed.</p><p id="22b49938-36dc-43ae-88f0-36ce121a1d76" class="">That’s it.</p><p id="165cb7d5-5a10-49d7-aeb9-c0334bef5ca8" class="">As a host myself, I’ve hosted over 400 of these conversations with more than 2,000 strangers, and these conversations usually follow a similar format.</p><p id="b67cf0d7-0e27-49b1-a7f2-35f7c213008b" class="">They always start with some small talk.</p><blockquote id="d40c271b-34d2-4618-abcb-d42f48968f35" class="">How’s your day been? What neighborhood do you live in? Where are you from originally? Why’d you sign up for this thing? Oh you watch that TV show?! Man, can you believe what’s happening in the news? Et cetera et cetera.</blockquote><p id="757ccd40-19dc-4b0d-a109-30145c10b1e5" class="">It’s awkward and redundant, but it’s necessary. You have to talk about something while everyone is warming into their seats and feeling each other out.</p><p id="1d625aee-3894-42c0-bfac-7e8674b6475f" class="">After a few minutes, I put my “host hat” on and call out the elephant in the room.</p><blockquote id="f389ff8e-1f27-4133-bc18-8f73ca4133e5" class="">Hey guys, I know we could talk about TV shows and current events for hours, but if you’re up for it, I’d love to try and actually get to know you.</blockquote><p id="fa14d91c-385b-4b04-b3e8-745329f5082d" class="">So I’ll pose a question that’s open ended. Personal. Maybe a bit uncomfortable. Maybe one of these:</p><figure id="4dfe172b-ea3c-4663-8cc7-f033f1b92317" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/twsquestions.png"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/twsquestions.png"/></a></figure><p id="497cb42f-29d7-4f70-b295-5ef55c606341" class="">I’ll turn to the most talkative person in the group and ask them to kick us off.</p><p id="5778a9e1-31a2-47ac-a4bb-ef0c4fc335de" class="">Now, if the idea of being put on the spot like that by a total stranger gives you a pit in your stomach, that’s normal. For what it’s worth, asking these questions is just as uncomfortable as answering, but that’s kind of the point.</p><h3 id="8894a4ae-879c-4878-942c-4936c80db27f" class="">What happens next is a conversational adventure.</h3><p id="04bf97ff-5a57-4a3e-9491-82fe2ba453f5" class="">The person I call on might actually answer the question directly, but they might also reflect on what they think of the question, opening a more meta conversation. They might shift direction and share something else entirely.</p><p id="bf6606f2-dd39-4317-890a-13042b47b242" class="">Whatever it is, the conversation has taken a sharp turn, and a new norm is formed.</p><p id="b01d6ab2-4861-496d-8bfb-5a0e1d348f39" class="">Asking one seemingly uncomfortable question raises the bar for what’s awkward. It’s not long before everyone at the table is asking follow up questions, paying attention to what each person has to say. Making eye contact! Even listening enough to not<em> constantly</em> think about what you’re going to say next while someone else is talking.</p><figure id="7f3b70f5-6307-49d4-b885-657228befc51" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/ECFCA1AB-3D29-4C36-A670-B9C8EB49F79F.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/ECFCA1AB-3D29-4C36-A670-B9C8EB49F79F.jpg"/></a></figure><p id="3fae39ed-e616-480b-af81-19adb0c5ddbf" class=""><strong>3b. WHAT CAN CONNECTING WITH STRANGERS TEACH US ABOUT CONNECTING WITH OURSELVES?</strong></p><h2 id="6654266b-3b4e-4edd-893a-a03567deb034" class="">Observing our Shared Humanity</h2><p id="4f3e38e8-3269-4c61-89a4-fc0b004a7752" class="">What makes a Tea With Strangers conversation meaningful isn’t that you just talked with strangers. It’s that you have experienced connection with them—that you observed a sense of your Shared Humanity.</p><p id="df8201a4-3e31-433f-ae80-1ae003ec71e8" class="">You just met these people two hours ago, and somehow it feels as though you’ve known them forever. You’ve shared stories with them that you forgot even existed, and you learn things about them that you would’ve never thought to ask about. You feel like you’re truly seeing them as whole people. You don’t know everything about them, but you know<em> that</em> you don’t know everything about them. You find yourself simultaneously aware of how much you have in common with these people <em>and</em> the fact that, as strangers, these people could have just as well been anybody else in the world.</p><p id="fbfa8cc7-07ed-4998-ba0d-42b5ff724e36" class="">Of course, the glow of Shared Humanity’s halo only shines so long before a rude clerk, bad driver or some troll on Twitter or Facebook puts a big fat dent in your faith in humanity.</p><h3 id="f98cd6e6-87e7-45bf-a8fa-f57988d1516a" class="">The muscle of possibility</h3><p id="35c9ae6d-60f8-47b5-ae4b-0d76ef652db9" class="">Reminders of Shared Humanity are critical to challenging your assumptions about the people around you. They exercise the muscle of possibility in your imagination. Any time you’re about to jump to a conclusion about someone you don’t know, the muscle reminds you:</p><p id="fcca90b9-b112-4d12-8595-d4617006e77b" class=""><em>You don’t </em>really<em> know what’s going on. You have no idea what the person is going through, and there’s probably a ton of assumptions you’ve baked into your interpretation of the situation that might be challenged if you sat with the person and heard their story. They are probably doing their best with the card they were dealt in this moment, and it’s likely that they are no “worse” or “better” than you are.</em></p><p id="f704976e-49b9-46b7-b00b-3521d02112b2" class="">The more you build this muscle, the more generously you reflect on and interact with others, the more easily accessible this observation of Shared Humanity is, the more deeply connected you feel to the people around you.</p><p id="094cbda2-a068-4151-ab3a-c68f1a9d14f1" class=""><strong>3c. WHAT CAN CONNECTING WITH STRANGERS TEACH US ABOUT CONNECTING WITH OURSELVES?</strong></p><h2 id="7f272966-6e69-4e48-b93e-f39b0c5df4f5" class="">Noticing yourself</h2><p id="45f0df50-345b-4e50-8d2f-f0204d657404" class="">If observing your Shared Humanity with those around you begets a deeper sense of connection with others, there must be a parallel experience that yields a sense of connection with yourself.</p><p id="4ba80cf3-1879-4078-b1ae-fff65b9cc9cb" class="">As you notice the reality that you don’t know everything about others, you might wonder what you don’t know about yourself.</p><p id="2f539981-7b8d-4760-a695-0a9f4405b41c" class="">As you learn things about others you would’ve never thought to ask about, you might also discover a whole league of questions you’ve never asked yourself.</p><p id="749cf157-4726-4d2b-8d44-46d6d18ba3ec" class="">As you see others as a whole persons instead of singular facets, you might zoom out and see you—your emotions, your experiences, your being—are far more than whatever specific detail you may be focusing your attention on in this moment.</p><p id="4c5962ae-cee9-45b7-b365-7026d16145a7" class="">But how? How do we see ourselves in this way?</p><p id="70a52ccf-b3a5-47be-bc8e-261776644f41" class=""><strong>Create space.</strong></p><p id="0065c06f-7ac8-4447-b920-86dfd2b1db2c" class="">The distinctive quality that makes a Tea With Strangers conversation so amenable to observing Shared Humanity is the space it affords the group to actually take a good look at one another—to see what they didn’t notice on first glance, to notice their own assumptions.</p><p id="d0d06e41-845e-4393-9877-440d84a35cb3" class="">In this space, curiosities can flourish and be met with stories, reflections and context inspire awe. A recipe for Shared Humanity.</p><p id="f3f7fdf5-5560-401e-98f5-10c71bbda258" class=""><strong>3d. WHAT CAN CONNECTING WITH STRANGERS TEACH US ABOUT CONNECTING WITH OURSELVES?</strong></p><h2 id="18da8835-c52c-4238-ace4-94866d7bf094" class="">Spaciousness + Curiosity = Awe</h2><p id="39fd288b-ba2f-4b91-bcad-8928cc58df1c" class="">This recipe also works when connecting with yourself. Think back to the two minds we talked about earlier—one that determines how we operate in any given moment and a second that has the capacity to notice what the first one is doing. Having a conversation between these two minds can look very similar to a Tea With Strangers conversation.</p><p id="d8ad2fba-0c4d-4262-9baf-b9f006b4d6b2" class="">In order to grow curious with yourself and listen to what you mind find, you need space to step outside of yourself. Giving your consciousness breathing room—time, non-judgment, quietude—can yield its own kind of shared humanity: Self Awareness.</p><p id="22696cbc-7d92-4df1-9a3b-00c7023ef12b" class="">Let’s walk through this recipe side-by-side, with strangers and with yourself, to make the picture a little clearer.</p><figure id="997d2d05-8f6b-4944-b1d3-2acf94991ff4" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/762264DA-3CE0-4CE4-9620-A178DCE483C7.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/762264DA-3CE0-4CE4-9620-A178DCE483C7.jpg"/></a></figure><p id="44a680a1-e847-4367-9f54-3e2171eb11b1" class="">At Tea With Strangers, everyone agrees to sit together for 2 hours and we don’t take our phones out, so there’s a lot of time to talk and a lot of time to think.</p><p id="a71342b3-13c2-4e95-bca0-6b8b99c51161" class="">Nobody knows who else will be there. They don’t know what they’re going to be talking about. The small talk at the beginning isn’t especially interesting, but it’s a start.</p><p id="cdc81c25-38bc-4780-9152-e18bfe5d7857" class="">Whatever comes out is pretty much unrehearsed and unplanned. This makes it hard to edit yourself or put on a show. You’re just being real, stepping into the space of what could happen.</p><p id="d87cc4ac-d46f-47fd-824e-77300c655888" class="">The first few moments of you spending time with yourself are usually very heady. You start wondering why you’re by yourself, wasting time, being bored.</p><p id="8915556e-757a-44b1-8077-c612ada49cec" class="">You could grab for your phone, but you resist for a moment. You don’t have a specific goal, but maybe something will emerge.</p><p id="78b69a82-6a30-41d5-9512-f8103f150dad" class="">You <em>could</em> be doing something more social, more productive, more interesting! But over time, you start to let go of your sense of control, your rush to get somewhere “good.”</p><p id="8a04298d-bed2-4c76-81c2-0f486686d01f" class="">You <em>choose</em> to be alone, and you’re creating space for what could happen.</p><figure id="2d0c5b36-5008-43c8-af45-3afb902b3268" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/EB20B23A-86ED-4E73-B440-DBE0D4059139.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/EB20B23A-86ED-4E73-B440-DBE0D4059139.jpg"/></a></figure><p id="363910ac-29f2-477a-9bbd-d4876e91e566" class="">At a Tea With Strangers conversation, the lack of context <em>is</em> the context.</p><p id="58f19ad2-9da8-405d-bcd7-6edeb3a95323" class="">Since nobody knows anybody at the table, there’s no such thing as a dumb question. It’s a little more comfortable to ask, “What’s the story behind that?” when someone shares something you want to know more about.</p><p id="041cc635-c6ff-46a8-ad23-9b0c6a874aef" class="">Behind these questions is interest. In front of them is belief. Asking a question and meaning it is a vote of confidence in the person that you’re asking, an unspoken undertone: <em>I don’t know how you’re going to respond to this, but I have a feeling that I’d enjoy finding out. I hope you’ll trust me enough to meet me halfway on this leap of faith.</em></p><p id="db4a00fd-c5cc-4c31-b90e-b3d46434acb6" class="">The fear of judgment that usually holds us back starts to dissolve as we grow acutely aware of the fact that, despite the flow of this conversation, it’s unlikely we’ll see each other again. Acceptance feels a little easier.</p><p id="c8a6c06b-b58a-43b6-bdf6-f8681e40fe34" class="">A flurry of “Whys?” “Tell me mores” and comfortably uncomfortable pauses fills the air with curiosity, satisfied by stories about where we come from, why we think what we think, and more nuanced follow-ups.</p><p id="6efe90cf-3944-4934-af73-ce0151d3e0f6" class="">When you stop looking to make your time with yourself useful, productive, or interesting, you start to get curious about things that you’ve been thinking about lately.</p><p id="5a76d288-b37d-41b0-9edd-2d64d40db3ff" class="">You notice that your first few thoughts are actually someone else’s—maybe something you read on the internet or heard someone talk about—before you ask yourself what you actually think. What do you actually feel? Why?</p><p id="8ffe4aa0-f5ef-4fa0-848a-ca65008a50ac" class="">A random observations enters from the periphery and somehow finds itself associating in your mind with a completely unrelated train of thought.</p><p id="798e696b-0da3-4fcf-8722-6a42d6142746" class="">You start noticing things about yourself that you didn’t know were there, or maybe you just forgot. Some of it is great. Some of it just…is. Some of it sucks and makes you sad. But it’s all you.</p><figure id="56d9232d-fb1b-4953-b3a5-f9bd25399aec" class="image"><a href="Being%20Alone%2034407e85467645258b5fc5737114c04b/dumbface.jpg"><img style="width:700px" src="Being%20Alone%2034407e85467645258b5fc5737114c04b/dumbface.jpg"/></a></figure><p id="b688b81e-8ccd-430e-9677-c920ba32093a" class="">The fact that this conversation even happened between a group of people who were small talking not more than 2 hours ago is both unsettling but also kind of mindblowing.</p><p id="e945b8c0-394b-4c64-8f1b-17d992b40417" class="">You would’ve never expected a bunch of strangers you had nothing to do with to become people you feel so invested in, so aware of.</p><p id="a9a7f1cb-ef9b-44cf-b3ff-e8f169cb395d" class="">Before you know it, you all have to get on with your own lives. The conversation is over, and it’s back to the real world. Maybe we’ll see each other again, but not likely. This was really nice while it lasted.</p><p id="e6bd7d00-c6d0-4ebc-b033-c71854104ff2" class="">People are so much more interesting when we give them space and curiosity to bloom before us.</p><p id="1b5f99c3-190e-487c-9aca-d1b90492151c" class="">The connections that start forming between thoughts you didn’t even know you had don’t make complete sense to your left brain, but your right brain is convinced there’s something there.</p><p id="07c19c90-b1ef-47b7-865d-9a2310ad61aa" class="">With some concentration, unexpected connections start to form—and more new ideas or reflections enter the fray. (Well, “new.” They were in your head all along.)</p><p id="535822a2-72ce-4c58-b88b-e3bda353c10b" class="">Maybe you judge your thoughts. Are they worth it? Real? Right? Any good? As you feel out their rough edges, you change your mind back and forth.</p><p id="df85e076-0628-4282-95d5-f45677424b2c" class="">You’ve discovered something. Maybe it’s profound. Maybe it’s a recycled version of a thought you already had. Gotta get back to the real world. This was really nice while it lasted.</p><p id="39a90749-48c1-42bb-9353-73f80d7e51d6" class="">Who would’ve thought you could learn so much about yourself and your thoughts? All you had to do was sit with them.</p><p id="f0bb89e3-f6ee-4547-bd99-0162b46412f8" class=""><strong>4a. WHAT IS GOOD ALONE TIME? HOW DO YOU KNOW WHEN IT’S WORKING?</strong></p><h2 id="581dce89-c84d-41b8-a553-3d550545cfa0" class="">Practice</h2><p id="a55c922e-1566-4961-9d11-11a81873d39f" class="">It’s hard to get this recipe “right” the first time. You might find yourself stuck running circles around “Why am I doing this again?” for ages before you ever get to really growing comfortable with the space enough to even notice your curiosities, let alone indulge them.</p><p id="95498548-a7da-41ca-8d5e-c802247eddce" class="">Good Alone Time takes practice, and practice can very well be excruciating. As with anything difficult, however, practice makes practice easier.</p><p id="6478056f-b283-4e27-9bf8-73e79967aa7b" class="">For me, practice is going on long walks in nature—long enough to forget what I was thinking about before I started—and instead marvel at how many shades of green there are.</p><p id="91d451ad-2bae-453b-9076-0d9d23c88391" class="">It’s taking a shower before bed to think about my day and leave the water running just long enough to forget that I even had a day in the first place. It’s slowly smelling my morning coffee before I start sipping it. It’s washing the dishes without my headphones in. It’s turning on Airplane Mode and typing out my thoughts to myself as if I’m texting my own consciousness, having a true back and forth.</p><p id="8d16024b-4b5e-4613-a139-481d4798818b" class="">And when I’m not quite prepared to face my own thoughts, it’s bringing a book to the living room and getting sucked into a story so deep that I forget my phone is in the bedroom—which, of course, requires me to leave my phone in the bedroom in the first place.</p><p id="43403f08-65c0-47ac-a855-9daf01475bf8" class="">All of these things are quiet. They don’t involve a phone. They require me to do one thing at a time. Ultimately, they’re all rote, monotonous activities that give my mind space to move slowly, pay attention to its steps, and listen to what might arise.</p><p id="7556249b-853c-4505-8fd7-b4800362d881" class="">For others, this might all sound a lot like meditation—and if that works for you, great! I’ve understood it to be the purest form of noticing your own thoughts, but the habit never quite stuck for me. Maybe one day.</p><p id="35a68716-1f28-41f0-9028-298d74045fb1" class="">The important thing about practice is that it’s regular. My habits are all small, but I can fit each of them into my life almost daily. Every day, I give my mind at least some space to be curious with myself. Some days, I find a sense of awe. Others, not so much. Being by myself still makes me very uncomfortable, but I’m way less scared of it—and in turn, significantly less inclined to reach for my devices when I’m left to my own devices. Progress!</p><p id="67752dd0-96cc-4422-9e9b-ed491299c0ef" class=""><strong>4b. WHAT IS GOOD ALONE TIME? HOW DO YOU KNOW WHEN IT’S WORKING?</strong></p><h2 id="0d392e7f-8602-40f0-bce2-a532f5ec0a69" class="">What happens now?</h2><p id="0bceff26-43d5-4f09-aa2e-c37dad55efd2" class="">I said at the beginning that my hope for you, by the time you finish reading this, is that you will:</p><ul id="5a63b5a7-43d7-4e24-b8ad-808ec9d74d73" class="bulleted-list"><li>Think more critically about and develop a language around your experience of being alone;</li></ul><ul id="a021da8f-fca5-47af-bb8b-6a60c6b9f28f" class="bulleted-list"><li>Consider the opportunity that being alone holds for you;</li></ul><ul id="f1c51fca-1eaa-4685-928e-b980c61d7979" class="bulleted-list"><li>Feel better positioned to build an honest relationship with yourself.</li></ul><p id="d830dcea-4eb8-4918-92a3-7718d74b5d49" class="">Let’s say I’ve achieved this goal. Fast-forward 3 months from now.</p><p id="b69fd909-39a9-4354-87fc-2b65c6190921" class="">Maybe you&#x27;ve gone for a 30 minute walk every day, no headphones or anything. Maybe you’ve been staring out the window for a few minutes in the morning before you get your day started. However you’ve chosen to practice being alone, you’ve been doing it.</p><p id="dd28531a-440c-4f69-80c4-d62652c3554f" class="">Besides having reduced your screen time (probably), what else changes?</p><p id="964ac00e-f903-429f-b33a-c24416409712" class="">I’ll project a few forecasts from my own experience:</p><ol type="1" id="84fb62e8-5260-41f3-97e9-f967f155b962" class="numbered-list" start="1"><li><strong>You get to know who you actually are.</strong><p id="c02c8850-eefd-4b52-a5ec-83b6fdb42429" class="">Being bored is part of it, but in that boredom, you start to be a little less scared of what you’ll see. That doesn’t mean you’re going to like all of it, but when you start asking yourself questions, you start to understand why you do the things you do or believe what you believe. You stop worrying so much about what other people think and trade that in for enjoying the process of becoming who you are. Instead of trying to craft some image to serve other people’s opinion of you, you form an opinion of yourself.</p></li></ol><ol type="1" id="1c98bd33-26ac-4f8c-b00b-0c56275c5da7" class="numbered-list" start="2"><li>Connecting with others gets easier.<p id="1444be13-9b87-4975-9902-ed12e222eed3" class="">When you recognize how complicated you are, you give other people a bit of a break and accept them for being complicated in their own ways. Instead of judging them and letting your preconceived notions guide you, you ask more questions to understand the things that don’t make sense to you. When you start feeling your feelings yourself, you don’t project them on other people nearly as much. The more secure you are in your own skin, the more you can create space for other people to be their whole selves—even if they’re not enjoying alone time nearly as much as you are.</p></li></ol><ol type="1" id="d851ee5e-5ee1-4223-a448-7f554cfb4b70" class="numbered-list" start="3"><li>You get a lot better at putting your own life in perspective.<p id="d637c351-50f9-4678-a4fc-37498a27f9e8" class="">The more you practice curiosity with yourself, the more you discover about why you react to things in your life the way that you do. By noticing patterns, you essentially develop a muscle that helps you reason through your emotions and move through life with more sense, more comfort, and less inexplicable anxiety. Recall the example of ending a FaceTime call and suddenly realizing how empty your bedroom feels? Instead, imagine trading that sinking feeling for a reflection on how appreciative you are of that friend. Instead of spinning into existential dread, you shoot your friend a text to share your love and go to bed feeling good about the fact that you have the strong relationships that you do.</p></li></ol><ol type="1" id="d9e91fad-4610-45d2-b94c-f60aff28490f" class="numbered-list" start="4"><li>You begin to enjoy your own company.<p id="3b7bc2e6-f1a1-4fcd-ae8f-78c89ca91239" class="">Being alone is less scary. Boredom doesn’t seem like such an awful prospect. You might almost feel a little bit Zen, and it’s weird. Maybe you notice that the people around you are living energetic, busy lives. In the past, you might have wanted to be where everyone else is, but instead, you feel oddly comfortable in your own company. You almost wonder why you’re not itching for a distraction or for something to do. It starts to hit you that the past version of you was almost always reacting to the world. Now, you have the capacity for conviction—to decide what you want in your own life.</p></li></ol><p id="fd99854b-cb3f-47ef-b019-ebde20f0de2e" class="">It sounds a little too good to be true, but it’s real, and it’s within reach. It might not sound all that sexy, and it probably won’t make for very many likes or comments, but damn, does it feel good to not care about likes or comments, to be acquainted with yourself, to be OK on a Friday night when the world is out and about and you’re just hanging out in your own skin.</p><p id="a4c4d2cb-4a14-44e5-9355-f450631763ba" class="">To be at home, in the company of yourself, exactly where you are.</p><p id="734e4d45-27e8-41d7-9553-f7c1451a2cc5" class="">P.S.</p><p id="0e713c55-7dd7-4e63-ae73-b17c7b741499" class="">If you just read this whole essay, I’d love to know what it made you think about. Email me at <a href="mailto:ankit@teawithstrangers.com">ankit@teawithstrangers.com</a>. Tweet at me <a href="http://twitter.com/ankitshah">@ankitshah</a>. DM me on Instagram <a href="https://instagram.com/ankitshah811">@ankitshah811</a>. Whatever your preference. I put a lot into bringing this essay to life and frankly want to know what it was all for (besides the intrinsic reward of writing something you’re proud of yada yada).</p><p id="c31a2689-24e0-4ac1-8ca4-4879dc295f01" class="">If you have no idea who I am but read this whole essay, (1) that’s amazing and (2) <a href="https://www.ankit.fyi/about">here’s more about me</a>.</p><p id="bceaebba-6fda-400b-9be8-d2dde16afd16" class="">Want me to email you when I have something to say? Sign up for my email list.</p></div></article></body></html>

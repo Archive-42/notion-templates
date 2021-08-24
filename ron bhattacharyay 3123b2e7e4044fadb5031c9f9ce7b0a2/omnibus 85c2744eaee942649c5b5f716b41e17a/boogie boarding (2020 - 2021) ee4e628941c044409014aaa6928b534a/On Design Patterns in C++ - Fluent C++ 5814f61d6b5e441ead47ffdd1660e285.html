@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>On Design Patterns in C++ - Fluent C++</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5814f61d-6b5e-441e-ad47-ffdd1660e285" class="page sans"><header><h1 class="page-title">On Design Patterns in C++ - Fluent C++</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.fluentcpp.com/2020/12/18/on-design-patterns-in-cpp/" class="url-value">https://www.fluentcpp.com/2020/12/18/on-design-patterns-in-cpp/</a></td></tr></tbody></table></header><div class="page-body"><figure id="82b0d16a-0ecf-41c6-8a0f-394d0a3c3117" class="image"><a href="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/banner_book.jpg"><img style="width:700px" src="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/banner_book.jpg"/></a></figure><p id="ca86e63f-3926-49f9-ada0-43d0dabc9c65" class="">Design patterns are a must-know in programming today.</p><p id="d38c2da0-4b68-44dc-8eaf-19728e4799b8" class="">The first reference to “design patterns” I know of is the famous <a href="https://www.amazon.com/gp/product/0201633612/ref=as_li_qf_asin_il_tl?ie=UTF8&amp;tag=fluentcpp-20&amp;creative=9325&amp;linkCode=as2&amp;creativeASIN=0201633612&amp;linkId=8d82c9d9fb2521a0d54f2f07c0bc12e0">GoF book</a>:</p><figure id="0a004324-1e30-42e9-a6d1-17b9d82bc170" class="image"><a href="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/design_patterns_book.jpg"><img style="width:400px" src="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/design_patterns_book.jpg"/></a></figure><p id="97c843e2-d8f8-4242-b7fb-41f9116966f3" class="">This book is a classic of programming and sits on the desk of many programmers across the world.</p><p id="10af5fcd-f439-4874-bf1b-5b9d7caee2bb" class="">The Design patterns described in this book are various ways to structure code to solve specific problems. Those patterns have been labelled with names such as “Strategy”, “Visitor”, “Adapter”, “Chain of Command” and so on.</p><p id="0ca3eddd-8bd7-4d9c-92a9-dc169ce8961d" class="">Design patterns are not specific of a language: they can be applied in C++, Java, C#, and many other languages. But the code examples in the GoF book are in C++ and Smalltalk.</p><p id="52274148-7f5f-4f65-af14-231062a95d95" class="">For a detailed analysis of those design patterns, refer to my series “Design Patterns VS Design Principles”. In this post I want to dig in a general aspect of design patterns in C++ that I didn’t find easy to see in the GoF book.</p><p id="a7b0e2fb-5c28-4239-8ef3-c115dc6f8a4a" class="">The seminal book on design patterns has C++ examples! Lucky us! To understand how to apply design patterns in C++, we can just have a look at the code snippets in the GoF book then, right?</p><p id="171cefab-bd92-4e6a-b167-c2ba8541e705" class="">Well, things are not so simple.</p><h3 id="9a2ec815-166d-4cd4-95a1-b97cc4a03abf" class="">The C++ in the GoF book is not representative of C++</h3><p id="a6cff0cd-731d-4860-b768-2d3d08674b84" class="">The features of C++ used in the GoF book do not take advantage of all the programming paradigms that C++ offers.</p><p id="57e21d67-fbac-43e6-aa0b-c9e85dde0ea4" class="">The main reason is that design patterns rely heavily on polymorphism, and the book exclusively uses <strong>runtime polymorphism</strong> in its examples, that is inheritance and virtual methods.</p><p id="18c79092-e191-4685-85d8-c7f716205954" class="">For example, here is an extract of the code illustrating the Visitor design pattern:</p><pre id="6e97a7b8-3c08-47e6-bbe1-7928a7dc9e4c" class="code"><code>class EquipmentVisitor {
+public:
+    virtual ~EquipmentVisitor();
+    virtual void VisitFloppyDisk(FloppyDisk*);
+    virtual void VisitCard(Card*);
+    virtual void VisitChassis(Chassis*);
+    virtual void VisitBus(Bus*);
+    // and so on for other concrete subclasses of Equipment
+protected:
+    EquipmentVisitor();
+};
+
+class PricingVisitor : public EquipmentVisitor {
+public:
+    PricingVisitor();
+    Currency&amp; GetTotalPrice();
+    virtual void VisitFloppyDisk(FloppyDisk*);
+    virtual void VisitCard(Card*);
+    virtual void VisitChassis(Chassis*);
+    virtual void VisitBus(Bus*);
+    // ...
+private:
+     Currency _total;
+};</code></pre><p id="db18c126-8fe5-4a24-a8f8-75c73211c938" class="">This is one possible way of implementing Visitor in C++, and doesn’t use the specificities of the language. We’ll see another one below. In the above code, we could just rearrange the position of the keywords and transform this code into Java for example.</p><p id="714bc474-d934-4f25-84b2-6452edef0309" class="">To be clear, my goal is not to pick on the GoF book. It is an excellent book, a very interesting read, and still relevant today despite the fact that it was written some 25 years ago. Both the design catalogue and the first part of the book (before the catalogue) contain valuable lessons of design.</p><p id="1075b821-0f03-4a46-b233-c89a72e7325c" class="">But after reading the GoF book you may have the impression that this is the only way to implement design patterns in C++. And this is not true.</p><h3 id="b27a8221-5496-41f7-8c1a-323043c7dda7" class="">Modern C++ design</h3><p id="ddcb8112-649f-4dec-8fd8-d3f6da088fee" class="">Another book on design patterns that was published after the GoF book is Andrei Alexandrescu’s <a href="https://www.amazon.com/gp/product/0201704315/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=0201704315&amp;linkCode=as2&amp;tag=fluentcpp-20&amp;linkId=5aeb3f292048e43723ef58985015c6e6">Modern C++ Design</a>:</p><figure id="167ecc58-9b56-484a-84d3-5167c4188a91" class="image"><a href="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/modern-cpp-design.jpg"><img style="width:250px" src="On%20Design%20Patterns%20in%20C++%20-%20Fluent%20C++%205814f61d6b5e441ead47ffdd1660e285/modern-cpp-design.jpg"/></a></figure><p id="9b4c1731-011a-498b-a882-5674efa7283a" class="">The title of this book is not very specific but look at the subtitle: <em>Generic Programming and Design Patterns Applied</em>. Generic programming means templates. This book is about implementing design patterns with templates.</p><p id="c2bf17a1-13d6-41d0-89a8-158cb4500ae4" class="">In fact there is more to this book than that. It shows advanced templates and design techniques. And it uses those techniques to implement design patterns in ways that are very specific to C++.</p><p id="4287d392-a321-49a7-92ce-e2e243969052" class="">This is my all-time favourite C++ book, and I recommend that you have a look at it. The templates have aged a little since it was published in 2001, long before variadic templates entered the standard, but it emulates of variadic templates with typelists.</p><p id="a56b8f97-7bae-4256-bdb7-f0acb3cf85d9" class="">It would be awesome to have a revised edition of this book with features of C++20. Still, the contents of this book remain interesting–and impressive!–today.</p><p id="4ecbcb5d-8eef-4481-86b2-ae09ad11a845" class="">We won’t get into the advanced techniques Modern C++ Design here. Instead we’re going to see two simple examples in the C++ standard library that use design patterns with other tools than inheritance and virtual methods.</p><h3 id="bd951497-2ecf-4b92-bcb1-fec0392ba7c1" class="">Strategy with <code>std::for_each</code></h3><p id="be5348e4-8ed3-4bf4-b87f-d174abceb3c3" class="">Consider the simplest algorithm of the STL algorithms library: <code>std::for_each</code>:</p><pre id="b8837614-5e75-43fb-8b6e-8b145f6fa99e" class="code"><code>template&lt;class InputIterator, class UnaryFunction&gt;
+UnaryFunction for_each(InputIterator first, InputIterator last, UnaryFunction f);</code></pre><p id="fedcbb2a-3b33-4da1-bc85-1f0e54b086d5" class=""><code>std::for_each</code> iterates over a range and applies a function to it:</p><pre id="dc6b056f-0ea0-4ab6-a5cf-fa535eed2c96" class="code"><code>auto numbers = std::vector&lt;int&gt;{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+std::for_each(begin(numbers), end(numbers), [](int&amp; i){ i *= 10; });
+
+// number now contains { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 }</code></pre><p id="376838cf-5cc0-4b1c-8e6f-0031d0394f04" class=""><code>std::for_each</code> implement the design pattern Strategy. Indeed, it takes a polymorphic parameter and uses it in its code. We could pass in any function or function to <code>for_each</code> as long as it accepts the type of parameters in the range denoted by the iterators.</p><p id="105e4f5b-afb9-40d0-b59d-7c7994dd0430" class="">Contrary to inheritance and virtual methods, this not runtime polymorphism. This is compile time polymorphism, based on templates, and that is resolved at compile time.</p><p id="8f3b987e-30b1-4893-a93a-93e5b6c38d64" class="">To be fair with the GoF book, even though it doesn’t mention <code>std::for_each</code>, one of the implementation remarks it mentions is that C++ allows to implement Strategy with a template parameter.</p><h3 id="13beaaeb-bf01-4a13-9920-d9e205a2fe64" class="">Visitor with <code>std::visit</code></h3><p id="876bfdec-2eb3-4887-ba55-7a094637fc3a" class="">Let’s take another example with the Visitor design pattern. Visitor is essentially when you have a polymorphic function to apply on a polymorphic object.</p><p id="55218a3b-017b-4ad2-8ca8-e38fc80bffd3" class="">The GoF book illustrates this with two hierarchies of classes, and shows how they can invoke virtual methods from one another to successively resolve the two instances of polymorphism.</p><p id="a9c5c4ca-eaa8-4665-8daf-acb589b3dda7" class="">To be fair again with the excellent GoF book, it mentions that this is a way to compensate for the <strong>double dispatch</strong> technique that C++ doesn’t implement (it mentions that the CLOS language implements it), which suggests that the double hierarchy of class is not the only way of implementing the pattern.</p><p id="07195244-cc2d-4778-aba7-88eaeff0d27f" class="">C++17’s <code>std::visit</code> gives another example of implementing the Visitor design pattern. <code>std::visit</code> is a way to apply a function on a <code>std::variant</code>. But since, by definition, a <code>std::variant</code> can hold values of different type, we may need various functions to operate on it.</p><p id="53980498-b8ff-4fae-be51-0cfdc9dc4905" class="">Consider the following example. This is one of the various techniques to create a function object that can operate on various types in C++:</p><pre id="d0ec2334-7a65-49af-85b1-daa802b30c7c" class="code"><code>struct Visitor
+{
+    std::string operator()(std::string const&amp; s){ return s; }
+    
+    template&lt;typename T&gt;
+    std::string operator()(T const&amp; value) { return std::to_string(value);}
+};</code></pre><p id="b1bd9441-7a4e-422a-83ce-d1d2c7ad987e" class="">Let’s now assume that we have a function that allows to get a variant object:</p><pre id="c2d76621-7e1d-4ce1-bdfd-5a180e6427a1" class="code"><code>std::variant&lt;int, std::string, char&gt; getNumber();</code></pre><p id="7ccfd5fd-c381-4e0a-a32d-49701232c751" class="">Then we can apply the visitor on the variant object with <code>std::visit</code>:</p><pre id="25e58775-15e8-4646-86a9-b8d8433d5766" class="code"><code>std::string s = std::visit(Visitor{}, getNumber());</code></pre><p id="41ae9455-8705-4052-a744-c68b1b418c40" class="">Here the visited object (the variant) uses runtime polymorphism (even though without inheritance and virtual methods), and the visitor object (the <code>Visitor</code>) uses compile time polymorphism based on overload resolution.</p><h3 id="3ef8e2ea-8a09-476b-bc5e-c2882a2c48be" class="">Various types of polymorphism</h3><p id="5e46970a-fa99-4056-a062-f4f4dd4bad5e" class="">Even if the GoF books hints that there are other possible implementations, its code examples make heavy usage of inheritance and virtual methods. This is one way of implementing polymorphism that has its advantages and drawbacks.</p><p id="e2f87e79-65c9-487f-897e-eaaf163a5898" class="">But keep in mind that C++ is a rich language that offers various types of polymorphism, including compile time polymorphism that offers a different trade-off.</p><p id="b6dd547d-0121-462c-8789-bc5c90323154" class="">Be aware of the many tools at your disposal to be able to use the most adapted one in the situations you encounter.</p><h3 id="b161f356-b5fb-4b45-80be-6ffbf1f7ef66" class="">You will also like</h3><ul id="a3c5872b-642f-4ea0-a663-739ff958816f" class="bulleted-list"><li>Design Patterns VS Design Principles</li></ul><ul id="c62b5b2e-ce50-466e-8642-172e926de4cd" class="bulleted-list"><li><a href="https://www.fluentcpp.com/2019/07/02/fseam-a-mocking-framework-that-requires-no-change-in-code-part-1/">FSeam: A Mocking Framework That Requires No Change In Code</a></li></ul><ul id="4e860ba8-8049-4d3a-99eb-d8230ec9007d" class="bulleted-list"><li><a href="https://www.fluentcpp.com/2018/04/17/pass-polymorphic-object-stl-algorithm/">How to Pass a Polymorphic Object to an STL Algorithm</a></li></ul><p id="89ddf760-f78d-4e34-ab4d-f6e10576246f" class="">Share this post!  Don&#x27;t want to miss out ? <strong>Follow:</strong></p><h3 id="b575882e-6042-4a71-b658-077b9bbf5bc4" class="">Get a free ebook on C++ smart pointers</h3><p id="8f2dd5bd-ef7d-4420-87fc-cca7c75d7be1" class="">Get a free ebook of more than 50 pages that will teach you the basic, medium and advanced aspects of C++ smart pointers, by subscribing to our mailing list! On top of that, you will also receive regular updates to make your code more expressive.</p><p id="06408f1d-2396-4b45-a89c-91152ae35d13" class="">No spam. You can unsubscribe at any time.</p></div></article></body></html>

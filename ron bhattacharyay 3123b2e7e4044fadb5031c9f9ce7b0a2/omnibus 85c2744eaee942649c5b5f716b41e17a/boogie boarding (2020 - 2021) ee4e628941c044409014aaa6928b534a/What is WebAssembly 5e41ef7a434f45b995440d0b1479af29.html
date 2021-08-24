@@ -1,0 +1,666 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>What is WebAssembly?</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5e41ef7a-434f-45b9-9544-0d0b1479af29" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎳</span></div><h1 class="page-title">What is WebAssembly?</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-green">Tech Design</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://medium.com/javascript-scene/what-is-webassembly-the-dawn-of-a-new-era-61256ec5a8f6" class="url-value">https://medium.com/javascript-scene/what-is-webassembly-the-dawn-of-a-new-era-61256ec5a8f6</a></td></tr></tbody></table></header><div class="page-body"><figure id="d4920b56-2e25-4793-84a3-dfe2f44cf0db" class="image"><a href="What%20is%20WebAssembly%205e41ef7a434f45b995440d0b1479af29/1kn4vtNVqMmMxkzIRCi3mjw.jpeg"><img style="width:700px" src="What%20is%20WebAssembly%205e41ef7a434f45b995440d0b1479af29/1kn4vtNVqMmMxkzIRCi3mjw.jpeg"/></a></figure><p id="8f7d6473-19da-40b8-923e-75246db56b0f" class="">Google, Microsoft, Mozilla, and a few other people have been secretly toiling away in a new <a href="https://www.w3.org/community/webassembly/">W3C WebAssembly Community Group</a>, and what they have been working on is no small thing.</p><p id="6f05aa37-b4ec-4ea8-926d-27686296833f" class=""><em>For more depth, see the follow-up article, </em><a href="https://medium.com/javascript-scene/why-we-need-webassembly-an-interview-with-brendan-eich-7fb2a60b0723"><em>“Why We Need WebAssembly: An Interview with Brendan Eich”</em></a><em>.</em></p><h1 id="c86aaea3-7962-4edb-8250-13ba975549b9" class=""><strong>WebAssembly is:</strong></h1><ul id="c7b16e7d-4d26-48e3-b2ca-b5ef52bd2ba3" class="bulleted-list"><li><strong>An improvement to JavaScript:</strong> Implement your performance critical stuff in wasm and import it like a standard JavaScript module.</li></ul><ul id="71f17860-443f-4d0d-9b2e-a8a9ce5347b8" class="bulleted-list"><li><strong>A new language:</strong> WebAssembly code defines an AST (Abstract Syntax Tree) represented in a <strong>binary format</strong>. You can <strong>author and debug in a text format</strong> so it’s readable.</li></ul><ul id="dec93db0-e783-4d70-a16b-0023f55a3e9e" class="bulleted-list"><li><strong>A browser improvement:</strong> <strong>Browsers will understand the binary format</strong>, which means we’ll be able to compile binary bundles that compress smaller than the text JavaScript we use today. Smaller payloads mean faster delivery. Depending on <strong>compile-time optimization opportunities</strong>, WebAssembly bundles may run faster than JavaScript, too!</li></ul><ul id="4ec2b17e-bc50-4b56-81ac-08aba10db09f" class="bulleted-list"><li><strong>A Compile Target:</strong> A way for other languages to get first-class binary support across the entire web platform stack.</li></ul><h1 id="97eb0dfb-4abf-40cb-ba3e-5b833a32e531" class="">What does this mean for JavaScript?</h1><p id="15f3dd11-7521-4888-916b-97a296a97371" class="">Before we answer this question, let’s back up a moment. Let me take you back in time… back… back…, back before React, before Angular, before Backbone, before jQuery…</p><p id="63e9be4b-60ec-45a8-9d52-e9b17c364082" class="">Ah, here we are.</p><blockquote id="0b04f24d-3024-456d-a02d-5990a9e98deb" class="">The web is a scattering of hypertext documents on bulletin board systems, not yet interlinked. The first web server is being hacked together on a NeXT workstation at CERN…</blockquote><p id="89d715ff-0f9d-4ad5-858c-9fc9bfb86d9b" class="">NeXT Computer used by <a href="https://en.wikipedia.org/wiki/Tim_Berners-Lee">Tim Berners-Lee</a> at <a href="https://en.wikipedia.org/wiki/CERN">CERN</a></p><p id="aaaee36f-dbc8-45cd-ab62-5e368190eb6d" class="">
+</p><p id="640c9bcd-560b-4b75-9a72-e8b749088e13" class="">The year is 1991 and my hair isn’t gray yet. I’m hacking together my ten thousandth text adventure game <em>(something like that, I’m not counting).</em></p><p id="927c6d3a-2a7e-4d60-bcbc-f73f34da8d4a" class="">
+</p><p id="c802a565-2508-4be6-a5b2-7b645ed36765" class="">I made a peculiar language choice for this one. I was sick of working in BASIC and Pascal. I wanted to use C, but I was still saving up for my first <em>Borland Turbo C++ </em><em><strong>boxed set</strong></em> (they literally came in boxes packed with manuals and install disks). I didn’t even have Turbo Assembler, yet.</p><p id="a943e15d-b5ea-403f-be12-2f341e100620" class="">
+</p><p id="9dc31fe2-11a5-45e5-9388-7e5c996bab48" class="">I was writing in assembly language and “compiling” to an executable with the DOS <em>`debug`</em> command line tool. If that sounds crazy, believe me, it was. I’m betting even those of you who used DOS probably didn’t realize you could use debug to <em>assemble instructions,</em> as well as <em>disassemble</em> (reverse engineer) existing code.</p><p id="1e271cbe-cfcf-4795-a860-88cd8e89f4ec" class="">
+</p><p id="47305091-ca64-4160-8ed5-5ccd95319282" class="">Sound cool? <strong>I hated it. </strong>I couldn’t wait to get my hands on Borland Turbo C++ so I could write code like a human being. Eventually, I got it as a gift. Score!</p><p id="7d8a09d8-6204-4949-a210-ebc004bcebce" class="">
+</p><p id="2871523c-8d46-42e1-9a88-5ee2ef02f950" class="">But <strong>one of my favorite things</strong> about Borland Turbo C++ was that <strong>it came bundled with Borland Turbo Assembler</strong>. What?! Why would you want to write code in assembly language when you have a great high-level object-oriented language like C++ in your toolbelt?</p><p id="f48ff507-3e61-4e9d-ad1c-bcbe4eea9d3f" class="">
+</p><p id="90c81c16-6656-4931-bb10-3c6971c440c0" class=""><strong>Sometimes you want to get to the bare metal,</strong> or as close to it as you can get without melting your brain. Did I mention that I also wrote a lot of machine language prior to getting my hands on C++?</p><p id="958831bb-c322-4b5a-ad14-cc0ff5d69345" class="">
+</p><p id="efb34046-6a1e-40b7-b3e9-1ef51656622f" class="">Losing My Mind — Mark Auer (CC BY-NC 2.0)</p><p id="ed9c084a-acf7-4fb6-a6a1-761302c3d2d0" class="">
+</p><p id="0e4ac191-f059-4093-91b6-19f06c502fdd" class="">It’s much harder to get real work done when you’re writing directly in assembly language. So <strong>why do we need this WebAssembly thing?</strong></p><p id="54c9231c-9dcb-4d01-8e9f-8efc2f0aa512" class="">
+</p><p id="067292e8-6505-4b4f-8d92-fe2234c62bcd" class=""><strong>We need WebAssembly</strong> because as flexible as JavaScript is, it’s still too hard to express many of the things we may want to in JavaScript, and the features we’d need to make it easy might add complexity to a language that already <a href="https://medium.com/javascript-scene/javascript-training-sucks-284b53666245">confuses many users</a>.</p><p id="0417ea5c-5395-43dc-8d71-666ebae0834c" class="">
+</p><p id="7f1b4280-84d9-4252-9419-c472af2858fd" class=""><strong>WebAssembly gives us access to a set of low level building blocks</strong> that we can use to construct just about anything you can imagine.</p><p id="1c51aa4b-dfb4-49ae-85ba-94db90fc0c55" class="">
+</p><p id="199ed2f6-db2f-4e35-849c-c5d09edbec6b" class=""><em>How is this different from JavaScript?</em> The key words are <strong>low-level</strong>. It defines primitives including <a href="https://github.com/WebAssembly/design/blob/master/AstSemantics.md#local-and-memory-types">a range of types</a> and operations on those types, literal forms for them, control-flow, calls, a heap, etc…</p><p id="edb1a614-d0d1-4336-8e9d-c1855cf665dd" class="">
+</p><p id="2887c418-4876-4140-9df8-55a0f49a6ec1" class="">These are very simple primitives. Nothing fancy. <strong>No complicated object system</strong> (prototypal or otherwise). <strong>No built-in automatic garbage collector</strong> following you around and stopping you periodically while it cleans up your scraps.</p><p id="f2f6bbca-593e-4e2b-8c61-3b8b2042bd31" class="">
+</p><p id="c72ae8d9-b4cf-402e-ab73-5c2828bd050f" class="">WebAssembly defines an <a href="https://github.com/WebAssembly/design/blob/master/AstSemantics.md#abstract-syntax-tree-semantics">Abstract Syntax Tree</a> (AST) that gets stored in a <a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md"><strong>binary format</strong></a>. Binary is great because it means we can create <a href="https://github.com/WebAssembly/design/blob/master/BinaryEncoding.md#why-a-binary-encoding-instead-of-a-text-only-representation">smaller app bundles</a>. You’re probably wondering how we’ll debug a binary language format.</p><p id="6b82cc02-7968-4d13-898c-309210a5bd20" class="">
+</p><p id="57d7db67-5d24-4c47-ab9b-7d2acb0e70d5" class="">Luckily, while we’re stepping through the debugger that will inevitably appear in browsers, the AST will be represented in a (moderately) friendly <a href="https://github.com/WebAssembly/design/blob/master/TextFormat.md"><strong>text format</strong></a>. I’d love to show you examples, but they’re a bit scarce right now. It will probably be a bit less readable than handwritten JavaScript, but <strong>about as readable as compiled asm.js</strong>. Maybe more readable. <em>We’ll see.</em></p><h1 id="34bf329c-3045-4260-83ef-679e6c1109e5" class="">What will WebAssembly be used for?</h1><p id="8078927d-6004-464f-9122-1edac48e061f" class="">Among other things, it will be easy to express things like threads and <strong>SIMD — </strong>a fancy word that means you can line up multiple chunks of data next to each other and invoke a single instruction to operate on all of them at the same time. It stands for <strong>S</strong>ingle <strong>I</strong>nstruction, <strong>M</strong>ultiple <strong>D</strong>ata.</p><p id="d7f5c7af-4f6d-462d-b9e8-5ef1a21401f7" class="">
+</p><p id="3f03ae8e-df15-40b0-8ee3-c83908639e70" class="">That means fat, <strong>parallel processing pipelines</strong> for your realtime video stream effects processor. If you have your finger on the pulse, you’ve probably already heard of doing this in JS, but I’ve always found it a bit awkward to try to do low level stuff like this using JavaScript’s existing type system.</p><p id="08b5c1f3-dfd0-4169-95f1-3ec574453f7e" class="">
+</p><p id="41521345-d665-45b4-a66f-1300bcda6135" class="">This is one of those cases where you’ll probably want to forget about the object system, the garbage collector, and all the fancy dynamic stuff. Just line up some raw bits in little rows and crunch through them as fast as possible.</p><h2 id="f2665186-e8c9-4beb-bf2e-e5abdd48bb01" class="">Show me the Apps</h2><p id="12333c99-85fd-4f60-8086-ea6292ee7e9b" class="">Games, VR and augmented reality are the obvious examples. Most of the current WebAssembly demos use Unity or Unreal Engine, both of which already support compiling to asm.js. Right now, music production apps like <a href="https://www.ableton.com/"><strong>Ableton Live</strong></a> and video production apps like <a href="http://www.adobe.com/products/premiere.html"><strong>Adobe Premier Pro</strong></a> are still a bit awkward to port to the web. Not impossible, mind you, just <em>awkward. </em>There are still lots of problems to solve, like better timing guarantees for data intensive realtime apps.</p><p id="185c890a-2000-46f8-9891-bae59cca7c9c" class="">
+</p><p id="dc7fd07e-6869-4b34-a9cb-f981bcf3054e" class="">We’ll also see apps that stream big channels of data through networks of processing functions like a <a href="http://dashersw.github.io/pedalboard.js/demo/"><strong>guitar effects pedalboard</strong></a>. These are traditionally things that most people don’t think of when they think of JavaScript. A lot of people would probably think it’s crazy to even try.</p><p id="5c8581bb-4d70-49fe-b080-c4760dc5cf1d" class="">
+</p><p id="7d9f0afe-5520-4ebc-ac3b-850560437b87" class="">But <strong>JavaScript is really a great language</strong> to build <strong>most of the code</strong> required by any app you can dream up.</p><p id="8bad823f-e13c-437b-853e-7ce08ccb0836" class="">
+</p><p id="c77d1b31-f865-42aa-8e34-90d4132ac8df" class="">Those gaps are no secret. Even JavaScript’s big fans would admit that there are times when <strong>we’re stretching the G-forces JavaScript can handle</strong> without losing its lunch. Up until yesterday, I thought that the plan would be to fill those gaps by adding complexity to the JavaScript language itself. Brendan Eich talked about that in a Fluent conference keynote that I applauded:</p><p id="93c176c9-2041-402e-967f-d140d099a74b" class="">
+</p><p id="904be58a-adcc-448f-9b42-ab642ce65d71" class="">But what some of us have really been missing is the ability to <strong>write most of the code in an amazing high-level language</strong> and still be able to <strong>drop down to a specialized, bare metal assembly language</strong> once in a while when we really need a boost.</p><p id="8b68c946-931b-4d5d-8481-e6e356bc64f6" class="">
+</p><p id="8bc4e8b8-d6c7-4541-b8fe-e0fae556646f" class="">I’m sure there are 200 other articles on WebAssembly being published today all over the web. I’ll bet most of them will focus on the other side of WebAssembly, which I’m equally excited about…</p><p id="98c2c1f5-7f54-4ed7-bfcf-fc5b56854124" class="">
+</p><p id="e34a3305-0490-4bc4-9607-99d6dcfba131" class="">We don’t really need WebAssembly to bring other languages to the web platform. <strong>We already have the best </strong><a href="https://www.unrealengine.com/what-is-unreal-engine-4"><strong>AAA game</strong></a> <a href="https://unity3d.com/unity/multiplatform"><strong>engines</strong></a> running smoothly at stunning quality by <strong>compiling to JavaScript</strong>.</p><p id="ac7cdda0-2853-4e0b-9271-2cb43fc2f0f9" class="">
+</p><p id="dced2b10-5d3f-42aa-baed-f06f4aa5fded" class="">WebAssembly adds things that most JS developers would agree <strong>we don’t need in JavaScript.</strong> We may still get those things, but not because we need them for JavaScript code. We’ll get them to support <strong>compiling from other languages</strong> which use them.</p><p id="6ce6a289-d378-4d5a-acdb-b803b4ec1a46" class="">
+</p><p id="a690b0d9-9819-43ef-aaee-98cc5816444a" class="">WebAssembly gives us an <strong>alternative compile target — </strong>One specifically designed for that purpose.</p><p id="41f025cf-d4c8-451f-855e-24c688d5b83a" class="">
+</p><p id="28c56349-1597-4bc7-ba4d-cb503c012978" class="">It will be easier now to port code that relies heavily on features like shared memory threads. I’d bet that the process of writing a compiler for WebAssembly will be somewhat less complicated than writing a compiler for JavaScript, simply because there’s a better mapping from the source language features to the target AST.</p><p id="d4d03167-f41e-4b97-94b2-8b8631122c01" class="">
+</p><p id="b3f78b07-38fc-40c9-968c-ddcda2a3aca1" class="">As great as it is to hear that all the old languages we know and love will run on the web platform now, WebAssembly means one more very important thing:</p><blockquote id="ec7e4260-da9e-412f-bedb-75f4b9dc626e" class="">WebAssembly is an open invitationto developers buildingfuture programming languages.</blockquote><p id="81695af5-13b6-4fb5-aa18-bf821c2accb4" class="">The future of the web platform has never looked brighter. You’d better pull out your shades.</p><h1 id="1188c49a-57fd-4523-b03d-6b6e278d8bc7" class="">Update / FAQ</h1><h2 id="51e18b6d-6a47-4b45-a31c-573395b4391f" class="">What’s wasm?</h2><p id="576f862a-202f-4a5a-95a2-35e3f5bebe90" class="">Short for <strong>W</strong>eb<strong>As</strong>se<strong>m</strong>bly.</p><h2 id="8ecff4a0-ccf8-4622-ba34-f33a2c4b47b2" class="">Why not use the JVM?</h2><p id="29c5807d-7ff9-4a47-be25-07db978396b9" class="">We’ve tried to put the JVM in browsers before via plugins. It didn’t work out so well. JavaScript already has a VM. Another VM means a second set of API hooks to give the VM access to the DOM, networking, sensors, input devices, etc… That’s not free. How will VM processes like garbage collection get along competing for the same resources? That may be harder than it sounds.</p><p id="5a40cf3c-4823-4718-91af-bd3b6a5dd9bf" class="">Initially, WebAssembly will run on an asm.js polyfill, meaning it can take advantage of the <strong>existing JavaScript VM foundations.</strong> The design will evolve from that base, so there is a smoother browser integration path than alternative VMs could provide.</p><h2 id="6fb64cd1-0c74-4bf4-a250-036ab92b232c" class="">Q: Doesn’t this mean other languages will take over? Won’t this cause fragmentation?</h2><p id="aba72600-03c0-4b9c-8324-e20fb278a9fe" class="">A: <strong>JavaScript has always had strong competition</strong> on the server side and in embedded programming for small hardware and robots, but in spite of many existing, viable alternatives with established package ecosystems and lots of trained developers, <strong>Node is still taking over startup and enterprise web servers at a torrential pace.</strong></p><p id="5611468c-e8dc-40c2-80d4-95b4a462d5f6" class="">
+</p><p id="a40c753d-2a7b-4d28-a6cb-7360af68e89a" class="">JavaScript also has significant network lock-in with the ecosystem and developer community. I love posting the modulecounts graph because it gets more impressive every time:</p><p id="904fd47b-5db3-4eb8-a1b0-712a85d0082d" class="">
+</p><p id="766df3d3-2239-4f24-b22e-0a5cfc2cb54c" class="">That green line there is <strong>npm,</strong> the standard package repository for JavaScript. It comes bundled with Node.</p><p id="86ce8196-86fc-4db4-abd2-9d154f19909b" class="">
+</p><p id="8a65b8b7-9a24-43ec-8f49-a714b69dac8b" class="">JavaScript is also becoming a popular choice for game programming, robotics, and IoT devices, all of which have very strong competition from C, C++, and Java. This has little to do with JavaScript’s dominant position as a web browser language. Those developers have choices, and they’re choosing JavaScript because <strong>they like it</strong>.</p><h2 id="a4ce6745-8ed3-4036-a7ed-cb3c64ac41d0" class="">What are the Text Formats Like?</h2><p id="7dbbf7d6-deb2-45d5-9378-25ab8b8b866f" class="">The most popular is a lisp-like S-expression form. For a taste, check out the <a href="http://ast.run/">WebAssembly Playground</a>.</p><h2 id="df43eb9d-cdbf-44a3-9d39-ae10ae4064cc" class="">Where Can I Learn More?</h2><h2 id="41d90242-b4b2-449d-9687-128af9f49bd0" class="">How can I stay in the loop?</h2><ul id="a9bfea01-b250-4f6c-9cc5-b5ee34b49492" class="bulleted-list"><li>IRC: irc://irc.w3.org:6667/#webassembly</li></ul><p id="11636bba-e2aa-4cfd-9355-f45e2b669cf7" class=""><em><strong>Eric Elliott</strong></em><em> is the author of </em><a href="http://pjabook.com/"><em>“Programming JavaScript Applications”</em></a><em> (O’Reilly), and </em><a href="https://leanpub.com/learn-javascript-react-nodejs-es6/"><em>“Learn JavaScript Universal App Development with Node, ES6, &amp; React”</em></a><em>. He has contributed to software experiences for </em><em><strong>Adobe Systems</strong></em><em>, </em><em><strong>Zumba Fitness</strong></em><em>,</em><em><strong>The Wall Street Journal</strong></em><em>, </em><em><strong>ESPN</strong></em><em>, </em><em><strong>BBC</strong></em><em>, and top recording artists including </em><em><strong>Usher</strong></em><em>, </em><em><strong>Frank Ocean</strong></em><em>, </em><em><strong>Metallica</strong></em><em>, and many more.</em></p><p id="c40a9c45-5762-414a-b841-1f36f7c1d0f1" class=""><em>He spends most of his time in the San Francisco Bay Area with the most beautiful woman in the world.</em></p><p id="fe5588fc-dc07-4802-8f8d-0e728b7a0609" class="">
+</p></div></article></body></html>

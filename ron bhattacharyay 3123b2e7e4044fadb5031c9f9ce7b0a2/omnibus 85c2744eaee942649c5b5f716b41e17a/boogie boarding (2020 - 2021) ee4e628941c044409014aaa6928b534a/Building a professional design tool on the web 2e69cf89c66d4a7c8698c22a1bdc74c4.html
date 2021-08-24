@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Building a professional design tool on the web</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e69cf89-c66d-4a7c-8698-c22a1bdc74c4" class="page sans"><header><h1 class="page-title">Building a professional design tool on the web</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://www.figma.com/blog/building-a-professional-design-tool-on-the-web/" class="url-value">https://www.figma.com/blog/building-a-professional-design-tool-on-the-web/</a></td></tr></tbody></table></header><div class="page-body"><figure id="b987b577-d0c8-4522-9cdd-251873086323" class="image"><a href="Building%20a%20professional%20design%20tool%20on%20the%20web%202e69cf89c66d4a7c8698c22a1bdc74c4/Building_a_Design_Tool_in_the_Web_Meta.png"><img style="width:700px" src="Building%20a%20professional%20design%20tool%20on%20the%20web%202e69cf89c66d4a7c8698c22a1bdc74c4/Building_a_Design_Tool_in_the_Web_Meta.png"/></a></figure><p id="d339b0d3-f6af-4d12-976b-a396fdd95b76" class="">Our vision for the future of design tools is one where both the tool and the content are easily available to anyone, anywhere. That’s why we built <a href="https://www.figma.com/">Figma</a>, a collaborative interface design tool that we <a href="https://www.figma.com/blog/design-meet-the-internet/">recently launched</a>, as a browser-based cloud service. When we set out to build Figma we knew it would be a challenge. To really succeed it would have to provide a high-fidelity editing experience that professionals would accept and would have to work consistently everywhere.</p><blockquote id="1619aa84-3a51-4354-8e19-b032a6366802" class="">Pulling this off was really hard; we’ve basically ended up building a browser inside a browser.</blockquote><p id="f3a5398b-e8ad-4a9d-957b-23f86534c386" class="">The reason this is hard is because the web wasn’t designed as a general-purpose computing platform. It started off as a technology primarily for documents and had a whole bunch of stuff for application development bolted on top. That stuff usually took the form of specific APIs for one-off cases instead of providing general primitives that can be used to implement all sorts of things. Some examples:</p><ul id="b22e7fbd-8789-4473-982f-cc58aaaf472f" class="bulleted-list"><li>CSS has lots of <a href="https://www.w3.org/TR/css3-fonts/#font-rend-props">fancy text layout algorithms</a> but no way to customize the algorithms or to read back the result of what the browser did so the text layout algorithm can be used as part of another algorithm.</li></ul><ul id="642a1bdc-1105-40f2-9fe7-7450f5c3af60" class="bulleted-list"><li>All browsers provide a <a href="https://www.chromium.org/developers/design-documents/gpu-accelerated-compositing-in-chrome">high-performance</a> <a href="https://msdn.microsoft.com/en-us/library/jj680148%28v=vs.85%29.aspx">GPU compositor</a> but the web doesn’t have any way of hooking into the rendering algorithm and changing how compositing works to add things like performance optimizations or custom blend modes.</li></ul><ul id="9920e398-3a05-4dfd-a4ef-634be7747112" class="bulleted-list"><li>Browsers embed <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=573948">highly-optimized</a> <a href="https://code.google.com/p/chromium/issues/detail?id=48789">image</a> <a href="https://blogs.msdn.com/b/ie/archive/2013/09/12/using-hardware-to-decode-and-load-jpg-images-up-to-45-faster-in-internet-explorer-11.aspx">decoders</a> that decode images asynchronously off the UI thread using the latest hardware features, but there’s no API for passing parameters to the decoders to do things like <a href="https://lists.w3.org/Archives/Public/public-whatwg-archive/2014Apr/0064.html">handle EXIF orientation</a> or avoid <a href="https://code.google.com/p/chromium/issues/detail?id=425935#c8">baking in the display color space</a> when using drawImage and getImageData.</li></ul><p id="d9c2fed1-63c8-42d3-94cb-a7189bb50111" class="">This lack of general primitives on the web is <a href="https://extensiblewebmanifesto.org/">starting to change</a> and now there are technologies like WebGL and asm.js that let developers cut past the browser and talk directly to the hardware. It’s this advancement that’s finally made high-performance web-based graphics applications practical. Developers no longer need to wait for the exact features they need to be added to the web, they can build those features themselves!</p><p id="81e6c234-6839-4c50-b507-54c32b18fbd0" class="">Our editor is written in C++ and cross-compiled to JavaScript using the <a href="https://emscripten.org/">emscripten</a> cross-compiler. The emscripten compiler targets the asm.js JavaScript subset which provides a way to get JavaScript JITs to emit predictable, compact machine code and is <a href="https://hacks.mozilla.org/2015/03/asm-speedups-everywhere/">widely supported</a> in all modern browsers. This has the following benefits:</p><ul id="f73a004c-a281-4565-b22c-18719e002555" class="bulleted-list"><li>We fully control memory layout and can use compact 32-bit floats or even bytes when appropriate instead of JavaScript’s 64-bit doubles. This is very important for apps like ours that use large amounts of data.</li></ul><ul id="dfbfe989-f3ae-4a17-8b60-0b0f29c1ef45" class="bulleted-list"><li>The generated code is completely in control of allocation, which makes it much easier to hit 60fps by avoiding GC pauses. All C++ objects are just reserved ranges in a pre-allocated typed array so the JavaScript GC is never involved.</li></ul><ul id="32caaac8-8fd8-47eb-a01c-785a1da96aa8" class="bulleted-list"><li>The generated code is pre-optimized using LLVM’s advanced optimizer. This combined with C++ template specialization generates very efficient code that is able to come within a factor of <a href="https://hacks.mozilla.org/2014/05/asm-js-performance-improvements-in-the-latest-version-of-firefox-make-games-fly/">2x native performance or better</a>.</li></ul><ul id="c530af1a-9fc7-4fce-b217-16acba7d268d" class="bulleted-list"><li>All asm.js code is guaranteed to be free of deoptimization points so JITs can do ahead-of-time compilation and provide predictable performance. Regular JavaScript code relies on JIT heuristics instead and performance can sometimes vary wildly between subsequent runs of the same code.</li></ul><p id="68a2cc04-cee7-4513-b6bd-5a253e52bf38" class="">That’s not to say emscripten is perfect. As with any new technology, there were bumps along the road. One big issue for us was that certain browser configurations couldn’t allocate large ranges of continuous address space for the huge typed array that contains the entire emscripten memory space. The worst case was <a href="https://code.google.com/p/chromium/issues/detail?id=394591">32-bit Chrome on Windows</a> which sometimes couldn’t even allocate a 256mb typed array because <a href="https://en.wikipedia.org/wiki/Address_space_layout_randomization">ASLR</a> was fragmenting the address space. This has since been fixed.</p><p id="539c940e-d53f-4190-9e1e-87778a65efd6" class="">A trick that also helps is to use handles to out-of-heap data for large resources such as image and geometry buffers. We have an internal API called IndirectBuffer (which we are open sourcing <a href="https://github.com/evanw/indirectbuffer">here</a>) that references an external typed array and makes it available to C++. Moving large allocations out of the main heap reduces memory fragmentation issues for long-running sessions, allows us to use more of the limited address space in 32-bit browsers, and allows us to break past the <a href="https://github.com/WebKit/webkit/blob/f01d2bb66fcde2c3519c4f0c61f790387fd5faee/Source/JavaScriptCore/runtime/ArrayBuffer.h#L255">31-bit typed array size limitation</a> in 64-bit browsers.</p><p id="a5878d2a-a072-4d19-a50f-dc2ce52f6743" class="">Current asm.js support is already quite good but there’s more exciting changes coming up. <a href="https://www.2ality.com/2015/06/web-assembly.html">WebAssembly</a> is an effort to implement a binary format for asm.js code to drastically reduce parse time that all major browser vendors are on board with. Right now the only form of multithreading is using web workers with message passing, but the upcoming <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SharedArrayBuffer#Specifications">shared typed array</a> specification will make shared-memory multithreading a reality.</p><p id="896b67eb-97fe-4ab4-98bf-3b1c2f30b7f8" class="">We’ve implemented our own rendering engine to make sure content renders quickly and consistently across platforms. Browsers have amazing graphics implementations and we initially attempted to use them instead of building a new rendering engine. Without a low-level API to access the browser’s render tree, the available options are either HTML, SVG, or 2D canvas. None of these options were satisfactory for many reasons:</p><ul id="054f8966-d0ec-4eb1-bc66-5a3bcf392deb" class="bulleted-list"><li>HTML and SVG contain a lot of baggage and are often much slower than the 2D canvas API due to DOM access. These are usually optimized for scrolling, not zooming, and geometry is often re-tessellated after every scale change.</li></ul><ul id="e4587768-8bc1-4ea2-9c70-a0ffa5d6860b" class="bulleted-list"><li>There is no guarantee about GPU acceleration and many things are still rendered on the CPU, which can be quite slow in certain cases.</li></ul><ul id="c94e1ed5-b571-485e-901e-1297908bdce6" class="bulleted-list"><li>Support for masking, blurring, and blend modes in HTML and SVG varies wildly between browsers and is often not anti-aliased or is too low resolution on high-DPI displays.</li></ul><ul id="81ad9679-a0d5-4e07-b43b-9576da73a59f" class="bulleted-list"><li>The 2D canvas API is an immediate mode API instead of a retained mode API so all geometry has to be re-uploaded to the graphics card every frame. This is needlessly wasteful and can become a bottleneck.</li></ul><ul id="08aae5fb-2481-4049-9039-af568fe79757" class="bulleted-list"><li>Text layout is <a href="https://css-tricks.com/font-rendering-differences-firefox-vs-ie-vs-safari/">inconsistent between browsers</a> and is even inconsistent between the <a href="https://blog.typekit.com/2010/10/21/type-rendering-web-browsers/">same browser on different platforms</a>.</li></ul><ul id="34ed5c0d-ac83-4c15-8b21-fcfc2b871703" class="bulleted-list"><li>We wanted to be able to add features such as <a href="https://i.stack.imgur.com/ivV6l.png">angular gradients</a> which are not supported by any of these rendering APIs.</li></ul><p id="f6149039-d1e9-4de4-ad7a-ff3d26c8bf87" class="">Instead of attempting to get one of these to work, we implemented everything from scratch using WebGL. Our renderer is a highly-optimized tile-based engine with support for masking, blurring, dithered gradients, blend modes, nested layer opacity, and more. All rendering is done on the GPU and is fully anti-aliased. Internally our code looks a lot like a browser inside a browser; we have our own DOM, our own compositor, our own text layout engine, and we’re thinking about adding a render tree just like the one browsers use to render HTML.</p><p id="59bbe34e-e49f-45f1-8201-0c68c3420abb" class="">The functionality of the web platform is still catching up to native platforms and there are unfortunately still a few gaps here and there. While we don’t have the resources to fill some of the larger gaps, I still try to fix what I can when it makes sense.</p><p id="c30702bf-b1be-4d70-8d25-fff4489d1135" class="">Before I started working on Figma, high-DPI custom cursors were really broken on the web. I had to manually fix <a href="https://code.google.com/p/chromium/issues/detail?id=268537">Chrome</a>, <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=888689">Firefox</a>, and <a href="https://bugs.webkit.org/show_bug.cgi?id=120783">WebKit</a> because all of them were broken in different ways. There still isn’t a single unified way to do it (SVG for Firefox, -webkit-image-set for Chrome and WebKit, and the ancient .cur format for IE) but at least it’s possible now.</p><p id="3cb0ff20-a7e3-4efd-8c10-319fd3751339" class="">I’ve also fixed a few <a href="https://bugs.webkit.org/show_bug.cgi?id=97237">egregious</a> <a href="https://bugs.chromium.org/p/angleproject/issues/detail?id=415">performance</a> and <a href="https://code.google.com/p/chromium/issues/detail?id=239731">usability</a> bugs to make our product better. The web can be frustrating sometimes, but browsers aren’t a black box (well, except for <em>that</em> browser) and often all it takes to fix annoying issues with the web is an afternoon of poking around in browser code, a day of back-and-forth over a patch, and a few months of waiting for the release to roll out.</p><p id="18f5d1bd-a19f-4907-942e-591c98007d05" class="">There’s still more that the web platform could do that would make Figma even better:</p><ul id="008237e3-40e2-4e44-9ddd-e127448b6a1f" class="bulleted-list"><li>Our biggest pain point is lack of access to glyph outlines and kerning tables which there currently <a href="https://www.w3.org/Bugs/Public/show_bug.cgi?id=21939">isn’t any way</a> <a href="https://www.w3.org/TR/2dcontext2/#textmetrics">of getting at</a>. One of the primary concerns is fingerprinting, but that battle has <a href="https://discourse.wicg.io/t/api-to-get-list-of-available-fonts/1197">already been lost</a>. We’re hoping access to font data can be exposed behind a user permission prompt like other privacy-sensitive APIs. Chrome has come up with a <a href="https://github.com/DHNishi/LocalFontAccess/blob/master/explainer.md">proposal</a> for a fix that’s currently <a href="https://code.google.com/p/chromium/issues/detail?id=535764">in the works</a> (they’ve been really helpful!) but there’s nothing else on the horizon for other browsers.</li></ul><ul id="636892cc-b323-49aa-98bb-9917f9c7804e" class="bulleted-list"><li>We would love to add support for common clipboard formats (.ai, .pdf, etc.) but the web <a href="https://github.com/w3c/clipboard-apis/issues/9#issuecomment-159023296">has no way to do this</a>. The only formats in the spec are text/plain and text/html (our Figma clipboard “format” is text/html with binary data encoded in an HTML comment).</li></ul><ul id="817f3514-2857-40ab-9b14-8e732d26d83b" class="bulleted-list"><li>Another issue for us is lack of support for the OS X trackpad pinch gesture. Chrome added a <a href="https://code.google.com/p/chromium/issues/detail?id=289887">little-known hack</a> where the pinch gesture sends the wheel event with ctrlKey down and calling preventDefault() allows the page to handle it. This is amazing and makes zooming and panning in Figma feel native and effortless. I tried to <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1052253">add it to Firefox</a> but that attempt is currently stuck. Pinching in Safari causes zooming behavior that’s really confusing to users and is <a href="https://bugs.webkit.org/show_bug.cgi?id=145214">impossible to disable</a>.</li></ul><p id="f9062c56-e8af-49ec-90b6-b9fd0cf41eff" class="">Performance and quality are some of our most important features. They’re a little different than normal features because you only notice them when they aren’t there, but they make all the difference.</p><p id="d1aca7c3-7fa7-46b3-93f6-145efd287a1c" class="">I’m very excited to finally reveal Figma to the world. The product isn’t open to the public yet but you can <a href="https://www.figma.com/">sign up</a> for our waiting list and try it out soon. Let us know what you think!</p></div></article></body></html>

@@ -1,0 +1,661 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Promnesia</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="63726c68-0121-4a49-93e9-0e5106bd3fa9" class="page sans"><header><h1 class="page-title">Promnesia</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://beepb00p.xyz/promnesia.html" class="url-value">https://beepb00p.xyz/promnesia.html</a></td></tr></tbody></table></header><div class="page-body"><p id="cddd1491-421a-4d61-bd18-3be6dd9b3b8c" class="">I was raised on science fiction and grew up dreaming about technology drastically changing our lives. Artificial intelligence, augmenting the brain with a math co-processor, head-up displays, neural interfaces, having perfect reaction and memory – many of you are on the same page and know the drill.</p><p id="e475a99a-63fc-4747-a4d9-4ecf16324ce0" class="">Years passed, I became a software engineer, and realized just how far we are from all these fancy technologies I wanted. So my aspirations have become more modest, and I&#x27;ve chosen a more realistic and plausible target: using my digital trace (such as browser history, webpage annotations and my <a href="https://beepb00p.xyz/tags.html">personal wiki</a>) to make up for my limited memory.</p><p id="99503754-7013-4e1b-a4a9-eab73a670d79" class="">I&#x27;m exploring lots of information on the Internet, and it feels wasteful to use my <a href="https://beepb00p.xyz/tags.html">meat resources</a> to keep track of it. Meanwhile, web browsers keep a record automatically, without any manual and conscious effort. Surely we can benefit from the immense computing power and memory capabilities of computers?</p><p id="d6ca92d8-249c-41a1-926d-8785cc9efab4" class="">So I figured that I wanted:</p><p id="82493078-0ec8-46a7-822e-a56196a713d9" class="">A web surfing companion. A copilot. A <a href="https://en.wikipedia.org/wiki/Memex">Memex</a>. A <a href="http://alumni.media.mit.edu/~rhodes/Papers/remembrance.html">Remembrance Agent</a>?</p><p id="557d4bbd-5110-4aae-92cb-ec4b301fd95b" class="">Call it whatever you like, I wish it were a concept with a widely accepted name. Something that will sit in my browser and:</p><ul id="40dd17d4-38ba-4736-93f2-acd801c6248c" class="bulleted-list"><li>aid me with <strong>information processing</strong>  <p id="c1d39207-3dc3-4467-a33e-6238c8f5b298" class="">Keep track of what I&#x27;ve read, when, on which device, and for how long.</p></li></ul><ul id="00d113b3-05b9-424f-a600-5c72ab2b31fa" class="bulleted-list"><li>show me my <strong>annotations and highlights</strong>, within the original page  <p id="02f7e656-7add-4f38-9890-c94655e76c81" class="">I don&#x27;t want to keep wondering whether I have my notes and thoughts stashed in some app, I want the computer to let me know instead.</p></li></ul><ul id="63701a20-7cea-4707-9f56-0acca9b2949d" class="bulleted-list"><li>unify my <strong>scattered and siloed bookmarks</strong>    <p id="439f03cb-0909-4b9b-a237-f1c116acf1bb" class="">Firefox bookmarks; Reddit/Hackernews saves; &quot;Watch later&quot; on Youtube, saved links in my instant messenger.</p><p id="01f7e438-f29c-46c0-8d07-63d842de6d6d" class="">These are the same damn thing, yet there is no way to oversee and process them through a single interface.</p><p id="410b47e3-a96c-46a8-b204-2174a13c78b2" class=""><a href="https://jborichevskiy.com/posts/digital-tools/#queue-management-for-inbound-digital-content">&quot;Queue management for inbound digital content&quot;</a>: a post expanding further on this idea.</p></li></ul><ul id="744277ac-3e86-442d-b6e1-4d15329bcf61" class="bulleted-list"><li>connect with my online presence: chats and social networks   <p id="b84f9bac-1d59-46e8-ae5c-1a8010cc947c" class="">If I tweeted about a page, surely this should be somehow recorded in the browsing history?</p><p id="51b98b78-209e-4390-9163-8a185d8ecc49" class="">In fact, the page that I bothered to tweet about is <strong>much</strong> more important than a page I merely visited in the browser.</p></li></ul><ul id="4abc0154-2f4e-4dc4-aa0f-298a2e54028c" class="bulleted-list"><li>help me explore new information and <strong>prioritize</strong> it   <p id="0d1efee3-73d9-467b-8f01-2aa6cb36c50e" class="">There is so much awesome stuff on the Internet! The biggest problem I have is picking the next cool link to dig into.</p><p id="c7a82a4c-f4b1-4646-a382-0ca5729b157f" class="">Imagine if in one click, I could see which of my friends, or the people I follow have read a certain link. What did they think? Have they posted about it, annotated, or something else? Do they follow the author, perhaps I should too?</p></li></ul><ul id="fdc1380d-30e6-409b-a2e0-87d99d23a1e4" class="bulleted-list"><li>bridge the gap between the browser and my <a href="https://beepb00p.xyz/tags.html">personal wiki</a>  <p id="4cba0924-5db3-41ec-bdb7-e5335d7dd518" class="">Whatever product I choose for managing my notes: Google Keep, Evernote, Roam Research, or even org-mode files on my disk, they always end up <strong>isolated and disconnected</strong> from my web browsing.</p></li></ul><p id="c37b2f1c-a7d2-4d82-a65a-3ee9bd82b972" class="">I searched for a system like this <a href="https://twitter.com/karlicoss/status/767412935316611072">for</a> several <a href="https://twitter.com/karlicoss/status/896313846159298560">years</a>.</p><p id="2a9e703d-eb97-4b2a-bdb5-f6587fcafa63" class="">After enough failed attempts at finding an <a href="https://beepb00p.xyz/promnesia.html">existing solution</a>, I figured it was going to be yet another thing I&#x27;d have to implement myself.</p><p id="eb381323-70f4-4d4d-b4c1-893944e6e7da" class="">The journey of building it took longer than I expected, led me through a rabbit hole of <a href="https://beepb00p.xyz/tags.html">data liberation</a>, lots of <a href="https://en.wiktionary.org/wiki/yak_shaving">yak shaving</a>, and made me realize: <strong>browser history is very, very broken</strong>.</p><p id="0fa81164-a5db-4449-8626-d5316a74c482" class="">Note: the next two sections are (somewhat technical) rants. If you prefer a more positive/less boring agenda, feel free to skip them straight to <a href="https://beepb00p.xyz/promnesia.html">&quot;Existing solutions&quot;</a> , and you can return back later if you feel like it.</p><p id="81c852a2-4cc9-4a33-a8e9-d2f920c28735" class="">To a large extent, URLs express <strong>relationships and hierarchy</strong> between the bits of information. For example: <code>blog &lt;-&gt; post &lt;-&gt; comment</code>, <code>person &lt;-&gt; tweet</code>, <code>playlist &lt;-&gt; video</code>.</p><p id="71f17dad-fc5e-4d38-b899-192bf539554a" class="">With this information you should be easily able to find everything relevant to the current page and trace your jumps through past websites. Merely by looking at URLs, without &quot;AI&quot; or some dubious machine learning algorithm! Seems like a low hanging fruit to harvest, right?</p><p id="5a7169fd-fd03-4672-afc1-ffc3f887b4b0" class="">Web browser history is a rich source of potentially useful information. Just think about it: it&#x27;s zero effort <a href="https://beepb00p.xyz/tags.html">lifelogging</a>. It contains exact timestamps and links which basically address information.</p><p id="594f63d0-6c43-4fff-808e-78bbabb55d3f" class="">Now think about the experience you actually have. What was the last time you used the browser history in any nontrivial way, for something other than reopening an accidentally closed tab?</p><p id="b57293b0-f12f-48f1-b489-d2fb9c978739" class="">Besides:</p><p id="fb93c00d-96e1-4055-b7bd-8c9f8a5eaccb" class="">When you&#x27;re using a native phone app (say, for Reddit or Twitter), your history either isn&#x27;t logged anywhere or if it is, it&#x27;s only stored locally on your phone.</p><p id="fcc63616-cd9a-4bd3-b540-6433782b3297" class="">On Android, it&#x27;s likely to be in an Sqlite database in <code>/data/data/app.name</code>. This directory is not accessible to normal users <strong>unless your phone is rooted</strong>. Just think about how ridiculous this is. It&#x27;s <strong>your own data</strong>, yet your OS babysits you, preventing access to it. And yes, I know sandboxing and security are important, but locking my data inside the app is hardly an acceptable tradeoff.</p><p id="69e0d8cb-9707-468e-901d-8fb45e873ab6" class="">As a specific example, the <a href="https://github.com/ccrama/Slide">Reddit Slide</a> app keeps your view history in <code>/data/data/me.ccrama.redditslide/SEEN</code>. Okay, say you root your phone and access the database. Turns out the the app isn&#x27;t persisting the data forever, it&#x27;s merely keeping a few weeks&#x27; cache. And I can hardly blame the developer for this: because of the data model, no one expects regular users to access this database.</p><p id="4f985b1d-8cb1-450e-acd2-4047833c7337" class="">So if you want your complete history, you have to backup this database regularly, keep the snapshots and <a href="https://beepb00p.xyz/exports.html">somehow</a> reconstruct it.</p><p id="682793fa-2bb1-45be-91b5-9f8b9c163bc9" class="">You may dismiss this as nitpicking and obsession over every last bit of my data. But when <strong>all</strong> of your phone apps are doing this you&#x27;re missing out on quite a lot of useful information.</p><p id="d7b861d8-405b-42bc-9ebe-fa5c5a6ddfde" class="">Building on the previous point:</p><p id="8587cc19-ec3d-416f-a50d-a7e95fcce281" class="">Even regular browser history is not easy to get:</p><ul id="e572bc74-62f6-4c58-95e4-eb13f1a6f01c" class="bulleted-list"><li>Firefox <a href="https://support.mozilla.org/en-US/questions/1080942">used to</a> silently &#x27;expire&#x27; your browser history</li></ul><ul id="751c1ef1-e5e8-41bd-9a27-b0923d9985d3" class="bulleted-list"><li>Chrome deletes history older than <a href="https://superuser.com/a/364475/300795">90 days</a>  <p id="1ccff82f-b075-45bc-8ed3-d1a3f86dc38a" class="">The only way to access older history I&#x27;m aware of is <a href="https://myactivity.google.com/">Google Activity</a> and Takeout.</p></li></ul><ul id="4589c5d9-8764-4e35-b63e-8bc1e26a34dc" class="bulleted-list"><li>Migration is limited to the most popular browsers  <p id="be717e35-0884-4085-b3bb-a04b67c39b40" class="">The retention limits the migration as well. E.g. if you migrate from Chrome to Firefox, history older than 90 days is locked and siloed in your Google Account.</p></li></ul><ul id="791a84e4-e7ef-4680-baed-6da13a481386" class="bulleted-list"><li>You&#x27;re going to have a hard time if you&#x27;re not using Google/Mozilla sync   <p id="876ecced-c1b3-42ca-8a54-b33261951a4d" class="">Your history will be scattered across devices and lost on OS reinstalls.</p><p id="0b972ae7-cd47-4e8e-bd65-9f6f2bd115d0" class="">There are ways of self-hosting Firefox sync, and (<a href="https://superuser.com/questions/614744/how-to-set-up-a-own-chrome-sync-server">allegedly</a>) even Chrome sync, but as you can imagine, is quite tedious.</p></li></ul><p id="cc923f8d-bb7f-4884-b079-5827a1f4fcf5" class="">Not all links in your history are equally important:</p><ul id="ca7162cb-95d2-40bb-9da1-1621a6341940" class="bulleted-list"><li>some are clicked on by accident</li></ul><ul id="1bc445f6-5123-43eb-8a57-e8396bb31bc2" class="bulleted-list"><li>some you&#x27;ve just skimmed</li></ul><ul id="b5cee748-fac6-4cc4-9c26-77deb4f097c2" class="bulleted-list"><li>some are on your reading list</li></ul><ul id="fa239cd2-66fe-4cfd-81d8-bc0d88176ae6" class="bulleted-list"><li>some you&#x27;ve been reading for hours and are full of your highlights and annotations</li></ul><ul id="09f01fcd-1dc6-47cc-9685-3161027ea6de" class="bulleted-list"><li>some you reference in your knowledge base/personal wiki</li></ul><ul id="5a61cf3d-8fe4-49d3-aa40-44256e5e8ed2" class="bulleted-list"><li>some of them you&#x27;ve shared with others on social media</li></ul><p id="77d082f2-f5f3-4f01-83f6-69902b0f43ac" class="">The current browser history experience makes no distinction between these scenarios.</p><p id="bb5c3d04-ea4c-4424-b35f-ca66c7616cdd" class="">This topic probably deserves a separate post, but I&#x27;ll keep it section-sized for now.</p><p id="88655672-6c0b-4122-852c-3a564684e996" class="">URLs might seem great because they mostly address content and are semi-descriptive: people try to keep URLs somewhat reasonable, tidy and working. But in the real world:</p><ul id="a4f0b878-10f5-496a-aa14-09d9d1b3e99a" class="bulleted-list"><li>links <strong>rot</strong>   <p id="058a8b39-619a-4a1e-85e7-4a31c0753bdd" class="">Many URLs are <a href="https://www.gwern.net/Archiving-URLs#link-rot"><strong>literally</strong></a><a href="https://www.gwern.net/Archiving-URLs#link-rot"> broken</a>. We&#x27;re lucky to have <a href="https://web.archive.org/">archive.org</a>, so you can at least access dead pages.</p><p id="714c91ee-db75-44a9-933d-5b19a6a4cee3" class="">But there is no way to migrate your browser history, e.g. point old URLs to their respective archive.org entries or a new domain. Similarly if you had the page annotated, your annotations become orphans without an easy way to relink them.</p></li></ul><ul id="17589e95-cfd5-4144-bfa8-870bbd14904b" class="bulleted-list"><li>links are <strong>obscured</strong>        <p id="2e717d0c-27c7-4c67-b71c-4c21cd7ac229" class="">There is no easy way to know what&#x27;s behind <code>https://www.instapaper.com/read/1265139707</code> without querying the Instapaper API.</p><p id="8f2faa01-4410-4466-bdcb-6e102cd808e8" class="">Relations between data are often obscured as well. For example:</p><ul id="1ee88484-ba6a-4b1b-8b6e-3d38f48a1f4d" class="bulleted-list"><li><code>https://news.ycombinator.com/item?id=22918980</code> is a submission link</li></ul><ul id="2ae2652e-4247-45a2-8259-45d33ff257ef" class="bulleted-list"><li><code>https://news.ycombinator.com/item?id=22919718</code> is a comment to that submission</li></ul><p id="df5e3953-b7fd-4fa4-b229-8fb3e8c7ed58" class="">These links are clearly related, but there is no way to tell it just from id.</p><p id="1d738892-9bce-40fc-9ce6-c4215f72abc9" class="">Compare this to Reddit links:</p><ul id="0f70bb2a-cd08-45a6-b331-52f231c21af4" class="bulleted-list"><li><code>https://reddit.com/r/orgmode/comments/g6ejwe/is_there_an_orgmode_workbook_tutorial_that_is</code> is a post link</li></ul><ul id="cb8a1823-0845-45bc-9e99-8ff386e37fac" class="bulleted-list"><li><code>https://reddit.com/r/orgmode/comments/g6ejwe/is_there_an_orgmode_workbook_tutorial_that_is/fo9qnen</code> is a comment to that post</li></ul><p id="781028d1-151c-44dd-a3da-149444bed9f5" class="">The ids are obscure, but at least we can clearly see the <code>post &lt;-&gt; comment</code> relation merely by looking at the URLs. Alas, browsers are just ignoring this useful information.</p></li></ul><ul id="275a9c78-2205-4f15-ba20-68eb94ffcb71" class="bulleted-list"><li>links are <strong>unstandardized</strong>       <p id="c75078d5-97cd-4ec4-89b2-aed0932abcd9" class="">For example, <a href="https://en.wikipedia.org/wiki/Query_string">queries</a> </p><ul id="999f45f1-728a-4331-a4a4-3ea610c6077f" class="bulleted-list"><li>typically don&#x27;t point to anything persistent and are used for querying (duh)</li></ul><ul id="04cdface-dc40-4857-8a5f-9fbab6bac374" class="bulleted-list"><li>but other times they are used to address information: <code>http://wiki.c2.com/?LispLanguage</code> or <code>https://www.scottaaronson.com/blog/?p=2694</code></li></ul><ul id="5ff0692c-2c3f-4d81-8555-e6db42e85595" class="bulleted-list"><li>and in many cases are utter garbage used for <a href="https://en.wikipedia.org/wiki/Query_string#Tracking">tracking</a></li></ul><p id="07187387-55da-439a-acaf-222e81c55a24" class="">The worst part is that these use cases overlap. For example, take a look at <code>youtube.com/watch?v=wHrCkyoe72U&amp;feature=share&amp;time_continue=6</code>:</p><ul id="0f9944f0-6f9e-4b08-a568-e7164d1755c2" class="bulleted-list"><li><code>v=wHrCkyoe72U</code> is the most important part of this link</li></ul><ul id="d6a67be1-5859-4bd4-a8e5-69812e893dfa" class="bulleted-list"><li><code>feature=share</code> is just garbage</li></ul><ul id="95631d7a-6abe-4744-b0ea-75f0d56229ca" class="bulleted-list"><li><code>time_continue=6</code> could be treated as useful information</li></ul><p id="40b97a7b-990a-46ab-8282-64f91f0e5847" class="">A similar story applies to <a href="https://en.wikipedia.org/wiki/Fragment_identifier">fragments</a>:</p><ul id="f2c301de-e52e-4673-b3df-30a55e86edd4" class="bulleted-list"><li>on Google groups, they are meaningful and address specific discussions and messages: <code>https://groups.google.com/a/list.hypothes.is/forum/#!topic/dev/kcmS7H8ssis</code></li></ul><ul id="d207bee6-34aa-4b91-aa18-4d17ca7d8b8b" class="bulleted-list"><li>on most websites, they refer to the content within a page: <code>https://github.com/lipoja/URLExtract/issues/13#issuecomment-467635302</code></li></ul></li></ul><ul id="973718b7-c4fe-4f5d-a031-2def703ad5b8" class="bulleted-list"><li>links are <strong>unnormalized</strong> <ul id="d2609086-bde9-417e-a3d3-01b3a8186f26" class="bulleted-list"><li>just think of all the www., amp., mobile., m. garbage</li></ul><ul id="cf64e306-95b2-4a16-99bb-0db343513240" class="bulleted-list"><li><code>youtu.be/1TKSfAkWWN0</code>, <code>youtube.com/embed/1TKSfAkWWN0</code> and <code>https://www.youtube.com/watch?v=1TKSfAkWWN0&amp;list=WL&amp;index=11</code> refer to the exact same content, yet your browser has no idea.</li></ul><ul id="70a3e04b-bd38-4489-b7c2-c25593ff54de" class="bulleted-list"><li><code>&lt;link rel=&quot;canonical&quot; ...&gt;</code> <a href="https://en.wikipedia.org/wiki/Canonical_link_element">element</a> <ul id="d0af91b1-abbf-4c3b-a92f-71e8fc1b01ff" class="bulleted-list"><li>often it&#x27;s not not present</li></ul><ul id="923a46c9-30eb-4b05-94f6-1cfc49f9babd" class="bulleted-list"><li>when present, often used improperly,</li></ul><ul id="5d83dcf8-0b69-4c4a-a19f-62495e0f933e" class="bulleted-list"><li>you need to fetch the page first to get the canonical link</li></ul><ul id="ae441a35-8e13-4b70-b62d-92afc7b95789" class="bulleted-list"><li>only works one way; you can&#x27;t easily retrieve all links that have <strong>the same canonical page</strong> as the current</li></ul></li></ul></li></ul><p id="43491ad8-7f6c-458a-b850-5d3e3a83d8fa" class="">I want URLs to <strong>address information</strong> and <strong>represent relations</strong>. The current URL experience is far from ideal for this.</p><p id="3054996a-2d4f-489f-bffd-258bc22a5656" class="">Sadly, I&#x27;ve seen very few similar projects. <strong>Please let me know if I missed anything!</strong></p><ul id="e3e910be-9a98-416c-b0dd-9596d9515a0a" class="bulleted-list"><li>  <p id="05e85879-e6da-4554-be81-7e405eb83d25" class="">A paper from 2000 (!):</p><blockquote id="7f1a80f1-6c55-4781-bc31-ab4125f4ca0e" class="">Margin Notes is a system that automatically annotates every webpage you visit with links to other potentially useful documents.</blockquote><p id="405ce899-7530-40fa-a06a-0647f5135ba9" class=""><a href="http://alumni.media.mit.edu/~rhodes/RA/Mnotes">This page</a> has more information and this seems like more of a recommendation system, and I haven&#x27;t found any source code to check it out.</p></li></ul><ul id="edae09b5-99db-4fad-aef6-4ce0a51898d0" class="bulleted-list"><li> <blockquote id="3a0d2a65-6a11-4fcb-9e0e-7c90b2580b83" class="">Goal: use a chrome extension to supplement your browsing experience by introducing a superior browsing history data structure:   preserve provenance. maintain a detailed account of browsing history track interactions with dynamic content</blockquote><p id="d63a92f8-84b0-430c-85ff-c28c650c83f0" class="">Sadly it&#x27;s only a concept.</p></li></ul><p id="f7eb13e5-eb3a-4625-ad0c-2f1a32ac0007" class="">There is a family of Chrome extensions similar to <a href="https://chrome.google.com/webstore/detail/history-trends-unlimited/pnmchffiealhkdloeffcdnbgdnedheme">History Trends Unlimited</a> which try to make up for Chrome&#x27;s 90-day retention by keeping the history in IndexDB. Unfortunately, retention is the only problem this solves, and then it it ends up as a yet another silo.</p><p id="e9de30a3-c401-47ff-9679-946c725dc485" class="">But, thousands of users indicates there is at least demand for such functionality.</p><p id="d78cea08-e2ed-4a64-a9f9-46495ee097f1" class="">Histre is an open source browser extension that presents history as a tree to allow for easier exploration. I really like the idea, and it&#x27;s a shame this is not the default representaion in our browsers.</p><p id="12d0ae23-a9d8-48f4-84ac-edf0f5b89359" class="">The downside of Histre is that it doesn&#x27;t integrate with your existing knowledge about the page from other services, so it&#x27;s a silo in its own regard.</p><p id="b387b655-3117-4c19-b2d9-5895781570b6" class="">Vivaldi has some <a href="https://help.vivaldi.com/article/history">fresh ideas</a>, in particular, statistics for browser history and calendar view. You can also enable infinite retention for the history in the settings.</p><p id="a1b145fe-824e-497e-b066-86f51a82f649" class="">However you only have access to your history within Vivaldi, and all your other data is left out.</p><p id="13b278da-0865-4090-a05a-1847889afbfb" class=""><a href="https://github.com/novoid/Memacs#readme">Memacs</a> by Karl Voit is a memex software which unifies your data as org-mode, allowing you to query it from within Emacs.</p><p id="657a6393-b987-4bf9-b1d3-b0ebb7b140e3" class="">It&#x27;s excellent as a personal timeline/information search system. However, that means you have to query information <strong>actively</strong> in your Emacs, as opposed to a <strong>passive</strong> assistant doing it for you.</p><p id="ac8559c5-65de-43b8-97e4-47d1ef85a75a" class="">Having your full detailed history as plaintext is kind of noisy without extra interfaces, and inefficient for long browsing histories with hundreds of thousands of entries.</p><p id="2d3e4f49-f9d4-4158-8843-13cb65ae2c9f" class=""><a href="https://github.com/WorldBrain/Memex#memex-features">Worldbrain Memex</a> is a browser extension to annotate, search and organize what you&#x27;ve seen online, and soon a <a href="https://community.worldbrain.io/t/new-testing-memex-mobile-app-sync/233">mobile app</a>.</p><p id="91ad1cca-3c2f-4c3d-9f4a-0cfdc3f5bf91" class="">It&#x27;s an amazing product: open source, local first, supports tagging, highlights, annotations, and even full-text history search. By all means, try it!</p><p id="af5d93ac-d9f4-4632-bc3b-4f55de2ef61e" class="">It would be pretty close to my vision of the personal web assistant if not for a problem: it is also a kind of a silo. You can import the data from other services into Memex, but then you have to conform to its model of the data. If for some reason you can&#x27;t use Memex for annotating and recording your history (e.g. on some of your devices) – you end up using multiple services, or having redundant (and potentially inconsistent) copies of your data scattered across your digital space.</p><p id="574ffc33-8fb0-45b7-8fb8-1cbdd3b9a2c3" class="">Having privacy focused and open source tools is a very important step towards a better future. However, I want a different <strong>model</strong> of interacting with my <strong>existing</strong> data, which doesn&#x27;t require moving data in between the silos. (see <a href="https://beepb00p.xyz/promnesia.html">&quot;it&#x27;s not just about the browser&quot;</a>)</p><p id="6c6d3106-72c4-4832-b29e-99e82ee839b0" class="">And jumping ahead again, <a href="https://beepb00p.xyz/promnesia.html">Promnesia</a> can be integrated with Memex data. Overall, it seems that our vision is pretty similar, and I <a href="https://beepb00p.xyz/promnesia.html">expect</a> that both projects can benefit from each other&#x27;s work, up to the point that Promnesia extension is sharing the extension/backend with Worldbrain Memex.</p><p id="9c58cdb6-26f4-46f2-807a-501f9f78779a" class="">I&#x27;ve already <a href="https://beepb00p.xyz/promnesia.html">mentioned</a> what I wanted, but I&#x27;ll recap:</p><ul id="ee289653-3464-42a9-88a2-09c01978b7a4" class="bulleted-list"><li><a href="https://beepb00p.xyz/promnesia.html">make history useful</a>: unify scattered and siloed history under a single interface  <p id="0e967486-e0cb-4378-a7b9-e2603863e410" class="">There should be absolutely no difference between a link you opened yesterday in your Instapaper phone app, and a link you visited in Firefox ten years ago.</p></li></ul><ul id="e7e5acfc-61d0-4414-a1e3-5b87268f9195" class="bulleted-list"><li><a href="https://beepb00p.xyz/promnesia.html">make URLs useful</a>: make use of their hierarchy and relations between them</li></ul><ul id="f304d64d-ae8d-4c55-bebd-ea419e58dd57" class="bulleted-list"><li>assist me in exploring new information</li></ul><ul id="db04e0ab-d316-4923-a5e9-972e2df7295e" class="bulleted-list"><li>make it possible to easily trace my history  <p id="0c853f64-a92d-4005-8da0-945cc7ea9dbc" class="">Let me answer when, how, and why did I visit/bookmark the page?</p></li></ul><ul id="e5067d5c-0966-46fc-8a6d-c20fde91f7db" class="bulleted-list"><li>integrate metadata: annotations, highlights, notes, chat messages, tweets, etc.  <p id="2b2c6146-8ad3-42fa-8830-7caca8ef0b6b" class="">Release it from walled gardens and display it right within the page when applicable (e.g. highlights)</p></li></ul><ul id="e524aaa6-4e9f-440f-8f3e-8601ce095d81" class="bulleted-list"><li><p id="c9556e65-95b4-4287-bf73-402625056452" class="">As long as it&#x27;s something you can extract URLs from, you should be able to feed it in Promnesia.</p></li></ul><p id="d167340e-27e3-4d63-8138-6e0bf71cd9fa" class="">A cool thing is that some of these goals weren&#x27;t clear from the beginning – I discovered them during development, and I think there are many more I haven&#x27;t discovered yet!</p><p id="91f931f5-b6f0-4978-8439-0a5069b6cbc6" class="">There are also some <strong>meta-goals</strong> and principles I&#x27;m adhering to:</p><ul id="d08f2d88-4858-41fd-959e-4a09e750981f" class="bulleted-list"><li>make it <strong>open source</strong>  <p id="6991b795-fdcb-4df0-bbea-0265a3e544dd" class="">This goes without saying: everything I&#x27;m doing for this project is shared and open source. Frankly, I&#x27;m not even sure such a project can be sustainable any other way.</p></li></ul><ul id="62f273a1-32b4-4ace-8cc4-4195ce267b26" class="bulleted-list"><li><strong>local first</strong>   <p id="aa231bd0-f39e-46e9-80c3-a27f83b77614" class="">Your past is sensitive data and you should have control over where you keep it and how you&#x27;re accessing it. In the simplest setup, promnesia communicates with your browser through a <strong>local</strong> port.</p><p id="91e32a64-ac58-4de5-99da-f4ef27da0d1c" class="">In addition, you have all your data available <a href="https://beepb00p.xyz/tags.html">#offline</a>. Modern browsers provide a pretty pathetic offline experience, but if you use a tool similar to <a href="https://github.com/pirate/ArchiveBox">ArchiveBox</a>, this can be useful to you.</p></li></ul><ul id="8c486870-a9be-4b82-97af-85e6304e2af3" class="bulleted-list"><li>make it <strong>modular</strong>    <p id="c564e7c1-3c86-4adc-8ab4-ec12e6d76647" class="">Make sure components can be reused.</p><p id="eb45b0d0-f62f-46b1-878b-b8dd439469d5" class="">For the past several months, I&#x27;ve mostly been removing/moving away the code from Promnesia to make sure that the <a href="https://github.com/karlicoss/HPI">data processing and normalization code</a> in it can be used for other purposes by other people.</p><p id="c2566a53-df80-4805-b1e6-1a19deb16bb1" class="">I&#x27;m going to take this even further and explore the potential for interoperability and integration with other open source tools, I&#x27;ll write about it a bit <a href="https://beepb00p.xyz/promnesia.html">later</a>.</p></li></ul><ul id="00651df9-e1ea-4726-8a56-558b12961cbd" class="bulleted-list"><li><strong>don&#x27;t build another silo</strong>, use existing information     <p id="66416ed7-ab5b-419e-bddb-1677fb3c0448" class="">This kind of complements the previous point.</p><p id="fcc9be3c-7727-478f-b4ed-f6232000a619" class="">There are many decent services and tools already. They all have their own <a href="https://beepb00p.xyz/annotating.html">pros and cons</a>. Different people prefer different tools. Sometimes because they&#x27;re locked in and don&#x27;t have much choice, but other times because they genuinely have subtle preferences and opinions.</p><p id="b0fadcb9-9b8d-4880-a4da-ce54e192105c" class="">The cost of switching is too high, both in terms of the time and the cognitive effort. There&#x27;s always the risk of encountering one small thing that would make the tool a no-go.</p><p id="7cdf2e9d-970f-42ed-8ef9-4ddeb1a8771d" class="">We should invest in finding better ways of <strong>combining</strong> existing tools, not rewriting all over again.</p></li></ul><p id="41972c4b-91ba-4305-9d83-f938f6c904f3" class="">Promnesia consists of three parts:</p><ul id="af52c089-92c8-4857-b61a-2aa5082d710a" class="bulleted-list"><li> <ul id="087eb8b4-763e-4dac-aef4-a2601ae1961e" class="bulleted-list"><li>neatly displays the history and other information in a sidebar</li></ul><ul id="e98285d4-82b5-4acd-a033-d9172a0c2101" class="bulleted-list"><li>handles highlights</li></ul><ul id="2b87bdfc-548f-4c61-8a30-fb8b33ebd0a4" class="bulleted-list"><li>provides search interface</li></ul><p id="5a866e23-78d1-4e66-b6ed-33adab04a4d4" class="">However, browser addons can&#x27;t read access your filesystem, so to load the data we need a helper component:</p></li></ul><ul id="9b93d1ba-e301-4e9a-b396-36c5af15e325" class="bulleted-list"><li><p id="beeb7ad3-d43b-4771-8036-215492b8a562" class="">It&#x27;s called &#x27;server&#x27;, but really it&#x27;s just a regular program with the only purpose to serve the data to the browser. It runs locally and you don&#x27;t have to expose it to the outside.</p></li></ul><ul id="5b1bf6dd-85d5-44dc-bc3c-b1583045e60d" class="bulleted-list"><li> <p id="40377904-c3e8-48fa-b8df-798f3a40d195" class="">Indexer goes through the sources (specified in the config), processes raw data and extracts URLs along with other useful information.</p><p id="c4df6e03-560e-4841-8340-53c3e874b662" class="">Another important thing it&#x27;s doing is <strong>normalising</strong> URLs to establish equivalence and stip off garbage. I write about the motivation for it in <a href="https://beepb00p.xyz/promnesia.html#urls_broken">&quot;URLs are broken&quot;</a>.</p></li></ul><p id="c8e97708-7758-4dae-96b1-a916f7ed2283" class="">You might also want to skim through the <a href="https://github.com/karlicoss/promnesia#glossary">glossary</a> if you want to understand deeper what information Promnesia is extracting.</p><h3 id="44ba6583-c632-4bb5-948d-42121200f795" class="">Data sources</h3><p id="6bb0ab16-b636-434a-96a4-d5b342d76999" class="">Promnesia ships with some builtin sources. It supports:</p><ul id="b727f2cd-5001-4c29-bf2e-1e68e8dc8261" class="bulleted-list"><li>data exports from online services: Reddit/Twitter/Hackernews/Telegram/Messenger/Hypothesis/Pocket/Instapaper, etc.  <p id="3c77f758-eea8-43cd-8579-3398a6f445b7" class="">It heavily benefits from <a href="https://github.com/karlicoss/HPI">HPI</a> package to access the data.</p></li></ul><ul id="82a2e5a7-0172-471e-8d8a-904db2c93ca9" class="bulleted-list"><li>Google Takeout/Activity backups</li></ul><ul id="3880887d-148e-4561-ad2b-ddf30118867b" class="bulleted-list"><li>Markdown/org-mode/HTML or any other plaintext on your disk</li></ul><ul id="f818f69b-a7ae-4382-a401-8b5a0f924052" class="bulleted-list"><li>in general, anything that can be parsed in some way</li></ul><ul id="f0f78f31-28d3-4e55-b7cf-25ed5d70343c" class="bulleted-list"><li>you can also add <a href="https://github.com/karlicoss/promnesia/blob/master/doc/SOURCES.org#extending">your own custom sources</a>, Promnesia is extensible</li></ul><p id="91ad8499-90ac-447d-ac18-8ff722603d31" class="">See <a href="https://github.com/karlicoss/promnesia/blob/master/doc/SOURCES.org">SOURCES</a> for more information.</p><h3 id="b24b5351-c953-4f02-9c86-e83d560f9e9f" class="">Data flow</h3><p id="3c46d4d8-4a0c-49ab-9c45-0af28771737f" class="">Here&#x27;s a diagram, which would hopefully help to understand how data flows through Promnesia.</p><p id="8d58219c-39f8-458b-9841-215d4823ac8d" class="">See HPI <a href="https://github.com/karlicoss/HPI/blob/master/doc/SETUP.org#data-flow">section on data flow</a> for more information on HPI modules and data flow.</p><p id="f1056eae-6eec-4f40-b7a5-77c4788a24fd" class="">Also check out my <a href="https://beepb00p.xyz/myinfra.html#promnesia">infrastructure map</a>, which is more detailed!</p><pre id="438e8fa1-5ffc-4a24-b602-cee35fa81a6d" class="code"><code>┌─────────────────────────────────┐ ┌────────────────────────────┐ ┌─────────────────┐
+│ 💾       HPI sources            │ │  💾    plaintext files      │ │  other sources  │
+│ (twitter, reddit, pocket, etc.) │ │ (org-mode, markdown, etc.) │ │ (user-defined)  │
+└─────────────────────────────────┘ └────────────────────────────┘ └─────────────────┘
+                                ⇘⇘              ⇓⇓               ⇙⇙
+                                 ⇘⇘             ⇓⇓              ⇙⇙
+                                 ┌──────────────────────────────┐
+                                 │ 🔄    promnesia indexer      │
+                                 |        (runs regularly)      │
+                                 └──────────────────────────────┘
+                                                ⇓⇓
+                                 ┌──────────────────────────────┐
+                                 │ 💾    visits database        │
+                                 │       (promnesia.sqlite)     │
+                                 └──────────────────────────────┘
+                                                ⇓⇓
+                                 ┌──────────────────────────────┐
+                                 │ 🔗    promnesia server       │
+                                 |       (always running)       |
+                                 └──────────────────────────────┘
+                                                ⇣⇣
+                                 ┌─────────────────────────────────┐
+                                 │ 🌐      web browser             ├───────────────────────────┐
+                                 |     (promnesia extension)       ⇐  💾 local browser history |
+                                 └─────────────────────────────────┴───────────────────────────┘
+</code></pre><p id="b64d37df-f739-4873-8a3c-a6fb04aa80ab" class="">Here I&#x27;ll describe some specific scenarios for which I find Promnesia extremely useful. <a href="https://github.com/karlicoss/promnesia#readme">README</a> also has screenshots and short screencasts which elaborate on the features.</p><ul id="06e5dab3-ceae-449b-b449-0e2e1c071d5d" class="bulleted-list"><li>Finding new information    <p id="aced7204-aa7c-411a-af39-191610867187" class="">Example: I run into an <a href="https://nautil.us/issue/66/clockwork/haunted-by-his-brother-he-revolutionized-physics-rp">article</a> on Twitter. I enjoyed it, and the website looks kind of familiar.</p><p id="2f12d604-72d8-4834-8663-ae2219db852d" class="">When I jump on <a href="https://nautil.us/">https://nautil.us</a>, the Promnesia sidebar shows me that I&#x27;ve visited and even annotated other articles on this site before!</p><p id="88256c42-cc14-4bf9-b330-2defa7a8542d" class="">I am repeatedly stumbling upon this site, and it&#x27;s got high quality content, so I subscribe to it through my RSS reader.</p></li></ul><ul id="a17ca179-f6af-4234-b85c-7edb7bfc3318" class="bulleted-list"><li>Exploring people and communities<ul id="2593f203-0d81-4e69-8442-b1fd02d5a974" class="bulleted-list"><li>How often have I engaged with a certain blog in the past?  <p id="257812c4-8cd3-45f0-858b-e939971166f7" class="">Which posts have I already seen or read? Did I like them? Should I dive deeper?</p></li></ul><ul id="43552ace-d9c6-46df-a0ed-eb2d7603dee2" class="bulleted-list"><li>Same questions, but for twitter accounts, subreddits, youtube channels or anything similar</li></ul></li></ul><ul id="6b2d31b4-20e6-4b4f-8415-9c7ac8c2ffdb" class="bulleted-list"><li>Display annotations and highlights from <strong>any</strong> service (e.g. Instapaper/Pocket), within the webpage</li></ul><ul id="f49bac75-ce93-4556-8390-6da3e4a42240" class="bulleted-list"><li>Personal digital archaeology and external memory<ul id="987576b3-05b8-4742-b28e-2f4db7ec9781" class="bulleted-list"><li>Why did I bookmark this youtube video? Who sent it to me?</li></ul><ul id="88ea6290-a4e1-4e06-a7b9-8b250e32270f" class="bulleted-list"><li>How did I get on this forgotten tab?</li></ul><ul id="9d5b671b-6bdc-4a66-ba9e-05d4b08b86d8" class="bulleted-list"><li>I&#x27;m sometimes annoyed by <code>@&lt;account&gt;</code> tweets. Should I unfollow them?  <p id="062fa5c1-e329-4cc0-9956-8c640db54805" class="">I.e. why did I follow them in the first place? Are they worth following overall? Do I like their tweets often or bookmark their links?</p></li></ul></li></ul><ul id="3107f967-280d-4d84-843f-edf1c84a5bda" class="bulleted-list"><li>Integrating with your knowledge base  <p id="024d290e-a900-40fa-930b-c1f18179f390" class="">Promnesia can handle your private wiki whether it&#x27;s plaintext, or a web service, which would help you instantly find and jump to the relevant information.</p></li></ul><ul id="390aebcb-f8b5-498d-aad5-aa204fdcfef7" class="bulleted-list"><li>Integrating with others&#x27; knowledge bases   <p id="e38acfe0-7021-41f9-b8c5-bab0f3a9295d" class="">I find it intriguing to think about this as tapping into each other&#x27;s brains!</p><p id="b32153d9-f5e0-42b7-9a9b-997a70e63970" class="">See: <a href="https://beepb00p.xyz/myinfra-roam.html">demo</a> integrating Promnesia with a Roam Research database.</p></li></ul><ul id="57e316e7-1670-47fc-829d-d2ac4e402ae1" class="bulleted-list"><li>Unified browser history   <p id="e11ae269-e7a0-4661-83d0-b269fd826653" class="">I&#x27;m listing it last because the benefits of this only become apparent when you start using your data, not while it just sits on your disk.</p><p id="fc8d91f0-e45b-4b22-aca6-c308a6b8191c" class="">As you collect more and more detailed history, the whole system becomes more and more useful.</p></li></ul><p id="51b5d2c9-f990-460c-9644-8de858d1752d" class="">Promnesia was a lot of work, especially in terms of sharing it with other people and documenting. If fact, <strong>most writing on my blog have been slowly building up to this post</strong>. On my <a href="https://beepb00p.xyz/myinfra.html">infrastructure map</a>, Promnesia is a leaf node!</p><p id="a11c75bd-4dfb-4120-8b33-a22113bdc2a5" class="">As much as I am proud of my work, and how rewarding it is when other people find it useful… I&#x27;m already thinking how to break Promnesia apart and perhaps even sunset it. I would be happy if:</p><ul id="cfa9098c-bc47-407e-8224-6b0818894f0b" class="bulleted-list"><li>I can raise the demand and awareness for data liberation and interoperability</li></ul><ul id="ead35224-5072-4661-a67b-2e51bfbd3064" class="bulleted-list"><li>I can inspire other people to implement something similar (and better!)</li></ul><p id="5b6f5ad9-b801-4dd0-8213-e533c9d02b5a" class="">As I <a href="https://beepb00p.xyz/promnesia.html">previously</a> mentioned, one of the meta-goals is modularity, so parts of Promnesia can be plugged in other tools. There is still some unused potential for integrating with other open source projects, so I want to take this even further and to the extreme:</p><ul id="185a9884-0fa8-4924-9c1e-cc9c31a6c0d0" class="bulleted-list"><li>URL indexers/data sources    <p id="4240c199-dc2c-4347-9935-67f3ee099433" class="">Promnesia modules are very slim when it comes to the URL extraction, many of them are just 30 lines of code. Most of the boring and tedious stuff (like data normalization) is encapsulated in <a href="https://github.com/karlicoss/HPI#readme">HPI</a> package, which can be used with other tools.</p><p id="5d2728bd-4314-4da3-90f8-36a539e43c22" class="">It would be interesting to see if these data sources can be integrated with Worldbrain Memex. <a href="https://beepb00p.xyz/promnesia.html">Before</a> I mentioned that at the moment Memex is a silo, but they also realize it! Very recently, WorldBrain announced <a href="https://github.com/WorldBrain/storex-hub">Storex Hub</a>, which seems like a potential means of integration.</p><p id="209e37cf-19fd-455e-8d20-20d3465b6e02" class="">It&#x27;s likely that Promnesia backend can be rebased on top of it.</p></li></ul><ul id="9cf0dda0-98fc-4b9b-93e7-96923e24cd44" class="bulleted-list"><li>URL normalization algorithm   <p id="5bf87df8-5cd0-4489-b259-8fd1f5b8ae8d" class="">At the moment, Promnesia uses a <a href="https://github.com/karlicoss/promnesia/blob/master/src/promnesia/cannon.py">hacky set of rules</a>, which does the right thing for the most websites I&#x27;m using. However, it&#x27;s not sustainable for one person to maintain, and it feels worthy of extraction to a separate project/public database. I imagine it to be something similar to tzdata, just think how much frustration we all save by using the same library for timezone information.</p><p id="f78f8db8-5dfa-4585-af76-8c88b3450987" class="">This would be something many projects could benefit from: Polar Bookshelf, <a href="https://web.hypothes.is/">Hypothesis</a>, Worldbrain Memex, and I&#x27;m sure there are many more I don&#x27;t even know of!</p></li></ul><ul id="f445d622-6e18-4cb5-b36e-f6f968ca270e" class="bulleted-list"><li>Highlighting and anchoring annotations   <p id="9afac1bf-57f9-4706-bfe4-ce0375427956" class="">One the one hand, even a very primitive algorithm for matching annotations against the page works pretty well in 90% of cases. On the other hand, the remaining 10% is the bit which is pretty hard to get right, and not an easy task.</p><p id="dcb837f7-f73e-4190-8bed-962eee9b0b9c" class="">It would be cool to reuse <a href="https://web.hypothes.is/blog/fuzzy-anchoring/#a-new-approach">fuzzy anchoring</a> by Hypothesis, compare it with whatever Worldbrain is using, and figure out how much of it is worth sharing. I&#x27;d rather help these projects maintain their code, than reinvent my own wheel.</p></li></ul><ul id="bdee8dc3-711e-4189-93a6-0eb447dd7a0b" class="bulleted-list"><li>Other features  <p id="e84f354a-577b-4e8c-a20e-cbb48662f4d0" class="">Again, it feels that most of Promnesia&#x27;s existing (and future!) features make sense to within Worldbrain Memex, or as plugins.</p></li></ul><p id="ddc30610-d7e6-4dbf-b860-a97c2bb5220d" class="">As you can see there is some significant overlap with Worldbrain Memex, and they already have a mature and impressive product. So I can see Promnesia as a plugin on top of it, or even as a part of it! This collaboration is something I&#x27;ll look at in the near future.</p><p id="c82ea4ae-8bcd-4307-8d40-06e72bf4ff4d" class="">In the meantime, Promnesia is completely usable on its own, and as long as I use it, I&#x27;ll be supporting it!</p><p id="c0ccd36e-05a5-4438-abe3-dda534fbf26c" class="">I&#x27;ve always expected my gadgets to extend my ability to think and process information. Promnesia is a step I&#x27;ve taken to bring that future closer.</p><p id="e7ce7307-79d4-4cd2-9ab9-caa67dfcf002" class="">Want to join me? Check out the <a href="https://github.com/karlicoss/promnesia">repository</a>, which contains more screenshots, demos, and the setup manual.</p><p id="8cee70e7-a0fe-487d-9362-66bee09b5688" class="">If you think of cool features, useful data sources, or any related thoughts feel free to use <a href="https://github.com/karlicoss/promnesia/issues">github issues</a> or reach me by some other means.</p><p id="3b70e5e9-3dca-442a-904d-cd7b96a42698" class="">Even better if you want to help and contribute! I&#x27;m happy to help you with any Python quirks or web extension specifics.</p><p id="f186e133-d685-4619-9495-98611911f958" class="">Related links:</p><p id="87233f77-6703-41d8-96e9-c90f4ee8fb4a" class=""><strong>Credits:</strong> thanks to <a href="https://jborichevskiy.com/about">Jonathan</a>, <a href="http://awesomesauce.name/">Andrew</a> and <a href="https://petr-tik.github.io/">Petr</a> for the valuable feedback on the post. Thanks to <a href="https://twitter.com/_bepolymathe_">Emmanuel</a> for trying out the project and suggestions on making it easier to set up!</p></div></article></body></html>

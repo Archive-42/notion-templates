@@ -1,0 +1,636 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Your Own Satellite: 7 Things to Know Before You Go</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+}
+.highlight-gray {
+	color: rgb(155,154,151);
+}
+.highlight-brown {
+	color: rgb(100,71,58);
+}
+.highlight-orange {
+	color: rgb(217,115,13);
+}
+.highlight-yellow {
+	color: rgb(223,171,1);
+}
+.highlight-teal {
+	color: rgb(15,123,108);
+}
+.highlight-blue {
+	color: rgb(11,110,153);
+}
+.highlight-purple {
+	color: rgb(105,64,165);
+}
+.highlight-pink {
+	color: rgb(173,26,114);
+}
+.highlight-red {
+	color: rgb(224,62,62);
+}
+.highlight-gray_background {
+	background: rgb(235,236,237);
+}
+.highlight-brown_background {
+	background: rgb(233,229,227);
+}
+.highlight-orange_background {
+	background: rgb(250,235,221);
+}
+.highlight-yellow_background {
+	background: rgb(251,243,219);
+}
+.highlight-teal_background {
+	background: rgb(221,237,234);
+}
+.highlight-blue_background {
+	background: rgb(221,235,241);
+}
+.highlight-purple_background {
+	background: rgb(234,228,242);
+}
+.highlight-pink_background {
+	background: rgb(244,223,235);
+}
+.highlight-red_background {
+	background: rgb(251,228,228);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(55, 53, 47, 0.6);
+	fill: rgba(55, 53, 47, 0.6);
+}
+.block-color-brown {
+	color: rgb(100,71,58);
+	fill: rgb(100,71,58);
+}
+.block-color-orange {
+	color: rgb(217,115,13);
+	fill: rgb(217,115,13);
+}
+.block-color-yellow {
+	color: rgb(223,171,1);
+	fill: rgb(223,171,1);
+}
+.block-color-teal {
+	color: rgb(15,123,108);
+	fill: rgb(15,123,108);
+}
+.block-color-blue {
+	color: rgb(11,110,153);
+	fill: rgb(11,110,153);
+}
+.block-color-purple {
+	color: rgb(105,64,165);
+	fill: rgb(105,64,165);
+}
+.block-color-pink {
+	color: rgb(173,26,114);
+	fill: rgb(173,26,114);
+}
+.block-color-red {
+	color: rgb(224,62,62);
+	fill: rgb(224,62,62);
+}
+.block-color-gray_background {
+	background: rgb(235,236,237);
+}
+.block-color-brown_background {
+	background: rgb(233,229,227);
+}
+.block-color-orange_background {
+	background: rgb(250,235,221);
+}
+.block-color-yellow_background {
+	background: rgb(251,243,219);
+}
+.block-color-teal_background {
+	background: rgb(221,237,234);
+}
+.block-color-blue_background {
+	background: rgb(221,235,241);
+}
+.block-color-purple_background {
+	background: rgb(234,228,242);
+}
+.block-color-pink_background {
+	background: rgb(244,223,235);
+}
+.block-color-red_background {
+	background: rgb(251,228,228);
+}
+.select-value-color-default { background-color: rgba(206,205,202,0.5); }
+.select-value-color-gray { background-color: rgba(155,154,151, 0.4); }
+.select-value-color-brown { background-color: rgba(140,46,0,0.2); }
+.select-value-color-orange { background-color: rgba(245,93,0,0.2); }
+.select-value-color-yellow { background-color: rgba(233,168,0,0.2); }
+.select-value-color-green { background-color: rgba(0,135,107,0.2); }
+.select-value-color-blue { background-color: rgba(0,120,223,0.2); }
+.select-value-color-purple { background-color: rgba(103,36,222,0.2); }
+.select-value-color-pink { background-color: rgba(221,0,129,0.2); }
+.select-value-color-red { background-color: rgba(255,0,26,0.2); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5d49a0ad-c6bc-4273-9e7e-cdc61e5a9247" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔭</span></div><h1 class="page-title">Your Own Satellite: 7 Things to Know Before You Go</h1><table class="properties"><tbody><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesCreatedAt"><path d="M6.98643729,14.0000972 C5.19579566,14.0000972 3.40419152,13.3106896 2.04245843,11.9323606 C-0.681017475,9.21200555 -0.680780251,4.76029539 2.04293482,2.04012507 C4.76664406,-0.68004331 9.22427509,-0.68004331 11.9480135,2.04013479 C13.272481,3.36277455 14,5.1330091 14,6.99552762 C14,8.87640182 13.2721894,10.6285043 11.9480135,11.9509302 C10.5679344,13.3105924 8.77756503,14.0000972 6.98643729,14.0000972 Z M10.2705296,7.00913883 L10.2705296,8.46099754 L10.2705296,8.65543362 L10.076181,8.65543362 L8.6543739,8.65543362 L5.72059514,8.65543362 L5.52619796,8.65543362 L5.52619796,8.46099754 L5.52619796,5.52541044 L5.52619796,3.37946773 L5.52619796,3.18502193 L5.72059514,3.18502193 L7.17253164,3.18502193 L7.36692883,3.18502193 L7.36692883,3.37946773 L7.36692883,6.81467358 L10.076181,6.81467358 L10.2705296,6.81467358 L10.2705296,7.00913883 Z M12.1601539,6.99552762 C12.1601539,5.61697497 11.6190112,4.32597154 10.6393933,3.34769528 C8.63253764,1.34336744 5.35197452,1.34061603 3.34153136,3.33944106 C3.33868273,3.34219247 3.33607716,3.34494388 3.33322852,3.34769528 C1.32397148,5.35459953 1.32372842,8.63641682 3.33322852,10.6433794 C5.34295224,12.6504489 8.62968901,12.6504489 10.6393933,10.6433794 C11.6190112,9.66506426 12.1601539,8.37408027 12.1601539,6.99552762 Z"></path></svg></span>Created</th><td><time>@August 24, 2021 4:00 PM</time></td></tr><tr class="property-row property-row-text"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesText"><path d="M7,4.56818 C7,4.29204 6.77614,4.06818 6.5,4.06818 L0.5,4.06818 C0.223858,4.06818 0,4.29204 0,4.56818 L0,5.61364 C0,5.88978 0.223858,6.11364 0.5,6.11364 L6.5,6.11364 C6.77614,6.11364 7,5.88978 7,5.61364 L7,4.56818 Z M0.5,1 C0.223858,1 0,1.223858 0,1.5 L0,2.54545 C0,2.8216 0.223858,3.04545 0.5,3.04545 L12.5,3.04545 C12.7761,3.04545 13,2.8216 13,2.54545 L13,1.5 C13,1.223858 12.7761,1 12.5,1 L0.5,1 Z M0,8.68182 C0,8.95796 0.223858,9.18182 0.5,9.18182 L11.5,9.18182 C11.7761,9.18182 12,8.95796 12,8.68182 L12,7.63636 C12,7.36022 11.7761,7.13636 11.5,7.13636 L0.5,7.13636 C0.223858,7.13636 0,7.36022 0,7.63636 L0,8.68182 Z M0,11.75 C0,12.0261 0.223858,12.25 0.5,12.25 L9.5,12.25 C9.77614,12.25 10,12.0261 10,11.75 L10,10.70455 C10,10.4284 9.77614,10.20455 9.5,10.20455 L0.5,10.20455 C0.223858,10.20455 0,10.4284 0,10.70455 L0,11.75 Z"></path></svg></span>Property</th><td></td></tr><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td><span class="selected-value select-value-color-purple">Space</span></td></tr><tr class="property-row property-row-url"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.4);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesUrl"><path d="M3.73333,3.86667 L7.46667,3.86667 C8.49613,3.86667 9.33333,4.70387 9.33333,5.73333 C9.33333,6.7628 8.49613,7.6 7.46667,7.6 L6.53333,7.6 C6.01813,7.6 5.6,8.0186 5.6,8.53333 C5.6,9.04807 6.01813,9.46667 6.53333,9.46667 L7.46667,9.46667 C9.5284,9.46667 11.2,7.79507 11.2,5.73333 C11.2,3.6716 9.5284,2 7.46667,2 L3.73333,2 C1.6716,2 0,3.6716 0,5.73333 C0,7.124 0.762067,8.33453 1.88953,8.97713 C1.87553,8.83107 1.86667,8.6836 1.86667,8.53333 C1.86667,7.92013 1.98753,7.33447 2.2036,6.7978 C1.99267,6.4954 1.86667,6.12953 1.86667,5.73333 C1.86667,4.70387 2.70387,3.86667 3.73333,3.86667 Z M12.1095,5.28907 C12.1231,5.4356 12.1333,5.58307 12.1333,5.73333 C12.1333,6.34607 12.0101,6.9294 11.7931,7.46513 C12.0059,7.768 12.1333,8.13573 12.1333,8.53333 C12.1333,9.5628 11.2961,10.4 10.2667,10.4 L6.53333,10.4 C5.50387,10.4 4.66667,9.5628 4.66667,8.53333 C4.66667,7.50387 5.50387,6.66667 6.53333,6.66667 L7.46667,6.66667 C7.98187,6.66667 8.4,6.24807 8.4,5.73333 C8.4,5.2186 7.98187,4.8 7.46667,4.8 L6.53333,4.8 C4.4716,4.8 2.8,6.4716 2.8,8.53333 C2.8,10.59507 4.4716,12.2667 6.53333,12.2667 L10.2667,12.2667 C12.3284,12.2667 14,10.59507 14,8.53333 C14,7.14267 13.2375,5.93167 12.1095,5.28907 Z"></path></svg></span>URL</th><td><a href="https://makezine.com/2014/04/11/your-own-satellite-7-things-to-know-before-you-go/" class="url-value">https://makezine.com/2014/04/11/your-own-satellite-7-things-to-know-before-you-go/</a></td></tr></tbody></table></header><div class="page-body"><figure id="6de3bb9e-4afe-4ed4-bafd-498dd40425a9" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/diyspaceweek_1_jbr2-short.jpg"><img style="width:620px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/diyspaceweek_1_jbr2-short.jpg"/></a></figure><p id="79ca3a53-9ccf-4a6d-bdd2-584ec228d9fd" class=""><em>All I ask is a successful launch, a clean radio signal, and a life just long enough to achieve that goal.</em></p><p id="4fb6bc8a-2dec-4adb-b1f6-61f1d6e98507" class="">If high-altitude balloons just aren’t high-altitude enough, if you feel frustrated by the pace of space development, or if you just really, really like rockets and hardware, I think launching your own satellite is an excellent decision. But first, what do you want your satellite to do? Here are 7 key things you need to know before you launch your personal spacecraft into orbit at 17,000 miles an hour.</p><p id="e8634b44-6f70-443d-b93d-4445183d02c4" class="">Aurora viewed from the ISS in low earth orbit, image courtesy NASA</p><figure id="22c743e8-abd6-43bb-8696-c1ef7f069b4c" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/dias_0103.png"><img style="width:620px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/dias_0103.png"/></a></figure><h2 id="cb2dbda2-b1f0-4e1d-ae01-c2d252bf793f" class="">What Is a Picosatellite?</h2><p id="54327ec0-5750-4030-ad56-3e5ecac5fbe9" class=""><em>Picosatellites</em>, by definition, are extremely small, lightweight satellites. Any picosatellite will tend to have these <strong>core components</strong>:</p><ul id="e60e5e4b-b020-41ea-937d-83a381ea74e2" class="bulleted-list"><li>An antenna</li></ul><ul id="76ee80c7-e8c6-453f-836f-e4e167651d78" class="bulleted-list"><li>A radio transmitter for uplinking commands or downloading your data</li></ul><ul id="53f0212d-cdcb-4552-a5b6-38049b8440ec" class="bulleted-list"><li>A computer-on-a-chip such as an Arduino or a Basic-X24</li></ul><ul id="18796358-dfba-4028-bc3d-d50d84a1a552" class="bulleted-list"><li>A power system, most often solar cells plus a battery plus a power bus</li></ul><ul id="8363d28c-235f-41f1-bfa0-8f8721890965" class="bulleted-list"><li>Sensors</li></ul><p id="783abcbd-4001-4490-8076-581e68105171" class="">The progenitor of the pico class is the <strong>CubeSat</strong>, an open source architecture that lets you pack anything you want into the 10cm × 10cm × 10cm cube.</p><p id="4cbfff40-f6c0-4919-8f42-d0d0484c283f" class="">The CubeSat is a satellite as cute as a pumpkin. Forbes reported on one vendor, Pumpkin Inc., that supplies premade CubeSats. CubeSat itself is a specification, not a piece of off-the-shelf hardware, so Pumpkin decided to prebuild kits and sell them. If you have your own rocket to launch your CubeSat on, for $7,500 they’ll sell you a CubeSat kit.</p><p id="1f645ea2-3cf3-4383-aea9-7a4ac4ccca85" class="">This neatly parallels InterOrbital Systems’ <strong>TubeSat</strong>. InterOrbital Systems (IOS) has the edge in price/performance, as they throw the launch in for the same cost. But it looks like neither IOS nor Pumpkin provide premades, just kits. So there’s still hobbyist work involved, but kits remove the need for engineering and just leave the fun part of assembly and integration.</p><p id="01c3d007-1bab-4aca-8dce-a4de25c558e7" class="">TubeSat and CubeSat, two variants of a picosatellite, with quarters shown for scale</p><figure id="d45c02b6-20a5-4a9d-ac0c-b19ed1a85c7b" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/tubey_vs_cubey2.jpg"><img style="width:640px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/tubey_vs_cubey2.jpg"/></a></figure><p id="5c48b927-7f90-4c69-96fb-1e388b1b7236" class="">TubeSats and CubeSats are slightly different, of course, and I am insanely pleased that both are advancing the idea of platform kits. This is a great step in the commodification of space research. Even if the mini CubeSat looks eerily similar to a Hellraiser Lemarchand box.</p><h2 id="5ac17e77-b5bd-4fb3-b1dd-045c4b8b7b2a" class="">How Much Does It Cost to Launch?</h2><p id="f6c0153a-992b-4b92-814c-e9deb33e4bd6" class="">If you build a CubeSat, securing a rocket to launch it on is not difficult, merely expensive. A typical CubeSat launch cost is estimated at $40,000. There are several commercial providers promising future CubeSat rockets, assuming they complete development. Various NASA and International Space Station projects accept some proposals using the CubeSat architecture. There are more companies entering the private launch business each year, so prospects for getting a launch are becoming more robust.</p><p id="c881a9e7-79ec-4126-8028-2a574dd9e1ef" class="">The TubeSat architecture from InterOrbital Systems is an alternative schema. Currently only supported by InterOrbital, it is very cost-effective. You get the schematics, main hardware components, and a launch on their still-in-development rocket for the single price of $8,000. A TubeSat uses a slightly longer hexagonal architecture, 12cm in length and 4cm in diameter.</p><p id="90a81c00-c1ab-4eba-b249-125d75a66a7f" class="">You can also work with a custom architecture if you have access to a rocket launch (through a college or university, perhaps), but currently the primary two players are the open CubeSat spec and the private TubeSat alternative.</p><h2 id="d4a43514-d4ce-444a-98ef-f10f3577cd82" class="">Where Is Orbit?</h2><p id="6b53c8b8-ea36-45f2-9bb9-b2f18b2c9dd3" class="">Where will your picosatellite go? It’s nearly a given that your picosatellite will go to <strong>low earth orbit (LEO)</strong>, a broad band ranging from about 150km up to perhaps 600km. This is the region that also has many science satellites and the International Space Station (ISS). It is in and below the ionosphere, the very, very thin part of the atmosphere that also coincides with much of the Earth’s magnetic field.</p><p id="7e5fe31d-381c-41f2-97aa-681d76342021" class="">The Earth’s magnetic field shields us from the Sun’s most fierce activity. High-energy particles, flare emissions, and coronal mass ejections (CMEs; basically blobs of Sun-stuff) get shunted by the magnetic field before they can reach ground. Where the magnetic field lines dip near the poles, this energy expresses itself as the aurora.</p><p id="ed9feca9-5db4-4786-a332-1d1816bd6c0d" class="">Low earth orbit view of an aurora (image ISS006E18372, courtesy of NASA)</p><figure id="2a2fbec6-5bd6-4c48-90cd-aef6e2311b13" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/aurora_iss_big.jpg"><img style="width:620px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/aurora_iss_big.jpg"/></a></figure><p id="43e85416-5e8c-40d6-8baf-87c628b6966d" class="">Above the ionosphere, the space environment can be hostile because of solar activity. Below it, the radiation risks are much lower. This is why the ISS is kept in LEO. LEO is, at heart,<strong> about as safe as space can get.</strong> It’s also where your picosatellite is likely to live.</p><p id="a08a947c-7ba7-4285-a4d9-405e184070d7" class="">A typical LEO orbit has about a <strong>90-minute period</strong>. That is, it rotates around the Earth once every 90 minutes, doing about <strong>15 orbits per day</strong>. Orbits can be positioned near the Earth’s equator (equatorial orbits) or loop from the North to South Pole (polar orbits). Similarly, orbits can be nearly circular, or be highly eccentric—coming closer to the Earth at one end of the orbit, and then moving far away at the other.</p><h2 id="51a4553d-5579-41d3-8d64-49c54d722f18" class="">How Long Will My Satellite Last?</h2><p id="32db36c5-8120-4a2a-b909-3a5270c32baa" class="">Your orbit is entirely determined by what your rocket provider has sold you. At the hobbyist level, you’re going to most likely get a standard 250km or so nearly circular orbit, either equatorial or polar. Such an orbit lasts (because of drag by the tenuous ionosphere) <strong>from</strong> <strong>3 to 16 weeks</strong> before the satellite will suffer a fiery reentry.</p><p id="36316454-bd2c-44c6-bb8f-8ef74e200b75" class="">At picosatellite masses, this means your satellite will go up and not return. You have less than three months to gather data. The picosatellite will then, essentially, vaporize neatly upon reentry (no space junk risk!)</p><h2 id="584b83aa-f248-4679-a3af-cb91023a1f53" class="">How’s the Weather Up There?</h2><h3 id="ebb9f68d-9fc3-4559-97f1-80b55bdd9879" class="">LEO Conditions and Viability</h3><p id="018fc8f3-e8df-41c6-8882-351dfdbe4752" class="">The ionosphere is called that because it is a very thin plasma of electrically charged atoms (ions) and electrons, due to the ultraviolet (UV) radiation from the Sun. Technically it extends from about 50km up to over 1,000km (thanks Wikipedia!), but LEO starts at 150km — below that, you can’t maintain a stable orbit. The ionosphere, as mentioned, is driven by solar activity. The portion facing the Sun has more <strong>ionization</strong>; also, solar activity can drive its behavior strongly. There are also dips in the magnetic field line, leading to <strong>radiation increases</strong> at lower altitudes. We’ve mentioned the poles, and regions such as the South Atlantic Anomaly (SAA) also have field lines that dip lower.</p><p id="d5bd46cb-419d-4e40-97d6-709838701586" class="">If you’re sending up sensors, you’ll want to ensure a couple things:</p><ul id="07883ce1-81ee-4f05-b056-8ecd16f45c9a" class="bulleted-list"><li>They have a sensitivity level appropriate to the level of signal you’re trying to measure.</li></ul><ul id="35d37405-a2e1-478a-a7ea-9eb2ae28da27" class="bulleted-list"><li>They have a dynamic range that lets you extract meaningful data.</li></ul><h3 id="c500f1ae-8e08-4287-8a55-b115165c7b4b" class="">LEO Temperatures</h3><p id="6c8f49ef-0007-40fb-a85d-a722d11d349f" class="">A metal plate in LEO will cycle <strong>from –170°C to 123°C </strong>depending on its Sun face and its time in sunlight. If your picosatellite is spinning, this will even out the heat distribution a bit, but that’s the range to assume. An orbit has approximately half its time in sunlight and the other half in Earth shade, so the temperature behavior is worth modeling.</p><p id="4f710fba-d5aa-4403-a5ea-7cdba8844f94" class="">Since the picosatellite is spinning, this range is fortunately smaller (as heat has time to distribute and dissipate), and with a 90-minute orbit, you should cycle through three ranges: too cold to register; transition regions where the sensor returns valid, slowly changing data; and possibly oversaturating at the high end. You can add a heater if necessary—satellites have used heaters and coolers depending on the instrument and facing.</p><p id="51cfc85a-4042-4c2a-aa7f-4082282adc06" class="">Therefore, a thermal sensor (like a microDig Hot brand sensor) that covers –40°C up to 100°C will suffice. The range of –40°C to 100°C is a feasible area to measure. In any event, past that range, the rest of the satellite electronics may have trouble.</p><p id="c93719ff-9d43-4865-babb-e08d430f7e68" class="">Similarly, a light-detecting sensor, for a spinning picosatellite, is likely to return just a binary signal: super-bright Sun in view and Sun not in view. So all that it will measure is the timing of when the Sun is in view. The function of the light sensors will be largely binary, to catch Sun-dark cycles as it spins, as well as the overall day/night cycle of the orbit. If there is a slight tumble to the satellite, all the better. These light sensors will provide a basic measure of the satellite’s position and tumbling. If you want to measure actual light levels, your design will have to <strong>ensure the Sun doesn’t saturate your detector</strong>.</p><p id="61c10a4c-2023-4711-a95e-5ee9b36f5d89" class="">The ionosphere has a field strength on the order of 0.3–0.6 gauss, with fluctuations of 5%. For a polar orbit, you’ll have higher variability and higher magnetic fields than an equatorial orbit (as the Earth’s magnetic field lines dip near the poles, hence the auroras). If you want to measure fluctuation, not the field strength, you need to <strong>capture 0.06–0.1 gauss signals</strong>. A $10 Hall effect sensor plus an op-amp could measure variations down to as low as 0.06 gauss if there’s no large external magnetic field. Below that, the noise from your sensor’s circuits, not the sensor, will likely be the limiting factor.</p><h2 id="d2754fdf-9662-45a8-950c-020ae63d0bee" class="">What About Particle (Radiation) Damage?</h2><p id="d1170fd7-b9e9-4eca-9132-e9fbea3d2819" class="">The mission life is short (less than three months), so you don’t need to worry about cumulative damage. I used to do radiation damage models back in school, and it turns out that modern electronics are surprisingly robust on short time scales. You primarily will have <strong>single-event upsets (SEPs)</strong> that scramble a sensor or computer, but since you likely don’t need 100% uptime, this shouldn’t be a problem. In fact, glitches will add interesting character to your derived data. Should you encounter, say, a <strong>solar storm</strong>, it’ll be interesting to see how the sensors deal with it, either with saturation or with spurious signals. A proportional counter or ersatz equivalent (like a microDig Reach) can measure these particle counts.</p><p id="df8c097c-7228-42e9-93a6-4f3457221b63" class="">And finally, the most important thing to know:</p><h2 id="e4d5a9a1-ad99-4f75-afd1-0f92cc5d4e45" class="">What Is My Mission?</h2><p id="79698b9a-0cbc-4b6e-858d-a9945538dab9" class="">Just what the heck do you want your picosatellite to do? You can neatly break out the typical picosatellite choices into science missions, engineering missions, and artworks. A science payload measures stuff. An engineering payload tests hardware or software. An art project instantiates a high concept. We will visit each.</p><p id="1e90ad5c-ec68-4b4b-8f7f-5ed515698a28" class="">On a science mission, your picosatellite will measure something. Science is about measurement at its heart. There are three types of missions you can do: pointing, in-situ, and engineering builds.</p><p id="00a07d3f-0bab-47d0-b5f8-292d7944ca55" class="">A <strong>pointing mission</strong> is like a telescope. Your picosatellite points at an object of interest—the Sun, the Moon, stars, the sky background, or the Earth—and observes it. Note that <strong>pointing at the Earth requires a license</strong>—not hard to get, but privacy is protected in hobby space.</p><p id="e2ea5fe9-973a-4cd1-9205-abcc95de677f" class="">You can point randomly, but that doesn’t seem very useful. You can set a <strong>survey mode</strong>, where your picosatellite is given a specific orientation in its orbit so that, each orbit, it sweeps across the sky in a predictable fashion. Or, you can do active pointing, making the picosatellite look where you want.</p><p id="230d8fb2-f3b8-4e14-ba60-191d907572ea" class=""><strong>Active pointing</strong> is fairly challenging. You need to know your position very accurately. Using inertial references—knowledge of the initial orbit plus internal prediction of how the satellite is traveling—is inexact for sensor pointing purposes. Therefore, pointing typically requires some sort of star-trackers. These are two or more wide-field telescopes that image the sky and compare it to an onboard catalog of known bright reference stars.</p><p id="f0505b2d-0f3b-4f05-959b-89b8ccba8582" class=""><strong>Star tracking</strong> is technically complex, and likely beyond the weight and design limitations of a typical picosatellite. However, see “Engineering!” below, for more on this.</p><p id="0196ce3a-fbcb-42d0-ac2d-ec7a8aaed99f" class="">A more common picosatellite science usage is <strong>in-situ measurements</strong>. This is the use of sensors that measure the region the satellite is in without requiring pointing. A thermometer is a perfect example of an in-situ detector. It measures the temperature, and you don’t need to precisely point it to know it works.</p><p id="b6879d3b-a777-4c38-a1a9-0f28d849306e" class="">Other in-situ measurements from LEO can include the electric and magnetic field in the ionosphere, light from the Sun or reflected Earth glow, measuring the ionospheric density, or tracking the kinematics of your orbit and positioning (how you are moving).</p><p id="597495a3-75a2-487f-a1df-9f46ee139433" class="">Or maybe you don’t want to measure something scientifically, you just want to build stuff. That’s engineering.</p><h3 id="843dcaac-b4bd-4e0b-8f05-2e89bc79689e" class="">Engineering!</h3><p id="9f4cdf4b-fb67-461b-a1ab-def40ef93c36" class="">An engineering picosatellite uses the platform to try out some new space hardware concepts, or to give you practice in building your own variants of known space hardware.</p><p id="3d8446b9-2b17-4a0f-91da-da3381de133a" class="">You can make a picosatellite to test out any of the <strong>hardware components</strong>. A new power system, a new positioning method, a new type of radio or relay communications, new sensors—really any component of the satellite can be built and improved.</p><p id="1ced3564-47b8-462b-8cbc-3ed27b090223" class="">Three ounces of flyable instrumentation</p><figure id="35d7a50d-c757-4012-a3c5-6a110ea42231" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/instruments_3oz.jpg"><img style="width:370px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/instruments_3oz.jpg"/></a></figure><p id="b0ae0cdb-b1b3-4cc4-b18f-d3415e6c4bea" class="">Some picosatellite projects have involved testing—on a small scale—new satellite <strong>propulsion concepts</strong>, ranging from ion engines to solar sails. Want to test an inflatable space station in miniature, or see if you can make a picosatellite that unfolds to form a large ham radio bounce point? Build it!</p><p id="3bfcb92b-da55-418b-800c-af7296331929" class="">Another engineering motive can be to test specific components: for example, comparing a custom electronics rig against a commercial off-the-shelf (COTS) component to see if satellites (of any size) can be made more cost-effective. Or you can test new data compression methods or alternative methods of doing on-board operations.</p><p id="71bd74af-f2f8-4d68-ada0-7fb53880d71d" class=""><strong>Innovation in operations</strong> is a subset of engineering goals worth exploring further. Picosatellites could be used to test the coordination of a constellation of satellites. They can be test beds for orbital mechanics studies, or lessons in coordinated satellite operations. As the cheapest way to get access to space, they are excellent test beds for prototyping new ways of doing satellite work before moving to million-dollar missions.</p><h3 id="f0e5e72d-2959-4ca6-8dfd-43c079d03a35" class="">Art Concept!</h3><p id="5827a4ca-6f6f-4d07-9272-7485eb74eacf" class="">Finally, there are concept pieces. My own “Project Calliope” TubeSat gathers in-situ measurements of the ionosphere and transmits them to Earth as music, a process called sonification. The intent is to return a sense of the rhythm and activity level of space, rather than numeric data, so we can get a sense of just how the Sun-Earth system behaves.</p><p id="6d981bde-0078-4175-b28e-adc08d0eb4c5" class="">You aren’t a real mission until you have your own flight patch.</p><figure id="94ce8970-f564-43d6-bd9d-a6ba42c05280" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/calliope_patch1.png"><img style="width:620px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/calliope_patch1.png"/></a></figure><p id="c7c2f5b9-9f18-4048-ae9c-107561618c0c" class="">You can launch a satellite to do anything. Send ashes to space. Ship up a Himalayan prayer flag. Launch your titanium wedding ring into orbit. <strong>Any art, music, or art/music/science hybrid idea is welcome</strong> because it’s your satellite. Just give it a purpose or utility beyond just the spectacle of being able to launch your own satellite.</p><p id="bca1dd53-4237-4db1-aa43-45e3638d9394" class="">Defining science (courtesy science20.com/skyday)</p><figure id="a7c5dc9a-941b-47d4-bd92-c36d11bfcbe7" class="image"><a href="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/blowup.png"><img style="width:322px" src="Your%20Own%20Satellite%207%20Things%20to%20Know%20Before%20You%20Go%205d49a0adc6bc42739e7ecdc61e5a9247/blowup.png"/></a></figure><h3 id="f92afdf8-62d1-46f9-b03b-44323e103499" class="">Solve a Decadal Problem for All of Humanity</h3><p id="26282ed8-007d-447b-91a8-65298059e337" class="">Here’s a design exercise that asks you to invent a satellite. The point is not whether you can build, but whether you can conceive and outline an idea that is <strong>worth building in the first place</strong>.</p><p id="a40810e7-ffe0-4228-9ac2-097a5f4bf44a" class="">Choose one of the <strong>decadal goals</strong> for Earth observing, heliophysics, astronomy, or planetary science, and design a mission concept to fulfill that task using a small satellite platform—NASA SMEX or smaller.</p><p id="018f5bdc-c236-4306-b442-32e9937a68c8" class="">Invent your satellite and make a <strong>five-minute pitch</strong> that you would present to NASA to ask for funding. Limit yourself to a satellite with one or two (at most) instruments. Here are some decadal reference links:</p><ul id="f8538bc1-e945-4353-b502-9a9d2cd00404" class="bulleted-list"><li>http://www.spacepolicyonline.com/national-research-council#decadal</li></ul><ul id="03ba15f9-0848-47f3-a36f-164e6cb8022e" class="bulleted-list"><li>http://decadal.gsfc.nasa.gov/about.html</li></ul><ul id="cc01ad0e-87db-4a1d-803a-3d6ef054b913" class="bulleted-list"><li>http://science.nasa.gov/about-us/science-strategy/decadal-surveys/</li></ul><ul id="0632e7bc-a14d-47ce-b029-c1a16a5ab2f0" class="bulleted-list"><li>http://solarsystem.nasa.gov/2013decadal/</li></ul><ul id="ef478d03-344d-40a7-ab70-e3cb7332183b" class="bulleted-list"><li>http://sites.nationalacademies.org/SSB/CurrentProjects/SSB_056864</li></ul><ul id="4717ef2f-56d9-4e43-90f6-672391ef42a7" class="bulleted-list"><li>http://science.nasa.gov/earth-science/decadal-surveys/</li></ul><p id="f830fa0c-b1b3-4f9c-b50f-b9beaa84e71a" class="">One example of a decadal goal, from Earth observing, might be:</p><p id="0cce1ae2-c1d6-41d2-bd29-ace5366b3585" class=""><em>Changing ice sheets and sea level. Will there be catastrophic collapse of the major ice sheets, including those of Greenland and the West Antarctic and, if so, how rapidly will this occur? What will be the time patterns of sea-level rise as a result?</em></p><p id="2afc9250-f67a-4c47-8e7c-7daacbaa9058" class="">A good pitch might include:</p><ul id="96d15574-123e-40b5-9496-d557841a0bfe" class="bulleted-list"><li>A mission summary chart (type/wavelength/goal/who/orbit)</li></ul><ul id="e1215f14-f5f9-4ab2-b131-482a155d2333" class="bulleted-list"><li>History of any past missions that tackled this</li></ul><ul id="0a52c302-fecf-4520-ac3c-7b5081b6781f" class="bulleted-list"><li>List of desired instrument loadout: what instrument types and what they each measure plus whether or not it needs focusing optics</li></ul><ul id="1377a38a-9a28-4d06-9864-36771566d169" class="bulleted-list"><li>Resolution range per detector (spatial, spectral, timing, brightness)</li></ul><ul id="3e67dbf1-f1cc-458e-9587-aceddedf1333" class="bulleted-list"><li>Cost estimate, based on comparison/analogy to similar missions</li></ul><p id="d3eaf3f5-a3b1-4384-941b-04e82d5c936e" class="">To evaluate a good pitch, consider whether:</p><ul id="8bbcef76-9192-40ff-9d69-140865915f37" class="bulleted-list"><li>Your goal and satellite are plausible.</li></ul><ul id="6bf8c325-925e-4050-bfae-6b7ed8d72626" class="bulleted-list"><li>Your approach clearly seems to be the right approach for the task.</li></ul><p id="36a5d986-9d8e-45e6-bc2e-c16469376590" class="">This is the skill of both business and academic proposals, where you must not only convince the audience that you are the right person for the task, but also that the task itself is worth doing!</p><p id="5cc6b304-5a11-467e-a831-9ec8ac253abf" class="">Building your own picosatellite is not just a means to an end, but a worthwhile goal itself. Even if you never launch it, the skills and experience you gain in making your own real satellite can be an awesome experience.</p><p id="b5297fcb-fb13-441c-aab6-92a90b43b2d3" class=""><strong>This article is adapted from </strong><a href="https://www.makershed.com/DIY_Satellite_Platforms_p/9781449310608.htm"><strong>DIY Satellite Platforms</strong></a><strong> and </strong><a href="https://www.makershed.com/DIY_Instruments_for_Amateur_Space_p/9781449310646-p.htm"><strong>DIY Instruments for Amateur Space</strong></a><strong> by Sandy Antunes. This series, which also includes </strong><a href="https://www.makershed.com/Surviving_Orbit_the_DIY_way_p/9781449356132.pdf.htm"><strong>Surviving Orbit the DIY Way</strong></a><strong>, is a deep and user-friendly resource for would-be spacecraft builders, available from the Maker Shed at </strong><a href="https://www.makershed.com/"><strong>makershed.com</strong></a><strong>. Watch for the fourth book in the series, </strong><em><strong>DIY Data Communication for Amateur Spacecraft</strong></em><strong>, coming this summer.</strong></p></div></article></body></html>
